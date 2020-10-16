@@ -1,0 +1,57 @@
+.d3-divergingstackedbarchart-svg
+{
+	background-color: white;
+/*
+	font: 10px sans-serif;
+	padding: 10px;
+	box-sizing: border-box;
+*/
+}
+
+
+.d3-divergingstackedbarchart-left2
+{
+	fill: #c7001e;
+}
+.d3-divergingstackedbarchart-left1
+{
+	fill: #f6a580;
+}
+.d3-divergingstackedbarchart-center
+{
+	fill: #cccccc;
+}
+.d3-divergingstackedbarchart-right1
+{
+	fill: #92c6db;
+}
+.d3-divergingstackedbarchart-right2
+{
+	fill: #086fad;
+}
+
+
+.d3-divergingstackedbarchart-axis path,
+.d3-divergingstackedbarchart-axis line
+{
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.d3-divergingstackedbarchart-legend-text
+{
+	font: 10px sans-serif;
+}
+
+.d3-divergingstackedbarchart-bar-background 
+{
+	fill: #F5F5F5;
+}
+
+
+.d3-divergingstackedbarchart-bar-text
+{
+	font: 10px sans-serif;
+}
+

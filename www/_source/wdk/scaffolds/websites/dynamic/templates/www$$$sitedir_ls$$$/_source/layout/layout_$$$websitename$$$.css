@@ -1,0 +1,75 @@
+.navbar-inverse
+{
+	background-color: {CSSCOLOR_NAVBARINVERSE_BACKGROUND_GRADIENT_TOP};
+	background-image: linear-gradient(to bottom,{CSSCOLOR_NAVBARINVERSE_BACKGROUND_GRADIENT_TOP} 0,{CSSCOLOR_NAVBARINVERSE_BACKGROUND_GRADIENT_BOTTOM} 100%); 
+	background-image: -webkit-linear-gradient(top,{CSSCOLOR_NAVBARINVERSE_BACKGROUND_GRADIENT_TOP} 0,{CSSCOLOR_NAVBARINVERSE_BACKGROUND_GRADIENT_BOTTOM} 100%);
+}
+
+.navbar-inverse .navbar-brand
+{
+	color: {CSSCOLOR_NAVBARINVERSE_BRAND};	
+}
+
+.navbar-inverse .navbar-nav > li > a
+{
+	color: {CSSCOLOR_NAVBARINVERSE_LINK};	
+}
+
+#navbar-fixed-top-overlap 
+{
+	padding-bottom: 61px;	   
+}
+
+a.active.list-group-item,
+a.active.list-group-item:hover,
+a.active.list-group-item:focus,
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus
+{
+	text-shadow: 0 -1px 0 {CSSCOLOR_MENU_ACTIVE_TEXT_SHADOW};
+	background-image: -webkit-linear-gradient(top,{CSSCOLOR_MENU_ACTIVE_BACKGROUND_GRADIENT_TOP} 0,{CSSCOLOR_MENU_ACTIVE_BACKGROUND_GRADIENT_BOTTOM} 100%);
+	background-image: linear-gradient(to bottom,{CSSCOLOR_MENU_ACTIVE_BACKGROUND_GRADIENT_TOP} 0,{CSSCOLOR_MENU_ACTIVE_BACKGROUND_GRADIENT_BOTTOM} 100%);
+	background-repeat: repeat-x;
+	border-color: {CSSCOLOR_MENU_ACTIVE_BACKGROUND_GRADIENT_TOP};
+}
+
+.panel-primary
+{
+  border-color: {CSSCOLOR_PANEL_PRIMARY_HEADING_BACKGROUND_GRADIENT_TOP};
+}
+
+.panel-primary > .panel-heading
+{
+  color: {CSSCOLOR_PANEL_PRIMARY_HEADING_TEXT};
+  background-color: {CSSCOLOR_PANEL_PRIMARY_HEADING_BACKGROUND_GRADIENT_TOP};
+  border-color: {CSSCOLOR_PANEL_PRIMARY_HEADING_BACKGROUND_GRADIENT_TOP};
+}
+
+.panel-primary > .panel-heading {
+  background-image: -webkit-linear-gradient(top, {CSSCOLOR_PANEL_PRIMARY_HEADING_BACKGROUND_GRADIENT_TOP} 0%, {CSSCOLOR_PANEL_PRIMARY_HEADING_BACKGROUND_GRADIENT_BOTTOM} 100%);
+  background-image: linear-gradient(to bottom, {CSSCOLOR_PANEL_PRIMARY_HEADING_BACKGROUND_GRADIENT_TOP} 0%, {CSSCOLOR_PANEL_PRIMARY_HEADING_BACKGROUND_GRADIENT_BOTTOM} 100%);
+  background-repeat: repeat-x;
+}
+
+
+/* Progress indicator */
+.wdk-progressindicator
+{
+  display: inline-block;
+  opacity: 0;
+  max-width: 0;
+  -webkit-transition: opacity 0.25s, max-width 0.45s;
+  -moz-transition: opacity 0.25s, max-width 0.45s;
+  -o-transition: opacity 0.25s, max-width 0.45s;
+  transition: opacity 0.25s, max-width 0.45s;
+}
+.wdk-progressindicator-container.active
+{
+  cursor: progress;
+}
+.wdk-progressindicator-container.active .wdk-progressindicator
+{
+  opacity: 1;
+  max-width: 50px;
+}

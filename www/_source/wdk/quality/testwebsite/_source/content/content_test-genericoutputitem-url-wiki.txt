@@ -1,0 +1,14 @@
+* [{URL content=""} 1:{URL content=""}]
+* [{URL content="index"} 2:{URL content="index"}]
+* [{URL content="index" language="en"} 3:{URL content="index" language="en"}]
+* [{URL content="index" language="de"} 4:{URL content="index" language="de"}]
+
+* [{URL content="only-en" language="en"} 5:{URL content="only-en" language="en"}]
+* [{URL content="only-en" language="de"} 6:{URL content="only-en" language="de"}]
+* [{URL content="only-de" language="en"} 7:{URL content="only-de" language="en"}]
+* [{URL content="only-de" language="de"} 8:{URL content="only-de" language="de"}]
+
+* [{URL content="test-routing1" language="en"} 9:{URL content="test-routing1" language="en"}]
+* [{URL content="test-routing1" language="de"} 10:{URL content="test-routing1" language="de"}]
+* [{URL content="test-routing2" language="en"} 11:{URL content="test-routing2" language="en"}]
+* [{URL content="test-routing2" language="de"} 12:{URL content="test-routing2" language="de"}]

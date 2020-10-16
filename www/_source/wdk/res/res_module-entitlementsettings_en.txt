@@ -1,0 +1,8 @@
+TID_ENTITLEMENTSETTINGS_TEXT
+Select the privileges for the user:
+TID_ENTITLEMENTSETTINGS_BUTTON_EDIT
+Set privileges
+TID_ENTITLEMENTSETTINGS_INFO_SETPRIVILEGES
+All selected privileges have been granted.
+TID_ENTITLEMENTSETTINGS_ERROR_SETPRIVILEGES
+One or more privileges have not been set.

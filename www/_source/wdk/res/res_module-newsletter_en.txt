@@ -1,0 +1,12 @@
+TID_NEWSLETTER_TITLE
+Newsletter
+TID_NEWSLETTER_TEXT_SUBSCRIBE
+Stay up-to-date and subscribe to the newsletter!
+TID_NEWSLETTER_LABEL_EMAIL
+Email
+TID_NEWSLETTER_ERROR_EMAIL_INVALID
+Please enter a valid email address!
+TID_NEWSLETTER_BUTTON_SUBMIT
+Subscribe
+TID_NEWSLETTER_INFO_SUCCESS
+Thank you!

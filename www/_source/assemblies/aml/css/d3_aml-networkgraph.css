@@ -1,0 +1,49 @@
+.aml-networkgraph-svg
+{
+	background-color: white;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+
+.aml-networkgraph-link
+{
+  stroke: black;
+}
+.aml-networkgraph-link-arrow1
+{
+  stroke: black;
+}
+.aml-networkgraph-link-arrow2
+{
+  stroke: black;
+}
+
+.aml-networkgraph-node text
+{
+	font-size: 14px;
+	font-family: sans-serif;
+	text-align: center;
+	stroke: #333;
+	cursor: pointer;
+}
+
+.aml-networkgraph-node circle
+{
+	stroke: #fff;
+	stroke-width: 3px;
+	cursor: pointer;
+}
+
+.aml-networkgraph-node-neutral circle
+{
+	fill: lightgrey;
+}
+.aml-networkgraph-node-positive circle
+{
+	fill: green;
+}
+.aml-networkgraph-node-negative circle
+{
+	fill: red;
+}

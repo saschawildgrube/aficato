@@ -1,0 +1,42 @@
+TID_COOKIEMANAGER_TITLE
+Cookie Manager
+TID_COOKIEMANAGER_TOOL_HELP
+Help
+TID_COOKIEMANAGER_TOOL_LIST
+List cookies
+TID_COOKIEMANAGER_TOOL_REFRESH
+Refresh list
+TID_COOKIEMANAGER_TOOL_SET
+Set cookie
+TID_COOKIEMANAGER_TOOL_UNSET
+Remove cookie
+TID_COOKIEMANAGER_HEADER_COOKIE
+Cookie
+TID_COOKIEMANAGER_HEADER_VALUE
+Value
+TID_COOKIEMANAGER_LABEL_COOKIE
+Name of cookie
+TID_COOKIEMANAGER_LABEL_VALUE
+Value of cookie
+TID_COOKIEMANAGER_LABEL_DURATION
+Duration in minutes
+TID_COOKIEMANAGER_BUTTON_SETCOOKIE
+Set Cookie
+TID_COOKIEMANAGER_TEXT_SETCOOKIE
+Enter a name and a value for a new cookie. If an existing name is chosen, the corresponding cookie value will be replaced.
+TID_COOKIEMANAGER_TEXT_COOKIESET
+After a cookie has been set it will not appear in the list until the next time the page is reloaded. Click on "?TID_BUTTON_NEXT?" to proceed.
+TID_COOKIEMANAGER_INFO_SET_SUCCESS
+The cookie "{COOKIE}" has been set.
+TID_COOKIEMANAGER_TEXT_COOKIEUNSET
+After a cookie has been removed it would appear in the list until the next time the page is reloaded. Click on "?TID_BUTTON_NEXT?" to proceed.
+TID_COOKIEMANAGER_INFO_UNSET_SUCCESS
+The cookie "{COOKIE}" has been removed.
+TID_COOKIEMANAGER_TEXT_HELP
+This module visualizes all set cookies sent by the browser.
+
+You can set new or change existing cookie values.
+TID_COOKIEMANAGER_ERROR_COOKIE_EMPTY
+Please enter a name for the cookie!
+TID_COOKIEMANAGER_ERROR_COOKIE_INVALID
+The cookie name is not valid. The cookie name may only consist alphanumeric characters and must not start with a digit.

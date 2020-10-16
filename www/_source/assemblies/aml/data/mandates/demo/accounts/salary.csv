@@ -1,0 +1,13 @@
+DATE;ID;AMOUNT;TYPE;DESCRIPTION;COUNTRY
+;;;CURRENCY;EUR;
+;;;COUNTRY;DEU;
+;;;BALANCE_BEGIN;1200;
+;;;ID;Sally Salary;
+2018-01-01;Employer;3250;SALARY;Gehalt Januar;DEU
+2018-01-02;Landlord;-1100;WIRE;Miete;DEU
+2018-01-03;ACME Versicherungen;-100;WIRE;Hausrat/Haftpflicht;DEU
+2018-01-05;Alpha Bank;-100;CASH;Automatenauszahlung Hauptstrasse;DEU
+2018-01-10;Rewe;-45.45;DEBITCARD;Rewe sagt Danke;DEU
+2018-02-01;Employer;3250;SALARY;Gehalt Februar;DEU
+2018-02-02;Landlord;-1100;WIRE;Miete;DEU
+2018-01-03;Rewe;-185.90;DEBITCARD;Rewe sagt Danke;DEU

@@ -1,0 +1,40 @@
+TID_NAVIGATION_SYSTEMADMIN
+System Administration 
+TID_NAVIGATION_SYSTEMADMIN-SERVERS
+Servers
+TID_NAVIGATION_SYSTEMADMIN-TESTCENTER
+Test Center
+TID_NAVIGATION_SYSTEMADMIN-WEBSERVICES
+Web  services
+TID_NAVIGATION_SYSTEMADMIN-LOG
+Log
+TID_NAVIGATION_SYSTEMADMIN-SCHEDULER
+Scheduler
+TID_NAVIGATION_SYSTEMADMIN-USER
+User
+TID_NAVIGATION_SYSTEMADMIN-SESSION
+Session
+TID_NAVIGATION_SYSTEMADMIN-DATA
+Data
+TID_NAVIGATION_SYSTEMADMIN-SOURCEFILES
+Source Files
+TID_TEXT_SYSTEMADMIN
+This area serves as the central hub to all core systems of the web application. It contains interfaces to the web services used by the site and specific user interfaces to the underlying data structures and a Test Center.
+TID_TEXT_SYSTEMADMIN-TESTCENTER
+The test center of the web application system. Execute and review tests here.
+TID_TEXT_SYSTEMADMIN-WEBSERVICES
+Overview and test cases for all configured web services.
+TID_TEXT_SYSTEMADMIN-DATA
+Browse, add, modify, and delete data items.
+TID_TEXT_SYSTEMADMIN-LOG
+Browse the audit-safe log of the web application system.
+TID_TEXT_SYSTEMADMIN-SCHEDULER
+Create, search, modify, and execute scheduled jobs.
+TID_TEXT_SYSTEMADMIN-SERVERS
+Provides an overview on all configured servers of the web application system.
+TID_TEXT_SYSTEMADMIN-SESSION
+Browse and investigate all sessions that currently exist.
+TID_TEXT_SYSTEMADMIN-SOURCEFILES
+Browse and download the source files of the web application system.
+TID_TEXT_SYSTEMADMIN-USER
+Search, create, and modify users.

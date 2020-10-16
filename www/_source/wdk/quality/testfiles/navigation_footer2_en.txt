@@ -1,0 +1,6 @@
+LEVEL	;CONTEXT			;LABEL											;CONDITIONS
+#0		;about				;?TID_NAVIGATION_ABOUT?			;
+#0		;contact			;?TID_NAVIGATION_CONTACT?		;
+#0		;license			;?TID_NAVIGATION_LICENSE?		;
+#0		;options			;?TID_NAVIGATION_OPTIONS?		;
+#0		;{W3CLINK}		;?TID_NAVIGATION_VALIDATOR?	;

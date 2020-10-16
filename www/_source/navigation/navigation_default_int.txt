@@ -1,0 +1,15 @@
+LEVEL	;CONTEXT								;LABEL																		;CONDITIONS
+0			;index									;?TID_NAVIGATION_START?										;
+0			;tour1									;?TID_NAVIGATION_TOUR?										;nologin, hide
+0			;team										;?TID_NAVIGATION_TEAM?										;
+0			;signin									;?TID_NAVIGATION_SIGNIN?									;nologin, hide
+0			;login									;?TID_NAVIGATION_LOGIN?										;nologin
+0			;aml-accountdatamanager	;?TID_NAVIGATION_AML-ACCOUNTDATAMANAGER?	;login 
+0			;aml-caseanalysis				;?TID_NAVIGATION_AML-CASEANALYSIS?				;login 
+0			;demo										;?TID_NAVIGATION_AML-DEMO?								;dev
+0			;include:aml-lab				;																					;
+0			;include:aml-doc				;																					;
+0			;admin									;?TID_NAVIGATION_ADMIN?										;admin
+1			;usermanagement					;?TID_NAVIGATION_USERMANAGEMENT?					;useradmin
+1			;include:systemadmin		;		 																			;
+0			;usersettings						;?TID_NAVIGATION_USERSETTINGS?						;login

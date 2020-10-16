@@ -1,0 +1,16 @@
+DirectoryIndex index.php
+RewriteEngine on
+RewriteRule ([.]*)sitemap\.xml$ $$$sitedir_ls$$$quality/testwebsite/?command=sitemap&%{QUERY_STRING}
+$$$seourlcommenttag$$$RewriteCond %{REQUEST_FILENAME} !-f
+$$$seourlcommenttag$$$RewriteCond %{REQUEST_FILENAME} !-d
+$$$seourlcommenttag$$$RewriteRule ([A-Za-z0-9\.\/\-]+)/?$ $$$sitedir_ls$$$quality/testwebsite/?seourl=$1&%{QUERY_STRING} [L]
+ErrorDocument 400 $$$sitedir_ls$$$quality/testwebsite/?error=HTTP400
+ErrorDocument 401 $$$sitedir_ls$$$quality/testwebsite/?error=HTTP401
+ErrorDocument 403 $$$sitedir_ls$$$quality/testwebsite/?error=HTTP403
+ErrorDocument 404 $$$sitedir_ls$$$quality/testwebsite/?error=HTTP404
+ErrorDocument 413 $$$sitedir_ls$$$quality/testwebsite/?error=HTTP413
+ErrorDocument 500 $$$sitedir_ls$$$quality/testwebsite/?error=HTTP500 
+AddHandler forbidden-file-types .inc
+AddHandler forbidden-file-types .cfg
+AddHandler forbidden-file-types .csv
+Action forbidden-file-types $$$sitedir_ls$$$quality/testwebsite/?error=HTTP404

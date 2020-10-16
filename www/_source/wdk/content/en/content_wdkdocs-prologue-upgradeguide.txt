@@ -1,0 +1,4 @@
+=Upgrade Guide=
+Version 1.0.0.0 is not released yet.
+
+At this point in time any new version may be backward-incompatible. Please refer to the [[wdkdocs-prologue-releasenotes|release notes]] for relevant changes.

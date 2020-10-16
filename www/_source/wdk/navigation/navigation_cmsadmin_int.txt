@@ -1,0 +1,3 @@
+LEVEL	;CONTEXT					;LABEL															;CONDITIONS
+0			;cmsadmin					;?TID_NAVIGATION_CMSADMIN?					;cmsadmin
+1			;cmsadmin-article	;?TID_NAVIGATION_CMSADMIN-ARTICLE?	;  

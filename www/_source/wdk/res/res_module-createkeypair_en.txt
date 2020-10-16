@@ -1,0 +1,31 @@
+TID_CREATEKEYPAIR_LABEL_EMAIL
+Email address
+TID_CREATEKEYPAIR_LABEL_NAME
+Name
+TID_CREATEKEYPAIR_LABEL_COMMENT
+Comment
+TID_CREATEKEYPAIR_LABEL_PASSWORD
+Private Key Password
+TID_CREATEKEYPAIR_BUTTON_CREATE
+Create Key Pair
+TID_CREATEKEYPAIR_ERROR_NAME_MISSING
+Please enter a name!
+TID_CREATEKEYPAIR_ERROR_EMAIL_INVALID
+Please enter a valid email address!
+TID_CREATEKEYPAIR_ERROR_NAME_TOOSHORT
+The name must be at least 5 characters long.
+TID_CREATEKEYPAIR_ERROR_PASSWORD_MISSING
+Please enter a password!
+TID_CREATEKEYPAIR_ERROR_CREATIONFAILED
+The creation of the new key pair failed for unknown reason.
+TID_CREATEKEYPAIR_TEXT_INTRO
+You can create a new key pair here.
+TID_CREATEKEYPAIR_TEXT_CREATED
+A new key pair has been created. The public key is used for encryption. It can be published.
+The private key is used for decryption. It should be kept secret.
+TID_CREATEKEYPAIR_TITLE_DETAILS
+Details
+TID_CREATEKEYPAIR_TITLE_PUBLICKEY
+Public Key
+TID_CREATEKEYPAIR_TITLE_PRIVATEKEY
+Private Key

@@ -1,0 +1,104 @@
+.aml-accountchart-svg
+{
+	background-color: white;
+	padding: 14px;
+	box-sizing: border-box;
+	font-family: sans-serif;	
+	text-align: center;
+}
+
+
+.aml-accountchart-axis-x
+{
+	font-size: 14px;
+}
+
+.aml-accountchart-axis-y
+{
+	font-size: 14px;
+}
+
+
+.aml-accountchart-column-background
+{
+	fill: #F5F5F5;
+}
+
+.aml-accountchart-bar-positive
+{
+	fill: {CSSCOLOR_TRANSACTION_DEPOSIT};
+}
+.aml-accountchart-bar-positive-text-inside
+{
+	font-size: 12px;
+	fill: white;
+}
+.aml-accountchart-bar-positive-text-outside
+{
+	font-size: 12px;
+	fill: black;
+}
+
+.aml-accountchart-bar-positive-fraction-cash
+{
+	fill: {CSSCOLOR_TRANSACTION_DEPOSIT_CASH};
+}
+.aml-accountchart-bar-positive-fraction-debitcard
+{
+	fill: {CSSCOLOR_TRANSACTION_DEPOSIT_DEBITCARD};
+}
+.aml-accountchart-bar-positive-fraction-wire
+{
+	fill: {CSSCOLOR_TRANSACTION_DEPOSIT_WIRE};
+}
+.aml-accountchart-bar-positive-fraction-salary
+{
+	fill: {CSSCOLOR_TRANSACTION_DEPOSIT_SALARY};
+}
+.aml-accountchart-bar-positive-fraction-default
+{
+	fill: {CSSCOLOR_TRANSACTION_DEPOSIT_OTHER};
+}
+
+ 
+.aml-accountchart-bar-negative
+{
+	fill: {CSSCOLOR_TRANSACTION_WITHDRAWAL};
+}
+.aml-accountchart-bar-negative-text-inside
+{
+	font-size: 12px;
+	fill: white;
+}
+.aml-accountchart-bar-negative-text-outside
+{
+	font-size: 12px;
+	fill: black;
+}
+
+.aml-accountchart-bar-negative-fraction-cash
+{
+	fill: {CSSCOLOR_TRANSACTION_WITHDRAWAL_CASH};
+}
+.aml-accountchart-bar-negative-fraction-debitcard
+{
+	fill: {CSSCOLOR_TRANSACTION_WITHDRAWAL_DEBITCARD};
+}
+.aml-accountchart-bar-negative-fraction-wire
+{
+	fill: {CSSCOLOR_TRANSACTION_WITHDRAWAL_WIRE};
+}
+.aml-accountchart-bar-negative-fraction-salary
+{
+	fill: {CSSCOLOR_TRANSACTION_WITHDRAWAL_SALARY};
+}
+.aml-accountchart-bar-negative-fraction-default
+{
+	fill: {CSSCOLOR_TRANSACTION_WITHDRAWAL_OTHER};
+}
+
+.aml-accountchart-line
+{
+	stroke-width: 2;
+	stroke: black;
+}

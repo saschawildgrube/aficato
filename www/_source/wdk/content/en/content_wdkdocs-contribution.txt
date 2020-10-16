@@ -1,0 +1,9 @@
+=Contribution=
+WDK is the work of great talent. They are full of enthusiasm, courage, endurance, skill and the will to make the web a better place.
+
+
+You want to contribute? That is great! Welcome to the team!
+
+
+This area contains useful information on contributing to the WDK and the related development processes.
+

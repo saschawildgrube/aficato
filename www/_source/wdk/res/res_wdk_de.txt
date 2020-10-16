@@ -1,0 +1,178 @@
+TID_ERROR_UNKNOWN
+Ein unerwarteter Fehler ist aufgetreten (ERRORCODE={ERROR}).
+TID_ERROR_HTTP400
+Fehler 400: Ungültige Anforderung.
+TID_ERROR_HTTP401
+Fehler 401: Nicht autorisiert.
+TID_ERROR_HTTP403
+Fehler 403: Zugriff verweigert.
+TID_ERROR_HTTP404
+Fehler 404: Seite nicht gefunden.
+TID_ERROR_HTTP413
+Fehler 413: Anforderung zu groß.
+TID_ERROR_HTTP500
+Fehler 500: Interner Serverfehler.
+TID_ERROR_CONTENT_NOT_FOUND
+Fehler: Inhalt nicht gefunden.
+TID_ERROR_INSUFFICIENT_PRIVILEGES
+Fehler: Sind sind für diesen Inhalt oder diese Funktion nicht berechtigt.
+TID_ERROR_LOGIN_REQUIRED
+Fehler: Sie müssen angemeldet sein, um den angeforderten Inhalt aufrufen zu können.
+TID_ERROR_SSL_REQUIRED
+Fehler: Um diese Seite anzuzeigen ist eine verschlüsselte Verbindung erforderlich.
+TID_ERROR_SESSION_CREATE
+Fehler: Eine Session konnte nicht erzeugt werden.
+TID_ERROR_REQUEST_FAILED
+Fehler: Die Abfrage schlug fehl. Es konnten keine Daten geladen werden.
+TID_ERROR_RESULT_INVALID
+Fehler: Der abgefragte Webservice lieferte kein gültiges Ergebnis.
+TID_ERROR_WRITE_FAILED
+Fehler: Es konnten keine Daten geschrieben werden.
+TID_ERROR_FORM_INVALID_FLOAT
+Die eingegebe Zahl ist ungültig. 
+TID_ERROR_FORM_INVALID_DATE
+Das eingegebene Datum ist ungültig.
+TID_ERROR_FORM_INVALID_DATETIME
+Das eingegebene Datums- und Zeitangabe ist ungültig.
+TID_ERROR_FORM_INVALID_EMAIL
+Die eingegebene Email ist ungültig.
+TID_ERROR_FORM_INVALID_URL
+Die eingegebene URL ist ungültig.
+TID_ERROR_FORM_VALUE_TOO_LOW
+Der eingegebene Wert ist zu niedrig.
+TID_ERROR_FORM_VALUE_TOO_HIGH
+Der eingegebene Wert ist zu hoch.
+TID_ERROR_FORM_VALUE_TOO_SHORT
+Der eingegebene Text ist zu kurz.
+TID_ERROR_FORM_VALUE_TOO_LONG
+Der eingegebene Text ist zu lang.
+TID_ERROR_FORM_INVALID_CHARS
+Der eingegebene Text enthält ungültige Zeichen.
+TID_ERROR_FORM_INVALID_ENUM
+Die ausgewählte Option wird nicht unterstützt.
+TID_ERROR_FORM_MISSING_DATE
+Bitte geben Sie ein Datum an!
+TID_ERROR_FORM_MISSING_DATETIME
+Bitte geben Sie ein Datum und eine Uhrzeit an!
+TID_ERROR_NOIMPORTFILE
+Es wurde keine Datei für den Import ausgewählt.
+TID_ERROR_IMPORTFILEINVALID
+Die zu importierende Datei ist nicht valide.
+TID_ERROR_IMPORT
+Beim Import der Datei ist ein Fehler aufgetreten.
+TID_INFO_IMPORT_COMPLETE
+Der Import ist abgeschlossen.
+TID_WARNING_UNDERCONSTRUCTION
+Achtung: Diese Seite befindet sich noch im Entwicklungsstadium!
+TID_WARNING_INSECURE
+Achtung: Sie übertragen Inhalte über eine unsichere Verbindung.
+TID_WARNING_CSRF_TOKEN_INVALID
+Achtung: Entweder Sie haben innerhalb einer Session eine Seite in einem neuen Browser-Fenster geöffnet, eine Seite neu geladen oder Sie wurden möglicherweise unwissentlich Opfer eines CSRF-Angriffs. Zur Sicherheit wurde die Session sofort beendet.
+TID_PRIVILEGE_USERADMIN
+Benutzer-Administrator
+TID_PRIVILEGE_SYSTEMADMIN
+System-Administrator
+TID_PRIVILEGE_CMSADMIN
+CMS-Administrator
+TID_LINK_PDF
+PDF herunterladen
+TID_BUTTON_NEXT
+Weiter
+TID_BUTTON_BACK
+Zurück
+TID_BUTTON_ADD
+Hinzufügen
+TID_BUTTON_MODIFY
+Ändern
+TID_BUTTON_DELETE
+Löschen
+TID_BUTTON_SAVE
+Speichern
+TID_BUTTON_FILTER
+Suchen
+TID_BUTTON_EXPORT
+Exportieren
+TID_BUTTON_IMPORT
+Importieren
+TID_TOOLTIP_VIEW
+Anzeigen
+TID_TOOLTIP_ADD
+Hinzufügen
+TID_TOOLTIP_MODIFY
+Ändern
+TID_TOOLTIP_DELETE
+Löschen
+TID_TOOLTIP_SORTASC
+Aufsteigend sortieren
+TID_TOOLTIP_SORTDESC
+Absteigend sortieren
+TID_TOOLTIP_RESETFILTERS
+Suchkriterien zurücksetzen
+TID_TAB_BASEDATA
+Stammdaten
+TID_TAB_HISTORY
+Historie
+TID_TABLEHEADER_NOTES
+Notizen
+TID_TABLEHEADER_TASKS
+Aufgaben
+TID_TABLEHEADER_CREATION
+Erstellt
+TID_TABLEHEADER_LASTCHANGE
+Letzte Änderung
+TID_LABEL_CREATION
+Erstellungszeitpunkt
+TID_LABEL_LASTCHANGE
+Zeitpunkt der letzten Änderung
+TID_LABEL_NOTES
+Notizen
+TID_SALUTATION_MR
+Herr
+TID_SALUTATION_MRS
+Frau
+TID_ITEM_YES
+Ja
+TID_ITEM_NO
+Nein
+TID_ITEM_ACTIVE
+Aktiv
+TID_ITEM_INACTIVE
+Inaktiv
+TID_ITEM_NONE
+Keine
+TID_OPTION_ALL
+Alle
+TID_OPTION_NONE
+Keine
+TID_OPTION_ACTIVE
+Nur aktive
+TID_OPTION_INACTIVE
+Nur inaktive
+TID_LABEL_FILTERBYLANGUAGE
+Sprache
+TID_LINK_NEXT
+Weiter
+TID_LINK_DOWNLOAD
+Herunterladen
+TID_NAVIGATION_MORE
+Mehr
+TID_NAVIGATION_SITEMAP
+Sitemap
+TID_LABEL_EXPORT_DECIMAL_DELIMITER
+Bitte wählen Sie das Dezimaltrennzeichen
+TID_OPTION_EXPORT_DECIMAL_DELIMITER_DOT
+Punkt '.'
+TID_OPTION_EXPORT_DECIMAL_DELIMITER_COMMA
+Komma ','
+TID_LABEL_MONTHS
+Monate
+TID_LABEL_WEEKS
+Wochen
+TID_LABEL_DAYS
+Tage
+TID_LABEL_HOURS
+Stunden
+TID_LABEL_MINUTES
+Minuten
+TID_LABEL_SECONDS
+Sekunden

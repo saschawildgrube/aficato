@@ -1,0 +1,80 @@
+TID_TITLE
+$$$WebSiteNameVerbose$$$
+TID_TITLE_DEFAULT
+?TID_TITLE?
+TID_META_KEYWORDS_DEFAULT
+$$$metakeywords$$$
+TID_META_DESCRIPTION_DEFAULT
+$$$metadescription$$$
+TID_COPYRIGHT
+Copyright &copy; {COPYRIGHT_PERIOD} by $$$publisher$$$
+TID_NAVIGATION_CURRENTPATH
+You are here
+TID_NAVIGATION_START
+Start
+TID_NAVIGATION_ABOUT
+About this website
+TID_NAVIGATION_DATAPROTECTION
+Data Protection
+TID_NAVIGATION_CONTACT
+Contact
+TID_NAVIGATION_ADMIN
+Admin
+TID_NAVIGATION_SIGNIN
+Signin
+TID_NAVIGATION_LOGIN
+Login
+TID_NAVIGATION_LOGOUT
+Good Bye
+TID_NAVIGATION_VALIDATOR
+Validate
+TID_NAVIGATION_USERMANAGEMENT
+User Management
+TID_NAVIGATION_USERSETTINGS
+My Settings
+TID_NAVIGATION_EXAMPLES
+Examples
+TID_NAVIGATION_EXAMPLE1
+Example 1
+TID_NAVIGATION_EXAMPLE2
+Example 2
+TID_NAVIGATION_EXAMPLE3
+Example 3
+TID_TITLE_START
+$$$WebSiteNameVerbose$$$
+TID_TITLE_DATAPROTECTION
+Data protection
+TID_TITLE_CONTACT
+Contact Information
+TID_TITLE_ADMIN
+Administration
+TID_TITLE_EXAMPLE3
+Example 3
+TID_TEXT_START
+This Website has been created using the Website Development Kit scaffolder.
+TID_INFO_POSTLOGIN
+Welcome back!
+TID_TEXT_LOGOUT
+You are now logged out. Please come back soon!
+TID_TEXT_ABOUT
+This website is published by:<br/><br/>$$$publisher$$$
+TID_TEXT_ADMIN
+Welcome to the administration area. Here you can find all tools to control this website.
+TID_TEXT_USERMANAGEMENT
+Add, modify, deactivate or even delete users or change their access rights.
+TID_TEXT_EXAMPLE3
+This is an example text used in a language independend content file loaded from a text resource file.
+TID_TEXT_DISCLAIMER
+This is a disclaimer text. Check out C$$$WebSiteName$$$Website::CallbackRenderSpecialContent() to see how it works!
+TID_CHECKBOX_DISCLAIMER
+Please confirm that you have read the disclaimer!
+TID_TOOLTIP_SSL
+This page has been transferred using HTTPS.
+TID_TOOLTIP_SWITCH2HTTP
+Change protocol to HTTP.
+TID_TOOLTIP_SWITCH2HTTPS
+Change protocol to HTTPS.
+TID_TOOLTIP_SENDMAIL
+Click here to send a mail!
+TID_TEXT_LOGINSTATUSWELCOMEUSER
+Hi {USERNAME}!

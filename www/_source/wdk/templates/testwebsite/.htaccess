@@ -1,0 +1,11 @@
+DirectoryIndex index.php
+RewriteEngine on
+RewriteRule ([.]*)sitemap\.xml$ /quality/testwebsite/?command=sitemap&%{QUERY_STRING}
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ([A-Za-z0-9\.\/\-]+)/?$ /quality/testwebsite/?seourl=$1&%{QUERY_STRING} [L]
+ErrorDocument 400 /?error=HTTP400
+ErrorDocument 401 /?error=HTTP401
+ErrorDocument 403 /?error=HTTP403
+ErrorDocument 404 /?error=HTTP404
+ErrorDocument 500 /?error=HTTP500 

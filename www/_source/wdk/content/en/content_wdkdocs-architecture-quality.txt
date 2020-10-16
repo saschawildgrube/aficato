@@ -1,0 +1,29 @@
+=Quality=
+{WDK} supports test driven development.
+
+
+One may ask, how can a development kit support the test driven approach?
+# The overall architecture approach of {WDK} fosters separation of duties and help to create components and code artefacts that can be tested independently.
+# Tests in {WDK} are executed at run-time, not at deploy-time. This allows tests not only to verify smaller code fragments but also the application behaviour in real life.
+Tests are part of the application that is deployed to environments and {WDK} has mechanisms to execute all available tests continuously in development, test and production environments. Alerts are triggered if a test failes.
+
+
+The following types of tests are shipped with {WDK}:
+* Environment tests check if the server environment is configured properly and is fit for purpose
+* Static source code tests check if e.g. deprecated functions are used, source files do not contain the byte order mask (BOM), required functions are defined, and there are no whitespaces before php code
+* Function and class tests check individual functions and classes
+* Web service tests verify the function of web services by consuming them via their defined HTTP interface
+* Website consumption tests check features that are exposed by the website itself by simulating browser requests - this also includes output rendering conducted by elements
+* Monitoring tests verify the availability of websites and web services
+In some cases the lines cannot be drawn exactly between these types - and there is no need to do so. All tests are embedded into the source code, deployed and executed in the same way.
+
+
+The dynamic website scaffold comes with the system/test webservice and the installer adds a scheduled job that will continuously execute all tests - starting with tests that have never executed before, then failed tests, then all tests sorted by their execution time.
+
+
+A {WDK}-based web application system can be a self-testing application. To execute tests within the actual environment (and not in a deployment pseudo-environment) comes with several advantages:
+# Errors that are caused by or related to server configuration or performance can be detected
+# The deployment process is faster (only files need to be copied) and this accelerates feedback cycles during development
+# Complex features (e.g. which require web service and database interaction) can be tested
+Teams eventually reach good code coverage with their automated tests, but a weak feature and corner case coverage. The {WDK} testing approach helps teams to really test relevant things.
+

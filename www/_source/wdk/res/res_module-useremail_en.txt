@@ -1,0 +1,43 @@
+TID_USEREMAIL_TEXT
+Here you can change the email address associated to your user account.
+TID_USEREMAIL_BUTTON_MODIFY
+Change email
+TID_USEREMAIL_LABEL_EMAIL
+Email
+TID_USEREMAIL_INFO_EMAIL_IDENTICAL
+You did not provide a new email address.
+TID_USEREMAIL_INFO_CHANGE_EMAIL_SUCCESS
+The new email address has been set.
+TID_USEREMAIL_INFO_UNSET_EMAIL_SUCCESS
+The email adress has been deleted.
+TID_USEREMAIL_ERROR_CHANGEEMAIL_FAILED
+The new email address could not be set.
+TID_USEREMAIL_ERROR_EMAIL_INVALID
+The entered email is invalid.
+TID_USEREMAIL_ERROR_EMAIL_EMPTY
+An email address must be entered.
+TID_USEREMAIL_EMAILSUBJECT_EMAILVALIDATION
+Please validate your email address!
+TID_USEREMAIL_EMAILBODY_EMAILVALIDATION
+Dear user,
+
+You are receiving this email to verify your changed email address.
+
+Please click on this link or copy this link into the address bar of your browser:
+{VALIDATION_LINK}
+
+If you do not want to verify you email address please ignore this mail.
+
+Thank you
+TID_USEREMAIL_INFO_VALIDATION_EMAIL_SENT
+Please check your inbox. An email has been sent to you to verify the correctness of your email address.
+TID_USEREMAIL_LINK_BACK
+Back
+TID_USEREMAIL_ERROR_TOKEN_NOT_FOUND
+The system was not able to verify your email. Possible reasons are:
+- the link you are using is incomplete. Please check if your mail client displays the link correctly.
+- the verification period has ended. In this case, you can simply restart the verification process and try again.
+TID_USEREMAIL_INFO_VALIDATION_SUCCESSFUL
+Thank you. Your email has been verified.
+TID_USEREMAIL_INFO_VALIDATION_PENDING
+A request is pending to change the email address to "{NEWEMAIL}". Please check your mail inbox!

@@ -1,0 +1,38 @@
+TID_NAVIGATION_WDKDOCS
+{WDK} Documentation
+TID_NAVIGATION_WDKDOCS-CHECKLISTS
+Checklists
+TID_TEXT_WDKDOCS
+The documentation of {WDK}
+TID_TEXT_WDKDOCS-PROLOGUE
+Release notes, upgrade guide and license information
+TID_TEXT_WDKDOCS-PROLOGUE-RELEASENOTES
+See what has changed in previous versions
+TID_TEXT_WDKDOCS-PROLOGUE-UPGRADEGUIDE
+What to do in case of major version changes
+TID_TEXT_WDKDOCS-PROLOGUE-LICENSE
+The license of {WDK}
+TID_TEXT_WDKDOCS-INTRODUCTION
+Getting started with {WDK}
+TID_TEXT_WDKDOCS-INTRODUCTION-ABOUT
+What is {WDK} in the first place?
+TID_TEXT_WDKDOCS-INTRODUCTION-INSTALLATION
+How to install a {WDK}-based application on a server?
+TID_TEXT_WDKDOCS-INTRODUCTION-GETTINGSTARTED
+First steps when developing your own {WDK}-based application
+TID_TEXT_WDKDOCS-FAQ
+Frequently Asked Questions
+TID_TEXT_WDKDOCS-ARCHITECTURE
+Understanding the structure of {WDK}-based application systems
+TID_TEXT_WDKDOCS-COMPONENTS
+The building blocks of {WDK}-based web applications
+TID_TEXT_WDKDOCS-GUIDES
+Learn how to do it
+TID_TEXT_WDKDOCS-FEATURES
+All capabilities of {WDK} explained
+TID_TEXT_WDKDOCS-GLOSSARY
+The terminology in a nutshell
+TID_TEXT_WDKDOCS-CONTRIBUTION
+Don't ask what {WDK} can do for you...
+TID_TEXT_WDKDOCS-API
+The API reference documentation

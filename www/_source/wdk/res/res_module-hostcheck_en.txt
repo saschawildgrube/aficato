@@ -1,0 +1,47 @@
+TID_HOSTCHECK_TITLE
+HostCheck
+TID_HOSTCHECK_TOOL_START
+Start
+TID_HOSTCHECK_LABEL_HOST
+Host (name or IP)
+TID_HOSTCHECK_BUTTON_CHECK
+Check
+TID_HOSTCHECK_INFO_SUCCESS
+Checking host "{VALUE}"...
+TID_HOSTCHECK_ERROR_HOST_INVALID
+This is neither a valid host name nor a valid IP address!
+TID_HOSTCHECK_ERROR_IP_NOT_RESOLVED
+The IP address could not be resolved from the host name!
+TID_HOSTCHECK_ERROR_HOSTNAME_NOT_RESOLVED
+The host name could not be resolved from the IP address!
+TID_HOSTCHECK_ERROR_DNSRECORDS
+No DNS records could be retrieved for the host name.
+TID_HOSTCHECK_ERROR_WHOIS-SERVER
+No Whois server could be determined for the host name.
+TID_HOSTCHECK_ERROR_HTTP
+No response to http request.
+TID_HOSTCHECK_ERROR_HTTPS
+No response to https request.
+TID_HOSTCHECK_LABEL_IP
+IP
+TID_HOSTCHECK_LABEL_HOSTNAME
+Host name
+TID_HOSTCHECK_LABEL_DOMAINSTATUS
+Domain Status
+TID_HOSTCHECK_LABEL_REVERSELOOKUP
+Reverse Lookup
+TID_HOSTCHECK_LABEL_DNSRECORDS
+DNS Records
+TID_HOSTCHECK_LABEL_BASHCMD-BLOCK
+Bash command to
+permanently block the IP
+TID_HOSTCHECK_LABEL_WHOIS-IP
+Whois (IP)
+TID_HOSTCHECK_LABEL_WHOIS-HOSTNAME
+Whois (Host name)
+TID_HOSTCHECK_LABEL_HTTP
+HTTP response
+TID_HOSTCHECK_LABEL_HTTPS
+HTTPS response
+TID_HOSTCHECK_TEXT_HELP
+Enter a host name or IP address to gain information about the host.

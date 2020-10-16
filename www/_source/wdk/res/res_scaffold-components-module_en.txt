@@ -1,0 +1,14 @@
+TID_SCAFFOLD_COMPONENTS_MODULE_NAME
+Create a new module
+TID_SCAFFOLD_COMPONENTS_MODULE_DESCRIPTION
+Creates source code for a new module.
+TID_SCAFFOLD_COMPONENTS_MODULE_CONTROL_ASSEMBLYID
+Assembly ID
+TID_SCAFFOLD_COMPONENTS_MODULE_CONTROL_MODULEID
+Module ID (CamelCased)
+TID_SCAFFOLD_COMPONENTS_MODULE_CONTROL_MODULEGROUP
+Module Group name (CamelCased)
+TID_SCAFFOLD_COMPONENTS_MODULE_ERROR_MODULEID_INVALID
+The module id is invalid. Please enter a camel-cased name like "ContractManager" or "Feedback"!
+TID_SCAFFOLD_COMPONENTS_MODULE_ERROR_ASSEMBLYID_INVALID
+The assembly id is invalid. The id must contain only lowercase characters and digits. It must start with a letter.

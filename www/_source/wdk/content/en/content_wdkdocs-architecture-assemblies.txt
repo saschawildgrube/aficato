@@ -1,0 +1,78 @@
+=Assemblies=
+Assemblies are packages to organize code and other assets. They are collections of components.
+
+
+Some would refer to them as bundles or packages.
+
+
+Essentially assemblies are folders with a specific set of subfolders and files.
+
+
+The source code directory of a {WDK}-based application is an assembly. And {WDK} is provided as an assembly, too.
+
+
+All re-usable code or component that is "plugged" into an application is part of an assmebly. All assemblies are placed in the assemblies folder of the application:
+<pre>
+/_source/  
+/_source/wdk/
+/_source/assemblies/[assembly1]/
+</pre>
+
+==Directory Structure==
+Assmemblies contain components, code and any other file.
+An assembly typically has the following folders:
+<pre>
+/
+/3rdparty
+/content
+/css
+/data
+/elements
+/fonts
+/images
+/js
+/layout
+/modules
+/navigation
+/quality
+/res
+/routing
+/scaffolds
+/webservices
+</pre>
+
+
+Folder names should be self-explanatory. However:
+* /3rdparty should contain 3rd party code that the author of an assembly requires.
+* /content is for content file - i.e. the pages of your website
+* /css is file cascading style sheet files
+* /data is for any static data files - could be anything
+* /elements is for [[wdkdocs-components-elememts|element]] class source files
+* /fonts is for fonts
+* /images is for images
+* /js is for Javascript files
+* /layout is for layout files
+* /modules is for [[wdkdocs-components-modules|module]] class source files
+* /navigation is navigation files which contain tree structures for user navigation
+* /quality is for tests and test data
+* /res is for text files containing localized text
+* /routing contains text files that maps content identifiers to user friendly URLs
+* /scaffolds contains all files related to a scaffold implementation and its template files - the mechanism to create new source code packages
+* /webservices contains the implementation of [[wdkdocs-architecture-webservices|web services]].
+* / Any other code files that should reside in the root folder of an assembly.
+==Assembly Line==
+All assemblies used by a website are be chained into the so-called assembly line.
+
+
+When including components (like content pages, modules, layout files, etc.) all assemblies are scanned. The first file found in the the assembly line that matches the required file is then used.
+
+
+This means that the order of the assemblies in the assembly line defines which file from which assembly is used. Hence assemblies can be used to "override" functionality and visual appearance of features defined in other assemblies.
+
+
+The first assembly being searched is always the application's source root folder (which is returned by the GetSourceDir() function defined in env.inc).
+
+
+The last assembly is the WDK source directory (which is returned by the GetWDKDir() function defined in env.inc).
+==Collaboration==
+Look at assemblies as means to distribute your code. 

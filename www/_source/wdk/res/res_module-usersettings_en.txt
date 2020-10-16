@@ -1,0 +1,24 @@
+TID_USERSETTINGS_TEXT
+Here you can change your local and language settings.
+TID_USERSETTINGS_BUTTON_EDIT
+Store settings
+TID_USERSETTINGS_LABEL_USERNAME
+Current user name
+TID_USERSETTINGS_LABEL_NEWUSERNAME
+Enter new user name
+TID_USERSETTINGS_LABEL_USERLANGUAGE
+Preferred language
+TID_USERSETTINGS_LABEL_USERCOUNTRY
+Country of residence
+TID_USERSETTINGS_LABEL_USERTIMEZONE
+Time zone
+TID_USERSETTINGS_OPTION_NOPREFERREDLANGUAGE
+No preferred language
+TID_USERSETTINGS_OPTION_NOCOUNTRY
+Omit country of residence
+TID_INFO_USER_EDIT_SUCCESS
+Your settings have been stored.
+TID_ERROR_USEREDIT
+The settings have not been stored
+TID_ERROR_LANGUAGE_NOT_SUPPORTED
+The language is not supported by this website.

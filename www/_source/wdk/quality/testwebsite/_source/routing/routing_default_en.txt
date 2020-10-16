@@ -1,0 +1,3 @@
+CONTEXTTYPE	;CONTEXT						;ALIAS
+content			;test-routing2			;Routing with Alias
+content			;test-language-alias;Language with Alias

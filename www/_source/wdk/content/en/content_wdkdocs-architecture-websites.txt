@@ -1,0 +1,12 @@
+=Websites=
+Websites are web applications intended to be consumed by a browser. They respond to HTTP requests with HTML documents, static assets, or responses intended to be processed by scripts executed within a browser.
+
+
+Websites interact with web services. They never communicate with databases directly.
+
+
+Websites are responsible to interpret user provided parameters (via GET, POST and Cookie) and generate a response that
+# Applies to the demand of the requesting user
+# Complies with defined access rights and roles of the requesting user
+# Matches the needs of the browser software and the device the browser software is running on
+Websites are PHP classes that are derived from CWebsite which is derived from CWebApplication.

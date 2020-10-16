@@ -1,0 +1,36 @@
+TID_DOMAIN_STATUS_UNKNOWN
+Not yet checked
+TID_DOMAINCHECK_TITLE
+Domain Check
+TID_DOMAINCHECK_TOOL_START
+Start
+TID_DOMAINCHECK_TOOL_HELP
+Help
+TID_DOMAINCHECK_TOOL_EXPORT
+CSV Export
+TID_DOMAINCHECK_TOOL_CLEAR
+Clear
+TID_DOMAINCHECK_LABEL_DOMAINS
+Domains
+TID_DOMAINCHECK_LABEL_WITHOUTHYPHEN
+Check without hyphen, too
+TID_DOMAINCHECK_LABEL_TLDS
+Top Level Domains
+TID_DOMAINCHECK_ERROR_DOMAINSMISSING
+Please specify at least one domain name!
+TID_DOMAINCHECK_ERROR_TOOMANYDOMAINS
+Sorry you can't check more than 20 domains at a time. This amount considers all combinations of domain names, top level domains, and domain names without hyphens.
+TID_DOMAINCHECK_BUTTON_CHECK
+Check Domains
+TID_DOMAINCHECK_TEXT_CHECKDOMAINS
+Enter domain names and TLDs separately! Each domain name will be combined with each TLD.
+TID_DOMAINCHECK_TEXT_HELP
+Write some documentation on how to use your module!
+TID_DOMAINCHECK_TABLEHEADER_DOMAIN
+Domain
+TID_DOMAINCHECK_INFO_CHECKSINPROGRESS
+Domain check is in progress. Please wait!
+TID_DOMAINCHECK_WARNING_NOTHINGTOEXPORT
+No domain checks have been performed yet. There is nothing to export.
+TID_DOMAINCHECK_ERROR_SESSIONSUPPORT
+The domain check can only be used if session support is activated.

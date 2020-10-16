@@ -1,0 +1,30 @@
+=Title=
+==Subtitles==
+First paragraph
+
+Second Paragraph
+=Lists=
+* Bullet Level 1
+** Bullet Level 2
+# Numeric Level 1
+## Numeric Level 2
+=Formatting=
+normal ''italic'' '''bold''' '''''italic and bold'''''
+<pre>Preformatted Text</pre>
+----
+=Links=
+* [[index]]
+* [[index|Go to index page]]
+* [http://www.example.com]
+* [http://www.example.com Example]
+* [{DOWNLOADPATH}test.pdf Test PDF]
+* [http://www.example.com/(with_bracets) Example with Bracets] 
+=Embedded HTML=
+This is some text with html <span style="color:red">formatting</span>.
+=Definition Lists=
+;Alpha
+:This first letter in the Greek alphabet
+;Zulu
+:Represents the letter Z in the NATO alphabet
+:An African tribe
+

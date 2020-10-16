@@ -1,0 +1,20 @@
+TID_LOGIN_LABEL_USERNAME
+User name
+TID_LOGIN_LABEL_PASSWORD
+Password
+TID_LOGIN_BUTTON_LOGIN
+Log-in
+TID_LOGIN_ERROR_USERNAME_MISSING
+Please enter your username!
+TID_LOGIN_ERROR_PASSWORD_MISSING
+You did not enter a password!
+TID_LOGIN_ERROR_INCORRECT
+Log in failed. Either user name or password is incorrect.
+TID_LOGIN_INFO_SUCCESS
+Login successful!
+TID_LOGIN_INFO_LOGIN
+You are currently logged in.
+TID_LOGIN_LINK_LOGIN
+Login
+TID_LOGIN_LINK_LOGOUT
+Logout

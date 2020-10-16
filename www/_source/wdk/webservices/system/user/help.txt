@@ -1,0 +1,6 @@
+PURPOSE
+
+	* to provide an user database
+	* to store generic properties of users
+
+{COMMAND_REFERENCE}

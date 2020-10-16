@@ -1,0 +1,54 @@
+=Red Flags=
+Red flags are raised when the following typologies are detected:
+==Inactivity==
+The Inactivity red flag is raised if there is not a single transaction within 21 consecutive days.
+==Structuring==
+The structuring typology is detected if there is a number of either withdrawal or deposit transactions which take place in a given time frame where each transaction is below a certain threshold and above another threshold and that sum up to a defined amount. Transaction of type DIRECTDEBIT, DEBITCARD, SALARY and OTHER are ignored.
+Two variants of structuring are supported:
+
+'''1 day'''
+
+Minimum number of transactions: 2
+
+Single transaction must be larger than or equal to: 150 EUR / USD
+
+Single transaction must be smaller than or equal to: 9500 EUR / USD
+
+Transactions must sum up to: 3000 EUR / USD
+
+'''7 days'''
+
+Minimum number of transactions: 2
+
+Single transaction must be larger than or equal to: 150 EUR / USD
+
+Single transaction must be smaller than or equal to: 9500 EUR / USD
+
+Transactions must sum up to: 5000 EUR / USD
+==International wires==
+Any wire transfer to or from another country is triggering this red flag.
+==Rapid movement of funds==
+The rapid movement of funds typology represents a behaviour where in a short period of time funds are being deposited and withdrawn - i.e. an account is used to transfer funds between two other accounts.
+
+The red flag is raised if within 7 consecutive days the ratio between deposits and withdrawals (or withdrawals and deposits whatever is higher) is above 45%. The individual transactions considered must be higher than or equal to 150 EUR / USD. Transactions of type DIRECTDEBIT, DEBITCARD, SALARY and OTHER are ignored.
+
+So if 1000 is deposited and 450 are withdrawn (or vice-versa) within 7 days the red flag is triggered.
+==Round amounts==
+Any transaction that is considered a 'round amount' triggers the red flag. For EUR and USD an amount is considered a round amount if:
+
+the amount is equal or higher than 2,000 and ends with 2 zeroes,
+
+the amount is equal or higher than 100,000 and ends with 3 zeroes,
+
+or the amount is equal or higher than 1,000,000 and ends with 4 zeroes.
+==Intensive cash==
+The intensive cash typology represents a behaviour in which a certain amount of cash is being deposited or withdrawn in a given time frame.
+
+The red flag is raised if at least 1500 EUR / USD is deposited or withdrawn within 7 days in at least 3 transactions where each individual transaction amount is equal to or between 150 and 1500 EUR / USD.
+
+The red flag is also raised if at least 3000 EUR / USD is deposited or withdrawn within one day in one or more transactions where each individual transaction amount is at least 150 EUR / USD.
+==High risk geographies==
+Any transaction will trigger the red flag which is to or from a country that is listed in the high risk geographies list:
+
+
+{HIGHRISKCOUNTRIES}

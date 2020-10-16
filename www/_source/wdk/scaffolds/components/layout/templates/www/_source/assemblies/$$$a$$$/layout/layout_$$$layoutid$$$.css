@@ -1,0 +1,31 @@
+/* Example of a layout specific css class using a layout config */
+.color1
+{
+	color: {LAYOUT_COLOR1};
+}
+
+#navbar-fixed-top-overlap 
+{
+	padding-bottom: 61px;	   
+}
+
+/* Progress indicator */
+.wdk-progressindicator
+{
+  display: inline-block;
+  opacity: 0;
+  max-width: 0;
+  -webkit-transition: opacity 0.25s, max-width 0.45s;
+  -moz-transition: opacity 0.25s, max-width 0.45s;
+  -o-transition: opacity 0.25s, max-width 0.45s;
+  transition: opacity 0.25s, max-width 0.45s;
+}
+.wdk-progressindicator-container.active
+{
+  cursor: progress;
+}
+.wdk-progressindicator-container.active .wdk-progressindicator
+{
+  opacity: 1;
+  max-width: 50px;
+}

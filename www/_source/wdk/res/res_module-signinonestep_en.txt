@@ -1,0 +1,22 @@
+TID_SIGNINONESTEP_LABEL_USERNAME
+Choose a user name
+TID_SIGNINONESTEP_LABEL_PASSWORD
+Enter a password
+TID_SIGNINONESTEP_LABEL_PASSWORD_REPEAT
+Repeat the password
+TID_SIGNINONESTEP_BUTTON_SIGNIN
+Sign-in
+TID_SIGNINONESTEP_ERROR_USERNAME_MISSING
+Please enter a username!
+TID_SIGNINONESTEP_ERROR_USERNAME_NOTALLOWED
+The selected user name is not valid for use.
+TID_SIGNINONESTEP_ERROR_USERNAME_BLACKLISTED
+The selected user name is not valid for use.
+TID_SIGNINONESTEP_ERROR_PASSWORD_MISSING
+Please enter a password!
+TID_SIGNINONESTEP_ERROR_PASSWORD_MISMATCH
+Please repeat the password!
+TID_SIGNINONESTEP_ERROR_USER_EXISTS
+The chosen username is already in use. Please choose a different one!
+TID_SIGNINONESTEP_INFO_WELCOME
+Thank you for signing-in.

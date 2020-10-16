@@ -1,0 +1,92 @@
+TID_JOB_TABLEHEADER_JOB_ID
+ID
+TID_JOB_TABLEHEADER_JOB_NAME
+Name
+TID_JOB_TABLEHEADER_JOB_URL
+URL
+TID_JOB_TABLEHEADER_TIMEOUT_SECONDS
+Timeout
+TID_JOB_TABLEHEADER_CREATION_DATETIME
+Created
+TID_JOB_TABLEHEADER_LASTCHANGE_DATETIME
+Last change
+TID_JOB_TABLEHEADER_LASTEXECUTION_DATETIME
+Last Execution
+TID_JOB_TABLEHEADER_NEXTEXECUTION_DATETIME
+Next Execution
+TID_JOB_TABLEHEADER_TASKS
+Tasks
+TID_JOB_LABEL_JOB_NAME
+Job name
+TID_JOB_LABEL_JOB_URL
+Job URL
+TID_JOB_LABEL_JOB_POSTPARAMS
+Post Parameters
+TID_JOB_LABEL_TIMEOUT_SECONDS
+Request timeout (seconds)
+TID_JOB_LABEL_JOB_ACTIVE
+Job is active
+TID_JOB_LABEL_SCHEDULE_MINUTE
+Crontab rule: minute
+TID_JOB_LABEL_SCHEDULE_HOUR
+Crontab rule: hour
+TID_JOB_LABEL_SCHEDULE_DAYOFMONTH
+Crontab rule: day of month
+TID_JOB_LABEL_SCHEDULE_MONTH
+Crontab rule: month
+TID_JOB_LABEL_SCHEDULE_DAYOFWEEK
+Crontab rule: day of week
+TID_JOB_TOOLTIP_EXECUTE
+Execute
+TID_JOB_TOOLTIP_FORCEEXECUTE
+Force Execute
+TID_JOB_TOOLTIP_MODIFY
+Modify this job
+TID_JOB_TOOLTIP_DELETE
+Delete this job
+TID_JOB_LABEL_DELETECONFIRM
+Please confirm that you want to delete the job "{JOB_USERFRIENDLY}" (id={JOB_INDEX})!
+TID_JOB_BUTTON_ADD
+Add
+TID_JOB_BUTTON_MODIFY
+Modify
+TID_JOB_BUTTON_DELETE
+Delete
+TID_JOB_TOOL_LIST
+List jobs
+TID_JOB_TOOL_ADD
+Add new job
+TID_JOB_TOOL_MODIFY
+Modify this job
+TID_JOB_TOOL_DELETE
+Delete this job
+TID_JOB_TOOL_REFRESH
+Refresh
+TID_JOB_INFO_ADD_SUCCESS
+A new job named "{JOB_USERFRIENDLY}" has been added with id {JOB_INDEX}. 
+TID_JOB_INFO_MODIFY_SUCCESS
+The scheduled job "{JOB_USERFRIENDLY}" (id={JOB_INDEX}) has been modified successfully. 
+TID_JOB_INFO_DELETE_SUCCESS
+The job "{JOB_USERFRIENDLY}" (id={JOB_INDEX}) has been sucessfully deleted.
+TID_JOB_INFO_EXECUTE_SUCCESS
+The job "{JOB_USERFRIENDLY}" (id={JOB_INDEX}) has been sucessfully executed.
+TID_JOB_ERROR_ITEM_NOT_FOUND
+The selected job was not found. Maybe it has been deleted in the meantime.
+TID_JOB_ERROR_JOB_INACTIVE
+The job is inactive and was not executed.
+TID_JOB_ERROR_JOB_NAMEOCCUPIED
+The entered name is already occupied.
+TID_JOB_ERROR_JOB_DELETE_CONFIRMATIONMISSING
+You must confirm to delete the job by checking the checkbox.
+TID_JOB_ERROR_JOB_NAMEMISSING
+Please enter a name for the job!
+TID_JOB_ERROR_CRONTABINVALID
+The scheduling rule must be compatible to a crontab rule.
+TID_JOB_NOTIMEOUT
+Not set
+TID_JOB_JOBWASNEVEREXECUTED
+Job was never executed
+TID_JOB_ERROR_JOB_EXECUTION
+An error occured when requesting the specified job URL.
+TID_JOB_ERROR_JOB_EXECUTION_WEBSERVICE
+The job was executed but the specified web service returned an error.

@@ -1,0 +1,572 @@
+TID_LANGUAGE_AR
+Arabic
+TID_LANGUAGE_CS
+Czech
+TID_LANGUAGE_DA
+Danish
+TID_LANGUAGE_DE
+German
+TID_LANGUAGE_EL
+Greek
+TID_LANGUAGE_EN
+English 
+TID_LANGUAGE_ES
+Spanish
+TID_LANGUAGE_FI
+Finnish
+TID_LANGUAGE_FR
+French
+TID_LANGUAGE_GA
+Irish
+TID_LANGUAGE_IS
+Icelandic
+TID_LANGUAGE_IT
+Italian
+TID_LANGUAGE_JA
+Japanese
+TID_LANGUAGE_LB
+Luxembourgish
+TID_LANGUAGE_NL
+Dutch
+TID_LANGUAGE_NN
+Norwegian
+TID_LANGUAGE_PL
+Polish
+TID_LANGUAGE_PT
+Portuguese
+TID_LANGUAGE_SV
+Swedish
+TID_LANGUAGE_ZH
+Chinese
+TID_COUNTRY_ABW
+Aruba
+TID_COUNTRY_AFG
+Afghanistan
+TID_COUNTRY_AGO
+Angola
+TID_COUNTRY_AIA
+Anguilla
+TID_COUNTRY_ALA
+Åland Islands
+TID_COUNTRY_ALB
+Albania
+TID_COUNTRY_AND
+Andorra
+TID_COUNTRY_ARE
+United Arab Emirates
+TID_COUNTRY_ARG
+Argentina
+TID_COUNTRY_ARM
+Armenia
+TID_COUNTRY_ASM
+American Samoa
+TID_COUNTRY_ATA
+Antarctica
+TID_COUNTRY_ATF
+French Southern Territories
+TID_COUNTRY_ATG
+Antigua and Barbuda
+TID_COUNTRY_AUS
+Australia
+TID_COUNTRY_AUT
+Austria
+TID_COUNTRY_AZE
+Azerbaijan
+TID_COUNTRY_BDI
+Burundi
+TID_COUNTRY_BEL
+Belgium
+TID_COUNTRY_BEN
+Benin
+TID_COUNTRY_BES
+Bonaire, Sint Eustatius and Saba
+TID_COUNTRY_BFA
+Burkina Faso
+TID_COUNTRY_BGD
+Bangladesh
+TID_COUNTRY_BGR
+Bulgaria
+TID_COUNTRY_BHR
+Bahrain
+TID_COUNTRY_BHS
+Bahamas
+TID_COUNTRY_BIH
+Bosnia and Herzegovina
+TID_COUNTRY_BLM
+Saint Barthélemy
+TID_COUNTRY_BLR
+Belarus
+TID_COUNTRY_BLZ
+Belize
+TID_COUNTRY_BMU
+Bermuda
+TID_COUNTRY_BOL
+Bolivia
+TID_COUNTRY_BRA
+Brazil
+TID_COUNTRY_BRB
+Barbados
+TID_COUNTRY_BRN
+Brunei Darussalam
+TID_COUNTRY_BTN
+Bhutan
+TID_COUNTRY_BVT
+Bouvet Island
+TID_COUNTRY_BWA
+Botswana
+TID_COUNTRY_CAF
+Central African Republic
+TID_COUNTRY_CAN
+Canada
+TID_COUNTRY_CCK
+Cocos (Keeling) Islands
+TID_COUNTRY_CHE
+Switzerland
+TID_COUNTRY_CHL
+Chile
+TID_COUNTRY_CHN
+China
+TID_COUNTRY_CIV
+Côte d'Ivoire
+TID_COUNTRY_CMR
+Cameroon
+TID_COUNTRY_COD
+Democratic Republic of the Congo
+TID_COUNTRY_COG
+Congo
+TID_COUNTRY_COK
+Cook Islands
+TID_COUNTRY_COL
+Columbia
+TID_COUNTRY_COM
+Comoros
+TID_COUNTRY_CPV
+Cabo Verde
+TID_COUNTRY_CRI
+Costa Rica
+TID_COUNTRY_CUB
+Cuba
+TID_COUNTRY_CUW
+Curaçao
+TID_COUNTRY_CXR
+Christmas Island
+TID_COUNTRY_CYM
+Cayman Islands
+TID_COUNTRY_CYP
+Cyprus
+TID_COUNTRY_CZE
+Czech Republic
+TID_COUNTRY_DEU
+Germany
+TID_COUNTRY_DJI
+Djibouti
+TID_COUNTRY_DMA
+Dominica
+TID_COUNTRY_DNK
+Denmark
+TID_COUNTRY_DOM
+Dominican Republic
+TID_COUNTRY_DZA
+Algeria
+TID_COUNTRY_ECU
+Ecuador
+TID_COUNTRY_EGY
+Egypt
+TID_COUNTRY_ERI
+Eritrea
+TID_COUNTRY_ESH
+Western Sahara
+TID_COUNTRY_ESP
+Spain
+TID_COUNTRY_EST
+Estonia
+TID_COUNTRY_ETH
+Ethiopia
+TID_COUNTRY_FIN
+Finland
+TID_COUNTRY_FJI
+Fiji
+TID_COUNTRY_FLK
+Falkland Islands
+TID_COUNTRY_FRA
+France
+TID_COUNTRY_FRO
+Faroe Islands
+TID_COUNTRY_FSM
+Federated States of Micronesia
+TID_COUNTRY_GAB
+Gabon
+TID_COUNTRY_GBR
+Great Britain
+TID_COUNTRY_GEO
+Georgia
+TID_COUNTRY_GGY
+Guernsey
+TID_COUNTRY_GHA
+Ghana
+TID_COUNTRY_GIB
+Gibraltar
+TID_COUNTRY_GIN
+Guinea
+TID_COUNTRY_GLP
+Guadeloupe
+TID_COUNTRY_GMB
+Gambia
+TID_COUNTRY_GNB
+Guinea-Bissau
+TID_COUNTRY_GNQ
+Equatorial Guinea
+TID_COUNTRY_GRC
+Greece
+TID_COUNTRY_GRD
+Grenada
+TID_COUNTRY_GRL
+Greenland
+TID_COUNTRY_GTM
+Guatemala
+TID_COUNTRY_GUF
+French Guiana
+TID_COUNTRY_GUM
+Guam
+TID_COUNTRY_GUY
+Guyana
+TID_COUNTRY_HKG
+Hong Kong
+TID_COUNTRY_HMD
+Heard Island and McDonald Islands
+TID_COUNTRY_HND
+Honduras
+TID_COUNTRY_HRV
+Croatia
+TID_COUNTRY_HTI
+Haiti
+TID_COUNTRY_HUN
+Hungary
+TID_COUNTRY_IDN
+Indonesia
+TID_COUNTRY_IMN
+Isle of Man
+TID_COUNTRY_IND
+India
+TID_COUNTRY_IOT
+British Indian Ocean Territory
+TID_COUNTRY_IRL
+Ireland
+TID_COUNTRY_IRN
+Iran
+TID_COUNTRY_IRQ
+Iraq
+TID_COUNTRY_ISL
+Iceland
+TID_COUNTRY_ISR
+Israel
+TID_COUNTRY_ITA
+Italy
+TID_COUNTRY_JAM
+Jamaica
+TID_COUNTRY_JEY
+Jersey
+TID_COUNTRY_JOR
+Jordan
+TID_COUNTRY_JPN
+Japan
+TID_COUNTRY_KAZ
+Kazakhstan
+TID_COUNTRY_KEN
+Kenya
+TID_COUNTRY_KGZ
+Kyrgyzstan
+TID_COUNTRY_KHM
+Cambodia
+TID_COUNTRY_KIR
+Kiribati
+TID_COUNTRY_KNA
+Saint Kitts and Nevis
+TID_COUNTRY_KOR
+Korea
+TID_COUNTRY_KWT
+Kuwait
+TID_COUNTRY_LAO
+Lao
+TID_COUNTRY_LBN
+Lebanon
+TID_COUNTRY_LBR
+Liberia
+TID_COUNTRY_LBY
+Libya
+TID_COUNTRY_LCA
+Saint Lucia
+TID_COUNTRY_LIE
+Liechtenstein
+TID_COUNTRY_LKA
+Sri Lanka
+TID_COUNTRY_LSO
+Lesotho
+TID_COUNTRY_LTU
+Lithuania
+TID_COUNTRY_LUX
+Luxembourg
+TID_COUNTRY_LVA
+Latvia
+TID_COUNTRY_MAC
+Macau
+TID_COUNTRY_MAF
+Saint Martin
+TID_COUNTRY_MAR
+Morocco
+TID_COUNTRY_MCO
+Monaco
+TID_COUNTRY_MDA
+Moldova
+TID_COUNTRY_MDG
+Madagascar
+TID_COUNTRY_MDV
+Maldives
+TID_COUNTRY_MEX
+Mexico
+TID_COUNTRY_MHL
+Marshall Islands
+TID_COUNTRY_MKD
+North Macedonia
+TID_COUNTRY_MLI
+Mali
+TID_COUNTRY_MLT
+Malta
+TID_COUNTRY_MMR
+Myanmar
+TID_COUNTRY_MNE
+Montenegro
+TID_COUNTRY_MNG
+Mongolia
+TID_COUNTRY_MNP
+Northern Mariana Islands
+TID_COUNTRY_MOZ
+Mozambique
+TID_COUNTRY_MRT
+Mauritania
+TID_COUNTRY_MSR
+Montserrat
+TID_COUNTRY_MTQ
+Martinique
+TID_COUNTRY_MUS
+Mauritius
+TID_COUNTRY_MWI
+Malawi
+TID_COUNTRY_MYS
+Malaysia
+TID_COUNTRY_MYT
+Mayotte
+TID_COUNTRY_NAM
+Namibia
+TID_COUNTRY_NCL
+New Caledonia
+TID_COUNTRY_NER
+Niger
+TID_COUNTRY_NFK
+Norfolk Island
+TID_COUNTRY_NGA
+Nigeria
+TID_COUNTRY_NIC
+Nicaragua
+TID_COUNTRY_NIU
+Niue
+TID_COUNTRY_NLD
+Netherlands
+TID_COUNTRY_NOR
+Norway
+TID_COUNTRY_NPL
+Nepal
+TID_COUNTRY_NRU
+Nauru
+TID_COUNTRY_NZL
+New Zealand
+TID_COUNTRY_OMN
+Oman
+TID_COUNTRY_PAK
+Pakistan
+TID_COUNTRY_PAN
+Panama
+TID_COUNTRY_PCN
+Pitcairn
+TID_COUNTRY_PER
+Peru
+TID_COUNTRY_PHL
+Philippines
+TID_COUNTRY_PLW
+Palau
+TID_COUNTRY_PNG
+Papua New Guinea
+TID_COUNTRY_POL
+Poland
+TID_COUNTRY_PRI
+Puerto Rico
+TID_COUNTRY_PRK
+North Korea
+TID_COUNTRY_PRT
+Portugal
+TID_COUNTRY_PRY
+Paraguay
+TID_COUNTRY_PSE
+Palestine
+TID_COUNTRY_PYF
+French Polynesia
+TID_COUNTRY_QAT
+Qatar
+TID_COUNTRY_REU
+Réunion
+TID_COUNTRY_ROU
+Romania
+TID_COUNTRY_RUS
+Russian Federation
+TID_COUNTRY_RWA
+Rwanda
+TID_COUNTRY_SAU
+Saudi Arabia
+TID_COUNTRY_SDN
+Sudan
+TID_COUNTRY_SEN
+Senegal
+TID_COUNTRY_SGP
+Singapore
+TID_COUNTRY_SGS
+South Georgia and the South Sandwich Islands
+TID_COUNTRY_SHN
+Saint Helena, Ascension and Tristan da Cunha
+TID_COUNTRY_SJM
+Svalbard and Jan Mayen
+TID_COUNTRY_SLB
+Solomon Islands
+TID_COUNTRY_SLE
+Sierra Leone
+TID_COUNTRY_SLV
+El Salvador
+TID_COUNTRY_SMR
+San Marino
+TID_COUNTRY_SOM
+Somalia
+TID_COUNTRY_SPM
+Saint Pierre and Miquelon
+TID_COUNTRY_SRB
+Serbia
+TID_COUNTRY_SSD
+South Sudan
+TID_COUNTRY_STP
+Sao Tome and Principe
+TID_COUNTRY_SUR
+Suriname
+TID_COUNTRY_SVK
+Slovakia
+TID_COUNTRY_SVN
+Slovenia
+TID_COUNTRY_SWE
+Sweden
+TID_COUNTRY_SWZ
+Eswatini
+TID_COUNTRY_SXM
+Sint Maarten
+TID_COUNTRY_SYC
+Seychelles
+TID_COUNTRY_SYR
+Syrian Arab Republic
+TID_COUNTRY_TCA
+Turks and Caicos Islands
+TID_COUNTRY_TCD
+Chad
+TID_COUNTRY_TGO
+Togo
+TID_COUNTRY_THA
+Thailand
+TID_COUNTRY_TJK
+Tajikistan
+TID_COUNTRY_TKL
+Tokelau
+TID_COUNTRY_TKM
+Turkmenistan
+TID_COUNTRY_TLS
+Timor-Leste
+TID_COUNTRY_TON
+Tonga
+TID_COUNTRY_TTO
+Trinidad and Tobago
+TID_COUNTRY_TUN
+Tunisia
+TID_COUNTRY_TUR
+Turkey
+TID_COUNTRY_TUV
+Tuvalu
+TID_COUNTRY_TWN
+Taiwan
+TID_COUNTRY_TZA
+Tanzania
+TID_COUNTRY_UGA
+Uganda
+TID_COUNTRY_UKR
+Ukraine
+TID_COUNTRY_UMI
+United States Minor Outlying Islands
+TID_COUNTRY_URY
+Uruguay
+TID_COUNTRY_USA
+United States
+TID_COUNTRY_UZB
+Uzbekistan
+TID_COUNTRY_VAT
+Vatican City
+TID_COUNTRY_VCT
+Saint Vincent and the Grenadines
+TID_COUNTRY_VEN
+Venezuela
+TID_COUNTRY_VGB
+Virgin Islands (British)
+TID_COUNTRY_VIR
+Virgin Islands (U.S.)
+TID_COUNTRY_VNM
+Viet Nam
+TID_COUNTRY_VUT
+Vanuatu
+TID_COUNTRY_WLF
+Wallis and Futuna
+TID_COUNTRY_WSM
+Samoa
+TID_COUNTRY_YEM
+Yemen
+TID_COUNTRY_ZAF
+South Africa
+TID_COUNTRY_ZMB
+Zambia
+TID_COUNTRY_ZWE
+Zimbabwe
+TID_REGION_EU
+European Union
+TID_CURRENCY_AED
+United Arab Emirates dirham
+TID_CURRENCY_CAD
+Canadian Dollar
+TID_CURRENCY_CHF
+Swiss Francs
+TID_CURRENCY_CNY
+Renminbi
+TID_CURRENCY_COP
+Peso
+TID_CURRENCY_CZK
+Czech koruna
+TID_CURRENCY_EUR
+Euro
+TID_CURRENCY_GBP
+British Pound
+TID_CURRENCY_SGD
+Singapore Dollar
+TID_CURRENCY_ISK
+Icelandic króna
+TID_CURRENCY_MAD
+Moroccan dirham
+TID_CURRENCY_NOK
+Norwegian Krone
+TID_CURRENCY_PHP
+Philippine Peso
+TID_CURRENCY_PLN
+Złoty
+TID_CURRENCY_USD
+US Dollar
+TID_CURRENCY_YEN
+Yen

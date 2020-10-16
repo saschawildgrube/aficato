@@ -1,0 +1,6 @@
+LEVEL	;CONTEXT					;LABEL														;CONDITIONS
+0			;sitemap					;?TID_NAVIGATION_SITEMAP?					;
+0			;about						;?TID_NAVIGATION_ABOUT?						;
+0			;dataprotection		;?TID_NAVIGATION_DATAPROTECTION?	;
+0			;contact					;?TID_NAVIGATION_CONTACT?					;
+0			;{W3CLINK}				;?TID_NAVIGATION_VALIDATOR?				;

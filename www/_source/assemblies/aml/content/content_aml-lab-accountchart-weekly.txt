@@ -1,0 +1,6 @@
+=Account Chart - Weekly=
+{ACCOUNTCHART}
+==Account Chart Data==
+{DATA_ACCOUNTCHART}
+==Account Data==
+{DATA_ACCOUNT}

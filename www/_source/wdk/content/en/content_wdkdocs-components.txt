@@ -1,0 +1,18 @@
+=Components=
+{WDK} and {WDK}-based web applications consist of components. Components are the building blocks of [[wdkdocs-architecture-webapplications|web applications]].
+
+
+Components are:
+* Assets - such as images, css files, java script files, fonts, videos, and other files for download)
+* [[wdkdocs-components-configurationdata|Configuration data]] - that impacts run-time behaviour but always remains static during operation
+* Content files - that represent the "pages" of a website
+* Entities - are definitions of database entities and define how data is viewed and edited by users
+* [[wdkdocs-components-elements|Elements]] - which render HTML
+* Layouts - which are the visual "themes" of {WDK}-based websites
+* [[wdkdocs-components-modules|Modules]] - which define used interactions in websites
+* Navigation trees - which define menu trees
+* (Text) resource files - contain localized text in different languages
+* Routes - provide alternative names for content pages if a website supports SEOed URLs
+* Scaffolds - produce new source code
+* Tests - verify code, classes, functions, server configuration and web applications
+All components are aggregated and organized in [[wdkdocs-architecture-assemblies|assemblies]].

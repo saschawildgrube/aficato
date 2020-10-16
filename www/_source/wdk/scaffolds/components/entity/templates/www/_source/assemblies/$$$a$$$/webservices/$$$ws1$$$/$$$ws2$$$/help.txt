@@ -1,0 +1,11 @@
+PURPOSE
+
+	* Manage the entity $$$EntityName$$$
+ 
+
+{COMMAND_REFERENCE}
+
+VERSION HISTORY
+
+	1.0 WORK IN PROGRESS
+		* First Baselined version

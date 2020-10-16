@@ -1,0 +1,10 @@
+TID_WIKIPAD_TAB_VIEW
+View
+TID_WIKIPAD_TAB_EDIT
+Edit
+TID_WIKIPAD_BUTTON_SAVE
+Save
+TID_ERROR_WIKIPAD_GET
+An error occured while loading the content.
+TID_ERROR_WIKIPAD_SET
+An error occured while storing the entered changes.

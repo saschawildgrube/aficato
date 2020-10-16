@@ -1,0 +1,4 @@
+TID_W3CVALIDATION_INFO_VALID
+This page is valid according to the w3c validation service.
+TID_W3CVALIDATION_INFO_INVALID
+This page is NOT valid according to the w3c validation service.

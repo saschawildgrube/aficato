@@ -1,0 +1,38 @@
+TID_NAVIGATION_DEVTOOLS
+Developer Tools
+TID_NAVIGATION_DEVTOOLS-ELEMENTGALLERY
+Element Gallery 
+TID_NAVIGATION_DEVTOOLS-SCAFFOLDER
+Scaffolder
+TID_NAVIGATION_DEVTOOLS-COOKIEMANAGER 
+Cookie Manager
+TID_NAVIGATION_DEVTOOLS-HTTPREQUEST
+Http Request
+TID_NAVIGATION_DEVTOOLS-HOSTCHECK
+Host Check
+TID_NAVIGATION_DEVTOOLS-SSLCHECK
+SSL Check
+TID_NAVIGATION_DEVTOOLS-DOMAINCHECK
+Domain Check
+TID_NAVIGATION_DEVTOOLS-LOCALENAVIGATOR
+Locale Navigator
+TID_TEXT_DEVTOOLS
+This area contains useful tools and documentation for developers of WDK based applications.
+TID_TEXT_DEVTOOLS-SCAFFOLDER
+Create source code packages for creating new applications or new features for existing ones.
+TID_TEXT_DEVTOOLS-ELEMENTGALLERY
+Source code examples for rendering (GUI) elements (like tables, forms, portfolios, etc.).
+TID_TEXT_DEVTOOLS-COOKIEMANAGER
+Investigate cookies that are sent by the browser.
+TID_TEXT_DEVTOOLS-HTTPREQUEST
+Execute an http request and display the response.
+TID_TEXT_DEVTOOLS-HOSTCHECK
+Gather information about a host (identified by name or IP address).
+TID_TEXT_DEVTOOLS-DOMAINCHECK
+Check availability of multiple domains in one go.
+TID_TEXT_DEVTOOLS-SSLCHECK
+Display the properties of an installed SSL certificate on a domain.
+TID_TEXT_DEVTOOLS-LOCALENAVIGATOR
+Browse the supported countries, languages, currencies and locales.
+TID_TEXT_DEVTOOLS-REFERENCEDESIGN
+This serves as a design reference page.

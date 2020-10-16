@@ -1,0 +1,6 @@
+PURPOSE
+
+	* provide a central storage for all sorts of data items
+	* store data items by name and grouped by context
+
+{COMMAND_REFERENCE}

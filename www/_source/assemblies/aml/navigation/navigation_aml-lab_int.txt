@@ -1,0 +1,8 @@
+LEVEL	;CONTEXT												;LABEL															;CONDITIONS
+0			;aml-lab												;Lab																;aml-lab
+1			;aml-lab-networkgraph						;Network Graph											;
+1			;aml-lab-accountchart-monthly		;Account Chart (Monthly)						;
+1			;aml-lab-accountchart-weekly		;Account Chart (Weekly)							;
+1			;aml-lab-accountchart-daily			;Account Chart (Daily)							;
+1			;aml-lab-datatransformation			;Data Transformaton									;
+1			;aml-lab-testcenter							;Test Center												;

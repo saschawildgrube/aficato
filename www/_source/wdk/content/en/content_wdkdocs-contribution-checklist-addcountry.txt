@@ -1,0 +1,15 @@
+=Checklist for adding a new country=
+# Identify ISO-Alpha-3 country code: [http://en.wikipedia.org/wiki/ISO_3166-1]
+# Add flag icon image to /wdk/images/:<code>layout_default_icon_country-XXX.png</code>
+# Add country code to wdk_country.inc GetAllCountryIDs()
+# Identify language codes: [http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes] or [http://www.loc.gov/standards/iso639-2/php/code_list.php]
+# Add language code to wdk_language.inc GetAllLanguageIDs()
+# Identify locale code. The following file contains a list of all supported locale codes:<code>/usr/share/i18n/SUPPORTED</code>
+# Add locale code to wdk_locale.inc GetAllLocales()
+# Identify currency code: [http://en.wikipedia.org/wiki/ISO_4217]
+# Add currency code to wdk_currency.inc GetAllCurrencyIDs()
+# Add locales to servers:<code>locale-gen xx_XX.utf8</code>
+# Restart apache on servers:<code>/etc/init.d/apache2 restart</code>
+# Add language, country, and currency string resources to wdk/res/res_local_en.txt and all other supported languages
+# Execute test wdk/environment/locales
+# Document the change in wdk.txt

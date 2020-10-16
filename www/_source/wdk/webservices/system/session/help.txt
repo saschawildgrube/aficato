@@ -1,0 +1,6 @@
+PURPOSE
+
+	* provide a framework for session related data storage
+	* to manage user authentication status during a session
+
+{COMMAND_REFERENCE}

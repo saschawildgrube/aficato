@@ -1,0 +1,28 @@
+.d3-simplenetworkgraph-svg
+{
+	background-color: white;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+
+.d3-simplenetworkgraph-link
+{
+  stroke: #aaa;
+}
+
+.d3-simplenetworkgraph-node text
+{
+	font-size: 14px;
+	font-family: sans-serif;
+	stroke: #333;
+	cursor: pointer;
+}
+
+.d3-simplenetworkgraph-node circle
+{
+	stroke: #fff;
+	stroke-width: 3px;
+	fill: #555;
+	cursor: pointer;
+}

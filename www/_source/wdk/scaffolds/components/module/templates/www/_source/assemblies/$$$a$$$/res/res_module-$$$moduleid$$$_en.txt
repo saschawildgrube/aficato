@@ -1,0 +1,24 @@
+TID_$$$MODULEID$$$_TITLE
+$$$ModuleID$$$
+TID_$$$MODULEID$$$_TOOL_START
+Start
+TID_$$$MODULEID$$$_TOOL_HELP
+Help
+TID_$$$MODULEID$$$_TOOL_ACTION1
+Action 1
+TID_$$$MODULEID$$$_TOOL_ACTION2
+Action 2
+TID_$$$MODULEID$$$_TEXT_ACTION1
+This is "Action 1". Please enter a value!
+TID_$$$MODULEID$$$_TEXT_ACTION2
+This is "Action 2". Please enter a value!
+TID_$$$MODULEID$$$_LABEL_VALUE
+Value
+TID_$$$MODULEID$$$_ERROR_VALUE_INVALID
+Value must not be empty!
+TID_$$$MODULEID$$$_BUTTON_SUBMIT
+Next
+TID_$$$MODULEID$$$_INFO_SUCCESS
+The entered value is "{VALUE}".
+TID_$$$MODULEID$$$_TEXT_HELP
+Write some documentation on how to use your module!

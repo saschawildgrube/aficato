@@ -1,0 +1,90 @@
+PURPOSE
+
+	* to provide an easy to access test framework
+	* support recurring tests and regression safety
+	* source code level tests
+	* web service tests
+	* test syntax and setting related testcases
+	* support test driven development
+
+OPERATION MODES
+
+	The test web service can be operated in two different ways:
+	With and without database support.
+	
+	a) Without database support
+	This operation mode assumes that there is no database available to store
+	test results. That means that whenever tests are executed, failes must be
+	reported in the very same moment. And as there is no way of determining when
+	tests have been executed for the last time, all tests must be executed in one
+	go to cover everything.
+	The command "testall" is made for this operation mode. As the command name
+	implies, one call tests all tests in one request and directly reports
+	on failures to a config-defined or parameter-supplied email address.
+	Depending on requirements the "testall" command can be executed once an hour
+	e.g. by using the scheduler web service.
+	The advantage is: A database is not needed.
+	The disadvantage is: If there are many tests the command might run into
+	request timeouts depending on server configuration.
+	
+	
+	b) With database support
+	This operation mode assumes that there IS database support available.
+	Lastest and historical test results are stored in the database.
+	This enables to run tests in smaller groups each time as the last execution
+	time is always stored with a result.
+	The test and the alerting frequency can be configured idependently.
+	The web service supports three commands for this operation mode: "testrun",
+	"alert", and "cleanup".
+	
+	The "testrun" command will execute a configured amount of tests and
+	will not exceed an also configured maximum execution time for the run.
+	It will store the test results of those tests executed and exit.
+	The next test run will then execute another set of tests.
+	The selection of tests to be executed is determined by the following factors:
+	1. Tests that have no result stored in the database are executed first.
+	2. Tests where the last status is REQUESTERROR.
+	3. All other tests sorted by the age of their last test result.
+	The tests with the oldest test results are executed first.
+	
+	The "alert" command checks the current results stored in the database and
+	alerts if at least one test result indicates errors or inconsistencies.
+	
+	The "cleanup" command deletes old or deprecated test results according to
+	configuration settings. This procedure is optional but strongly recommended
+	to avoid database ressource shortage over time.
+		
+	The "install" command sets up the database and all required scheduler
+	jobs depending on whether the configuration setting "databasesupport" is
+	to "true" or not.
+	
+
+
+TEST STATUS DEFINITION
+
+	* PASSED
+	  A test has been executed and the result was OK.
+	  
+	* INACTIVE
+	  A test has been executed and the test reported that it is not active.
+	  This means that no statement can be made to the subject of the test,
+	  but the condition of the test is intentional.
+	  
+	* FAILED
+	  A test has been executed and reported to be failed.
+	  
+	* UNDEFINED
+	  A test has been executed but it neither reported PASSED, FAILED, or INACTIVE.
+	  This is usually the case if a syntax error occurs and a test cannot execute completely.
+
+	* REQUESTERROR
+	  A test has been executed, but the http request to the test request has failed on protocol level.
+	  This can happen if the test script runs an infinite loop and the http request runs into a timeout.
+	  
+	* TESTING
+	  A test is currently being executed.
+	  
+	* UNKNOWN
+	  The status is unknown. The status UNKNOWN can also be expressed as an empty string.
+
+{COMMAND_REFERENCE}

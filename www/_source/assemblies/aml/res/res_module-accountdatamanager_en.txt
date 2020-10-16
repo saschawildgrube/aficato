@@ -1,0 +1,46 @@
+TID_ACCOUNTDATAMANAGER_TITLE
+Account Data Management
+TID_ACCOUNTDATAMANAGER_TOOL_LIST
+List
+TID_ACCOUNTDATAMANAGER_TOOL_HELP
+Help
+TID_ACCOUNTDATAMANAGER_TOOL_UPLOAD
+Upload
+TID_ACCOUNTDATAMANAGER_TOOLTIP_DELETE
+Delete this account file
+TID_ACCOUNTDATAMANAGER_TEXT_UPLOAD
+Select a csv file that contains account transaction data.
+TID_ACCOUNTDATAMANAGER_TABLEHEADER_FILENAME
+Account data file
+TID_ACCOUNTDATAMANAGER_TABLEHEADER_TASKS
+Tasks
+TID_ACCOUNTDATAMANAGER_LABEL_FILE
+Select csv file
+TID_ACCOUNTDATAMANAGER_BUTTON_UPLOAD
+Upload
+TID_ACCOUNTDATAMANAGER_ERROR_NOMANDATE
+The logged in user is not associated to a mandate.
+TID_ACCOUNTDATAMANAGER_ERROR_NOFILE
+No file has been uploaded.
+TID_ACCOUNTDATAMANAGER_ERROR_FILENOTSUPPORTED
+The file type is not supported. Only csv files are supported at the moment.
+TID_ACCOUNTDATAMANAGER_ERROR_FILENOTLOADED
+The file could not be read. This may indicate that mandatory fields were not included. Please refer to the help secton.
+TID_ACCOUNTDATAMANAGER_ERROR_FILENOTSTORED
+The file could not be stored on the server. That should not happen. Please contact support.
+TID_ACCOUNTDATAMANAGER_INFO_UPLOADSUCCESS
+The file has been stored on the server.
+TID_ACCOUNTDATAMANAGER_INFO_UPLOADSUCCESSOVERWRITE
+The file has been replaced on the server.
+TID_ACCOUNTDATAMANAGER_ERROR_NOFILETODELETE
+The file {FILETODELETE} does not exist (anymore) and hence cannot be deleted.
+TID_ACCOUNTDATAMANAGER_TEXT_DELETE
+Please confirm that the file {FILETODELETE} should be deleted!
+TID_ACCOUNTDATAMANAGER_BUTTON_DELETE
+Delete {FILETODELETE}
+TID_ACCOUNTDATAMANAGER_ERROR_DELETEFAILED
+Failed to delete file {FILETODELETE}. This should not happen. Please contact support!
+TID_ACCOUNTDATAMANAGER_INFO_DELETESUCCESS
+The file has been deleted from the server.
+TID_ACCOUNTDATAMANAGER_TEXT_HELP
+Here you can upload new account data files and delete old ones.

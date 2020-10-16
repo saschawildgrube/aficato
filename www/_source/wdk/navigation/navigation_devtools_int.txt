@@ -1,0 +1,10 @@
+LEVEL	;CONTEXT									;LABEL				 														;CONDITIONS
+0			;devtools									;?TID_NAVIGATION_DEVTOOLS?								;devtools
+1			;devtools-scaffolder			;?TID_NAVIGATION_DEVTOOLS-SCAFFOLDER?			;
+1			;devtools-elementgallery	;?TID_NAVIGATION_DEVTOOLS-ELEMENTGALLERY?	;
+1			;devtools-cookiemanager		;?TID_NAVIGATION_DEVTOOLS-COOKIEMANAGER?	;
+1			;devtools-httprequest			;?TID_NAVIGATION_DEVTOOLS-HTTPREQUEST?		;
+1			;devtools-hostcheck				;?TID_NAVIGATION_DEVTOOLS-HOSTCHECK?			;
+1			;devtools-sslcheck				;?TID_NAVIGATION_DEVTOOLS-SSLCHECK?				;
+1			;devtools-domaincheck			;?TID_NAVIGATION_DEVTOOLS-DOMAINCHECK?		;
+1			;devtools-localenavigator	;?TID_NAVIGATION_DEVTOOLS-LOCALENAVIGATOR?;

@@ -1,0 +1,19 @@
+.d3-radialtidytree-svg
+{
+	background-color: white;
+	font-size: 10px;
+	font-family: sans-serif;
+	padding: 10px;
+	box-sizing: border-box;
+}
+    
+.d3-radialtidytree-path-start
+{
+	stroke: #999;
+}
+
+.d3-radialtidytree-path-end
+{
+	stoke: #555;
+}
+

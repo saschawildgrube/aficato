@@ -1,0 +1,4 @@
+TID_TITLE_ELEMENT_DEMO
+Demo
+TID_TEXT_ELEMENT_DEMO
+This element is just about demostrating how elements work and which files can be used to define it.

@@ -1,0 +1,8 @@
+TID_META_KEYWORDS_DEFAULT
+defaultkeyword1, defaultkeyword2
+TID_META_KEYWORDS_TEST-META1
+specifickeyword1, specifickeyword2   
+TID_META_DESCRIPTION_DEFAULT
+defaultdescription
+TID_META_DESCRIPTION_TEST-META2
+specificdescription

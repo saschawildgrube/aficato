@@ -1,0 +1,73 @@
+TID_TITLE
+AFiCATo
+TID_TITLE_DEFAULT
+?TID_TITLE?
+TID_META_KEYWORDS_DEFAULT
+
+TID_META_DESCRIPTION_DEFAULT
+
+TID_COPYRIGHT_
+Copyright &copy; {COPYRIGHT_PERIOD} by Jesus Loaiza and Sascha Wildgrube
+TID_COPYRIGHT
+Copyright &copy; {COPYRIGHT_PERIOD} by Sascha Wildgrube
+TID_NAVIGATION_CURRENTPATH
+You are here
+TID_NAVIGATION_START
+Start
+TID_NAVIGATION_ABOUT
+About this website
+TID_NAVIGATION_DATAPROTECTION
+Data Protection
+TID_NAVIGATION_TEAM
+Team
+TID_NAVIGATION_TOUR
+Take the tour
+TID_NAVIGATION_ADMIN
+Admin
+TID_NAVIGATION_SIGNIN
+Signin
+TID_NAVIGATION_LOGIN
+Login
+TID_NAVIGATION_LOGOUT
+Good Bye
+TID_NAVIGATION_VALIDATOR
+Validate
+TID_NAVIGATION_USERMANAGEMENT
+User Management
+TID_NAVIGATION_USERSETTINGS
+My Settings
+TID_NAVIGATION_AML-DEMO
+Demo
+TID_NAVIGATION_AML-ACCOUNTDATAMANAGER
+Account Data
+TID_NAVIGATION_AML-CASEANALYSIS
+Case Analysis 
+TID_TITLE_START
+?TID_TITLE?
+TID_TEXT_START
+We make anti financial crimes analysis tools.
+We take anti money laundering analysis to the next level.
+TID_TITLE_DATAPROTECTION
+Data protection
+TID_TITLE_CONTACT
+Contact Information
+TID_TITLE_ADMIN
+Administration
+TID_TITLE_AML-ACCOUNTDATAMANAGER
+Account Data Management
+TID_INFO_POSTLOGIN
+Welcome back!
+TID_TEXT_LOGOUT
+You are now logged out. Please come back soon!
+TID_TEXT_ABOUT
+This website is published by:<br/><br/>AFiCATo
+TID_TEXT_ADMIN
+Welcome to the administration area. Here you can find all tools to control this website.
+TID_TEXT_USERMANAGEMENT
+Add, modify, deactivate or even delete users or change their access rights.
+TID_TOOLTIP_SENDMAIL
+Click here to send a mail!
+TID_TEXT_LOGINSTATUSWELCOMEUSER
+{USERNAME}
+TID_BUTTON_CTA
+Get in touch with us

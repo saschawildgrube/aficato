@@ -1,0 +1,5 @@
+PURPOSE
+
+	* demonstrate functionality and architecture of WDK webservices
+
+{COMMAND_REFERENCE}

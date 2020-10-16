@@ -1,0 +1,15 @@
+=Modules=
+Modules implement user interaction.
+
+
+Modules are PHP classes derived from CModule which is derived from CWebsiteSatellite.
+
+
+Modules use user provided input and [[wdkdocs-architecture-webservices|web services]] to determine their next state. Modules use [[wdkdocs-components-elements|elements]], layout files, configuration data to render their current state representation.
+
+
+A module can render itself using different styles. A style is an identifier that is used to load a specific layout file.
+
+
+Modules play a major role in the separation of concerns approach. 
+

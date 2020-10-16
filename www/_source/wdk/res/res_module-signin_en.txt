@@ -1,0 +1,70 @@
+TID_SIGNIN_LABEL_USERNAME
+Choose a user name
+TID_SIGNIN_LABEL_ALTERNATIVEUSERNAME
+Your selected user name is not available for use.<br/>You can choose from one of these
+TID_SIGNIN_OPTION_USERINPUT
+or...
+TID_SIGNIN_LABEL_ALTERNATIVEUSERNAMEINPUT
+...try this username
+TID_SIGNIN_LABEL_USEREMAIL
+Please enter your email address
+TID_SIGNIN_LABEL_PASSWORD
+Enter a password 
+TID_SIGNIN_LABEL_PASSWORD_REPEAT
+Repeat the password
+TID_SIGNIN_BUTTON_SIGNIN
+Sign-in
+TID_SIGNIN_ERROR_USERNAME_MISSING
+Please enter a username! 
+TID_SIGNIN_ERROR_USEREMAIL_MISSING
+Please enter a valid email address.
+TID_SIGNIN_ERROR_USEREMAIL_INVALID
+The email address you have entered is invalid. Please check your spelling.
+TID_SIGNIN_ERROR_PASSWORD_MISSING
+Please enter a password!
+TID_SIGNIN_ERROR_PASSWORD_POLICY
+The password does not comply to the defined password policy.
+TID_SIGNIN_ERROR_PASSWORD_MISMATCH
+Please repeat the password!
+TID_SIGNIN_ERROR_USER_EXISTS
+The chosen username is already in use. Please choose a different one!
+TID_SIGNIN_ERROR_USERNAME_NOTALLOWED
+The selected user name is not allowed.
+
+Please only use lowercase letter, digits, dashes, the dot, or the @-symbol.
+TID_SIGNIN_ERROR_USERNAME_BLACKLISTED
+The selected user name is not allowed.
+TID_SIGNIN_INFO_WELCOME
+Thank you for signing-in.
+TID_SIGNIN_EMAIL_SUBJECT
+Welcome to {SITENAME}, {USERNAME}
+TID_SIGNIN_EMAIL_BODY
+Hello {USERNAME},
+
+Welcome to {SITENAME}.
+
+Please verify the setup of your user account.
+
+Please click on this link or copy this link into the address bar of your browser:
+{VALIDATION_LINK}
+
+Please validate your account before {VALIDATION_END_DATETIME} ({VALIDATION_END_TIMEZONE}).
+
+The address {USEREMAIL} has been entered during sign-in. If you do not want to join {SITENAME} please ignore this mail.
+
+Thank you.
+
+{SITETEAM}
+TID_SIGNIN_INFO_EMAIL_SENT
+Please check your inbox! An email has been sent to you to verify the setup of your user account.
+
+Please also check your SPAM folder!
+TID_SIGNIN_LINK_BACK
+Back
+TID_SIGNIN_ERROR_TOKEN_NOT_FOUND
+The system was not able to verify your request. Possible reasons are:
+- The link you are using is incomplete. Please check if your mail client displays the link correctly.
+- The verification period has ended. In this case, you can simply re-create your user account. Please make sure to respond to the email in a timely manner.
+- You have already opened the link and your request has been verified already. Try to login in with your user account.
+TID_SIGNIN_INFO_VALIDATION_SUCCESSFUL
+Thank you. Your email has been verified.

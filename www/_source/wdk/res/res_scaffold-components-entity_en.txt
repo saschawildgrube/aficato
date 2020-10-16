@@ -1,0 +1,18 @@
+TID_SCAFFOLD_COMPONENTS_ENTITY_NAME
+Create a new entity
+TID_SCAFFOLD_COMPONENTS_ENTITY_DESCRIPTION
+Creates source code for a new data entity including the entity definition, web service, and a module for managing the data.
+TID_SCAFFOLD_COMPONENTS_ENTITY_CONTROL_ENTITYNAME
+Entity (CamelCased)
+TID_SCAFFOLD_COMPONENTS_ENTITY_CONTROL_ASSEMBLYID
+Assembly id
+TID_SCAFFOLD_COMPONENTS_ENTITY_CONTROL_GROUPNAME
+Group name (CamelCased, used for module, web service, and as database table prefix)
+TID_SCAFFOLD_COMPONENTS_ENTITY_CONTROL_AUTHOR
+Author's name (used in web service meta data)
+TID_SCAFFOLD_COMPONENTS_ENTITY_ERROR_ENTITYNAME_INVALID
+The entity name is invalid. Please enter a camel-cased name like "Contract" or "ProjectIssue"!
+TID_SCAFFOLD_COMPONENTS_ENTITY_ERROR_GROUPNAME_INVALID
+The group name is invalid. Please enter a camel-cased name like "ExampleGroup" or "MyFeature"!
+TID_SCAFFOLD_COMPONENTS_ENTITY_ERROR_ASSEMBLYID_INVALID
+The assembly id is invalid. The id must contain only lowercase characters and digits. It must start with a letter.

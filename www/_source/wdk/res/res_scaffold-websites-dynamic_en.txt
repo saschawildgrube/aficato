@@ -1,0 +1,58 @@
+TID_SCAFFOLD_WEBSITES_DYNAMIC_NAME
+Create a new dynamic website
+TID_SCAFFOLD_WEBSITES_DYNAMIC_DESCRIPTION
+This creates the source code of a dynamic website based on the Website Development Kit. The website system supports users, audit-safe logging, sessions, scheduled jobs, the test center, and generic data items.
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_ROOTURL
+Root URL without protocol and sub directory (e.g. "www.example.com")
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_SITEDIR
+Site's sub directory (e.g. "mysite/" if the full URL is "www.example.com/mysite/", leave blank if your site is at the root URL)
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_WEBSITENAME
+Website name (CamelCased, no spaces allowed)
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_WEBSITENAMEVERBOSE
+User friendly verbose name of the website
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_WEBSITENAMESHORT
+User friendly abbreviated name of the website
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_SEOURL
+SEO friendly URLs
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_DATABASESERVER
+Database server
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_DATABASEUSERNAME
+Database user
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_DATABASEUSERPASSWORD
+Database password
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_DATABASENAME
+Database name
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_DATABASETABLENAMEPREFIX
+Database table name prefix
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_TMPDIR
+Folder for temporary files to which PHP has write access (can be left blank)
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_ADMINEMAIL
+Admin's email address
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_AUTHOR
+Author's name
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_PUBLISHER
+Publisher
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_SITETEAM
+The site operator team name (e.g. used as the sender name of emails sent by the website)
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_METAKEYWORDS
+Meta keywords (can be left empty)
+TID_SCAFFOLD_WEBSITES_DYNAMIC_CONTROL_METADESCRIPTION
+Meta description (can be left empty)
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_ROOTURL_INVALID
+The URL is invalid. Do not add the protocol (e.g. "http://")!
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_SITEDIR_INVALID
+The site dir is invalid!
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_WEBSITENAME_INVALID
+The website name is invalid. You may only use upper and lowercase letters and numbers.
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_WEBSITENAMEVERBOSE_INVALID
+Please enter a verbose name!
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_WEBSITENAMESHORT_INVALID
+Please enter a abbreviated name for the website!
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_EMAIL_INVALID
+Please enter a valid email address!
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_AUTHOR_INVALID
+Please enter the author's name!
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_PUBLISHER_INVALID
+Please enter the publisher's name!
+TID_SCAFFOLD_WEBSITES_DYNAMIC_ERROR_SITETEAM_INVALID
+Please enter the site team's name!

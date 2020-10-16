@@ -1,0 +1,64 @@
+LEVEL	;CONTEXT																						;LABEL														;CONDITIONS
+0			;wdkdocs																						;?TID_NAVIGATION_WDKDOCS?					;wdkdocs
+1			;wdkdocs-prologue																		;Prologue													;wdkdocs
+2			;wdkdocs-prologue-releasenotes											;Release Notes										;
+2			;wdkdocs-prologue-upgradeguide											;Upgrade Guide										;
+2			;wdkdocs-prologue-license														;License													;
+1			;wdkdocs-introduction																;Introduction											;
+2			;wdkdocs-introduction-about													;About														;
+2			;wdkdocs-introduction-installation									;Installation											;
+2			;wdkdocs-introduction-gettingstarted								;Getting started									;wdkdocs-wip
+1			;wdkdocs-faq																				;FAQ															;wdkdocs-wip
+1			;wdkdocs-architecture																;Architecture											;
+2			;wdkdocs-architecture-assemblies										;Assemblies												;
+2			;wdkdocs-architecture-webapplications								;Web Applications									;
+2			;wdkdocs-architecture-websites											;Websites													;
+3			;wdkdocs-architecture-websites-requestlifecycle			;Request lifecycle								;wdkdocs-wip
+2			;wdkdocs-architecture-webservices										;Web services		 									;
+3			;wdkdocs-architecture-webservices-requestlifecycle	;Request lifecycle								;wdkdocs-wip
+2			;wdkdocs-architecture-quality												;Quality													;
+2			;wdkdocs-architecture-beyondmvc											;Beyond MVC												;
+2			;wdkdocs-architecture-installer											;Installer												;wdkdocs-wip
+2			;wdkdocs-architecture-input													;Input handling										;wdkdocs-wip
+1			;wdkdocs-components																	;Components												;wdkdocs-wip
+2			;wdkdocs-components-assets													;Assets														;wdkdocs-wip
+2			;wdkdocs-components-config													;Config														;
+2			;wdkdocs-components-content													;Content													;wdkdocs-wip
+2			;wdkdocs-components-entities												;Entities													;wdkdocs-wip
+2			;wdkdocs-components-elements												;Elements													;
+2			;wdkdocs-components-layouts													;Layouts													;wdkdocs-wip
+2			;wdkdocs-components-modules													;Modules													;
+2			;wdkdocs-components-navigation											;Navigation												;wdkdocs-wip
+2			;wdkdocs-components-resources												;Resources												;wdkdocs-wip
+2			;wdkdocs-components-routes													;Routes														;wdkdocs-wip
+2			;wdkdocs-components-scaffolds												;Scaffolds												;wdkdocs-wip
+2			;wdkdocs-components-tests														;Tests														;wdkdocs-wip
+1			;wdkdocs-guides																			;Guides														;wdkdocs-wip
+2			;wdkdocs-guides-elements														;Creating an element							;wdkdocs-wip
+1			;wdkdocs-features																		;Features													;wdkdocs-wip
+2			;wdkdocs-features-accessrights											;Access rights										;wdkdocs-wip
+2			;wdkdocs-features-basicauth													;Basic authentication							;wdkdocs-wip
+2			;wdkdocs-features-bbcode														;bbcode														;wdkdocs-wip
+2			;wdkdocs-features-conditions												;Conditions												;wdkdocs-wip
+2			;wdkdocs-features-cmf																;Content Management Framework			;wdkdocs-wip
+2			;wdkdocs-features-crud															;CRUD															;wdkdocs-wip
+2			;wdkdocs-features-csrf															;CSRF protection									;wdkdocs-wip
+2			;wdkdocs-features-debugging													;Debugging												;wdkdocs-wip
+2			;wdkdocs-features-encryption												;Encryption												;wdkdocs-wip
+2			;wdkdocs-features-events														;Events														;wdkdocs-wip
+2			;wdkdocs-features-fileio														;File I/O													;wdkdocs-wip
+2			;wdkdocs-features-i18n															;I18N															;wdkdocs-wip
+2			;wdkdocs-features-logging														;Logging													;wdkdocs-wip
+2			;wdkdocs-features-login															;Login														;wdkdocs-wip
+2			;wdkdocs-features-passwords													;Passwords												;wdkdocs-wip
+2			;wdkdocs-features-serialization											;Serialization										;wdkdocs-wip
+2			;wdkdocs-features-sessions													;Sessions													;wdkdocs-wip
+2			;wdkdocs-features-tests															;Tests														;wdkdocs-wip
+2			;wdkdocs-features-wiki															;Wiki															;wdkdocs-wip
+1			;wdkdocs-glossary																		;Glossary													;
+1			;wdkdocs-conventions																;Conventions											;
+1			;wdkdocs-contribution																;Contribution											;wdkdocs-contribution
+2			;wdkdocs-contribution-bugreport											;Bug reports											;
+2			;wdkdocs-contribution-checklist-release							;Release Checklist								;
+2			;wdkdocs-contribution-checklist-addcountry					;Add a new country								;
+1			;wdkdocs-api																				;API Documentation								;wdkdocs-wip

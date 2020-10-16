@@ -1,0 +1,3 @@
+CONTEXTTYPE	;CONTEXT					;ALIAS
+content			;index						;start
+content			;aml-demo					;demo

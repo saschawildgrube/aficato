@@ -1,0 +1,12 @@
+PURPOSE
+
+	* Storage for user generated articles and keeps a change log
+	* Considers language, target regions, release status, and revisions
+	* Articles can be active or inactive
+	* Article activation and deactivation can be scheduled
+	* Articles are language specific and they can be country specific
+	* Article contents consists of a title and a text
+	* Translated articles point to a reference article
+ 
+
+{COMMAND_REFERENCE}

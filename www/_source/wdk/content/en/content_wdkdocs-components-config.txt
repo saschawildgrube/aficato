@@ -1,0 +1,4 @@
+=Configuration Data=
+Configuration data (or "config" is used to control the behaviour of a [[wdkdocs-glossary-component|component]]. Configuration data remains constant within the component. Configuration data of a [[wdkdocs-glossary-webapplication|web application]] is never subject to dynamic sources. Whereas all other [[wdkdocs-glossary-component|components]] may be configured depending on context or external content or input.
+
+Configuration data is usually provided in an associative array. The source of configuration data can be a config file or source code.

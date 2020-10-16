@@ -1,0 +1,12 @@
+TID_SCAFFOLD_COMPONENTS_LAYOUT_NAME
+Create a new layout
+TID_SCAFFOLD_COMPONENTS_LAYOUT_DESCRIPTION
+Creates source code for a new layout.
+TID_SCAFFOLD_COMPONENTS_LAYOUT_CONTROL_ASSEMBLYID
+Assembly ID
+TID_SCAFFOLD_COMPONENTS_LAYOUT_CONTROL_LAYOUTID
+Layout ID (CamelCased)
+TID_SCAFFOLD_COMPONENTS_LAYOUT_ERROR_LAYOUTID_INVALID
+The layout id is invalid. Please enter a camel-cased name like "MaterialDesign" or "Metro"!
+TID_SCAFFOLD_COMPONENTS_LAYOUT_ERROR_ASSEMBLYID_INVALID
+The assembly id is invalid. The id must contain only lowercase characters, digits and the dash. It must start with a letter.

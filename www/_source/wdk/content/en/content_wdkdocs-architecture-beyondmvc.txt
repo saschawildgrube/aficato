@@ -1,0 +1,50 @@
+=Beyond MVC=
+The model view controller concept is better than nothing but it has a number of shortcomings:
+# Actual design (HTML, CSS) is not fully separated from data structures
+# There is no concept for the encapsulation of database interactions in web services
+MVC is great if the alternative was to mingle HTML, PHP code including database interaction in one single file. But that is not the benchmark.
+
+
+{WDK} is beyond MVC. In {WDK} there is a true separation of concerns between layout (i.e. the rendering of HTML code), user interaction (which is defined in modules), business logic (basically the code of the webservice) and database interaction.
+
+
+The architecture approach in {WDK} aims at:
+# being able to make changes that affect all layers as quickly and as error-free as possible (e.g. if a new database attribute is added and should be visible and editable to users)
+# being able to make changes that only affect ONE of the layers independently
+# being able to fully exchange one of the layers without affecting the other layers
+Most MVC implementation reach any of these goals.
+
+
+The different layers
+{|
+!Layer
+!MVC equivalent
+!Implemented in
+!Responsibility
+|-
+|Layout
+|View
+|Website
+|Define the HTML footprint of all rendered output
+|-
+|Elements
+|View
+|Website
+|Transform data to be displayed into HTML structures using layout definitions
+|-
+|Modules
+|Controller
+|Website
+|Control the user interaction, define the data and options to be displayed to the user. Transport user provided input to the business logic layer (implemented by web services). Retrieve data from the business logic layer to the user.
+|-
+|Business Logic
+|Controller/Model
+|Web service
+|Define the processing of data provided by users and other sources, store, search and retrieve data from the database encapsulation layer.
+|-
+|Database Encapsulation
+|Model
+|Web service
+|Provide the interface to the database.
+|-
+|}

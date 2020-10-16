@@ -1,0 +1,4 @@
+CONTEXTTYPE	;CONTEXT					;ALIAS
+content			;index						;A seo friendly start page
+content			;contact					;Get in touch with us
+content			;about						;About this website

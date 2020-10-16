@@ -1,0 +1,8 @@
+TID_BLOG_LINK_READ
+Further reading
+TID_BLOG_LINK_ARCHIVE
+Archive
+TID_BLOG_LINK_BACK
+Back
+TID_BLOG_LINK_LATEST
+Latest articles

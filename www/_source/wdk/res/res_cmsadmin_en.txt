@@ -1,0 +1,12 @@
+TID_NAVIGATION_CMSADMIN
+CMS Administration
+TID_NAVIGATION_CMSADMIN-ARTICLE 
+Articles
+TID_NAVIGATION_CMS-NEWSEDITOR
+News Editor
+TID_NAVIGATION_CMS-BLOGEDITOR
+Blog Editor
+TID_TEXT_CMSADMIN
+This area contains all Content Management System Administration tools.
+TID_TEXT_CMSADMIN-ARTICLE
+Browse and manage all articles stored in the content management system.

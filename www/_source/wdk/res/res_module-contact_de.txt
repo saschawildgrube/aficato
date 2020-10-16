@@ -1,0 +1,26 @@
+TID_CONTACT_LABEL_EMAIL
+Email
+TID_CONTACT_LABEL_SALUTATION
+Anrede
+TID_CONTACT_LABEL_NAME
+Name
+TID_CONTACT_LABEL_COMPANY
+Firma
+TID_CONTACT_LABEL_PHONE
+Telefon
+TID_CONTACT_LABEL_TEXT
+Ihre Anfrage
+TID_CONTACT_BUTTON_SEND
+Kontakt aufnehmen
+TID_CONTACT_ERROR_NAME_MISSING
+Bitte geben Sie Ihren Namen an
+TID_CONTACT_ERROR_TEXT_MISSING
+Bitte geben Sie Ihre Nachricht ein
+TID_CONTACT_ERROR_EMAIL_INVALID
+Bitte geben Sie eine gültige Email-Adresse an
+TID_CONTACT_TEXT_INTRO
+Wir freuen uns auf Ihre Kontaktaufnahme.
+TID_CONTACT_TEXT_SUBMIT
+Vielen Dank für Ihre Anfrage. Wir werden uns baldmöglichst bei Ihnen melden.
+TID_CONTACT_MAIL_SUBJECT
+Nachricht von {NAME}

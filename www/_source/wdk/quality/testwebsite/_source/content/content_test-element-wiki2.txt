@@ -1,0 +1,81 @@
+=2x2=
+{|
+	 !Header 1
+!Header 2
+|-
+|Data 11
+|Data 12
+|-
+|Data 21
+|Data 22
+|}
+=3x3=
+{|
+!Header 1
+!Header 2
+!Header 3
+|-
+|Data 11
+|Data 12
+|Data 13
+|-
+|Data 21
+|Data 22
+|Data 23
+|-
+|Data 31
+|Data 32
+|Data 33
+|}
+=Nested=
+{|
+!Header 1
+!Header 2
+|-
+|
+{|
+!H1
+!H2
+|-
+|D1
+|D2
+|}
+|&nbsp;
+|}
+=Pre=
+{|
+!Header 1
+!Header 2
+|-
+|<pre>{|
+!H1
+!H2
+|-
+|D1
+|D2
+|}</pre>
+|'''Formatted'''
+|}
+=Empty=
+{|
+|}
+=Mixed Headers=
+{|
+!Header
+|Data
+!Header
+|-
+|Data
+!Header
+|Data
+|-
+!Header
+|Data
+!Header
+|}
+=Single Line Rows=
+{|
+!Header1!!Header2!!Header3
+|-
+|Data1||Data2||Data3
+|}

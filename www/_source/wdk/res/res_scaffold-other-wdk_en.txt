@@ -1,0 +1,4 @@
+TID_SCAFFOLD_OTHER_WDK_NAME
+Download the latest {WDK}
+TID_SCAFFOLD_OTHER_WDK_DESCRIPTION
+This will copy the {WDK} source code as-is from this website.

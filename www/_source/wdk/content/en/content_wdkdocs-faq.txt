@@ -1,0 +1,30 @@
+=FAQ=
+==Does {WDK} have a command line interface?==
+No. It does not need one. You can use the web based scaffolder to create boilerplate code.
+
+==Does {WDK} work with Composer?==
+No. We are considering that for the future.
+==Does {WDK} support OAuth?==
+There are two answers here:
+
+# Of course you can protect {WDK}-based application by an external OAuth provider - as you can with any other web-based application.
+# Currently there is no {WDK}-based OAuth-server available.
+==How does {WDK} do support ORM?==
+The entity pattern supports database abstraction and a powerful toolset to create generic CRUD user interfaces and web services.
+==Which template engine is supported?==
+{WDK} has it's own template engine. Refer to the [[wdkdocs-components-elements|element] component for more information.
+==Does {WDK} work well with SASS or LASS?==
+From {WDK}'s perspective CSS files are an asset. The {WDK} [[wdkdocs-architecture-assemblies|assemlby] file structure defines where css files should reside and in some cases which file names are to be used - but {WDK} does not interfere with any tools used to create CSS files in the first place.
+==I can't find the "app" and "vendor" folders. Where are they?==
+Please refer to [[wdkdocs-architecture-assemblies|assemblies]] on how files and folders are structured in {WDK}.
+==How does {WDK} work with tools like gulp or webpack?==
+{WDK} does not intefere with you build or deployment tools. It's just source code files.
+==How do I integrate 3rd party code?==
+{WDK}-based applications are open to include 3rd party code. However, {WDK} comes with a number of requirements for source code that some vendors simply don't keep up with. 
+==How does authentication and user management work?==
+{WDK} comes with ready-made components that support user registration, login, authentication and authorization. Use the scaffolder and create a database-based application to get started.
+==Can I use the email as a username? What do I have to consider?==
+In {WDK} users are identified by a numberic ID and a user name string. The email address is a non-unique attribute of a user.
+In order to use a user's email address as a user name you have to go through the following steps:
+# Limit the allowed user names to strings that match an email address. Refer to CWebsite::CallbackUserCheckName() and IsValidEmail().
+# Implement a process that allows a user to change its user name and email address in one go. Check out CUserSettingsModule and CUserEmailModule.

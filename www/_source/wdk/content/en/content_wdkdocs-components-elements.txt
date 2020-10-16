@@ -1,0 +1,15 @@
+=Elements=
+Elements render HTML output within [[wdkdocs-architecture-websites|websites]].
+
+
+Elements are PHP classes derived from CElement which is derived from CWebsiteSatellite. Elements use layout files and explicitly provided input to generate output. Other than that elements never interact with other components.
+
+
+An element can render itself using different styles. A style is an identifier that is used to load a specific layout file.
+
+
+For example: a link element could render an HTML A tag when using the "default" style or use the style "button" to render the link as a button.
+
+
+Element play a major role in the separation of concerns approach. 
+

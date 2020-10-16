@@ -1,0 +1,10 @@
+=Web Applications=
+WDK-based application systems consist of web applications.
+
+
+The following types of web applications are supported by {WDK} - but you can also invent new ones of course:
+* [[wdkdocs-architecture-websites|Websites]]
+* [[wdkdocs-architecture-webservices|Web services]]
+* Unit test hub
+* Installers
+

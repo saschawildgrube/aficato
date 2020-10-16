@@ -1,0 +1,12 @@
+TID_SIGNOUT_BUTTON_SIGNOUT
+Delete my account
+TID_SIGNOUT_TEXT_PRESIGNOUT
+In case you do not want to use the service anymore you can delete your account here.
+TID_SIGNOUT_LABEL_CONFIRMATION
+Please confirm that you want to delete your user account. BE AWARE THAT ALL DATA STORED RELATED TO YOUR USER ACCOUNT WILL BE IRREVOCABLY DELETED!
+TID_SIGNOUT_BUTTON_CONFIRM
+DELETE MY ACCOUNT
+TID_SIGNOUT_ERROR_SIGNOUTFAILED
+An error occured while deleting your user account.
+TID_SIGNOUT_INFO_SIGNOUTSUCCESS
+Your user account has been deleted.

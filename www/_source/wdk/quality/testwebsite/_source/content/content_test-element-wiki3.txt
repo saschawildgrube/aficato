@@ -1,0 +1,8 @@
+=Source Code=
+Here is some source code:
+<code>
+	function [[HelloWorld]]($strName)
+	{
+		print("Hello $strName");
+	}
+</code>

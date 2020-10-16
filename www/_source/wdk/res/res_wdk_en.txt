@@ -1,0 +1,182 @@
+TID_ERROR_UNKNOWN
+An unexpected error has occured (ERRORCODE={ERROR}).
+TID_ERROR_HTTP400
+Error 400: Bad Request.
+TID_ERROR_HTTP401
+Error 401: Unauthorized.
+TID_ERROR_HTTP403
+Error 403: Authorization failed.
+TID_ERROR_HTTP404
+Error 404: Page not found.
+TID_ERROR_HTTP413
+Error 413: Request entity too large.
+TID_ERROR_HTTP500
+Error 500: Internal server error.
+TID_ERROR_CONTENT_NOT_FOUND
+Error: Content not found.
+TID_ERROR_INSUFFICIENT_PRIVILEGES
+Error: You are not entitled to access this content or functionality.
+TID_ERROR_LOGIN_REQUIRED
+Error: You must be logged in to see this content or functionality.
+TID_ERROR_SSL_REQUIRED
+Error: In order to access this site the secure socket layer protocol (SSL) must be used.
+TID_ERROR_SESSION_CREATE
+Error: The session could not be created.
+TID_ERROR_REQUEST_FAILED
+Error: The request failed. No data could be retrieved.
+TID_ERROR_RESULT_INVALID
+Error: The requested web service did not return a valid result.
+TID_ERROR_WRITE_FAILED
+Error: Data could not be written.
+TID_ERROR_FORM_INVALID_FLOAT
+The number being entered is invalid.
+TID_ERROR_FORM_INVALID_INTEGER
+The value being entered is invalid.
+TID_ERROR_FORM_INVALID_DATE
+The entered date is invalid.
+TID_ERROR_FORM_INVALID_DATETIME
+The entered date and time is invalid.
+TID_ERROR_FORM_INVALID_EMAIL
+The entered email address is invalid.
+TID_ERROR_FORM_INVALID_URL
+The entered URL is invalid.
+TID_ERROR_FORM_VALUE_TOO_LOW
+The entered value is too low.
+TID_ERROR_FORM_VALUE_TOO_HIGH
+The entered value is too high.
+TID_ERROR_FORM_VALUE_TOO_SHORT
+The entered text is too short.
+TID_ERROR_FORM_VALUE_TOO_LONG
+The entered text is too long.
+TID_ERROR_FORM_INVALID_CHARS
+The entered text contains invalid characters.
+TID_ERROR_FORM_INVALID_ENUM
+The entered value is not supported.
+TID_ERROR_FORM_MISSING_DATE
+Please enter a date!
+TID_ERROR_FORM_MISSING_DATETIME
+Please enter a date and time!
+TID_ERROR_NOIMPORTFILE
+No file was provided for import.
+TID_ERROR_IMPORTFILEINVALID
+The import file is not valid.
+TID_ERROR_IMPORT
+Errors occured while importing the file.
+TID_INFO_IMPORT_COMPLETE
+The import has been completed.
+TID_WARNING_UNDERCONSTRUCTION
+Warning: This site is still under construction!
+TID_WARNING_INSECURE
+Warning: Your are accessing this site using an insecure protocol.
+TID_WARNING_CSRF_TOKEN_INVALID
+Warning: Either you opened a page in a new window, reloaded a page, or you might be the victim of a potential CSRF attack. For security reasons the session has been closed immediately.
+TID_PRIVILEGE_USERADMIN
+User Administrator
+TID_PRIVILEGE_SYSTEMADMIN
+System Administrator
+TID_PRIVILEGE_CMSADMIN
+CMS Administrator
+TID_LINK_PDF
+Download PDF
+TID_BUTTON_NEXT
+Next
+TID_BUTTON_BACK
+Back
+TID_BUTTON_ADD
+Add
+TID_BUTTON_MODIFY
+Modify
+TID_BUTTON_DELETE
+Delete
+TID_BUTTON_SAVE
+Save
+TID_BUTTON_FILTER
+Filter
+TID_BUTTON_EXPORT
+Export
+TID_BUTTON_IMPORT
+Import
+TID_TOOLTIP_VIEW
+View
+TID_TOOLTIP_ADD
+Add
+TID_TOOLTIP_MODIFY
+Modify
+TID_TOOLTIP_DELETE
+Delete
+TID_TOOLTIP_REFRESH
+Refresh
+TID_TOOLTIP_SORTASC
+Ascending sorting
+TID_TOOLTIP_SORTDESC
+Descending sorting
+TID_TOOLTIP_RESETFILTERS
+Reset filter criteria
+TID_TAB_BASEDATA
+Base data
+TID_TAB_HISTORY
+History
+TID_TABLEHEADER_NOTES
+Notes
+TID_TABLEHEADER_TASKS
+Tasks
+TID_TABLEHEADER_CREATION
+Created
+TID_TABLEHEADER_LASTCHANGE
+Last change
+TID_LABEL_CREATION
+Date and time of creation
+TID_LABEL_LASTCHANGE
+Date and time of last change
+TID_LABEL_NOTES
+Notes
+TID_SALUTATION_MR
+Mr.
+TID_SALUTATION_MRS
+Mrs.
+TID_ITEM_YES
+Yes
+TID_ITEM_NO
+No
+TID_ITEM_ACTIVE
+Active
+TID_ITEM_INACTIVE
+Inactive
+TID_ITEM_NONE
+None
+TID_OPTION_ALL
+All
+TID_OPTION_NONE
+None
+TID_OPTION_ACTIVE
+Only active
+TID_OPTION_INACTIVE
+Only inactive
+TID_LABEL_FILTERBYLANGUAGE
+Filter by language
+TID_LINK_NEXT
+Next
+TID_LINK_DOWNLOAD
+Download
+TID_NAVIGATION_MORE
+More
+TID_NAVIGATION_SITEMAP
+Sitemap
+TID_LABEL_EXPORT_DECIMAL_DELIMITER
+Please choose the decimal delimiter
+TID_OPTION_EXPORT_DECIMAL_DELIMITER_DOT
+Dot (e.g. "23.4")
+TID_OPTION_EXPORT_DECIMAL_DELIMITER_COMMA
+Comma (e.g. "23,4")
+TID_LABEL_MONTHS
+Months
+TID_LABEL_WEEKS
+Weeks
+TID_LABEL_DAYS
+Days
+TID_LABEL_HOURS
+Hours
+TID_LABEL_MINUTES
+Minutes
+TID_LABEL_SECONDS
+Seconds

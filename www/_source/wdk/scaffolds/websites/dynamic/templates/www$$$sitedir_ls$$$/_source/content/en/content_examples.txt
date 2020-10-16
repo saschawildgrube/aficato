@@ -1,0 +1,3 @@
+=?TID_NAVIGATION_EXAMPLES?=
+ 
+Check out the following examples to see different ways of integrating static content: [[example1|One]], [[example2|Two]], and [[example3|Three]].

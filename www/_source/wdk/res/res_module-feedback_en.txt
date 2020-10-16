@@ -1,0 +1,18 @@
+TID_FEEDBACK_LABEL_EMAIL
+Your email address
+TID_FEEDBACK_LABEL_NAME
+Your name
+TID_FEEDBACK_LABEL_FEEDBACK
+Your Feedback
+TID_FEEDBACK_BUTTON_SEND
+Send Feedback
+TID_FEEDBACK_ERROR_NAME_MISSING
+Please enter your name!
+TID_FEEDBACK_ERROR_EMAIL_INVALID
+Please enter a valid email address!
+TID_FEEDBACK_ERROR_TEXT_SHORT
+Please be more specific!
+TID_FEEDBACK_TEXT_INTRO
+Please provide your feedback on this website! Tell us what you like and what you miss!
+TID_FEEDBACK_TEXT_FEEDBACKSENT
+Thank you for helping to improve this website.

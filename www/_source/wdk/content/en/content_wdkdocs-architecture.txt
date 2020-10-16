@@ -1,0 +1,17 @@
+=Architecture=
+WDK comes with a strict architecture approach.
+
+This means:
+# A web application system consists of separate web applications (e.g. websites and web services) with clearly defined responsibilities
+# The internal structure of each web application is well defined - each part has its defined place
+# Code and other file assets are organized in a well-defined structure
+==Principles==
+# Responsibility for security is shared between all web applications
+# [https://en.wikipedia.org/wiki/Separation_of_concerns Separation of concerns]
+# Automated testing is a feature, not a step in the deployment process
+==Web Application Systems==
+A WDK based web application system typically consists of the following web applications:
+* Browser facing websites
+* Web services with database connections
+* Unit test hub
+* Installer

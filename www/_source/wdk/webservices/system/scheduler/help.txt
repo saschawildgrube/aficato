@@ -1,0 +1,12 @@
+PURPOSE
+
+	* provide a cluster-safe crontab functionality
+
+{COMMAND_REFERENCE}
+	
+FAQ
+
+	Q: How to invoke the Scheduler web service from crontab?
+	A: Add the following command line to the crontab:
+   	"wget <service url> --spider --timeout=55 --tries=1"
+   	Make sure the scheduler is run as often as possible (at least every minute).

@@ -1,0 +1,9 @@
+=Conventions=
+==Naming Conventions==
+{WDK} uses the following naming conventions:
+;Attribute definition names and webservice parameters:
+:&lt;attributename>_&lt;type>
+;Webservice return xml tag names and data base field names:
+:&lt;ATTRIBUTENAME>_&lt;TYPE>
+;Text (or translation) items:
+:TID[_&lt;CONTEXTNAME>]_&lt;TYPE>_&lt;NAME>

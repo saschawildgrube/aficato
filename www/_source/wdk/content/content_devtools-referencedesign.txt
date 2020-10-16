@@ -1,0 +1,35 @@
+=Reference Design Page=
+This page serves as a design reference page. It can be used to brief a designer when creating a new web design.
+
+The designer should use this page as part of the design draft and include all following GUI elements.
+==Second Level Headline==
+This is some text with an internal [[index|link]].
+===Third Level Headline===
+And even more text including an external [www.example.com link].
+====Fourth Level Headline====
+Even more text. This time its more text to show how a line break looks like. But for this even more senseless words are required. You expected this loram ipsum thing here. Indeed, that would have been an alternative.
+=====Fifth Level Headline=====
+And agin more blind text for public amusement.
+==Images==
+===Floating right===
+{IMAGE id="logo" style="floatright"}This is some blind text to demonstrate an image that is floating right around the text. Laram ipsom et cetera. Some more blind text to make the example work.
+<div style="clear: both;"></div>
+===Floating left===
+{IMAGE id="logo" style="floatleft"}This is some blind text to demonstrate an image that is floating left next to a text. Laram ipsom et cetera. And again some more blind text to make the example work.
+<div style="clear: both;"></div>
+==Lists==
+===Bullet List===
+Some text preceding the list.
+{LIST}
+Some text after the list.
+===Ordered List===
+Some text preceding the list.
+{NUMBEREDLIST}
+Some text after the list.
+==Messages==
+{MESSAGESTACK}
+==Form==
+{FORM}
+==Toolbar and Item Manager==
+{TOOLBAR}
+{ITEMMANAGER}

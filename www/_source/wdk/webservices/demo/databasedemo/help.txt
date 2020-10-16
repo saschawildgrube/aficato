@@ -1,0 +1,6 @@
+PURPOSE
+
+	* demonstrate the structure of database based webservices
+	* provide a template for new database based webservices
+
+{COMMAND_REFERENCE}

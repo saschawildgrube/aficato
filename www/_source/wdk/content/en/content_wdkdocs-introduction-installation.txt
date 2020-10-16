@@ -1,0 +1,77 @@
+=Installation=
+First of all: You don't ''install'' {WDK}. To be precise, you install an application ''based'' on {WDK}.
+An application ''based'' on {WDK} contains all files that are part of {WDK}.
+In order to create an application ''based'' on {WDK} you can (but don't have to) use the [{WDK_SCAFFOLDER_URL} scaffolder]. The [{WDK_SCAFFOLDER_URL} scaffolder] is a web application that produces a boilerplate application based on {WDK} using some input from you.
+
+
+Long story short: installing a {WDK}-based application includes:
+# Setting up a server environment and configure it properly
+# Create a new boilerplate application using the [{WDK_SCAFFOLDER_URL} scaffolder]
+# Deploy all files created by the [{WDK_SCAFFOLDER_URL} scaffolder] to the server environment
+# Run the installation script of the application
+# Setup cronjobs
+# Verify the new installation using automated tests
+==System Requirements==
+To run a {WDK}-based application you will need a LAMP stack. This version of {WDK} has been tested on:
+* [https://www.ubuntu.com/ Ubuntu] {WDK_SYSTEMREQUIREMENT_UBUNTU_VERSION}
+* [http://www.php.net php] {WDK_SYSTEMREQUIREMENT_PHP_VERSION}
+* [https://httpd.apache.org/ Apache http server] {WDK_SYSTEMREQUIREMENT_APACHE_VERSION}
+* [https://mariadb.org/ MariaDB] {WDK_SYSTEMREQUIREMENT_MARIADB_VERSION}
+==Setting up a server environment==
+A {WDK}-based application can run from the root folder or any subdirectory of a web server. This means that a {WDK}-based application can share a domain (or subdomain) with other applications. The following steps are needed to prepare the server environment:
+# Create a virtual host or define a subdirectory within an existing virtual host
+# Make sure you can update files to this directory
+# Configure the Apache web server to support .htaccess files
+# Enable sending emails using the php api
+# If your application makes use of a database, setup a (logical) database for your new application
+The following steps are also recommended - however it is not specific to {WDK}-based application:
+# Setup a backup mechanism for the database
+# Setup monitoring for your new application
+There will be more steps required that may impact your server configuration. You will go through them after scaffolding the new biolerplate application and when executing automated tests.
+==Create a new boilerplate application using the scaffolder==
+# Go to [{WDK_SCAFFOLDER_URL}].
+# Choose "New Website"
+# Choose which type of website you want to create
+# Enter the requested information as good as you can. Don't worry, you can change it later.
+# Download the zip file
+# Unpack the zip file
+# Follow instructions in the contained readme file
+The readme file contained on the zip file provided by the scaffolder will lead you through the actual installation of your application. It will also provide some hints on how to startdeveloping your own website and how to add content.
+==Deploy all files created by the scaffolder to the server environment==
+Part of the instructions that you will find in the readme file is the deployment of the files to the server environment.
+
+
+There are no specific requirements regarding the directory structure of your public folders.
+
+
+The source code of your application will typically reside in a folder called "_source" but you can give it any other name if you want. In that case you will have to modify the corresponding path information in the env.inc file.
+
+
+This source folder can be a subdirectory of the applications public root folder - given your webserver allows to block access to this folder - or any folder to which the web server has access to.
+
+
+Since {WDK}-based applications per se do not require any additional runtimes, deploy-time processing, or any other magic ingredients to run, deploying an application's source files to the right place is all it takes. There are no restrictions for the use of a specific file transfer mechanism.
+==Run the installation script==
+The installation script provided in the scaffolded boilerplate application makes sure that database tables are initialized and setup up. It also creates an "admin" user and sets up scheduled tasks.
+
+
+Just follow the instructions in the readme file.
+==Setup cronjob==
+The contained readme file also provides information about setting up a cron job that triggers the application's scheduling system. This is required for the continuous execution of automated tests.
+
+
+The scheduling system is a web service that should be requested every minute. Here again: please follow the instructions in the readme file.
+==Verify the new installation using automated tests==
+{WDK}-based applications come with a truckload of automated test. Some of these tests verify the proper and secure configuration of the server environment.
+
+
+Start with executing all tests within your application.
+
+
+Some of the tests may fail after initial execution. This is normal and to be expected. Typically they indicate insecure or incomplete server configuration. The test script output will provide hints on what needs to be done.
+
+
+The development of {WDK} was guided by the idea of zero-tolerance against php warnings and errors and failed tests. It is strongly recommended to make sure that all tests are passed before proceeding.
+
+
+{WDK} has a number of very strict requirements regarding server configuration, mainly php settings. Some features require access to directories containing log files and sudo access to some commands for the user context in which the web server is run. The failing tests will guide you through all necessary changes that need to be made - in most cases the failing tests will even provide the bash commands needed to do the changes.

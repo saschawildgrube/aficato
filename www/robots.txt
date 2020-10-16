@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /quality
+Disallow: /install
+Disallow: /webservices

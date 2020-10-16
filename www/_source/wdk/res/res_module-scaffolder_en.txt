@@ -1,0 +1,54 @@
+TID_SCAFFOLDER_TITLE
+Scaffolder
+TID_SCAFFOLDER_TOOL_HELP
+Help
+TID_SCAFFOLDER_TOOL_SELECTCATEGORY
+Select Category
+TID_SCAFFOLDER_TOOL_SELECTSCAFFOLD
+Select Scaffold
+TID_SCAFFOLDER_TOOL_CONFIGURE
+Configure Scaffold
+TID_SCAFFOLDER_CATEGORY_WEBSITES
+New Website
+TID_SCAFFOLDER_CATEGORY_COMPONENTS
+New Components
+TID_SCAFFOLDER_CATEGORY_OTHER
+Other
+TID_SCAFFOLDER_TEXT_HELP
+The scaffolder creates code packages based on template files and your preferences. It can help to create the initial set of source code files that make up a new website or create code that extends an existing website.
+
+The scaffolding process has four steps:
+
+1. Select the category and the actual scaffold to be used.
+2. Configure the scaffold. E.g. for a new website, you will specify it's name and root URL.
+3. Create and download the zip archive containing the processed template files.
+4. Deploy the files in your code repository. In some cases you might have to do more than just adding files. You will find necessary information within the scaffold zip archive.
+TID_SCAFFOLDER_CONTROL_SELECTCATEGORY
+Select a scaffold category:
+TID_SCAFFOLDER_TEXT_SELECTCATEGORY
+Scaffolds are organized in different categories: 
+
+Choose "?TID_SCAFFOLDER_CATEGORY_WEBSITES?" to create a scaffold to start a new web application system from scratch.
+Choose "?TID_SCAFFOLDER_CATEGORY_COMPONENTS?" to add new components to an existing web application.
+Choose "?TID_SCAFFOLDER_CATEGORY_OTHER?" for more options like downloading the latest {WDK}.
+<!--Choose "?TID_SCAFFOLDER_CATEGORY_OTHER?" for more options.-->
+TID_SCAFFOLDER_CONTROL_SELECTSCAFFOLD
+Please select a scaffold:
+TID_SCAFFOLDER_TEXT_SELECTSCAFFOLD
+
+TID_SCAFFOLDER_TEXT_CONFIGURE
+Please configure the scaffold!
+TID_SCAFFOLDER_BUTTON_CREATE
+Create
+TID_SCAFFOLDER_TEXT_PREPARE
+The scaffold zip archive is now ready for download.
+TID_SCAFFOLDER_BUTTON_DOWNLOAD
+Download
+TID_SCAFFOLDER_ERROR_NO_SCAFFOLDS_AVAILABLE
+Sorry, no scaffolds are available at this time. Probably maintenance work is going on. Please try again later!
+TID_SCAFFOLDER_ERROR_SCAFFOLD_NOT_FOUND
+The selected scaffold could not be found.
+TID_SCAFFOLDER_ERROR_SCAFFOLD_DIR_NOT_FOUND
+The selected scaffold directory could not be found.
+TID_SCAFFOLDER_ERROR_SCAFFOLD_ARCHIVE_FILE_CREATION_FAILED
+The creation of the scaffold archive file failed.

@@ -1,0 +1,12 @@
+LEVEL	;CONTEXT							;LABEL				;CONDITIONS
+0			;1										;Node 1				;
+0			;2										;Node 2				;
+1			;21										;Node 2.1			;
+1			;22										;Node 2.2			;
+1			;23										;Node 2.3			;
+0			;3										;Node 3				;	
+1			;31										;Node 3.1			;
+2			;311									;Node 3.1.1		;
+3			;3111									;Node 3.1.1.1	;
+3			;3112									;Node 3.1.1.2	;
+0			;include:demoinclude	;							;

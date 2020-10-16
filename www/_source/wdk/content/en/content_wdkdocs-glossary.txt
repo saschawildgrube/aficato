@@ -1,0 +1,45 @@
+=Glossary=
+;Assembly
+:A collection of components organized in a defined folder and file structure.
+;Assembly line
+:An array of assemblies to be used by a website.
+;Asset
+:See Static Asset.
+;Component
+:WDK based web applications are made of components.
+;Configuration
+:Data that defines the behaviour of a web application and which is independent from dynamic states or user interaction.
+;Content
+:A content is an HTML, WIKI and/or PHP file representing a page of a website.
+;Element
+:A class implementing output rendering. The term is derived from "HTML element" as elements are used to render both simple HTML elements as well as complex structures. Elements may use other elements but do NOT interact with dynamic data sources.
+;Module
+:A class implementing a user interaction within a website. Modules interact with web services and other modules. Modules use elements to generate output.
+;Navigation
+:A navigation tree structure representing the level, context, visual text and conditions under which a given navigation item should be visible to a user represented in a CSV file.
+;Layout
+:A visual theme of a website.
+;Log
+:A semi-permanent storage of system events.
+;Scaffold
+:A configurable template for the creation of new source code.
+;Session
+:A user specific list of named values which is maintained temporarily.
+;State
+:Modules run through one or more states. A state represents one step in a step-by-step user interaction.
+;Static asset
+:Images, videos, fonts and any other files which are not generated dynamically and which are provided by a web application.
+;Style
+:A variant of a layout (e.g. of an element) that is defined by code.
+;Text resource
+:Text files containing localized screen text in a simple tag-value format.
+;Unit test
+:A script that verifies functions, classes and/or web applications.
+;Web application
+:A stateless application responding to HTTP requests.
+;Web service
+:A web application that exposes an API encapusalting business logic and persistent storage intended to be consumed by other web applications.
+;Website
+:A web application to be consumed by browsers usually providing an HTML/CSS/JS-based interface. Usually implemented as a class derived from CWebsite.
+;Website satellite
+:A class that acts as a proxy to a website class. It is used to access functionality implemented in CWebsite more conveniently.

@@ -1,0 +1,5 @@
+PURPOSE
+
+	* Manage the logical server on which the web application system is running on.
+
+{COMMAND_REFERENCE}
