@@ -537,46 +537,46 @@
 									$strTasks .= $this->RenderTaskIcon(
 										$strEntity,
 										"sortorderfirst",
-										"sortorderfirst",
+										"chevron-up",
 										"modifysortorder",
 										$arrayParams);
 								}
-		
+
 								if ($nSortOrder > 1)
 								{
 									$arrayParams[$this->GetModuleVarName("sortorder_value")] = $nSortOrder - 1;
 									$strTasks .= $this->RenderTaskIcon(
 										$strEntity,
 										"sortorderup",
-										"sortorderup",
+										"angle-up",
 										"modifysortorder",
 										$arrayParams);
 								}
-		
+
 								if ($nSortOrder > $nMoveMany)
 								{
 									$arrayParams[$this->GetModuleVarName("sortorder_value")] = $nSortOrder - 5;
 									$strTasks .= $this->RenderTaskIcon(
 										$strEntity,
 										"sortorderupmany",
-										"sortorderupmany",
+										"angle-double-up",
 										"modifysortorder",
 										$arrayParams);
 								}
+
 		
-								
-								//$strTasks .= "<br/>";
-	
+								$strTasks .= "<br/>";
+
 								if ($nSortOrder < $nTotalEntries-1)
 								{
 									$arrayParams[$this->GetModuleVarName("sortorder_value")] = INTEGER_MAX;
 									$strTasks .= $this->RenderTaskIcon(
 										$strEntity,
 										"sortorderlast",
-										"sortorderlast",
+										"chevron-down",
 										"modifysortorder",
 										$arrayParams);
-								}
+								}	
 			
 								if ($nSortOrder < $nTotalEntries-2)  
 								{
@@ -584,7 +584,7 @@
 									$strTasks .= $this->RenderTaskIcon(
 										$strEntity,
 										"sortorderdown",
-										"sortorderdown",
+										"angle-down",
 										"modifysortorder",
 										$arrayParams);
 								}
@@ -595,14 +595,18 @@
 									$strTasks .= $this->RenderTaskIcon(
 										$strEntity,
 										"sortorderdownmany",
-										"sortorderdownmany",
+										"angle-double-down",
 										"modifysortorder",
 										$arrayParams);
 								}	
+
+
 		
 								//$strTasks .= '</div>';
 											
-								$arrayItem[$strAttribute] = $nSortOrder."&nbsp;&nbsp;".$strTasks;
+								//$arrayItem[$strAttribute] = $nSortOrder."&nbsp;&nbsp;".$strTasks;
+								$arrayItem[$strAttribute] = $strTasks;
+
 							}
 						}
 						break;
@@ -1478,7 +1482,7 @@
 						$arrayParams = array();
 						$arrayParams[$this->GetModuleVarNameState()] = $strEntity."_list";
 						$strLink = $this->GetWebsite()->MakeURL($arrayParams);
-						$this->AddTool($strLink, "reload", "?".$this->MakeEntityTID($strEntity,"TOOL","REFRESH")."?");
+						$this->AddTool($strLink, "refresh", "?".$this->MakeEntityTID($strEntity,"TOOL","REFRESH")."?");
 					}
 				}
 
@@ -1565,7 +1569,7 @@
 								$arrayParams[$this->GetModuleVarNameState()] = $strEntity."_view";
 								$arrayParams[$this->GetItemIndexPropertyModuleVarName($strEntity)] = $strEntityIndex;
 								$strLink = $this->GetWebsite()->MakeURL($arrayParams);
-								$this->AddTool($strLink, "reload", "?".$this->MakeEntityTID($strEntity,"TOOL","REFRESH")."?");
+								$this->AddTool($strLink, "refresh", "?".$this->MakeEntityTID($strEntity,"TOOL","REFRESH")."?");
 							}
 						}						
 					}						

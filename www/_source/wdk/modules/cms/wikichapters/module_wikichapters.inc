@@ -26,7 +26,6 @@
 			$strLinkTemplateChapter = ReplaceString($strLinkTemplateChapter,"%7D","}");
 			$this->m_strLinkTemplateChapter = $strLinkTemplateChapter;
 			$this->IncludeElement("wiki");
-			$this->IncludeElement("toolbar");
 			return true;
 		}
 		

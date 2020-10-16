@@ -24,16 +24,12 @@
 				{
 					return;	
 				}
-				// wdk.txt and content_wdkdocs-releasenotes.txt contain
-				// references on the cases checked here.
-				// So they must be excluded.
-				if (	$strFileName == 'wdk.txt'
-					||	$strFileName == 'content_wdkdocs-prologue-releasenotes.txt')
+				// content_wdkdocs-releasenotes.txt contains
+				// references to some of the cases checked here.
+				if ($strFileName != 'content_wdkdocs-releasenotes.txt')
 				{
-					return;	
+					$arrayRegExp[] = '/imprint/';	
 				}
-
-				$arrayRegExp[] = '/imprint/';
 					
 			}
 			$this->CheckFileAgainstRegExp($strFilePath,$arrayRegExp);

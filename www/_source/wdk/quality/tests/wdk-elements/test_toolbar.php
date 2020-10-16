@@ -29,7 +29,7 @@
 			
 			$this->TestCase_CheckURL(
 				$strURL,
-				array('<div><a href="http://www.example.com"><img src="'.$strURL_Image.'id=icon_link" alt="" title="Example.com" style="vertical-align:middle;"/>Example.com</a>&nbsp;<a href="http://www.example.com"><img src="'.$strURL_Image.'id=icon_link" alt="" title="" style="vertical-align:middle;"/></a>&nbsp;<a href="http://www.example.com" target="_blank">Example.com</a></div>'));
+				array('<div><a href="http://www.example.com"><i class="fa fa-link fa-fw" aria-hidden="true"></i>Example.com</a>&nbsp;<a href="http://www.example.com"><i class="fa fa-link fa-fw" aria-hidden="true"></i></a>&nbsp;<a href="http://www.example.com" target="_blank">Example.com</a></div>'));
 		}
 		
 		function CallbackCleanup()

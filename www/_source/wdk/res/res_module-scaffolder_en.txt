@@ -11,9 +11,9 @@ Configure Scaffold
 TID_SCAFFOLDER_CATEGORY_WEBSITES
 New Website
 TID_SCAFFOLDER_CATEGORY_COMPONENTS
-New Components
+New Component
 TID_SCAFFOLDER_CATEGORY_OTHER
-Other
+Something else
 TID_SCAFFOLDER_TEXT_HELP
 The scaffolder creates code packages based on template files and your preferences. It can help to create the initial set of source code files that make up a new website or create code that extends an existing website.
 

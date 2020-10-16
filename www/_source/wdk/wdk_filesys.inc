@@ -379,40 +379,49 @@
 	
 	function GetFileCategory($strPath)
 	{
-		if (StringSection($strPath,-1,1) == "/")
+		if (StringSection($strPath,-1,1) == '/')
 		{
-			return "folder";	
+			return 'folder';	
 		}
 		$strExt = GetExtentionFromPath($strPath);
 		switch ($strExt)
 		{
-		case "txt":
-		case "cfg":
-			return "text";
-		case "pdf":
-			return "pdf";
-		case "png":
-		case "gif":
-		case "bmp":
-		case "tif":
-			return "image";
-		case "html":
-		case "htm":
-		case "css":
-		case "php":
-		case "inc":
-		case "js":
-			return "web";
+		case 'txt':
+		case 'cfg':
+			return 'text';
+		case 'pdf':
+			return 'pdf';
+		case 'png':
+		case 'gif':
+		case 'bmp':
+		case 'tif':
+		case 'jpg':
+		case 'svg':
+			return 'image';
+		case 'html':
+		case 'htm':
+		case 'css':
+		case 'map':
+		case 'php':
+		case 'inc':
+		case 'js':
+		case 'xml':
+			return 'code';
+		case 'mp4':
+		case 'mpeg':
+		case 'ogv':
+		case 'webm':
+			return 'video';
 		default:
-			return "other";	
+			return 'other';	
 		}	
 	}
 	
 	function GetAllMimeTypes()
 	{
 		// Based on http://www.webmaster-toolkit.com/mime-types.shtml
-		require_once("wdk_csv.inc");
-		$arrayMimeTypes = FileReadCSV_RFC4180(GetWDKDir()."data/mimetypes.csv");
+		require_once('wdk_csv.inc');
+		$arrayMimeTypes = FileReadCSV_RFC4180(GetWDKDir().'data/mimetypes.csv');
 		return $arrayMimeTypes;
 	}
 	

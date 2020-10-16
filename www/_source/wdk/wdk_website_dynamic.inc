@@ -1,6 +1,6 @@
 <?php
 
-	require_once("wdk_website.inc");
+	require_once('wdk_website.inc');
 	
 	abstract class CDynamicWebSite extends CWebSite
 	{

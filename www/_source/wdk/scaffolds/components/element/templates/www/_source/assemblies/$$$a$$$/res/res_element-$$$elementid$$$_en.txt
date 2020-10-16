@@ -1,0 +1,4 @@
+TID_TITLE_ELEMENT_$$$ELEMENTID$$$
+$$$ElementId$$$
+TID_TEXT_ELEMENT_$$$ELEMENTID$$$
+This new element has been created using the scaffolder. Please add a helpful description here!

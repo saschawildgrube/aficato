@@ -4,8 +4,6 @@ TID_TITLE_ELEMENT_BLOGARTICLE
 Blog Article
 TID_TITLE_ELEMENT_BLOGARTICLETEASER
 Blog Article Teaser
-TID_TITLE_ELEMENT_CAROUSEL
-Carousel
 TID_TITLE_ELEMENT_COUNTDOWN
 Countdown
 TID_TITLE_ELEMENT_DEFINITIONLIST
@@ -18,6 +16,12 @@ TID_TITLE_ELEMENT_FACEBOOKSHARE
 Facebook Share Button
 TID_TEXT_ELEMENT_FACEBOOKSHARE
 The Facebook Share Button allows a user to share the currently viewed page via Facebook.
+TID_TITLE_ELEMENT_FORKMEONGITHUB
+Fork Me On GitHub
+TID_TEXT_ELEMENT_FORKMEONGITHUB
+This element displays a ribbon on the page with a link to a public GitHub repository. On mobile devices it will just display a banner-like link where the element is placed on the page.
+TID_TITLE_ELEMENT_FORMAT
+Format
 TID_TITLE_ELEMENT_GOOGLEMAPS
 Google Maps
 TID_TITLE_ELEMENT_HEADER
@@ -26,18 +30,20 @@ TID_TITLE_ELEMENT_NEWSARTICLE
 News Article
 TID_TEXT_ELEMENT_NEWSARTICLE
 The News Article element display a full news article including its meta data.
+TID_TITLE_ELEMENT_LEGEND
+Legend
 TID_TITLE_ELEMENT_LINK
 Link
 TID_TITLE_ELEMENT_LINKEDINSHARE
 LinkedIn Share Button
 TID_TEXT_ELEMENT_LINKEDINSHARE
 The LinkedIn Share Button allows a user to share the currently viewed page via LinkedIn.
+TID_TITLE_ELEMENT_LOADING
+Loading
 TID_TITLE_ELEMENT_TEXT
 Text
 TID_TITLE_ELEMENT_LIST
 List
-TID_TITLE_ELEMENT_FORMAT
-Format
 TID_TITLE_ELEMENT_HIGHLIGHT
 Highlight
 TID_TITLE_ELEMENT_NUMBEREDLIST
@@ -48,6 +54,8 @@ TID_TITLE_ELEMENT_PAGENAVIGATION
 Page Navigation
 TID_TITLE_ELEMENT_ITEMMANAGER
 Item Manager
+TID_TITLE_ELEMENT_FLAG
+Flag
 TID_TITLE_ELEMENT_ICON
 Icon
 TID_TITLE_ELEMENT_LINKICON

@@ -1,17 +1,15 @@
 LEVEL	;CONTEXT																						;LABEL														;CONDITIONS
 0			;wdkdocs																						;?TID_NAVIGATION_WDKDOCS?					;wdkdocs
-1			;wdkdocs-prologue																		;Prologue													;wdkdocs
-2			;wdkdocs-prologue-releasenotes											;Release Notes										;
-2			;wdkdocs-prologue-upgradeguide											;Upgrade Guide										;
-2			;wdkdocs-prologue-license														;License													;
-1			;wdkdocs-introduction																;Introduction											;
-2			;wdkdocs-introduction-about													;About														;
-2			;wdkdocs-introduction-installation									;Installation											;
-2			;wdkdocs-introduction-gettingstarted								;Getting started									;wdkdocs-wip
+1			;wdkdocs-about																			;About														;
+1			;wdkdocs-license																		;License													;
+1			;wdkdocs-installation																;Installation											;
+1			;wdkdocs-gettingstarted															;Getting started									;wdkdocs-wip
+1			;wdkdocs-releasenotes																;Release notes										;
+1			;wdkdocs-upgradeguide																;Upgrade guide										;
 1			;wdkdocs-faq																				;FAQ															;wdkdocs-wip
 1			;wdkdocs-architecture																;Architecture											;
 2			;wdkdocs-architecture-assemblies										;Assemblies												;
-2			;wdkdocs-architecture-webapplications								;Web Applications									;
+2			;wdkdocs-architecture-webapplications								;Web applications									;
 2			;wdkdocs-architecture-websites											;Websites													;
 3			;wdkdocs-architecture-websites-requestlifecycle			;Request lifecycle								;wdkdocs-wip
 2			;wdkdocs-architecture-webservices										;Web services		 									;
@@ -40,7 +38,7 @@ LEVEL	;CONTEXT																						;LABEL														;CONDITIONS
 2			;wdkdocs-features-basicauth													;Basic authentication							;wdkdocs-wip
 2			;wdkdocs-features-bbcode														;bbcode														;wdkdocs-wip
 2			;wdkdocs-features-conditions												;Conditions												;wdkdocs-wip
-2			;wdkdocs-features-cmf																;Content Management Framework			;wdkdocs-wip
+2			;wdkdocs-features-cmf																;Content management framework			;wdkdocs-wip
 2			;wdkdocs-features-crud															;CRUD															;wdkdocs-wip
 2			;wdkdocs-features-csrf															;CSRF protection									;wdkdocs-wip
 2			;wdkdocs-features-debugging													;Debugging												;wdkdocs-wip
@@ -59,6 +57,7 @@ LEVEL	;CONTEXT																						;LABEL														;CONDITIONS
 1			;wdkdocs-conventions																;Conventions											;
 1			;wdkdocs-contribution																;Contribution											;wdkdocs-contribution
 2			;wdkdocs-contribution-bugreport											;Bug reports											;
-2			;wdkdocs-contribution-checklist-release							;Release Checklist								;
-2			;wdkdocs-contribution-checklist-addcountry					;Add a new country								;
-1			;wdkdocs-api																				;API Documentation								;wdkdocs-wip
+2			;wdkdocs-contribution-release												;Release checklist								;
+2			;wdkdocs-contribution-addcountry										;Add a new country								;
+2			;wdkdocs-contribution-github												;Publish a project on GitHub			;
+1			;wdkdocs-api																				;API documentation								;wdkdocs-wip

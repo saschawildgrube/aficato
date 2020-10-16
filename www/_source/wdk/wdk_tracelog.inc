@@ -9,7 +9,7 @@
 
 		function __construct()
 		{
-			$this->m_strPrefix = "";
+			$this->m_strPrefix = '';
 			$this->m_strPostfix = "\n";
 			$this->m_nDebugPoint = 0;
 		}
@@ -45,6 +45,10 @@
 		
 		function Debug($value = null)
 		{
+			if ($this->m_nDebugPoint == 0)
+			{
+				$this->m_strTraceLog = $this->m_strPrefix.'Debug mode ACTIVE'.$this->m_strPostfix.$this->m_strTraceLog;
+			}
 			$this->m_nDebugPoint++;
 			$this->Trace("DEBUG: #".$this->m_nDebugPoint.''.(($value !== null && !is_array($value))?(': '.RenderValue($value)):('')));
 			if (is_array($value) == true)

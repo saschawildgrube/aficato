@@ -1,0 +1,65 @@
+=About {WDK}=
+{WDK} is a "Website Development Kit". It is more than just a framework.
+
+
+{WDK} contains all tools and structures required to create complex, reliable, robust, multilingual, database-backed web application systems.
+
+
+There are quite a number of php frameworks out in the market. Symfony (and Laravel), CakePHP, Yii, Zend, Wordpress and Drupal - just to name a few. 
+
+
+Some of them are extensible web content management systems others are more like toolboxes with more or less independent libraries. 
+
+
+It seems as if there are only extremes. All too strict systems on one end which force developers to solve problems they wouldn't have without the framework. And a set of independent libraries on the other hand which provide flexibility but again require developers to solve standard problems where out-of-the-box solutions should be at hand - thinking of authentification, user-friendly URLs, web security and localization.
+
+
+The selection of a php framework at the beginning of a project is certainly a selection of taste. Past experience, self confidence and credibility of an individual make the difference most of the time. However considerations regarding future costs, segregation of duties in a development team, security, operateability and other relevant factors hardly play a role in such a selection process.
+
+
+Now {WDK} enters the stage and you might ask: Why do we need yet another php framework?
+
+
+Good question but let us check the definition of a "php framework" first. And even more important: what are typical expecations to a "php framework"?
+
+
+When conducting some Google research on "php framework" you end up with a list of usual suspects. However as stated above there are fundamental differences between these "php frameworks".
+
+
+The English Wikipedia article on [https://en.wikipedia.org/wiki/Software_framework software framework] has a good definition to start with:
+
+
+"In computer programming, a software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software. A software framework provides a standard way to build and deploy applications. A software framework is a universal, reusable software environment that provides particular functionality as part of a larger software platform to facilitate development of software applications, products and solutions. Software frameworks may include support programs, compilers, code libraries, tool sets, and application programming interfaces (APIs) that bring together all the different components to enable development of a project or system."
+
+
+So in essence, a "php framework" is a software framework based on the language php using its build-in functions and classes.
+
+
+Wikipedia also concludes:
+
+
+"Frameworks have key distinguishing features that separate them from normal libraries:
+* inversion of control: In a framework, unlike in libraries or in standard user applications, the overall program's flow of control is not dictated by the caller, but by the framework.
+* extensibility: A user can extend the framework - usually by selective overriding; or programmers can add specialized user code to provide specific functionality.
+* non-modifiable framework code: The framework code, in general, is not supposed to be modified, while accepting user-implemented extensions. In other words, users can extend the framework, but should not modify its code."
+
+Which we may fully agree in theory. Some of the typical "php framework" do not really control the overall program flow - unless you consider optional URL routing to a class member function as "overall program flow".
+Extensibility may or may not be in the DNA of most frameworks. Most frameworks come with some form of core that is not meant to be modified - unless you risk regressions and incompatibilities all over the place, so it straight forward to agree to the "non-modifiable framework code" statement - although we all know that a "php framework" can of course be modified at all times.
+
+
+The main plot of a framework is the idea that you build your own application (or website) on top of it. It forms a basis. The big question is: does this basis solve the relevant standard problems? How quickly can an individual (and a team) gather knowledge on how to make use of these solutions? How expensive is it to gather the relevant knowledge?
+
+
+{WDK} has been created over many years. The experience of numerous software projects formed the structure and solutions baked into it.
+
+
+Be warned: {WDK} is not suceptible to the recent trend of standardizing solutions just for the sake of it. You will not find pure MVC nor will {WDK} make use of HTTP verbs and HTTP response codes when interacting with webservices. There are a number of defacto standards floating around the community. And yeah, sometimes it is better to be wrong together, than to be right on your own.
+
+
+{WDK} is a contribution that helps teams to get the right balance between doing it like "everyone else" does it and getting to the right solution quickly. It provides freedom and flexibility and it provides a very strict architecture approach where it is needed.
+
+
+{WDK} is more than a framework. It is a "Website Development Kit" - as it provides all ingredients to build complex, dynamic websites and web-based applications.
+
+
+Enjoy using {WDK}!

@@ -16,8 +16,6 @@
 		
 		function CallbackInit()
 		{
-			$this->IncludeElement("toolbar");
-			
 			if ($this->GetState() == "")
 			{				
 				$this->SetState("list");	
@@ -81,7 +79,7 @@
 				$arrayParams = array();
 				$arrayParams[$this->GetModuleVarNameState()] = "viewall";
 				$strLink = $this->GetWebsite()->MakeURL($arrayParams);
-				$toolbarDef->AddTool($strLink, "listdetail", "?TID_ELEMENTGALLERY_TOOL_VIEWALL?");
+				$toolbarDef->AddTool($strLink, "list-details", "?TID_ELEMENTGALLERY_TOOL_VIEWALL?");
 			}			
 
 			$toolbar = new CToolbarElement($this->GetWebsite(),"default");

@@ -101,8 +101,8 @@
 		{
 			$this->RenderTabNavigation();
 
-			$this->IncludeElement('icon');
-			$icon = new CIconElement($this->GetWebsite(),"default");
+			$this->IncludeElement('flag');
+			$flag = new CFlagElement($this->GetWebsite(),'default');
 			$arrayIDs = GetAllCountryIDs();
 			$arrayList = array();
 			array_push(
@@ -117,7 +117,7 @@
 					$arrayList,
 					array(
 						$strCountryID,
-						$icon->RenderIcon('country-'.StringLowerCase($strCountryID),'?TID_COUNTRY_'.$strCountryID.'?'),
+						$flag->RenderFlag($strCountryID),
 						'?TID_COUNTRY_'.$strCountryID.'?'));				
 			}
 			$table = new CTableElement($this->GetWebsite(),'default');

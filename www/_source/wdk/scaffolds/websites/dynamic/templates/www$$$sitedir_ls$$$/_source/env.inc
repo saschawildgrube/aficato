@@ -96,9 +96,9 @@
 		return 'prod';	
 	}
 	
-	function GetDatabaseConfigID()
+	function GetEnvConfigID()
 	{
-		return 'database';
+		return 'env';
 	}
 	
 	function GetOperationMode()

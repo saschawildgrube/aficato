@@ -8,34 +8,40 @@
 		{
 			parent::__construct(
 				$website,
-				"icon",
+				'icon',
 				$strStyleID,
 				true,
-				false);
+				true);
+				
+			$this->GetWebsite()->ActivateFontAwesome();
 		}
 		
-		function RenderIcon($strIconID, $strToolTip)
+		function RenderIcon($strIconID)
 		{
-			$strLayoutDef = $this->GetLayoutDef("LAYOUT_ICON_".StringUppercase($strIconID));
-			if ($strLayoutDef == "")
-			{
-				$strLayoutDef = $this->GetLayoutDef("LAYOUT_ICON_DEFAULT");
-			}
+			$strLayoutDef = $this->GetLayoutHTML();
 			
 			$arrayItems = array();
-			$arrayItems["ICONID"] = $strIconID;
-			if (FindString($strLayoutDef,"IMAGEURL") != -1)
+			
+			$strAliasIconID = $this->GetLayoutDef('LAYOUT_ICON_'.StringUpperCase($strIconID));
+			if ($strAliasIconID != '')
 			{
-				$arrayItems["IMAGEURL"] = HtmlEncode($this->GetWebsite()->GetLayoutImageURL("icon_".$strIconID,"png"));
-			}
-			if (FindString($strLayoutDef,"TOOLTIP") != -1)
-			{
-				$arrayItems["TOOLTIP"] = HtmlEncode($strToolTip);
+				$strIconID = $strAliasIconID;
 			}
 			
+			$arrayItems['ICONID'] = StringLowerCase($strIconID);
+
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strLayoutDef);
 			return $strOutput;			
 		}
+	}
+		
+	function GetIconIDByFileCategory($strFileCategory)
+	{
+		if ($strFileCategory == 'other')
+		{
+			return 'file-o';	
+		}
+		return 'file-'.$strFileCategory.'-o';
 	}
 

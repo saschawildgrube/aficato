@@ -1,5 +1,10 @@
 <?php
 
+	function IsArray($array)
+	{
+		return is_array($array);
+	}
+
 	function ArrayCount($array)
 	{
 		if (!is_array($array))
@@ -35,12 +40,115 @@
 		return $array1;
 	}
 
-	function ArrayMerge($array1, $array2)
+
+	function CallbackArrayMergeSet($vValue1, $vValue2)
 	{
-		$ea = new CErrorAmnesty();
-		$ea->Start();
-		$arrayResult = array_merge($array1, $array2);
-		$ea->End();
+		return $vValue2;
+	}
+	function CallbackArrayMergeAdd($vValue1, $vValue2)
+	{
+		if (is_numeric($vValue1) && is_numeric($vValue2))
+		{
+			return $vValue1 + $vValue2;
+		}
+		return $vValue2;
+	}
+
+
+	function ArrayMerge($array1, $array2, callable $CallbackArrayMerge = null)
+	{
+		$arrayResult = array();
+		if (is_array($array1) == false)
+		{
+			if ($array1 == null)
+			{
+				return ArrayMerge($array2,array());
+			}
+			$array1 = array($array1);
+		}
+		if (is_array($array2) == false)
+		{
+			if ($array2 == null)
+			{
+				return ArrayMerge($array1,array());
+			}
+			$array2 = array($array2);
+		}
+		foreach($array1 as $vKey => $vValue)
+		{
+			if (is_numeric($vKey) == true)
+			{
+				$arrayResult[] = $vValue;	
+			}
+			else
+			{
+				$arrayResult[$vKey] = $vValue;
+			}
+		}
+		foreach($array2 as $vKey => $vValue)
+		{
+			if (is_numeric($vKey) == true)
+			{
+				$arrayResult[] = $vValue;	
+			}
+			else
+			{
+				if ($CallbackArrayMerge == null)
+				{
+					$arrayResult[$vKey] = $vValue;
+				}
+				else
+				{
+					$arrayResult[$vKey] = $CallbackArrayMerge(ArrayGetValue($arrayResult,$vKey),$vValue);
+				}
+			}
+		}
+		return $arrayResult;
+	}
+
+	function ArrayMergeRecursive($array1, $array2, callable $CallbackArrayMerge = null)
+	{
+		$arrayResult = array();
+		if (!is_array($array1) || !is_array($array2))
+		{
+			return ArrayMerge($array1, $array2, $CallbackArrayMerge);
+		}
+		foreach($array1 as $vKey => $vValue)
+		{
+			if (is_numeric($vKey) == true)
+			{
+				$arrayResult[] = $vValue;	
+			}
+			else
+			{
+				$arrayResult[$vKey] = $vValue;
+			}
+		}
+		foreach($array2 as $vKey => $vValue)
+		{
+			if (is_numeric($vKey) == true)
+			{
+				$arrayResult[] = $vValue;	
+			}
+			else
+			{
+				if (is_array($vValue))
+				{
+					$arrayResult[$vKey] = ArrayMergeRecursive(ArrayGetValue($array1,$vKey),$vValue,$CallbackArrayMerge);	
+				}
+				else
+				{
+					if ($CallbackArrayMerge == null)
+					{
+						$arrayResult[$vKey] = $vValue;
+					}
+					else
+					{
+						$arrayResult[$vKey] = $CallbackArrayMerge(ArrayGetValue($arrayResult,$vKey),$vValue);
+					}
+				}
+			}
+		}
 		return $arrayResult;
 	}
 
@@ -145,7 +253,7 @@
 
 	function ArraySetValue(&$array,$value,$key1,$key2=null,$key3=null,$key4=null,$key5=null,$key6=null,$key7=null)
 	{
-		if (!is_array($array))
+		if (!IsArray($array))
 		{
 			$array = array();
 		}
@@ -161,7 +269,7 @@
 
 	function ArraySetValueRecursive(&$array,$newvalue,$key)
 	{
-		if (!is_array($array))
+		if (!IsArray($array))
 		{
 			$array = array();
 		}
@@ -178,9 +286,45 @@
 		}
 	}
 	
+	function ArrayMap($array,callable $CallbackMap,$arrayParams = array())
+	{
+		if (!IsArray($array))
+		{
+			return array();	
+		}
+		$arrayResult = array(); 
+		foreach ($array as $key => $value)
+		{
+			$arrayResult[$key] = $CallbackMap($key,$value,$arrayParams);
+		}
+		return $arrayResult;
+	}
+
+	function ArrayMapRecursive($array,callable $CallbackMap,$arrayParams = array())
+	{
+		if (!IsArray($array))
+		{
+			return array();	
+		}
+		$arrayResult = array();
+		foreach ($array as $key => $value)
+		{
+			if (IsArray($value))
+			{
+				$arrayResult[$key] = ArrayMapRecursive($value,$CallbackMap,$arrayParams);
+			}
+			else
+			{
+				$arrayResult[$key] = $CallbackMap($key,$value,$arrayParams);
+			}
+		}
+		return $arrayResult;
+	}
+
+	
 	function ArraySort($array,$bMaintainKeys = false, callable $CallbackCompare = null)
 	{
-		if (!is_array($array))
+		if (!IsArray($array))
 		{
 			return false;	
 		}
@@ -510,6 +654,23 @@
 		return $arraySource;  
 	} 
 	
+	function ArrayRemoveKeyRecursive($arraySource,$keyUnwanted)
+	{
+		
+		if (ArrayKeyExists($arraySource,$keyUnwanted) == true)
+		{
+			unset($arraySource[$keyUnwanted]);
+		}
+		foreach ($arraySource as $key => &$value)
+		{
+			if (IsArray($value))
+			{
+				$value = ArrayRemoveKeyRecursive($value,$keyUnwanted);
+			}
+		}
+		return $arraySource;  
+	} 
+	
 	function ArrayTransformToTable($arraySource,$strHeaderKeys = "",$strHeaderValues = "")
 	{
 		if (!is_array($arraySource))
@@ -568,7 +729,7 @@
 	{
 		if (!is_array($arraySource))
 		{
-			return "";	
+			return '';	
 		}
 		return base64_encode(serialize($arraySource));
 	}
@@ -629,6 +790,19 @@
 		$ea = new CErrorAmnesty();
 		$ea->Start();
 		$arrayResult = array_unique($arrayInput);
+		$ea->End();
+		return $arrayResult;
+	}
+	
+	function ArrayValues($arrayInput)
+	{
+		if (!is_array($arrayInput))
+		{
+			return array();	
+		} 
+		$ea = new CErrorAmnesty();
+		$ea->Start();
+		$arrayResult = array_values($arrayInput);
 		$ea->End();
 		return $arrayResult;
 	}

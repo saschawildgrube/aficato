@@ -4,7 +4,6 @@
 	{
 		function CallbackRenderContent(&$arrayItems)
 		{
-			$this->IncludeElement("link");
 			$link = new CLinkElement($this->GetWebsite(), "default");
 			$arrayItems["ELEMENT_LINK_NOTEXT"] = $link->RenderLink("http://www.example.com");
 			$arrayItems["ELEMENT_LINK"] = $link->RenderLink("http://www.example.com","Example");

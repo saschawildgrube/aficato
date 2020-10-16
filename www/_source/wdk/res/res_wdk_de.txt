@@ -68,6 +68,8 @@ TID_WARNING_INSECURE
 Achtung: Sie übertragen Inhalte über eine unsichere Verbindung.
 TID_WARNING_CSRF_TOKEN_INVALID
 Achtung: Entweder Sie haben innerhalb einer Session eine Seite in einem neuen Browser-Fenster geöffnet, eine Seite neu geladen oder Sie wurden möglicherweise unwissentlich Opfer eines CSRF-Angriffs. Zur Sicherheit wurde die Session sofort beendet.
+TID_INFO_LOADING
+Lade...
 TID_PRIVILEGE_USERADMIN
 Benutzer-Administrator
 TID_PRIVILEGE_SYSTEMADMIN

@@ -4,9 +4,8 @@
 	{
 		function CallbackRenderContent(&$arrayItems)
 		{
-			$this->IncludeElement("icon");
-			$icon = new CIconElement($this->GetWebsite(), "default");
-			$arrayItems["ELEMENT_ICON"] = $icon->RenderIcon("link","An icon without a link");
+			$icon = new CIconElement($this->GetWebsite(), 'default');
+			$arrayItems['ELEMENT_ICON'] = $icon->RenderIcon('link');
 		}
 	}
 	

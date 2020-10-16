@@ -174,11 +174,6 @@
 			$this->SetLayout('$$$websitename$$$');
 
 
-			// SSL ICON
-			$this->IncludeModule('security/ssl');
-			$moduleSSL = new CSSLModule($this,'ssl');
-			$this->SetOutputItem('MODULE_SSL_ICON',$moduleSSL->RenderModule('icon'));
-
 			// DISPLAY DATETIME
 			$this->IncludeElement('datetime');
 			$datetime = new CDateTimeElement($this,'default');

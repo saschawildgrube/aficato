@@ -4,8 +4,8 @@
 	ini_set('display_errors', 1);
 	
 	ini_set('allow_url_fopen', 0);
-	ini_set("max_execution_time",120);
-	ini_set("expose_php",false);
+	ini_set('max_execution_time',120);
+	ini_set('expose_php',false);
 	header('X-Powered-By:'); 
 
 	require_once("wdk_env.inc");
@@ -68,7 +68,7 @@
 			parent::__construct();
 			
 			// Init time zone
-			date_default_timezone_set("UTC");
+			date_default_timezone_set('UTC');
 			
 			// Init profiling
 			$this->m_stopwatch = new CStopWatch();
@@ -149,7 +149,7 @@
 		{
 			return $this->m_arrayConfig;
 		}
-		function GetConfig($strConfig1,$strConfig2="",$strConfig3="",$strConfig4="")
+		function GetConfig($strConfig1,$strConfig2='',$strConfig3='',$strConfig4='')
 		{
 			return ArrayGetValue($this->m_arrayConfig,$strConfig1,$strConfig2,$strConfig3,$strConfig4);	
 		}

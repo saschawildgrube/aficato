@@ -205,15 +205,15 @@
 				}
 			}
 
-			if ($this->TestCase_CheckEnvFunction("GetDatabaseConfigID") == true)
+			if ($this->TestCase_CheckEnvFunction('GetEnvConfigID') == true)
 			{
-				$strDatabaseConfigID = GetDatabaseConfigID();
-				if ($strDatabaseConfigID != "")
+				$strEnvConfigID = GetEnvConfigID();
+				if ($strEnvConfigID != '')
 				{
-					if (IsValidConfigID($strDatabaseConfigID) == false)
+					if (IsValidConfigID($strEnvConfigID) == false)
 					{
 						$this->SetResult(false);
-						$this->Trace("GetDatabaseConfigID() returned an invalid condig id: \"$strDatabaseConfigID\"");
+						$this->Trace("GetEnvConfigID() returned an invalid condig id: \"$strEnvConfigID\"");
 						$this->Trace("TESTCASE FAILED");
 					}	
 				}

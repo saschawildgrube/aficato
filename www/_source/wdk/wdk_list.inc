@@ -24,8 +24,7 @@
 		{
 			if (!is_array($arrayList))
 			{
-				$this->m_arrayList = array();
-				return;
+				$arrayList = array();
 			}
 			$this->m_arrayList = $arrayList;
 		}
@@ -52,7 +51,7 @@
 
 			$arrayListFiltered = array();
 
-			foreach ($arrayList as $element)
+			foreach ($arrayList as $arrayElement)
 			{
 				$bAddToResult = true;
 				foreach ($arrayFilterOptions as $arrayOption)
@@ -67,7 +66,7 @@
 					}
 					$strColumn = ArrayGetValue($arrayOption,"field");
 					// This is behaviour by design. If the field does not exist, it will not be considered. It will not just be assumed the fields is "" or 0.
-					if (!ArrayKeyExists($element,$strColumn))
+					if (!ArrayKeyExists($arrayElement,$strColumn))
 					{
 						continue;	
 					}
@@ -78,7 +77,7 @@
 					{
 						case "=":
 						{
-							if ((ArrayGetValue($element,$strColumn) == $strValue) != true)
+							if ((ArrayGetValue($arrayElement,$strColumn) == $strValue) != true)
 							{
 								$bAddToResult = false;
 							}
@@ -86,7 +85,7 @@
 						}
 						case "!=":
 						{
-							if ((ArrayGetValue($element,$strColumn) != $strValue) != true)
+							if ((ArrayGetValue($arrayElement,$strColumn) != $strValue) != true)
 							{
 								$bAddToResult = false;
 							}
@@ -94,7 +93,7 @@
 						}
 						case "<":
 						{
-							if ((ArrayGetValue($element,$strColumn) < $strValue) != true)
+							if ((ArrayGetValue($arrayElement,$strColumn) < $strValue) != true)
 							{
 								$bAddToResult = false;
 							}							
@@ -102,7 +101,7 @@
 						}
 						case ">":
 						{
-							if ((ArrayGetValue($element,$strColumn) > $strValue) != true)
+							if ((ArrayGetValue($arrayElement,$strColumn) > $strValue) != true)
 							{
 								$bAddToResult = false;
 							}
@@ -110,7 +109,7 @@
 						}
 						case "<=":
 						{
-							if ((ArrayGetValue($element,$strColumn) <= $strValue) != true)
+							if ((ArrayGetValue($arrayElement,$strColumn) <= $strValue) != true)
 							{
 								$bAddToResult = false;
 							}
@@ -118,7 +117,7 @@
 						}
 						case ">=":
 						{
-							if ((ArrayGetValue($element,$strColumn) >= $strValue) != true)
+							if ((ArrayGetValue($arrayElement,$strColumn) >= $strValue) != true)
 							{
 								$bAddToResult = false;
 							}
@@ -126,7 +125,7 @@
 						}
 						case "contains":
 						{
-							if ((FindString(StringLowerCase(ArrayGetValue($element,$strColumn)),StringLowerCase($strValue)) != -1) != true)
+							if ((FindString(StringLowerCase(ArrayGetValue($arrayElement,$strColumn)),StringLowerCase($strValue)) != -1) != true)
 							{
 								$bAddToResult = false;
 							}							
@@ -134,7 +133,7 @@
 						}
 						case "in":
 						{
-							$strElementValue = ArrayGetValue($element,$strColumn);
+							$strElementValue = ArrayGetValue($arrayElement,$strColumn);
 							$bAddToResult = false;
           				$arrayValues = explode(",",$strValue);
           				foreach ($arrayValues as $strValue2)
@@ -155,7 +154,7 @@
 				}
 				if ($bAddToResult == true)
 				{
-					array_push($arrayListFiltered,$element);
+					array_push($arrayListFiltered,$arrayElement);
 				}
 				
 			}
@@ -266,10 +265,10 @@
 			$arrayListBlock = array();
 			for ($nIndex = $nLowerLimit; $nIndex < $nUpperLimit; $nIndex++)
 			{
-				$element = ArrayGetValue($arrayList,$nIndex);
-				if (is_array($element))
+				$arrayElement = ArrayGetValue($arrayList,$nIndex);
+				if (is_array($arrayElement))
 				{
-					array_push($arrayListBlock,$element);
+					array_push($arrayListBlock,$arrayElement);
 				}
 			}
 			$this->SetListArray($arrayListBlock);
@@ -323,6 +322,51 @@
 			}
 			
 			$this->SetListArray($arrayList);
+			return true;
+		}
+		
+		
+		function Aggregate(
+			$arrayColumns,
+			$strResultColumn)
+		{
+			if (ArrayCount($arrayColumns) == 0)
+			{
+				return false;	
+			}
+			if ($strResultColumn == '')
+			{
+				return false;	
+			}
+			
+			$arrayList = $this->GetListArray();
+			
+			$arrayAggregatedList = array();	
+			
+			foreach ($arrayList as $arrayElement)
+			{
+				$strCombinedKey = '';
+				foreach ($arrayElement as $strKey => $value)
+				{
+					if (ArrayValueExists($arrayColumns,$strKey))
+					{
+						$strValue = GetStringValue($value);
+						$strCombinedKey .= ($strCombinedKey == '')?($strValue):(','.$strValue);
+					}
+				}
+
+				foreach ($arrayElement as $strKey => $value)
+				{
+					if (ArrayValueExists($arrayColumns,$strKey))
+					{
+						$arrayAggregatedList[$strCombinedKey][$strKey] = $value;
+					}
+				}
+				$arrayAggregatedList[$strCombinedKey][$strResultColumn] = 1 + intval(ArrayGetValue($arrayAggregatedList,$strCombinedKey,$strResultColumn));
+			}
+			$arrayAggregatedList = ArrayValues($arrayAggregatedList);
+									
+			$this->SetListArray($arrayAggregatedList);
 			return true;
 		}
 

@@ -92,9 +92,9 @@
 		return 'prod';	
 	}
 	
-	function GetDatabaseConfigID()
+	function GetEnvConfigID()
 	{
-		return "database-".GetStage();
+		return "env-".GetStage();
 	}
 	
 	function GetOperationMode()

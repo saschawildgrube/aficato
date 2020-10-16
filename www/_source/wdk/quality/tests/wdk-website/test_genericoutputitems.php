@@ -1,12 +1,12 @@
 <?php
 	
-	require_once(GetWDKDir()."wdk_unittest.inc");
+	require_once(GetWDKDir().'wdk_unittest.inc');
 	
 	class CTest extends CUnitTest
 	{
 		function __construct()
 		{
-			parent::__construct("Test Generic Output Items");
+			parent::__construct('Test Generic Output Items');
 		}
 		
 		function CallbackInit()
@@ -18,11 +18,11 @@
 		function TestCase_GenericOutputItem($strContent,$arrayExpectedOutput)
 		{
 			$this->TestCase_CheckURL(
-				$strTestWebsiteURL = "http://".GetRootURL()."quality/testwebsite/?content=".$strContent,
+				$strTestWebsiteURL = 'http://'.GetRootURL().'quality/testwebsite/?content='.$strContent,
 				$arrayExpectedOutput);
 			
-			$this->Trace("");	
-			$this->Trace("");	
+			$this->Trace('');	
+			$this->Trace('');	
 			
 		}
 		
@@ -33,12 +33,12 @@
 			$this->SetResult(true);
 			
 			$this->TestCase_GenericOutputItem(
-				"test-genericoutputitem",
+				'test-genericoutputitem',
 				array(
-					//HtmlEncode("http://".GetRootURL()."quality/testwebsite/?content=index&language=EN"),
-					HtmlEncode("http://".GetRootURL()."quality/testwebsite/en/"),
-					HtmlEncode("http://".GetRootURL()."quality/testwebsite/?layout=default&command=image&id=icon_test"),
-					HtmlEncode("http://".GetRootURL()."quality/testwebsite/?layout=default&command=image&id=test")
+					HtmlEncode('http://'.GetRootURL().'quality/testwebsite/en'),
+					HtmlEncode('http://'.GetRootURL().'quality/testwebsite/en/'),
+					HtmlEncode('http://'.GetRootURL().'quality/testwebsite/?layout=default&command=image&id=test'),
+					'<i class="fa fa-test fa-fw" aria-hidden="true"></i>'
 				)
 				);
 

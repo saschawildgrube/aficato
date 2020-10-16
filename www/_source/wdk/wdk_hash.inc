@@ -1,8 +1,8 @@
 <?php
 
-	function MakeHash($payload,$strSeed="",$strHashMode="sha1")
+	function MakeHash($payload,$strSeed='',$strHashMode='sha1')
 	{
-		$strPayload = "";
+		$strPayload = '';
 		if (is_array($payload))
 		{
 			ksort($payload);
@@ -15,11 +15,11 @@
 		{
 			$strPayload = "$payload";	
 		}
-		if ($strHashMode == "bcrypt7")
+		if ($strHashMode == 'bcrypt7')
 		{
 			return sha1(crypt($strPayload,"$2a$07$".StringSection(base64_encode(sha1($strSeed)),22)));
 		}
-		if ($strHashMode == "bcrypt12")   
+		if ($strHashMode == 'bcrypt12')   
 		{
 			return sha1(crypt($strPayload,"$2a$12$".StringSection(base64_encode(sha1($strSeed)),22)));
 		}
@@ -28,7 +28,7 @@
 		
 	function MakePasswordHashSeed()
 	{
-		return sha1("PASSWORDHASHSEED".microtime(true).rand());	
+		return sha1('PASSWORDHASHSEED'.microtime(true).rand());	
 	}
 	
 

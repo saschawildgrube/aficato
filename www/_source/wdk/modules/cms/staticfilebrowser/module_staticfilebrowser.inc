@@ -31,7 +31,7 @@
 				return false;	
 			}
 			$arrayToolbarConfig = array(
-				"browse" => array("reload"),
+				'browse' => array('refresh'),
 				);
 			$this->SetToolbarConfig($arrayToolbarConfig);
 			return true;
@@ -43,11 +43,11 @@
 			$this->Trace("CallbackRenderModule(\"$strState\")");
 			switch ($strState)
 			{
-				case "download":
+				case 'download':
 					return $this->StateDownload();
-				case "reload":
-				case "":
-					$this->SetState("browse");
+				case 'refresh':
+				case '':
+					$this->SetState('browse');
 				default:
 					return $this->StateBrowse();
 			}
@@ -66,22 +66,22 @@
 				$arrayParams[$this->GetModuleVarNameState()] = "browse";
 				$arrayParams[$this->GetModuleVarName("currentdir")] = $strParentDir;
 				$strLink = $this->GetWebsite()->MakeURL($arrayParams);
-				$toolbarDef->AddTool($strLink, "back", "?TID_STATICFILEBROWSER_TOOL_PARENTDIR?");
+				$toolbarDef->AddTool($strLink, "level-up", "?TID_STATICFILEBROWSER_TOOL_PARENTDIR?");
 
 				$arrayParams = array();
 				$arrayParams[$this->GetModuleVarNameState()] = "browse";
 				$arrayParams[$this->GetModuleVarName("currentdir")] = "";
 				$strLink = $this->GetWebsite()->MakeURL($arrayParams);
-				$toolbarDef->AddTool($strLink, "list", "?TID_STATICFILEBROWSER_TOOL_ROOTDIR?");
+				$toolbarDef->AddTool($strLink, "level-up", "?TID_STATICFILEBROWSER_TOOL_ROOTDIR?");
 			}
 			
 			
-			if ($this->IsToolVisible("reload"))
+			if ($this->IsToolVisible('refresh'))
 			{
 				$arrayParams = array();
-				$arrayParams[$this->GetModuleVarNameState()] = "browse";
+				$arrayParams[$this->GetModuleVarNameState()] = 'browse';
 				$strLink = $this->GetWebsite()->MakeURL($arrayParams);
-				$toolbarDef->AddTool($strLink, "reload", "?TID_STATICFILEBROWSER_TOOL_RELOAD?");
+				$toolbarDef->AddTool($strLink, 'refresh', '?TID_STATICFILEBROWSER_TOOL_REFRESH?');
 			}
 
 			if ($toolbarDef->GetToolCount() == 0)
@@ -89,16 +89,15 @@
 				$this->SetOutputItem("TOOLBAR",""); 
 				return;
 			}
-			$this->IncludeElement("toolbar");
-			$toolbar = new CToolbarElement($this->GetWebsite(),"default");
+			$toolbar = new CToolbarElement($this->GetWebsite(),'default');
 			$this->SetOutputItem("TOOLBAR",$toolbar->RenderToolbar($toolbarDef)); 
 		}		
 		
 		function CallbackIsToolVisible($strToolID)
 		{
-			if ($strToolID == "reload")
+			if ($strToolID == 'refresh')
 			{
-				if ($this->GetModuleConfig("hidereload") == true)
+				if ($this->GetModuleConfig('hiderefresh') == true)
 				{
 					return false;	
 				}	
@@ -246,8 +245,6 @@
 			$bHideTableHeader = $this->GetModuleConfig("hidetableheader");
 			
 
-			$this->IncludeElement("link");
-			$this->IncludeElement("linkicon");
 			$this->IncludeElement("itemmanager");
 			
 			$linkicon = new CLinkIconElement($this->GetWebsite(),"default");
@@ -299,7 +296,7 @@
 					
 					if ($bHideIcon == false)
 					{
-						$arrayRow["NAME"] = $linkicon->RenderLinkIcon($strLink,"filecategory-folder",$strPathRel);
+						$arrayRow["NAME"] = $linkicon->RenderLinkIcon($strLink,'folder',$strPathRel);
 					}
 				}
 				else if (IsFile($strPathAbs))
@@ -319,7 +316,9 @@
 					}
 					if ($bHideIcon == false)
 					{
-						$arrayRow["NAME"] = $linkicon->RenderLinkIcon($strLink,"filecategory-".GetFileCategory($strPathAbs),$strPathRel);
+						$strFileCategory = GetFileCategory($strPathAbs);
+						
+						$arrayRow["NAME"] = $linkicon->RenderLinkIcon($strLink,GetIconIDByFileCategory($strFileCategory),$strPathRel);
 					}
 				}
 				

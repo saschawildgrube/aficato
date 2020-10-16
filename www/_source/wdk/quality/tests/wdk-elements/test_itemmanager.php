@@ -52,9 +52,9 @@
 <li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=2">3</a></li>
 <li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=3">4</a></li>
 <li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=4">5</a></li>
-<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=1">&rarr;</a></li>
-<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=5">&raquo;</a></li>
-<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=9">&raquo;&raquo;</a></li>
+<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=1"><i class="fa fa-chevron-right fa-fw" aria-hidden="true"></i></a></li>
+<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=5"><i class="fa fa-forward fa-fw" aria-hidden="true"></i></a></li>
+<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=9"><i class="fa fa-fast-forward fa-fw" aria-hidden="true"></i></a></li>
 </ul>
 <table><tbody><tr>
 <td>FIRST_ACTIVE</td>
@@ -68,11 +68,11 @@
 <table><tbody>
 <tr>
 <th>
-<span><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_sort_option=col1&amp;itemmanager_sort_order=asc"><img src="http://'.GetRootURL().'quality/testwebsite/?layout=default&amp;command=image&amp;id=icon_sortasc" alt="" title="Ascending sorting" style="vertical-align:middle;"/></a>
-<a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_sort_option=col1&amp;itemmanager_sort_order=desc"><img src="http://'.GetRootURL().'quality/testwebsite/?layout=default&amp;command=image&amp;id=icon_sortdesc" alt="" title="Descending sorting" style="vertical-align:middle;"/></a>
+<span><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_sort_option=col1&amp;itemmanager_sort_order=asc" title="Ascending sorting"><i class="fa fa-chevron-down fa-fw" aria-hidden="true"></i></a>
+<a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_sort_option=col1&amp;itemmanager_sort_order=desc" title="Descending sorting"><i class="fa fa-chevron-up fa-fw" aria-hidden="true"></i></a>
 </span>
-Column 1<br/><span><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_sort_option=col2&amp;itemmanager_sort_order=asc"><img src="http://'.GetRootURL().'quality/testwebsite/?layout=default&amp;command=image&amp;id=icon_sortasc" alt="" title="Ascending sorting" style="vertical-align:middle;"/></a>
-<a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_sort_option=col2&amp;itemmanager_sort_order=desc"><img src="http://'.GetRootURL().'quality/testwebsite/?layout=default&amp;command=image&amp;id=icon_sortdesc" alt="" title="Descending sorting" style="vertical-align:middle;"/></a>
+Column 1<br/><span><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_sort_option=col2&amp;itemmanager_sort_order=asc" title="Ascending sorting"><i class="fa fa-chevron-down fa-fw" aria-hidden="true"></i></a>
+<a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_sort_option=col2&amp;itemmanager_sort_order=desc" title="Descending sorting"><i class="fa fa-chevron-up fa-fw" aria-hidden="true"></i></a>
 </span>
 Column 2</th>
 <th>
@@ -137,9 +137,9 @@ Column 4<br/>Column 5</th>
 <li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=2">3</a></li>
 <li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=3">4</a></li>
 <li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=4">5</a></li>
-<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=1">&rarr;</a></li>
-<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=5">&raquo;</a></li>
-<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=9">&raquo;&raquo;</a></li>
+<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=1"><i class="fa fa-chevron-right fa-fw" aria-hidden="true"></i></a></li>
+<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=5"><i class="fa fa-forward fa-fw" aria-hidden="true"></i></a></li>
+<li><a href="http://'.GetRootURL().'quality/testwebsite/en/test-element-itemmanager/?itemmanager_offset=9"><i class="fa fa-fast-forward fa-fw" aria-hidden="true"></i></a></li>
 </ul>
 </div>';
 

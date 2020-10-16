@@ -117,9 +117,9 @@
     . '([a-z0-9+!*(),;?&=$_.-]+(\:[a-z0-9+!*(),;?&=$_.-]+)?@)?' // USER and PASSWORD
     . '(([a-z0-9-.]*)\.([a-z]{2,20})|'.$strIPregex.'|localhost)' // HOST with TLD or IP or "localhost"
     . '(\:[0-9]{2,5})?' // PORT
-    . '(\/([a-z0-9+$_=,~%()\/@-]\.?)+)*\/?' // PATH allowing double slashes and commas, equal signs...
-    . '(\?[a-z+&$_.-][a-z0-9;:@&%=+\/$_.-]*)?' // GET Query 
-		. '(#([a-z!_.-\/][a-z0-9&!+\/=$_.-]*)?)?' // ANCHOR
+    . '(\/([a-z0-9:+$_=,~%()\/@-]\.?)+)*\/?' // PATH allowing double slashes and commas, equal signs...
+    . '(\?[a-z\:+&$_.-][a-z0-9;:@&%=+\/$_.\?\{\}\-]*)?' // GET Query      
+		. '(#([a-z!_.\-\/][a-z0-9:&!+\/=$_.\?\-]*)?)?' // ANCHOR 
 		;
 		
 		$strURLregex = '/^'.$strURLregex.'$/';

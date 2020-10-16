@@ -1,12 +1,13 @@
 <?php
 
-	require_once("wdk_unittest.inc");
-	require_once("wdk_webserviceconsumer_webapplication.inc");
-	require_once("wdk_ip.inc");
+	require_once('wdk_unittest.inc');
+	require_once('wdk_webserviceconsumer_webapplication.inc');
+	require_once('wdk_ip.inc');
 
-	define("WEBSERVICE_SYSTEM_SERVER_TIMEOUT", 12);
-	define("LOG_MAILWARN_FILESIZE_THRESHOLD", (4*1024*1024));
-		
+	define('WEBSERVICE_SYSTEM_SERVER_TIMEOUT',	12);
+	define('LOG_MAILWARN_FILESIZE_THRESHOLD', 	(4*1024*1024));
+	define('LOG_PANEL_FILESIZE_THRESHOLD', 			100);
+
 	abstract class CMonitoringUnitTest extends CUnitTest
 	{
 		function __construct($strName,$arrayConfig = array())
@@ -251,7 +252,7 @@
 		{
 			$this->Trace("");			
 			$this->Trace("Hostname       : ".$strDomain);
-			$this->Trace("Expected Status: ".$strExpectedStatus);
+			$this->Trace("Expected status: ".$strExpectedStatus);
 			$strStatus = ArrayGetValue(GetDomainStatusArray(),GetDomainStatus($strDomain,false));
 			$this->Trace("GetDomainStatus: ".$strStatus);
 
@@ -295,7 +296,7 @@
 			}
 			else
 			{
-				$this->Trace("Checking Disk Space");
+				$this->Trace("Checking disk space");
 				$nDiskFreePercent = $webservice->GetResultValue("DISK_FREE_PERCENT");
 				if ($nDiskFreePercent < 10)
 				{
@@ -303,7 +304,7 @@
 					$bResult = false;					
 				}
 	
-				$this->Trace("Checking Average Load");
+				$this->Trace("Checking average load");
 				$fAvgLoad15 = $webservice->GetResultValue("LOAD_AVERAGE_15MINUTES");
 				if ($fAvgLoad15 > 10)  
 				{
@@ -311,7 +312,7 @@
 					$bResult = false;					
 				}
 				
-				$this->Trace("Checking Mail Log Files");
+				$this->Trace("Checking mail.warn file");
 				$fLogMailWarnFileSize = $webservice->GetResultValue("MAIL_MAILWARN_FILESIZE");
 				if ($fLogMailWarnFileSize > LOG_MAILWARN_FILESIZE_THRESHOLD)  
 				{
@@ -320,7 +321,7 @@
 				}
 				
 				
-				$this->Trace("Checking Mail Queue");
+				$this->Trace("Checking mail queue");
 				$nMailQueueSize = $webservice->GetResultValue("MAIL_QUEUE_SIZE");
 				if ($nMailQueueSize > 100)
 				{
@@ -329,13 +330,26 @@
 				}
 
 
-				$this->Trace("Checking Core Dump Files");
+				$this->Trace("Checking core dump files");
 				$nCoreDumpFiles = $webservice->GetResultValue("CORE_DUMP_FILE_COUNT");
 				if ($nCoreDumpFiles > 0)
 				{
 					$this->Trace("FAILED: Number of core dump files on the server: $nCoreDumpFiles");
 					$bResult = false;										
 				}
+
+
+				$this->Trace("Checking Plesk's panel.log file");
+				$fLogPanelLogFileSize = $webservice->GetResultValue("PLESK_PANELLOG_FILESIZE");
+				if ($fLogPanelLogFileSize > LOG_PANEL_FILESIZE_THRESHOLD)  
+				{
+					$this->Trace('FAILED: panel.log file size is '.$fLogPanelLogFileSize.'. This may indicate problems with Plesk configuration or Lets Encrypt SSL certificate renewals.'); 
+					$bResult = false;										
+				}
+
+
+
+
 			}
 
 
@@ -485,7 +499,7 @@
 
 			if ($bCheckReverseLookup == true)
 			{
-				$this->Trace("Checking Reverse Lookup");
+				$this->Trace("Checking reverse lookup");
 				
 				$arrayURL = ParseURL($strURL);
 				$strHostname = ArrayGetValue($arrayURL,"HOST");
@@ -510,7 +524,7 @@
 				$this->SetResult(false);
 				$this->Trace("TESTCASE FAILED");
 			}
-		}
+		} 
 		
 		
 		
@@ -584,7 +598,7 @@
 			$arrayHeaders = array(),
 			$strMode = "get")
 		{
-			return $this->TestCase_CheckURL(
+			$strResponse = $this->TestCase_CheckURL(
 				$strURL,
 				$arrayExpectedPatternWhitelist,
 				$arrayExpectedPatternBlacklist,
@@ -596,8 +610,7 @@
 				$nTimeoutSeconds,
 				false,
 				false,
-				21);
-			
+				14);
 		}
 
 		
@@ -702,6 +715,62 @@
 			}
 		}		
 		
+		
+		function TestCase_CheckSSL(
+			$strHost,
+			$nSSLCertValidityThresholdDays = 14)
+		{			
+			$this->Trace('Test SSL certificates: '.$strHost);
+	
+			$bResult = true;
+			
+			if ($nSSLCertValidityThresholdDays < 1)
+			{
+				$nSSLCertValidityThresholdDays = 1;
+			}
+
+			if (IsValidURL($strHost))
+			{				
+				$arrayURL = ParseURL($strHost);
+				$strHost = ArrayGetValue($arrayURL,'HOST');
+			}
+			$arrayCerts = GetSSLCertificatesFromHost($strHost);
+			$arrayCert = ArrayGetValue($arrayCerts,0);
+			if (!is_array($arrayCert))
+			{
+				$this->Trace('Could not retrieve SSL certificate.');	
+				$bResult = false;
+			}
+			else
+			{
+				$timeValidTo = intval(ArrayGetValue($arrayCert,'validTo_time_t'));
+				$strDateTimeValidTo = RenderDateTime($timeValidTo);
+				$nSecondsRemainingThreshold = $nSSLCertValidityThresholdDays * 24 * 60 * 60;
+				if ($timeValidTo < time() + $nSecondsRemainingThreshold)
+				{
+					if ($timeValidTo < time())
+					{
+						$this->Trace('SSL certificate expired as of '.$strDateTimeValidTo.'!');	
+					}
+					else
+					{
+						$this->Trace('SSL certificate will expire as of '.$strDateTimeValidTo.'!');									
+					}
+					$bResult = false;
+				}
+				else
+				{
+					$this->Trace('SSL certificate is OK.');	
+				}
+			}
+			
+			if ($bResult != true)
+			{
+				$this->SetResult(false);
+				$this->Trace('TESTCASE FAILED');
+			}
+		}
+
 		
 		
 

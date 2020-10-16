@@ -194,7 +194,6 @@
 				// create link wrapper
 				if ($strLink != "")
 				{
-					$this->IncludeElement("link");
 					$link = new CLinkElement(
 						$this->GetWebsite(),
 						$this->GetLayoutDef("LAYOUT_TAGCLOUD_LINK_STYLE"));

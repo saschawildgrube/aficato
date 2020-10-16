@@ -43,20 +43,20 @@
 			$arrayParams[$strSortOptionParam] = $strSortOption;
 			$arrayParams[$strSortOrderParam] = "asc";
 			$strURL = $this->GetWebsite()->MakeURL($arrayParams);
-			$strASC = $this->m_linkicon->RenderLinkIcon($strURL,"sortasc",$strToolTipAsc);
+			$strASC = $this->m_linkicon->RenderLinkIcon($strURL,"chevron-down",$strToolTipAsc);
 
 			// ASC ACTIVE
-			$strASC_ACTIVE = $this->m_icon->RenderIcon("sortasc-active",$strToolTipAsc);
+			$strASC_ACTIVE = $this->m_icon->RenderIcon("chevron-circle-down",$strToolTipAsc);
 			
 			// DESC
 			$arrayParams = array();
 			$arrayParams[$strSortOptionParam] = $strSortOption;
 			$arrayParams[$strSortOrderParam] = "desc";
 			$strURL = $this->GetWebsite()->MakeURL($arrayParams);
-			$strDESC = $this->m_linkicon->RenderLinkIcon($strURL,"sortdesc",$strToolTipDesc);
+			$strDESC = $this->m_linkicon->RenderLinkIcon($strURL,"chevron-up",$strToolTipDesc);
 
 			// DESC ACTIVE
-			$strDESC_ACTIVE = $this->m_icon->RenderIcon("sortdesc-active",$strToolTipDesc);
+			$strDESC_ACTIVE = $this->m_icon->RenderIcon("chevron-circle-up",$strToolTipDesc);
 
 		
 			

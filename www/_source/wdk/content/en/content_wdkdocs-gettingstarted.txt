@@ -1,0 +1,27 @@
+=Getting Started=
+This articles makes you familiar with the most important features and ideas in {WDK}.
+
+
+After [[wdkdocs-introduction-installation|installing]] your first application you can directly try it and see how it works. But you can also go through this article in a dry run.
+==Adding a static page==
+Adding a new static page to your application is very simple.
+
+
+Each page (in {WDK} terms a content) is represented by a file and identified ba a content ID. E.g.:
+<pre>/content/en/content_mynewpage.htm</pre>
+Usually content files are language specific. But you can also add content files that are not language specific. This is useful if they do not contain any localized text on their own. E.g.:
+<pre>/content/content_mynewpage.htm</pre>
+Now there could be two files representing the same content. If there is a file matching the current language, it will be preferred over the language independent file.
+
+
+Content pages are navigated using the content parameter in the URL:
+<pre>?content=mynewpage</pre>
+Now you want users to find this page. The obvious option is to add the new content to the default navigation tree in the file:
+<pre>/navigation/navigation_default_int.txt</pre>
+Just add the following line:
+<pre>0;mynewpage;This is my new page;</pre>
+The new content is now available and visible to users.
+==Using WIKI syntax==
+If you want to use wiki syntax in your content files you can do so. However in that case content files must use the ".txt" extention instead of ".htm".
+E.g.:
+<pre>/content/en/content_mynewpage.txt</pre>

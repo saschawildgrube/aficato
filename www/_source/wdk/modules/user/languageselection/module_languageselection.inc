@@ -33,7 +33,6 @@
 			$arrayLanguages = $this->GetWebsite()->GetConfig("languages");
 			$arrayLanguageLinks = array();
 			
-			$this->IncludeElement("linkicon");
 			$linkicon = new CLinkIconElement($this->GetWebsite(),"default");
 			$strToolBar = "";
 			
@@ -66,7 +65,6 @@
 			$arrayLanguages = $this->GetWebsite()->GetConfig("languages");
 			$arrayLanguageLinks = array();
 			
-			$this->IncludeElement("link");
 			$link = new CLinkElement($this->GetWebsite(),"default");
 			
 			foreach ($arrayLanguages as $strLanguage)
@@ -89,7 +87,6 @@
 				
 			}
 			
-			$this->IncludeElement("list");
 			$this->IncludeElement("text");
 			
 			$list = new CListElement($this->GetWebsite(),"default");			

@@ -12,13 +12,13 @@
 			CWebSite &$website,
 			$strID)
 		{
-			if (!is_subclass_of($website,"CWebsite"))
+			if (!is_subclass_of($website,'CWebsite'))
 			{
-				FatalError("CWebsiteSatellite \"$strID\" has been initialized with an invalid website object.");
+				FatalError('CWebsiteSatellite "'.$strID.'" has been initialized with an invalid website object.');
 			}
 			$this->m_website = $website;
 			$this->m_strID = $strID;
-			$this->m_strResPrefix = "";
+			$this->m_strResPrefix = '';
 			$this->m_arrayOutputItems = array();
 		}
 		
@@ -159,7 +159,13 @@
 			$this->GetWebsite()->SetVar($strVar,$strValue);
 		}
 		
-		function LoadString($strID,$strLanguage="")
+		
+		function LoadStringResources($strID,$strLanguage = '')
+		{
+			return $this->GetWebsite()->LoadStringResources($strID,$strLanguage);
+		}
+		
+		function LoadString($strID,$strLanguage = '')
 		{
 			return $this->GetWebsite()->LoadString($strID,$strLanguage);
 		}
@@ -200,13 +206,13 @@
 			return $this->GetWebsite()->SystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
 		}
 		
-		function MakeURL($arrayParams)
+		function MakeURL($arrayParams,$bEncoded=true)
 		{
-			return $this->GetWebsite()->MakeURL($arrayParams);
+			return $this->GetWebsite()->MakeURL($arrayParams, $bEncoded);
 		}
 		
 		
-		function AddJavaScript($strTitle,$strID = "")
+		function AddJavaScript($strTitle,$strID='')
 		{
 			$this->GetWebsite()->AddJavaScript($strTitle,$strID); 
 		}
@@ -246,6 +252,30 @@
 			$this->GetWebsite()->AddStyleSheetSourceCode($strTitle,$strSourceCode);
 		}
 
+		function RenderDate($time) 
+		{
+			return $this->GetWebsite()->RenderDate($time);
+		}
+
+		function RenderTime($time)
+		{
+			return $this->GetWebsite()->RenderTime($time);
+		}
+		
+		function RenderDateTime($time)
+		{
+			return $this->GetWebsite()->RenderDateTime($time);
+		}
+		
+		function RenderNumber($fValue,$nPrecision=0,$strMetric='',$bUseSeparator = true)
+		{
+			return $this->GetWebsite()->RenderNumber($fValue,$nPrecision,$strMetric,$bUseSeparator);
+		}
+
+		function RenderCurrency($fValue,$strCurrencyID)
+		{
+			return $this->GetWebsite()->RenderCurrency($fValue,$strCurrencyID);
+		}
 		
 	}
 

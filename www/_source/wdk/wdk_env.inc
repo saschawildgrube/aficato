@@ -2,71 +2,71 @@
 
 	function CheckEnvironment()
 	{
-		if (!function_exists("GetDocumentRootDir"))
+		if (!function_exists('GetDocumentRootDir'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetSourceDir"))
+		if (!function_exists('GetSourceDir'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetWDKDir"))
+		if (!function_exists('GetWDKDir'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetConfigDir"))
+		if (!function_exists('GetConfigDir'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetWebservicesDir"))
+		if (!function_exists('GetWebservicesDir'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetQualityDir"))
+		if (!function_exists('GetQualityDir'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetRootURL"))
+		if (!function_exists('GetRootURL'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetWebservicesURL"))
+		if (!function_exists('GetWebservicesURL'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetAdminEmail"))
+		if (!function_exists('GetAdminEmail'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetSystemEmail"))
+		if (!function_exists('GetSystemEmail'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetSystemEmailSenderName"))
+		if (!function_exists('GetSystemEmailSenderName'))
 		{
 			return false;	
 		}
-		if (!function_exists("GetMailDomain"))
+		if (!function_exists('GetMailDomain'))
 		{
 			return false;	
 		}		
-		if (!function_exists("GetStage"))
+		if (!function_exists('GetStage'))
 		{
 			return false;	
 		}		
-		if (!function_exists("GetDatabaseConfigID"))
+		if (!function_exists('GetEnvConfigID'))
 		{
 			return false;	
 		}		
-		if (!function_exists("GetOperationMode"))
+		if (!function_exists('GetOperationMode'))
 		{
 			return false;	
 		}		
-		if (!function_exists("GetGpgPath"))
+		if (!function_exists('GetGpgPath'))
 		{
 			return false;	
 		}		
-		if (!function_exists("GetTempDir"))
+		if (!function_exists('GetTempDir'))
 		{
 			return false;	
 		}		
@@ -75,27 +75,27 @@
 	
 	function CheckSafeMode($bSafeModeOffRequired = false)
 	{
-		$bValue = GetBoolValue(ini_get("safe_mode"));
+		$bValue = GetBoolValue(ini_get('safe_mode'));
 		if ($bSafeModeOffRequired == true && $bValue == true)
 		{
-			FatalError("Safe Mode is required to be off but not configured.");	
+			FatalError('Safe Mode is required to be off but not configured.');	
 		}
 		return $bValue;
 	}
 	
 	function GetMemoryLimit()
 	{
-		return GetIntegerValue(ini_get("memory_limit"));	
+		return GetIntegerValue(ini_get('memory_limit'));	
 	}
 
 	function GetMaxExecutionTime()
 	{
-		return GetIntegerValue(ini_get("max_execution_time"));	
+		return GetIntegerValue(ini_get('max_execution_time'));	
 	}
 	
 	function InitIsFeatureActive()
 	{
-		if (!function_exists("IsFeatureActive"))
+		if (!function_exists('IsFeatureActive'))
 		{
 			function IsFeatureActive($strFeature)
 			{

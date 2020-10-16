@@ -12,7 +12,7 @@
 
 	$config = new CConfig();
 	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetDatabaseConfigID());
+	$config->LoadConfig(GetEnvConfigID());
 
 	 
 	$arrayConfig = array();	

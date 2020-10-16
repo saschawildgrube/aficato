@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				"downloadlink",
+				'downloadlink',
 				$strStyleID,
 				false,
 				true);
@@ -20,17 +20,17 @@
 			
 			$arrayItems = array();
 			
-			if (strstr($strFileURL,"&amp;") == FALSE )
+			if (strstr($strFileURL,'&amp;') == false )
 			{
 				$strFileURL = HtmlEncode($strFileURL);
 			}
 			
-			$strIconURL = $this->GetWebsite()->GetLayoutImageURL("icon_".StringLowerCase($strFileType),"png");
-			$strIconURL = HtmlEncode($strIconURL);
+			$icon = new CIconElement($this->GetWebsite(),'default');
+			$strIcon = $icon->RenderIcon(GetIconIDByFileCategory(GetFileCategory('bogus.'.$strFileType)));
 			
-			$arrayItems["FILEURL"] = $strFileURL;
-			$arrayItems["ICONURL"] = $strIconURL;
-			$arrayItems["LINKTEXT"] = $strLinkText;
+			$arrayItems['URL'] = $strFileURL;
+			$arrayItems['ICON'] = $strIcon;
+			$arrayItems['TEXT'] = $strLinkText;
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

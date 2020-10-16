@@ -64,7 +64,7 @@ database tables manually or install new web services selectively.
 The install script can only help when starting from scratch - i.e. with
 an empty database.
 
-The configuration setting TABLENAMEPREFIX in the file _source/database.cfg may
+The configuration setting DATABASE_TABLENAMEPREFIX in the file _source/env.cfg may
 also come in handy. When a table name prefix is configured, all table names
 used in sql queries are prefixed so you can have multiple versions of all
 tables in one logical database.

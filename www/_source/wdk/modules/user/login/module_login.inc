@@ -48,7 +48,6 @@
 			$arrayParams["content"] = $this->m_strContentLogin;
 			$strLogoutURL = $this->GetWebsite()->MakeURL($arrayParams);
 			
-			$this->IncludeElement("link");
 			$link = new CLinkElement($this->GetWebsite(),"default");
 			$this->SetOutputItem("STATUS_LOGINLINK",$link->RenderLink($strLogoutURL,"?TID_LOGIN_LINK_LOGIN?"));
 

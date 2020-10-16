@@ -2,7 +2,7 @@
 
 	function IsValidLayoutID($strLayoutID)
 	{
-		if ($strLayoutID == "")
+		if ($strLayoutID == '')
 		{
 			return false;
 		}
@@ -21,7 +21,7 @@
 			CWebSite $website,
 			$strLayoutID)
 		{
-			parent::__construct($website, "Layout ".$strLayoutID);
+			parent::__construct($website, 'Layout '.$strLayoutID);
 						
 			// Init values
 			$this->m_strLayoutID = $strLayoutID;

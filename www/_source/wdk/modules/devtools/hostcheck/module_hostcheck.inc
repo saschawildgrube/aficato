@@ -182,7 +182,6 @@
 			$arrayCollection = array();
 			$arrayTable = array();
 			
-			$this->IncludeElement("table");
 			$table = new CTableElement($this->GetWebsite(),"default");
 			
 			$this->IncludeElement("collection");

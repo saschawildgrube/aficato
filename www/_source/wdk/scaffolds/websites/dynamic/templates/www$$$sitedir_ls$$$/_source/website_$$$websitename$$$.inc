@@ -302,12 +302,6 @@
 			$this->m_moduleUserEmail = new CUserEmailModule($this,true,true,'verifymail',60*60);
 			$this->RegisterModule($this->m_moduleUserEmail);
 
-
-			// SSL ICON
-			$this->IncludeModule('security/ssl');
-			$moduleSSL = new CSSLModule($this,'ssl');
-			$this->SetOutputItem('MODULE_SSL_ICON',$moduleSSL->RenderModule('icon'));
-
 			return $bResult;
 		}
 		

@@ -13,9 +13,77 @@
 			console.log(variant);
 		}
 	}
-	function Error(variant)
+	function TraceError(variant)
 	{
 		console.error(variant);
+	}
+	
+	function GetValue(vObject, vKey1, vKey2, vKey3, vKey4, vKey5, vKey6)
+	{
+		if (vObject == undefined)
+		{
+			return null;
+		}
+		if (vKey1 == undefined)
+		{
+			return null;
+		}
+		if (vKey2 == undefined)
+		{
+			if (vObject[vKey1] == undefined)
+			{
+				return null;
+			}
+			return vObject[vKey1];
+		}
+		return GetValue(vObject[vKey1],vKey2,vKey3,vKey4,vKey5,vKey6);
+	}
+	
+	function RenderValue(vValue, nLevel)
+	{
+		nLevel = GetIntegerValue(nLevel);
+		if (nLevel > 10)
+		{
+			return 'level too high';
+		}
+		var strLevel = '___';
+		strLevel = strLevel.repeat(nLevel);
+		
+		var bIsObject = vValue instanceof Object;
+		var strTypeOf = typeof vValue;
+	
+		if (vValue == undefined)
+		{
+			return 'undefined';
+		}
+		if (vValue == null)
+		{
+			return 'null';
+		}
+	
+		var strOutput = '';
+		
+		if (Array.isArray(vValue))
+		{
+			strOutput += '\n';
+			vValue.forEach( function(vElement,nKey)
+			{
+				strOutput += strLevel+'['+nKey+']: '+RenderValue(vElement,nLevel+1)+'\n';
+			});
+		}
+		else if (bIsObject || (strTypeOf == 'object'))
+		{
+			strOutput += '\n';
+			Object.keys(vValue).forEach( function(strKey)
+			{
+				strOutput += strLevel+'["'+strKey+'"]: '+RenderValue(vValue[strKey],nLevel+1)+'\n';
+			});
+		}
+		else
+		{
+			strOutput += ''+vValue.toString();
+		}
+		return strOutput;
 	}
 	
 	function GetStringValue(value)
@@ -56,6 +124,27 @@
 		}
 		return 0;	
 	}
+
+	function GetIntegerValue(value)
+	{
+		return parseInt(GetNumberValue(value));	
+	}
+
+	function HttpRequest(strURL)
+	{
+		var strResponse = '';
+		function Listener()
+		{
+			strResponse = this.responseText;
+		}
+		var xmlhttprequest = new XMLHttpRequest();
+		xmlhttprequest.addEventListener("load", Listener);
+		xmlhttprequest.open("GET", strURL, false);
+		xmlhttprequest.send();
+		return strResponse;
+	}
+
+
 
 	function SetCookie(strName, strValue, nExpiryDays)
 	{
@@ -121,17 +210,23 @@
 	 	while (new Date() < nMilliseconds) {}
 	}
 	
+	function GetRandomInteger(nMax = 1)
+	{
+		return Math.floor(Math.random() * (nMax+1));
+	}
+
 	function GetRandomToken(nLength)
 	{
 		Trace('GetRandomToken('+nLength+')');
-		var strToken = "";
+		var strToken = '';
 		for (var nCount = 0; nCount < nLength; nCount++)
 		{
-			strToken += ""+Math.floor((Math.random() * 10));
+			strToken += GetStringValue(GetRandomInteger(9));
 		}
 		Trace('returns "'+strToken+'"');
 		return strToken;
 	}
+	
 	
 	function InitProgressIndicator()
 	{

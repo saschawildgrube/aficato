@@ -46,14 +46,14 @@
 	{
 		if (is_array($value))
 		{
-			return "";	
+			return '';	
 		}
 		if ($value === false)
 		{
-			return "0";	
+			return '0';	
 		}
 
-		return "".$value;
+		return ''.$value;
 	}
 
 
@@ -179,8 +179,8 @@
 	
 	function RenderHex($strRaw)
 	{
-		$strHex = "";
-		$nLength = strlen($strRaw);
+		$strHex = '';
+		$nLength = strlen(GetStringValue($strRaw));
     $i = 0;
 		for ($i = 0; $i < $nLength; $i++)
     {

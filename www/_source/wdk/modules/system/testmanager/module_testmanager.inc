@@ -166,7 +166,7 @@
 				$strLink = $this->MakeURL($arrayParams,$arrayParams);
 				$this->AddTool(
 					$strLink,
-					"execute",
+					"fast-forward",
 					$this->LoadStringEntity("TEST","TOOL","TESTFAILED"));			
 					
 				
@@ -176,7 +176,7 @@
 				$strLink = $this->MakeURL($arrayParams,$arrayParams);
 				$this->AddTool(
 					$strLink,
-					"execute",
+					"forward",
 					$this->LoadStringEntity("TEST","TOOL","TESTALL"));					
 	
 				$arrayParams = array();
@@ -185,7 +185,7 @@
 				$strLink = $this->MakeURL($arrayParams,$arrayParams);
 				$this->AddTool(
 					$strLink,
-					"execute",
+					"forward",
 					$this->LoadStringEntity("TEST","TOOL","TESTLOCAL"));					
 			}
 
@@ -198,7 +198,7 @@
 				$strLink = $this->GetWebsite()->MakeURL($arrayParams);
 				$this->AddTool(
 					$strLink,
-					"reload",
+					"execute",
 					$this->LoadStringEntity("TEST","TOOL","TEST"));
 			} 
 
@@ -1055,7 +1055,7 @@
 				// Tool Icons
 				$strTasks = "";
 				$strTasks .= $linkicon->RenderLinkIcon($strLinkTestDetails,"view",$strTidToolView);
-				$strTasks .= $linkicon->RenderLinkIcon($strLinkTest,"reload",$strTidToolTest);
+				$strTasks .= $linkicon->RenderLinkIcon($strLinkTest,"execute",$strTidToolTest);
 								
 				$item["TASKS"] = $strTasks;
 		

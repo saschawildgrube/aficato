@@ -32,8 +32,7 @@
 			}
 
 			$arrayToolbarConfig = array();
-			$arrayToolbarConfig["help"][] = "help";
-			$arrayToolbarConfig["help"][] = "selectcategory";
+			$arrayToolbarConfig["help"] = array("selectcategory");
 			$arrayToolbarConfig["selectcategory"] = array("help");
 			$arrayToolbarConfig["selectscaffold"] = array("help","selectcategory");
 			$arrayToolbarConfig["configure"] = array("help","selectcategory","selectscaffold");
@@ -204,8 +203,7 @@
 				return;	
 			}
 			
-			$this->IncludeElement("toolbar");
-			
+		
 			$toolbarDef = new CToolbarDefinition();
 
 			if ($this->IsToolVisible("help"))

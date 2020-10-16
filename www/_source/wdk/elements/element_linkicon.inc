@@ -11,35 +11,33 @@
 			$this->m_icon = null;			
 			parent::__construct(
 				$website,
-				"linkicon",
+				'linkicon',
 				$strStyleID,
 				false,
 				true);
 		}
 		
-		function RenderLinkIcon($strURL, $strIconID, $strToolTip = "", $bExternal = false)
+		function RenderLinkIcon($strURL, $strIconID, $strToolTip = '', $bExternal = false)
 		{
 			$strOutput = $this->GetLayoutHTML(); 
 			
 			$arrayItems = array();
 			
-			if (strstr($strURL,"&amp;") == FALSE )
+			if (strstr($strURL,'&amp;') == false)
 			{
 				$strURL = HtmlEncode($strURL);
 			}
 			
-			if ($this->m_icon==null)
+			if ($this->m_icon == null)
 			{
-				$this->GetWebsite()->IncludeElement("icon");
-				$this->m_icon = new CIconElement($this->GetWebsite(),"default");  
+				$this->GetWebsite()->IncludeElement('icon');
+				$this->m_icon = new CIconElement($this->GetWebsite(),'default');  
 			}
-			$arrayItems["ICON"] = $this->m_icon->RenderIcon($strIconID,$strToolTip);
+			$arrayItems['ICON'] = $this->m_icon->RenderIcon($strIconID);
 			
-			$strToolTip = HtmlEncode($strToolTip);
-			
-			$arrayItems["URL"] = $strURL;
-			$arrayItems["TOOLTIP"] = $strToolTip;
-			$arrayItems["EXTERNAL"] = ($bExternal)?(' target="_blank"'):('');
+			$arrayItems['URL'] = $strURL;
+			$arrayItems['TOOLTIP'] = HtmlEncode($strToolTip);
+			$arrayItems['EXTERNAL'] = ($bExternal)?(' target="_blank"'):('');
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

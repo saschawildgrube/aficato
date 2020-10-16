@@ -37,7 +37,7 @@
 	require_once("wdk_bot.inc");
 	require_once("wdk_layout.inc");
 	require_once("wdk_navigationtree.inc");
-	require_once("wdk_devices.inc");
+
 	
 	abstract
 	class CWebSite extends CWebApplication
@@ -128,7 +128,7 @@
 		private $m_elementSourceCode;
 		private $m_elementYouTube;
 		private $m_elementGoogleMaps;
-		private $m_elementCountdown;
+		private $m_elementCountDown;
 		
 		private $m_arrayDynamicNavigationTrees;
 		
@@ -161,7 +161,7 @@
 			// Check Environment
 			if (CheckEnvironment() == false)
 			{
-				$this->Error("CheckEnvironment returned false. Check out env.inv if all environemnt functions have been defined!");
+				$this->Error("CheckEnvironment returned false. Check out env.inc if all environemnt functions have been defined!");
 			}
 			
 			// Subsequent request detection
@@ -221,37 +221,15 @@
 				'payload19','title19','text19','linktext19','linkurl19','imageurl19','external19',				
 				'payload20','title20','text20','linktext20','linkurl20','imageurl20','external20',				
 				'style'));
-			$this->RegisterGenericOutputItem('CAROUSEL',array(
-				'payload1','title1','text1','linktext1','linkurl1','imageurl1','external1',
-				'payload2','title2','text2','linktext2','linkurl2','imageurl2','external2',
-				'payload3','title3','text3','linktext3','linkurl3','imageurl3','external3',
-				'payload4','title4','text4','linktext4','linkurl4','imageurl4','external4',
-				'payload5','title5','text5','linktext5','linkurl5','imageurl5','external5',
-				'payload6','title6','text6','linktext6','linkurl6','imageurl6','external6',
-				'payload7','title7','text7','linktext7','linkurl7','imageurl7','external7',
-				'payload8','title8','text8','linktext8','linkurl8','imageurl8','external8',
-				'payload9','title9','text9','linktext9','linkurl9','imageurl9','external9',
-				'payload10','title10','text10','linktext10','linkurl10','imageurl10','external10',
-				'payload11','title11','text11','linktext11','linkurl11','imageurl11','external11',
-				'payload12','title12','text12','linktext12','linkurl12','imageurl12','external12',
-				'payload13','title13','text13','linktext13','linkurl13','imageurl13','external13',				
-				'payload14','title14','text14','linktext14','linkurl14','imageurl14','external14',				
-				'payload15','title15','text15','linktext15','linkurl15','imageurl15','external15',				
-				'payload16','title16','text16','linktext16','linkurl16','imageurl16','external16',				
-				'payload17','title17','text17','linktext17','linkurl17','imageurl17','external17',				
-				'payload18','title18','text18','linktext18','linkurl18','imageurl18','external18',				
-				'payload19','title19','text19','linktext19','linkurl19','imageurl19','external19',				
-				'payload20','title20','text20','linktext20','linkurl20','imageurl20','external20',				
-				'style'));
 			$this->RegisterGenericOutputItem('GOOGLEMAPS',array('location'));
 			$this->RegisterGenericOutputItem('COUNTDOWN',array('datetime','timezone'));
 			
 
 			// Init Timezone Default
-			$this->SetTimeZone("UTC");
+			$this->SetTimeZone('UTC');
 
 			// Initialize Meta
-			if ($this->GetMeta("version") == "")
+			if ($this->GetMeta('version') == '')
 			{
 				$this->Error("Meta: No version specified.");
 			}
@@ -292,7 +270,7 @@
 
 			// Set Tracing by Parameter
 			$this->SetTraceActive(false);
-			if (intval($this->GetParam("trace")) > 0)
+			if (GetBoolValue($this->GetParam('trace')) == true)
 			{
 				$this->SetTraceActive(true);
 				$this->Trace("Trace activated by parameter.");
@@ -499,17 +477,23 @@
 				}
 			}
 
-		
-			// Set Tracing by Session
-			if (intval(ArrayGetValue($this->m_arraySession,"trace")) > 0)
-			{
-				$this->SetTraceActive(true);
-				$this->Trace("Trace activated by session.");
-			}
 
+			$bActivateTrace = false;
+			
+			
+		
+			// Set Tracing by Session (if it's not deactivated by parameter)
+			if (GetBoolValue(ArrayGetValue($this->m_arraySession,'trace')) == true)
+			{
+				if ((!(ArrayKeyExists($this->m_arrayParams,'trace') == true) && (GetBoolValue(ArrayGetValue($this->m_arrayParams,'trace')) == false)))
+				{
+					$this->SetTraceActive(true);
+					$this->Trace("Trace activated by session.");
+				}
+			}
+			
 			// Initialize Variables - Second time
 			$this->m_arrayVars = ArrayMerge($this->m_arraySession,$this->m_arrayParams);
-			
 			
 			
 			// CSRF Protection
@@ -797,14 +781,15 @@
 			$this->SetOutputItem("WDK_COPYRIGHT_PERIOD",WDK_COPYRIGHT_SINCE."-".$strCurrentYear);
 			$this->SetOutputItem("WDK_DOCS_URL","http://www.websitedevkit.com/");
 			$this->SetOutputItem("WDK_SCAFFOLDER_URL","http://www.websitedevkit.com/scaffolder/");
-			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_PHP_VERSION","7.2.17");
-			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_UBUNTU_VERSION","18.04");
-			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_APACHE_VERSION","2.4.29");
-			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_MARIADB_VERSION","10.1.38");
+			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_PHP_VERSION",'7.2.24');
+			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_UBUNTU_VERSION",'18.04');
+			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_APACHE_VERSION",'2.4.29');
+			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_MARIADB_VERSION','10.1.38');
 			
 		
 			// Include standard elements
 			// The ''.' is to defuse the deprecation test
+			$this->IncludeElement(''.'icon');
 			$this->IncludeElement(''.'link');
 			$this->IncludeElement(''.'linkicon');
 			$this->IncludeElement(''.'list');
@@ -2424,14 +2409,14 @@
 		function AddStyleSheetURL($strTitle,$strURL)
 		{
 			$this->m_arrayStyleSheets[$strTitle] = array(
-				"url" => $strURL);	
+				'url' => $strURL);	
 		}
 
 		final
 		function AddStyleSheetSourceCode($strTitle,$strSourceCode)
 		{
 			$this->m_arrayStyleSheets[$strTitle] = array(
-				"sourcecode" => $strSourceCode);	
+				'sourcecode' => $strSourceCode);	
 		}
 
 
@@ -2464,7 +2449,7 @@
 		}
 		
 		final		
-		function LoadStringResources($strID,$strLanguage = "")
+		function LoadStringResources($strID,$strLanguage = '')
 		{
 			if ($strLanguage == "")
 			{
@@ -2915,7 +2900,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		}
 		
 		final
-		function PrepareHeader()
+		function RenderHeader($strInput)
 		{
 			$strHeader = "<head>\n";
 			$strHeader .= "\t<title>".$this->GetWebsiteTitle()."</title>\n";
@@ -2956,17 +2941,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strHeader .= "\t".$strAdditionalHeader."\n";
 			}
 			
-			$strHeader = $this->PrepareHeaderStyleSheets($strHeader);
-       
 			$strHeader .= "</head>\n\n";
-			$this->SetOutputItem('HEADER',$strHeader);
+			
+			$strOutput = ReplaceTagsBraces($strInput,array('HEADER' => $strHeader));
+		
+			return $strOutput;
 		}
 		
 		final
-		function PrepareHeaderStyleSheets($strHeader)
+		function RenderHeaderStyleSheets($strInput)
 		{
-			// Add additional CSS files to be included
+			$strHeader = '';
 			
+			// Add additional CSS files to be included
 			foreach ($this->m_arrayStyleSheets as $strTitle => $arrayStyleSheet)
 			{
 				$strURL = ArrayGetValue($arrayStyleSheet,'url');
@@ -3052,7 +3039,9 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					}
 				}
 			}
-			return $strHeader;
+
+			$strOutput = ReplaceString($strInput,'</head>',$strHeader."\n</head>");
+			return $strOutput;
 		}
 		
 		
@@ -3371,10 +3360,9 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			case "ICON":
 				if ($this->m_elementIcon == null)
 				{
-					$this->IncludeElement("icon");
-					$this->m_elementIcon = new CIconElement($this,"default");	
+					$this->m_elementIcon = new CIconElement($this,'default');	
 				}
-				return $this->m_elementIcon->RenderIcon(ArrayGetValue($arrayAttributes,"id"),"");
+				return $this->m_elementIcon->RenderIcon(ArrayGetValue($arrayAttributes,'id'));
 				
 			case "IMAGEURL":
 				$strID = ArrayGetValue($arrayAttributes,"id");
@@ -3504,7 +3492,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				{
 					if ($this->m_elementLink == null)
 					{
-						$this->IncludeElement('link');
 						$this->m_elementLink = new CLinkElement($this,'default');	
 					}
 					return $this->m_elementLink->RenderLink(
@@ -3515,7 +3502,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				}
 				else
 				{
-					$this->IncludeElement('link');
 					$elementLink = new CLinkElement($this,$strStyle);	
 					return $elementLink->RenderLink(
 						$strURL,
@@ -3552,59 +3538,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				}
 				return $this->m_elementYouTube->RenderYouTube($strID);
 							
-			case "CAROUSEL":
-				$strStyle = ArrayGetValue($arrayAttributes,"style");
-				if ($strStyle == "")
-				{
-					$strStyle = "default";
-				}
-				
-				$this->IncludeElement("carousel");
-				$carousel = new CCarouselElement($this,$strStyle);
-				
-				$arraySlides = array();
-				for ($nIndex = 1; $nIndex <= 20; $nIndex++)
-				{
-					$arraySlide = array();
-					$strPayload = ArrayGetValue($arrayAttributes,"payload".$nIndex);
-					if ($strPayload != "")
-					{
-						$arraySlide["payload"] = $strPayload;
-					}
-					else
-					{
-						$strTitle = ArrayGetValue($arrayAttributes,"title".$nIndex);
-						$strText = ArrayGetValue($arrayAttributes,"text".$nIndex);
-						$strImageURL = ArrayGetValue($arrayAttributes,"imageurl".$nIndex);
-						$strLinkText = ArrayGetValue($arrayAttributes,"linktext".$nIndex);
-						if (($strTitle != "")
-							||($strText	!= "")
-							||($strImageURL != "")
-							||($strLinkText != ""))
-						{
-							$arraySlide["title"] = $strTitle;
-							$arraySlide["text"] = $strText;
-							$arraySlide["imageurl"] = $strImageURL;
-							$arraySlide["linktext"] = $strLinkText;
-							$arraySlide["linkurl"] = ArrayGetValue($arrayAttributes,"linkurl".$nIndex);;
-							$arraySlide["external"] = ArrayGetValue($arrayAttributes,"external".$nIndex);;
-						}
-					}
-					
-					
-					if (ArrayCount($arraySlide) > 0)
-					{
-						$arraySlides[] = $arraySlide;	
-					}
-					
-				}
-				
-				if (ArrayCount($arraySlides) > 0)
-				{
-					return $carousel->RenderCarousel($arraySlides);
-				}
-				return "";								
-
 
 			case "PORTFOLIO":
 				$strStyle = ArrayGetValue($arrayAttributes,"style");
@@ -3665,15 +3598,15 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				return $this->m_elementGoogleMaps->RenderGoogleMaps($strLocation);
 
 			case "COUNTDOWN":
-				if ($this->m_elementCountdown == null)
+				if ($this->m_elementCountDown == null) 
 				{
-					$this->IncludeElement("countdown");
-					$this->m_elementCountdown = new CCountdownElement($this,'default');	
+					$this->IncludeElement('countdown');
+					$this->m_elementCountDown = new CCountDownElement($this,'default');	
 				}
 				$strDateTime = ArrayGetValue($arrayAttributes,'datetime');
 				$strTimeZone = ArrayGetValue($arrayAttributes,'timezone');
 				$time = GetTime($strDateTime,$strTimeZone);
-				return $this->m_elementCountdown->RenderCountdown($time);
+				return $this->m_elementCountDown->RenderCountDown($time);   
 						
 			default:
 				$this->Error("CallbackRenderGenericOutputItem: No callback function handles item id: \"$strItem\"");
@@ -3840,6 +3773,8 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			{
 				$strOutput = ReplaceString($strOutput,"</body>",$strScriptHTML."\n\n</body>");
 			}
+			
+			$this->m_arrayJavaScripts = array();
 
 			return $strOutput;
 		}
@@ -3847,41 +3782,43 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final  
 		function RenderWebSite()
 		{
-			$this->Trace("RenderWebsite BEGIN");
+			$this->Trace('RenderWebsite BEGIN');
 			$this->ProfilingTrace();
 
-			$this->SetOutputItem("ROOTURL", $this->GetRootURL());
-			$this->SetOutputItem("ROOTPATH", $this->GetRootPath());
-			$this->SetOutputItem("SELFURL",$this->MakeSelfURL());
-			$this->SetOutputItem("INDEXURL",$this->MakeIndexURL());
+			// Initialize default placeholders
+			$this->SetOutputItem('ROOTURL', $this->GetRootURL());
+			$this->SetOutputItem('ROOTPATH', $this->GetRootPath());
+			$this->SetOutputItem('SELFURL',$this->MakeSelfURL());
+			$this->SetOutputItem('INDEXURL',$this->MakeIndexURL());
 
-			$this->SetOutputItem("CSSPATH",$this->GetRootURL() . "css/");
-			$this->SetOutputItem("IMAGEPATH",$this->GetImageRootURL());
-			$this->SetOutputItem("DOWNLOADPATH", $this->GetDownloadRootURL());
+			$this->SetOutputItem('CSSPATH',$this->GetRootURL() . 'css/');
+			$this->SetOutputItem('IMAGEPATH',$this->GetImageRootURL());
+			$this->SetOutputItem('DOWNLOADPATH', $this->GetDownloadRootURL());
 			
-			$this->SetOutputItem("LAYOUT",$this->GetLayout());
-			$this->SetOutputItem("LANGUAGE",StringLowerCase($this->GetLanguage()));
-			
+			$this->SetOutputItem('LAYOUT',$this->GetLayout());
+			$this->SetOutputItem('LANGUAGE',StringLowerCase($this->GetLanguage()));
+
+			// Render special pages			
 			$strOutput = $this->RenderSpecialPages();
-			if ($strOutput != "")
+			if ($strOutput != '')
 			{
 				return $strOutput;	
 			}
 			
 			$this->PrepareDocType();
-			
-			$this->Trace("Rendering content START");			
+
+			// Render Content
+			$this->Trace('Rendering content START');			
 			$this->CallbackPreContent();
 			$this->RenderContent();
 			$this->CallbackPostContent();
-			$this->Trace("Rendering content END");
+			$this->Trace('Rendering content END');
 			$this->ProfilingTrace();
 			
-			
-			$this->Trace("Load default string ressources START");			
-			$this->LoadStringResources("default");
-			// Default resource file has highest priority
-			$this->Trace("Load default string ressources END");
+			// Load default string resources
+			$this->Trace('Load default string ressources START');			
+			$this->LoadStringResources('default');
+			$this->Trace('Load default string ressources END');
 			$this->ProfilingTrace();
 
 			// Prepare Layout
@@ -3914,21 +3851,25 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$this->Trace("Loading framework file END");
 			$this->ProfilingTrace();
 			
+			// Render Navigation
 			$this->Trace("CallbackRenderNavigation START");
 			$this->CallbackRenderNavigation($strOutput);
 			$this->Trace("CallbackRenderNavigation END");
 			$this->ProfilingTrace();
 			
+			// Render Message Stack
 			$this->Trace("PrepareMessages START");
 			$this->PrepareMessages();
 			$this->Trace("PrepareMessages END");
 			$this->ProfilingTrace();
-			
-			$this->Trace("PrepareHeader START");
-			$this->PrepareHeader();
-			$this->Trace("PrepareHeader END");
-			$this->ProfilingTrace();
 
+			// Render Header
+			$this->Trace("RenderHeader START");
+			$strOutput = $this->RenderHeader($strOutput);
+			$this->Trace("RenderHeader END");
+			$this->ProfilingTrace();
+			
+			
 			$this->CheckInvalidTID();
 			$this->ProfilingTrace();
 			
@@ -3952,13 +3893,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$this->AddJavaScript('wdk-trace-activate');
 			}
 
-			$this->Trace("RenderJavaScripts START"); 
-			$strOutput = $this->RenderJavaScripts($strOutput);
-			$this->Trace("RenderJavaScripts END");
-			$this->ProfilingTrace();
-			
-			
-			
 			$this->Trace("Tag replacement START");
 			
 			$stopwatchTagReplacement = new CStopWatch();
@@ -3977,7 +3911,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			while ($nIteration > 0)
 			{
 				$this->Trace("Rendering: $nIteration iterations to go");
-				
+
 				// Replace output items tags
 				$this->ProfilingTrace();
 				$this->Trace("Rendering: ReplaceOutputItems()");
@@ -4014,6 +3948,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strOutput = $this->ReplaceGenericOutputItems($strOutput);
 				$stopwatchReplaceGenericOutputItems->Stop();
 				
+				$this->ProfilingTrace();
+				$this->Trace("Rendering: RenderJavaScripts()"); 
+				$strOutput = $this->RenderJavaScripts($strOutput);
+
+				
 				$nIteration--;
    	      
  	      if ($nIteration > 0)
@@ -4036,6 +3975,13 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$this->Trace("Tag replacement END");
 			$this->ProfilingTrace();
 			
+			// Render Style Sheets
+			$this->Trace("RenderHeaderStyleSheets START");
+			$strOutput = $this->RenderHeaderStyleSheets($strOutput);
+			$this->Trace("RenderHeaderStyleSheets END");
+			$this->ProfilingTrace();
+	
+			// Render Code
 			$this->Trace("RenderCode START");
 			$strOutput = $this->RenderCode($strOutput);
 			$this->Trace("RenderCode END");
@@ -4979,10 +4925,10 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function CallbackParseSEOURL($strSEOURL)
 		{
 			$strLanguage = $this->GetLanguage();
-			$this->Trace("SEOURL: $strSEOURL");
-			if ($strSEOURL != "")
+			$this->Trace('SEOURL: '.$strSEOURL);
+			if ($strSEOURL != '')
 			{
-				$arraySegments = StringExplode($strSEOURL,"/");
+				$arraySegments = StringExplode($strSEOURL,'/');
 				$this->Trace($arraySegments);
 				$nSegments = ArrayCount($arraySegments);
 				if ($nSegments == 1)
@@ -4990,14 +4936,14 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					$strSegment = $arraySegments[0];
 					if (ArrayValueExists($this->GetSupportedLanguages(),StringUpperCase($strSegment)))
 					{
-						$this->SetContent("index");
+						$this->SetContent('index');
 						$this->SetLanguage(StringUpperCase($strSegment));    
 					}
 					else
 					{
 						$this->SetContent(
 							$this->GetRoutingContext(
-								"content",
+								'content',
 								$arraySegments[0],
 								$strLanguage));
 					}
@@ -5008,7 +4954,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					$this->SetLanguage($strLanguage);  
 					$this->SetContent(
 						$this->GetRoutingContext(
-							"content",
+							'content',
 							$arraySegments[1],
 							$strLanguage));
 				}

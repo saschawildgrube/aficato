@@ -18,7 +18,8 @@
 			$strSeparator = ',',
 			$arrayCommentTokens = array(),
 			$strQuote = '"',
-			$strEscapedQuote = '""')
+			$strEscapedQuote = '""',
+			$bNewLineInQuotedValue = false)
 		{ 
 			$this->Trace("TestCase_CSV");
 	
@@ -34,7 +35,8 @@
 				$strSeparator,
 				$arrayCommentTokens,
 				$strQuote,
-				$strEscapedQuote);
+				$strEscapedQuote,
+				$bNewLineInQuotedValue);
 			
 			$this->Trace("Result:");
 			$this->Trace($arrayData);
@@ -89,7 +91,8 @@ more text;0.23;line two';
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 			$strRawData =
@@ -121,7 +124,8 @@ more text;0.23;line two';
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -154,7 +158,8 @@ more text;0.23;line two';
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 			$strRawData =
@@ -186,7 +191,8 @@ more text;0.23;line two';
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -216,7 +222,8 @@ more text;0.23;line two';
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -250,7 +257,8 @@ more text;0.23;line two';
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 $strRawData =
@@ -281,7 +289,77 @@ $strRawData =
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
+
+
+
+$strRawData =
+"COLUMN1;COLUMN2;COLUMN3
+text with a quote at the end\";23;line one
+more text;0.23;line two with a quote at the end\"";
+
+			$arrayExpectedResult = array(
+				array(
+					"COLUMN1",
+					"COLUMN2",
+					"COLUMN3"),
+				array(
+					"COLUMN1" => "text with a quote at the end\"",
+					"COLUMN2" => "23",
+					"COLUMN3" => "line one"),
+				array(
+					"COLUMN1" => 'more text',
+					"COLUMN2" => "0.23",
+					"COLUMN3" => "line two with a quote at the end\"")
+				);
+		
+			$this->TestCase_ParseCSV(
+				$arrayExpectedResult,
+				$strRawData,
+				true,
+				true,
+				';',
+				array('//'),
+				'"',
+				'""',
+				false);
+
+
+$strRawData =
+"COLUMN1;COLUMN2;COLUMN3
+\"some quoted text with a semi-colon; and a new\nline\";23;line one//a comment
+\"more text with inline comment // and \"\"quotes\"\"\";0.23;line two";
+
+			$arrayExpectedResult = array(
+				array(
+					"COLUMN1",
+					"COLUMN2",
+					"COLUMN3"),
+				array(
+					"COLUMN1" => "some quoted text with a semi-colon; and a new",
+					"COLUMN2" => "",
+					"COLUMN3" => ""),
+				array(
+					"COLUMN1" => "line\"",
+					"COLUMN2" => "23",
+					"COLUMN3" => "line one"),
+				array(
+					"COLUMN1" => 'more text with inline comment // and "quotes"',
+					"COLUMN2" => "0.23",
+					"COLUMN3" => "line two")
+				);
+		
+			$this->TestCase_ParseCSV(
+				$arrayExpectedResult,
+				$strRawData,
+				true,
+				true,
+				';',
+				array('//'),
+				'"',
+				'""',
+				false);
 
 
 
@@ -314,7 +392,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 
 $strRawData =
 "COLUMN1;COLUMN2;COLUMN3\n".
@@ -346,7 +425,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 $strRawData =
@@ -397,7 +477,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -440,7 +521,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -485,7 +567,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -515,7 +598,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 			$strRawData =
@@ -543,7 +627,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 				
 
 
@@ -569,7 +654,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 
 			$strRawData =
 'COLUMN1;COLUMN2;COLUMN3
@@ -591,7 +677,8 @@ $strRawData =
 				';',
 				array('#'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -619,7 +706,8 @@ a;b;c';
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -643,7 +731,8 @@ A2;B2;C2";
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 			$strRawData =
@@ -668,7 +757,8 @@ A2;B2;C2";
 				',',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -695,7 +785,8 @@ AAAä,UUUü,OOOö');
 				',',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -721,7 +812,8 @@ AAAä, "UUUü" ,OOOö');
 				',',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 			$strRawData = u(
@@ -746,7 +838,8 @@ AAAä, "UUUü" ,OOOö//test');
 				',',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 
 
@@ -772,7 +865,83 @@ AAAä, "UUU ""ü""" ,OOOö');
 				',',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
+
+
+
+$strRawData =
+"COLUMN1;COLUMN2;COLUMN3\n".
+"\"some quoted text with a semi-colon; and a new\nline\";23;line one\n".
+"\n".
+"\n".
+"\"even more quoted text with a semi-colon;\";24;line two (since line two lines are empty)";
+
+			$arrayExpectedResult = array(
+				array(
+					"COLUMN1",
+					"COLUMN2",
+					"COLUMN3"),
+				array(
+					"COLUMN1" => "some quoted text with a semi-colon; and a new",
+					"COLUMN2" => "",
+					"COLUMN3" => ""),
+				array(
+					"COLUMN1" => "line\"",
+					"COLUMN2" => "23",
+					"COLUMN3" => "line one"),
+				array(
+					"COLUMN1" => "even more quoted text with a semi-colon;",
+					"COLUMN2" => "24",
+					"COLUMN3" => "line two (since line two lines are empty)"), 
+				);
+		
+			$this->TestCase_ParseCSV(
+				$arrayExpectedResult,
+				$strRawData,
+				true,
+				true,
+				';',
+				array(),
+				'"',
+				null,
+				false);
+
+
+
+$strRawData =
+"COLUMN1;COLUMN2;COLUMN3\n".
+"\"some quoted text with a semi-colon; and a new\nline\";23;line one\n".
+"\n".
+"\n".
+"\"even more quoted text with a semi-colon;\";24;line two (since line two lines are empty)";
+
+			$arrayExpectedResult = array(
+				array(
+					"COLUMN1" => "some quoted text with a semi-colon; and a new",
+					"COLUMN2" => "",
+					"COLUMN3" => ""),
+				array(
+					"COLUMN1" => "line\"",
+					"COLUMN2" => "23",
+					"COLUMN3" => "line one"),
+				array(
+					"COLUMN1" => "even more quoted text with a semi-colon;",
+					"COLUMN2" => "24",
+					"COLUMN3" => "line two (since line two lines are empty)"), 
+				);
+		
+			$this->TestCase_ParseCSV(
+				$arrayExpectedResult,
+				$strRawData,
+				true,
+				false,
+				';',
+				array(),
+				'"',
+				null,
+				false);
+
 
 
 
@@ -786,7 +955,8 @@ AAAä, "UUU ""ü""" ,OOOö');
 				';',
 				array('//'),
 				'"',
-				'""');
+				'""',
+				true);
 
 				
 

@@ -1,5 +1,3 @@
-$this->IncludeElement("toolbar");
-
 $toolbarDef = new CToolbarDefinition();
 
 $toolbarDef->AddTool("http://www.example.com", "link", "Example.com");

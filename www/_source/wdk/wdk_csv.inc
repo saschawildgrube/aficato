@@ -34,9 +34,10 @@
 		$strSeparator = ',',
 		$arrayCommentTokens = array(),
 		$strQuote = '"',
-		$strEscapedQuote = '""')
+		$strEscapedQuote = '""',
+		$bNewLineInQuotedValue = false)
 	{
-		if (StringTrim($strCSV) == "")
+		if (StringTrim($strCSV) == '')
 		{
 			return array();	
 		}
@@ -45,10 +46,14 @@
 		
 		$strCSV = StringEncodeUTF8($strCSV);
 		$strCSV = ReplaceString($strCSV,"\r\n","\n"); 
-		$strCSV = ReplaceString($strCSV,"\r",""); 
+		$strCSV = ReplaceString($strCSV,"\r",''); 
 		$strSeparator = StringEncodeUTF8($strSeparator);
 		$strQuote = StringEncodeUTF8($strQuote);
 		$strEscapedQuote = StringEncodeUTF8($strEscapedQuote);
+		if (!is_array($arrayCommentTokens))
+		{
+			$arrayCommentTokens = array();
+		}
 		foreach ($arrayCommentTokens as &$strCommentToken)
 		{
 			$strCommentToken = StringEncodeUTF8($strCommentToken);
@@ -60,18 +65,83 @@
 		$nLengthSeparator = StringLength($strSeparator);
 		$nLengthQuote = StringLength($strQuote);
 		$nLengthEscapedQuote = StringLength($strEscapedQuote);
+		$nLengthNewLine = StringLength($strNewLine);
+
+
+		if (	$bHeaderRow == true
+			&&	$strEscapedQuote == ''
+			&&	$nLengthQuote <= 1
+			&&	ArrayCount($arrayCommentTokens) == 0
+			&&	$bNewLineInQuotedValue == false)
+		{
+			// a header row exists, single character quotes, no comments, no newlines in quoted text, no escaped quotes?
+			// Then we can use the built-in php function	
+			
+			$arrayCSV = array();
+			$arrayRows = StringExplode($strCSV,$strNewLine);
+			foreach ($arrayRows as $strRow)
+			{
+				$strRow = StringTrim($strRow);
+				if ($strRow != '')
+				{
+					$arrayCSV[] = str_getcsv($strRow,$strSeparator,$strQuote);
+				}
+			}
+			if (ArrayCount($arrayCSV) > 1)
+			{
+				$arrayRow1 = $arrayCSV[0];
+				$nColumns = ArrayCount($arrayRow1);
+				$bFirst = true;
+				foreach ($arrayCSV as &$arrayRow)
+				{
+					if ($bFirst == true)
+					{
+						$bFirst = false;
+						continue;
+					}
+					while (ArrayCount($arrayRow) < $nColumns)
+					{
+						$arrayRow[] = '';
+					}
+					$arrayRow = array_combine($arrayRow1, $arrayRow);
+				}
+/*
+		    array_walk($arrayCSV, function(&$a) use ($arrayCSV)
+		    {
+		      $a = array_combine($arrayCSV[0], $a);
+		    });
+*/		    
+		    if ($IncludeHeadersInResult == false)
+		    {
+		    	array_shift($arrayCSV); // remove column header
+		    }
+		  }
+			return $arrayCSV;
+		}
+
+
+
+
+
+
+
+
 		
 		$arrayRows = array();
 		$arrayValues = array();
 		$nPos = 0;
 		$nStartPos = 0;
 		$nPreviousState = CSV_INITIAL;
-		$strNextValue = "";
-		$strNextToken = "";
+		$strNextValue = '';
+		$strNextToken = '';
 		
 		$arrayNeedlesInitial = ArrayAppend(array($strSeparator,$strNewLine,$strQuote),$arrayCommentTokens);
 		$arrayNeedlesUnquotedValue = ArrayAppend(array($strSeparator,$strNewLine),$arrayCommentTokens);
 		$arrayNeedlesQuotedValue =  array($strQuote,$strEscapedQuote);
+		if ($bNewLineInQuotedValue == false)
+		{
+			$arrayNeedlesQuotedValue[] = $strNewLine;
+		}
 		
 		for ($nPos = 0; $nPos < $nLength; $nPos++)
 		{
@@ -91,14 +161,14 @@
 			case CSV_LEADINGWHITESPACE:
 			case CSV_SEPARATOR:
 
-				if ($cChar == " "
+				if ($cChar == ' '
 					||$cChar == "\t")
 				{
 					$nPreviousState = CSV_LEADINGWHITESPACE;
 					continue;
 				}
 
-				$strNextToken = "";
+				$strNextToken = '';
 				$nPosNextToken = FindStringMultiple(
 					$strCSV,
 					$arrayNeedlesInitial,
@@ -141,7 +211,7 @@
 					}
 					$strNextValue = StringSection($strCSV,$nPos,$nPosNextToken-$nPos);
 					$arrayValues[] = StringTrim($strNextValue);
-					$strNextValue = "";
+					$strNextValue = '';
 					$arrayRows[] = $arrayValues;
 					$arrayValues = array();
 					$nPreviousState = CSV_NEWLINE;
@@ -158,6 +228,7 @@
 						continue;
 					}
 					$strNextValue = StringSection($strCSV,$nPos,$nPosNextToken-$nPos);
+					$nPos += $nPosNextToken - $nPos - 1;
 					$nPreviousState = CSV_UNQUOTEDVALUE;
 					continue;
 				}
@@ -188,7 +259,7 @@
 			
 			case CSV_UNQUOTEDVALUE:
 
-				$strNextToken = "";
+				$strNextToken = '';
 				
 				$nPosNextToken = FindStringMultiple(
 					$strCSV,
@@ -205,7 +276,7 @@
 					{
 						$nPos = $nPosNextToken;
 						$arrayValues[] = StringTrim($strNextValue);
-						$strNextValue = "";
+						$strNextValue = '';
 						$nPreviousState = CSV_SEPARATOR;
 						continue;
 					}	
@@ -221,7 +292,7 @@
 					}
 
 					$arrayValues[] = StringTrim($strNextValue);
-					$strNextValue = "";
+					$strNextValue = '';
 					$nPreviousState = CSV_COMMENT;
 					continue;
 					
@@ -294,11 +365,26 @@
 				if ($nPosQuote == $nPos)
 				{
 					$arrayValues[] = StringTrim($strNextValue);
-					$strNextValue = "";
+					$strNextValue = '';
 
 					$nPos += $nLengthQuote - 1;
 					$nPreviousState = CSV_QUOTEEND;
 					continue;
+				}
+				
+				if ($bNewLineInQuotedValue == false)
+				{
+					$nPosNewLine = FindString($strCSV, $strNewLine, false, $nPos);
+					if ($nPosNewLine == $nPos)
+					{
+						$arrayValues[] = StringTrim($strNextValue);
+						$strNextValue = '';					
+						$arrayRows[] = $arrayValues;
+						$arrayValues = array();
+						$nPos += $nLengthNewLine - 1;
+						$nPreviousState = CSV_NEWLINE;
+						continue;
+					}
 				}
 
 				$strNextValue .= $cChar;
@@ -308,7 +394,7 @@
 			case CSV_QUOTEEND:
 			case CSV_TRAILINGNOISE:
 
-				if ($cChar == " "
+				if ($cChar == ' '
 					||$cChar == "\t")
 				{
 					$nPreviousState = CSV_TRAILINGNOISE;
@@ -464,7 +550,8 @@
 			',',
 			array(),
 			'"',
-			'""');
+			'""',
+			false);
 	}
 
 	function ParseCSV_Excel(
@@ -506,8 +593,8 @@
 			';',
 			array('#'),
 			'"',
-			'""'  
-			);
+			'""',  
+			true);
 	}
 
 
@@ -525,7 +612,8 @@
 		$strSeparator = ',',
 		$arrayCommentTokens = array(),
 		$strQuote = '"',
-		$strEscapedQuote = '""')
+		$strEscapedQuote = '""',
+		$bNewLineInQuotedValue = false)
 	{
 		$strCSV = FileRead($strFile);
 		if ($strCSV == false)
@@ -539,7 +627,8 @@
 			$strSeparator,
 			$arrayCommentTokens,
 			$strQuote,
-			$strEscapedQuote);
+			$strEscapedQuote,
+			$bNewLineInQuotedValue);
 	}
 
 	function FileReadCSV_AutoDetect(

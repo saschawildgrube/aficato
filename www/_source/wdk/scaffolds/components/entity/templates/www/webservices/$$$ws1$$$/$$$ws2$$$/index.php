@@ -13,7 +13,7 @@
 	
 	$config = new CConfig();
 	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetDatabaseConfigID());
+	$config->LoadConfig(GetEnvConfigID());
 
 	/*
 		The config array contains the configuration of a web service.

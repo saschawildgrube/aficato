@@ -231,16 +231,16 @@
 			
 			//$this->Trace("Timeout : ".$nTimeoutSeconds);
 
-			$strWebsiteOutput = HttpRequest(
+			$strResponse = HttpRequest(
 				$strURL,
 				$arrayParams,
 				$strMode,
 				$nTimeoutSeconds,
 				$arrayCookies,
 				$arrayHeaders,
-				false);
+				true);
 				
-			if ($strWebsiteOutput == false)
+			if ($strResponse == false)
 			{
 				$this->Trace("Failed to load $strURL");
 				if ($bSetRequestErrorOnTimeout == true)
@@ -254,19 +254,34 @@
 				}
 				return false;
 			}
+			
+			if ($strResponse != false)
+			{
+				$arrayResponse = ParseHttpResponse($strResponse);
+				$strStatusCode = ArrayGetValue($arrayResponse,'statuscode');
+				$this->Trace('Status code is '.$strStatusCode);
+				if (StringSection($strStatusCode,0,1) == '5')
+				{
+					//$this->Trace('Status code is '.$strStatusCode);
+					$bResult = false;
+				}
+				$strContent = ArrayGetValue($arrayResponse,'content');
+			}				
+			
+			
 			if ($bBinary == false)
 			{
-				$strWebsiteOutput = StringRemoveControlChars($strWebsiteOutput);
+				$strContent = StringRemoveControlChars($strContent);
 			}
 			else
 			{
-				$strWebsiteOutput = bin2hex($strWebsiteOutput);
-				$this->Trace(StringCutOff($strWebsiteOutput));
+				$strContent = bin2hex($strContent);
+				$this->Trace(StringCutOff($strContent));
 			}
 			
 			if ($this->GetVerbose())
 			{
-				$this->Trace("Result length after removing control chars: ".StringLength($strWebsiteOutput));
+				$this->Trace("Result length after removing control chars: ".StringLength($strContent));
 			}
 		
 			if (is_array($arrayExpectedPatternWhitelist))
@@ -282,7 +297,7 @@
 						$strPattern = bin2hex($strPattern);
 					}
 					$strPattern = StringRemoveControlChars($strPattern);
-					if (FindString($strWebsiteOutput,$strPattern) == -1)    
+					if (FindString($strContent,$strPattern) == -1)    
 					{
 						$this->Trace("Expected pattern not found:\n\"".StringCutOff($strPattern,300)."\"");	
 						$bResult = false;
@@ -302,7 +317,7 @@
 						$strPattern = bin2hex($strPattern);
 					}
 					$strPattern = StringRemoveControlChars($strPattern);
-					if (FindString($strWebsiteOutput,$strPattern) != -1)
+					if (FindString($strContent,$strPattern) != -1)
 					{
 						$this->Trace("Unexpected pattern (\"".StringCutOff($strPattern,200)."\") found!");	
 						$bResult = false;
@@ -317,7 +332,7 @@
 				}
 				foreach ($arrayRegExpPattern as $strPattern)
 				{
-					if (RegExpMatch($strWebsiteOutput,$strPattern) != true)
+					if (RegExpMatch($strContent,$strPattern) != true)
 					{
 						$this->Trace("Regular Expression did not match (\"".StringCutOff($strPattern,100)."\")!");	
 						$bResult = false;
@@ -367,11 +382,11 @@
 			if ($bResult != true)
 			{
 				$this->SetResult(false);
-				$this->Trace("TESTCASE FAILED");
+				$this->Trace('TESTCASE FAILED');
 			}
-			return $strWebsiteOutput;
+			return $strContent;
 		}
-		
+
 
 
 	}

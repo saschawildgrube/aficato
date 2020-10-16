@@ -21,7 +21,7 @@
 			$this->GetWebsite()->ActivateJQuery();
 			
 			// GLYPHICONS
-			$this->GetWebsite()->AddStyleSheet('font-glyphicons-halflings','glyphicons-halflings');
+			//$this->GetWebsite()->AddStyleSheet('font-glyphicons-halflings','glyphicons-halflings');
 			
 			return $bResult;
 		}

@@ -87,15 +87,15 @@
 						'/"tidwarning"/',
 						'/unintendedoutputcheck_defuse/',
 						'/"maxcontentsize"/',
-						'/\-\>IncludeElement\(\"|\')link(\"|\')\)/',
-						'/\-\>IncludeElement\(\"|\')linkicon(\"|\')\)/',
-						'/\-\>IncludeElement\(\"|\')list(\"|\')\)/',
-						'/\-\>IncludeElement\(\"|\')navigation(\"|\')\)/',
+						'/\-\>IncludeElement\((\"|\')link(\"|\')\)/',
+						'/\-\>IncludeElement\((\"|\')linkicon(\"|\')\)/',
+						'/\-\>IncludeElement\((\"|\')list(\"|\')\)/',
+						'/\-\>IncludeElement\((\"|\')navigation(\"|\')\)/',
 						'/\-\>IncludeElement\((\"|\')message(\"|\')\)/',
-						'/\-\>IncludeElement\(\"messagestack(\"|\')\)/',
-						'/\-\>IncludeElement\(\"|\')form(\"|\')\)/',
-						'/\-\>IncludeElement\(\"|\')toolbar(\"|\')\)/',
-						'/\-\>IncludeElement\(\"|\')table(\"|\')\)/',
+						'/\-\>IncludeElement\((\"|\')messagestack(\"|\')\)/',
+						'/\-\>IncludeElement\((\"|\')form(\"|\')\)/',
+						'/\-\>IncludeElement\((\"|\')toolbar(\"|\')\)/',
+						'/\-\>IncludeElement\((\"|\')table(\"|\')\)/',
 						'/IsFeatureDisabled\(/',
 						'/CHARSET_ALPHALOWERCASE/',
 						'/CHARSET_ALPHAUPPERCASE/',
@@ -110,7 +110,25 @@
 						'/wdk-progressindicator(\"|\')/',
 						'/wdk-progressindicator-download(\"|\')/',
 						'/RedirectAtOnce/',
-						'/MakeProtocolLink/'
+						'/MakeProtocolLink/',
+						'/ _construct()/',
+						'/linkexternal/',
+						'/listdetails/',
+						'/filecategory-archive/',
+						'/filecategory-folder/',
+						'/filecategory-image/',
+						'/filecategory-other/',
+						'/filecategory-pdf/',
+						'/filecategory-text/',
+						'/filecategory-web/',
+						'/linkstrong/',
+						'/notok/',
+						'/\-\>IncludeElement\((\"|\')carousel(\"|\')\)/',
+						'/\-\>IncludeModule\((\"|\')security\/ssl(\"|\')\);/',
+						'/CCountdownElement/',
+						'/RenderCountdown/(/',
+						'/IsDevice/',
+						'/GetDatabaseConfigID/(/'
 					);
 					
 				if ($strFileName != "wdk_url.inc")
@@ -129,7 +147,8 @@
 			{
 				$arrayRegExp = array
 					(
-						' xmlns=\"http://www.w3.org/1999/xhtml\"'
+						' xmlns=\"http://www.w3.org/1999/xhtml\"',
+						'/{MODULE_SSL_ICON}/'		
 					);				
 			}
 			$this->CheckFileAgainstRegExp($strFilePath,$arrayRegExp);

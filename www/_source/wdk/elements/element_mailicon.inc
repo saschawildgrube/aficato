@@ -8,39 +8,35 @@
 		{
 			parent::__construct(
 				$website,
-				"mailicon",
+				'mailicon',
 				$strStyleID,
 				false,
 				true);
 		}
 		
-		function RenderMailIcon($strMail, $strToolTip, $strSubject = "", $strBody = "")
+		function RenderMailIcon($strMail, $strToolTip, $strSubject = '', $strBody = '')
 		{
 			$strOutput = $this->GetLayoutHTML(); 
 			
 			$arrayItems = array();
 			
-			
-			$strImageURL = $this->GetWebsite()->GetLayoutImageURL("icon_mail","png");
-			
-			$arrayItems["IMAGEURL"] = $strImageURL;
-			$strMailURL = "mailto:".$strMail."?";
-			$strOptions = "";
-			if ($strSubject != "")
+			$strMailURL = 'mailto:'.$strMail.'?';
+			$strOptions = '';
+			if ($strSubject != '')
 			{
-				$strOptions .= "subject=".StringURLEncode($strSubject);
+				$strOptions .= 'subject='.StringURLEncode($strSubject);
 			}
-			if ($strBody != "")
+			if ($strBody != '')
 			{
-				if ($strOptions != "")                
+				if ($strOptions != '')                
 				{  
-					$strOptions .= "&amp;";
+					$strOptions .= '&amp;';
 				}
-				$strOptions .= "body=".StringURLEncode($strBody);
+				$strOptions .= 'body='.StringURLEncode($strBody);
 			}
 			$strMailURL .= $strOptions;
-			$arrayItems["MAILURL"] = $strMailURL;
-			$arrayItems["TOOLTIP"] = $strToolTip;
+			$arrayItems['MAILURL'] = $strMailURL;
+			$arrayItems['TOOLTIP'] = $strToolTip;
 			
 			$strOutput = ReplaceTagsWDK($strOutput, $arrayItems);
 			

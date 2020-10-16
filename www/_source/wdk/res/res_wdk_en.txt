@@ -70,6 +70,8 @@ TID_WARNING_INSECURE
 Warning: Your are accessing this site using an insecure protocol.
 TID_WARNING_CSRF_TOKEN_INVALID
 Warning: Either you opened a page in a new window, reloaded a page, or you might be the victim of a potential CSRF attack. For security reasons the session has been closed immediately.
+TID_INFO_LOADING
+Loading...
 TID_PRIVILEGE_USERADMIN
 User Administrator
 TID_PRIVILEGE_SYSTEMADMIN

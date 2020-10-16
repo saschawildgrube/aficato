@@ -1,40 +1,40 @@
 <?php
 	
-	require_once(GetWDKDir()."wdk_json.inc");
+	require_once(GetWDKDir().'wdk_json.inc');
 	
 	class CTest extends CUnitTest
 	{
 		function __construct()
 		{
-			parent::__construct("WDK JsonEncode and JsonDecode");
+			parent::__construct('WDK JsonEncode and JsonDecode');
 		}
 		  
 
 		function TestCase_JsonEncode_JsonDecode(
 			$arrayInput,
-			$strExpectedResult,
+			$strExpectedResult, 
 			$arrayExpectedResult)
 		{ 
-			$this->Trace("");
-			$this->Trace("");
-			$this->Trace("TestCase_JsonEncode_JsonDecode");
+			$this->Trace('');
+			$this->Trace('');
+			$this->Trace('TestCase_JsonEncode_JsonDecode');
 	
-			$this->Trace("arrayInput:");
+			$this->Trace('arrayInput:');
 			$this->Trace($arrayInput);
-			$this->Trace("Expected:"); 
+			$this->Trace('Expected:'); 
 			$this->Trace(RenderValue($strExpectedResult));
 
 			$strResult = JsonEncode($arrayInput);
 
-			$this->Trace("JsonEncode result:");
+			$this->Trace('JsonEncode result:');
 			$this->Trace(RenderValue($strResult));
-			$this->Trace("StringLength(): ".StringLength($strResult));
+			$this->Trace('StringLength(): '.StringLength($strResult));
 			
 			if ($strExpectedResult === false)
 			{
 				if (!($strResult === false))
 				{
-					$this->Trace("Testcase FAILED!");	
+					$this->Trace('Testcase FAILED!');	
 					$this->SetResult(false);
 					return;
 				}
@@ -42,7 +42,7 @@
 	
 			if (StringRemoveControlChars($strResult) != StringRemoveControlChars($strExpectedResult))
 			{
-				$this->Trace("Testcase FAILED!");	
+				$this->Trace('Testcase FAILED!');	
 				$this->SetResult(false);
 				return;
 			}
@@ -52,13 +52,13 @@
 			$this->Trace($arrayResult);
 			if ($arrayResult != $arrayExpectedResult)
 			{
-				$this->Trace("Testcase FAILED!");	
+				$this->Trace('Testcase FAILED!');	
 				$this->SetResult(false);
 				return;
 			}
 			
 
-			$this->Trace("Testcase PASSED!");
+			$this->Trace('Testcase PASSED!');
 		}
 
 
@@ -85,9 +85,9 @@
 				$arrayExpected);			
 			
 			$arrayInput = array(
-				1 => "a",
-				2 => "b",
-				3 => "c"
+				1 => 'a',
+				2 => 'b',
+				3 => 'c'
 				);
 			$strJsonExpected =
 '{
@@ -103,9 +103,9 @@
 				
 			$arrayInput = array(
 				array('Keys','Values'),
-				array(1,"a"),
-				array(2,"b"),
-				array(3,"c")
+				array(1,'a'),
+				array(2,'b'),
+				array(3,'c')
 				);
 			$strJsonExpected =
 '[
@@ -133,9 +133,9 @@
 				$arrayExpected);
 
 			$arrayInput = array(
-				10 => "a",
-				20 => "b",
-				30 => "c"
+				10 => 'a',
+				20 => 'b',
+				30 => 'c'
 				);
 			$strJsonExpected =
 '{

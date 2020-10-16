@@ -1,6 +1,6 @@
 <?php
 	
-	function CompressFiles($strZipFilePath, $arrayFiles, $strArchiveComment = "")
+	function CompressFiles($strZipFilePath, $arrayFiles, $strArchiveComment = '')
 	{
 		if (!is_array($arrayFiles))
 		{
@@ -22,14 +22,14 @@
     	return false;
 		}
 		
-		if ($strArchiveComment != "")
+		if ($strArchiveComment != '')
 		{
 			$zip->setArchiveComment($strArchiveComment);	
 		}
 
 		foreach ($arrayFiles as $arrayFileInfo)
 		{
-			$strArchiveFilePath =	ArrayGetValue($arrayFileInfo,"archivefilepath");
+			$strArchiveFilePath =	ArrayGetValue($arrayFileInfo,'archivefilepath');
 			if (!IsValidPath($strArchiveFilePath))
 			{
 				$zip->unchangeAll();
@@ -37,17 +37,17 @@
 			}
 			
 			
-			$strArchiveFileComment =	ArrayGetValue($arrayFileInfo,"archivefilecomment");
+			$strArchiveFileComment =	ArrayGetValue($arrayFileInfo,'archivefilecomment');
 			
-			$strContents =	ArrayGetValue($arrayFileInfo,"contents");
-			$strFilePath =	ArrayGetValue($arrayFileInfo,"filepath");
-			if ($strContents != "" && $strFilePath != "")
+			$strContents =	ArrayGetValue($arrayFileInfo,'contents');
+			$strFilePath =	ArrayGetValue($arrayFileInfo,'filepath');
+			if ($strContents != '' && $strFilePath != '')
 			{
 				$zip->unchangeAll();
 				return false;	
 			}
 
-			if ($strFilePath != "")
+			if ($strFilePath != '')
 			{
 				if (!IsFile($strFilePath))
 				{
@@ -60,7 +60,7 @@
 			{
 				$zip->addFromString($strArchiveFilePath, $strContents);
 			}
-			if ($strArchiveFileComment != "")
+			if ($strArchiveFileComment != '')
 			{
 				$zip->setCommentName($strArchiveFilePath, $strArchiveFileComment);				
 			}
@@ -69,7 +69,7 @@
 	}
 
 
-	function CompressFilesInMemory($arrayFiles, $strArchiveComment = "")
+	function CompressFilesInMemory($arrayFiles, $strArchiveComment = '')
 	{
 		$strTempDir = GetTempDir();
 		$strTempFile = $strTempDir.MakeNumericToken(10);

@@ -125,7 +125,7 @@
 			$toolbarDef->AddTool("http://www.example.com", "view", "View");
 			$toolbarDef->AddTool("http://www.example.com", "url", "Link");
 			$toolbarDef->AddTool("http://www.example.com", "delete", "Delete");
-			$toolbarDef->AddTool("http://www.example.com", "reload", "Reload");
+			$toolbarDef->AddTool("http://www.example.com", "refresh", "Refresh");
 			$toolbarDef->AddTool("http://www.example.com", "help", "Help");
 			$toolbar = new CToolbarElement($this->GetWebsite(),"default");
 			$arrayItems["TOOLBAR"] = $toolbar->RenderToolbar($toolbarDef); 

@@ -148,7 +148,6 @@
 			}			
 
 
-			$this->IncludeElement('table');
 			$table = new CTableElement($this->GetWebsite(),'default');
 
 			$arrayTable = array();
