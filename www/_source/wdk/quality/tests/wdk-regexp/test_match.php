@@ -60,6 +60,7 @@
 			$this->TestCase_RegExpMatch('Folder (123)','/\([0-9]+\)/m',true);
 			$this->TestCase_RegExpMatch('Folder ()','/\([0-9]+\)/m',false);
 			$this->TestCase_RegExpMatch('Folder','/\([0-9]+\)/m',false);
+			$this->TestCase_RegExpMatch('webservice_default_accesscode','/webservice.*accesscode/',true);
 		}
 		
 

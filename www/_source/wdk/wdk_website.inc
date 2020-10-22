@@ -148,12 +148,13 @@
 				$arrayObfuscationItems);
 	
 			// Init Tracing	
-			$this->SetTracePrefix("WEBSITE: ");
+			$this->SetTracePrefix('WEBSITE: ');
 			$this->TraceVersionWDK();
-			$this->Trace("PHP Version: ".phpversion());
-			$this->Trace("Server IP: ".$this->GetServerIP());
-			$this->Trace("Client IP: ".$this->GetClientIP());
-			$this->Trace("User Agent: ".$this->GetUserAgent());
+			$this->Trace('Environment: '.GetEnvID());
+			$this->Trace('PHP Version: '.phpversion());
+			$this->Trace('Server IP  : '.$this->GetServerIP());
+			$this->Trace('Client IP  : '.$this->GetClientIP());
+			$this->Trace('User Agent : '.$this->GetUserAgent());
 
 			// Performace measurement
 			$this->m_bProfiling = true;
@@ -161,7 +162,7 @@
 			// Check Environment
 			if (CheckEnvironment() == false)
 			{
-				$this->Error("CheckEnvironment returned false. Check out env.inc if all environemnt functions have been defined!");
+				$this->Error('CheckEnvironment returned false. Check out env.inc if all environemnt functions have been defined!');
 			}
 			
 			// Subsequent request detection
@@ -2387,14 +2388,14 @@
 		}
 
 		final
-		function AddStyleSheet($strTitle,$strID="")
+		function AddStyleSheet($strTitle,$strID='')
 		{
-			if ($strID == "")
+			if ($strID == '')
 			{
 				$strID = $strTitle;	
 			}			
 			$this->m_arrayStyleSheets[$strTitle] = array(
-				"id" => $strID);	
+				'id' => $strID);	
 		}
 
 		final
@@ -2917,8 +2918,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 	   	// This is to prevent IE from searching the browserconfig.xml file
 	   	$strHeader .= "\t<meta name=\"msapplication-config\" content=\"none\"/>\n";
 	   	
-	   	//<meta http-equiv="Content-Script-Type" content="text/javascript" />
-	   	
 	   	// Support Google to identify the URL that is really relevant for this page
 	   	$arrayParams = array();
 	   	$arrayParams["content"] = $this->GetContent();
@@ -2930,7 +2929,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 	   		$arrayLanguages = $this->GetSupportedLanguages();
 	   		foreach ($arrayLanguages as $strLanguage)
 	   		{
-			   	$arrayParams["language"] = $strLanguage;
+			   	$arrayParams['language'] = $strLanguage;
 	   			$strLanguageLink = $this->MakeSitemapURL($arrayParams,true);
 	   			$strHeader .= "\t<link rel=\"alternate\" href=\"".$strLanguageLink."\" hreflang=\"".StringLowerCase($strLanguage)."\" />\n";
 	   		}
@@ -2952,10 +2951,25 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function RenderHeaderStyleSheets($strInput)
 		{
 			$strHeader = '';
+
+
+			// Load layout configuration
 			
+			$strLayoutConfigFile = $this->GetAssemblyLine()->GetLayoutConfigFilePath($this->GetLayout());
+						
+			$arrayLayoutConfig = array();			
+			if ($strLayoutConfigFile != '')
+			{
+				$this->SetLayoutConfigItems(LoadNamedArrayFromTextFile($strLayoutConfigFile));	
+				//$this->Trace('Layout config items:');
+				//$this->Trace($this->GetAllLayoutConfigItems());
+			}
+	
 			// Add additional CSS files to be included
 			foreach ($this->m_arrayStyleSheets as $strTitle => $arrayStyleSheet)
 			{
+				//$this->Trace('RenderHeaderStyleSheets: Adding style sheet: '.$strTitle.':');
+				//$this->Trace($arrayStyleSheet);
 				$strURL = ArrayGetValue($arrayStyleSheet,'url');
 				if ($strURL != '')
 				{
@@ -2981,6 +2995,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 							$strCss = FileRead($strCssFile);
 							if ($strCss != '')
 							{						
+								if (ArrayCount($this->GetAllLayoutConfigItems()) > 0)
+								{
+									$strCss = ReplaceTagsBraces($strCss,$this->GetAllLayoutConfigItems());
+								}			
+								
 								$strHeader .= "	<style media=\"screen\">\n";
 								$strHeader .= "		/*<![CDATA[*/\n";
 								$strHeader .= $strCss;
@@ -3005,15 +3024,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 	
 			// Add Layout CSS
 
-			$strLayoutConfigFile = $this->GetAssemblyLine()->GetLayoutConfigFilePath($this->GetLayout());
-						
-			$arrayLayoutConfig = array();			
-			if ($strLayoutConfigFile != "")
-			{
-				$this->SetLayoutConfigItems(LoadNamedArrayFromTextFile($strLayoutConfigFile));	
-				$this->SetOutputItems($this->GetAllLayoutConfigItems());
-			}
-			
 			$strLayoutCssFile = $this->GetAssemblyLine()->GetLayoutCssFilePath($this->GetLayout());
 			if ($strLayoutCssFile != "")
 			{
@@ -3023,7 +3033,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					if (	(ArrayCount($this->GetAllLayoutConfigItems()) == 0)
 						&& 	(IsFile($this->m_strStyleSheetsDir.GetFileNameFromPath($strLayoutCssFile))))
 					{
-						$strHeader .= "	<link href=\"".$this->GetRootURL()."css/".GetFileNameFromPath($strLayoutCssFile)."\" rel=\"stylesheet\">\n";
+						$strHeader .= '	<link href="'.$this->GetRootURL().'css/'.GetFileNameFromPath($strLayoutCssFile).'" rel="stylesheet">'."\n";
 					}
 					else
 					{

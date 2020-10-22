@@ -78,33 +78,7 @@
 				$this->SetError("DATABASE_CONFIG");
 				return;
 			}
-
-/*
-			The multi query capability is supported in some environments but not in others.
-			Starting from WDK Revision 44 multi query support is no longer required.
-
-			// Multi Query Capability
-			$this->Trace("Checking SQL multi query capability...");
-			$strSQL = "SHOW ENGINES;\nSHOW TABLES;";
-			$this->Trace("SQL: $strSQL");
-			if ($this->m_database->Query($strSQL) != true)
-			{
-				$this->TraceDatabaseError();
-				if ($this->m_database->GetErrorCode() == 1064) // syntax error
-				{
-					$this->Trace("The query failed because support for multiple sql statements within the query is not present. This is probably a configuration or compilation error. WDK components rely on this capability. Please liase with your application hosting environment provider to fix this!");
-					$this->SetError("DATABASE_MULTI_QUERY_FAILED");
-					return;
-				}
-				else
-				{
-					$this->SetError("DATABASE_QUERY_FAILED");
-				}
-				return;
-			}
-			$this->Trace($this->DatabaseGetDataFromLastQuery());				
-			*/
-			
+	
 		}
 		
 		function CommandInstall()
@@ -166,10 +140,8 @@
 		
 		function DatabaseConnect()
 		{
-			$arrayDBConfig = $this->GetConfig("database");
-			
 			$arrayConfigErrors = array();
-			if ($this->DatabaseCheckConfig($arrayDBConfig,$arrayConfigErrors) == false)
+			if ($this->DatabaseCheckConfig($this->GetConfigArray(),$arrayConfigErrors) == false)
 			{
 				$this->Trace("DatabaseCheckConfig() returned errors:");
 				$this->Trace($arrayConfigErrors);
@@ -179,12 +151,12 @@
 			}
 			
 			if ($this->m_database->Connect(
-				ArrayGetValue($arrayDBConfig,"server"),
-				ArrayGetValue($arrayDBConfig,"username"),
-				ArrayGetValue($arrayDBConfig,"userpassword"),
-				ArrayGetValue($arrayDBConfig,"databasename"),
-				ArrayGetValue($arrayDBConfig,"tablenameprefix"),
-				ArrayGetValue($arrayDBConfig,"port")) != TRUE)
+				$this->GetConfig('database_host'),
+				$this->GetConfig('database_user'),
+				$this->GetConfig('database_password'),
+				$this->GetConfig('database_name'),
+				$this->GetConfig('database_tablenameprefix'),
+				$this->GetConfig('database_port')) != TRUE)
 			{
 				$this->SetError("DATABASE_CONNECT_FAILED");
 				return false;
@@ -202,37 +174,37 @@
 				$arrayConfigErrors[] = "Config array is not an array.";
 				$bResult = false;
 			}
-			$strServer = ArrayGetValue($arrayConfig,"server");
-			if ($strServer == "")
+			$strHost = ArrayGetValue($arrayConfig,"database_host");
+			if ($strHost == "")
 			{
-				$arrayConfigErrors[] = "Database server is not specified.";
+				$arrayConfigErrors[] = "Database host is not specified.";
 				$bResult = false;
 			}
-			$strPort = ArrayGetValue($arrayConfig,"port");
+			$strPort = ArrayGetValue($arrayConfig,"database_port");
 			if ($strPort != "")
 			{
 				if (StringCheckCharSet($strPort,CHARSET_NUMERIC) != true)
 				{
-					$arrayConfigErrors[] = "Database post must be numeric.";
+					$arrayConfigErrors[] = "Database port must be numeric.";
 					$bResult = false;
 				}
 			}
-			$strUsername = ArrayGetValue($arrayConfig,"username");
+			$strUsername = ArrayGetValue($arrayConfig,"database_user");
 			if ($strUsername == "")
 			{
 				$arrayConfigErrors[] = "Database user is not specified.";
 				$bResult = false;
 			}
-			$strPassword = ArrayGetValue($arrayConfig,"userpassword");
+			$strPassword = ArrayGetValue($arrayConfig,"database_password");
 			if ($strPassword == "")
 			{
 				$arrayConfigErrors[] = "Database user password is not specified.";
 				$bResult = false;
 			}
-			$strDatabase = ArrayGetValue($arrayConfig,"databasename");
+			$strDatabase = ArrayGetValue($arrayConfig,"database_name");
 			if ($strDatabase == "")
 			{
-				$arrayConfigErrors[] = "Logical database is not specified.";
+				$arrayConfigErrors[] = "Logical database name is not specified.";
 				$bResult = false;
 			}
 			return $bResult;

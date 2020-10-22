@@ -75,7 +75,7 @@
 			$strMandateDataDir = GetDocumentRootDir();
 	 		$strMandateDataDir .= '../../';
 	 		
- 			if (GetStage() == 'dev')
+ 			if (GetEnvID() == 'dev')
  			{
  				$strMandateDataDir .= 'data-dev/';	
  			}

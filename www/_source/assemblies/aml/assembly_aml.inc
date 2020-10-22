@@ -20,7 +20,7 @@
 			$bResult = parent::CallbackWebsiteInit();
 			$this->GetWebsite()->LoadStringResources('aml');
 			
-			$this->SetOutputItems(
+			$this->GetWebsite()->SetLayoutConfigItems(
 				LoadNamedArrayFromTextFile(
 					$this->GetAssemblyLine()->GetLayoutConfigFilePath(
 						$this->GetWebsite()->GetLayout(),

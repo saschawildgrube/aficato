@@ -1,7 +1,9 @@
 ={WDK} release checklist=
 * Search for "TODO" in the source code
 * Execute all automated tests
-* Test the scaffolder and create a new website
+* Test release candidate with selected websites
+* Test website scaffolder: "Basic"
+* Test website scaffolder: "Dynamic"
 * Update version information in wdk.txt (remove "WORK IN PROGRESS")
 * Update copyright year in wdk.txt
 * Update version information in content_wdkdocs-prologue-releasenotes.txt (remove "WORK IN PROGRESS")
@@ -20,6 +22,7 @@
 * Remove the baseline date in wdk.inc
 * Update version in wdk.txt and add "WORK IN PROGRESS" after he version number
 * Add new version chapter in content_wdkdocs-prologue-releasenotes.txt:<pre>
+* Update your websites
 ==Version 0.0.0.x WORK IN PROGRESS==
 NOT YET Baselined
 * Security

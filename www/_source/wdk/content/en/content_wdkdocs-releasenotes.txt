@@ -2,9 +2,11 @@
 ==Version 0.0.0.75 WORK IN PROGRESS==
 NOT YET Baselined
 
-WARNING: GetDatabaseConfigID() has been renamed to GetEnvConfigID()!
+'''IMPORTANT'''
+* GetStage() has been renamed to GetEnvID()!
+* GetDatabaseConfigID() has been renamed to GetEnvConfigID()!
+* ICON SUPPORT HAS CHANGED SIGNIFICANTLY. CHECK YOUR ICONS, TOOLBARS, ETC.!
 
-ICON SUPPORT HAS CHANGED SIGNIFICANTLY. CHECK YOUR ICONS, TOOLBARS, ETC.!
 
 * Security
 ** No Changes
@@ -12,7 +14,9 @@ ICON SUPPORT HAS CHANGED SIGNIFICANTLY. CHECK YOUR ICONS, TOOLBARS, ETC.!
 ** JavaScripts that were added during the rendering of generic output items were not considered since JavaScripts were rendered before tag replacement. This has been changed. JavaScripts are now embedded as part of the tag replacement loop - so placeholders in JavaScripts can be used and generic output items can in return still add JavaScripts.
 ** CWebsiteSatellite::MakeURL() did not pass through the bEncoded parameter. This has been fixed.
 * Refactoring
-** The env.inc function GetDatabaseConfigID() has been renamed to GetEnvConfigID() and the expected cfg file is now env.cfg by default.
+** The env.inc function GetDatabaseConfigID() has been renamed to GetEnvConfigID() and the expected config file is now env.cfg by default.
+** The env config file is now loaded by default by CWebApplication - so there is no need to do that in derived classes (Websites, Web services, Installers, etc.).
+** Access codes for web services can still be set in the GetWebserviceDirectory function - but they shouldn't. Set the access codes in the env.cfg file!
 ** The CIconElement class is now entirely based on Font Awesome icons instead of a mix of images, Font Awesome and Glyphicons. This has widespread implications on CLinkIconELement, CMailIconElement, CItemManagerElement, CPageNavigatonElement, CFormElement etc.
 ** Removed all layout_default_icon* files (except the country and language icons)
 ** Removed layout_default_horizontalmenu_separator.png
@@ -20,10 +24,14 @@ ICON SUPPORT HAS CHANGED SIGNIFICANTLY. CHECK YOUR ICONS, TOOLBARS, ETC.!
 ** Removed CSSLModule
 ** Renamed class CountdownElement to CCountDownElement
 ** Refactoring of RenderWebsite and the rendering of the head portion of the html output: The header is rendered before the tag replacement (like before) but the array of css files and the default layout css file is now added AFTER the tag replacement. This enables css files to be added late during generic tag replacements. E.g. if the icon element is only used as a generic tag, it can still use CWebsite::ActivateFontAwesome() to add the font awesome css file.
+** Layout config items will also be applied to additional css files which are embedded into the html.
 ** Removed wdk_devices.inc with its GetDeviceType() and IsDevice*() functions. Removed the mobile_detect library from WDK. The reason to add the library was because phone number links were not properly treated by browsers in 2017. However this has changed so there is no reason not to create tel: links for non-mobile devices in 2020.
 ** Removed the bootstrap dist file from WDK.
 ** Webservice system/server is now using GetSystemHostname() to derive the Plesk URL (not the IP) because we assume that a SSL certificate is set up for the domain. In addition the login page URL has changed in a recent Plesk version.
+** Removed the templates in folder wdk/templates/. Use the scaffolder instead!
+** ArraySetValueRecursive() now returns the modified array instead of modifying the parameter.
 * New Features
+** ArraySetValueRecursive() can now identify keys based on a regular expression.
 ** Added function ArrayRemoveKeyRecursive() and corresponding tests
 ** Added function ArrayMap() and corresponding test
 ** Added function ArrayMapRecursive() and corresponding test
@@ -35,7 +43,8 @@ ICON SUPPORT HAS CHANGED SIGNIFICANTLY. CHECK YOUR ICONS, TOOLBARS, ETC.!
 ** Added several functions to CWebsiteSatellite: RenderDate(), RenderTime(), RenderDateTime(), RenderNumber() and RenderCurrency()
 * Quality
 ** The test security/openssl now checks if the build date could be determined. It will result as a failed FAILED test but it will no longer output false statements regarding vulnerabilities.
-** Test sourcfiles/typo has been updated to detect 'teh'.
+** Test sourcefiles/typo has been updated to detect 'teh'.
+** Test sourcefiles/deprecated now checks against GetDatabaseConfig().
 * Documentation
 ** Removed "Prologue" and "Introduction" chapters and moved all contained contents to the first level.
 ** Added article on publishing a WDK based project on GitHub.
@@ -202,7 +211,7 @@ Baselined 2019-04-29
 ** MakeURL() can now deal with URLs that already have some parameters when adding parameters from the array.
 ** The website scaffolds now contain a robots.txt that discourages indexing /css /js /fonts /images /videos folders.
 ** The website scaffolds GetRootURL() functions now use the SERVER_NAME variable instead of the hard coded root URL to support multiple environments.
-** The website scaffolds GetStage() function now checks if the root URL starts with "dev." to identify a DEV environment.
+** The website scaffolds GetEnvID() function now checks if the root URL starts with "dev." to identify a DEV environment.
 * Quality
 ** CUnitTest::TestCase_CheckURL() can now also check the validity period of an SSL certificate.
 ** CMonitoringUnitTest::TestCase_MonitorURL() by default warns if the the SSL certificate validity period ends within the next 21 days.

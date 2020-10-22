@@ -60,7 +60,7 @@
 		
 		
 		function Connect(
-			$strDBServer,
+			$strDBHost,
 			$strDBUser,
 			$strDBPassword,
 			$strDBName,
@@ -76,7 +76,7 @@
 			$ea = new CErrorAmnesty();
 			$ea->Start();
 			$nDBLink = mysqli_connect(
-				$strDBServer,
+				$strDBHost,
 				$strDBUser,
 				$strDBPassword,
 				$strDBName,

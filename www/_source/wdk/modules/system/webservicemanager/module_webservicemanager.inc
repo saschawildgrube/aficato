@@ -126,7 +126,7 @@
 					array_push($arrayLinks,$arrayConfigLink);
 				}
 			}
-			$strAccessCode = $this->GetWebsite()->GetConfig("webservices",$strWebservice,"accesscode");
+			$strAccessCode = $this->GetWebsite()->GetWebserviceAccessCode($strWebservice);
 			$this->Trace("strAccessCode = $strAccessCode");
 			if ($strAccessCode != "")
 			{
@@ -191,7 +191,7 @@
 			$strError = $consumer->GetError();
 			if ($strError != "")
 			{
-				$this->SetErrorMessageCode("UNKNOWN");
+				$this->SetErrorMessageCode($strError);
 				$this->SetOutputItem("HELP","");
 				$this->SetOutputItem("VERSION","");
 			}

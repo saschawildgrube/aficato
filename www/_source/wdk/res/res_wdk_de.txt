@@ -28,6 +28,8 @@ TID_ERROR_RESULT_INVALID
 Fehler: Der abgefragte Webservice lieferte kein gültiges Ergebnis.
 TID_ERROR_WRITE_FAILED
 Fehler: Es konnten keine Daten geschrieben werden.
+TID_ERROR_ACCESSCODE_REQUIRED
+Fehler: Ein Zugangscode (Access code) wird benötigt, um einen Webservice aufzurufen. Möglicherweise wurde der Zugangscode nicht in der Konfiguration vermerkt.
 TID_ERROR_FORM_INVALID_FLOAT
 Die eingegebe Zahl ist ungültig. 
 TID_ERROR_FORM_INVALID_DATE

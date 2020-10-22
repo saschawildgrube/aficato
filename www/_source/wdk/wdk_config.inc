@@ -1,12 +1,12 @@
 <?php
 
-	require_once("wdk_datacontainer.inc");
-	require_once("wdk_arraytextfile.inc");
+	require_once('wdk_datacontainer.inc');
+	require_once('wdk_arraytextfile.inc');
 
 
 	function IsValidConfigID($strConfigID)
 	{
-		if ($strConfigID == "")
+		if ($strConfigID == '')
 		{
 			return false;	
 		}	
@@ -14,11 +14,11 @@
 		{
 			return false;	
 		}
-		if (StringSection($strConfigID,0,1) == "-")
+		if (StringSection($strConfigID,0,1) == '-')
 		{
 			return false;	
 		}
-		if (StringSection($strConfigID,-1,1) == "-")
+		if (StringSection($strConfigID,-1,1) == '-')
 		{
 			return false;	
 		}
@@ -36,8 +36,8 @@
 			parent::__construct();
 			$this->m_arrayLoadedConfigStores = array();
 			$this->m_arrayConfigStoreLocations = array();
-			//$this->m_arraySupportedConfigStoreTypes = array("cfg","csv","xml");
-			$this->m_arraySupportedConfigStoreTypes = array("cfg");
+			//$this->m_arraySupportedConfigStoreTypes = array('cfg','csv','xml');
+			$this->m_arraySupportedConfigStoreTypes = array('cfg');
 		}
 		
 		function AddConfigStoreLocation($strNewConfigStoreLocation)
@@ -62,10 +62,10 @@
 				{
 					$arrayNewConfigValues = array();
 					
-					$strConfigFile = $strLocation.$strConfigID.".".$strStoreType;
+					$strConfigFile = $strLocation.$strConfigID.'.'.$strStoreType;
 					switch ($strStoreType)
 					{
-						case "cfg":
+						case 'cfg':
 							$arrayNewConfigValues = LoadNamedArrayFromTextFile($strConfigFile);
 							if (is_array($arrayNewConfigValues))
 							{

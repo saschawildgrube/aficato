@@ -1849,7 +1849,7 @@
 				$strBody = '';
 				
 				$strBody .=
-					'http://'.GetRootURL()." (".GetStage().")\n\n";
+					'http://'.GetRootURL()." (".GetEnvID().")\n\n";
 				
 				$strBody .=
 					$errorlog->GetTraceLog()

@@ -17,7 +17,7 @@
 		function ConsumeWebService(
 			$strWebService,
 			$arrayParams,
-			$nTimeOut=WEBSERVICE_CONSUMER_TIMEOUT_DEFAULT)
+			$nTimeOut = WEBSERVICE_CONSUMER_TIMEOUT_DEFAULT)
 		{
 			$this->ProfilingTrace();
 			$this->Trace("ConsumeWebService BEGIN");
@@ -58,10 +58,14 @@
 					$strWebService,
 					"url");
 					
+				
+				$strWebServiceAccessCode = $this->m_webapp->GetWebserviceAccessCode($strWebService);
+					/*
 				$strWebServiceAccessCode = ArrayGetValue(
 					$arrayWebServices,
 					$strWebService,
 					"accesscode");
+					*/
 				if ($strWebServiceAccessCode != "")
 				{
 					$arrayParams["accesscode"] = $strWebServiceAccessCode;

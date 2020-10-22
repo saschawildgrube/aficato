@@ -1,26 +1,26 @@
 =Publish your {WDK} based project on GitHub=
 Every project based on {WDK} that is published on GitHub is a great contribution! This is how it is done:
-* Create repository on [https://www.github.com GitHub]
-* Create an image for social media (ideally 1280 x 640) and add it to the repository
-* Define a headline description for the repository
-* Define topics for your repository
-* Provide a website for the project (if applicable)
-* Make sure the secret credentials and tokens yre not committed to the repository. Check your source code for:
-** Google Maps api keys
+* Create repository on [https://www.github.com GitHub] or in your local environment
+* Make sure the secret credentials and tokens are not committed to the repository. Check your source code for:
 ** Database credentials
+** Webservice access tokens
+** Google Maps api keys
 ** Any other credentials or api tokens that should not be shared publicly
-* Add such files to a gitignore file. Find some examples [https://github.com/github/gitignore here].
+* Add files /info/exclude. Find some examples [https://github.com/github/gitignore here].
 * Prepare repository readme file
 ** Add information about the project itself
 ** Add installation instructions including how to set up api tokens and database credentials
 ** Add a link to the license of your project
-* Setup the repository in your local environment. By default the repository folder is named after the repository - this might not refelct your actual folder structure.
 * Perform the initial commit
 * Update the repository readme file
 * Adapt your deployment process: E.g. ignore the .git/ folder and .git* files in your deplyomemt process
+* Create an image for social media (ideally 1280 x 640) and add it to the repository
+* Define a headline description for the repository
+* Define topics for your repository
+* Provide a website for the project (if applicable)
+* Make the repository public
+* Add the fork me on GitHub ribbon on the website if applicable
 * Post on [https://www.xing.com xing.com]
 * Post on [https://www.linkedin.com linkedin.com]
 * Post on [https://www.twitter.com twitter.com]
 * Post on [https://www.facebook.com facebook.com]
-* Add the fork me on GitHub ribbon on the website if applicable
-* Commit the change

@@ -70,7 +70,7 @@
 
 	function GetSystemEmailSenderName()
 	{
-		return GetRootURL().' ('.GetStage().')';	
+		return GetRootURL().' ('.GetEnvID().')';	
 	}
 
 
@@ -83,7 +83,7 @@
 	}
 
 	
-	function GetStage()
+	function GetEnvID()
 	{
 		if (FindString(GetRootURL(),'dev.') == 0)
 		{
@@ -94,7 +94,7 @@
 	
 	function GetEnvConfigID()
 	{
-		return "env-".GetStage();
+		return "env-".GetEnvID();
 	}
 	
 	function GetOperationMode()
@@ -114,7 +114,7 @@
 
 	function GetErrorLogPath()
 	{
-		if (GetStage() == 'dev')
+		if (GetEnvID() == 'dev')
 		{
 			return GetDocumentRootDir().'../../logs-dev/error_log';
 		}

@@ -19,7 +19,7 @@
 		function RenderAMLAccountChart($arrayData)
 		{
 			$this->AddJavaScript('d3_aml-accountchart');
-			$this->GetWebsite()->AddStyleSheet('d3_aml-accountchart');			 
+			$this->AddStyleSheet('d3_aml-accountchart');			 
 
 			$this->AddJavaScript('react_aml-accountchart');
 

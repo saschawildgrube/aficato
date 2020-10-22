@@ -10,25 +10,16 @@
 	$strServiceSourceDir = GetWDKDir()."webservices/system/log/";
 	require_once ($strServiceSourceDir."webservice_log.inc");
 	
-	$config = new CConfig();
-	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetEnvConfigID());
-
-	 
-	$arrayConfig = array();	
-	$arrayConfig["database"] = $config->GetDataArray();
+	$arrayConfig = array();
 	$arrayConfig["protocols"] = array("http","https");
 	$arrayConfig["admin_email"] = GetAdminEmail();
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
-	$arrayConfig["accesscodes"] = array($arrayConfig["webservices"]["system/log"]["accesscode"]);
-
+	
 	//$arrayConfig["hashsink_email"] = GetAdminEmail();
 	//$arrayConfig["logmail_active"] = true; 
 	//$arrayConfig["logmail_email"] = GetAdminEmail();
+	
 
-	
-	
-	
 	// Whitelists
 	
 	$arrayConfig["severity_whitelist"] = array(
@@ -78,10 +69,10 @@
 	$arrayConfig["reporterid_blacklist"][] = "TESTBLACKLIST";
 	$arrayConfig["eventid_whitelist"][] = "TEST";
 	$arrayConfig["eventid_blacklist"][] = "TESTBLACKLIST";
-
 	
 	
 	$arrayParams = array();
+	//$arrayParams ["trace"] = "1";
 	
 	$webservice = new CLogWebService(
 		$strServiceSourceDir,

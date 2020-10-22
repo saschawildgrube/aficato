@@ -17,7 +17,6 @@
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
 	$arrayConfig["accesscodes"] = array("1");	
 	$arrayConfig["exclude"]["assemblies"] = array("wdk");
-	
 	$arrayConfig["database_support"] = false; 
  
  	$arrayParams = array();

@@ -10,21 +10,11 @@
 	$strServiceSourceDir = GetWDKDir()."webservices/system/session/"; 
 	require_once ($strServiceSourceDir."webservice_session.inc");
 	
-	$config = new CConfig();
-	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetEnvConfigID());
-
-	 
-	$arrayConfig = array();	
-	$arrayConfig["database"] = $config->GetDataArray();
-	$arrayConfig["protocols"] = array("http","https");
+	$arrayConfig = array();	$arrayConfig["protocols"] = array("http","https");
 	$arrayConfig["admin_email"] = GetAdminEmail();
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
-	$arrayConfig["accesscodes"] = array($arrayConfig["webservices"]["system/session"]["accesscode"]);
-
 	
 	$arrayConfig["duration_max"] = intval(60 * 60 * 24); // Sessions may last 24 hours.
-	//$arrayConfig["duration_max"] = intval(60 * 60 * 12); // Sessions may last 12 hours.
 	$arrayConfig["data_maxlen"] = 65535; // Each session can handle 64 K bytes
 	
 	

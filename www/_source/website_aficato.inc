@@ -23,7 +23,7 @@
 			$arrayMeta['copyright'] = '?TID_COPYRIGHT?';
 			$arrayMeta['copyright_since'] = '2019';
 			
-			
+
 			$arrayConfig = array();
 			
 			
@@ -125,7 +125,7 @@
 				Since the additional check may impact performance the setting should
 				be deactivated if no longer needed.
 			*/
-			if (GetStage() == 'dev')
+			if (GetEnvID() == 'dev')
 			{
 				$arrayConfig['check_unresolvedtid'] = true;
 			}
@@ -135,7 +135,7 @@
 				Since the additional check may impact performance the setting should
 				be deactivated if no longer needed.
 			*/
-			if (GetStage() == 'dev')
+			if (GetEnvID() == 'dev')
 			{
 				$arrayConfig['check_invalidtid'] = true;
 			}
@@ -145,7 +145,7 @@
 				Since the check may impact performance the setting should
 				be deactivated once the check is no longer needed.
 			*/
-			if (GetStage() == 'dev')
+			if (GetEnvID() == 'dev')
 			{
 				$arrayConfig['check_unintendedoutput'] = true;
 			}
@@ -550,7 +550,7 @@
 			
 			if ($strCondition == 'aml-lab')
 			{
-				if (GetStage() == 'dev')
+				if (GetEnvID() == 'dev')
 				{
 					return true;
 				}	
@@ -558,7 +558,7 @@
 
 			if ($strCondition == 'aml-demo')
 			{
-				if (GetStage() == 'dev')
+				if (GetEnvID() == 'dev')
 				{
 					return true;
 				}	
@@ -569,7 +569,7 @@
 				return parent::CallbackCheckCondition('login');
 			}			
 			
-			if ($strCondition == GetStage())
+			if ($strCondition == GetEnvID())
 			{
 				return true;	
 			}

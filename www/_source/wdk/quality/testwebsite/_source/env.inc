@@ -65,7 +65,7 @@
 
 	function GetSystemEmailSenderName()
 	{
-		return GetRootURL()." (".GetStage().")";	
+		return GetRootURL()." (".GetEnvID().")";	
 	}
 
 
@@ -77,7 +77,7 @@
 	}
 
 	
-	function GetStage()
+	function GetEnvID()
 	{
 		return "prod";	
 	}

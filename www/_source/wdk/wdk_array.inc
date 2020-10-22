@@ -267,23 +267,40 @@
 	}
 
 
-	function ArraySetValueRecursive(&$array,$newvalue,$key)
+	function ArraySetValueRecursive($array,$newvalue,$key)
 	{
 		if (!IsArray($array))
 		{
-			$array = array();
+			return array();
 		}
 		foreach ($array as $currentkey => &$value)
 		{
+			$bMatch = false;
 			if ($currentkey === $key)
+			{
+				$bMatch = true;
+			}
+			else
+			{
+				if (StringSection($key,0,1) == '/')
+				{
+					if (RegExpMatch($currentkey,$key) == true)
+					{
+						$bMatch = true;
+					}
+				}	
+			}
+
+			if ($bMatch == true)
 			{
 				$value = $newvalue;	
 			}
 			else if (is_array($value))
 			{
-				ArraySetValueRecursive($value,$newvalue,$key);	
+				$value = ArraySetValueRecursive($value,$newvalue,$key);	
 			}
 		}
+		return $array;
 	}
 	
 	function ArrayMap($array,callable $CallbackMap,$arrayParams = array())

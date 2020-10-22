@@ -14,6 +14,7 @@
 		{
 			$this->m_strWebservice = "cms/article";
 			$this->m_arrayIDs = array();
+
 			$arrayConfig = array();
 			$arrayConfig["webservices"] = GetWebServicesDirectory();
 			parent::__construct(

@@ -10,21 +10,12 @@
 	$strServiceSourceDir = GetWDKDir()."webservices/system/test/";
 	require_once ($strServiceSourceDir."webservice_test.inc");
 
-	$config = new CConfig();
-	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetEnvConfigID());
-
-	$arrayConfig = array();	
+	$arrayConfig = array();
 	$arrayConfig["protocols"] = array("http","https");
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
-	$arrayConfig["accesscodes"] = array($arrayConfig["webservices"]["system/test"]["accesscode"]);
 	$arrayConfig["admin_email"] = GetAdminEmail();
-	$arrayConfig["database"] = $config->GetDataArray();
-	
 	$arrayConfig["load_tolerance"] = array("testrun" => 3.0);
-
 	$arrayConfig["database_support"] = true;
-
 	$arrayConfig["alert_email"] = GetAdminEmail();
 	$arrayConfig["tests_url"] = "http://".GetRootURL()."quality/";
 

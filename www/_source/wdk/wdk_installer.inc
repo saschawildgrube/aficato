@@ -15,8 +15,8 @@
 			header("Content-Disposition: attachment;filename=\"install_log.txt\"");
  			LockParameterSources();
  
- 			$arrayConfig = array();
- 			$arrayConfig["webservices"] = GetWebservicesDirectory(ArrayGetValue($arrayConfig,"webservices"));
+			$arrayConfig = array();
+ 			$arrayConfig["webservices"] = GetWebservicesDirectory();
  	
 			parent::__construct(
 				array(),

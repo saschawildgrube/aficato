@@ -69,25 +69,25 @@
 
 			// Manage Name
 			$this->m_strName = $strName;
-			$this->Trace("Name         : ".$this->GetName());
-			$this->Trace("Version      : ".$this->GetMeta("version"));
+			$this->Trace('Name         : '.$this->GetName());
+			$this->Trace('Version      : '.$this->GetMeta('version'));
 			
 			// Server
-			$this->Trace("Server name  : ".$_SERVER["SERVER_NAME"]."");	
-			$this->Trace("Server IP    : ".$this->GetServerIP());	
+			$this->Trace('Server name  : '.$_SERVER["SERVER_NAME"]);	
+			$this->Trace('Server IP    : '.$this->GetServerIP());	
 			
 			// Client
-			$this->Trace("Client IP    : ".$this->GetClientIP());	
+			$this->Trace('Client IP    : '.$this->GetClientIP());	
 
 			// Instance
-			$this->Trace("InstanceToken: ".$this->GetInstanceToken());	
+			$this->Trace('InstanceToken: '.$this->GetInstanceToken());	
 
 
 			// Init Error
 			$this->m_strErrorID = "";
 
 			// Trace time			
-			$this->Trace("Current time : ".RenderDateTimeNow(). " UTC");
+			$this->Trace('Current time : '.RenderDateTimeNow(). ' UTC');
 	
 			// Init output format
 			$this->m_arraySupportedFormatsDefault = array("json","xml","csv","csvpath","printr","html");
@@ -311,10 +311,24 @@
 					$this->GetEmailAlertSeverityThreshold())
 				);
 		
+		
+			// Determine default access code, if 'accesscodes' has not been explicitly set to false.
+			$arrayAccessCodes = $this->GetConfig("accesscodes");
+			if (!is_array($arrayAccessCodes))
+			{
+				if ($arrayAccessCodes !== false)
+				{
+					$strDefaultAccessCode = $this->GetWebserviceAccessCode($strName);
+					if ($strDefaultAccessCode != '')
+					{
+						$this->m_arrayConfig['accesscodes'] = array($strDefaultAccessCode);
+					}
+				}
+			}
+		
 						
 			// Check Access Codes
 			$bAccessCodeMatch = false;	
-			$arrayAccessCodes = $this->GetConfig("accesscodes");
 			if (is_array($arrayAccessCodes))
 			{
 				if (ArrayCount($arrayAccessCodes) > 0)
@@ -329,10 +343,13 @@
 					{
 						foreach ($arrayAccessCodes as $strAccessCode)
 						{
-							if ($strAccessCode == $strAccessCodeParam)
-							{ 
-								$bAccessCodeMatch = true;
-								break;
+							if ($strAccessCode != '')
+							{
+								if ($strAccessCode == $strAccessCodeParam)
+								{ 
+									$bAccessCodeMatch = true;
+									break;
+								}
 							}
 						}
 						if ($bAccessCodeMatch == false)

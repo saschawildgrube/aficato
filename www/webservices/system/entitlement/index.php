@@ -10,17 +10,10 @@
 	$strServiceSourceDir = GetWDKDir()."webservices/system/entitlement/";
 	require_once ($strServiceSourceDir."webservice_entitlement.inc");
 
-	$config = new CConfig();
-	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetEnvConfigID());
-
-	 
-	$arrayConfig = array();	
-	$arrayConfig["database"] = $config->GetDataArray();
+	$arrayConfig = array();
 	$arrayConfig["protocols"] = array("http","https");
 	$arrayConfig["admin_email"] = GetAdminEmail();
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
-	$arrayConfig["accesscodes"] = array($arrayConfig["webservices"]["system/entitlement"]["accesscode"]);
 	
 	$arrayParams = array();
 	//$arrayParams ["trace"] = "1";

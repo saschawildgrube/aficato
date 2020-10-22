@@ -15,7 +15,6 @@
 	$arrayConfig["protocols"] = array("http","https");
 	$arrayConfig["admin_email"] = GetAdminEmail();
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
-	$arrayConfig["accesscodes"] = array($arrayConfig["webservices"]["system/server"]["accesscode"]);
 	
 	$arrayParams = array();
 

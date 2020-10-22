@@ -16,7 +16,6 @@
 			
 		
 			$arrayConfig = array();
-			
 			$arrayConfig["languages"][] = "EN";
 			$arrayConfig["languages"][] = "DE";
 			$arrayConfig["fallbacklanguage"] = StringUpperCase(ArrayGetValue($_GET,"fallbacklanguage"));

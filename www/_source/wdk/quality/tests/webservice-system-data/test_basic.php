@@ -11,7 +11,7 @@
 		
 		function __construct()
 		{
-			$arrayConfig = array();
+			$arrayConfig = array();;
 			$arrayConfig["webservices"] = GetWebServicesDirectory();
 			$this->m_strWebservice = "system/data";
 			parent::__construct("Web service system/data basic functionality",$arrayConfig);

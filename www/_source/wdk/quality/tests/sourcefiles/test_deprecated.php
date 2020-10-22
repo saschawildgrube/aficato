@@ -128,7 +128,8 @@
 						'/CCountdownElement/',
 						'/RenderCountdown/(/',
 						'/IsDevice/',
-						'/GetDatabaseConfigID/(/'
+						'/GetDatabaseConfigID/(/',
+						'/GetStage/(/'
 					);
 					
 				if ($strFileName != "wdk_url.inc")

@@ -81,9 +81,11 @@
 			// Init obfuscation items
 			$this->m_arrayObfuscationItems = array(
 				"accesscode",
+				"/webservice.*accesscode/",
 				"password",
 				"passwordhash",
-				"authenticationpayload");
+				"authenticationpayload",
+				"database_password");
 			$this->m_arrayObfuscationItems = ArrayAppend($this->m_arrayObfuscationItems,$arrayObfuscationItems);
 			
 			// Instantiate trace log
@@ -96,7 +98,11 @@
 			$this->m_arrayMeta = $arrayMeta;
 
 			// Initialize config
-			$this->m_arrayConfig = $arrayConfig;
+			$config = new CConfig();
+			$config->AddConfigStoreLocation(GetConfigDir());
+			$config->LoadConfig(GetEnvConfigID());
+			$this->m_arrayConfig =  $config->GetDataArray();
+			$this->m_arrayConfig = ArrayMerge($this->m_arrayConfig,$arrayConfig);
 
 			// Initialize caching
 			$this->m_bCacheActive = true;
@@ -165,7 +171,17 @@
 
 		function GetWebserviceAccessCode($strWebservice)
 		{
-			return $this->GetConfig("webservices",$strWebservice,"accesscode");
+			$strAccessCode = $this->GetConfig('webservices',$strWebservice,'accesscode');
+			if ($strAccessCode == '')
+			{
+				$strKey = 'webservice_'.ReplaceString($strWebservice,'/','-').'_accesscode';
+				$strAccessCode = $this->GetConfig($strKey);
+			}
+			if ($strAccessCode == '')
+			{
+				$strAccessCode = $this->GetConfig('webservice_default_accesscode');
+			}
+			return $strAccessCode;
 		}
 
 
@@ -231,8 +247,8 @@
 				$arraySecured = $value; 
 				foreach ($this->m_arrayObfuscationItems as $strItem)
 				{
-					ArraySetValueRecursive($arraySecured,"*",$strItem);
-					ArraySetValueRecursive($arraySecured,"*",StringUpperCase($strItem));
+					$arraySecured = ArraySetValueRecursive($arraySecured,"*",$strItem);
+					$arraySecured = ArraySetValueRecursive($arraySecured,"*",StringUpperCase($strItem));
 				}
 				$this->m_tracelog->Trace($arraySecured);
 			}
@@ -308,13 +324,13 @@
 		final		
 		function GetAdminEmail()
 		{
-			return $this->GetConfig("admin_email");
+			return $this->GetConfig('admin_email');
 		}
 		
 		function SendErrorMailToAdmin()
 		{
 			return $this->SendMailToAdmin(
-				"ERROR",
+				'ERROR',
 				$this->GetTraceLog());
 		}
 
@@ -517,17 +533,17 @@
 		
 		function CallbackBasicAuthRenderFailed() 
 		{
-			return "Authentication Failed";	
+			return 'Authentication Failed';	
 		}
 		
 		function CallbackBasicAuthRenderSuccess() 
 		{
-			return "";
+			return '';
 		}		
 		
 		function TraceVersionWDK() 
 		{
-			$this->Trace(ArrayGetValue(GetVersionInfoWDK(),"VERBOSE"));
+			$this->Trace(ArrayGetValue(GetVersionInfoWDK(),'VERBOSE'));
 		}
 
 	

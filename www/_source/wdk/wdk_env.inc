@@ -50,7 +50,7 @@
 		{
 			return false;	
 		}		
-		if (!function_exists('GetStage'))
+		if (!function_exists('GetEnvID'))
 		{
 			return false;	
 		}		

@@ -10,17 +10,11 @@
 	$strServiceSourceDir = GetWDKDir()."webservices/system/scheduler/";
 	require_once ($strServiceSourceDir."webservice_scheduler.inc");
 
-	$config = new CConfig();
-	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetEnvConfigID());
-
-	 
 	$arrayConfig = array();	
-	$arrayConfig["database"] = $config->GetDataArray();
+	$arrayConfig['accesscode'] = false;
 	$arrayConfig["protocols"] = array("http","https");
 	$arrayConfig["admin_email"] = GetAdminEmail();
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
-	
 	$arrayConfig["load_tolerance"] = array("crontab" => 3.0);
 	$arrayConfig["crontab_heartbeat"] = true; 
 	$arrayConfig["disable_log"] = true;

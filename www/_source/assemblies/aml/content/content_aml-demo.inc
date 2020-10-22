@@ -13,7 +13,7 @@
  
  			$strAccountDataDir = GetDocumentRootDir();
  			$strAccountDataDir .= '../../';
- 			if (GetStage() == 'dev')
+ 			if (GetEnvID() == 'dev')
  			{
  				$strAccountDataDir .= 'data-dev/';	
  			}

@@ -11,16 +11,13 @@
 	
 	require_once (GetSourceDir()."webservices_directory.inc");
 	
-	$config = new CConfig();
-	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetEnvConfigID());
+
 
 	/*
 		The config array contains the configuration of a web service.
 		Some settings are optional other are crucial for operations.
 	*/ 
 	$arrayConfig = array();	
-	$arrayConfig["database"] = $config->GetDataArray();
 	$arrayConfig["protocols"] = array("http","https");
 	
 	/*
@@ -38,15 +35,17 @@
 	/*
 		Accesscodes protect web services from unauthorized use.
 		A client must provide one out of many defined access codes.
-		In this case we get the accesscode from the web service directory
-		which is shared between website and web service source code.
+		By default the access code is defined by the default webservice access
+		code stored in the environment config file.
+		If you do not want the default behaviour, set the value to false in order to
+		go without protection or set an array of allowed access codes explicitly.
 	*/
-	$arrayConfig["accesscodes"] = array($arrayConfig["webservices"]["$$$webservicename$$$"]["accesscode"]);
+	//$arrayConfig["accesscodes"] = false;
 	
 	/*
 		You can specify a load tolerance for every single command of a web service.
 		If a load tolerance is set for a command, it will only be executed if
-		the one minute average load is below tolerance.
+		the one minute average load is below the tolerance threshold.
 		This allows to create a balance between crucial activities and resource
 		consumption on the server.
 	*/

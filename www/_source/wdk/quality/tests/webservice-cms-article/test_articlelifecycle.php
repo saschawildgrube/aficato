@@ -12,6 +12,7 @@
 		{
 			$this->m_strWebservice = "cms/article";
 			$this->m_arrayArticleVersionIDs = array();
+
 			$arrayConfig = array();
 			$arrayConfig["webservices"] = GetWebServicesDirectory();
 			parent::__construct("Web service cms/article: article lifecylce",$arrayConfig);

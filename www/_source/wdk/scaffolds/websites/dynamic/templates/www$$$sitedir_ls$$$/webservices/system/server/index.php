@@ -10,14 +10,13 @@
 	$strServiceSourceDir = GetWDKDir()."webservices/system/server/";
 	require_once ($strServiceSourceDir."webservice_server.inc");	
 	
-	
 	$arrayConfig = array();
 	$arrayConfig["protocols"] = array("http","https");
 	$arrayConfig["admin_email"] = GetAdminEmail();
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
-	$arrayConfig["accesscodes"] = array($arrayConfig["webservices"]["system/server"]["accesscode"]);
 	
 	$arrayParams = array();
+	//$arrayParams ["trace"] = "1";
 
 	$webservice = new CServerWebService(
 		$strServiceSourceDir,

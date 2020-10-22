@@ -10,21 +10,12 @@
 	$strServiceSourceDir = GetWDKDir()."webservices/system/data/";
 	require_once ($strServiceSourceDir."webservice_data.inc");
 	
-	$config = new CConfig();
-	$config->AddConfigStoreLocation(GetConfigDir());
-	$config->LoadConfig(GetEnvConfigID());
-
-	 
-	$arrayConfig = array();	
-	$arrayConfig["database"] = $config->GetDataArray();
+	$arrayConfig = array();
 	$arrayConfig["protocols"] = array("http","https");
 	$arrayConfig["admin_email"] = GetAdminEmail();
 	$arrayConfig["webservices"] = GetWebservicesDirectory();
-	$arrayConfig["accesscodes"] = array($arrayConfig["webservices"]["system/data"]["accesscode"]);
-	
 	$arrayConfig["max_content_size"] = 60000;
 	
-	 
 	$arrayParams = array();
 	//$arrayParams ["trace"] = "1";
 	

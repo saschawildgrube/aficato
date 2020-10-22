@@ -53,8 +53,8 @@
  				
 			$formDef->AddControlText(
  				"DATABASESERVER",
- 				$this->GetVarName("databaseserver"),
- 				$this->GetTID("CONTROL_DATABASESERVER"),
+ 				$this->GetVarName("databasehost"),
+ 				$this->GetTID("CONTROL_DATABASEHOST"),
  				"localhost",
 		   	50,
  				100);		 				
@@ -69,18 +69,18 @@
  				100);	
 
 			$formDef->AddControlText(
- 				"DATABASEUSERNAME",
- 				$this->GetVarName("databaseusername"),
- 				$this->GetTID("CONTROL_DATABASEUSERNAME"),
- 				$this->GetVar("databaseusername"),
+ 				"DATABASEUSER",
+ 				$this->GetVarName("databaseuser"),
+ 				$this->GetTID("CONTROL_DATABASEUSER"),
+ 				$this->GetVar("databaseuser"),
 		   	50,
  				100);		 				
 		
 			$formDef->AddControlText(
  				"DATABASEUSERPASSWORD",
- 				$this->GetVarName("databaseuserpassword"),
- 				$this->GetTID("CONTROL_DATABASEUSERPASSWORD"),
- 				$this->GetVar("databaseuserpassword"),
+ 				$this->GetVarName("databasepassword"),
+ 				$this->GetTID("CONTROL_DATABASEPASSWORD"),
+ 				$this->GetVar("databasepassword"),
 		   	50,
  				100);		 				
 
@@ -190,11 +190,11 @@
 			$arrayParams["sitedir_ls"] = "/".$arrayParams["sitedir"];  // "ls" is for "leading slash"
 			
 			
-			$arrayParams["databaseserver"] = $this->GetVar("databaseserver");
-			$arrayParams["databasename"] = $this->GetVar("databasename");
-			$arrayParams["databaseusername"] = $this->GetVar("databaseusername");
-			$arrayParams["databaseuserpassword"] = $this->GetVar("databaseuserpassword");
-			$arrayParams["databasetablenameprefix"] = $this->GetVar("databasetablenameprefix");
+			$arrayParams["database-host"] = $this->GetVar("databasehost");
+			$arrayParams["database-name"] = $this->GetVar("databasename");
+			$arrayParams["database-user"] = $this->GetVar("databaseuser");
+			$arrayParams["database-password"] = $this->GetVar("databasepassword");
+			$arrayParams["database-tablenameprefix"] = $this->GetVar("databasetablenameprefix");
 			
 			
 			$arrayParams["tmpdir"] = $this->GetVar("tmpdir");
@@ -221,14 +221,7 @@
 			$arrayParams["metakeywords"] = $this->GetVar("metakeywords");
 			$arrayParams["metadescription"] = $this->GetVar("metadescription");
 			
-			$arrayParams["system-log-accesscode"] = MakeNumericToken(40);
-			$arrayParams["system-data-accesscode"] = MakeNumericToken(40);
-			$arrayParams["system-server-accesscode"] = MakeNumericToken(40);
-			$arrayParams["system-scheduler-accesscode"] = MakeNumericToken(40);
-			$arrayParams["system-user-accesscode"] = MakeNumericToken(40);
-			$arrayParams["system-entitlement-accesscode"] = MakeNumericToken(40);
-			$arrayParams["system-test-accesscode"] = MakeNumericToken(40);
-			$arrayParams["system-session-accesscode"] = MakeNumericToken(40);
+			$arrayParams["webservice-default-accesscode"] = MakeNumericToken(40);
 
 			if ($this->GetVar("seourl") == false)
 			{
@@ -278,17 +271,6 @@
 				$arrayErrors["WEBSITENAMEVERBOSE"]	= $this->GetTID("ERROR_WEBSITENAMEVERBOSE_INVALID");
 			}
 
-
-			//$strDatabaseName = 
-			/*
-			$arrayParams["databaseserver"] = $this->GetVar("databaseserver");
-			$arrayParams["databasename"] = $this->GetVar("databasename");
-			$arrayParams["databaseusername"] = $this->GetVar("databaseusername");
-			$arrayParams["databaseuserpassword"] = $this->GetVar("databaseuserpassword");
-			$arrayParams["databasetablenameprefix"] = $this->GetVar("databasetablenameprefix");
-*/
-
-		
 			if ( IsValidEmail($arrayParams["adminemail"]) == false)
 			{
 				$arrayErrors["ADMINEMAIL"]	= $this->GetTID("ERROR_EMAIL_INVALID");
