@@ -89,12 +89,22 @@
 		{
 			return 'dev';
 		}
-		return 'prod';	
+		if (FindString(GetRootURL(),'aficato.com') != -1)
+		{
+			return 'prod';
+		}
+		
+		return '';	
 	}
 	
 	function GetEnvConfigID()
 	{
-		return "env-".GetEnvID();
+		$strEnvConfigID = 'env';
+		if (GetEnvID() != '')
+		{
+			$strEnvConfigID .= '-'.GetEnvID();
+		}
+		return $strEnvConfigID;
 	}
 	
 	function GetOperationMode()
