@@ -383,6 +383,15 @@
 */
 			$this->SetOutputItem('LANGUAGESELECTION','');	
 
+
+			// FORK ME ON GITHUB
+			$this->IncludeElement('forkmeongithub');
+			$forkmeongithub = new CForkMeOnGithubElement($this,'default');
+			$this->SetOutputItem('FORKMEONGITHUB',$forkmeongithub->RenderForkMeOnGithub('saschawildgrube','aficato'));
+
+
+
+
 		}
 		
 		function CallbackRenderSpecialContent($strContentID)
