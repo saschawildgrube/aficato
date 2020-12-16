@@ -332,8 +332,6 @@
 			case CSV_ESCAPEDQUOTE:
 			case CSV_QUOTEDVALUE:
 
-				// TODO: optimize here!
-
 				$strNextToken = "";
 				
 				$nPosNextToken = FindStringMultiple(

@@ -1,8 +1,5 @@
 <?php
 
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
-
 	require_once('wdk_webapplication.inc');
 	require_once('wdk_quality.inc');
 	require_once('wdk_unittest.inc');

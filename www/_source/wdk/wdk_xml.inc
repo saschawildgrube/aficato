@@ -202,6 +202,7 @@
 		
 		function Parse($strXML)
 		{
+			//$strXML = ReplaceString($strXML,'<br />',"\n");
 			$this->Init();
 			$arrayData = array();
 			$arrayIndex = array();
@@ -421,8 +422,12 @@
 		private
 		function MakeCDATA($strData)
 		{
-			$strData = ReplaceString(strval($strData),"]]>","]]]]><![CDATA[>");
-			return "<![CDATA[$strData]]>";
+			$strData = ReplaceString(strval($strData),']]>',']]]]><![CDATA[>');
+			//$strData = ReplaceString($strData,"\n",'&#xA;&#xD;');
+			//$strData = ReplaceString($strData,"\n",'<br />');
+			
+			$strData =  '<![CDATA['.$strData.']]>';
+			return $strData;
 		}
 	}
 

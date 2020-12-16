@@ -1,8 +1,8 @@
 <?php
 
-	require_once(GetWDKDir()."wdk_layout_bootstrap.inc");
+	require_once(GetWDKDir()."wdk_layout_bootstrap3.inc");
 
-	abstract class CLayoutBootstrapTheme extends CLayoutBootstrap
+	abstract class CLayoutBootstrap3Theme extends CLayoutBootstrap3
 	{
 		function __construct(
 			CWebSite $website,
@@ -23,7 +23,8 @@
 			$this->GetWebsite()->AddHeader('<![endif]-->');
 
 			// BOOTSTRAP THEME
-			$this->GetWebsite()->AddStyleSheet('bootstrap-theme','bootstrap-theme.min');
+			$this->AddStyleSheetURL('bootstrap-theme','https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css');
+			// integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"
 			
 			$this->GetWebsite()->AddJavaScript('layout-element-navigation-horizontalpath','layout_default_element_navigation_horizontalpath');
 			

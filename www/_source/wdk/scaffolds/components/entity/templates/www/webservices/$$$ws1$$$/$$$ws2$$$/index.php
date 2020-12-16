@@ -3,13 +3,13 @@
 	error_reporting (E_ALL);
 	ini_set('display_errors', 1);
 
-	require_once ("../../../_source/env.inc");
+	require_once ('../../../_source/env.inc');
 	
-	$strServiceDir = GetWebservicesDir(). "$$$webservicename$$$/";
-	$strServiceSourceDir = GetSourceDir()."assemblies/$$$a$$$/webservices/$$$webservicename$$$/";
-	require_once ($strServiceSourceDir."webservice_$$$ws2$$$.inc");
+	$strServiceDir = GetWebservicesDir().'$$$webservicename$$$/';
+	$strServiceSourceDir = GetSourceDir().'assemblies/$$$a$$$/webservices/$$$webservicename$$$/';
+	require_once ($strServiceSourceDir.'webservice_$$$ws2$$$.inc');
 	
-	require_once (GetSourceDir()."webservices_directory.inc");
+	require_once (GetSourceDir().'webservices_directory.inc');
 	
 
 
@@ -18,19 +18,19 @@
 		Some settings are optional other are crucial for operations.
 	*/ 
 	$arrayConfig = array();	
-	$arrayConfig["protocols"] = array("http","https");
+	$arrayConfig['protocols'] = array('http','https');
 	
 	/*
 		GetWebservicesDirectory() is usually implemented in web services_directory.inc.
 		It returns a configuration array with details on web services contained
 		in this application system.
 	*/
-	$arrayConfig["webservices"] = GetWebservicesDirectory();
+	$arrayConfig['webservices'] = GetWebservicesDirectory();
 	
 	/*
 		Any notification mails will be sent to this email address:
 	*/
-	$arrayConfig["admin_email"] = GetAdminEmail();
+	$arrayConfig['admin_email'] = GetAdminEmail();
 		
 	/*
 		Accesscodes protect web services from unauthorized use.
@@ -40,7 +40,7 @@
 		If you do not want the default behaviour, set the value to false in order to
 		go without protection or set an array of allowed access codes explicitly.
 	*/
-	//$arrayConfig["accesscodes"] = false;
+	//$arrayConfig['accesscodes'] = false;
 	
 	/*
 		You can specify a load tolerance for every single command of a web service.
@@ -49,14 +49,14 @@
 		This allows to create a balance between crucial activities and resource
 		consumption on the server.
 	*/
-	$arrayConfig["load_tolerance"] = array("cleanup" => 3.0);
+	$arrayConfig['load_tolerance'] = array('cleanup' => 3.0);
 	
 	/*
 		Define which event severity level justifies to send an email each
 		time the event is triggered. Anything more verbose than SEVERITY_ERROR
 		(e.g. SEVERITY_WARNING) may spam the administrator's inbox.
 	*/
-	$arrayConfig["email_alert_severity_threshold"] = SEVERITY_ERROR;
+	$arrayConfig['email_alert_severity_threshold'] = SEVERITY_ERROR;
 	
 	/*
 		The parameter array can be used to immitate parameters which would
@@ -64,10 +64,10 @@
 		For example, you could create versions of the web service index.php that
 		always execute a specific command.
 		The example below would always generate debug output no matter if the
-		parameter "trace" is set to "1" or not.
+		parameter 'trace' is set to '1' or not.
 	*/
 	$arrayParams = array();
-	//$arrayParams ["trace"] = "1";
+	//$arrayParams ['trace'] = '1';
 	
 	/*
 		Creating an instance of the web service class triggers everything

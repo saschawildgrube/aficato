@@ -123,4 +123,12 @@
 		}
 	}
 
-
+	function MakeTel($strTel)
+	{
+		$strTel = StringFilter($strTel,CHARSET_TEL);
+		if (StringSection($strTel,0,4) != 'tel:')
+		{
+			$strTel = 'tel:'.$strTel;
+		}
+		return $strTel;	
+	}

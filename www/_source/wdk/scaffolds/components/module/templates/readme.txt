@@ -51,14 +51,14 @@ CallbackInitAssemblyLine. If it doesn't exist add it:
 
 	function CallbackInitAssemblyLine(&$assemblyLine)
 	{
-		$assembly = new CAssembly($this,'$$$a$$$');
+		$assembly = new CAssembly($this,"$$$a$$$");
 		$assemblyLine->AddAssembly($assembly);
 	}
 
 If the function exists, just add the following lines to the existing
 function:
 
-	$assembly = new CAssembly($this,'$$$a$$$');
+	$assembly = new CAssembly($this,"$$$a$$$");
 	$assemblyLine->AddAssembly($assembly);
 
 

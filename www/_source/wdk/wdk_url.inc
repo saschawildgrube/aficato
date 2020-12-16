@@ -91,6 +91,26 @@
 		return $strURL;
 	}
 
+	function GetRegExURL()
+	{
+		$strIPregex = '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b';
+
+		$strURLregex =
+			'((https?|ftp)\:\/\/)?' // SCHEME 
+    . '([a-z0-9+!*(),;?&=$_.-]+(\:[a-z0-9+!*(),;?&=$_.-]+)?@)?' // USER and PASSWORD
+    . '(([a-z0-9-.]*)\.([a-z]{2,20})|'.$strIPregex.'|localhost)' // HOST with TLD or IP or "localhost"
+    . '(\:[0-9]{2,5})?' // PORT
+    . '(\/([a-z0-9!$%\/()=@+~,:\-_]\.?)+)*\/?' // PATH allowing double slashes and commas, equal signs...
+    . '(\?[a-z\:+&$_.-][a-z0-9;:@&%=+\/$_.\?\{\}\-]*)?' // GET Query      
+		. '(#([a-z!_\.\-\/][a-z0-9:&%!+\/=$_\.\?\-]*)?)?' // ANCHOR 
+		;
+		
+		$strURLregex = '/^'.$strURLregex.'$/';
+		
+		return $strURLregex;
+	}
+	
+
 	function IsValidURL($strURL)
 	{
 		if ($strURL == "")	
@@ -109,24 +129,10 @@
 		{
 			return false;
 		}
-
-		$strIPregex = '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b';
-
-		$strURLregex =
-			'((https?|ftp)\:\/\/)?' // SCHEME 
-    . '([a-z0-9+!*(),;?&=$_.-]+(\:[a-z0-9+!*(),;?&=$_.-]+)?@)?' // USER and PASSWORD
-    . '(([a-z0-9-.]*)\.([a-z]{2,20})|'.$strIPregex.'|localhost)' // HOST with TLD or IP or "localhost"
-    . '(\:[0-9]{2,5})?' // PORT
-    . '(\/([a-z0-9:+$_=,~%()\/@-]\.?)+)*\/?' // PATH allowing double slashes and commas, equal signs...
-    . '(\?[a-z\:+&$_.-][a-z0-9;:@&%=+\/$_.\?\{\}\-]*)?' // GET Query      
-		. '(#([a-z!_.\-\/][a-z0-9:&!+\/=$_.\?\-]*)?)?' // ANCHOR 
-		;
-		
-		$strURLregex = '/^'.$strURLregex.'$/';
 		
 		$strURL = StringLowerCase(u($strURL));
 
-		if (RegExpMatch($strURL,$strURLregex) == false) 
+		if (RegExpMatch($strURL,GetRegExURL()) == false) 
 		{ 
 			return false; 
 	  } 
@@ -186,6 +192,19 @@
 			$arrayParams[$strNewKey] = $strNewValue;
 		}
 		return $arrayParams;
+	}
+
+	function IsStringURLEncoded($strString)
+	{
+		if ($strString == '')
+		{
+			return false;
+		}
+		if (StringCheckCharSet($strString,CHARSET_URL) == false)
+		{
+			return false;
+		}
+		return true;
 	}
 
 	function StringURLEncode($strString)

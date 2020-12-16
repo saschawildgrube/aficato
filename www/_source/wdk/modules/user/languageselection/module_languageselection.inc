@@ -11,12 +11,12 @@
 			$strContent)
 		{ 
 			$this->m_strContent = $strContent;
-			parent::__construct($website,"user/languageselection");
+			parent::__construct($website,'user/languageselection');
 		}
 		
 		function CallbackInit()
 		{
-			$this->GetWebsite()->LoadStringResources("local");
+			$this->GetWebsite()->LoadStringResources('local');
 			return true;
 		}
 		
@@ -28,21 +28,22 @@
 		
 		function StateDefaultStyleToolbar()
 		{
-			$this->Trace("StateDefaultStyleToolbar");
+			$this->Trace('StateDefaultStyleToolbar');
 			
-			$arrayLanguages = $this->GetWebsite()->GetConfig("languages");
+			$arrayLanguages = $this->GetWebsite()->GetConfig('languages');
 			$arrayLanguageLinks = array();
 			
-			$linkicon = new CLinkIconElement($this->GetWebsite(),"default");
-			$strToolBar = "";
+			$this->IncludeElement('linkimage');
+			$linkimage = new CLinkImageElement($this->GetWebsite(),'default');
+			$strToolBar = '';
 			
 			foreach ($arrayLanguages as $strLanguage)
 			{
-				if ($this->m_strContent != "")
+				if ($this->m_strContent != '')
 				{
 					$arrayParams = array();
-					$arrayParams["content"] = $this->m_strContent;
-					$arrayParams["language"] = $strLanguage;
+					$arrayParams['content'] = $this->m_strContent;
+					$arrayParams['language'] = $strLanguage;
 					$strLinkURL = $this->GetWebsite()->MakeURL($arrayParams);
 					
 				}
@@ -51,29 +52,32 @@
 					$strLinkURL = $this->GetWebsite()->MakeLanguageURL($strLanguage);	
 				}
 				
-				$strToolBar .= $linkicon->RenderLinkIcon($strLinkURL,"language-".StringLowerCase($strLanguage),"?TID_LANGUAGE_".StringUpperCase($strLanguage)."?");
+				$strToolBar .= $linkimage->RenderLinkImage(
+					$strLinkURL,
+					$this->GetWebsite()->GetLayoutImageURL('icon_language-'.StringLowerCase($strLanguage)),
+					'?TID_LANGUAGE_'.StringUpperCase($strLanguage).'?');
 			}
-			$this->SetOutputItem("TOOLBAR",$strToolBar);
+			$this->SetOutputItem('TOOLBAR',$strToolBar);
 
-			return "default";
+			return 'default';
 		}
 
 		function StateDefaultStyleLinklist()
 		{
-			$this->Trace("StateDefaultStyleLinklist");
+			$this->Trace('StateDefaultStyleLinklist');
 			
-			$arrayLanguages = $this->GetWebsite()->GetConfig("languages");
+			$arrayLanguages = $this->GetWebsite()->GetConfig('languages');
 			$arrayLanguageLinks = array();
 			
-			$link = new CLinkElement($this->GetWebsite(),"default");
+			$link = new CLinkElement($this->GetWebsite(),'default');
 			
 			foreach ($arrayLanguages as $strLanguage)
 			{
-				if ($this->m_strContent != "")
+				if ($this->m_strContent != '')
 				{
 					$arrayParams = array();
-					$arrayParams["content"] = $this->m_strContent;
-					$arrayParams["language"] = $strLanguage;
+					$arrayParams['content'] = $this->m_strContent;
+					$arrayParams['language'] = $strLanguage;
 					$strLinkURL = $this->GetWebsite()->MakeURL($arrayParams);
 					
 				}
@@ -82,33 +86,33 @@
 					$strLinkURL = $this->GetWebsite()->MakeLanguageURL($strLanguage);	
 				}
 
-				$strLanguageLink = $link->RenderLink($strLinkURL,"?TID_LANGUAGE_".StringUpperCase($strLanguage)."?");
+				$strLanguageLink = $link->RenderLink($strLinkURL,'?TID_LANGUAGE_'.StringUpperCase($strLanguage).'?');
 				array_push($arrayLanguageLinks,$strLanguageLink);
 				
 			}
 			
-			$this->IncludeElement("text");
+			$this->IncludeElement('text');
 			
-			$list = new CListElement($this->GetWebsite(),"default");			
+			$list = new CListElement($this->GetWebsite(),'default');			
 			$strLanguageList = $list->RenderList($arrayLanguageLinks);
-			$textelement = new CTextElement($this->GetWebsite(),"default");
-			$strLanguageSelection = $textelement->RenderText("?TID_LANGUAGESELECTION_TITLE_LINKLIST?",$strLanguageList);
+			$textelement = new CTextElement($this->GetWebsite(),'default');
+			$strLanguageSelection = $textelement->RenderText('?TID_LANGUAGESELECTION_TITLE_LINKLIST?',$strLanguageList);
 						
-			$this->SetOutputItem("LINKLIST",$strLanguageSelection);
+			$this->SetOutputItem('LINKLIST',$strLanguageSelection);
 		           
-			return "default";
+			return 'default';
 		}
 		
 		function StateDefaultStyleDropdown()
 		{ 
-			$this->Trace("StateDefaultStyleDropdown");
+			$this->Trace('StateDefaultStyleDropdown');
 			
-			$arrayLanguages = $this->GetWebsite()->GetConfig("languages");
+			$arrayLanguages = $this->GetWebsite()->GetConfig('languages');
 
 			$arrayVars =  $this->GetWebsite()->GetSessionAwareArrayVars();
-			if ($this->m_strContent != "")
+			if ($this->m_strContent != '')
 			{
-				$arrayVars["content"] = $this->m_strContent;
+				$arrayVars['content'] = $this->m_strContent;
 			} 
 
 			$formDef = new CFormDefinition();
@@ -116,35 +120,35 @@
 			$arrayOptions = array();
 			foreach ($arrayLanguages as $strLanguage)
 			{
-				$arrayOptions[$strLanguage] = "?TID_LANGUAGE_".StringUpperCase($strLanguage)."?";
+				$arrayOptions[$strLanguage] = '?TID_LANGUAGE_'.StringUpperCase($strLanguage).'?';
 			}
-			$formDef->AddControlSelect("LANGUAGE","language","xxx",$arrayOptions, $this->GetWebsite()->GetLanguage());
+			$formDef->AddControlSelect('LANGUAGE','language','xxx',$arrayOptions, $this->GetWebsite()->GetLanguage());
 			
-			$formDef->AddControlButtonSubmit(">>");
+			$formDef->AddControlButtonSubmit('>>');
 
-			$form = new CFormTemplateElement($this->GetWebsite(),"default");
-			$this->SetOutputItem("DROPDOWN",
-				$form->RenderFormTemplate($formDef,array(),array(),"languageselectiondropdown"));
+			$form = new CFormTemplateElement($this->GetWebsite(),'default');
+			$this->SetOutputItem('DROPDOWN',
+				$form->RenderFormTemplate($formDef,array(),array(),'languageselectiondropdown'));
 		
-			return "default";
+			return 'default';
 		}
 		
 		
 		function StateDefault()
 		{
-			if ($this->GetStyle() == "toolbar")
+			if ($this->GetStyle() == 'toolbar')
 			{
 				return $this->StateDefaultStyleToolbar();	
 			}
-			if ($this->GetStyle() == "linklist")
+			if ($this->GetStyle() == 'linklist')
 			{
 				return $this->StateDefaultStyleLinklist();	
 			}
-			if ($this->GetStyle() == "dropdown")
+			if ($this->GetStyle() == 'dropdown')
 			{
 				return $this->StateDefaultStyleDropdown();	
 			}
-			$this->GetWebsite()->Error("Unsupported style specified");
+			$this->GetWebsite()->Error('Unsupported style specified');
 		}
 
 

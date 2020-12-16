@@ -46,17 +46,10 @@
 		function CallbackInitCommandDefinition(&$commandDef)
 		{
 			parent::CallbackInitCommandDefinition($commandDef);
-			$commandDef->AddCommandDefinition("install",array());
 		}		
 		
 		function CallbackCommand($strCommand)
 		{
-			if ($strCommand == "install")
-			{
-				$this->CommandInstall();
-				return;	
-			}
-			
 			parent::CallbackCommand($strCommand);	
 		}
 		
@@ -83,6 +76,13 @@
 		
 		function CommandInstall()
 		{
+			parent::CommandInstall();
+			if ($this->GetError() != "")
+			{
+				return;	
+			}
+			
+			
 			$strInstallFile = $this->GetSourceDir()."install.sql";
 			if (!IsFile($strInstallFile))
 			{

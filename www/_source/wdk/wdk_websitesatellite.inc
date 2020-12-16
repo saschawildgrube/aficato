@@ -217,9 +217,9 @@
 			$this->GetWebsite()->AddJavaScript($strTitle,$strID); 
 		}
 
-		function AddJavaScriptURL($strTitle,$strURL)
+		function AddJavaScriptURL($strTitle,$strURL,$strIntegrity='')
 		{
-			$this->GetWebsite()->AddJavaScriptURL($strTitle,$strURL);		
+			$this->GetWebsite()->AddJavaScriptURL($strTitle,$strURL,$strIntegrity);		
 		}
 
 		function AddJavaScriptFile($strTitle,$strFilePath)
@@ -242,9 +242,9 @@
 			$this->GetWebsite()->AddStyleSheetFilePath($strTitle,$strFilePath);
 		}
 
-		function AddStyleSheetURL($strTitle,$strURL)
+		function AddStyleSheetURL($strTitle,$strURL,$strIntegrity='')
 		{
-			$this->GetWebsite()->AddStyleSheetURL($strTitle,$strURL);
+			$this->GetWebsite()->AddStyleSheetURL($strTitle,$strURL,$strIntegrity);
 		}
 
 		function AddStyleSheetSourceCode($strTitle,$strSourceCode)

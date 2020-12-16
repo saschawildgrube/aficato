@@ -40,6 +40,10 @@ TID_TEXT_ELEMENT_LINKEDINSHARE
 The LinkedIn Share Button allows a user to share the currently viewed page via LinkedIn.
 TID_TITLE_ELEMENT_LOADING
 Loading
+TID_TITLE_ELEMENT_RESPONSIVE
+Responsive
+TID_TEXT_ELEMENT_RESPONSIVE
+The responsive element allows to provide multiple variants of a content which should be displayed in each of the four screen sizes.
 TID_TITLE_ELEMENT_TEXT
 Text
 TID_TITLE_ELEMENT_LIST
@@ -60,6 +64,8 @@ TID_TITLE_ELEMENT_ICON
 Icon
 TID_TITLE_ELEMENT_LINKICON
 Link Icon
+TID_TITLE_ELEMENT_LINKIMAGE
+Link Image
 TID_TITLE_ELEMENT_DOWNLOADLINK
 Download Link
 TID_TITLE_ELEMENT_IMAGE

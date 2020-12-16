@@ -8,20 +8,20 @@
 		{
 			parent::__construct(
 				$website,
-				"image",
+				'image',
 				$strStyleID,
 				false,
 				true);
 		}
 		
-		function RenderImage($strImageURL, $strText = "")
+		function RenderImage($strImageURL, $strText = '')
 		{
 			$strOutput = $this->GetLayoutHTML();  
 			
 			$arrayItems = array();
 			
-			$arrayItems["IMAGEURL"] = htmlentities($strImageURL);
-			$arrayItems["TEXT"] = $strText;
+			$arrayItems['IMAGEURL'] = htmlentities($strImageURL);
+			$arrayItems['TEXT'] = $strText;
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

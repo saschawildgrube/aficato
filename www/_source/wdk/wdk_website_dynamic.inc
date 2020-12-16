@@ -583,11 +583,20 @@
 					{
 						return $strDefaultContent;
 					}
+					else
+					{
+						return '';	
+					}
 				}
 				return false;
 			}
 			$strContent = $webservice->GetResultValueInsecure('DATA','DATA_CONTENT');
-			$strContent = urldecode($strContent);
+			if (IsStringURLEncoded($strContent))
+			{
+				$this->Trace('GetData: IsStringURLEncoded returned true');
+				$this->Trace($strContent);
+				$strContent = StringURLDecode($strContent);
+			}
 			return $strContent;
 		}
 		
@@ -597,7 +606,9 @@
 			$arrayParams = array();
 			$arrayParams['command'] = 'set';
 			$arrayParams['data_name'] = $strDataName;
-			$arrayParams['data_content'] = StringURLEncode($strContent);
+			//$arrayParams['data_content'] = StringURLEncode($strContent);
+			$arrayParams['data_content'] = $strContent;
+			
 			
 			if ($strContextType != '')
 			{

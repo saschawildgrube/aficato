@@ -14,7 +14,7 @@
 				$website,
 				"sortoption",
 				$strStyleID,
-				true,
+				false,
 				true);
 		}
 		

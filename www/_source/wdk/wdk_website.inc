@@ -1,8 +1,5 @@
 <?php
  
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);  
-	  
 	require_once('wdk_webapplication.inc');
 
 	require_once("wdk_mail.inc");
@@ -803,8 +800,8 @@
 
 		
 			// Initialize Logo
-			$linkLogo = new CLinkElement($this,"logo");
-			$this->SetOutputItem("LOGO",$linkLogo->RenderLink($this->GetRootURL(),"?TID_TITLE?"));
+			$linkLogo = new CLinkElement($this,'logo');
+			$this->SetOutputItem('LOGO',$linkLogo->RenderLink($this->GetRootURL(),'?TID_TITLE?'));
 
 			
 			// Initialize CTA
@@ -1779,7 +1776,7 @@
 		}
 		
 		final  
-		function GetLayoutImageURL($strImageID,$strImageFileExtention="png")
+		function GetLayoutImageURL($strImageID,$strImageFileExtention='png')
 		{
 			$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),$strImageFileExtention);
 			if (IsFile($this->GetImagesDir().$strFile))
@@ -2366,10 +2363,11 @@
 		}
 
 		final
-		function AddJavaScriptURL($strTitle,$strURL)
+		function AddJavaScriptURL($strTitle,$strURL,$strIntegrity='')
 		{
 			$this->m_arrayJavaScripts[$strTitle] = array(
-				"url" => $strURL);	
+				'url' => $strURL,
+				'integrity' => $strIntegrity);	
 		}
 
 		final
@@ -2402,15 +2400,16 @@
 		function AddStyleSheetFilePath($strTitle,$strFilePath)
 		{
 			$this->m_arrayStyleSheets[$strTitle] = array(
-				"filepath" => $strFilePath);	
+				'filepath' => $strFilePath);	
 		}
 
 
 		final
-		function AddStyleSheetURL($strTitle,$strURL)
+		function AddStyleSheetURL($strTitle,$strURL,$strIntegrity='')
 		{
 			$this->m_arrayStyleSheets[$strTitle] = array(
-				'url' => $strURL);	
+				'url' => $strURL,
+				'integrity' => $strIntegrity);	
 		}
 
 		final
@@ -2975,7 +2974,13 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				{
 					if (IsValidURL($strURL) == true)
 					{
-						$strHeader .= '	<link href="'.$strURL.'" rel="stylesheet">'."\n";						
+						$strIntegrityAttribute = '';
+						$strIntegrity = ArrayGetValue($arrayStyleSheet,'integrity');
+						if ($strIntegrity != '')
+						{
+							$strIntegrityAttribute = ' integrity="'.$strIntegrity.'" crossorigin="anonymous"';
+						}
+						$strHeader .= '	<link href="'.$strURL.'" rel="stylesheet"'.$strIntegrityAttribute.'>'."\n";						
 					}
 					continue;
 				}
@@ -3736,7 +3741,14 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strURL = ArrayGetValue($arrayJavaScript,'url');
 				if (IsValidURL($strURL) == true)
 				{
-					$strScriptHTML .= "\n<script src=\"$strURL\"></script>";
+					$strIntegrityAttribute = '';
+					$strIntegrity = ArrayGetValue($arrayJavaScript,'integrity');
+					if ($strIntegrity != '')
+					{
+						$strIntegrityAttribute = ' integrity="'.$strIntegrity.'" crossorigin="anonymous"';
+					}
+					
+					$strScriptHTML .= "\n".'<script src="'.$strURL.'"'.$strIntegrityAttribute.'></script>';
 					continue;
 				}
 				
@@ -3748,11 +3760,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				}
 				
 				$strScriptID = ArrayGetValue($arrayJavaScript,'id');
-				if ($strScriptID != "")
+				if ($strScriptID != '')
 				{
 					if (IsFile($this->m_strJavaScriptsDir.$strScriptID.'.js') == true)
 					{
-						$strScriptHTML .= "\n<script src=\"".$this->GetRootURL()."js/".$strScriptID.".js\"></script>";
+						$strScriptHTML .= "\n".'<script src="'.$this->GetRootURL().'js/'.$strScriptID.'.js"></script>';
 						continue;
 					}
 					$strJavaScriptFile = $this->GetJavaScriptFilePath($strScriptID);
@@ -5412,15 +5424,36 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		{
 			$this->AddJavaScript('facebook-sdk');
 			$this->SetBodyItem('facebook-sdk','<div id="fb-root"></div>');
-			return true;
 		}		
 
 		function ActivateJQuery()
 		{
-			$this->AddJavaScriptURL('jquery','https://code.jquery.com/jquery.js');
-			return true;
+			//$this->AddJavaScriptURL('jquery','https://code.jquery.com/jquery-1.12.4.min.js','sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=');
+			//$this->AddJavaScriptURL('jquery','https://code.jquery.com/jquery-3.5.1.slim.min.js','sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj');
+			$this->AddJavaScriptURL('jquery','https://code.jquery.com/jquery-3.5.1.min.js','sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==');
+		
+		
+		
 		}		
 
+		function ActivateBootstrap3()
+		{
+			$this->ActivateJQuery();
+			$this->AddStyleSheetURL('bootstrap','https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css','sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u');
+			$this->AddJavaScriptURL('bootstrap','https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js','sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa');
+		}
+
+		function ActivateBootstrap4()
+		{
+			$this->AddStyleSheetURL('bootstrap','https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css','sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2');
+			$this->AddJavaScriptURL('bootstrap','https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js','sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx');
+		}
+
+		
+		function ActivateFontAwesome4()
+		{ 
+			$this->AddStyleSheetURL('fontawesome4','https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');	
+		}
 
 		function ActivateReact()
 		{
@@ -5441,10 +5474,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			return true;
 		}		
 		
-		function ActivateFontAwesome()
-		{ 
-			$this->AddStyleSheetURL('fontawesome','https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');	
-		}
+
 		
 		
 		final

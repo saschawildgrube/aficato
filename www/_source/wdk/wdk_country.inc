@@ -1,8 +1,8 @@
 <?php
 	
-	function IsValidCountryID($strCountry)
+	function IsValidCountryID($strCountryID)
 	{
-		return ArrayValueExists(GetAllCountryIDs(),$strCountry);	
+		return ArrayValueExists(GetAllCountryIDs(),$strCountryID);	
 	}
 
 	// http://en.wikipedia.org/wiki/ISO_3166-1

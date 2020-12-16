@@ -6,8 +6,8 @@
 * Test website scaffolder: "Dynamic"
 * Update version information in wdk.txt (remove "WORK IN PROGRESS")
 * Update copyright year in wdk.txt
-* Update version information in content_wdkdocs-prologue-releasenotes.txt (remove "WORK IN PROGRESS")
-* Update the baseline date in content_wdkdocs-prologue-releasenotes.txt
+* Update version information in content_wdkdocs-releasenotes.txt (remove "WORK IN PROGRESS")
+* Update the baseline date in content_wdkdocs-releasenotes.txt
 * Update version information in wdk.inc (add the baseline date)
 * Update system requirements (versions) in wdk_website.inc (search for "WDK_SYSTEMREQUIREMENT_")
 * Test the updated version information in lab environment
@@ -21,10 +21,11 @@
 * Update version in wdk.inc 
 * Remove the baseline date in wdk.inc
 * Update version in wdk.txt and add "WORK IN PROGRESS" after he version number
-* Add new version chapter in content_wdkdocs-prologue-releasenotes.txt:<pre>
-* Update your websites
+* Add new version chapter in content_wdkdocs-releasenotes.txt:<pre>
 ==Version 0.0.0.x WORK IN PROGRESS==
 NOT YET Baselined
+* '''IMPORTANT'''
+** No issues
 * Security
 ** No Changes
 * Defects
@@ -38,3 +39,4 @@ NOT YET Baselined
 * Documentation
 ** No Changes
 </pre>
+* Update your websites

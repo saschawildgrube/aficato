@@ -6,7 +6,7 @@
 	{
 		function __construct()
 		{
-			parent::__construct('Test generic output item LINK');
+			parent::__construct("Test generic output item LINK");
 		}
 		
 		function CallbackInit()
@@ -18,7 +18,7 @@
 		function TestCase_GenericOutputItem($strContent,$strExpectedOutput)
 		{
 			$this->TestCase_CheckURL(
-				$strTestWebsiteURL = 'http://'.GetRootURL().'quality/testwebsite/?content=test-genericoutputitem-'.$strContent,
+				$strTestWebsiteURL = "http://".GetRootURL()."quality/testwebsite/?content=test-genericoutputitem-".$strContent,
 				array($strExpectedOutput));			
 		}
 		

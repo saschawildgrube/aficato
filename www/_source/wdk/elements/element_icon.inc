@@ -13,7 +13,7 @@
 				true,
 				true);
 				
-			$this->GetWebsite()->ActivateFontAwesome();
+			$this->GetWebsite()->ActivateFontAwesome4();
 		}
 		
 		function RenderIcon($strIconID)

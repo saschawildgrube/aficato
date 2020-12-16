@@ -2,16 +2,6 @@
 
 	// http://www.ietf.org/rfc/rfc3966.txt
 	
-	function MakeTel($strTel)
-	{
-		$strTel = StringFilter($strTel,CHARSET_TEL);
-		if (StringSection($strTel,0,4) != 'tel:')
-		{
-			$strTel = 'tel:'.$strTel;
-		}
-		return $strTel;	
-	}
-
 	class CTelElement extends CElement
 	{
 		function __construct(

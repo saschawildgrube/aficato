@@ -1,7 +1,5 @@
 <?php
 
-	error_reporting (E_ALL);
-	ini_set('display_errors', 1);
 	
 	require_once("wdk_webapplication.inc");
  
@@ -177,6 +175,8 @@
 					// Add generic commands:
 					$this->m_commandDef->AddCommandDefinition_help();
 					$this->m_commandDef->AddCommandDefinition_selfcheck();
+					$this->m_commandDef->AddCommandDefinition_install();
+
 
 					// Check command and related parameters
 					$strError = $this->m_commandDef->CheckCommand($this->GetCommand(),$this->m_arrayParams,$arrayDefaultParams);
@@ -514,7 +514,7 @@
 			// TRACE
 			if ($this->IsTraceActive())
 			{
-				$this->SetResultEnvelopeValue($this->GetTraceLog(),"TRACE");
+				$this->SetResultEnvelopeValue($this->GetTraceLog(),'TRACE');
 			}
 
 			$this->RenderWebService();
@@ -533,6 +533,10 @@
 			case 'selfcheck':
 				$this->CommandSelfCheck();
 				return;
+				
+			case 'install':
+				$this->CommandInstall();
+				return;	
 				
 			case '':
 				$this->SetError('COMMAND_MISSING');
@@ -894,6 +898,12 @@
 	
 			$this->Trace("Install_AddScheduledJob END");
 		}		
+
+
+		function CommandInstall()
+		{
+			return;
+		}
 
 
 		

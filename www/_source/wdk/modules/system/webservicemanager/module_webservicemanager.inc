@@ -189,19 +189,16 @@
 			$arrayParams["command"] = "help";
 			$consumer->ConsumeWebService($strWebservice,$arrayParams);
 			$strError = $consumer->GetError();
+			$this->SetOutputItem("VERSION",$consumer->GetMetaValue("VERSION"));
 			if ($strError != "")
 			{
 				$this->SetErrorMessageCode($strError);
 				$this->SetOutputItem("HELP","");
-				$this->SetOutputItem("VERSION","");
 			}
 			else
 			{
 				$console = new CConsoleElement($this->GetWebsite(),"default"); 
-				$this->SetOutputItem(
-					"HELP",
-					$console->RenderConsole($consumer->GetHelp()));
-				$this->SetOutputItem("VERSION",$consumer->GetMetaValue("VERSION"));
+				$this->SetOutputItem("HELP",$console->RenderConsole($consumer->GetHelp()));
 			}
 
 

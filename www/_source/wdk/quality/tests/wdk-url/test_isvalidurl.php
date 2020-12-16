@@ -44,6 +44,10 @@
 		{
 			parent::CallbackTest();
 			
+			$this->Trace('GetRegExURL():');
+			$this->Trace(GetRegExURL());
+			$this->Trace('');
+
 			$this->TestCase_IsValidURL('http://localhost',true);
 			$this->TestCase_IsValidURL('http://localhost:8080',true);
 			$this->TestCase_IsValidURL('http://localhost/',true);
@@ -75,6 +79,8 @@
  			$this->TestCase_IsValidURL('http://www.cio.de/a/die-10-wichtigsten-technologie-trends-2016,3248934.html',true);
  			$this->TestCase_IsValidURL('https://www.amazon.de/Game-Penetrating-Secret-Society-Artists/dp/0061240168/ref=sr_1_6?ie=UTF8&qid=1473444983&sr=8-6&keywords=the+game',true);
  			$this->TestCase_IsValidURL('https://analytics.google.com/analytics/web/#embed/report-home/a7THIS46IS10A79TESTp114482491/',true);
+ 			$this->TestCase_IsValidURL('https://store.servicenow.com/sn_appstore_store.do#!/store/application/f13e0cce0fabaa003e0b87ece1050ec3/2.0.0?referer=%2Fstore%2Fsearch%3Flistingtype%3Dallintegrations%25253Bancillary_app%25253Bcertified_apps%25253Bcontent%25253Bindustry_solution%25253Boem%25253Butility%26q%3Dfile&sl=sh',true);
+
  			
  			$this->TestCase_IsValidURL('https://groups.google.com/a/test/forum/#managemembers/hello-world/members/active',true);
  			$this->TestCase_IsValidURL('https://groups.google.com/a/test/forum/#manage!members/hello-world/members/active',true);

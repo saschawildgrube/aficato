@@ -13,7 +13,7 @@
 				false,
 				true);
 				
-			$this->GetWebsite()->ActivateFontAwesome();
+			$this->GetWebsite()->ActivateFontAwesome4();
 		}
 		
 		function RenderLoading($strText = '')

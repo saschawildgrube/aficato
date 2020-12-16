@@ -129,7 +129,9 @@
 						'/RenderCountdown/(/',
 						'/IsDevice/',
 						'/GetDatabaseConfigID/(/',
-						'/GetStage/(/'
+						'/GetStage/(/',
+						'/CBootstrapLayout/',
+						'/CBootstrapThemeLayout/'
 					);
 					
 				if ($strFileName != "wdk_url.inc")

@@ -1,13 +1,47 @@
 ={WDK} Release Notes=
-==Version 0.0.0.75 WORK IN PROGRESS==
-NOT YET Baselined
+==Version 0.0.0.76==
+Baselined 2020-12-15
 
-'''IMPORTANT'''
-* GetStage() has been renamed to GetEnvID()!
-* GetDatabaseConfigID() has been renamed to GetEnvConfigID()!
-* ICON SUPPORT HAS CHANGED SIGNIFICANTLY. CHECK YOUR ICONS, TOOLBARS, ETC.!
+* '''IMPORTANT'''
+** Removed glyphicon support
+** By default CWebsite::ActivateJQuery() function now includes JQuery 3 (instead of 1)
+** Renamed CBootstrapLayout and CBootstrapThemeLayout to CBootstrap3Layout and CBootstrap3ThemeLayout
+* Security
+** No changes
+* Defects
+** CSortOrderElement did not use its layout cfg file. The cfg file and the load mechanism has been removed.
+** The module user/languageselection still used the deprecated icon element that was based in images. This has been fixed.
+** Updated IsValidURL() to cover even more sophisticated cases of valid URLs
+** Module system/webservicemanager did not show a webservice's version if the help file could not be loaded. This has been fixed.
+** Module cms/wikipad no longer displays an error message if the loaded content is just empty and no default content has been provided.
+* Refactoring
+** The function TestCase_w3cValidateURL() has been moved to the CMonitoringUnitTest class to encourage reuse
+** Updated the blank male and female profile images
+** Removed no longer needed images used to construct a very old variant of the tab navigation element
+** Moved function MakeTel() to wdk_html.inc
+** Renamed CWebsite->ActivateBootstrap() to ActivateBootstrap3() to support multiple Bootstrap versions
+** Removed bootstrap files from the distribution. All files are now loaded from the corresponding CDNs.
+** WDK JS functions to store and remember scroll positions are now JQuery 3 compatible.
+* New Features
+** The "install" command is now supported by all webservices (not just database based webservices).
+** Added the function IsStringURLEncoded()
+** Added the CLinkImageElement class
+** Added the CResponsiveElement class
+** Added CWebsite::ActivateBootstrap4() to include js and css components of Bootstrap 4.x
+** CWebsite::AddStyleSheetURL() and CWebsite::AddJavaScriptURL() now support the integrity attribute
+** CWikipadModule now support a "Save and stay" button to save changes and return to edit mode. It can be activated using the module config option "showsubmitbuttonsaveandstay".
+** CFormElement: In the "onecolumn" layout style multiple buttons in a row are now displayed next to each other instead of above each other.
+* Quality
+** No changes
+* Documentation
+** No changes
+==Version 0.0.0.75==
+Baselined 2020-10-20
 
-
+* '''IMPORTANT'''
+** GetStage() has been renamed to GetEnvID()!
+** GetDatabaseConfigID() has been renamed to GetEnvConfigID()!
+** ICON SUPPORT HAS CHANGED SIGNIFICANTLY. CHECK YOUR ICONS, TOOLBARS, ETC.!
 * Security
 ** No Changes
 * Defects
@@ -44,7 +78,7 @@ NOT YET Baselined
 * Quality
 ** The test security/openssl now checks if the build date could be determined. It will result as a failed FAILED test but it will no longer output false statements regarding vulnerabilities.
 ** Test sourcefiles/typo has been updated to detect 'teh'.
-** Test sourcefiles/deprecated now checks against GetDatabaseConfig().
+** Test sourcefiles/deprecated now checks against GetDatabaseConfigID() and GetStage().
 * Documentation
 ** Removed "Prologue" and "Introduction" chapters and moved all contained contents to the first level.
 ** Added article on publishing a WDK based project on GitHub.
@@ -53,7 +87,7 @@ Baselined 2020-05-06
 * Security
 ** No Changes
 * Defects
-** GetDnsRecords() now uses CErrorAmnesty to supresse errors emitted from dns_get_records() to stdout.
+** GetDnsRecords() now uses CErrorAmnesty to supress errors emitted from dns_get_records() to stdout.
 ** LoadStringResourceFile() erroneously merged previously loaded strings over new ones instead of vice-versa. This has been fixed. Strings loaded later now have higher priority.
 ** IsValidURL() can now also cope with URLs that have a @ character in the path and {}? characters in the query.
 ** GetDomainStatus() did not properly consider TAKEN domains in case there are DNS entries. The function now also checks for "status: connect" and reports such domains as TAKEN.

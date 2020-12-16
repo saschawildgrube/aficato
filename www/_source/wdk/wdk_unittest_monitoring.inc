@@ -3,6 +3,7 @@
 	require_once('wdk_unittest.inc');
 	require_once('wdk_webserviceconsumer_webapplication.inc');
 	require_once('wdk_ip.inc');
+	require_once('wdk_w3c.inc');
 
 	define('WEBSERVICE_SYSTEM_SERVER_TIMEOUT',	12);
 	define('LOG_MAILWARN_FILESIZE_THRESHOLD', 	(4*1024*1024));
@@ -771,8 +772,37 @@
 			}
 		}
 
-		
-		
+		function TestCase_w3cValidateURL(
+			$strURL,
+			$strExpectedResult)
+		{ 
+			$this->Trace("TestCase_w3cValidateURL");
+	
+			$this->Trace("strURL = \"$strURL\"");
+			$this->Trace("strExpectedResult = \"$strExpectedResult\"");
+
+			$strValidatorURL = w3cGetValidatorURL($strURL);
+			$this->Trace("Validator URL: \"$strValidatorURL\"");
+			
+			$strResult = w3cValidateURL($strURL);
+			$this->Trace("Testcase w3cValidateURL returns: \"$strResult\"");
+			
+			if ($strResult == $strExpectedResult)
+			{
+				$this->Trace("Testcase PASSED!");
+			}
+			else if ($strResult == "UNDEFINED")
+			{
+				$this->Trace("Testcase UNDEFINED! This is because the w3c validator did not yield any defined result.");
+			}
+			else
+			{
+				$this->Trace("Testcase FAILED!");	
+				$this->SetResult(false);	
+			}
+			$this->Trace("");
+			$this->Trace(""); 
+		}		
 
 	}
 

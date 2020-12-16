@@ -1,8 +1,8 @@
 <?php
 
-	require_once(GetWDKDir()."wdk_layout_bootstrap.inc");
+	require_once(GetWDKDir()."wdk_layout_bootstrap3.inc");
 
-	class CMyLayout extends CLayoutBootstrap
+	class CMyLayout extends CLayoutBootstrap3
 	{
 		function CallbackInit()
 		{
@@ -18,7 +18,7 @@
 			$this->GetWebsite()->AddStyleSheet('$$$layoutid$$$','3rdparty');
 	
 				// Or use one of the CWebsite::Activate*() functions
-			$this->GetWebsite()->ActivateFontawesome();
+			$this->GetWebsite()->ActivateFontawesome4();
 
 			
 			// Load config items			

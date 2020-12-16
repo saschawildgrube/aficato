@@ -108,7 +108,7 @@
 
 
 			$strContent = $this->GetData($this->GetDataName());
-			if ($strContent == false)
+			if ($strContent === false)
 			{
 				$this->SetErrorMessageCode("WIKIPAD_GET");
 				$this->SetOutputItem("WIKI","");
@@ -159,13 +159,23 @@
 			$strContent = ReplaceString($strContent,"<code>","<CODE>");
 			$strContent = ReplaceString($strContent,"</code>","</CODE>");
 
+			$bShowSubmitButtonSaveAndStay = $this->GetModuleConfig("showsubmitbuttonsaveandstay");  
+
 			$bShowSubmitButtonOnTop = $this->GetModuleConfig("showsubmitbuttonontop");
 			if ($bShowSubmitButtonOnTop == true)
 			{
 				$this->m_formDef->AddControlButtonSubmit("?TID_WIKIPAD_BUTTON_SAVE?");
+				if ($bShowSubmitButtonSaveAndStay == true)
+				{
+					$this->m_formDef->AddControlButtonSubmit("?TID_WIKIPAD_BUTTON_SAVE_AND_STAY?","SUBMIT-STAY",'stay');
+				}
 			}
 			$this->m_formDef->AddControlTextArea("CONTENT",$this->GetModuleVarName("content"),"",$strContent,$nColumns,$nLines); 
 			$this->m_formDef->AddControlButtonSubmit("?TID_WIKIPAD_BUTTON_SAVE?","SUBMIT-2");
+			if ($bShowSubmitButtonSaveAndStay == true)
+			{
+				$this->m_formDef->AddControlButtonSubmit("?TID_WIKIPAD_BUTTON_SAVE_AND_STAY?","SUBMIT-STAY-2",'stay');
+			}
 	
 			$form = new CFormElement($this->GetWebsite(),"onecolumn");
 			
@@ -184,6 +194,8 @@
 		{
 			$this->Trace("StateSubmit");
 			
+			$this->Trace($this->GetAllModuleVars());
+			
 			$strContent = $this->GetModuleVarInsecure("content");
 			
 			$strContent = ReplaceString($strContent,"<CODE>","<code>");
@@ -198,6 +210,15 @@
 				return $this->StateEdit();
 			}
 			$this->SetModuleVar("content","");
+			
+			$strSubmitValue = $this->GetVar("submit");
+			
+			if ($strSubmitValue == 'stay')
+			{
+				return $this->StateEdit();	
+			}
+			
+			
 			return $this->StateView();
 		}
 		

@@ -1,13 +1,13 @@
 <?php
 
-	require_once(GetWDKDir()."wdk_layout_bootstrap-theme.inc"); 
+	require_once(GetWDKDir()."wdk_layout_bootstrap3-theme.inc"); 
 
-	class CMyLayout extends CLayoutBootstrapTheme
+	class CMyLayout extends CLayoutBootstrap3Theme
 	{
 		function CallbackInit()
 		{
 			$bResult = parent::CallbackInit();
-			$this->GetWebsite()->ActivateFontAwesome();
+			$this->GetWebsite()->ActivateFontAwesome4();
 			$this->GetWebsite()->AddJavaScript('wdk');
 			$this->GetWebsite()->AddJavaScript('wdk-progressindicator-activate');
 			$this->GetWebsite()->AddJavaScript('wdk-progressindicatordownload-activate');
