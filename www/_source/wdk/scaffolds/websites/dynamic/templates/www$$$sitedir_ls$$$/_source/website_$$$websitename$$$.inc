@@ -115,8 +115,12 @@
 				can be deactivated via parameter.
 			*/			
 			$arrayConfig['cache_allow_nocache'] = true;
-			
-			
+
+			/*
+				You can use this setting to explicitly allow a browser to embedd the
+				website into an iframe if this is intended.
+			*/
+			$arrayConfig['iframe_allow'] = false;
 			
 			/*
 				Use this setting to control if a warning message should be displayed 
@@ -208,6 +212,12 @@
 				This setting controls the support of seo friendly urls:
 			*/
 			$arrayConfig['seourl'] = '$$$seourlparam$$$';
+
+			/*
+				This settings controls whether OpenGraph headers should be set.
+				Overload the function OnGetOpenGraphImageURL() to set the image.
+			*/
+			$arrayConfig['opengraph'] = true;
 
 		
 			$arrayConfig['csvformat'] = 'excel';

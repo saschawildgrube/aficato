@@ -22,7 +22,7 @@
 
 			$arrayItems = array();
 		
-			if ($strText == "")
+			if ($strText == '')
 			{
 				$strText = '?TID_INFO_LOADING?';
 			}

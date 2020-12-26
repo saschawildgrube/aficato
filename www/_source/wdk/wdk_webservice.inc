@@ -1,19 +1,19 @@
 <?php
 
 	
-	require_once("wdk_webapplication.inc");
+	require_once('wdk_webapplication.inc');
  
- 	require_once("wdk_arrayprint.inc"); 
+ 	require_once('wdk_arrayprint.inc'); 
 
-	require_once("wdk_json.inc"); 
-	require_once("wdk_xml.inc");
-	require_once("wdk_pathcontent.inc");
-	require_once("wdk_csv.inc");
-	require_once("wdk_mail.inc");
-	require_once("wdk_arraytextfile.inc");
-	require_once("wdk_parameter.inc");
-	require_once("wdk_command.inc");
-	require_once("wdk_webserviceconsumer_webapplication.inc");
+	require_once('wdk_json.inc'); 
+	require_once('wdk_xml.inc');
+	require_once('wdk_pathcontent.inc');
+	require_once('wdk_csv.inc');
+	require_once('wdk_mail.inc');
+	require_once('wdk_arraytextfile.inc');
+	require_once('wdk_parameter.inc');
+	require_once('wdk_command.inc');
+	require_once('wdk_webserviceconsumer_webapplication.inc');
 
 	abstract class CWebService extends CWebApplication
 	{

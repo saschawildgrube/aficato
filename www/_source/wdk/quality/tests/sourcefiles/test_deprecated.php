@@ -1,12 +1,12 @@
 <?php
 	
-	require_once(GetWDKDir()."wdk_unittest_recursivefilecheck.inc");
+	require_once(GetWDKDir().'wdk_unittest_recursivefilecheck.inc');
 	
 	class CTest extends CUnitTestRecursiveFileCheck
 	{
 		function __construct()
 		{
-			parent::__construct("Check for deprecated functions and classes in php source code");
+			parent::__construct('Check for deprecated functions and classes in php source code');
 		}
 		 
 		
@@ -15,12 +15,12 @@
 		{ 
 			$arrayRegExp = array();
 			$strExtention = GetExtentionFromPath($strFilePath);
-			if (	$strExtention == "inc"
-				||  $strExtention == "php")
+			if (	$strExtention == 'inc'
+				||  $strExtention == 'php')
 			{
 				$strFileName = GetFilenameFromPath($strFilePath);
 				// we don't want to fail the test because of THIS file!
-				if ($strFileName == "test_deprecated.php")
+				if ($strFileName == 'test_deprecated.php')
 				{
 					return;	
 				}
@@ -28,15 +28,15 @@
 
 				$arrayRegExp = array
 					(
-						"/[^gy]CheckCharSet\(/",
+						'/[^gy]CheckCharSet\(/',
 						'/CContentDefault/',
-						"/CUsersWebsite/",
-						"/RenderFormGeneric/",
-						"/->Log\(/",
-						"/->Event\(/",
-						"/(=\s*|\.\s*|return\s+|=>\s*|\(\s*)GetWebserviceURL\s*\(/",
-						"/\"databasesupport\"/",
-						"/\"maxcontentsize\"/",
+						'/CUsersWebsite/',
+						'/RenderFormGeneric/',
+						'/->Log\(/',
+						'/->Event\(/',
+						'/(=\s*|\.\s*|return\s+|=>\s*|\(\s*)GetWebserviceURL\s*\(/',
+						'/"databasesupport"/',
+						'/"maxcontentsize"/',
 						"/\"nolog\"/",
 						"/\"noevents\"/",
 						"/\"maxtimeout\"/",
@@ -131,7 +131,10 @@
 						'/GetDatabaseConfigID/(/',
 						'/GetStage/(/',
 						'/CBootstrapLayout/',
-						'/CBootstrapThemeLayout/'
+						'/CBootstrapThemeLayout/',
+						'/CallbackGetWebsiteTitle/',
+						'/CallbackGetWebsiteDescription/',
+						'/CallbackGetWebsiteKeywords/'
 					);
 					
 				if ($strFileName != "wdk_url.inc")

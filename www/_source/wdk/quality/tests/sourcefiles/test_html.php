@@ -6,7 +6,7 @@
 	{
 		function __construct()
 		{
-			parent::__construct('Check for typical typos in source code files');
+			parent::__construct('Check for problems in xhtml files');
 		}
 
 		function Callback_TestCase_CheckFile($strFilePath)
@@ -16,21 +16,12 @@
 			$strFileName = GetFilenameFromPath($strFilePath);
 			
 			// we don't want to fail the test because of THIS file!
-			if ($strFileName == 'test_typo.php')
-			{
-				return;	
-			}
 
-			if (	$strExtention == 'inc'
-				||  $strExtention == 'php'
-				||  $strExtention == 'js'  
-				||  $strExtention == 'txt'
-				||  $strExtention == 'htm')
+			if (	$strExtention == 'htm'
+				||  $strExtention == 'txt')
 			{
 				$arrayRegExp = array();
-				$arrayRegExp[] = '/retrun/';
-				$arrayRegExp[] = '/provacy/';
-				$arrayRegExp[] = '/ teh /';
+				$arrayRegExp[] = '/--->/';
 				$this->CheckFileAgainstRegExp($strFilePath,$arrayRegExp);
 			}
 			

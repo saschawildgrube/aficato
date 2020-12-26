@@ -1208,9 +1208,11 @@
 			$strURL = $this->GetWebsite()->MakeURL($arrayParams);
 			$this->GetWebsite()->Redirect($strURL,0); 
 			
-			//$this->AddInfoMessageCode("CHECKSINPROGRESS");
+			$this->IncludeElement('loading');
+			$loading = new CLoadingElement($this->GetWebsite(),'inline');
 			$this->SetInfoMessageText(
-				ReplaceTagsWDK(
+				$loading->RenderLoading()
+				.ReplaceTagsWDK(
 					$this->LoadStringEntity("TEST","INFO","RUNTESTS-PROGRESS"),
 					array(
 						"COUNT" => ArrayCount($arrayTests) - 1

@@ -1,7 +1,7 @@
 <?php
 	
-	define('WDK_VERSION', '0.0.0.76');
-	define('WDK_VERSION_DATE', '2020-12-15');
+	define('WDK_VERSION', '0.0.0.77');
+	define('WDK_VERSION_DATE', '');
 	define('WDK_COPYRIGHT_SINCE', '2005');
 	
 	function GetVersionInfoWDK()

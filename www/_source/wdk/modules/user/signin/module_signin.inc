@@ -598,6 +598,7 @@
 			$this->SystemEvent(
 				"INFORMATIONAL",
 				"USER_SIGNIN",
+				$strUsername,
 				array(
 					"username" => $strUsername,
 					"useremail" => $consumer->GetResultValue("USER","USER_EMAIL")));

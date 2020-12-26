@@ -56,6 +56,10 @@
 			$this->TestCase_StringCheckCharSet(CHARSET_URL,"https://www.websitedevkit.com/webservices/system/test/?command=cleanup&accesscode=1",true);
 			$this->TestCase_StringCheckCharSet(CHARSET_URL,"https://www.websitedevkit.com/webservices/system/test/?command=cleanup&accesscode=1§§§",false);
 
+			$this->TestCase_StringCheckCharSet(CHARSET_ALPHA.CHARSET_LINEBREAK,"a\nb",true);
+			$this->TestCase_StringCheckCharSet(CHARSET_ALPHA.CHARSET_LINEBREAK,'a\nb',false);
+
+
 			
 		}
 		

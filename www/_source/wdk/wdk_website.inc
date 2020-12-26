@@ -75,6 +75,7 @@
 	
 		private $m_res;
 		private $m_bUseRes;
+		private $m_arrayLoadedStringResources;
 		private $m_arrayResText;
     
     private $m_strFrameworkID;
@@ -604,12 +605,13 @@
 
 			// Manage Local Resources
 			$this->m_bUseRes = true;
-			if ($this->GetVar("nores")=="1")
+			if ($this->GetVar("nores")=='1')
 			{
 				$this->m_bUseRes = false;
 			}
 			$this->m_res = new CLocalResources();
 			$this->m_arrayResText = array();
+			$this->m_arrayLoadedStringResources = array();
 
 
 
@@ -761,10 +763,10 @@
 			$this->SetOutputItem("MODULE_LOGIN_FORM","");
 		
 		
-			$this->LoadStringResources("wdk");
+			$this->LoadStringResources('wdk');
 			// WDK Ressources have lowest priority
 			
-			$this->LoadStringResources("default");
+			$this->LoadStringResources('default');
 			// This is because getmessage directly loads an error text and CallbackInit might render modules 
 
 			// Initialize "powered by"
@@ -2456,6 +2458,14 @@
 				$strLanguage = $this->GetLanguage();
 			}
 			
+			if (ArrayGetValue($this->m_arrayLoadedStringResources,$strLanguage,$strID) == true)
+			{
+				$this->Trace('LoadStringResources: '.$strID.' for language '.$strLanguage.' is already loaded.');
+				return true;	
+			}
+			$this->m_arrayLoadedStringResources[$strLanguage][$strID] = true;
+			
+			
 			$strFile = $this->GetAssemblyLine()->GetResourceFilePath($strLanguage,$strID);
 			if ($strFile == false)
 			{
@@ -3156,7 +3166,27 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strContentHTML = $msg->RenderMessage($strMessage);
 		   }
 		   $this->SetOutputItem("MESSAGE_UNDERCONSTRUCTION",$strContentHTML);
-		   
+		}
+
+		final		
+		function PrepareOpenGraph()
+		{
+			if ($this->GetConfigBoolean('opengraph'))
+			{
+				$strImageURL = $this->OnGetOpenGraphImageURL();
+				if ($strImageURL != '')
+				{
+					$this->AddHeader('<meta property="og:image" content="'.$strImageURL.'">');
+				}
+		   	$arrayParams = array();
+		   	$arrayParams["content"] = $this->GetContent();
+		   	$strURL = $this->MakeSitemapURL($arrayParams,true);
+				$this->AddHeader('<meta property="og:url" content="'.$strURL.'">');
+				$this->AddHeader('<meta property="og:type" content="website">');
+				$this->AddHeader('<meta property="og:title" content="'.$this->OnGetWebsiteTitle().'">');
+				$this->AddHeader('<meta property="og:image:alt" content="'.$this->OnGetWebsiteTitle().'">');
+				$this->AddHeader('<meta property="og:description" content="'.$this->OnGetWebsiteDescription().'">');
+			}			
 		}
 		
 		final
@@ -3837,12 +3867,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$this->Trace('Rendering content END');
 			$this->ProfilingTrace();
 			
-			// Load default string resources
-			$this->Trace('Load default string ressources START');			
-			$this->LoadStringResources('default');
-			$this->Trace('Load default string ressources END');
-			$this->ProfilingTrace();
-
 			// Prepare Layout
 			$strLayoutFilePHP = $this->GetAssemblyLine()->GetLayoutIncFilePath($this->GetLayout());
       if ($strLayoutFilePHP != "")
@@ -3884,6 +3908,13 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$this->PrepareMessages();
 			$this->Trace("PrepareMessages END");
 			$this->ProfilingTrace();
+			
+			// Prepare OpenGrapg
+			$this->Trace("PrepareOpenGraph START");
+			$this->PrepareOpenGraph();
+			$this->Trace("PrepareOpenGraph END");
+			$this->ProfilingTrace();
+		
 
 			// Render Header
 			$this->Trace("RenderHeader START");
@@ -4010,10 +4041,10 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$this->ProfilingTrace();
 		
 
-			$this->Trace("Rendering: Total seconds elapsed during tag replacement___________: ".$stopwatchTagReplacement->GetTotalSeconds());
-			$this->Trace("Rendering: Total seconds elapsed in ReplaceOutputItems()_______: ".$stopwatchReplaceOutputItems->GetTotalSeconds());
-			$this->Trace("Rendering: Total seconds elapsed in ReplaceText()_________________: ".$stopwatchReplaceText->GetTotalSeconds());
-			$this->Trace("Rendering: Total seconds elapsed in ReplaceGenericOutputItems(): ".$stopwatchReplaceGenericOutputItems->GetTotalSeconds());
+			$this->Trace("Rendering: Total seconds elapsed during tag replacement___________: ".RenderNumber($stopwatchTagReplacement->GetTotalSeconds(),3));
+			$this->Trace("Rendering: Total seconds elapsed in ReplaceOutputItems()__________: ".RenderNumber($stopwatchReplaceOutputItems->GetTotalSeconds(),3));
+			$this->Trace("Rendering: Total seconds elapsed in ReplaceText()_________________: ".RenderNumber($stopwatchReplaceText->GetTotalSeconds(),3));
+			$this->Trace("Rendering: Total seconds elapsed in ReplaceGenericOutputItems()___: ".RenderNumber($stopwatchReplaceGenericOutputItems->GetTotalSeconds(),3));
 			
 			$this->Trace("RenderWebsite END");
 			
@@ -4756,7 +4787,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			return true;
 		}
 			
-		function CallbackGetWebsiteTitle()
+		function OnGetWebsiteTitle()
 		{
 			$strTitle = "";
 			if (IsValidContentID($this->GetContent()) == true)
@@ -4792,7 +4823,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		}
 
 
-		function CallbackGetWebsiteDescription()
+		function OnGetWebsiteDescription()
 		{
 			$strText = $this->LoadString("TID_META_DESCRIPTION_".StringUppercase($this->GetContent()));
 			if ($strText != "")
@@ -4807,7 +4838,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			return "";	
 		}
 
-		function CallbackGetWebsiteKeywords()
+		function OnGetWebsiteKeywords()
 		{
 			$strText = $this->LoadString("TID_META_KEYWORDS_".StringUpperCase($this->GetContent()));
 			$strTextDefault = $this->LoadString("TID_META_KEYWORDS_DEFAULT");
@@ -4823,6 +4854,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				}
 			}
 			return $strText;
+		}
+		
+		function OnGetOpenGraphImageURL()
+		{
+			return $this->GetImageURL('opengraph','png');	
 		}
 
 		
@@ -5323,19 +5359,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function GetWebsiteTitle()
 		{
-			return $this->CallbackGetWebsiteTitle();
+			return $this->OnGetWebsiteTitle();
 		}
 		
 		final
 		function GetWebsiteDescription()
 		{
-			return $this->CallbackGetWebsiteDescription();
+			return $this->OnGetWebsiteDescription();
 		}		
 
 		final
 		function GetWebsiteKeywords()
 		{
-			return $this->CallbackGetWebsiteKeywords();
+			return $this->OnGetWebsiteKeywords();
 		}		
 
 		
@@ -5454,6 +5490,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		{ 
 			$this->AddStyleSheetURL('fontawesome4','https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');	
 		}
+
+		function ActivateFontAwesome5()
+		{ 
+			$this->AddJavaScriptURL('fontawesome5','https://use.fontawesome.com/releases/v5.0.8/js/all.js','sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ');	
+		}
+
 
 		function ActivateReact()
 		{

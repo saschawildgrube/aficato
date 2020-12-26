@@ -1,4 +1,41 @@
 ={WDK} Release Notes=
+==Version 0.0.0.77 WORK IN PROGRESS==
+NOT YET Baselined
+* '''IMPORTANT'''
+** MakeHash() now supports arrays within arrays by calling itself recursively. This may lead to incompatible (yet more correct and colision free) hash values.
+** Started to rename CWebsite::Callback*() functions to CWebsite::On*().
+* Security
+** No Changes
+* Defects
+** The charset definitions containing escaped characters were not using double quotes. This has been fixed. Affected charset definitions are CHARSET_LINEBREAK and CHARSET_WHITESPACE.
+** MakeHash() produced an error of an array with arrays was supplied as the payload. This has been fixed.
+** Module user/signin caused an error by supplying incorrect parameters to the website's SystemEvent() method. This has been fixed.
+* New Features
+** Added native support for open graph headers. Overload the function CWebsite::OnGetOpenGraphImageURL() to provide an open graph image. Title and description is taken from the corresponding functions OnGetWebsiteTitle() and OnGetWebsiteDescription().
+** Added opengraph.png to demonstrate the open graph feature.
+** Module system/testmanager now displays a rotating spinner icon when executing all tests.
+** The Loading element now has an "inline" style to be used when embedded into a message text.
+** CWebApplication now sets the header "X-Frame-Options: DENY" to prevent integration into an iframe unless the config setting "iframe_allow" is set to true.
+** Added function CWebsite::ActivateFontAwesome5() for font awesome 5.x support.
+* Improvements
+** The release notes now contain the "Improvements" section to better highlight improvements on existing features.
+** The release notes now also contain the "Discontinued" section to highlight features that have been removed.
+** The GitHub ribbon now uses div instead of span tag to improve layout on mobile devices.
+* Discontinued
+** Removed CGoogleMapsElement
+* Refactoring
+** Renamed function CallbackGetWebsiteTitle() to OnGetWebsiteTitle().
+** Renamed function CallbackGetWebsiteDescription() to OnGetWebsiteDescription().
+** Renamed function CallbackGetWebsiteKeywords() to OnGetWebsiteKeywords().
+** Character definition CHARSET_SPECIAL no longer contains the space.
+** Character definition CHARSET_TEXT now contains line break and whitespace characters.
+* Quality
+** Added test sourcefiles/badstringliterals to check if there are escaped line break characters within single quotes string literals - which typically is a mistake in php code (but not in JS).
+** Added test sourcefiles/html to check for problems in html files (starting with bad comment end tags).
+** Added test wdk-element/flag
+** Added test wdk-hash/makehash to test the MakeHash() function in various scenarios.
+* Documentation
+** No Changes
 ==Version 0.0.0.76==
 Baselined 2020-12-15
 

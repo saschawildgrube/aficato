@@ -106,9 +106,8 @@
 
 			// Initialize caching
 			$this->m_bCacheActive = true;
-			if ($this->GetConfigBoolean("cache_deactivate") == true)
+			if ($this->GetConfigBoolean('cache_deactivate') == true)
 			{
-				$this->Trace("Caching deactivated by configuration!");
 				$this->m_bCacheActive = false;
 			}
 
@@ -119,7 +118,7 @@
 			$this->m_strClientIP = $_SERVER['REMOTE_ADDR'];
 			
 			$strXForwardedFor = ArrayGetValue($_SERVER,'HTTP_X_FORWARDED_FOR');
-			if ($strXForwardedFor != "")
+			if ($strXForwardedFor != '')
 			{
 				if (IsValidIPv4($this->m_strClientIP) == true)
 				{
@@ -135,6 +134,13 @@
 			
 			// Init basic auth
 			$this->m_bBasicAuth = false;
+			
+			// X-Frame-Options: DENY
+			if ($this->GetConfigBoolean('iframe_allow') != true)
+			{
+				header('X-Frame-Options: DENY');
+			}
+
 		}
 
 		function GetSelfURL()
@@ -247,8 +253,8 @@
 				$arraySecured = $value; 
 				foreach ($this->m_arrayObfuscationItems as $strItem)
 				{
-					$arraySecured = ArraySetValueRecursive($arraySecured,"*",$strItem);
-					$arraySecured = ArraySetValueRecursive($arraySecured,"*",StringUpperCase($strItem));
+					$arraySecured = ArraySetValueRecursive($arraySecured,'*',$strItem);
+					$arraySecured = ArraySetValueRecursive($arraySecured,'*',StringUpperCase($strItem));
 				}
 				$this->m_tracelog->Trace($arraySecured);
 			}

@@ -12,6 +12,7 @@
 				$strStyleID,
 				false,
 				true);
+			$this->GetWebsite()->LoadStringResources('local');
 		}
 		
 		function RenderFlag($strCountryID)

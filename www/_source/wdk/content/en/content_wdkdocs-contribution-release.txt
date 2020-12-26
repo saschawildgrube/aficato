@@ -27,16 +27,20 @@ NOT YET Baselined
 * '''IMPORTANT'''
 ** No issues
 * Security
-** No Changes
+** No changes
 * Defects
-** No Changes
-* Refactoring
-** No Changes
-* New Features
-** No Changes
+** No changes
+* New features
+** No changes
+* Improvements
+** No changes
+* Discontinued
+** No changes
 * Quality
-** No Changes
+** No changes
+* Refactoring
+** No changes
 * Documentation
-** No Changes
+** No changes
 </pre>
 * Update your websites

@@ -212,6 +212,8 @@
 			*/
 			$arrayConfig['seourl'] = 'seourl';
 
+			$arrayConfig['opengraph'] = true;
+
 		
 			$arrayConfig['csvformat'] = 'excellegacy';
 			
@@ -656,7 +658,12 @@
 			
 			return parent::CallbackCreateImage($image,$strImageID);
 		}
-
+/*		
+		function OnGetOpenGraphImageURL()
+		{
+			return $this->GetImageURL('opengraph_checklisthq','png');
+		}
+*/
 	}
 	
 

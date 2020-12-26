@@ -8,33 +8,33 @@
 		}
 		if (is_string($value))
 		{
-			if ($value == "")
+			if ($value == '')
 			{
 				return 0;	
 			}
 			$value = StringRemoveControlChars($value);
 			$value = StringUpperCase($value);
-			if (StringSection($value,-2) == "MB")
+			if (StringSection($value,-2) == 'MB')
 			{
 				return round($value) * 1024 * 1024;
 			}
-			if (StringSection($value,-2) == "TB")
+			if (StringSection($value,-2) == 'TB')
 			{
 				return round($value) * 1024 * 1024 * 1024;
 			}
-			if (StringSection($value,-2) == "KB")
+			if (StringSection($value,-2) == 'KB')
 			{
 				return round($value) * 1024;
 			}
-			if (StringSection($value,-2) == "BN")
+			if (StringSection($value,-2) == 'BN')
 			{
 				return round($value) * 1000000000;
 			}
-			if (StringSection($value,-1) == "M")
+			if (StringSection($value,-1) == 'M')
 			{
 				return round($value) * 1000000;
 			}
-			if (StringSection($value,-1) == "T")
+			if (StringSection($value,-1) == 'T')
 			{
 				return round($value) * 1000;
 			}
@@ -65,15 +65,15 @@
 				return false;
 			return true;
 		}
-		if ($value == "")
+		if ($value == '')
 			return false;
-		if ($value == "1")
+		if ($value == '1')
 			return true;
-		if ($value == "0")
+		if ($value == '0')
 			return false;
-		if (StringLowerCase($value) == "true")
+		if (StringLowerCase($value) == 'true')
 			return true;
-		if (StringLowerCase($value) == "false")
+		if (StringLowerCase($value) == 'false')
 			return false;
 		if ($value == true)
 			return true;
@@ -90,16 +90,16 @@
 		{
 			return false;
 		}
-		if ($value == "")
+		if ($value == '')
 			return false;
 			
-		if ($value == "1")
+		if ($value == '1')
 			return true;
-		if ($value == "0")
+		if ($value == '0')
 			return true;
-		if (StringLowerCase($value) == "true")
+		if (StringLowerCase($value) == 'true')
 			return true;
-		if (StringLowerCase($value) == "false")
+		if (StringLowerCase($value) == 'false')
 			return true;
 		return false;
 	}
@@ -156,7 +156,7 @@
 		{
 			return false;	
 		}
-		if ($value == "")
+		if ($value == '')
 		{
 			return false;	
 		}
@@ -171,9 +171,9 @@
 	{
 		if ($bUppercase == true)
 		{
-			return ((GetBoolValue($value))?("TRUE"):("FALSE"));
+			return ((GetBoolValue($value))?('TRUE'):('FALSE'));
 		}
-		return ((GetBoolValue($value))?("true"):("false"));
+		return ((GetBoolValue($value))?('true'):('false'));
 	}
 	
 	
@@ -184,7 +184,7 @@
     $i = 0;
 		for ($i = 0; $i < $nLength; $i++)
     {
-			$strHex .= sprintf("%02x", ord($strRaw{$i}));
+			$strHex .= sprintf('%02x', ord($strRaw{$i}));
     }
     return $strHex;
 	}
@@ -192,7 +192,7 @@
 	function RenderInteger($value)
 	{
 		$value = GetIntegerValue($value);
-		return "".strval($value);
+		return ''.strval($value);
 	}	
 	
 	
