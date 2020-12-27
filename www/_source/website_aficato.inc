@@ -658,12 +658,7 @@
 			
 			return parent::CallbackCreateImage($image,$strImageID);
 		}
-/*		
-		function OnGetOpenGraphImageURL()
-		{
-			return $this->GetImageURL('opengraph_checklisthq','png');
-		}
-*/
+
 	}
 	
 

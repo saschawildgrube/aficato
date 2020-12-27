@@ -9,9 +9,9 @@ Select Scaffold
 TID_SCAFFOLDER_TOOL_CONFIGURE
 Configure Scaffold
 TID_SCAFFOLDER_CATEGORY_WEBSITES
-New Website
+New website
 TID_SCAFFOLDER_CATEGORY_COMPONENTS
-New Component
+New component
 TID_SCAFFOLDER_CATEGORY_OTHER
 Something else
 TID_SCAFFOLDER_TEXT_HELP
@@ -31,7 +31,6 @@ Scaffolds are organized in different categories:
 Choose "?TID_SCAFFOLDER_CATEGORY_WEBSITES?" to create a scaffold to start a new web application system from scratch.
 Choose "?TID_SCAFFOLDER_CATEGORY_COMPONENTS?" to add new components to an existing web application.
 Choose "?TID_SCAFFOLDER_CATEGORY_OTHER?" for more options like downloading the latest {WDK}.
-<!--Choose "?TID_SCAFFOLDER_CATEGORY_OTHER?" for more options.-->
 TID_SCAFFOLDER_CONTROL_SELECTSCAFFOLD
 Please select a scaffold:
 TID_SCAFFOLDER_TEXT_SELECTSCAFFOLD

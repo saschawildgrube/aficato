@@ -1,2 +1,5 @@
 =Routes=
-TODO
+Routes are alternative names for content pages.
+
+
+They can be used to build user and SEO friendly URLs or make sure that old links remain functional after a change.

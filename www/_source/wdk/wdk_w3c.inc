@@ -16,6 +16,10 @@
 		{
 			return 'UNDEFINED';
 		}
+		if (FindString($strResponse,'503 Service Unavailable') != -1)
+		{
+			return 'UNDEFINED';
+		}
 		if (FindString($strResponse,'The document validates') == -1)
 		{
 			return 'FAILED';
@@ -38,7 +42,8 @@
 			'get',
 			15,
 			array(),
-			array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; rv:11.0) like Gecko'));
+			array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; rv:11.0) like Gecko'),
+			false);
 
 		return w3cInterpretResponse($strOutput);
 	}

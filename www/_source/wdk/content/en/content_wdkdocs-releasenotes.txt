@@ -1,6 +1,6 @@
 ={WDK} Release Notes=
-==Version 0.0.0.77 WORK IN PROGRESS==
-NOT YET Baselined
+==Version 0.0.0.77==
+Baselined 2020-12-27
 * '''IMPORTANT'''
 ** MakeHash() now supports arrays within arrays by calling itself recursively. This may lead to incompatible (yet more correct and colision free) hash values.
 ** Started to rename CWebsite::Callback*() functions to CWebsite::On*().
@@ -30,12 +30,13 @@ NOT YET Baselined
 ** Character definition CHARSET_SPECIAL no longer contains the space.
 ** Character definition CHARSET_TEXT now contains line break and whitespace characters.
 * Quality
+** Function w3cInterpretResponse() now identified a 503 error (which comes up from time to time - e.g. 2020-12-27) and the corresponding test is set to inactive in that case.
 ** Added test sourcefiles/badstringliterals to check if there are escaped line break characters within single quotes string literals - which typically is a mistake in php code (but not in JS).
 ** Added test sourcefiles/html to check for problems in html files (starting with bad comment end tags).
 ** Added test wdk-element/flag
 ** Added test wdk-hash/makehash to test the MakeHash() function in various scenarios.
 * Documentation
-** No Changes
+** Added an article about routes.
 ==Version 0.0.0.76==
 Baselined 2020-12-15
 

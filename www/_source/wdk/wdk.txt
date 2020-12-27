@@ -1,5 +1,5 @@
 =Website Development Kit (WDK)=
-Version 0.0.0.77 WORK IN PROGRESS
+Version 0.0.0.77
 
 
 by Sascha Wildgrube (sascha@wildgrube.com)

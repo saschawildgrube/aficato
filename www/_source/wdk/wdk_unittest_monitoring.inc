@@ -794,6 +794,7 @@
 			else if ($strResult == "UNDEFINED")
 			{
 				$this->Trace("Testcase UNDEFINED! This is because the w3c validator did not yield any defined result.");
+				$this->SetActive(false);	
 			}
 			else
 			{
