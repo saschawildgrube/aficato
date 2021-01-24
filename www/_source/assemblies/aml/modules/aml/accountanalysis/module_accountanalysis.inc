@@ -25,7 +25,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->m_arrayErrors = array();
 	
@@ -50,7 +50,7 @@
 			$this->GetWebsite()->IncludeElement('amlredflagslegend');
 			$this->m_amlredflagsElement = new CAMLRedFlagsLegendElement($this->GetWebsite(),'default');
 			
-			return true;
+			return parent::OnInit();
 		}
 		
 		
@@ -64,14 +64,14 @@
 			return $this->GetModuleConfigBoolean('demo');	
 		}
 	
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 /*			if ($this->IsDemo() == true)
 			{
 				return $this->StateChart();
 			}
 			*/
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case 'data':

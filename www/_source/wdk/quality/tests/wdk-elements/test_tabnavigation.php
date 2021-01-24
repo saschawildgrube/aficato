@@ -7,16 +7,16 @@
 			parent::__construct("Test Element TabNavigation");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			$this->SetResult(true);
 			return true;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$strURL = "http://".GetRootURL()."quality/testwebsite/?content=test-element-tabnavigation";
 
@@ -25,9 +25,9 @@
 				array('<table><tbody><tr><td>FIRST_ACTIVE</td><td>ACTIVE:Tab 1</td><td>ACTIVE_TO_INACTIVE</td><td>INACTIVE:<a href="http://www.example.com/2">Tab 2</a></td><td>INACTIVE_TO_INACTIVE</td><td>INACTIVE:<a href="http://www.example.com/3">Tab 3</a></td><td>LAST_INACTIVE</td><td>NO_TAB</td></tr></tbody></table><table><tbody><tr><td>FIRST_INACTIVE</td><td>INACTIVE:<a href="http://www.example.com/1">Tab 1</a></td><td>INACTIVE_TO_ACTIVE</td><td>ACTIVE:Tab 2</td><td>ACTIVE_TO_INACTIVE</td><td>INACTIVE:<a href="http://www.example.com/3">Tab 3</a></td><td>LAST_INACTIVE</td><td>NO_TAB</td></tr></tbody></table><table><tbody><tr><td>FIRST_INACTIVE</td><td>INACTIVE:<a href="http://www.example.com/1">Tab 1</a></td><td>INACTIVE_TO_INACTIVE</td><td>INACTIVE:<a href="http://www.example.com/2">Tab 2</a></td><td>INACTIVE_TO_INACTIVE</td><td>INACTIVE:<a href="http://www.example.com/3">Tab 3</a></td><td>LAST_INACTIVE</td><td>NO_TAB</td></tr></tbody></table>'));
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		

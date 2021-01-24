@@ -19,20 +19,20 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayEntityDefinitions = array(
 				"article" => GetEntityDefinitionArticle()
 			);
 			$this->SetEntityDefinitions($arrayEntityDefinitions);
 			$this->GetWebsite()->LoadStringResources("local");
-			return true;
+			return parent::OnInit();
 		}
 		
 	
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "help":
@@ -40,11 +40,11 @@
 				case "":
 					return $this->StateList("article");
 				default:
-					return parent::CallbackRenderModule($strState);
+					return parent::OnRenderModule($strState);
 			}
 		}
 		
-		function CallbackPrepareWebserviceParams($strEntity,&$arrayParams)
+		function OnPrepareWebserviceParams($strEntity,&$arrayParams)
 		{
 			if ($strEntity == "article")
 			{
@@ -62,7 +62,7 @@
 		}
 		
 		
-		function CallbackPrepareFilterSelectOptions($strEntity,$strFilter)
+		function OnPrepareFilterSelectOptions($strEntity,$strFilter)
 		{
 			$arrayOptions = array();
 			if ($strEntity == "article")
@@ -125,11 +125,11 @@
 				}				
 			}
 			
-			return parent::CallbackPrepareFilterSelectOptions($strEntity,$strFilter);
+			return parent::OnPrepareFilterSelectOptions($strEntity,$strFilter);
 		}
 
 
-		function CallbackPrepareSelectOptions($strEntity,$strAttributeID,$strIndex)
+		function OnPrepareSelectOptions($strEntity,$strAttributeID,$strIndex)
 		{
 			$arrayOptions = array();
 			if ($strEntity == "article")
@@ -147,11 +147,11 @@
 				}
 				
 			}
-			return parent::CallbackPrepareSelectOptions($strEntity,$strAttributeID,$strIndex);
+			return parent::OnPrepareSelectOptions($strEntity,$strAttributeID,$strIndex);
 		}
 		
 		
-		function CallbackPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
 		{
 			if ($strEntity == "article")
 			{
@@ -208,22 +208,22 @@
 				}
 
 				/*
-					parent::CallbackPrepareItemDataView will replace line breaks by "<br/>" tags.
+					parent::OnPrepareItemDataView will replace line breaks by "<br/>" tags.
 					But this is not what we want, as the content will be rendered depending on
 					article format using the article element.
 				*/
 				$strContent = $arrayItem["content"];    
-				parent::CallbackPrepareItemDataView($strEntity,$strIndex,$arrayItem);
+				parent::OnPrepareItemDataView($strEntity,$strIndex,$arrayItem);
 				$arrayItem["content"] = $strContent;
 				
 			}
 			else
 			{
-				parent::CallbackPrepareItemDataView($strEntity,$strIndex,$arrayItem);
+				parent::OnPrepareItemDataView($strEntity,$strIndex,$arrayItem);
 			}
 		}
 		
-		function CallbackItemView($strEntity,$strEntityIndex,$arrayItem)
+		function OnItemView($strEntity,$strEntityIndex,$arrayItem)
 		{
 			$this->IncludeElement("tabnavigation");
 			$this->IncludeElement("article");

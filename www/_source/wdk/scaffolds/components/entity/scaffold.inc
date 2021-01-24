@@ -5,7 +5,7 @@
 	class CMyScaffolder extends CScaffolder
 	{
 		
-		function CallbackPrepareForm(CFormDefinition &$formDef)
+		function OnPrepareForm(CFormDefinition &$formDef)
 		{
 			$formDef->AddControlText(
  				"ENTITYNAME",
@@ -50,7 +50,7 @@
 			
 		}
 		
-		function CallbackGetParams(&$arrayParams)
+		function OnGetParams(&$arrayParams)
 		{
 			
 			$arrayParams["a"] = StringLowerCase($this->GetVar("assemblyid"));
@@ -82,7 +82,7 @@
 		}
 		
 		
-		function CallbackCheckParams($arrayParams,&$arrayErrors)
+		function OnCheckParams($arrayParams,&$arrayErrors)
 		{
 			$strEntityName = $arrayParams["EntityName"];
 			if (StringCheckCamelCase($strEntityName) == false)

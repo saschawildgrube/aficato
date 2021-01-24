@@ -40,12 +40,6 @@
 					
 		}
 		
-		function CallbackInit()
-		{
-			return parent::CallbackInit();
-		}
-
-
 		function SystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails=array())
 		{
 			$arrayDetails["authuserid"] = $this->GetAuthUserID();
@@ -61,15 +55,15 @@
 		}
 
 		
-		function CallbackSystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
+		function OnSystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
 		{
-			parent::CallbackSystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
+			parent::OnSystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
 			$this->SystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
 		}
 		
-		function CallbackSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
+		function OnSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
 		{
-			$this->Trace("CallbackLog: Log via LOG webservice.");
+			$this->Trace("OnLog: Log via LOG webservice.");
 			
 			$arrayParams = array();
 			$arrayParams["command"] = "log";
@@ -93,9 +87,9 @@
 			}
 		}
 		
-		function CallbackSessionCreate()
+		function OnSessionCreate()
 		{
-			$this->Trace("CDynamicWebSite::CallbackSessionCreate");
+			$this->Trace("CDynamicWebSite::OnSessionCreate");
 			if (IsSessionModeServer($this->GetSessionMode()))
 			{			
 				$arrayParams = array();
@@ -119,12 +113,12 @@
 				$strSessionID = $consumer->GetResultValue("NEW_SESSION_ID");
 				return $strSessionID;
 			}
-			return parent::CallbackSessionCreate();
+			return parent::OnSessionCreate();
 		}
 	
-		function CallbackSessionRead($strSessionID, &$arrayData)
+		function OnSessionRead($strSessionID, &$arrayData)
 		{
-			$this->Trace("CDynamicWebSite::CallbackSessionRead");
+			$this->Trace("CDynamicWebSite::OnSessionRead");
 			if (IsSessionModeServer($this->GetSessionMode()))
 			{			
 			
@@ -148,19 +142,19 @@
 					$strSessionIP = $consumer->GetResultValue("SESSION","USER_IP");
 					if ($strClientIP != $strSessionIP)
 					{
-						$this->Trace("CallbackSessionRead: Client IP ($strClientIP) does not match IP stored in session ($strSessionIP).");
+						$this->Trace("OnSessionRead: Client IP ($strClientIP) does not match IP stored in session ($strSessionIP).");
 						return false;	
 					}
 				}
 				if ($this->m_strSessionOwnerID != $consumer->GetResultValue("SESSION","OWNER_ID"))
 				{
-					$this->Trace("CallbackSessionRead: Session owner IDs do not match.");	
+					$this->Trace("OnSessionRead: Session owner IDs do not match.");	
 					return false;	
 				}
 				
 				$strData = $consumer->GetResultValue("SESSION","DATA");
 						
-				$this->Trace("CallbackSessionRead: Serialized data read from session:\n\"$strData\"");
+				$this->Trace("OnSessionRead: Serialized data read from session:\n\"$strData\"");
 				$arrayData = ArrayUnpack($strData);
 				
 				if (!is_array($arrayData))
@@ -171,16 +165,16 @@
 				$arrayData = SecureParameterArray($arrayData);
 						
 				$this->SetAuthUserID($consumer->GetResultValue("SESSION","USER_ID_AUTHENTICATION"));
-				$this->Trace("CallbackSessionRead: Authenticated user read from session:\n\"".$this->GetAuthUserID()."\"");
+				$this->Trace("OnSessionRead: Authenticated user read from session:\n\"".$this->GetAuthUserID()."\"");
 			
 				return true;
 			}
-			return parent::CallbackSessionRead($strSessionID, $arrayData);
+			return parent::OnSessionRead($strSessionID, $arrayData);
 		}
 
-		function CallbackSessionWrite($strSessionID, $arrayData)
+		function OnSessionWrite($strSessionID, $arrayData)
 		{
-			$this->Trace("CDynamicWebSite::CallbackSessionWrite");
+			$this->Trace("CDynamicWebSite::OnSessionWrite");
 
 			if (IsSessionModeServer($this->GetSessionMode()))
 			{			
@@ -191,7 +185,7 @@
 				}
 				
 				$strData = ArrayPack($arrayData);
-				$this->Trace("CallbackSessionWrite: Serialized data to be written:\n\"$strData\"");
+				$this->Trace("OnSessionWrite: Serialized data to be written:\n\"$strData\"");
 				
 				$arrayParams = array();
 				$arrayParams["command"] = "write";
@@ -205,8 +199,8 @@
 	/*
 				if ($consumer->GetError()=="SESSION_NOT_FOUND") // possibly expired?
 				{
-					$strNewSessionID = $this->CallbackSessionCreate();
-					return $this->CallbackSessionWrite($strNewSessionID,$arrayData);
+					$strNewSessionID = $this->OnSessionCreate();
+					return $this->OnSessionWrite($strNewSessionID,$arrayData);
 				}
 	*/
 				
@@ -216,12 +210,12 @@
 				}
 				return true;
 			}
-			return parent::CallbackSessionWrite($strSessionID, $arrayData);
+			return parent::OnSessionWrite($strSessionID, $arrayData);
 		}
 		
-		function CallbackSessionDestroy($strSessionID)
+		function OnSessionDestroy($strSessionID)
 		{
-			$this->Trace("CDynamicWebSite::CallbackSessionDestroy");
+			$this->Trace("CDynamicWebSite::OnSessionDestroy");
 			
 			if (IsSessionModeServer($this->GetSessionMode()))
 			{			
@@ -240,7 +234,7 @@
 				}
 				return true;
 			}
-			return parent::CallbackSessionDestroy($strSessionID);
+			return parent::OnSessionDestroy($strSessionID);
 		}
 
 		
@@ -255,7 +249,7 @@
 		}
 		
 	
-		function CallbackUserLogin($strUserName,$strAuthenticationPayload)
+		function OnUserLogin($strUserName,$strAuthenticationPayload)
 		{
 			$arrayParams = array();
 			$arrayParams["command"] = "login";
@@ -285,7 +279,7 @@
 				
 		}
 		
-		function CallbackUserLogout()
+		function OnUserLogout()
 		{
 			$this->SystemEvent("INFORMATIONAL","LOGOUT",$this->GetAuthuserName(),array());
 			
@@ -305,15 +299,15 @@
 			return true;
 		}		
 		
-		function CallbackUserCheckName($strUsername)
+		function OnUserCheckName($strUsername)
 		{
 			return StringCheckCharSet($strUsername,CHARSET_USERNAME);	
 		}
 		
-		function CallbackUserChangePassword($strOldPassword,$strNewPassword)
+		function OnUserChangePassword($strOldPassword,$strNewPassword)
 		{
 			$strUserID = $this->GetAuthUserID();
-			if ($strUserID == "")
+			if ($strUserID == '')
 			{
 				return false;	
 			}
@@ -345,11 +339,11 @@
 				return false;
 			}
 
-			return true;
+			return parent::OnUserChangePassword($strOldPassword,$strNewPassword);
 		}
 
 		
-		function CallbackUserLoadSettings()
+		function OnUserLoadSettings()
 		{
 			$arrayParams = array();
 			$arrayParams["command"] = "get";
@@ -381,11 +375,11 @@
 				$this->SetCountry($strUserCountry);
 			}
 			
-			$this->Trace("CallbackLoadUserSettings ($strUserTimezone,$strUserLanguage)");
+			$this->Trace("OnLoadUserSettings ($strUserTimezone,$strUserLanguage)");
 			return true;
 		}
 		
-		function CallbackUserSignin($strUserName,$strPassword,$arraySigninParams=array(),&$strError="",&$arrayResults=array())
+		function OnUserSignin($strUserName,$strPassword,$arraySigninParams=array(),&$strError="",&$arrayResults=array())
 		{
 			$webservice = new CWebServiceConsumerWebApplication($this);	
 			
@@ -463,7 +457,7 @@
 		
 		
 		
-		function CallbackUserDelete($strUserID)
+		function OnUserDelete($strUserID)
 		{
 			$arrayParams = array();
 			$arrayParams["command"] = "delete";
@@ -475,7 +469,7 @@
 			{
 				$this->SetErrorMessageCode($strError);
 				
-				$this->Trace("CDynamicWebSite::CallbackUserDelete failed!");
+				$this->Trace("CDynamicWebSite::OnUserDelete failed!");
 				
 				return false;
 			}
@@ -483,7 +477,7 @@
 		}
 		
 	
-		function CallbackCheckCondition($strCondition)
+		function OnCheckCondition($strCondition)
 		{
 			if ($strCondition == "login")
 			{
@@ -499,7 +493,7 @@
 					return true;
 				}
 			}			
-			return parent::CallbackCheckCondition($strCondition);	
+			return parent::OnCheckCondition($strCondition);	
 		}
 		
 
@@ -536,7 +530,7 @@
 		}
 		
 	
-		function CallbackUserInitPrivileges()
+		function OnUserInitPrivileges()
 		{
 			$arrayParams = array();
 			$arrayParams["command"] = "get";
@@ -562,7 +556,7 @@
 		}
 
 
-		function CallbackGetData($strContextType, $strContextID, $strDataName, $strDefaultContent)
+		function OnGetData($strContextType, $strContextID, $strDataName, $strDefaultContent)
 		{
 			$webservice = new CWebServiceConsumerWebApplication($this);
 			$arrayParams = array();
@@ -600,7 +594,7 @@
 			return $strContent;
 		}
 		
-		function CallbackSetData($strContextType, $strContextID, $strDataName,$strContent)
+		function OnSetData($strContextType, $strContextID, $strDataName,$strContent)
 		{
 			$webservice = new CWebServiceConsumerWebApplication($this);
 			$arrayParams = array();

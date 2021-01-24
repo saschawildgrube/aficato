@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContentSystemAdmin
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$this->GetWebsite()->IncludeModule("system/testmanager");
 			$testmanager = new CTestManagerModule($this->GetWebsite(),"");

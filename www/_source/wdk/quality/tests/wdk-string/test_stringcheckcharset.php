@@ -9,9 +9,9 @@
 			parent::__construct("Test StringCheckCharset");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			return true;
 		}
@@ -37,9 +37,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->TestCase_StringCheckCharSet(u("ÄÖÜ"),u("ÄÄÄÄÄÖÖÖ"),true);
 			$this->TestCase_StringCheckCharSet(u("ÄÜ"),u("ÄÄÄÄÄÖÖÖ"),false);

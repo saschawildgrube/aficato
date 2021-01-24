@@ -7,9 +7,9 @@
 			parent::__construct("GetIntegerValue");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			return true;
 		}
@@ -36,9 +36,9 @@
 			
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->TestCase_GetIntegerValue(0,0);
 			$this->TestCase_GetIntegerValue(1,1);

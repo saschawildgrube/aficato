@@ -9,9 +9,9 @@
 			parent::__construct("Test CXMLElement Parse and Render");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			return true;
 		}
@@ -61,9 +61,9 @@
 		}
 		
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 	
 	
 	

@@ -11,12 +11,12 @@
 			parent::__construct("Test DEMO web service FORMAT",$arrayConfig);
 		}
 	
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->RequireWebservice("demo/demo");
 			$this->SetVerbose(false);
 			$this->SetResult(true);
-			return parent::CallbackInit();	
+			return parent::OnInit();	
 		}
 	
 		function TestCase_WebserviceFormat($strFormat)
@@ -119,9 +119,9 @@
 		}
 	
 	
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();	
+			parent::OnTest();	
 			
 			$this->TestCase_WebserviceFormat("xml");
 			$this->TestCase_WebserviceFormat("json");

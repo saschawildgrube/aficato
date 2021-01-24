@@ -10,9 +10,9 @@
 			parent::__construct("ShellShock");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -402,9 +402,9 @@
 			$this->Trace("");			
 		}				
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->Trace("This test aims to detect a potential weakness of the bash shell.");
 			$this->Trace("For more information go to:");

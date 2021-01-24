@@ -8,16 +8,16 @@
 			parent::__construct("Test Element Navigation");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			$this->SetResult(true);			
 			return true;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$strURL_Root = "http://".GetRootURL()."quality/testwebsite/";
 			$strURL = $strURL_Root."?content=test-element-navigation";
@@ -49,9 +49,9 @@
 ));
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 	}

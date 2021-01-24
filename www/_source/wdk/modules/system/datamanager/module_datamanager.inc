@@ -18,7 +18,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayEntityDefinitions = array(
 				"dataitem" => GetEntityDefinitionDataitem()
@@ -26,32 +26,32 @@
 
 			$this->SetEntityDefinitions($arrayEntityDefinitions);
 			
-			return true;
+			return parent::OnInit();
 		}
 		
 
 		
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "":
 					return $this->StateList("dataitem");
 				default:
-					return parent::CallbackRenderModule($strState);
+					return parent::OnRenderModule($strState);
 			}
 		}
 		
 
 
-		function CallbackCheckInputValues($strItem,$bAdd,$arrayItem)
+		function OnCheckInputValues($strItem,$bAdd,$arrayItem)
 		{
-			$arrayErrors = parent::CallbackCheckInputValues($strItem,$bAdd,$arrayItem);
+			$arrayErrors = parent::OnCheckInputValues($strItem,$bAdd,$arrayItem);
 			return $arrayErrors;
 		}
 		
-		function CallbackPrepareWebserviceParams($strEntity,&$arrayParams)
+		function OnPrepareWebserviceParams($strEntity,&$arrayParams)
 		{
 			if ($strEntity == "dataitem")
 			{
@@ -64,7 +64,7 @@
 			}
 		}
 		
-		function CallbackPrepareItemDataList($strEntity,&$arrayItems,$strSortOption,$strSortOrder)
+		function OnPrepareItemDataList($strEntity,&$arrayItems,$strSortOption,$strSortOrder)
 		{
 			if ($strEntity == "dataitem")
 			{
@@ -74,17 +74,17 @@
 				}
 			}
 			
-			parent::CallbackPrepareItemDataList($strEntity,$arrayItems,$strSortOption,$strSortOrder);
+			parent::OnPrepareItemDataList($strEntity,$arrayItems,$strSortOption,$strSortOrder);
 		}
 		
-		function CallbackPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
 		{
 			if ($strEntity == "dataitem")
 			{
 				$arrayItem["data_content"] = StringWordWrap($arrayItem["data_content"],90,"<br/>",true);
 			}
 			
-			parent::CallbackPrepareItemDataView($strEntity,$strIndex,$arrayItem);
+			parent::OnPrepareItemDataView($strEntity,$strIndex,$arrayItem);
 		}
 		
 	}

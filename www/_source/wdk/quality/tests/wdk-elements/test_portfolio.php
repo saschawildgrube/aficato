@@ -9,9 +9,9 @@
 			parent::__construct("Test Element Portfolio");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			return true;
 		}
 		
@@ -22,9 +22,9 @@
 				array($strExpectedOutput));			
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 
 			$strExpected =

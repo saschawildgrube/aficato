@@ -33,17 +33,17 @@
 				
 		}
 		
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
 			$paramDef->AddParameterDefinitionString("new_name",1,128,CHARSET_TEXTID);
 			$paramDef->AddParameterDefinitionBoolean("update_lastaccess");
 			//$paramDef->AddParameterDefinitionInteger("threshold_versions",0,1000,true);
 			//$paramDef->AddParameterDefinitionDateTime("threshold_datetime","",RenderDateTimeNow(),true);
-			parent::CallbackInitParameterDefinition($paramDef);
+			parent::OnInitParameterDefinition($paramDef);
 			
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
 			$commandDef->AddCommandDefinition(
 				"rename",
@@ -65,19 +65,19 @@
 					)
 				);
 			*/
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->DatabaseConnect() != true)
 			{
 				return false;
 			}			
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			switch ($strCommand)
 			{
@@ -91,7 +91,7 @@
 				return;
 				
 			default:
-				parent::CallbackCommand($strCommand);
+				parent::OnCommand($strCommand);
 				return;
 			}
 		}
@@ -105,7 +105,7 @@
 			}
 		}
 		
-		function CallbackCheckParameter($strCommand,$strParamName,$strParamValue)
+		function OnCheckParameter($strCommand,$strParamName,$strParamValue)
 		{
 			if ($strParamName == "language")
 			{
@@ -134,7 +134,7 @@
 				}
 			}
 			*/
-			$bResult = parent::CallbackCheckParameter($strCommand,$strParamName,$strParamValue);	
+			$bResult = parent::OnCheckParameter($strCommand,$strParamName,$strParamValue);	
 			if ($bResult == true)
 			{
 				if ($strParamName == "publication_end_datetime")
@@ -458,11 +458,11 @@
 			return;
 		}		
 		
-		function CallbackCommandAddPrepare($strEntity,&$arrayItem)
+		function OnCommandAddPrepare($strEntity,&$arrayItem)
 		{
 			if ($strEntity == "article")
 			{
-				$bResult = $this->CallbackCommandSetPrepare($strEntity,$arrayItem);
+				$bResult = $this->OnCommandSetPrepare($strEntity,$arrayItem);
 				if ($bResult == false)
 				{
 					return false;	
@@ -474,10 +474,10 @@
 					$arrayItem["NAME"] = MakeID(ArrayGetValue($arrayItem,"TITLE"));
 				}
 			}
-			return parent::CallbackCommandAddPrepare($strEntity,$arrayItem);		
+			return parent::OnCommandAddPrepare($strEntity,$arrayItem);		
 		}
 
-		function CallbackCommandSetPrepare($strEntity,&$arrayItem)
+		function OnCommandSetPrepare($strEntity,&$arrayItem)
 		{
 			if ($strEntity == "article")
 			{			
@@ -487,10 +487,10 @@
 					$arrayItem["PUBLICATION_END_DATETIME"] = DATETIME_INFINITE;
 				}
 			}
-			return parent::CallbackCommandSetPrepare($strEntity,$arrayItem);
+			return parent::OnCommandSetPrepare($strEntity,$arrayItem);
 		}  
 		
-		function CallbackCommandGetComplete($strEntity,&$arrayItem,$strContext)
+		function OnCommandGetComplete($strEntity,&$arrayItem,$strContext)
 		{
 			if ($strEntity == "article")
 			{
@@ -522,7 +522,7 @@
 					$arrayItem["AUTHOR_USER_ID"] = "";
 				}				
 			}
-			return parent::CallbackCommandGetComplete($strEntity,$arrayItem,$strContext);
+			return parent::OnCommandGetComplete($strEntity,$arrayItem,$strContext);
 		}		
 
 

@@ -74,9 +74,9 @@ Usually the website class implementation is in a file named like this:
 
 
 Within your website class implementation, search for the function
-CallbackInitAssemblyLine. If it doesn't exist add it:
+OnInitAssemblyLine. If it doesn't exist add it:
 
-	function CallbackInitAssemblyLine(&$assemblyLine)
+	function OnInitAssemblyLine(&$assemblyLine)
 	{
 		$assembly = new CAssembly($this,"$$$a$$$");
 		$assemblyLine->AddAssembly($assembly);
@@ -127,7 +127,7 @@ always implies that the associated test scripts need to be changed, too.
 It is good practice to create test scripts that cover all functions of a
 web service.
 
-Check out the web service implementation to see which callback functions
+Check out the web service implementation to see which functions
 can be used to adjust the web service behaviour. The same applies to
 the module implementation.
 

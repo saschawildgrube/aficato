@@ -10,15 +10,15 @@
 			parent::__construct("WDK GetAllLocales");
 		}
 		  
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->SetActive(false);
 		}
 
  
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 
 			$arrayLocales = GetAllLocales();

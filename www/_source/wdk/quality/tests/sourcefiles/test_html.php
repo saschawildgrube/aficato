@@ -9,7 +9,7 @@
 			parent::__construct('Check for problems in xhtml files');
 		}
 
-		function Callback_TestCase_CheckFile($strFilePath)
+		function OnTestCaseCheckFile($strFilePath)
 		{ 
 			$arrayRegExp = array();
 			$strExtention = GetExtentionFromPath($strFilePath);
@@ -28,9 +28,9 @@
 			return;
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$this->CheckSourceDirectories();
 		}

@@ -48,9 +48,9 @@ Usually the website class implementation is in a file named like this:
 
 
 Within your website class implementation, search for the function
-CallbackInitAssemblyLine. If it doesn't exist add it:
+OnInitAssemblyLine. If it doesn't exist add it:
 
-	function CallbackInitAssemblyLine(&$assemblyLine)
+	function OnInitAssemblyLine(&$assemblyLine)
 	{
 		$assembly = new CAssembly($this,"$$$a$$$");
 		$assemblyLine->AddAssembly($assembly);
@@ -72,7 +72,7 @@ in the __construct() function:
 $arrayConfig["layouts"][] = "$$$layoutid$$$";
 
 You may even want to set the layout as the default layout by
-adding this line in the CallBackOnInit() function:
+adding this line in the OnInit() function:
 
 $this->SetLayout("$$$layoutid$$$");
 

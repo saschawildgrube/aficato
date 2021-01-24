@@ -3,7 +3,7 @@
 
 	class CMyContent extends CContentSystemAdmin
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$this->GetWebsite()->IncludeModule("system/sessionmanager");
 			$sessionmanager = new CSessionManagerModule($this->GetWebsite(),"");

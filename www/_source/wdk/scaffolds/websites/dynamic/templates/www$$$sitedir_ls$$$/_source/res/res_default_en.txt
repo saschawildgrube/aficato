@@ -65,7 +65,7 @@ Add, modify, deactivate or even delete users or change their access rights.
 TID_TEXT_EXAMPLE3
 This is an example text used in a language independend content file loaded from a text resource file.
 TID_TEXT_DISCLAIMER
-This is a disclaimer text. Check out C$$$WebSiteName$$$Website::CallbackRenderSpecialContent() to see how it works!
+This is a disclaimer text. Check out C$$$WebSiteName$$$Website::OnRenderSpecialContent() to see how it works!
 TID_CHECKBOX_DISCLAIMER
 Please confirm that you have read the disclaimer!
 TID_TOOLTIP_SSL

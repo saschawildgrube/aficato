@@ -19,7 +19,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->GetPreselectedScaffoldID() != "")
 			{
@@ -40,7 +40,7 @@
 			
 			$this->SetToolbarConfig($arrayToolbarConfig);
 			
-			return true;
+			return parent::OnInit();
 		}
 
 		function GetPreselectedScaffoldCategory()
@@ -56,7 +56,7 @@
 		}
 		
 
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{
@@ -444,9 +444,9 @@
 			return "configure";
 		}
 		
-		function CallbackIsToolVisible($strToolID)
+		function OnIsToolVisible($strToolID)
 		{
-			return parent::CallbackIsToolVisible($strToolID);
+			return parent::OnIsToolVisible($strToolID);
 			
 		}
 		

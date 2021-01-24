@@ -9,9 +9,9 @@
 			parent::__construct("Test GetDateTimeLocalFormat");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			date_default_timezone_set("UTC");
 			return true;
@@ -44,9 +44,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->TestCase_GetDateTimeLocalFormat("","%Y-%m-%d %H:%M:%S");
 			$this->TestCase_GetDateTimeLocalFormat("USA","%m/%d/%Y %I:%M:%S%P");
 		}

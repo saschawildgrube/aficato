@@ -36,9 +36,9 @@
 			parent::__construct("Web service system/user",$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 
 			$this->RequireWebservice("system/user");
 			
@@ -51,9 +51,9 @@
 			return true;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$consumer = new CWebServiceConsumerWebApplication($this);
 
@@ -305,9 +305,9 @@
 			$this->SetResult(true);
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			
 			$consumer = new CWebServiceConsumerWebApplication($this);
 			

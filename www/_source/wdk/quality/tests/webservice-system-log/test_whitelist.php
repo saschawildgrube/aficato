@@ -14,9 +14,9 @@
 			parent::__construct("Web service system/log Whitelist",$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			
 			$this->m_strWebservice = "system/log";
 					
@@ -25,9 +25,9 @@
 			return true;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$consumer = new CWebServiceConsumerWebApplication($this);			
 			
 			

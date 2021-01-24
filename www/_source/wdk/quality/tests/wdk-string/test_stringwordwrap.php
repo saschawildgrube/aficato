@@ -7,9 +7,9 @@
 			parent::__construct("StringWordWrap");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			//$this->SetActive(false);
 			$this->SetResult(true);
 			return true;
@@ -40,9 +40,9 @@
 			
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->TestCase_StringWordWrap(
 				"The quick brown fox jumps over the lazy dog.",

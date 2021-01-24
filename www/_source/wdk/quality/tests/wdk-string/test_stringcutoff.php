@@ -7,9 +7,9 @@
 			parent::__construct("StringCutOff");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -37,9 +37,9 @@
 		}
 
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest(); 
+			parent::OnTest(); 
 
 			$this->TestCase_StringCutOff(
 				"1234 67890 23456789 1234 67890 23456789",

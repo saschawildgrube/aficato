@@ -9,9 +9,9 @@
 			parent::__construct("Test GetHostNameFromIP");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -40,9 +40,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			// Example.com resolves to 93.184.216.34. But 93.184.216.34 does not allow reverse lookup.
 			$this->TestCase_GetHostNameFromIP("93.184.216.34",false);

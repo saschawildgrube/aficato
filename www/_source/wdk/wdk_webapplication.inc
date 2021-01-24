@@ -381,7 +381,7 @@
 				$this->Trace("SYSTEM LOG: $strEventSeverity: $strEventID: Logging is deactivated by config.");
 				return;
 			}
-			return $this->CallbackSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
+			return $this->OnSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
 		}
 		
 		function SystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails=array())
@@ -392,16 +392,16 @@
 				return;
 			}
 			$arrayDetails["instancetoken"] = $this->GetInstanceToken();			
-			return $this->CallbackSystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
+			return $this->OnSystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
 		}
 
-		function CallbackSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
+		function OnSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
 		{
 			$this->Trace("SYSTEM LOG: ".RenderValue($strEventSeverity).": ".RenderValue($strEventID).": ".RenderValue($strEventMessage));
 			$this->Trace("No log handler implemented.");
 		}
 	
-		function CallbackSystemEvent($strEventSeverity,$strEventID,$strEventMessage, $arrayDetails)
+		function OnSystemEvent($strEventSeverity,$strEventID,$strEventMessage, $arrayDetails)
 		{
 			$this->Trace("SYSTEM EVENT: ".RenderValue($strEventSeverity).": ".RenderValue($strEventID).": ".RenderValue($strEventMessage));
 			$this->Trace($arrayDetails);
@@ -478,22 +478,22 @@
 			$strUser = $this->GetBasicAuthUser();
 			$strPassword = $this->GetBasicAuthPassword();
 			
-			$this->m_bBasicAuth = $this->CallbackBasicAuth(
+			$this->m_bBasicAuth = $this->OnBasicAuth(
 				$this->GetBasicAuthUser(),
 				$this->GetBasicAuthPassword());
 
 			if ($this->m_bBasicAuth == false)
 			{
-				$strText = $this->CallbackBasicAuthGetText();
+				$strText = $this->OnBasicAuthGetText();
 				
   			header('WWW-Authenticate: Basic realm="'.$strText.'"');
   			header('HTTP/1.0 401 Unauthorized');
 				
-				$strOutput = $this->CallbackBasicAuthRenderFailed();
+				$strOutput = $this->OnBasicAuthRenderFailed();
 			}
 			else
 			{
-				$strOutput = $this->CallbackBasicAuthRenderSuccess();
+				$strOutput = $this->OnBasicAuthRenderSuccess();
 			}
 			if ($strOutput != '')
 			{
@@ -527,22 +527,22 @@
 			return ArrayGetValue($_SERVER,'PHP_AUTH_PW');	
 		}
 		
-		function CallbackBasicAuthGetText()
+		function OnBasicAuthGetText()
 		{
 			return "";	
 		}
 		
-		function CallbackBasicAuth($strUser,$strPassword)
+		function OnBasicAuth($strUser,$strPassword)
 		{
 			return false;	
 		}
 		
-		function CallbackBasicAuthRenderFailed() 
+		function OnBasicAuthRenderFailed() 
 		{
 			return 'Authentication Failed';	
 		}
 		
-		function CallbackBasicAuthRenderSuccess() 
+		function OnBasicAuthRenderSuccess() 
 		{
 			return '';
 		}		

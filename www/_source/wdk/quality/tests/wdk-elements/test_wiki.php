@@ -9,9 +9,9 @@
 			parent::__construct("Test Element Wiki");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			//$this->SetActive(false);
 			return true;
 		}
@@ -25,9 +25,9 @@
 			$this->TestCase_CheckURL($strURL,array($strExpected));
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 
 
@@ -324,9 +324,9 @@ Some text
 
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		 

@@ -9,9 +9,9 @@
 			parent::__construct("RenderPathContent() and ParsePathContent()");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			return true;
 		}
@@ -66,9 +66,9 @@
 		}
 		
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 					
 		

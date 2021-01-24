@@ -9,9 +9,9 @@
 			parent::__construct("Test Element ItemManager");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			//$this->SetActive(false);
 			return true;
 		}
@@ -25,9 +25,9 @@
 			$this->TestCase_CheckURL($strURL,array($strExpected));
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 
 
@@ -151,9 +151,9 @@ Column 4<br/>Column 5</th>
 
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		 

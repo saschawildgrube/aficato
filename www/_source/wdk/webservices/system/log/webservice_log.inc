@@ -49,36 +49,36 @@
 				
 		}
 		
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
 			$paramDef->AddParameterDefinitionBoolean("logmail");
-			parent::CallbackInitParameterDefinition($paramDef);
+			parent::OnInitParameterDefinition($paramDef);
 			
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
 			$commandDef->AddCommandDefinition("log",array("reporter_id","event_severity","event_id","event_message","event_details","event_datetime","logmail"));
 			$commandDef->AddCommandDefinition("verify",array());	
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->DatabaseConnect() != true)
 			{
 				return false;
 			}			
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 		
-		function CallbackSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
+		function OnSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
 		{
 			// No, the log web service will not trigger a log entry
 		}
 		
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			switch ($strCommand)
 			{
@@ -91,7 +91,7 @@
 				return;
 				
 			default:
-				parent::CallbackCommand($strCommand);
+				parent::OnCommand($strCommand);
 				return;
 			}
 		}

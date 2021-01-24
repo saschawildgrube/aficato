@@ -48,12 +48,12 @@
 
 		}
 		
-		function Callback_TestCase_CheckFile($strFilePath)
+		function OnTestCaseCheckFile($strFilePath)
 		{
 			
 		}
 
-		function Callback_TestCase_CheckFolder($strFolderPath)
+		function OnTestCaseCheckFolder($strFolderPath)
 		{
 			
 		}
@@ -61,13 +61,13 @@
 		final
 		function CheckFile($strFilePath)
 		{
-			$this->Callback_TestCase_CheckFile($strFilePath);
+			$this->OnTestCaseCheckFile($strFilePath);
 		}
 
 		final
 		function CheckFolder($strFolderPath)
 		{
-			$this->Callback_TestCase_CheckFolder($strFolderPath);
+			$this->OnTestCaseCheckFolder($strFolderPath);
 		}
 
 		

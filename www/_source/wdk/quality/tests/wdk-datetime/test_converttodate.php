@@ -9,9 +9,9 @@
 			parent::__construct('Test ConvertToDate');
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			date_default_timezone_set('UTC');
 			return true;
@@ -38,9 +38,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->TestCase_ConvertToDate('12.01.2010','2010-01-12');
 			$this->TestCase_ConvertToDate('01.12.2010','2010-12-01');
 			$this->TestCase_ConvertToDate('27.7.77','1977-07-27');

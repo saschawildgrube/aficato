@@ -19,7 +19,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayEntityDefinitions = array(
 				'job' => GetEntityDefinitionJob()
@@ -29,10 +29,10 @@
 
 			$this->IncludeElement('format');
 			
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{
@@ -41,13 +41,13 @@
 				case 'execute':
 					return $this->StateExecute();
 				default:
-					return parent::CallbackRenderModule($strState);
+					return parent::OnRenderModule($strState);
 			}
 		}
 		
-		function CallbackCheckInputValues($strEntity,$bAdd,$arrayItem)
+		function OnCheckInputValues($strEntity,$bAdd,$arrayItem)
 		{
-			$arrayErrors = parent::CallbackCheckInputValues($strEntity,$bAdd,$arrayItem);
+			$arrayErrors = parent::OnCheckInputValues($strEntity,$bAdd,$arrayItem);
 			if ($strEntity == 'job')
 			{
 				if ($arrayItem['job_name'] == '')
@@ -90,7 +90,7 @@
 			
 		}
 
-		function CallbackPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
 		{
 			$bActive = true;
 			if ($strEntity == 'job')
@@ -140,7 +140,7 @@
 			}
 	
 			
-			parent::CallbackPrepareItemDataView($strEntity,$strIndex,$arrayItem);
+			parent::OnPrepareItemDataView($strEntity,$strIndex,$arrayItem);
 			if ($strEntity == 'job')
 			{			
 				if ($bActive == false)
@@ -157,13 +157,13 @@
 			}
 		} 
 		
-		function CallbackPrepareItemDataModify($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataModify($strEntity,$strIndex,&$arrayItem)
 		{
 			if ($strEntity == 'job')
 			{			
 				$arrayItem['job_postparams'] = ReplaceString(ArrayGetValue($arrayItem,'job_postparams'),'%20',' ');
 			}
-			parent::CallbackPrepareItemDataModify($strEntity,$strIndex,$arrayItem);
+			parent::OnPrepareItemDataModify($strEntity,$strIndex,$arrayItem);
 		}
 		
 		function StateExecute()

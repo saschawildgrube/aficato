@@ -17,7 +17,7 @@
 			parent::__construct("Web service cms/article: Cleanup based on article name",$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->RequireWebservice($this->m_strWebservice);
 			$this->SetVerbose(true);
@@ -25,7 +25,7 @@
 			// Test remains inactive as long as the cleanup command is implemented
 			$this->SetActive(false);	
 			
-			return parent::CallbackInit();	
+			return parent::OnInit();	
 		}	
 		
 		function Test_Cleanup($arrayArticles,$strName,$strLanguage,$strCountry,$strType,$strThresholdDateTime,$strThresholdVersions)
@@ -143,9 +143,9 @@
 		
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->SetResult(true);
 
@@ -230,9 +230,9 @@
 				
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			
 		
 			$this->Trace("DELETE ARTICLES");

@@ -20,7 +20,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->m_strUserID == "")
 			{
@@ -31,10 +31,10 @@
 			{
 				$this->Error("An array of privilege ids must be supplied (privileges).");	
 			}
-			return true;
+			return parent::OnInit();
 		}
 
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{

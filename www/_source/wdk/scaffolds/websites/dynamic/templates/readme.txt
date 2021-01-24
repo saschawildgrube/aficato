@@ -89,7 +89,7 @@ A good start to develop your website is:
 - Add corresponding content htm or txt files in /_source/content/en/
 - Start to implement the layout of your site by changing and adding files in /_source/layout/
 - Run through /_source/website_$$$websitename$$$.inc. Change general configuration
-  settings and modify the implementation of callback functions.
+  settings and modify the implementation of overloaded functions.
   You will find some hints in source code comments.
   
 You may also want to explore the debug mode of your new website:

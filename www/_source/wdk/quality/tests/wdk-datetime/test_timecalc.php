@@ -9,9 +9,9 @@
 			parent::__construct("Test Time calculation functions");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			//
 			//$this->SetActive(false);
 			//
@@ -63,9 +63,9 @@
 		} 
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 	
 			$this->TestCase_TimeCalc(
 				"GetTimeAddSeconds",

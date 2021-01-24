@@ -11,7 +11,7 @@
 		 
 		
 		
-		function Callback_TestCase_CheckFile($strFilePath)
+		function OnTestCaseCheckFile($strFilePath)
 		{ 
 			$arrayRegExp = array();
 			$strExtention = GetExtentionFromPath($strFilePath);
@@ -68,10 +68,10 @@
 						"/GetBoolString/",
 						'"assembly_blacklist"/',
 						'/VerifyTextID/',
-						"/GetInvalidTextIDs/",
+						'/GetInvalidTextIDs/',
 						'/wdk_dns.inc/',
 						'/mysql_/',
-						"/MakeSQL_Assignment\(/",
+						'/MakeSQL_Assignment\(/',
 						"/MakeSQL_Value\(/",
 						"/MakeSQL_Field\(/",
 						"/MakeSQL_Fields\(/",
@@ -129,27 +129,30 @@
 						'/RenderCountdown/(/',
 						'/IsDevice/',
 						'/GetDatabaseConfigID/(/',
-						'/GetStage/(/',
+						'/GetStage\(/',
 						'/CBootstrapLayout/',
 						'/CBootstrapThemeLayout/',
-						'/CallbackGetWebsiteTitle/',
-						'/CallbackGetWebsiteDescription/',
-						'/CallbackGetWebsiteKeywords/'
+						'/IncludeAssembly\(/',  
+						'/RegisterAssembly\(/',
+						'/On_TestCase_CheckFile\(/',
+						'/On_TestCase_CheckFolder\(/',
+						'/::Callback/',
+						'/m_bCallback/'
 					);
 					
-				if ($strFileName != "wdk_url.inc")
+				if ($strFileName != 'wdk_url.inc')
 				{
-					$arrayRegExp[] = "/urlencode\(/";
+					$arrayRegExp[] = '/urlencode\(/';
 				}
 
-				if ($strFileName != "wdk_element.inc")
+				if ($strFileName != 'wdk_element.inc')
 				{
-					$arrayRegExp[] = '/$this->m_strLayoutHTML;/';
+					$arrayRegExp[] = '/$this->m_strLayoutHTML;/';  
 				}
 					
 			}
-			else if (	$strExtention == "htm"
-						||  $strExtention == "cfg")
+			else if (	$strExtention == 'htm'
+						||  $strExtention == 'cfg')
 			{
 				$arrayRegExp = array
 					(
@@ -160,9 +163,9 @@
 			$this->CheckFileAgainstRegExp($strFilePath,$arrayRegExp);
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$this->CheckSourceDirectories();
 		}

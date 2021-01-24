@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$strText = u("<p>Line<br/>Break</p>");
 			$strToken = u("B");

@@ -1,5 +1,5 @@
 =Website Development Kit (WDK)=
-Version 0.0.0.77
+Version 0.0.0.78
 
 
 by Sascha Wildgrube (sascha@wildgrube.com)
@@ -9,8 +9,8 @@ complex web applications.
 It addresses numerous issues web application developers have
 to take care of. It contains solutions to create multi-lingual
 dynamic websites and database wrapping webservices.
-=Copyright and Licence=
-Copyright 2005-2020 by Sascha Wildgrube
+=Copyright and License= 
+Copyright 2005-2021 by Sascha Wildgrube
 
 
 Licensed under the Apache License, Version 2.0 (the "License");

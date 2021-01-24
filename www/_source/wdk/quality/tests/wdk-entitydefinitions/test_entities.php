@@ -17,9 +17,9 @@
 			parent::__construct("Test Definition of all WDK supported Entities");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			return true;
 		}
@@ -69,9 +69,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->TestCase_CheckEntity("session",GetEntityDefinitionSession());
 			$this->TestCase_CheckEntity("log",GetEntityDefinitionLog());
 			$this->TestCase_CheckEntity("user",GetEntityDefinitionUser());

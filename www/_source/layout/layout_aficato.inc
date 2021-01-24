@@ -4,9 +4,9 @@
 
 	class CMyLayout extends CLayoutBootstrap3Theme
 	{
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			$this->GetWebsite()->ActivateFontAwesome4();
 			$this->GetWebsite()->AddJavaScript('wdk');
 			$this->GetWebsite()->AddJavaScript('wdk-progressindicator-activate');

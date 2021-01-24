@@ -9,9 +9,9 @@
 			parent::__construct("Test CrontabCalculateNextDateTime");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			date_default_timezone_set("UTC");
 			return true;
@@ -68,9 +68,9 @@
 
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 	
 		
 			$this->TestCase_CrontabCalculateNextDateTime(
@@ -254,9 +254,9 @@
 
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		

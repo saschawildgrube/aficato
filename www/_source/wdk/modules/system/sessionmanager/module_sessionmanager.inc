@@ -24,7 +24,7 @@ $arrayParams["ownerid"] = $this->GetModuleVar("ownerid");
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayEntityDefinitions = array(
 				"session" => GetEntityDefinitionSession()
@@ -32,12 +32,12 @@ $arrayParams["ownerid"] = $this->GetModuleVar("ownerid");
 	
 			$this->SetEntityDefinitions($arrayEntityDefinitions);
 			
-			return true;
+			return parent::OnInit();
 		}
 		
-		function CallbackPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
 		{
-			parent::CallbackPrepareItemDataView($strEntity,$strIndex,$arrayItem);
+			parent::OnPrepareItemDataView($strEntity,$strIndex,$arrayItem);
 			if ($strEntity == "session")
 			{
 				// Display the user name (instead of the user id)
@@ -84,18 +84,18 @@ $arrayParams["ownerid"] = $this->GetModuleVar("ownerid");
 			}
 		}
 		
-		function CallbackPrepareToolbar()
+		function OnPrepareToolbar()
 		{
 			$arrayParams = array();
 			$arrayParams[$this->GetModuleVarNameState()] = "sessioncleanup";
 			$strLink = $this->GetWebsite()->MakeURL($arrayParams);
 			$this->AddTool($strLink, "delete", "?TID_SESSION_TOOL_SESSIONCLEANUP?");
-			parent::CallbackPrepareToolbar();	
+			parent::OnPrepareToolbar();	
 		}
 		
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "sessioncleanup":
@@ -103,7 +103,7 @@ $arrayParams["ownerid"] = $this->GetModuleVar("ownerid");
 				case "":
 					return $this->StateList("session");
 				default:
-					return parent::CallbackRenderModule($strState);
+					return parent::OnRenderModule($strState);
 			}
 		}
 		
@@ -128,9 +128,9 @@ $arrayParams["ownerid"] = $this->GetModuleVar("ownerid");
 			return $this->StateList("session");	
 		}
 		
-		function CallbackItemDeleted($strEntity,$strItemIndex,$arrayItem)
+		function OnItemDeleted($strEntity,$strItemIndex,$arrayItem)
 		{
-			parent::CallbackItemDeleted($strEntity,$strItemIndex,$arrayItem);
+			parent::OnItemDeleted($strEntity,$strItemIndex,$arrayItem);
 			$strSessionID = ArrayGetValue($arrayItem,"session_id");
 			if ($this->GetWebsite()->GetSessionID() == $strSessionID)
 			{

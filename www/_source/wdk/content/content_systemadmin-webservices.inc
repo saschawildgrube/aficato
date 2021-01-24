@@ -4,7 +4,7 @@
 
 	class CMyContent extends CContentSystemAdmin
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$arrayModuleConfig = array();
 			

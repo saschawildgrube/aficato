@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContentSystemAdmin
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$arrayConfig = array();
 			$arrayConfig["privileges"] = $this->GetWebsite()->GetConfig("privileges");

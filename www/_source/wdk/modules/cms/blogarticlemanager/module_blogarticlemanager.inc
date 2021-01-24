@@ -16,9 +16,9 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			if ($bResult == false)
 			{
 				return false;	
@@ -78,7 +78,7 @@
 			return true;
 		}
 		
-		function CallbackPrepareWebserviceParams($strEntity,&$arrayParams)
+		function OnPrepareWebserviceParams($strEntity,&$arrayParams)
 		{
 			if ($strEntity == "article")
 			{
@@ -98,11 +98,11 @@
 				}
 							
 			}
-			parent::CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			parent::OnPrepareWebserviceParams($strEntity,$arrayParams);
 		}
 
 		
-		function CallbackCheckConditionForItem($strEntity,$arrayItem,$strState)
+		function OnCheckConditionForItem($strEntity,$arrayItem,$strState)
 		{
 			if ($strEntity == "article")	
 			{

@@ -10,7 +10,7 @@
 	
 	class CMyInstaller extends CInstaller
 	{
-		function CallbackInstall()
+		function OnInstall()
 		{
 			if ($this->InstallWebservice("system/log") == false)
 			{
@@ -58,7 +58,7 @@
 			return true;
 		}
 		
-		function CallbackRollback()
+		function OnRollback()
 		{
 			return true;
 		}

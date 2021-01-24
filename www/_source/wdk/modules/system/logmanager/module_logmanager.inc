@@ -18,7 +18,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayEntityDefinitions = array(
 				"log" => GetEntityDefinitionLog()
@@ -26,13 +26,13 @@
 
 			$this->SetEntityDefinitions($arrayEntityDefinitions);
 			
-			return true;
+			return parent::OnInit();
 		}
 		
 	
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "help":
@@ -40,11 +40,11 @@
 				case "":
 					return $this->StateList("log");
 				default:
-					return parent::CallbackRenderModule($strState);
+					return parent::OnRenderModule($strState);
 			}
 		}
 		
-		function CallbackPrepareFilterSelectOptions($strEntity,$strFilter)
+		function OnPrepareFilterSelectOptions($strEntity,$strFilter)
 		{
 			$arrayOptions = array();
 			if ($strEntity == "log")
@@ -66,7 +66,7 @@
 			return $arrayOptions;
 		}		
 		
-		function CallbackPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
 		{
 			if ($strEntity == "log")
 			{
@@ -103,7 +103,7 @@
 					}
 				}
 			}
-			parent::CallbackPrepareItemDataView($strEntity,$strIndex,$arrayItem);
+			parent::OnPrepareItemDataView($strEntity,$strIndex,$arrayItem);
 		}
 	}
 

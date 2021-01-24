@@ -32,17 +32,17 @@
 			parent::__construct("Web service system/user Changing a Password",$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->m_strUserName = "test-password";
 			$this->SetVerbose(false);
 			$this->RequireWebservice($this->m_strWebservice);			 
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$strPassword1 = "password1";
 			$strPassword2 = "password2";
@@ -165,9 +165,9 @@
 			$this->SetResult(true);
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			
 			$consumer = new CWebServiceConsumerWebApplication($this);
 			

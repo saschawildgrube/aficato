@@ -9,9 +9,9 @@
 			parent::__construct("Test DetectBot");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -41,9 +41,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->TestCase_DetectBot("","",false);			
 			$this->TestCase_DetectBot("123.123.123.123","blah +http://www.google.com","http://www.google.com/");

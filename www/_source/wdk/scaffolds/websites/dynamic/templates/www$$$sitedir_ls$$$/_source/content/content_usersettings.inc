@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContentLogin
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 		
 			$this->GetWebsite()->IncludeModule("user/usersettings");

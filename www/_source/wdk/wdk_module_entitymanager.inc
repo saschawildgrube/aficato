@@ -34,9 +34,9 @@
 		}
 
 
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			return $bResult;
 		}
 
@@ -142,10 +142,10 @@
 		final
 		function CheckConditionForItem($strEntity,$arrayItem,$strState)
 		{
-			return $this->CallbackCheckConditionForItem($strEntity,$arrayItem,$strState);
+			return $this->OnCheckConditionForItem($strEntity,$arrayItem,$strState);
 		}
 		
-		function CallbackCheckConditionForItem($strEntity,$arrayItem,$strContext)
+		function OnCheckConditionForItem($strEntity,$arrayItem,$strContext)
 		{
 			return "";	
 		}	
@@ -284,9 +284,9 @@
 		}
 
 		
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\")");
+			$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\")");
 			$arrayEntityDefinitions = $this->m_entityDef->GetEntityDefinitions();
 			foreach ($arrayEntityDefinitions as $strEntity => $arrayEntity)
 			{
@@ -294,7 +294,7 @@
 				{
 					if ($this->CheckCondition($strEntity,"list"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateList(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateList(\"$strEntity\")");
 						return $this->StateList($strEntity);
 					}
 			
@@ -303,168 +303,168 @@
 				{
 					if ($this->IsStateSupported($strEntity,"view"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateView(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateView(\"$strEntity\")");
 						return $this->StateView($strEntity);
 					}
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_list");
+						return $this->OnRenderModule($strEntity."_list");
 					}
 				}
 				elseif ($strState == $strEntity."_add")
 				{
 					if ($this->IsStateSupported($strEntity,"add"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateAdd(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateAdd(\"$strEntity\")");
 						return $this->StateAdd($strEntity);
 					}
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_list");
+						return $this->OnRenderModule($strEntity."_list");
 					}
 				}
 				elseif ($strState == $strEntity."_addsubmit")
 				{
 					if ($this->IsStateSupported($strEntity,"add"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateAddSubmit(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateAddSubmit(\"$strEntity\")");
 						return $this->StateAddSubmit($strEntity);
 					}				
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_list");
+						return $this->OnRenderModule($strEntity."_list");
 					}
 				}
 				elseif ($strState == $strEntity."_modify")
 				{
 					if ($this->IsStateSupported($strEntity,"modify"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateModify(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateModify(\"$strEntity\")");
 						return $this->StateModify($strEntity);
 					}				
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_view");
+						return $this->OnRenderModule($strEntity."_view");
 					}
 				}
 				elseif ($strState == $strEntity."_modifysubmit")
 				{
 					if ($this->IsStateSupported($strEntity,"modify"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateModifySubmit(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateModifySubmit(\"$strEntity\")");
 						return $this->StateModifySubmit($strEntity);
 					}				
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_view");
+						return $this->OnRenderModule($strEntity."_view");
 					}
 				}
 				elseif ($strState == $strEntity."_modifysortorder")
 				{
 					if ($this->IsStateSupported($strEntity,"modifysortorder"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateModifySortOrder(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateModifySortOrder(\"$strEntity\")");
 						return $this->StateModifySortOrder($strEntity);
 					}				
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_list");
+						return $this->OnRenderModule($strEntity."_list");
 					}
 				}
 				elseif ($strState == $strEntity."_duplicate")
 				{
 					if ($this->IsStateSupported($strEntity,"duplicate"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateDuplicate(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateDuplicate(\"$strEntity\")");
 						return $this->StateDuplicate($strEntity);
 					}				
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_view");
+						return $this->OnRenderModule($strEntity."_view");
 					}
 				}
 				elseif ($strState == $strEntity."_duplicatesubmit")
 				{
 					if ($this->IsStateSupported($strEntity,"duplicate"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateDuplicateSubmit(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateDuplicateSubmit(\"$strEntity\")");
 						return $this->StateDuplicateSubmit($strEntity);
 					}				
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_duplicate");
+						return $this->OnRenderModule($strEntity."_duplicate");
 					}
 				}
 				elseif ($strState == $strEntity."_delete")
 				{
 					if ($this->IsStateSupported($strEntity,"delete"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateDelete(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateDelete(\"$strEntity\")");
 						return $this->StateDelete($strEntity);
 					}				
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_view");
+						return $this->OnRenderModule($strEntity."_view");
 					}
 				}
 				elseif ($strState == $strEntity."_deletesubmit")
 				{
 					if ($this->IsStateSupported($strEntity,"delete"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateDeleteSubmit(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateDeleteSubmit(\"$strEntity\")");
 						return $this->StateDeleteSubmit($strEntity);
 					}				
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_view"); 
+						return $this->OnRenderModule($strEntity."_view"); 
 					}
 				}
 				elseif ($strState == $strEntity."_export")
 				{
 					if ($this->IsStateSupported($strEntity,"export"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateExport(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateExport(\"$strEntity\")");
 						return $this->StateExport($strEntity);
 					}
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_list");
+						return $this->OnRenderModule($strEntity."_list");
 					}
 				}
 				elseif ($strState == $strEntity."_exportsubmit")
 				{
 					if ($this->IsStateSupported($strEntity,"export"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateExportSubmit(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateExportSubmit(\"$strEntity\")");
 						return $this->StateExportSubmit($strEntity);
 					}
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_list");
+						return $this->OnRenderModule($strEntity."_list");
 					}
 				}				
 				elseif ($strState == $strEntity."_import")
 				{
 					if ($this->IsStateSupported($strEntity,"import"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateImport(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateImport(\"$strEntity\")");
 						return $this->StateImport($strEntity);
 					}
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_list");
+						return $this->OnRenderModule($strEntity."_list");
 					}
 				}
 				elseif ($strState == $strEntity."_importsubmit")
 				{
 					if ($this->IsStateSupported($strEntity,"import"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateImportSubmit(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateImportSubmit(\"$strEntity\")");
 						return $this->StateImportSubmit($strEntity);
 					}
 					else
 					{
-						return $this->CallbackRenderModule($strEntity."_list");
+						return $this->OnRenderModule($strEntity."_list");
 					}
 				}				
 				
@@ -477,7 +477,7 @@
 				{
 					if ($this->CheckCondition($strEntity,"list"))
 					{
-						$this->Trace("CEntityManagerModule::CallbackRenderModule(\"$strState\") -> calling StateList(\"$strEntity\")");
+						$this->Trace("CEntityManagerModule::OnRenderModule(\"$strState\") -> calling StateList(\"$strEntity\")");
 						return $this->StateList($strEntity);
 					}
 				}
@@ -487,7 +487,7 @@
 			return "error";
 		}
 
-		function CallbackPrepareItemDataList($strEntity,&$arrayItems,$strSortOption,$strSortOrder)
+		function OnPrepareItemDataList($strEntity,&$arrayItems,$strSortOption,$strSortOrder)
 		{
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			$arrayAttributes = ArrayGetValue($arrayEntity,"attributes");
@@ -507,7 +507,7 @@
 			{
 				$strIndex = ArrayGetValue($arrayItem,$strIndexAttribute);
 				
-				$this->CallbackPrepareItemDataView($strEntity,$strIndex,$arrayItem);
+				$this->OnPrepareItemDataView($strEntity,$strIndex,$arrayItem);
 	
 				foreach ($arrayAttributes as $strAttribute => $arrayAttribute)
 				{
@@ -620,7 +620,7 @@
 
 
 
-		function CallbackPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
 		{
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			$arrayAttributes = ArrayGetValue($arrayEntity,"attributes");
@@ -752,16 +752,16 @@
 			}
 		}
 
-		function CallbackPrepareItemDataDefaultValues($strEntity,&$arrayItem)
+		function OnPrepareItemDataDefaultValues($strEntity,&$arrayItem)
 		{
 		}
 
-		function CallbackPrepareItemDataDuplicate($strEntity,&$arrayItem)
+		function OnPrepareItemDataDuplicate($strEntity,&$arrayItem)
 		{
 		}
 
 
-		function CallbackPrepareItemDataModify($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataModify($strEntity,$strIndex,&$arrayItem)
 		{
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			$arrayAttributes = ArrayGetValue($arrayEntity,"attributes");
@@ -837,7 +837,7 @@
 
 
 		
-		function CallbackPrepareItemDataExport($strEntity,$strIndex,$arrayItem)
+		function OnPrepareItemDataExport($strEntity,$strIndex,$arrayItem)
 		{
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			$arrayAttributes = ArrayGetValue($arrayEntity,"attributes");
@@ -897,7 +897,7 @@
 		}
 
 
-		function CallbackPrepareItemDataImport($strEntity,$bAdd,$arrayItem)
+		function OnPrepareItemDataImport($strEntity,$bAdd,$arrayItem)
 		{
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			$arrayAttributes = ArrayGetValue($arrayEntity,"attributes");
@@ -956,7 +956,7 @@
 		}
 
 
-		function CallbackCheckInputValues($strEntity,$bAdd,$arrayItem)
+		function OnCheckInputValues($strEntity,$bAdd,$arrayItem)
 		{
 			$arrayErrors = array();
 			
@@ -1144,7 +1144,7 @@
 		}
 
 
-		function CallbackPrepareInputValues($strEntity,$bAdd,$arrayItem)
+		function OnPrepareInputValues($strEntity,$bAdd,$arrayItem)
 		{
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			$arrayAttributes = ArrayGetValue($arrayEntity,"attributes");
@@ -1238,11 +1238,11 @@
 
 
 		
-		function CallbackPrepareWebserviceParams($strEntity,&$arrayParams)
+		function OnPrepareWebserviceParams($strEntity,&$arrayParams)
 		{
 		}
 		
-		function CallbackPrepareSelectOptions($strEntity,$strAttributeID,$strIndex)
+		function OnPrepareSelectOptions($strEntity,$strAttributeID,$strIndex)
 		{
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			$arrayAttribute = ArrayGetValue($arrayEntity,"attributes",$strAttributeID);
@@ -1369,7 +1369,7 @@
 			return false;
 		}
 		
-		function CallbackPrepareFilterSelectOptions($strEntity,$strFilterID)
+		function OnPrepareFilterSelectOptions($strEntity,$strFilterID)
 		{
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			$arrayFilter = ArrayGetValue($arrayEntity,"filteroptions","filters",$strFilterID);
@@ -1394,7 +1394,7 @@
 				$arrayOptions = array();
 				$arrayOptions[""] = "?TID_OPTION_ALL?";
 				$arrayOptions = ArrayMerge(
-					$this->CallbackPrepareSelectOptions(
+					$this->OnPrepareSelectOptions(
 						$strEntity,
 						$strWebserviceFilterOption,
 						""),
@@ -1430,11 +1430,11 @@
 				{
 					$arrayOptions = array();
 					// This is to make sure the all option is on top.
-					// CallbackPrepareSelectOptions may add a "None" option.
+					// OnPrepareSelectOptions may add a "None" option.
 					$arrayOptions[""] = "";
 					$arrayOptions = ArrayAppend(
 						$arrayOptions,
-						$this->CallbackPrepareSelectOptions(
+						$this->OnPrepareSelectOptions(
 							$strEntity,
 							$strWebserviceFilterOption,
 							""));
@@ -1447,7 +1447,7 @@
 			return false;
 		}		
 	
-		function CallbackPrepareToolbar()
+		function OnPrepareToolbar()
 		{
 
 			$strState = $this->GetState();
@@ -1577,42 +1577,42 @@
 			}
 		}
 		
-		function CallbackItemAdded($strEntity,$strNewItemIndex,$arrayItem)
+		function OnItemAdded($strEntity,$strNewItemIndex,$arrayItem)
 		{
 			$arrayItem["INDEX"] = $strNewItemIndex;
 			$this->GetWebsite()->SystemEvent("INFORMATIONAL",StringUpperCase($strEntity)."_ADD",$strNewItemIndex,$arrayItem);
 		}
 		
-		function CallbackItemModified($strEntity,$strItemIndex,$arrayItem)
+		function OnItemModified($strEntity,$strItemIndex,$arrayItem)
 		{
 			$arrayItem["INDEX"] = $strItemIndex;
 			$this->GetWebsite()->SystemEvent("INFORMATIONAL",StringUpperCase($strEntity)."_MODIFY",$strItemIndex,$arrayItem);
 		}
 
-		function CallbackItemSortOrderModified($strEntity,$strItemIndex,$arrayItem)
+		function OnItemSortOrderModified($strEntity,$strItemIndex,$arrayItem)
 		{
 			$arrayItem["INDEX"] = $strItemIndex;
 			$this->GetWebsite()->SystemEvent("INFORMATIONAL",StringUpperCase($strEntity)."_MODIFYSORTORDER",$strItemIndex,$arrayItem);
 		}
 
 
-		function CallbackItemDuplicated($strEntity,$strItemIndex,$arrayItem)
+		function OnItemDuplicated($strEntity,$strItemIndex,$arrayItem)
 		{
 			$arrayItem["INDEX"] = $strItemIndex;
 			$this->GetWebsite()->SystemEvent("INFORMATIONAL",StringUpperCase($strEntity)."_DUPLICATE",$strItemIndex,$arrayItem);
 		}
 		
-		function CallbackItemDeleted($strEntity,$strItemIndex,$arrayItem)
+		function OnItemDeleted($strEntity,$strItemIndex,$arrayItem)
 		{
 			$arrayItem["INDEX"] = $strItemIndex;
 			$this->GetWebsite()->SystemEvent("INFORMATIONAL",StringUpperCase($strEntity)."_DELETE",$strItemIndex,$arrayItem);
 		}		
 		
-		function CallbackItemView($strEntity,$strItemIndex,$arrayItem)
+		function OnItemView($strEntity,$strItemIndex,$arrayItem)
 		{
 		}
 		
-		function CallbackGetExportFileTitle($strEntity)
+		function OnGetExportFileTitle($strEntity)
 		{
 			//return "export";
 			return $strEntity."_".StringTranslateCharacters(
@@ -1654,7 +1654,7 @@
 		final
 		function RenderToolbar()
 		{
-			$this->CallbackPrepareToolbar();
+			$this->OnPrepareToolbar();
 			if ($this->m_toolbarDef->GetToolCount() == 0)
 			{
 				$this->SetOutputItem("TOOLBAR",""); 
@@ -1853,17 +1853,17 @@
 								$arrayParams[$strWebserviceFilterParam.$nFilterIndex."_value"] = $strFilterModuleVar;
 							}
 							
-							$arrayOptions = $this->CallbackPrepareFilterSelectOptions(
+							$arrayOptions = $this->OnPrepareFilterSelectOptions(
 								$strEntity,
 								$strFilter);
 								
 							if (!is_array($arrayOptions))
 							{
-								$this->Error("Implementation error in CallbackPrepareFilterSelectOptions(\"$strEntity\",\"$strFilter\"). The function must return an array!");	
+								$this->Error("Implementation error in OnPrepareFilterSelectOptions(\"$strEntity\",\"$strFilter\"). The function must return an array!");	
 							}
 							if (ArrayCount($arrayOptions) == 0)
 							{
-								$this->Error("Implementation error in CallbackPrepareFilterSelectOptions(\"$strEntity\",\"$strFilter\"). The function must return a non-empty array!");	
+								$this->Error("Implementation error in OnPrepareFilterSelectOptions(\"$strEntity\",\"$strFilter\"). The function must return a non-empty array!");	
 							}
 							$formDef->AddControlSelect(
 								StringUpperCase($strFilter),
@@ -1905,7 +1905,7 @@
 			// INVOKE WEBSERVICE PART 2
 			
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"list");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			$strError = $webservice->GetError();
 			if ($strError != "")
@@ -2050,7 +2050,7 @@
 				}
 			}
 			
-			$this->CallbackPrepareItemDataList($strEntity,$arrayItems,$strSortOption,$strSortOrder);
+			$this->OnPrepareItemDataList($strEntity,$arrayItems,$strSortOption,$strSortOrder);
 
 			foreach ($arrayItems as &$arrayItem)
 			{
@@ -2341,7 +2341,7 @@
 		
 				// INVOKE WEB SERVICE
 				$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"list");
-				$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+				$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 				$webservice->ConsumeWebService($strWebservice,$arrayParams);
 				$strError = $webservice->GetError();
 				if ($strError != "")
@@ -2397,7 +2397,7 @@
 						$strIndex = $arrayItemRaw[$strTag];
 					}
 				}
-				$arrayItem = $this->CallbackPrepareItemDataExport($strEntity,$strIndex,$arrayItem);
+				$arrayItem = $this->OnPrepareItemDataExport($strEntity,$strIndex,$arrayItem);
 				$arrayItem2 = array();
 				foreach ($arrayAttributes as $strAttributeID => $arrayAttribute)
 				{
@@ -2433,7 +2433,7 @@
 		
 			$this->GetWebsite()->DownloadFile(
 				"text/csv",
-				$this->CallbackGetExportFileTitle($strEntity).".csv",
+				$this->OnGetExportFileTitle($strEntity).".csv",
 				$strCSV);
 			
 				
@@ -2550,9 +2550,9 @@
 					$bAdd = false;	
 				}
 
-				$arrayItem = $this->CallbackPrepareItemDataImport($strEntity,$bAdd,$arrayItem);  
-				$arrayItem = $this->CallbackPrepareInputValues($strEntity,$bAdd,$arrayItem);
-				$arrayErrors = $this->CallbackCheckInputValues($strEntity,$bAdd,$arrayItem);
+				$arrayItem = $this->OnPrepareItemDataImport($strEntity,$bAdd,$arrayItem);  
+				$arrayItem = $this->OnPrepareInputValues($strEntity,$bAdd,$arrayItem);
+				$arrayErrors = $this->OnCheckInputValues($strEntity,$bAdd,$arrayItem);
 				
 				$strUserFriendlyValue = ArrayGetValue($arrayItem,$strUserFriendlyAttribute);
 				if (ArrayCount($arrayErrors) > 0)
@@ -2637,7 +2637,7 @@
 			$arrayParams = array();
 			$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strEntityIndex;
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"get");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			
 			$strError = $webservice->GetError();
@@ -2656,7 +2656,7 @@
 			}
 			
 			$arrayItemRaw = $arrayItem;
-			$this->CallbackPrepareItemDataView($strEntity,$strEntityIndex,$arrayItem);
+			$this->OnPrepareItemDataView($strEntity,$strEntityIndex,$arrayItem);
 			
 			$strViewStyle = ArrayGetValue($arrayEntity,"view","style");
 			if ($strViewStyle == "")
@@ -2744,7 +2744,7 @@
 			
 			$this->RenderToolbar();	
 			
-			$strState = $this->CallbackItemView($strEntity,$strEntityIndex,$arrayItemRaw);
+			$strState = $this->OnItemView($strEntity,$strEntityIndex,$arrayItemRaw);
 			if ($strState != "")
 			{
 				return $strState;	
@@ -2928,7 +2928,7 @@
 			
 			//$arrayItem = $this->GetItemDataFromModuleVars($strEntity);
 			$arrayItem = $this->GetItemDataFromModuleVarsInsecure($strEntity);
-			$arrayItem = $this->CallbackPrepareInputValues($strEntity,true,$arrayItem);
+			$arrayItem = $this->OnPrepareInputValues($strEntity,true,$arrayItem);
 			
 			$arrayItemDefaults = $this->GetItemDataDefaultValues($strEntity);
 			$arrayItem = ArrayAppend($arrayItemDefaults,$arrayItem);
@@ -2975,8 +2975,8 @@
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			
 			$arrayItem = $this->GetItemDataFromModuleVarsInsecure($strEntity);
-			$arrayItem = $this->CallbackPrepareInputValues($strEntity,true,$arrayItem);
-			$this->m_arrayErrors = $this->CallbackCheckInputValues($strEntity,true,$arrayItem);
+			$arrayItem = $this->OnPrepareInputValues($strEntity,true,$arrayItem);
+			$this->m_arrayErrors = $this->OnCheckInputValues($strEntity,true,$arrayItem);
 			if (ArrayCount($this->m_arrayErrors) > 0)
 			{
 				return $this->StateAdd($strEntity);
@@ -2989,7 +2989,7 @@
 				$strEntity,
 				$arrayItem);
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"add");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			
 			$strError = $webservice->GetError();
@@ -3001,10 +3001,10 @@
 
 			$strNewItemIndex = $webservice->GetResultValue(ArrayGetValue($arrayEntity,"webservice","newitemidtag"));
 			$this->ResetItemModuleVars($strEntity);
-			$this->CallbackItemAdded($strEntity,$strNewItemIndex,$arrayItem);
+			$this->OnItemAdded($strEntity,$strNewItemIndex,$arrayItem);
 
 			// This is to ensure proper rendering of the user friendly attribute
-			$this->CallbackPrepareItemDataView($strEntity,$strNewItemIndex,$arrayItem);
+			$this->OnPrepareItemDataView($strEntity,$strNewItemIndex,$arrayItem);
 			$strUserFriendly = ArrayGetValue($arrayItem,ArrayGetValue($arrayEntity,"userfriendlyattribute"));
 			$this->SetInfoMessageCodeEntity($strEntity,"ADD_SUCCESS");
 			$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_USERFRIENDLY",$strUserFriendly);
@@ -3033,7 +3033,7 @@
 			$arrayParams = array();
 			$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strEntityIndex;
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"get");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			
 			$strError = $webservice->GetError();
@@ -3128,8 +3128,8 @@
 
 			// PREPARE MODIFIED VALUES			
 			$arrayItem = $this->GetItemDataFromModuleVarsInsecure($strEntity);
-			$arrayItem = $this->CallbackPrepareInputValues($strEntity,false,$arrayItem);
-			$this->m_arrayErrors = $this->CallbackCheckInputValues($strEntity,false,$arrayItem);
+			$arrayItem = $this->OnPrepareInputValues($strEntity,false,$arrayItem);
+			$this->m_arrayErrors = $this->OnCheckInputValues($strEntity,false,$arrayItem);
 			if (ArrayCount($this->m_arrayErrors) > 0)
 			{
 				return $this->StateModify($strEntity);
@@ -3141,7 +3141,7 @@
 				$arrayItem);
 			$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strEntityIndex;
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"set");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			$strError = $webservice->GetError();
 			if ($strError != "")
@@ -3155,7 +3155,7 @@
 				$arrayParams = array();
 				$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strEntityIndex;
 				$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"get");
-				$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+				$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 				$webservice->ConsumeWebService($strWebservice,$arrayParams);
 				$strError = $webservice->GetError();
 				if ($strError != "")
@@ -3165,10 +3165,10 @@
 				}
 				$arrayItem = $this->GetItemValuesFromWebservice($strEntity,$webservice);
 
-				$this->CallbackItemModified($strEntity,$strEntityIndex,$arrayItem);
+				$this->OnItemModified($strEntity,$strEntityIndex,$arrayItem);
 
 				// This is to ensure proper rendering of the user friendly attribute
-				$this->CallbackPrepareItemDataView($strEntity,$strEntityIndex,$arrayItem);
+				$this->OnPrepareItemDataView($strEntity,$strEntityIndex,$arrayItem);
 				$strUserFriendly = ArrayGetValue($arrayItem,ArrayGetValue($arrayEntity,"userfriendlyattribute"));
 				$this->SetInfoMessageCodeEntity($strEntity,"MODIFY_SUCCESS");
 				$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_USERFRIENDLY",$strUserFriendly);
@@ -3212,7 +3212,7 @@
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"set");
 			$arrayParams[$strSortOrderAttribute] = $nSortOrder;
 			
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			$strError = $webservice->GetError();
 			if ($strError != "")
@@ -3225,7 +3225,7 @@
 				$arrayParams = array();
 				$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strEntityIndex;
 				$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"get");
-				$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+				$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 				$webservice->ConsumeWebService($strWebservice,$arrayParams);
 				$strError = $webservice->GetError();
 				if ($strError != "")
@@ -3239,7 +3239,7 @@
 				$this->SetInfoMessageCodeEntity($strEntity,"MODIFYSORTORDER_SUCCESS");
 				$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_USERFRIENDLY",$strUserFriendly);
 				$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_INDEX",$strEntityIndex);
-				$this->CallbackItemSortOrderModified($strEntity,$strEntityIndex,$arrayItem);
+				$this->OnItemSortOrderModified($strEntity,$strEntityIndex,$arrayItem);
 				
 				$this->ResetItemModuleVars($strEntity);
 			}
@@ -3274,7 +3274,7 @@
 			$arrayParams = array();
 			$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strEntityIndex;
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"get");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			
 			$strError = $webservice->GetError();
@@ -3293,7 +3293,7 @@
 			}
 			
 			
-			$this->CallbackPrepareItemDataDuplicate($strEntity,$arrayItem);
+			$this->OnPrepareItemDataDuplicate($strEntity,$arrayItem);
 
 		
 			$formDef = new CFormDefinition();
@@ -3352,8 +3352,8 @@
 			$arrayEntity = $this->GetEntityDefinition($strEntity);
 			
 			$arrayItem = $this->GetItemDataFromModuleVarsInsecure($strEntity);
-			$arrayItem = $this->CallbackPrepareInputValues($strEntity,true,$arrayItem);
-			$this->m_arrayErrors = $this->CallbackCheckInputValues($strEntity,true,$arrayItem);
+			$arrayItem = $this->OnPrepareInputValues($strEntity,true,$arrayItem);
+			$this->m_arrayErrors = $this->OnCheckInputValues($strEntity,true,$arrayItem);
 			if (ArrayCount($this->m_arrayErrors) > 0)
 			{
 				return $this->StateDuplicate($strEntity);
@@ -3366,7 +3366,7 @@
 				$strEntity,
 				$arrayItem);
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"add");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			
 			$strError = $webservice->GetError();
@@ -3380,10 +3380,10 @@
 
 			$this->ResetItemModuleVars($strEntity);
 
-			$this->CallbackItemDuplicated($strEntity,$strNewItemIndex,$arrayItem);
+			$this->OnItemDuplicated($strEntity,$strNewItemIndex,$arrayItem);
 		
 			// This is to ensure proper rendering of the user friendly attribute
-			$this->CallbackPrepareItemDataView($strEntity,$strNewItemIndex,$arrayItem);
+			$this->OnPrepareItemDataView($strEntity,$strNewItemIndex,$arrayItem);
 			$strUserFriendly = ArrayGetValue($arrayItem,ArrayGetValue($arrayEntity,"userfriendlyattribute"));
 			$this->SetInfoMessageCodeEntity($strEntity,"DUPLICATE_SUCCESS");
 			$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_USERFRIENDLY",$strUserFriendly);
@@ -3437,7 +3437,7 @@
 			
 			
 			// This is to ensure proper rendering of the user friendly attribute
-			$this->CallbackPrepareItemDataView($strEntity,$strEntityIndex,$arrayItem);
+			$this->OnPrepareItemDataView($strEntity,$strEntityIndex,$arrayItem);
 			$strUserFriendly = ArrayGetValue($arrayItem,ArrayGetValue($arrayEntity,"userfriendlyattribute"));
 			$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_USERFRIENDLY",$strUserFriendly);
 			$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_INDEX",$strEntityIndex);
@@ -3493,7 +3493,7 @@
 			$arrayParams = array();
 			$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strEntityIndex;
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"get");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			$strError = $webservice->GetError();
 			if ($strError != "")
@@ -3513,7 +3513,7 @@
 			
 			
 			// This is to ensure proper rendering of the user friendly attribute
-			$this->CallbackPrepareItemDataView($strEntity,$strEntityIndex,$arrayItem);
+			$this->OnPrepareItemDataView($strEntity,$strEntityIndex,$arrayItem);
 			$strUserFriendly = ArrayGetValue($arrayItem,ArrayGetValue($arrayEntity,"userfriendlyattribute"));
 			$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_USERFRIENDLY",$strUserFriendly);
 			$this->GetWebsite()->SetOutputItem(StringUpperCase($strEntity)."_INDEX",$strEntityIndex);
@@ -3532,7 +3532,7 @@
 			$arrayParams = array();
 			$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strEntityIndex;
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"delete");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			$strError = $webservice->GetError();
 			if ($strError != "")
@@ -3542,7 +3542,7 @@
 			else
 			{
 				$this->SetInfoMessageCodeEntity($strEntity,"DELETE_SUCCESS");
-				$this->CallbackItemDeleted($strEntity,$strEntityIndex,$arrayItem);
+				$this->OnItemDeleted($strEntity,$strEntityIndex,$arrayItem);
 			}
 					
 					
@@ -3641,7 +3641,7 @@
 					}
 				}
 			}
-			$this->CallbackPrepareItemDataDefaultValues($strEntity,$arrayItem);
+			$this->OnPrepareItemDataDefaultValues($strEntity,$arrayItem);
 			return $arrayItem;
 		}
 
@@ -3662,9 +3662,9 @@
 			if ($bShowReadOnlyInModify == true)
 			{
 				$arrayReadOnlyValues = $arrayValues;
-				$this->CallbackPrepareItemDataView($strEntity,$strIndex,$arrayReadOnlyValues);
+				$this->OnPrepareItemDataView($strEntity,$strIndex,$arrayReadOnlyValues);
 			}
-			$this->CallbackPrepareItemDataModify($strEntity,$strIndex,$arrayValues);
+			$this->OnPrepareItemDataModify($strEntity,$strIndex,$arrayValues);
 			
 			$nTextAreaLinesDefault = 12;
 			$nTextAreaLinesEntity = intval(ArrayGetValue($arrayEntity,"textarealines"));
@@ -3716,7 +3716,7 @@
 					{
 						case "select":
 						{
-							$arrayOptions = $this->CallbackPrepareSelectOptions(
+							$arrayOptions = $this->OnPrepareSelectOptions(
 								$strEntity,
 								$strAttribute,
 								$strIndex);
@@ -3931,7 +3931,7 @@
 								}
 								case "language":
 								{
-									$arrayOptions = $this->CallbackPrepareSelectOptions(
+									$arrayOptions = $this->OnPrepareSelectOptions(
 										$strEntity,
 										$strAttribute,
 										$strIndex);
@@ -3952,7 +3952,7 @@
 								}
 								case "language":
 								{
-									$arrayOptions = $this->CallbackPrepareSelectOptions(
+									$arrayOptions = $this->OnPrepareSelectOptions(
 										$strEntity,
 										$strAttribute,
 										$strIndex);
@@ -4069,7 +4069,7 @@
 			$arrayParams = array();
 			$arrayParams[$this->GetItemIndexPropertyWebserviceParamName($strEntity)] = $strIndex;
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"get");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 			$webservice->ConsumeWebService($strWebservice,$arrayParams);
 			
 			$strError = $webservice->GetError();

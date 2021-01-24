@@ -9,9 +9,9 @@
 			parent::__construct("Test Generic Output Item: Portfolio");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			return true;
 		}
 		
@@ -26,9 +26,9 @@
 			
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->SetResult(true);
 			
@@ -56,9 +56,9 @@
 				
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		

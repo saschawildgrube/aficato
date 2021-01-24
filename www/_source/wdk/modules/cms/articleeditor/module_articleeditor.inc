@@ -14,7 +14,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->GetState() == "")
 			{				
@@ -30,10 +30,10 @@
 			$this->SetToolbarConfig($arrayToolbarConfig);
 	*/
 			
-			return true;
+			return parent::OnInit();
 		}
 
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{
@@ -332,7 +332,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			
 			return true;

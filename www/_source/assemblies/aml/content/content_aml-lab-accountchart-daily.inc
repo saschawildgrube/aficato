@@ -3,7 +3,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			
 			$strMockCSVFilePath = $this->GetWebsite()->GetDataFilePath('/mandates/demo/accounts/mockdata-account-a-transactions.csv');

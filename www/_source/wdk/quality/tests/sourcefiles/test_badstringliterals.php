@@ -9,7 +9,7 @@
 			parent::__construct('Check for broken string literals php source code');
 		}
 		
-		function Callback_TestCase_CheckFile($strFilePath)
+		function OnTestCaseCheckFile($strFilePath)
 		{ 
 			$strExtention = GetExtentionFromPath($strFilePath);
 			if (	$strExtention == 'inc'
@@ -33,9 +33,9 @@
 			}
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$this->CheckSourceDirectories();
 		}

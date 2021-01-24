@@ -6,7 +6,7 @@
 		private $m_strModuleGroup;
 		private $m_strModuleID;
 		private $m_strModuleDir;
-		private $m_bInitInvoked;
+		private $m_bOnInit;
 		private $m_bInit;
 		private $m_strInitialState;
 		private $m_strFinalState;
@@ -18,15 +18,15 @@
 		function __construct(
 			CWebSite &$website,
 			$strModulePath,
-			$strInstanceID = "",
+			$strInstanceID = '',
 			$arrayConfig = array())
 		{
 			
-			parent::__construct($website, "Module ".$strModulePath);
+			parent::__construct($website,$strModulePath);
 						
 			// Init values
 			$this->m_strModulePath = $strModulePath;
-			$arrayModulePathComponents = explode("/",$strModulePath);
+			$arrayModulePathComponents = explode('/',$strModulePath);
 			if (!is_array($arrayModulePathComponents) || ArrayCount($arrayModulePathComponents) != 2)
 			{
 				$this->Trace($arrayModulePathComponents);
@@ -54,11 +54,23 @@
 			$this->m_strFinalState = "";
 			$this->m_strInitialState = $this->GetState();
 			$this->m_strPreviousState = $this->GetModuleVar("previous_state");
-			$this->m_bInit = $this->CallbackInit();
+			$this->m_bOnInit = false;
+			$this->m_bInit = $this->OnInit();
+			if ($this->m_bOnInit == false)
+			{
+				FatalError('Module '.$this->GetModuleID().' must call parent::OnInit()!');
+			}
 		}
 
-		function CallbackInit()
+		function GetSatelliteType()
 		{
+			return 'Module';	
+		}
+
+
+		function OnInit()
+		{
+			$this->m_bOnInit = true;
 			return true;
 		}
 
@@ -228,7 +240,7 @@
 			return $this->GetWebsite()->GetMessage($strMessageType,$strMessageID,StringUpperCase($this->GetModuleID()));
 		}
 		
-		function CallbackIsToolVisible($strToolID)
+		function OnIsToolVisible($strToolID)
 		{
 			$strState = $this->GetState();
 			$this->Trace($strState);
@@ -247,7 +259,7 @@
 		final
 		function IsToolVisible($strToolID)
 		{
-			return $this->CallbackIsToolVisible($strToolID);
+			return $this->OnIsToolVisible($strToolID);
 		}
 
 
@@ -286,21 +298,21 @@
 		{
 			if ($strEventID == "website-module-init")
 			{
-				$this->CallbackWebsiteInit();	
+				$this->OnWebsiteInit();	
 				return;
 			}
 			if ($strEventID == "website-user-delete")
 			{
-				$this->CallbackUserDelete(ArrayGetValue($arrayParams,"userid"));
+				$this->OnUserDelete(ArrayGetValue($arrayParams,"userid"));
 				return;
 			}
 			return parent::EventHandler($strEventID,$arrayParams);
 		}
 		
 		final
-		function RenderModule($strStyleID = "")
+		function RenderModule($strStyleID = '')
 		{
-			$this->Trace("RenderModule BEGIN");
+			$this->Trace('RenderModule BEGIN');
 			$this->GetWebsite()->ProfilingTrace();
 			$strOutput = "";
 			if ($this->m_bInit != true)
@@ -310,33 +322,33 @@
 			else
 			{
 				$this->m_strStyleID = $strStyleID;
-				$strStateID = $this->CallbackRenderModule($this->GetState());
+				$strStateID = $this->OnRenderModule($this->GetState());
 				$this->m_strFinalState = $strStateID;
 				$strOutput = $this->LoadModuleLayoutFile($strStateID,$strStyleID);
        	$strOutput = $this->ReplaceOutputItems($strOutput);
        	$this->GetWebsite()->SetOutputItems($this->m_arrayOutputItems);
 				$this->m_strStyleID = "";
 			}
-			$this->Trace("RenderModule END");
+			$this->Trace('RenderModule END');
 			$this->GetWebsite()->ProfilingTrace();
 			return $strOutput;
 		}
 
-		function CallbackWebsiteInit()
+		function OnWebsiteInit()
 		{
-			$this->Trace("CallbackWebsiteInit is not implemented.");
+			$this->Trace('OnWebsiteInit is not implemented.');
 		}
 
-		function CallbackUserDelete($strUserID)
+		function OnUserDelete($strUserID)
 		{
-			$this->Trace("CallbackUserDelete is not implemented.");
+			$this->Trace('OnUserDelete is not implemented.');
 		}
 
 		
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Error("Module ".$this->m_strModuleID.": CallbackRenderModule not implemented.");
-			return "";
+			$this->Error('Module '.$this->m_strModuleID.': OnRenderModule not implemented.');
+			return '';
 		}
 		
 

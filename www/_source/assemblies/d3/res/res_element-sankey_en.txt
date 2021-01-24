@@ -1,0 +1,4 @@
+TID_TITLE_ELEMENT_SANKEY
+Sankey
+TID_TEXT_ELEMENT_LINECHART
+This element draws a sankey diagramme using react and d3.

@@ -18,19 +18,19 @@
 			parent::__construct("DATABASEDEMO web service - Sort order",$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->RequireWebservice($this->m_strWebservice);
 			$this->SetVerbose(true);
 			$this->m_consumer = new CWebServiceConsumerWebApplication($this);
-			return parent::CallbackInit();	
+			return parent::OnInit();	
 		}	
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
-			$this->CallbackCleanup();
+			$this->OnCleanup();
 			$arrayItemIDs = array();
 			
 		
@@ -439,9 +439,9 @@
 		}
 		
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			
 			
 			

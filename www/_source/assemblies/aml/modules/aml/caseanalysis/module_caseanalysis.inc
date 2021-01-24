@@ -18,7 +18,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->m_arrayErrors = array();
 	
@@ -33,15 +33,15 @@
 			
 			$this->m_arrayAccounts = $this->GetAccounts();
 			
-			return true;
+			return parent::OnInit();
 		}
 		
 	
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace('CallbackRenderModule("'.$strState.'")');
+			$this->Trace('OnRenderModule("'.$strState.'")');
 			
-			$strResult = parent::CallbackRenderModule($strState);
+			$strResult = parent::OnRenderModule($strState);
 			if ($strResult != '')
 			{
 				return $strResult;

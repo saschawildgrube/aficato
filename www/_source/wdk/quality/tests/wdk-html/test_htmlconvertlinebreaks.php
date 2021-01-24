@@ -9,9 +9,9 @@
 			parent::__construct("Test HtmlConvertLineBreaks");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			return true;
 		}
@@ -44,9 +44,9 @@
 		}
 		
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->TestCase_HtmlConvertLineBreaks("A\nB\nC","A<br/>B<br/>C");
 			$this->TestCase_HtmlConvertLineBreaks("A\r\nB\r\nC","A<br/>B<br/>C");

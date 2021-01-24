@@ -35,9 +35,9 @@
 				$arrayObfuscationItems);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			if ($bResult == false)
 			{
 				return false;
@@ -125,9 +125,9 @@
 			return $this->m_entityDef->GetFieldName($strEntity,$strAttribute);
 		}
 		
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
-			parent::CallbackInitParameterDefinition($paramDef);
+			parent::OnInitParameterDefinition($paramDef);
 			$arrayEntityDefinitions = $this->GetEntityDefinitions();
 			if (is_array($arrayEntityDefinitions))
 			{
@@ -289,9 +289,9 @@
 			}
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 			
 			$arrayEntityDefinitions = $this->GetEntityDefinitions();
 			foreach ($arrayEntityDefinitions as $strEntity => $arrayEntityDefinition)
@@ -396,9 +396,9 @@
 			}
 		}
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
-			$this->Trace("CDatabaseEntityWebService::CallbackCommand('$strCommand')");
+			$this->Trace("CDatabaseEntityWebService::OnCommand('$strCommand')");
 			$arrayResult = $this->GetGenericCommandAndEntity();
 			if (is_array($arrayResult))
 			{
@@ -425,7 +425,7 @@
 					break;
 				}			
 			}
-			parent::CallbackCommand($strCommand);	
+			parent::OnCommand($strCommand);	
 		}
 		
 		final
@@ -497,7 +497,7 @@
 			}
 		}
 		
-		function CallbackGetDefaultCsvPath()
+		function OnGetDefaultCsvPath()
 		{
 			$arrayResult = $this->GetGenericCommandAndEntity();
 			if (is_array($arrayResult))
@@ -527,7 +527,7 @@
 					}
 				}
 			}
-			return parent::CallbackGetDefaultCsvPath();	
+			return parent::OnGetDefaultCsvPath();	
 		}
 
 		function CommandSelfCheck()
@@ -910,7 +910,7 @@
 			$arraySQL["limit"]["rowcount"] = $nBlockSize;
 
 			
-			$this->CallbackCommandListPrepareSQL($strEntity,$arraySQL);
+			$this->OnCommandListPrepareSQL($strEntity,$arraySQL);
 			$strError = "";
 			$strSQL = MakeSQL($arraySQL,$strError);
 			if ($strSQL == false)
@@ -943,7 +943,7 @@
 			
 			foreach ($arrayList as &$arrayItem)
 			{
-				$bResult = $this->CallbackCommandGetComplete($strEntity,$arrayItem,"list");
+				$bResult = $this->OnCommandGetComplete($strEntity,$arrayItem,"list");
 				if ($bResult == false)
 				{
 					return;	
@@ -998,7 +998,7 @@
 				}				
 			}
 			
-			$bResult = $this->CallbackCommandAddPrepare($strEntity,$arrayFields);
+			$bResult = $this->OnCommandAddPrepare($strEntity,$arrayFields);
 			if ($bResult == false)
 			{
 				return;	
@@ -1022,16 +1022,16 @@
 			$strNewItemID = $this->m_database->GetLastInsertID();
 			$this->SetResultValue("".$strNewItemID,$strNewItemIDTag);
 			
-			$this->CallbackCommandAddComplete($strEntity,$arrayFields,$strNewItemID);
+			$this->OnCommandAddComplete($strEntity,$arrayFields,$strNewItemID);
 
 			return;
 		}
 		
-		function CallbackCommandAddPrepare($strEntity,&$arrayItem)
+		function OnCommandAddPrepare($strEntity,&$arrayItem)
 		{
 			return true;				
 		}
-		function CallbackCommandAddComplete($strEntity,$arrayItem,$strNewItemID)
+		function OnCommandAddComplete($strEntity,$arrayItem,$strNewItemID)
 		{
 			return true;				
 		}
@@ -1094,7 +1094,7 @@
 
 			$strTable = $this->GetDatabaseTableName($strEntity);
 			
-			$bResult = $this->CallbackCommandGetPrepare($strEntity);
+			$bResult = $this->OnCommandGetPrepare($strEntity);
 			if ($bResult == false)
 			{
 				return;	
@@ -1210,7 +1210,7 @@
 
 
 
-			$this->CallbackCommandGetPrepareSQL($strEntity,$arraySQL);
+			$this->OnCommandGetPrepareSQL($strEntity,$arraySQL);
 			$strSQL = MakeSQL($arraySQL);
 
 			if ($this->DatabaseQuery($strSQL) != true)
@@ -1234,7 +1234,7 @@
 
 			$arrayItem = ArrayGetValue($arrayData,0);
 			
-			$bResult = $this->CallbackCommandGetComplete($strEntity,$arrayItem,"get");
+			$bResult = $this->OnCommandGetComplete($strEntity,$arrayItem,"get");
 			if ($bResult == false)
 			{
 				return;	
@@ -1244,11 +1244,11 @@
 			$this->SetResultValue($arrayItem,$strEntityTag);
 			return;
 		}
-		function CallbackCommandGetPrepare($strEntity)
+		function OnCommandGetPrepare($strEntity)
 		{
 			return true;				
 		}
-		function CallbackCommandGetComplete($strEntity,&$arrayItem,$strContext)
+		function OnCommandGetComplete($strEntity,&$arrayItem,$strContext)
 		{
 			$arrayEntityDefinition = $this->GetEntityDefinition($strEntity);
 			$arrayAttributes = ArrayGetValue($arrayEntityDefinition,"attributes");
@@ -1385,7 +1385,7 @@
 				}				
 			}
 			
-			$bResult = $this->CallbackCommandSetPrepare($strEntity,$arrayItem);
+			$bResult = $this->OnCommandSetPrepare($strEntity,$arrayItem);
 			if ($bResult == false)
 			{
 				return;	
@@ -1407,24 +1407,24 @@
 				return;
 			}
 						
-			$this->CallbackCommandSetComplete($strEntity,$arrayItem);
+			$this->OnCommandSetComplete($strEntity,$arrayItem);
 
 			return;
 		}
 
-		function CallbackCommandSetPrepare($strEntity,&$arrayItem)
+		function OnCommandSetPrepare($strEntity,&$arrayItem)
 		{
 			return true;				
 		}
-		function CallbackCommandSetComplete($strEntity,$arrayItem)
+		function OnCommandSetComplete($strEntity,$arrayItem)
 		{
 			return true;
 		}
-		function CallbackCommandListPrepareSQL($strEntity,&$arraySQL)
+		function OnCommandListPrepareSQL($strEntity,&$arraySQL)
 		{
 			return;	
 		}
-		function CallbackCommandGetPrepareSQL($strEntity,&$arraySQL)
+		function OnCommandGetPrepareSQL($strEntity,&$arraySQL)
 		{
 			return;	
 		}

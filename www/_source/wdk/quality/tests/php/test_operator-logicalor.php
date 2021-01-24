@@ -25,9 +25,9 @@
 		}
 
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->SetResult(true);
 			

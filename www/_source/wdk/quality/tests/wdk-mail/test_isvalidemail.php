@@ -9,9 +9,9 @@
 			parent::__construct("Test IsValidEmail");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			return true;
 		}
@@ -38,9 +38,9 @@
 			$this->Trace("");
 		}		
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->TestCase_IsValidEmail("info@example.com",true);
 			$this->TestCase_IsValidEmail("info@example.info",true);

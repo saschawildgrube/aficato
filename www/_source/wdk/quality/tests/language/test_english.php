@@ -11,7 +11,7 @@
 		 
 		
 		
-		function Callback_TestCase_CheckFile($strFilePath)
+		function OnTestCaseCheckFile($strFilePath)
 		{ 
 			$arrayRegExp = array();
 			$strExtention = GetExtentionFromPath($strFilePath);
@@ -35,9 +35,9 @@
 			$this->CheckFileAgainstRegExp($strFilePath,$arrayRegExp);
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$this->CheckSourceDirectories();
 		}

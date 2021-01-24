@@ -51,7 +51,7 @@ A good start to develop your website is:
 - Run through /_source/website_$$$websitename$$$.inc
 
 There You can change config settings and work on the implementation of
-callback functions. You will find some hints in source code comments.
+overloaded functions. You will find some hints in source code comments.
 
 
 Check out $$$wdk-docs-url$$$ for further assistance!

@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$strText = u("Here are some German umlauts: ִײÜהצü");
 			$strToken = u("ִ");

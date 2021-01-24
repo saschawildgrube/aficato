@@ -9,7 +9,7 @@
 			parent::__construct("ReadDirectory");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$bMissingDir = false;
 			$strDir = GetWDKDir()."quality/testdir/dir3/";
@@ -28,7 +28,7 @@
 			{
 				$this->Trace("This will cause the test to fail. A possible reason for that is that zip archives do not store empty directories. Create the directories to make the test work!");
 			}
-			return parent::CallbackInit();	 
+			return parent::OnInit();	 
 		}
 
 		function TestCase_ReadDirectory(
@@ -64,9 +64,9 @@
 		}
 
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 					
 			$this->SetResult(true);
 			

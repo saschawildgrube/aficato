@@ -7,9 +7,9 @@
 			parent::__construct("ReplaceTagsWithReplaceString");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -55,9 +55,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$arrayTags = array(
 				"TID_ITEM1" => "blubb\nand a new line.",

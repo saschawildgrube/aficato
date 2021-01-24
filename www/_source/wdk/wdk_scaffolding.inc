@@ -28,6 +28,12 @@
 			$this->m_strZipFileName = "wdk-scaffold.zip";
 		}
 
+		function GetSatelliteType()
+		{
+			return 'Scaffolder';	
+		}
+
+
 		final
 		function GetScaffoldDir()
 		{
@@ -72,15 +78,15 @@
 		final
 		function PrepareForm(CFormDefinition &$formDef)
 		{
-			$this->CallbackPrepareForm($formDef);
+			$this->OnPrepareForm($formDef);
 		}
 		
 		final
 		function CheckParams(&$arrayErrors)
 		{
 			$arrayParams = array();
-			$this->CallbackGetParams($arrayParams);
-			$this->CallbackCheckParams($arrayParams,$arrayErrors);
+			$this->OnGetParams($arrayParams);
+			$this->OnCheckParams($arrayParams,$arrayErrors);
 			if (ArrayCount($arrayErrors) > 0)
 			{
 				return false;	
@@ -95,7 +101,7 @@
 			$arrayScaffoldParams["wdk"] = $this->GetWebsite()->GetOutputItem("WDK");
 			$arrayScaffoldParams["wdk-docs-url"] = $this->GetWebsite()->GetOutputItem("WDK_DOCS_URL");
 			$arrayScaffoldParams["wdk-scaffolder-url"] = $this->GetWebsite()->GetOutputItem("WDK_SCAFFOLDER_URL");
-			$this->CallbackGetParams($arrayScaffoldParams);
+			$this->OnGetParams($arrayScaffoldParams);
 			
 			$strZipFileTitle = ArrayGetValue($this->m_arrayCfg,"ZIPFILETITLE");
 			if ($strZipFileTitle != "")
@@ -105,7 +111,7 @@
 			}
 			
 			$arrayArchiveFiles = array();
-			$this->CallbackAddAdditionalArchiveFiles($arrayScaffoldParams,$arrayArchiveFiles);
+			$this->OnAddAdditionalArchiveFiles($arrayScaffoldParams,$arrayArchiveFiles);
 			return CreateScaffoldArchive($this->GetScaffoldDir(),$arrayScaffoldParams,$arrayArchiveFiles);
 		}
 		
@@ -140,22 +146,22 @@
 		}		
 
 		
-		function CallbackPrepareForm(CFormDefinition &$formDef)
+		function OnPrepareForm(CFormDefinition &$formDef)
 		{
 			
 		}
 		
-		function CallbackGetParams(&$arrayParams)
+		function OnGetParams(&$arrayParams)
 		{
 			
 		}
 		
-		function CallbackCheckParams($arrayParams,&$arrayErrors)
+		function OnCheckParams($arrayParams,&$arrayErrors)
 		{
 			
 		}
 		
-		function CallbackAddAdditionalArchiveFiles($arrayParams,&$arrayArchiveFiles)
+		function OnAddAdditionalArchiveFiles($arrayParams,&$arrayArchiveFiles)
 		{
 			
 		}

@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$arrayItems["MODULE_SIGNIN"] = $this->GetWebsite()->m_moduleSignin->RenderModule("");
 			$arrayItems["MODULE_SIGNINONESTEP"] = $this->GetWebsite()->m_moduleSigninOneStep->RenderModule("");

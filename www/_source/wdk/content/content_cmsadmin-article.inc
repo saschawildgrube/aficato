@@ -2,14 +2,14 @@
 
 	class CMyContent extends CContentCMSAdmin
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$this->GetWebsite()->IncludeModule("cms/articlemanager");
 			$articlemanager = new CArticleManagerModule($this->GetWebsite(),"");
 			$arrayItems["MODULE_ARTICLEMANAGER"] = $articlemanager->RenderModule();
 		}
 		
-		function CallbackGetRequiredConditions()
+		function OnGetRequiredConditions()
 		{
 			return array("cmsadmin" => "INSUFFICIENT_PRIVILEGES");
 		}				

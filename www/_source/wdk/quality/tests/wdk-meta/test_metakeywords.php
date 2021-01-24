@@ -9,9 +9,9 @@
 			parent::__construct("Test Meta Keywords");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			//$this->SetActive(false);
 			return true;
 		}
@@ -25,9 +25,9 @@
 			$this->TestCase_CheckURL($strURL,$arrayExpected);
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 
 			$arrayExpected = array("defaultkeyword1","defaultkeyword2","specifickeyword1","specifickeyword2");
@@ -39,9 +39,9 @@
 
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		 

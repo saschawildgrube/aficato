@@ -581,7 +581,6 @@ function D3_ParallelSets(vSelector, aProps)
 	      .attr("class", "parsetstooltip");
 	
 	  return d3.rebind(parsets, event, "on").width(960).height(600);
-	  //return d3.rebind(parsets, event, "on").width(960).height(600);
 	
 	
 	  function dimensionFormatName(d, i)

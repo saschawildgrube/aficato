@@ -9,9 +9,9 @@
 			parent::__construct('Test RenderDateTime');
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			date_default_timezone_set('UTC');
 			return true;
@@ -39,9 +39,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->TestCase_RenderDateTime(0,'');
 			$this->TestCase_RenderDateTime(1,'1970-01-01 00:00:01');
 			$this->TestCase_RenderDateTime(-1,'1969-12-31 23:59:59');

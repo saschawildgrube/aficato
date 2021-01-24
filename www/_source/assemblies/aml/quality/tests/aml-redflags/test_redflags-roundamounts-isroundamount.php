@@ -42,15 +42,15 @@
 		}
 
 
-		function CallbackInit()
+		function OnInit()
 		{
 			//$this->SetActive(false);	
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 					
 			$this->SetResult(true);
 

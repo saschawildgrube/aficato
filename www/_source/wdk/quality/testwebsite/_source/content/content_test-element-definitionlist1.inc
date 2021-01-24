@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$this->IncludeElement("definitionlist");
 			$definitionlist = new CDefinitionListElement($this->GetWebsite(),"default");

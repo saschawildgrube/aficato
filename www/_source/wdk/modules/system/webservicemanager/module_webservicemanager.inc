@@ -14,19 +14,9 @@
 				$strInstanceID,
 				$arrayConfig);
 		}
+
 		
-		function CallbackInit()
-		{
-			/*
-			if ($this->GetModuleConfig("groupname") != "")
-			{
-				$this->SetModuleVar("groupname",$this->GetModuleConfig("groupname"));
-			}
-			*/
-			return true;
-		}
-		
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{

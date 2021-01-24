@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$arrayConfig = array();
 			$arrayConfig["defaultprivileges"] = $this->GetWebsite()->GetConfig("defaultprivileges");
@@ -13,7 +13,7 @@
 			$arrayItems["MODULE_USERMANAGER"] = $usermanager->RenderModule();
 		}
 		
-		function CallbackGetRequiredConditions()
+		function OnGetRequiredConditions()
 		{
 			return array("useradmin" => "INSUFFICIENT_PRIVILEGES");
 		}

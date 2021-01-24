@@ -9,9 +9,9 @@
 			parent::__construct("Test generic output item URL");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			return true;
 		}
 		
@@ -22,9 +22,9 @@
 				$arrayExpectedOutput);
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			
 			$arrayExpectedOutput[] = '<li><a href="http://'.GetRootURL()."quality/testwebsite/en/test-genericoutputitem-url-wiki/";

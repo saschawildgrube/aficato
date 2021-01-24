@@ -9,9 +9,9 @@
 			parent::__construct($website, $strLayoutID);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			
 			// BOOTSTRAP
 			$this->GetWebsite()->ActivateBootstrap4();

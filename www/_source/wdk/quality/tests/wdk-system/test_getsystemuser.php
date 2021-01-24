@@ -9,9 +9,9 @@
 			parent::__construct("GetSystemUser");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 
 			if (CheckSafeMode())
 			{
@@ -22,9 +22,9 @@
 			return true;
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$strUser = GetSystemUser();
 			$this->Trace("GetSystemUser() returned \"$strUser\"");

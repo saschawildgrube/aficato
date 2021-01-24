@@ -17,7 +17,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayParams[$this->GetModuleVarName("chapter")] = "{CHAPTERID}";
 			$arrayParams[$this->GetModuleVarNameState()] = "chapter";
@@ -26,12 +26,12 @@
 			$strLinkTemplateChapter = ReplaceString($strLinkTemplateChapter,"%7D","}");
 			$this->m_strLinkTemplateChapter = $strLinkTemplateChapter;
 			$this->IncludeElement("wiki");
-			return true;
+			return parent::OnInit();
 		}
 		
 		
 
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{

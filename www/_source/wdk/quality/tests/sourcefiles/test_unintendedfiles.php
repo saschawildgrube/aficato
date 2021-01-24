@@ -9,7 +9,7 @@
 			parent::__construct("Check for unintended files");
 		}
 		
-		function Callback_TestCase_CheckFile($strFilePath)
+		function OnTestCaseCheckFile($strFilePath)
 		{
 			$bUnintendedFile = false;
 			$strExtention = GetExtentionFromPath($strFilePath);
@@ -48,9 +48,9 @@
 			}
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$this->CheckDocumentRootDirectory();  
 		}

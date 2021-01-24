@@ -9,9 +9,9 @@
 			parent::__construct("Httpoxy Vulnerability CVE-2016-5385 (PHP) and CVE-2016-5387 (Apache HTTP Server)");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -19,7 +19,7 @@
 		
 		
 				
-		function Callback_TestCase_CheckFile($strFilePath)
+		function OnTestCaseCheckFile($strFilePath)
 		{ 
 			$arrayRegExp = array();
 			$strExtention = GetExtentionFromPath($strFilePath);
@@ -45,9 +45,9 @@
 			$this->CheckFileAgainstRegExp($strFilePath,$arrayRegExp);
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->Trace("Checking for the Httpoxy vulnerability (CVE-2016-5385):");
 			$this->Trace("For more information go to:");

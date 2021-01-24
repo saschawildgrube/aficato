@@ -7,26 +7,26 @@
 			parent::__construct("TestWebsite self check");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			$this->SetResult(true);
 			return true;
 		}
 		
 			
 			
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$strURL = "http://".GetRootURL()."quality/testwebsite/";
 			$this->TestCase_CheckURL($strURL,array("This is an instance of a WDK test website."));
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			
 			if ($this->GetResult() == false)
 			{

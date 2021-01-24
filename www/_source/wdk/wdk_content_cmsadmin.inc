@@ -9,7 +9,7 @@
 			parent::__construct($website, $strContentID);
 		}
 		
-		function CallbackGetRequiredConditions()
+		function OnGetRequiredConditions()
 		{
 			return array("cmsadmin" => "INSUFFICIENT_PRIVILEGES");
 		}

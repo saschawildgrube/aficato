@@ -9,9 +9,9 @@
 			parent::__construct("Check for google-analytics.js in public js folder");
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			
 			$strFilePath = GetDocumentRootDir() . 'js/google-analytics.js';

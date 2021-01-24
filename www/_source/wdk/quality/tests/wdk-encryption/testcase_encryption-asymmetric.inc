@@ -11,9 +11,9 @@
 			parent::__construct("WDK Asymmetric Encryption and Decryption");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			if (CheckSafeMode())
 			{
 				$this->Trace("Safe Mode is ON. So Shell* functions are not expected to work!");
@@ -161,13 +161,13 @@
 			$this->Trace("");
 		}
 
-		function CallbackCleanup()
+		function OnCleanup()
 		{
 			if (is_object($this->m_aee) && ($this->GetVerbose() == true))
 			{
 				$this->Trace($this->m_aee->GetTraceLog());
 			}
-			return parent::CallbackCleanup();
+			return parent::OnCleanup();
 		}		
 	}
 	

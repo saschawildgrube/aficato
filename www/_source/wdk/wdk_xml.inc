@@ -533,7 +533,7 @@
 						}
 					}
 					$strValue = trim(ArrayGetValue($arrayDataItem,"value"));
-					$strValue = $this->CallbackData($strTag,$strValue,$arrayParams);
+					$strValue = $this->OnData($strTag,$strValue,$arrayParams);
 					if ($strValue == "")
 					{
 						$strOutputXML .= 
@@ -578,12 +578,12 @@
 
 		}
 				
-		function CallbackData($strElementName,$strData,$arrayParams)
+		function OnData($strElementName,$strData,$arrayParams)
 		{
 			return $strData;
 		}
 		
-		function CallbackAttributes($strElementName,$arrayAttributes)
+		function OnAttributes($strElementName,$arrayAttributes)
 		{
 			return $arrayAttributes;
 		}		
@@ -612,7 +612,7 @@
 			return $this->Process($strXML,$arrayParams,"");
 		}
 		
-		function CallbackData($strElementName,$strData,$arrayParams)
+		function OnData($strElementName,$strData,$arrayParams)
 		{
 			$strData = StringXMLEntities($strData);
 			$arrayWhitelist = $arrayParams["whitelist"];

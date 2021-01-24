@@ -1,0 +1,4 @@
+TID_TITLE_ELEMENT_LINECHART
+Line Chart
+TID_TEXT_ELEMENT_LINECHART
+This element draws a basic line chart using react and d3.

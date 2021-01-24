@@ -8,9 +8,9 @@
 			parent::__construct("Test Download");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			$this->SetResult(true);
 			
 //			$this->SetActive(false);
@@ -34,9 +34,9 @@
 			$this->Trace("");				
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->Trace("");
 			$this->Trace("PART 1: Testing the download URL generator");

@@ -5,7 +5,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderSpecialContent()
+		function OnRenderSpecialContent()
 		{
 			$this->GetWebsite()->SetFramework("fullwidth");
 			$this->GetWebsite()->MaintainScrollPosition();

@@ -3,7 +3,7 @@
 	class CMyScaffolder extends CScaffolder
 	{
 		
-		function CallbackPrepareForm(CFormDefinition &$formDef)
+		function OnPrepareForm(CFormDefinition &$formDef)
 		{
 			
 			$formDef->AddControlSeparator();
@@ -157,7 +157,7 @@
  			$formDef->AddControlSeparator();
 		}
 		
-		function CallbackGetParams(&$arrayParams)
+		function OnGetParams(&$arrayParams)
 		{
 			$arrayParams["rooturl"] = $this->GetVar("rooturl");
 
@@ -237,7 +237,7 @@
 			
 		}
 		
-		function CallbackCheckParams($arrayParams,&$arrayErrors)
+		function OnCheckParams($arrayParams,&$arrayErrors)
 		{
 			$strRootURL = $arrayParams["rooturl"];
 			if (StringSection($strRootURL,0,4) == "http")
@@ -289,7 +289,7 @@
 
 		}
 		
-		function CallbackAddAdditionalArchiveFiles($arrayParams,&$arrayArchiveFiles)
+		function OnAddAdditionalArchiveFiles($arrayParams,&$arrayArchiveFiles)
 		{
 			$arrayFiles = ReadDirectory(GetWDKDir(),true);
 			foreach ($arrayFiles as $strFilePath)

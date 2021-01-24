@@ -31,9 +31,9 @@
 				
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			if ($bResult == false)
 			{
 				return false;
@@ -58,7 +58,7 @@
 			return true;
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
 			/*
 				Add more command definitions here!
@@ -85,10 +85,10 @@
 				array()
 				);				
 				
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 		}
 
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
 			/*
 				param1 and param2 are used by the "helloworld" command.
@@ -107,11 +107,11 @@
 				If two or more commands share the same parameter, they also share the
 				parameter definition.
 			*/
-			parent::CallbackInitParameterDefinition($paramDef);
+			parent::OnInitParameterDefinition($paramDef);
 			
 		}
 
-		function CallbackCheckParameter($strCommand,$strParamName,$strParamValue)
+		function OnCheckParameter($strCommand,$strParamName,$strParamValue)
 		{
 			/*
 				Implement specific checks for parameters here!
@@ -126,7 +126,7 @@
 			/*
 				You may want to let the default checks take place before or after your own.
 			*/
-			$bResult = parent::CallbackCheckParameter($strCommand,$strParamName,$strParamValue);	
+			$bResult = parent::OnCheckParameter($strCommand,$strParamName,$strParamValue);	
 			if ($bResult == true)
 			{
 				if ($strParamName == "param2")
@@ -140,7 +140,7 @@
 			return $bResult;
 		}		
 	
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			switch ($strCommand)
 			{
@@ -157,7 +157,7 @@
 				return;
 				
 			default:
-				parent::CallbackCommand($strCommand);
+				parent::OnCommand($strCommand);
 				return;
 			}
 		}
@@ -196,21 +196,21 @@
 			}
 		}
 		
-		function CallbackCommandAddPrepare($strEntity,&$arrayItem)
+		function OnCommandAddPrepare($strEntity,&$arrayItem)
 		{
 			if ($strEntity == "$$$entityname$$$")
 			{
 				/*
-					Use this callback function to preset attribute values when
+					Use this function to preset attribute values when
 					adding new items!
 				*/
 				$arrayItem["CREATION_DATETIME"] = RenderDateTimeNow();
 				$arrayItem["LASTCHANGE_DATETIME"] = $arrayItem["CREATION_DATETIME"];
 			}
-			return parent::CallbackCommandAddPrepare($strEntity,$arrayItem);		
+			return parent::OnCommandAddPrepare($strEntity,$arrayItem);		
 		}
 		
-		function CallbackCommandAddComplete($strEntity,$arrayItem,$strNewItemID)
+		function OnCommandAddComplete($strEntity,$arrayItem,$strNewItemID)
 		{
 			/*
 				This function is called after a new item has been added and thus
@@ -255,7 +255,7 @@
 			}
 		}
 
-		function CallbackCommandGetPrepare($strEntity)
+		function OnCommandGetPrepare($strEntity)
 		{
 			/*
 				Invoked before the get command receives data from the database...
@@ -263,18 +263,18 @@
 				Return false to prevent the "get" command from actually requesting the 
 				database.
 			*/
-			return parent::CallbackCommandGetPrepare($strEntity);				
+			return parent::OnCommandGetPrepare($strEntity);				
 		}
 	
 
-		function CallbackCommandGetComplete($strEntity,&$arrayItem,$strContext)
+		function OnCommandGetComplete($strEntity,&$arrayItem,$strContext)
 		{
 			/*
-				This callback function is invoked after data has been received
+				This function is invoked after data has been received
 				from the database.
 				The strContext parameter is either set to "get" or "list" depending
 				on the command that was called.
-				If the "list" command is executed, the callback function is invoked
+				If the "list" command is executed, the function is invoked
 				for each single item that is going to be returned by the command.
 			*/
 			if ($strEntity == "$$$entityname$$$")
@@ -302,7 +302,7 @@
 					}
 				}
 			}
-			return parent::CallbackCommandGetComplete($strEntity,$arrayItem,$strContext);
+			return parent::OnCommandGetComplete($strEntity,$arrayItem,$strContext);
 		}		
 		
 		
@@ -327,10 +327,10 @@
 			}
 		}
 		
-		function CallbackCommandSetPrepare($strEntity,&$arrayItem)
+		function OnCommandSetPrepare($strEntity,&$arrayItem)
 		{
 			/*
-				This callback function is invoked before new data is
+				This function is invoked before new data is
 				used to update an existing item in the database.
 				Use it to make modifications to the attributes before being
 				updated!
@@ -339,15 +339,15 @@
 			{			
 				$arrayItem["LASTCHANGE_DATETIME"] = RenderDateTimeNow();
 			}
-			return parent::CallbackCommandSetPrepare($strEntity,$arrayItem);
+			return parent::OnCommandSetPrepare($strEntity,$arrayItem);
 		}  
 		
-		function CallbackCommandSetComplete($strEntity,$arrayItem)
+		function OnCommandSetComplete($strEntity,$arrayItem)
 		{
 			/*
 				This function is called after attribute data has been updated.
 			*/
-			return parent::CallbackCommandSetComplete($strEntity,$arrayItem);
+			return parent::OnCommandSetComplete($strEntity,$arrayItem);
 		}  
 
 		

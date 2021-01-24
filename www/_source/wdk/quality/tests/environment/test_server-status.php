@@ -13,9 +13,9 @@
 		}
 		
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$strURL = $this->GetWebserviceURL("system/server");
 			if ($strURL == "")

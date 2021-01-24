@@ -21,14 +21,14 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->m_strMandateID = false;
-			return true;
+			return parent::OnInit();
 		}
 		
 	
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			$strMandateID = $this->GetUserMandateID();
 			if ($strMandateID == false)

@@ -28,15 +28,15 @@
 			parent::__construct("Web service system/user Rename",$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->RequireWebservice($this->m_strWebservice);
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			
 			
@@ -163,9 +163,9 @@
 			$this->SetResult(true);
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			
 			$consumer = new CWebServiceConsumerWebApplication($this);
 			

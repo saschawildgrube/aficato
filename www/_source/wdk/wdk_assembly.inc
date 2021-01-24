@@ -17,9 +17,10 @@
 		return true;
 	}
 
-	class CAssembly extends CWebsiteSatellite
+	final class CAssembly extends CWebsiteSatellite
 	{
 		private $m_strRoorDir;
+		private $m_bPluginsDir;
 		private $m_bLayoutDir;
 		private $m_bStyleSheetsDir;
 		private $m_bJavaScriptsDir;
@@ -31,7 +32,7 @@
 		function __construct(
 			CWebSite &$website,
 			$strAssemblyID,
-			$strRootDir = "")
+			$strRootDir = '')
 		{
 			if (IsValidAssemblyID($strAssemblyID) == false)
 			{
@@ -47,6 +48,7 @@
 				FatalError("CAssembly has been initialized with an invalid root path: \"$strRootDir\"");
 			}
 			$this->SetRootDir($strRootDir);
+			$this->m_bPluginsDir = IsDirectory($this->GetPluginsDir());			
 			$this->m_bLayoutDir = IsDirectory($this->GetLayoutDir());			
 			$this->m_bStyleSheetsDir = IsDirectory($this->GetStyleSheetsDir());
 			$this->m_bJavaScriptsDir = IsDirectory($this->GetJavaScriptsDir());
@@ -54,8 +56,16 @@
 			$this->m_bResDir = IsDirectory($this->GetResDir());			
 			$this->m_bModulesDir = IsDirectory($this->GetModulesDir());			
 			$this->m_bRoutingDir = IsDirectory($this->GetRoutingDir());			
-			parent::__construct($website,$strAssemblyID);
+			parent::__construct(
+				$website,
+				$strAssemblyID);
 		}
+		
+		function GetSatelliteType()
+		{
+			return 'Assembly';	
+		}
+
 
 		final
 		function SetRootDir($strRootDir)
@@ -107,6 +117,12 @@
 		}
 
 		final
+		function GetPluginsDir()
+		{
+			return $this->m_strRootDir . 'plugins/';	
+		}		
+
+		final
 		function GetLayoutDir()
 		{
 			return $this->m_strRootDir . "layout/";	
@@ -155,55 +171,6 @@
 			return $this->m_strRootDir . "js/";	
 		}	
 
-
-		final
-		function EventHandler($strEventID,$arrayParams)
-		{
-			if ($strEventID == "website-assembly-init")
-			{
-				return $this->CallbackWebsiteInit();
-			}
-			if ($strEventID == "website-user-delete")
-			{
-				return $this->CallbackUserDelete(ArrayGetValue($arrayParams,"userid"));
-			}
-			if ($strEventID == "website-user-changepassword")
-			{
-				return $this->CallbackUserChangePassword(
-					ArrayGetValue($arrayParams,"oldpassword"),
-					ArrayGetValue($arrayParams,"newpassword"));
-			}
-			return parent::EventHandler($strEventID,$arrayParams);
-		}
-
-		function CallbackWebsiteInit()
-		{
-			$this->Trace("Assembly ".$this->GetID()." WebsiteInit");
-			return true;
-		}
-
-		function CallbackUserDelete($strUserID)
-		{
-			return true;
-		}
-		
-		function CallbackUserChangePassword($strOldPassword,$strNewPassword)
-		{
-			return true;	
-		}
-		
-		
-		function CallbackRenderGenericOutputItem($strItem, $arrayAttributes)
-		{
-			return "";
-		}
-		
-		
-		
-		
-		
-		
-
 		function GetAssetFilePath(
 			$strAssetType,
 			$arrayParams)
@@ -218,7 +185,12 @@
 					ArrayGetValue($arrayParams,"ext")
 					);
 				break;
-			case "element":
+			case 'plugin':
+				$strFilePath = $this->MakePluginSourceFilePath(
+					ArrayGetValue($arrayParams,'plugin')
+					);
+				break;
+			case 'element':
 				$strFilePath = $this->MakeElementSourceFilePath(
 					ArrayGetValue($arrayParams,"element")
 					);
@@ -429,11 +401,18 @@
 			}
 			return $this->GetContentDir().$strLanguagePath."content_" .$strContentID.".".$strExt;
 		}
+
+		function MakePluginSourceFilePath(
+			$strPluginID)
+		{
+			return $this->GetPluginsDir().'plugin_'.$strPluginID.'.inc';
+		}
+
 		
 		function MakeElementSourceFilePath(
 			$strElementID)
 		{
-			return $this->GetElementsDir()."element_".$strElementID.".inc";
+			return $this->GetElementsDir().'element_'.$strElementID.'.inc';
 		}
 
 		function MakeElementDemoCodeFilePath(

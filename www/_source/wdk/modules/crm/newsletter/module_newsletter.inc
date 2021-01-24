@@ -4,7 +4,6 @@
 	
 	class CNewsletterModule extends CModule
 	{
-		
 		private $m_arrayErrors;
 	
 		function __construct(
@@ -12,6 +11,7 @@
 			$strInstanceID = "",
 			$arrayConfig = array())
 		{
+			$this->m_arrayErrors = array();
 			parent::__construct(
 				$website,
 				"crm/newsletter",
@@ -19,17 +19,9 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnRenderModule($strState)
 		{
-			$this->m_arrayErrors = array();
-			
-			return true;
-		}
-		
-	
-		function CallbackRenderModule($strState)
-		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "submit":

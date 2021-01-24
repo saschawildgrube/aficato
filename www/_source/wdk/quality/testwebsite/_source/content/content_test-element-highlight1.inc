@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$strText = "<textarea>highlighted</textarea><p>This is some text with a highlighted text with some entities (&copy;&amp;&nbsp;).</p>";
 			$strToken = "highlighted";

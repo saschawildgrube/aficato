@@ -14,7 +14,7 @@
 				"devtools/elementgallery");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->GetState() == "")
 			{				
@@ -35,10 +35,10 @@
  
  			$this->m_arrayElements = ArraySort($this->m_arrayElements);
 			
-			return true;
+			return parent::OnInit();
 		}
 
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{

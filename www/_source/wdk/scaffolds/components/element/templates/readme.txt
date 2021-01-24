@@ -47,9 +47,9 @@ Usually the website class implementation is in a file named like this:
 
 
 Within your website class implementation, search for the function
-CallbackInitAssemblyLine(). If it doesn't exist add it:
+OnInitAssemblyLine(). If it doesn't exist add it:
 
-	function CallbackInitAssemblyLine(&$assemblyLine)
+	function OnInitAssemblyLine(&$assemblyLine)
 	{
 		$assembly = new CAssembly($this,'$$$a$$$');
 		$assemblyLine->AddAssembly($assembly);
@@ -70,7 +70,7 @@ The URL to the element gallery looks like this:
 https://www.yourwebsite.com/?content=devtools-elementgallery
 
 If you can't access the element gallery, try to add the
-following code to the function CallbackCheckCondition():
+following code to the function OnCheckCondition():
 
 			if ($strCondition == 'devtools')
 			{

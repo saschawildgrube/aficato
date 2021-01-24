@@ -11,9 +11,9 @@
 			
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);	
 			return true;
 		} 
@@ -43,9 +43,9 @@
 		}
 
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			for ($nIndex = -2; $nIndex <= 45; $nIndex++)
 			{

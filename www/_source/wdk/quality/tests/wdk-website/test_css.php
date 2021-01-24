@@ -8,16 +8,16 @@
 			parent::__construct("Test Style Sheet Inclusion");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			$this->SetResult(true);
 			return true;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$strURL = "http://".GetRootURL()."quality/testwebsite/?content=test-css";
 

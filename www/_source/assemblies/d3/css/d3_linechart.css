@@ -1,0 +1,35 @@
+.linechart-svg
+{
+	background-color: white;
+	padding: 14px;
+	box-sizing: border-box;
+	font-family: sans-serif;	
+	text-align: center;
+}
+
+
+.linechart-axis-x
+{
+	font-size: 14px;
+}
+
+.linechart-axis-y
+{
+	font-size: 14px;
+}
+
+
+.linechart-column-background
+{
+	fill: #F5F5F5;
+}
+
+.linechart-dot
+{
+	stroke-width: 0;
+}
+
+.linechart-line
+{
+	stroke-width: 2;
+}

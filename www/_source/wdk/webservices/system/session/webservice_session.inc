@@ -30,33 +30,33 @@
 				$arrayEntityDefinition);
 		}
 
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
 			$paramDef->AddParameterDefinitionInteger("duration",1,intval($this->GetConfig("duration_max")));
 			$paramDef->AddParameterDefinitionUsername("user_name");
 			$paramDef->AddParameterDefinitionString("authenticationpayload",1,255,CHARSET_TEXT);
-			parent::CallbackInitParameterDefinition($paramDef);
+			parent::OnInitParameterDefinition($paramDef);
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 			$commandDef->AddCommandDefinition("login",array("session_id","owner_id","user_id","user_name","authenticationpayload"));
 			$commandDef->AddCommandDefinition("logout",array("session_id","owner_id"));	
 			$commandDef->AddCommandDefinition("cleanup",array());	
 		}
 
 
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->DatabaseConnect() != true)
 			{
 				return false;
 			}			
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			switch ($strCommand)
 			{
@@ -89,13 +89,13 @@
 				return;
 
 			default:
-				parent::CallbackCommand($strCommand);
+				parent::OnCommand($strCommand);
 				return;
 			}
 		}
 
 	
-		function CallbackCheckParameter($strCommand,$strParamName,$strParamValue)
+		function OnCheckParameter($strCommand,$strParamName,$strParamValue)
 		{
 			switch ($strParamName)
 			{
@@ -112,7 +112,7 @@
 				return true;
 
 			default:
-				return parent::CallbackCheckParameter($strCommand,$strParamName,$strParamValue);
+				return parent::OnCheckParameter($strCommand,$strParamName,$strParamValue);
 			}
 		}
 

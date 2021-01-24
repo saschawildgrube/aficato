@@ -22,7 +22,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->RequireWebservice($this->m_strWebservice);
 
@@ -33,7 +33,7 @@
 			
 			$this->SetVerbose(true);
 			$this->SetResult(true);
-			return parent::CallbackInit();	
+			return parent::OnInit();	
 		}	
 		 
 		
@@ -64,9 +64,9 @@
 			$this->Trace('');
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			
 			
@@ -92,9 +92,9 @@
 
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 									
 			$this->Trace("DELETE ARTICLES");
 			$this->Trace("Going to delete ".ArrayCount($this->m_arrayIDs)." items.");

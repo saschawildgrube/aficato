@@ -36,17 +36,17 @@
 			parent::__construct("Web service system/entitlement",$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->RequireWebservice($this->m_strUserWebservice);
 			$this->RequireWebservice($this->m_strEntitlementWebservice);
 			$this->SetVerbose(false);
-			return parent::CallbackInit();;
+			return parent::OnInit();;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$strTestUser = "testentitlement";
 			
@@ -250,9 +250,9 @@
 			$this->SetResult(true);
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			
 			$consumer = new CWebServiceConsumerWebApplication($this);
 			

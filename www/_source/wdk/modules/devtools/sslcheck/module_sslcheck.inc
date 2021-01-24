@@ -20,7 +20,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->m_arrayErrors = array();
 			
@@ -37,13 +37,13 @@
 			*/
 			$this->SetToolbarConfig($arrayToolbarConfig);
 			
-			return true;
+			return parent::OnInit();
 		}
 		
 	
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "check":

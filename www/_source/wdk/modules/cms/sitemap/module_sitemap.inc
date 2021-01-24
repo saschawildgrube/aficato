@@ -9,26 +9,21 @@
 	
 		function __construct(
 			CWebSite $website,
-			$strInstanceID = "",
+			$strInstanceID = '',
 			$arrayConfig = array())
 		{
+			$this->m_arrayErrors = array();
 			parent::__construct(
 				$website,
 				"cms/sitemap",
 				$strInstanceID,
 				$arrayConfig);
 		}
-		
-		function CallbackInit()
-		{
-			$this->m_arrayErrors = array();
-			return true;
-		}
-		
+			
 	
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "":

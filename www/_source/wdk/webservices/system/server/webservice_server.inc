@@ -31,31 +31,31 @@
 				);
 		}
 		
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
-			parent::CallbackInitParameterDefinition($paramDef);
+			parent::OnInitParameterDefinition($paramDef);
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
 			//$commandDef->AddCommandDefinition('restart',array());
 			$commandDef->AddCommandDefinition('info',array());
 			$commandDef->AddCommandDefinition('status',array());
 			$commandDef->AddCommandDefinition('performance',array());
 			$commandDef->AddCommandDefinition('protect',array());
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->SetResultValue($this->GetServerIP(),'IP');
 			$this->SetResultValue(GetSystemHostname(),'HOSTNAME');
 		
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 		
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			switch ($strCommand)
 			{
@@ -82,7 +82,7 @@
 				return;
 
 			default:
-				parent::CallbackCommand($strCommand);
+				parent::OnCommand($strCommand);
 				return;
 			}
 		}

@@ -9,19 +9,19 @@
 			parent::__construct("WDK CSecureDataContainer");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if (!IsMcryptSupported())
 			{
 				$this->SetActive(false);
 			}
-			return parent::CallbackInit();	
+			return parent::OnInit();	
 		}
 
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			
 			

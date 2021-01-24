@@ -19,15 +19,15 @@
 			parent::__construct("Web service system/test",$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->RequireWebservice($this->m_strWebservice);
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			
 			

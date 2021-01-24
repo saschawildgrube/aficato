@@ -39,6 +39,11 @@
 		{
 			return $this->m_strID;	
 		}
+
+		function GetSatelliteType()
+		{
+			FatalError('GetSatelliteType() must be implemented by derived class!');	
+		}
 		
 		function GetDataFilePath($strFilePath)
 		{
@@ -172,7 +177,7 @@
 		
 		function Trace($value)
 		{
-			$this->GetWebsite()->Trace($this->GetID().': '.RenderValue($value));
+			$this->GetWebsite()->Trace($this->GetSatelliteType().': '.$this->GetID().': '.RenderValue($value));
 		}
 		function ProfilingTrace()
 		{
@@ -180,7 +185,7 @@
 		}
 		function Debug($value = null)
 		{
-			$this->GetWebsite()->Debug($value);	
+			$this->GetWebsite()->Debug($this->GetSatelliteType().': '.$this->GetID().': '.RenderValue($value));	
 		}
 		
 		

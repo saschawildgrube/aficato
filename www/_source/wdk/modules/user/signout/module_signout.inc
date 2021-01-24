@@ -8,40 +8,25 @@
 		
 		function __construct(
 			CWebSite $website,
-			$strPreferredContent = ""
-			//,$strContentAfterSignOut = ""
+			$strPreferredContent = ''
 			)
 		{
 			$this->m_arrayErrors = array();
 			$this->m_strPreferredContent = $strPreferredContent;
-			//$this->m_strContentAfterSignOut = $strContentAfterSignOut;
-			parent::__construct($website,"user/signout");
-		}
-		
-		function CallbackInit()
-		{
-			return true;
+			parent::__construct($website,'user/signout');
 		}
 		
 		
-		function CallbackWebsiteInit()
+	
+		function OnRenderModule($strState)
 		{
-/*
-			if ($this->GetState() == "signout")
-			{
-			}
-	*/		
-		}		
-		
-		function CallbackRenderModule($strState)
-		{
-			if ($this->GetWebSite()->GetAuthUserID() == "")
+			if ($this->GetWebSite()->GetAuthUserID() == '')
 			{
 				return $this->StateNoLogin();	
 			}
 			switch ($strState)
 			{
-				case "signout":
+				case 'signout':
 				{
 					return $this->StateSignOut();
 				}
@@ -54,48 +39,48 @@
 		
 		function StateNoLogin()
 		{
-			$this->SetState("nologin");
-			return "nologin";
+			$this->SetState('nologin');
+			return 'nologin';
 		}
 
 		
 		function StatePreSignOut()
 		{
-			$this->SetState("presignout");
+			$this->SetState('presignout');
 			
 			
 			$formDef = new CFormDefinition();
 			
 			$arrayParams = array();
-			$arrayParams[$this->GetModuleVarNameState()] = "signout";
-			if ($this->m_strPreferredContent != "")
+			$arrayParams[$this->GetModuleVarNameState()] = 'signout';
+			if ($this->m_strPreferredContent != '')
 			{
-				$arrayParams["content"] = $this->m_strPreferredContent;
+				$arrayParams['content'] = $this->m_strPreferredContent;
 			}
 			$formDef->SetURL($this->GetWebsite()->GetRootURL_PreferHTTPS(),$arrayParams);
 			
-			$formDef->AddControlStatic("TEXT","?TID_SIGNOUT_TEXT_PRESIGNOUT?");
-			$formDef->AddControlButtonSubmit("?TID_SIGNOUT_BUTTON_SIGNOUT?");
+			$formDef->AddControlStatic('TEXT','?TID_SIGNOUT_TEXT_PRESIGNOUT?');
+			$formDef->AddControlButtonSubmit('?TID_SIGNOUT_BUTTON_SIGNOUT?');
 			
-			$form = new CFormElement($this->GetWebsite(),"default");
+			$form = new CFormElement($this->GetWebsite(),'default');
 			
 			$this->SetOutputItem(
-				"FORM",
+				'FORM',
 				$form->RenderForm(
 					$formDef,
 					$this->GetAllModuleVars(),
 					$this->m_arrayErrors));
 			
 
-			return "presignout";
+			return 'presignout';
 		}
 		
 		function StateSignOut()
 		{
-			$this->SetState("signout");
+			$this->SetState('signout');
 
-			$bConfirmation = GetBoolValue($this->GetModuleVar("confirmation"));
-			$this->SetModuleVar("confirmation","");
+			$bConfirmation = GetBoolValue($this->GetModuleVar('confirmation'));
+			$this->SetModuleVar('confirmation','');
 			
 						
 			if ($bConfirmation == false)
@@ -103,32 +88,32 @@
 				$formDef = new CFormDefinition();
 				
 				$arrayParams = array();
-				$arrayParams[$this->GetModuleVarNameState()] = "signout";
-				if ($this->m_strPreferredContent != "")
+				$arrayParams[$this->GetModuleVarNameState()] = 'signout';
+				if ($this->m_strPreferredContent != '')
 				{
-					$arrayParams["content"] = $this->m_strPreferredContent;
+					$arrayParams['content'] = $this->m_strPreferredContent;
 				}
 				$formDef->SetURL($this->GetWebsite()->GetRootURL_PreferHTTPS(),$arrayParams);
 				
 				$formDef->AddControlCheckbox(
-					"CONFIRMATION",
-					$this->GetModuleVarName("confirmation"),
-					"?TID_SIGNOUT_LABEL_CONFIRMATION?",
+					'CONFIRMATION',
+					$this->GetModuleVarName('confirmation'),
+					'?TID_SIGNOUT_LABEL_CONFIRMATION?',
 					false);
 	
-				$formDef->AddControlButtonSubmit("?TID_SIGNOUT_BUTTON_CONFIRM?");
+				$formDef->AddControlButtonSubmit('?TID_SIGNOUT_BUTTON_CONFIRM?');
 				
-				$form = new CFormElement($this->GetWebsite(),"default");
+				$form = new CFormElement($this->GetWebsite(),'default');
 				
 				$this->SetOutputItem(
-					"FORM",
+					'FORM',
 					$form->RenderForm(
 						$formDef,
 						$this->GetAllModuleVars(),
 						$this->m_arrayErrors));
 						
-				$this->SetState("presignout");
-				return "signout";
+				$this->SetState('presignout');
+				return 'signout';
 			}
 			
 			$bResult = $this->GetWebsite()->UserDelete(
@@ -136,24 +121,24 @@
 			
 			if ($bResult == false)
 			{
-				$message = new CMessageElement($this->GetWebsite(),"error");
+				$message = new CMessageElement($this->GetWebsite(),'error');
 				$this->SetOutputItem(
-					"MESSAGE",
-					$message->RenderMessage($this->GetMessage("ERROR","SIGNOUTFAILED"))
+					'MESSAGE',
+					$message->RenderMessage($this->GetMessage('ERROR','SIGNOUTFAILED'))
 					);
-				//$this->SetErrorMessageCode("SIGNOUTFAILED");
-				return "error";
+				//$this->SetErrorMessageCode('SIGNOUTFAILED');
+				return 'error';
 			}
 
-			$message = new CMessageElement($this->GetWebsite(),"info");
+			$message = new CMessageElement($this->GetWebsite(),'info');
 			$this->SetOutputItem(
-				"MESSAGE",
-				$message->RenderMessage($this->GetMessage("INFO","SIGNOUTSUCCESS"))
+				'MESSAGE',
+				$message->RenderMessage($this->GetMessage('INFO','SIGNOUTSUCCESS'))
 				);
 
 			
-			$this->SetState("postsignout");
-			return "postsignout";
+			$this->SetState('postsignout');
+			return 'postsignout';
 		}		
 	
 	}

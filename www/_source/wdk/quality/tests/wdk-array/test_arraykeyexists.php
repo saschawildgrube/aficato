@@ -9,9 +9,9 @@
 			parent::__construct("Test ArrayKeyExists");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -44,9 +44,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$arrayInput = array();
 			$this->TestCase_ArrayKeyExists($arrayInput,"1",false);

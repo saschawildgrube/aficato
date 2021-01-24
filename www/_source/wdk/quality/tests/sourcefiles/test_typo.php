@@ -9,14 +9,20 @@
 			parent::__construct('Check for typical typos in source code files');
 		}
 
-		function Callback_TestCase_CheckFile($strFilePath)
+		function OnTestCaseCheckFile($strFilePath)
 		{ 
 			$arrayRegExp = array();
 			$strExtention = GetExtentionFromPath($strFilePath);
 			$strFileName = GetFilenameFromPath($strFilePath);
 			
-			// we don't want to fail the test because of THIS file!
+			// We don't want to fail the test because of THIS file!
 			if ($strFileName == 'test_typo.php')
+			{
+				return;	
+			}
+			
+			// We don't check minified 3rd party js files
+			if (FindString($strFileName,'.min.js') != -1)
 			{
 				return;	
 			}
@@ -25,21 +31,27 @@
 				||  $strExtention == 'php'
 				||  $strExtention == 'js'  
 				||  $strExtention == 'txt'
+				||  $strExtention == 'md'
 				||  $strExtention == 'htm')
 			{
 				$arrayRegExp = array();
-				$arrayRegExp[] = '/retrun/';
-				$arrayRegExp[] = '/provacy/';
-				$arrayRegExp[] = '/ teh /';
+				$arrayRegExp[] = '/retrun/i';
+				$arrayRegExp[] = '/provacy/i';
+				$arrayRegExp[] = '/ teh /i';
+				$arrayRegExp[] = '/plgin/i';
+				$arrayRegExp[] = '/steepphp/i';
+				$arrayRegExp[] = '/scallfolder/i';
+				$arrayRegExp[] = '/licence/i';
+				
 				$this->CheckFileAgainstRegExp($strFilePath,$arrayRegExp);
 			}
 			
 			return;
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$this->CheckSourceDirectories();
 		}

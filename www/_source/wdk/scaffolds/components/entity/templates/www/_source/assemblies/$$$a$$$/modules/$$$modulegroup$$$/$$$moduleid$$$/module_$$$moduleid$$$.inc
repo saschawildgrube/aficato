@@ -18,7 +18,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayEntityDefinitions = array(
 				"$$$entityname$$$" => GetEntityDefinition$$$EntityName$$$()
@@ -28,9 +28,9 @@
 		}
 		
 	
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "":
@@ -39,18 +39,18 @@
 					*/
 					return $this->StateList("$$$entityname$$$");
 				default:
-					return parent::CallbackRenderModule($strState);
+					return parent::OnRenderModule($strState);
 			}
 		}
 		
-		function CallbackPrepareToolbar()
+		function OnPrepareToolbar()
 		{
-			parent::CallbackPrepareToolbar();
+			parent::OnPrepareToolbar();
 		}
 				
-		function CallbackCheckInputValues($strEntity,$bAdd,$arrayItem) 
+		function OnCheckInputValues($strEntity,$bAdd,$arrayItem) 
 		{
-			$arrayErrors = parent::CallbackCheckInputValues($strEntity,$bAdd,$arrayItem);
+			$arrayErrors = parent::OnCheckInputValues($strEntity,$bAdd,$arrayItem);
 			
 			if ($strEntity == "$$$entityname$$$")
 			{
@@ -70,9 +70,9 @@
 			return $arrayErrors;
 		}
 		
-		function CallbackPrepareInputValues($strEntity,$bAdd,$arrayItem) 
+		function OnPrepareInputValues($strEntity,$bAdd,$arrayItem) 
 		{
-			$arrayItem = parent::CallbackPrepareInputValues($strEntity,$bAdd,$arrayItem);
+			$arrayItem = parent::OnPrepareInputValues($strEntity,$bAdd,$arrayItem);
 			
 			if ($strEntity == "$$$entityname$$$")
 			{
@@ -85,12 +85,12 @@
 			return $arrayItem;
 		}		
 				
-		function CallbackPrepareWebserviceParams($strEntity,&$arrayParams)
+		function OnPrepareWebserviceParams($strEntity,&$arrayParams)
 		{
 			if ($strEntity == "$$$entityname$$$")
 			{
 				/*
-				Use this callback function to modify parameters sent to the
+				Use this function to modify parameters sent to the
 				entity web service.
 				
 				The example below adds an additional parameter "update_lastaccess"
@@ -111,10 +111,10 @@
 		}
 
 			
-		function CallbackPrepareFilterSelectOptions($strEntity,$strFilter)
+		function OnPrepareFilterSelectOptions($strEntity,$strFilter)
 		{
 			/*
-				This callback function is invoked to fill a form's select dropdown
+				This function is invoked to fill a form's select dropdown
 				with values from which the user can choose from for filtering.
 				So this is used for the dropdowns in the search options bar in the
 				list view.
@@ -143,14 +143,14 @@
 					return $arrayOptions;
 				}
 			}
-			return parent::CallbackPrepareFilterSelectOptions($strEntity,$strFilter);
+			return parent::OnPrepareFilterSelectOptions($strEntity,$strFilter);
 		}
 
 
-		function CallbackPrepareSelectOptions($strEntity,$strAttributeID,$strItemIndex)
+		function OnPrepareSelectOptions($strEntity,$strAttributeID,$strItemIndex)
 		{
 			/*
-				This callback function is invoked to fill a form's select dropdown
+				This function is invoked to fill a form's select dropdown
 				with values from which the user can choose from when adding or
 				modifying an item.
 				
@@ -187,30 +187,30 @@
 				*/
 				
 			}
-			return parent::CallbackPrepareSelectOptions($strEntity,$strAttributeID,$strItemIndex);
+			return parent::OnPrepareSelectOptions($strEntity,$strAttributeID,$strItemIndex);
 		}
 		
 		
-		function CallbackPrepareItemDataDefaultValues($strEntity,&$arrayItem)
+		function OnPrepareItemDataDefaultValues($strEntity,&$arrayItem)
 		{
 			/*
-				This callback function is called before the form to add a new item
+				This function is called before the form to add a new item
 				is populated.
 				Modifying the arrayItem overrides defaults defined by the entity
 				definition.
 				Use this function to implement dynamic defaults.
 			*/
 			
-			parent::CallbackPrepareItemDataDefaultValues($strEntity,$arrayItem);
+			parent::OnPrepareItemDataDefaultValues($strEntity,$arrayItem);
 			if ($strEntity == "$$$entityname$$$")
 			{
 				$arrayItem["intval"] = 23;
 			}
 		}
 		
-		function CallbackPrepareItemDataDuplicate($strEntity,&$arrayItem)
+		function OnPrepareItemDataDuplicate($strEntity,&$arrayItem)
 		{
-			parent::CallbackPrepareItemDataDuplicate($strEntity,$arrayItem);
+			parent::OnPrepareItemDataDuplicate($strEntity,$arrayItem);
 			if ($strEntity == "$$$entityname$$$")
 			{
 				$arrayItem["name"] = ReplaceTagsWDK(
@@ -221,36 +221,36 @@
 		}
 
 		
-		function CallbackItemAdded($strEntity,$strNewItemIndex,$arrayItem)
+		function OnItemAdded($strEntity,$strNewItemIndex,$arrayItem)
 		{
 			/*
-				This callback function is called after a new item has been added by the user.
+				This function is called after a new item has been added by the user.
 				The example below sends an email to the website's administrator.
 			*/
 			$this->GetWebsite()->SendMailToAdmin(
 				"A new $$$EntityName$$$ has been added!",
 				"The new item's id is $strNewItemIndex.");
 
-			parent::CallbackItemAdded($strEntity,$strNewItemIndex,$arrayItem);
+			parent::OnItemAdded($strEntity,$strNewItemIndex,$arrayItem);
 		}
 
 	
-		function CallbackPrepareItemDataList($strEntity,&$arrayItems,$strSortOption,$strSortOrder)
+		function OnPrepareItemDataList($strEntity,&$arrayItems,$strSortOption,$strSortOrder)
 		{
 			/*
 				The default implememtation adds task icons
 				for sort order modification and calls
-				CallbackPrepareItemDataView() for every icon.
+				OnPrepareItemDataView() for every icon.
 				
 				Implement this function to change behaviour only for "list" views.
 			*/
-			parent::CallbackPrepareItemDataList($strEntity,$arrayItems,$strSortOption,$strSortOrder);
+			parent::OnPrepareItemDataList($strEntity,$arrayItems,$strSortOption,$strSortOrder);
 		}
 	
-		function CallbackPrepareItemDataView($strEntity,$strItemIndex,&$arrayItem)
+		function OnPrepareItemDataView($strEntity,$strItemIndex,&$arrayItem)
 		{
 			/*
-			Use this callback function to modify attribute values before being displayed in
+			Use this function to modify attribute values before being displayed in
 			"view" or "list" views.
 			*/
 			if ($strEntity == "$$$entityname$$$")
@@ -264,7 +264,7 @@
 					code or not at all.
 				*/
 			
-				parent::CallbackPrepareItemDataView($strEntity,$strItemIndex,$arrayItem);
+				parent::OnPrepareItemDataView($strEntity,$strItemIndex,$arrayItem);
 				
 				$strType = ArrayGetValue($arrayItem,"type");
 				if ($strType != "")
@@ -277,14 +277,14 @@
 			}
 			else
 			{
-				parent::CallbackPrepareItemDataView($strEntity,$strItemIndex,$arrayItem);
+				parent::OnPrepareItemDataView($strEntity,$strItemIndex,$arrayItem);
 			}
 		}
 		
-		function CallbackItemView($strEntity,$strItemIndex,$arrayItem)
+		function OnItemView($strEntity,$strItemIndex,$arrayItem)
 		{
 			/*
-				This callback function is invoked AFTER the view state is prepared.
+				This function is invoked AFTER the view state is prepared.
 				The arrayItem contains raw values as received from the web service.
 				Use this function to implement customized view states.
 				
@@ -295,12 +295,12 @@
 			$arrayItem["INDEX"] = $strItemIndex;
 			$this->GetWebsite()->SystemEvent("INFORMATIONAL",StringUpperCase($strEntity)."_VIEW",$strItemIndex,$arrayItem);
 			
-			parent::CallbackItemView($strEntity,$strItemIndex,$arrayItem);
+			parent::OnItemView($strEntity,$strItemIndex,$arrayItem);
 		}
 		
 			
  
-		function CallbackPrepareItemDataModify($strEntity,$strItemIndex,&$arrayItem)
+		function OnPrepareItemDataModify($strEntity,$strItemIndex,&$arrayItem)
 		{
 			/*
 				This function is called BEFORE an item is presented for modification
@@ -308,38 +308,38 @@
 				The parent class implementation already covers typical cases, like
 				date formatting etc.
 			*/
-			parent::CallbackPrepareItemDataModify($strEntity,$strItemIndex,$arrayItem);
+			parent::OnPrepareItemDataModify($strEntity,$strItemIndex,$arrayItem);
 		}
 		
-		function CallbackItemModified($strEntity,$strItemIndex,$arrayItem)
+		function OnItemModified($strEntity,$strItemIndex,$arrayItem)
 		{
 			/*
-				This callback function is called after an item has been modified by the user.
+				This function is called after an item has been modified by the user.
 				The example below sends an email to the website's administrator.
 			*/
 			$this->GetWebsite()->SendMailToAdmin(
 				"$$$EntityName$$$ $strItemIndex has been modified!",
 				"");			
-			parent::CallbackItemModified($strEntity,$strItemIndex,$arrayItem);
+			parent::OnItemModified($strEntity,$strItemIndex,$arrayItem);
 		}
 		
-		function CallbackItemDeleted($strEntity,$strItemIndex,$arrayItem)
+		function OnItemDeleted($strEntity,$strItemIndex,$arrayItem)
 		{
 			/*
-				This callback function is called after an item has been deleted by the user.
+				This function is called after an item has been deleted by the user.
 				The example below sends an email to the website's administrator.
 			*/
 			$this->GetWebsite()->SendMailToAdmin(
 				"$$$EntityName$$$ $strItemIndex has been deleted!",
 				"");			
-			parent::CallbackItemModified($strEntity,$strItemIndex,$arrayItem);
+			parent::OnItemModified($strEntity,$strItemIndex,$arrayItem);
 		}		
 		
 
-		function CallbackPrepareItemDataExport($strEntity,$strItemIndex,$arrayItem)
+		function OnPrepareItemDataExport($strEntity,$strItemIndex,$arrayItem)
 		{
 			/*
-				This callback function is called for each item before being exported
+				This function is called for each item before being exported
 				as a csv file.
 				
 				The parent implementation takes care for the typical rendering
@@ -347,7 +347,7 @@
 				the current user's locale preferences - e.g. because a German Excel will
 				not interpret the decimal delimiter "." as such.
 			*/
-			return parent::CallbackPrepareItemDataExport($strEntity,$strItemIndex,$arrayItem);
+			return parent::OnPrepareItemDataExport($strEntity,$strItemIndex,$arrayItem);
 		}
 
 

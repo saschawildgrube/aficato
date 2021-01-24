@@ -10,7 +10,7 @@
 			parent::__construct("GetFileSize (with large files)");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$nMemoryLimit = GetMemoryLimit();
 			$this->Trace("GetMemoryLimit() = $nMemoryLimit");
@@ -22,7 +22,7 @@
 			
 			
 			
-			return parent::CallbackInit();	
+			return parent::OnInit();	
 		}
 		
 
@@ -53,9 +53,9 @@
 		}
 
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 					
 			$this->SetResult(true);
 
@@ -84,10 +84,10 @@
 			}
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
 			DeleteFile($this->m_strTmpFile);			
-			return parent::CallbackCleanup();
+			return parent::OnCleanup();
 		}
 		
 		

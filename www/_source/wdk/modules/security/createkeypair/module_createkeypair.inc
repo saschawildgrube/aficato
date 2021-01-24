@@ -18,10 +18,6 @@
 				);
 		}
 		
-		function CallbackInit()
-		{
-			return true;
-		}
 		
 		function CheckSystemRequirements()
 		{
@@ -31,7 +27,7 @@
 		
 
 
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{

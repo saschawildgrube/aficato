@@ -346,7 +346,7 @@
 						{
 							$strCurrentSortOrder = '';
 						}
-						$strCell = $this->CallbackRenderHeaderCell(
+						$strCell = $this->OnRenderHeaderCell(
 							$strColumnID,
 							$strColumnText,
 							$strSortOptionParam,
@@ -393,7 +393,7 @@
 					
 					if ($strColumnTab == '' || $strColumnTab == $strCurrentTab)
 					{
-						$strCell = $this->CallbackRenderDataCell(
+						$strCell = $this->OnRenderDataCell(
 							$strColumnID,
 							$arrayItem);
 						if ($strCell == '')
@@ -444,7 +444,7 @@
 		}
 		
 		
-		function CallbackRenderHeaderCell(
+		function OnRenderHeaderCell(
 			$strColumnID,
 			$strColumnText,
 			$strSortOptionParam,
@@ -476,7 +476,7 @@
 			return $strCell;
 		}
 
-		function CallbackRenderDataCell(
+		function OnRenderDataCell(
 			$strColumnID,
 			$arrayItem)
 		{

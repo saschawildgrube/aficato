@@ -30,32 +30,32 @@
 				);
 		}
 		
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
 			$paramDef->AddParameterDefinition_userid();
-			parent::CallbackInitParameterDefinition($paramDef);	
+			parent::OnInitParameterDefinition($paramDef);	
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
 			//$commandDef->AddCommandDefinition("get",array("user_id"));
 			//$commandDef->AddCommandDefinition("set",array("user_id","privilege_id"));
 			//$commandDef->AddCommandDefinition("delete",array("user_id","privilege_id"));
 			$commandDef->AddCommandDefinition("deleteall",array("user_id"));
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->DatabaseConnect() != true)
 			{
 				return false;
 			}			
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}		
 		
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			switch ($strCommand)
 			{
@@ -64,14 +64,14 @@
 				return;
 
 			default:
-				parent::CallbackCommand($strCommand);
+				parent::OnCommand($strCommand);
 				return;
 			}
 		}
 
-		function CallbackLog($strEventSeverity, $strEventID, $strDetails)
+		function OnLog($strEventSeverity, $strEventID, $strDetails)
 		{
-			$this->CallbackLog_LogWebservice($strEventSeverity, $strEventID, $strDetails);
+			$this->OnLog_LogWebservice($strEventSeverity, $strEventID, $strDetails);
 		}	
 
 		

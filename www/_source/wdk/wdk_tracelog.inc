@@ -18,6 +18,7 @@
 		{
 			$this->m_strPrefix = $strNewPrefix;	
 		}
+		
 		function SetPostfix($strNewPostfix)
 		{
 			$this->m_strPostfix = $strNewPostfix;	
@@ -34,10 +35,12 @@
 				$this->m_strTraceLog .= $this->m_strPrefix.RenderValue($value).$this->m_strPostfix;
 			}
 		}
+		
 		function GetTraceLog()
 		{
 			return $this->m_strTraceLog;
 		}
+		
 		function RenderTraceLog()
 		{
 			return "<div style=\"float:left;\"><pre style=\"text-align: left;\">" . HtmlEncode($this->GetTraceLog()) . "</pre></div>";	

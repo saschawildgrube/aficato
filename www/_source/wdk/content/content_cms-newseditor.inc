@@ -2,16 +2,16 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->IncludeModule("cms/newsarticlemanager");
-			$newsarticlemanager = new CNewsArticleManagerModule($this->GetWebsite(),"");
-			$arrayItems["MODULE_NEWSARTICLEMANAGER"] = $newsarticlemanager->RenderModule();
+			$this->GetWebsite()->IncludeModule('cms/newsarticlemanager');
+			$newsarticlemanager = new CNewsArticleManagerModule($this->GetWebsite(),'');
+			$arrayItems['MODULE_NEWSARTICLEMANAGER'] = $newsarticlemanager->RenderModule();
 		}
 		
-		function CallbackGetRequiredConditions()
+		function OnGetRequiredConditions()
 		{
-			return array("newseditor" => "INSUFFICIENT_PRIVILEGES");
+			return array('newseditor' => 'INSUFFICIENT_PRIVILEGES');
 		}		
 		
 	}

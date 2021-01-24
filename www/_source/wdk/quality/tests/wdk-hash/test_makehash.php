@@ -7,9 +7,9 @@
 			parent::__construct('MakeHash');
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -37,9 +37,9 @@
 		}
 		
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->TestCase_MakeHash('','',null,				'da39a3ee5e6b4b0d3255bfef95601890afd80709');
 			$this->TestCase_MakeHash(false,false,null,	'da39a3ee5e6b4b0d3255bfef95601890afd80709');

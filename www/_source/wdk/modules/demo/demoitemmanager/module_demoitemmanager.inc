@@ -18,7 +18,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayEntityDefinitions = array(
 				"demoitem" => GetEntityDefinitionDemoitem()
@@ -26,28 +26,28 @@
 
 			$this->SetEntityDefinitions($arrayEntityDefinitions);
 			
-			return true;
+			return parent::OnInit();
 		}
 		
 
 		
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
-			$this->Trace("CallbackRenderModule(\"$strState\")");
+			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
 				case "":
 					return $this->StateList("demoitem");
 				default:
-					return parent::CallbackRenderModule($strState);
+					return parent::OnRenderModule($strState);
 			}
 		}
 		
 
 
-		function CallbackCheckInputValues($strEntity,$bAdd,$arrayItem)
+		function OnCheckInputValues($strEntity,$bAdd,$arrayItem)
 		{
-			$arrayErrors = parent::CallbackCheckInputValues($strEntity,$bAdd,$arrayItem);
+			$arrayErrors = parent::OnCheckInputValues($strEntity,$bAdd,$arrayItem);
 			if ($strEntity == "demoitem")
 			{
 				$strName = $arrayItem["item_name"];

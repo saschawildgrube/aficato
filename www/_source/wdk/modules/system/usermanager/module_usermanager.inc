@@ -24,7 +24,7 @@
 				$arrayConfig);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$arrayEntityDefinitions = array(
 				"user" => GetEntityDefinitionUser()
@@ -34,10 +34,10 @@
 			
 			$this->GetWebsite()->LoadStringResources("local");
 			
-			return true;
+			return parent::OnInit();
 		}
 
-		function CallbackRenderModule($strState)
+		function OnRenderModule($strState)
 		{
 			switch ($strState)
 			{
@@ -46,7 +46,7 @@
 				case "user_modifysubmit":
 					return $this->StateUserModifySubmit();
 				default:
-					return parent::CallbackRenderModule($strState);
+					return parent::OnRenderModule($strState);
 			}
 		}
 		
@@ -56,9 +56,9 @@
 			return "$nSiloID";	
 		}
 		
-		function CallbackCheckInputValues($strEntity,$bAdd,$arrayItem) 
+		function OnCheckInputValues($strEntity,$bAdd,$arrayItem) 
 		{
-			$arrayErrors = parent::CallbackCheckInputValues($strEntity,$bAdd,$arrayItem);
+			$arrayErrors = parent::OnCheckInputValues($strEntity,$bAdd,$arrayItem);
 			if ($strEntity == "user")
 			{
 				if ($bAdd == true)
@@ -74,7 +74,7 @@
 		}
 
 		
-		function CallbackPrepareSelectOptions($strEntity,$strAttributeID,$strIndex)
+		function OnPrepareSelectOptions($strEntity,$strAttributeID,$strIndex)
 		{
 			if ($strEntity == "user")
 			{
@@ -114,10 +114,10 @@
 					return $arrayCountryOptions;
 				}
 			}
-			return parent::CallbackPrepareSelectOptions($strEntity,$strAttributeID,$strIndex);	
+			return parent::OnPrepareSelectOptions($strEntity,$strAttributeID,$strIndex);	
 		}		
 		
-		function CallbackPrepareFilterSelectOptions($strEntity,$strFilter)
+		function OnPrepareFilterSelectOptions($strEntity,$strFilter)
 		{
 			$arrayOptions = array();
 			if ($strEntity == "user")
@@ -131,10 +131,10 @@
 					return $arrayOptions;
 				}
 			}
-			return parent::CallbackPrepareFilterSelectOptions($strEntity,$strFilter);
+			return parent::OnPrepareFilterSelectOptions($strEntity,$strFilter);
 		}
 		
-		function CallbackPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
+		function OnPrepareItemDataView($strEntity,$strIndex,&$arrayItem)
 		{
 			if ($strEntity == "user")
 			{
@@ -148,7 +148,7 @@
 					$arrayItem["TASKS"] = $strTasks;
 				}
 			}
-			parent::CallbackPrepareItemDataView($strEntity,$strIndex,$arrayItem);
+			parent::OnPrepareItemDataView($strEntity,$strIndex,$arrayItem);
 			if ($strEntity == "user")
 			{
 				$strLastAuth = ArrayGetValue($arrayItem,"lastauthentication_datetime");
@@ -159,7 +159,7 @@
 			}
 		} 
 
-		function CallbackPrepareWebserviceParams($strEntity,&$arrayParams)
+		function OnPrepareWebserviceParams($strEntity,&$arrayParams)
 		{
 			if ($strEntity == "user")
 			{
@@ -217,7 +217,7 @@
 			
 			$arrayItem = $this->GetItemDataFromModuleVarsInsecure("user");
 			$arrayErrors = array();
-			$this->CallbackCheckInputValues("user",false,$arrayItem,$arrayErrors);
+			$this->OnCheckInputValues("user",false,$arrayItem,$arrayErrors);
 			if (ArrayCount($arrayErrors) > 0)
 			{
 				$this->SetFormErrors($arrayErrors);
@@ -401,13 +401,13 @@
 		}
 		
 /*		
-		function CallbackItemAdded($strEntity,$strNewItemID,$arrayItem)
+		function OnItemAdded($strEntity,$strNewItemID,$arrayItem)
 		{
 			if ($strEntity == "user")
 			{
 				$this->GetWebsite()->UserPostCreation($strNewItemID);
 			}
-			parent::CallbackItemAdded($strEntity,$strNewItemID,$arrayItem);
+			parent::OnItemAdded($strEntity,$strNewItemID,$arrayItem);
 		}
 		*/
 		
@@ -420,7 +420,7 @@
 			
 			$arrayItem = $this->GetItemDataFromModuleVarsInsecure($strEntity);
 			$arrayErrors = $this->GetFormErrors();
-			$this->CallbackCheckInputValues($strEntity,true,$arrayItem,$arrayErrors);
+			$this->OnCheckInputValues($strEntity,true,$arrayItem,$arrayErrors);
 			$this->SetFormErrors($arrayErrors);
 			if (ArrayCount($arrayErrors) > 0)
 			{
@@ -434,7 +434,7 @@
 				$strEntity,
 				$arrayItem);
 			$arrayParams["command"] = $this->GetItemWebserviceCommand($strEntity,"add");
-			$this->CallbackPrepareWebserviceParams($strEntity,$arrayParams);
+			$this->OnPrepareWebserviceParams($strEntity,$arrayParams);
 
 			$strError = "";
 			$arrayResult = array();
@@ -459,7 +459,7 @@
 
 			$this->ResetItemModuleVars($strEntity);
 
-			$this->CallbackItemAdded($strEntity,$strNewItemIndex,$arrayItem);
+			$this->OnItemAdded($strEntity,$strNewItemIndex,$arrayItem);
 			
 			return $this->StateList($strEntity);
 		}

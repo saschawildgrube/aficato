@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContentDevtools
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$this->GetWebsite()->LoadStringResources("devtools");
 			$navigationtree = $this->GetWebsite()->GetNavigationTree("");

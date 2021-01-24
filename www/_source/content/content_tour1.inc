@@ -1,12 +1,9 @@
 <?php
 
-
-
-
 	class CMyContent extends CContent
 	{
 		
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$this->GetWebsite()->SetFramework("fullwidth");
  		

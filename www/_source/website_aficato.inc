@@ -228,31 +228,39 @@
 					
 		}
 		
-		function CallbackInitAssemblyLine(&$assemblyLine)
+		function OnInitAssemblyLine(&$assemblyLine)
 		{
-			$this->IncludeAssembly('aml');
-			$assembly = new CAMLAssembly($this);
-			$assemblyLine->AddAssembly($assembly);
-			$this->RegisterAssembly($assembly);		
-
+			$assembly = new CAssembly($this,'aml');
+			$assemblyLine->AddAssembly($assembly);	
+			
 			$assembly = new CAssembly($this,'d3');
 			$assemblyLine->AddAssembly($assembly);	
 
 
-			parent::CallbackInitAssemblyLine($assemblyLine);
+			parent::OnInitAssemblyLine($assemblyLine);
 		}
 		
-		function CallbackInitRoutingMap()
+		function OnInitPlugins()
 		{
-			parent::CallbackInitRoutingMap();
+			$arrayPlugins = array();
+			
+			$this->IncludePlugin('aml');
+			$arrayPlugins[] = new CAMLPlugin($this);
+			
+			return $arrayPlugins;
+		}
+		
+		function OnInitRoutingMap()
+		{
+			parent::OnInitRoutingMap();
 			$this->LoadRoutingMap('default');
 		}
 
 		
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			
 			$this->AddHeader('<!--AVAILABILITY-CHECK-->');
 
@@ -311,20 +319,12 @@
 		}
 	
 	
-		function CallbackUserCheckName($strUsername)
+		function OnUserCheckName($strUsername)
 		{
-			if (parent::CallbackUserCheckName($strUsername) == false)
+			if (parent::OnUserCheckName($strUsername) == false)
 			{
 				return false;	
 			}
-			/*
-				This makes sure all new user names consist of lower
-				case characters or numbers.
-				Remove this if you want to allow more options!
-				If for example the website should only accept valid
-				email addresses as usernames, this would be the place
-				to enforce this.
-			*/
 			if (StringCheckCharSet($strUsername,CHARSET_ALPHANUMERIC_LOWERCASE) == false)
 			{
 				return false;	
@@ -332,9 +332,9 @@
 			return true;
 		}
 		
-		function CallbackUserChangePassword($strOldPassword,$strNewPassword)
+		function OnUserChangePassword($strOldPassword,$strNewPassword)
 		{
-			$bResult = parent::CallbackUserChangePassword($strOldPassword,$strNewPassword);
+			$bResult = parent::OnUserChangePassword($strOldPassword,$strNewPassword);
 			if (!$bResult)
 			{
 				return false;
@@ -349,16 +349,9 @@
 			return true;
 		}
 
-	
-	
-		function CallbackPreContent()
-		{
-			/*
-				Called before the actual content rendering takes place.
-			*/
-		}
 
-		function CallbackPostContent()
+
+		function OnPostContent()
 		{
 		
 			// DATETIME
@@ -396,7 +389,7 @@
 
 		}
 		
-		function CallbackRenderSpecialContent($strContentID)
+		function OnRenderSpecialContent($strContentID)
 		{
 
 			
@@ -430,38 +423,12 @@
 				$strOutput = $this->m_moduleUserEmail->RenderModule();
 				return $strOutput;
 			}			
-			
-
-			
-			
-			return parent::CallbackRenderSpecialContent($strContentID); 
-		}
-
-		function CallbackRenderContentException()
-		{
-			/*
-				This function is called if a requested content is not found.
-				If you were implementing a wiki, this would be the place to create a
-				new page.
-			*/
-			return parent::CallbackRenderContentException();
-		}
-
-
-		function CallbackRenderGenericOutputItem($strItem, $arrayAttributes)
-		{
-			switch ($strItem)
-			{
-			case 'GOOGLEURL':
-				return 'http://www.google.de/search?q='.ArrayGetValue($arrayAttributes,'search');
-
-			default:
-				return parent::CallbackRenderGenericOutputItem($strItem, $arrayAttributes);
-			}
-		}
 		
+			
+			return parent::OnRenderSpecialContent($strContentID); 
+		}
 
-		function CallbackRenderNavigation($strOutput)
+		function OnRenderNavigation($strOutput)
 		{
 			/*
 				This function is called after content rendering is complete.
@@ -520,7 +487,7 @@
 
 
 
-		function CallbackCheckCondition($strCondition)
+		function OnCheckCondition($strCondition)
 		{
 			
 
@@ -577,7 +544,7 @@
 			
 			if ($strCondition == 'aml-doc')
 			{
-				return parent::CallbackCheckCondition('login');
+				return parent::OnCheckCondition('login');
 			}			
 			
 			if ($strCondition == GetEnvID())
@@ -585,13 +552,13 @@
 				return true;	
 			}
 		
-			return parent::CallbackCheckCondition($strCondition);	
+			return parent::OnCheckCondition($strCondition);	
 		}
 		
 		
 		
 		
-		function CallbackGetDateLocalFormat($strCountryID)
+		function OnGetDateLocalFormat($strCountryID)
 		{
 			/*
 				Use this function to override defaults defined in GetDateLocalFormat().
@@ -608,7 +575,7 @@
 			}
 		}
 
-		function CallbackGetTimeLocalFormat($strCountryID)
+		function OnGetTimeLocalFormat($strCountryID)
 		{
 			/*
 				Use this function to override defaults defined in GetTimeLocalFormat().
@@ -624,39 +591,6 @@
 				default:
 					return '%I:%M:%S%P';
 			}
-		}
-		
-		
-		function CallbackCreateImage(&$image,$strImageID)
-		{
-			/*
-				This function is the actual command handler for the 'image' command.
-				Whenever an image is requested, the callback function is invoked.
-				If the parent implementation is called, the website will try to load an image file
-				from the file system, and if it can't be found it will render an error image.
-				
-				The source code below demonstrates how to implement the function. It does the
-				same as CWebsite::RenderErrorImage() so this is just for demonstration purposes.
-			*/
-			if ($strImageID == 'test')
-			{			
-				if ($image != null)
-				{
-					imagedestroy($image);	
-				}
-				$nWidth = 20;
-				$nHeight = 20;
-				
-				$image = imagecreate($nWidth,$nHeight);
-				$colorBackground =  imagecolorallocate ( $image, 255, 255, 255);
-				$colorForeground =  imagecolorallocate ( $image, 255, 0, 0);
-				imagefilledrectangle($image, 0, 0, $nWidth, $nHeight, $colorBackground);
-				imageline ($image , 3, 3 , $nWidth-3, $nHeight-3, $colorForeground );
-				imageline ($image , $nWidth-3, 3 , 3, $nHeight-3, $colorForeground );
-				return true;
-			}
-			
-			return parent::CallbackCreateImage($image,$strImageID);
 		}
 
 	}

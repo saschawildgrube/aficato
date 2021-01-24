@@ -1,6 +1,6 @@
 <?php
 
-	require_once(GetWDKDir()."wdk_website.inc");
+	require_once(GetWDKDir().'wdk_website.inc');
 	
 	class CTestWebSite extends CWebSite
 	{
@@ -10,20 +10,20 @@
 			)
 		{
 			$arrayMeta = array();
-			$arrayMeta["version"] = "1.0";
-			$arrayMeta["author"] = "Sascha Wildgrube";
-			$arrayMeta["copyright"] = "Refer to WDK Documentation for copyright information.";
+			$arrayMeta['version'] = '1.0';
+			$arrayMeta['author'] = 'Sascha Wildgrube';
+			$arrayMeta['copyright'] = 'Refer to WDK Documentation for copyright information.';
 			
 		
 			$arrayConfig = array();
-			$arrayConfig["languages"][] = "EN";
-			$arrayConfig["languages"][] = "DE";
-			$arrayConfig["fallbacklanguage"] = StringUpperCase(ArrayGetValue($_GET,"fallbacklanguage"));
-			$arrayConfig["protocols"] = array("http","https");
-			$arrayConfig["underconstruction"] = "1";
-			$arrayConfig["admin_email"] = GetAdminEmail();
+			$arrayConfig['languages'][] = 'EN';
+			$arrayConfig['languages'][] = 'DE';
+			$arrayConfig['fallbacklanguage'] = StringUpperCase(ArrayGetValue($_GET,'fallbacklanguage'));
+			$arrayConfig['protocols'] = array('http','https');
+			$arrayConfig['underconstruction'] = '1';
+			$arrayConfig['admin_email'] = GetAdminEmail();
 			
-			$arrayConfig["seourl"] = "seourl";
+			$arrayConfig['seourl'] = 'seourl';
 			
 			parent::__construct(
 				GetRootURL(),
@@ -32,59 +32,59 @@
 				$arrayMeta,
 				$arrayConfig,
 				$arrayParams,
-				"website_test");
+				'website_test');
 					
 		}
 		
-		function CallbackInitRoutingMap()
+		function OnInitRoutingMap()
 		{
-			parent::CallbackInitRoutingMap();
-			$this->LoadRoutingMap("default");
+			parent::OnInitRoutingMap();
+			$this->LoadRoutingMap('default');
 		}
 		
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 		
-		function CallbackRenderSpecialContent($strContentID)
+		function OnRenderSpecialContent($strContentID)
 		{
-			return "";
+			return '';
 		}
 
-		function CallbackRenderNavigation($strOutput)
+		function OnRenderNavigation($strOutput)
 		{
 		}
 		
 
-		function CallbackCheckCondition($strCondition)
+		function OnCheckCondition($strCondition)
 		{
 			return true;	
 		}
 		
-		function CallbackPreContent()
+		function OnPreContent()
 		{
 		}
 		
-		function CallbackPostContent()
+		function OnPostContent()
 		{
 		}	
 		
 		
-		function CallbackInitAssemblyLine(&$assemblyLine)
+		function OnInitAssemblyLine(&$assemblyLine)
 		{
-			$assembly = new CAssembly($this,"testimages");
+			$assembly = new CAssembly($this,'testimages');
 			$assemblyLine->AddAssembly($assembly);
 
-			$assembly = new CAssembly($this,"testdownload");
+			$assembly = new CAssembly($this,'testdownload');
 			$assemblyLine->AddAssembly($assembly);
 
-			$assembly = new CAssembly($this,"testjavascript");
+			$assembly = new CAssembly($this,'testjavascript');
 			$assemblyLine->AddAssembly($assembly);
 
 
-			parent::CallbackInitAssemblyLine($assemblyLine);
+			parent::OnInitAssemblyLine($assemblyLine);
 		}		
 		
 

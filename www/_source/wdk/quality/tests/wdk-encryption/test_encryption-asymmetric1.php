@@ -9,17 +9,17 @@
 			parent::__construct();
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->SetActive(false); // key generation on headless systems takes too long on some systems.
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 
 
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->SetResult(true);
 			

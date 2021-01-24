@@ -15,13 +15,8 @@
 			parent::__construct($website,"user/layoutselection");
 		}
 		
-		function CallbackInit()
-		{
-			//$this->GetWebsite()->LoadStringResources("local");
-			return true;
-		}
-		
-		function CallbackRenderModule($strState)
+	
+		function OnRenderModule($strState)
 		{
 			return $this->StateDefault();
 		}

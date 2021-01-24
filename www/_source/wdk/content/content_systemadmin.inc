@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContentSystemAdmin
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$navigationtree = $this->GetWebsite()->GetNavigationTree("");
 			$navigation = new CNavigationElement($this->GetWebsite(),"portfolio");

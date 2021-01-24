@@ -10,7 +10,7 @@
 		}
 		
 
-		function CallbackInit()
+		function OnInit()
 		{
 			$this->SetResult(true);
 			if (!IsMcryptSupported())
@@ -21,7 +21,7 @@
 				$this->Trace("");
 				$this->SetActive(false);
 			}
-			return parent::CallbackInit();	
+			return parent::OnInit();	
 		}
 		
 		
@@ -35,9 +35,9 @@
 				
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$stopwatch = new CStopWatch();
 			

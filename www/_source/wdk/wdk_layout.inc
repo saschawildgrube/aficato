@@ -21,19 +21,25 @@
 			CWebSite $website,
 			$strLayoutID)
 		{
-			parent::__construct($website, 'Layout '.$strLayoutID);
+			parent::__construct($website, $strLayoutID);
 						
 			// Init values
 			$this->m_strLayoutID = $strLayoutID;
 		}
 		
+		function GetSatelliteType()
+		{
+			return 'Layout';	
+		}
+		
+		
 		final
 		function Init()
 		{
-			return $this->CallbackInit();
+			return $this->OnInit();
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			return true;
 		}

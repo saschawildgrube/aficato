@@ -9,7 +9,7 @@
 			parent::__construct("Check for unintended folders");
 		}
 		
-		function Callback_TestCase_CheckFolder($strFolderPath)
+		function OnTestCaseCheckFolder($strFolderPath)
 		{
 			$bUnintendedFolder = false;
 			$strFolderName = GetFolderNameFromPath($strFolderPath);
@@ -35,9 +35,9 @@
 			}
 		}
 
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			$this->CheckDocumentRootDirectory();  
 		}

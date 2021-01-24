@@ -40,13 +40,13 @@
 				$arrayEntityDefinition);
 		}
 		
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
 			$paramDef->AddParameterDefinitionBoolean("forceexecute");
-			parent::CallbackInitParameterDefinition($paramDef);
+			parent::OnInitParameterDefinition($paramDef);
 		}
 		
-		function CallbackCheckParameter($strCommand,$strParamName,$strParamValue)
+		function OnCheckParameter($strCommand,$strParamName,$strParamValue)
 		{
 			if ($strParamName == "timeout_seconds")
 			{
@@ -56,27 +56,27 @@
 					return false;
 				}
 			}	
-			return parent::CallbackCheckParameter($strCommand,$strParamName,$strParamValue);
+			return parent::OnCheckParameter($strCommand,$strParamName,$strParamValue);
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
 			$commandDef->AddCommandDefinition("execute",array("job_id","forceexecute"));
 			$commandDef->AddCommandDefinition("crontab",array());
 			$commandDef->AddCommandDefinition("status",array());
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 		}		
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->DatabaseConnect() != true)
 			{
 				return false;
 			}			
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}		
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			switch ($strCommand)
 			{
@@ -97,7 +97,7 @@
 				return;
 
 			default:
-				parent::CallbackCommand($strCommand);
+				parent::OnCommand($strCommand);
 				return;
 			}
 		}
@@ -162,7 +162,7 @@
 			}
 		}
 
-		function CallbackCommandAddPrepare($strEntity,&$arrayFields)
+		function OnCommandAddPrepare($strEntity,&$arrayFields)
 		{
 			if ($strEntity == "job")
 			{
@@ -177,9 +177,9 @@
 					$arrayFields["SCHEDULE_MONTH"],
 					$arrayFields["SCHEDULE_DAYOFWEEK"]);
 			}
-			return parent::CallbackCommandAddPrepare($strEntity,$arrayFields);				
+			return parent::OnCommandAddPrepare($strEntity,$arrayFields);				
 		}
-		function CallbackCommandAddComplete($strEntity,$arrayItem,$strNewItemID)
+		function OnCommandAddComplete($strEntity,$arrayItem,$strNewItemID)
 		{
 			if ($strEntity == "job")
 			{
@@ -189,7 +189,7 @@
 					"A new job has been added: ".$arrayItem["JOB_NAME"],
 					array("jobid"=>$strNewItemID,"jobname"=>$arrayItem["JOB_NAME"]));
 			}
-			return parent::CallbackCommandAddComplete($strEntity,$arrayItem,$strNewItemID);
+			return parent::OnCommandAddComplete($strEntity,$arrayItem,$strNewItemID);
 		}		
 		
 		function CommandSet($strEntity)
@@ -204,7 +204,7 @@
 			}
 		}		
 
-		function CallbackCommandSetPrepare($strEntity,&$arrayFields)
+		function OnCommandSetPrepare($strEntity,&$arrayFields)
 		{
 			if ($strEntity == "job")
 			{
@@ -218,7 +218,7 @@
 					$arrayFields["SCHEDULE_MONTH"],
 					$arrayFields["SCHEDULE_DAYOFWEEK"]);			
 			}
-			return parent::CallbackCommandSetPrepare($strEntity,$arrayFields);
+			return parent::OnCommandSetPrepare($strEntity,$arrayFields);
 		}
 		
 		/*

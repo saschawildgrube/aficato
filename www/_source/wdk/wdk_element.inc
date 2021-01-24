@@ -19,7 +19,7 @@
 			$bLayoutCFG,
 			$bLayoutHTML)
 		{
-			parent::__construct($website,"Element ".$strElementID);
+			parent::__construct($website,$strElementID);
 			
 			// Init values
 			$this->m_bLayoutCFG = $bLayoutCFG;
@@ -27,6 +27,11 @@
 			$this->m_arrayLayoutDef = array();
 			$this->m_strElementID = $strElementID;
 			$this->SetStyle($strStyleID);
+		}
+		
+		function GetSatelliteType()
+		{
+			return 'Element';	
 		}
 
 		function SetStyle($strNewStyleID)

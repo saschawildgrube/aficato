@@ -38,9 +38,9 @@
 		private $m_paramDef;
 		private $m_commandDef;
 		
-		private $m_bCallbackInitParameterDefinition;
-		private $m_bCallbackInitCommandDefinition;
-		private $m_bCallbackInit;
+		private $m_bOnInitParameterDefinition;
+		private $m_bOnInitCommandDefinition;
+		private $m_bOnInit;
 		
 	
 		function __construct(
@@ -89,7 +89,7 @@
 	
 			// Init output format
 			$this->m_arraySupportedFormatsDefault = array("json","xml","csv","csvpath","printr","html");
-			$arraySupportedFormats = $this->CallbackGetSupportedFormats();
+			$arraySupportedFormats = $this->OnGetSupportedFormats();
 			if (!is_array($arraySupportedFormats))
 			{
 				$arraySupportedFormats = $this->m_arraySupportedFormatsDefault;
@@ -163,11 +163,11 @@
 			$this->m_commandDef = new CCommandDefinition();
 			if ($this->GetError() == "")
 			{
-				$this->m_bCallbackInitCommandDefinition = false;
-				$this->CallbackInitCommandDefinition($this->m_commandDef);
-				if ($this->m_bCallbackInitCommandDefinition == false)
+				$this->m_bOnInitCommandDefinition = false;
+				$this->OnInitCommandDefinition($this->m_commandDef);
+				if ($this->m_bOnInitCommandDefinition == false)
 				{
-					$this->Trace("CallbackInitCommandDefinition() must call its parent function!");
+					$this->Trace("OnInitCommandDefinition() must call its parent function!");
 					$this->SetError("IMPLEMENTATION");
 				}
 				else
@@ -198,11 +198,11 @@
 			$this->m_paramDef->AddParameterDefinitionBoolean("nocache");
 			$this->m_paramDef->AddParameterDefinitionString("csvpath",0,100,CHARSET_XMLTAG."/");
 
-			$this->m_bCallbackInitParameterDefinition = false;
-			$this->CallbackInitParameterDefinition($this->m_paramDef);
-			if ($this->m_bCallbackInitParameterDefinition == false)
+			$this->m_bOnInitParameterDefinition = false;
+			$this->OnInitParameterDefinition($this->m_paramDef);
+			if ($this->m_bOnInitParameterDefinition == false)
 			{
-				$this->Trace("CallbackInitParameterDefinition() must call its parent function!");
+				$this->Trace("OnInitParameterDefinition() must call its parent function!");
 				$this->SetError("IMPLEMENTATION");
 			}
 
@@ -232,10 +232,10 @@
 			{
 				if ($this->GetError() == "")
 				{
-					$bResult = $this->CallbackCheckParameter($this->GetCommand(),$strParamName,$strParamValue);
+					$bResult = $this->OnCheckParameter($this->GetCommand(),$strParamName,$strParamValue);
 					if (($this->GetError() == "") && ($bResult == false))
 					{
-						$this->Trace("CallbackCheckParameter(\"".$this->GetCommand()."\",\"$strParamName\",\"$strParamValue\") returned false, but an error has not been set.");
+						$this->Trace("OnCheckParameter(\"".$this->GetCommand()."\",\"$strParamName\",\"$strParamValue\") returned false, but an error has not been set.");
 						$this->SetError("PARAMETER_CHECK_FAILED");
 					}
 				}
@@ -455,11 +455,11 @@
 			// RESULT
 			if ($this->GetError() == "")
 			{
-				$this->m_bCallbackInit = false;
-				$bInit = $this->CallbackInit();
-				if ($this->m_bCallbackInit == false)
+				$this->m_bOnInit = false;
+				$bInit = $this->OnInit();
+				if ($this->m_bOnInit == false)
 				{
-					$this->Trace("CallbackInit() must call its parent function!");
+					$this->Trace("OnInit() must call its parent function!");
 					$this->SetError("IMPLEMENTATION");
 				}
 				else
@@ -543,28 +543,28 @@
 				return;
 				
 			default:
-				$this->CallbackCommand($strCommand);
+				$this->OnCommand($strCommand);
 				return;
 			}
 		}
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			$this->SetError("COMMAND_NOT_IMPLEMENTED");
 			return;
 		}
 		
-		function CallbackError($strError)
+		function OnError($strError)
 		{
 			return;	
 		}
 		
-		function CallbackCheckParameter($strCommand,$strParamName,$strParamValue)
+		function OnCheckParameter($strCommand,$strParamName,$strParamValue)
 		{
 			return true;	
 		}
 		
-		function CallbackGetSupportedFormats()
+		function OnGetSupportedFormats()
 		{
 			return $this->m_arraySupportedFormatsDefault;
 		}
@@ -583,18 +583,18 @@
 			{
 				$this->m_strErrorID = $strErrorID;
 				$this->Trace("Error: $strErrorID");
-				$this->CallbackError($strErrorID);
+				$this->OnError($strErrorID);
 			}
 			else if ($bOverride == true)
 			{
 				$this->m_strErrorID = $strErrorID;
 				$this->Trace("Error: $strErrorID (override)");
-				$this->CallbackError($strErrorID);
+				$this->OnError($strErrorID);
 			}
 			else
 			{
 				$this->Trace("Additional Error: $strErrorID");
-				$this->CallbackError($strErrorID);
+				$this->OnError($strErrorID);
 			}
 		}
 		
@@ -780,22 +780,22 @@
 
 
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			$this->m_bCallbackInit = true;
+			$this->m_bOnInit = true;
 			return true;			
 		}
 		
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
-			$this->m_bCallbackInitParameterDefinition = true;
+			$this->m_bOnInitParameterDefinition = true;
 		}
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
-			$this->m_bCallbackInitCommandDefinition = true;
+			$this->m_bOnInitCommandDefinition = true;
 		}
 
-		function CallbackSystemLog($strEventSeverity, $strEventID, $strEventMessage,$arrayDetails)
+		function OnSystemLog($strEventSeverity, $strEventID, $strEventMessage,$arrayDetails)
 		{
 			$this->Trace("SYSTEM LOG: ".RenderValue($strEventSeverity).": ".RenderValue($strEventID).": ".RenderValue($strEventMessage));
 			if (ArrayCount($arrayDetails) > 0)
@@ -974,7 +974,7 @@
 				$strPath = $this->GetParam("csvpath");
 				if ($strPath == "")
 				{
-					$strPath = $this->CallbackGetDefaultCsvPath();
+					$strPath = $this->OnGetDefaultCsvPath();
 				}
 				if ($strPath == "")
 				{
@@ -1020,7 +1020,7 @@
 			return MakeCSV_RFC4180($value);   
 		}
 		
-		function CallbackGetDefaultCsvPath()
+		function OnGetDefaultCsvPath()
 		{
 			return "";	
 		}

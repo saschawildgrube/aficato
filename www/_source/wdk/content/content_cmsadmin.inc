@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContentCMSAdmin
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$this->GetWebsite()->LoadStringResources("cmsadmin");
 			$navigationtree = $this->GetWebsite()->GetNavigationTree("");
@@ -10,7 +10,7 @@
 			$arrayItems["PORTFOLIO"]  = $navigation->RenderNavigationCurrentPathPortfolio($navigationtree);
 		}
 
-		function CallbackGetRequiredConditions()
+		function OnGetRequiredConditions()
 		{
 			return array("cmsadmin" => "INSUFFICIENT_PRIVILEGES");
 		}				

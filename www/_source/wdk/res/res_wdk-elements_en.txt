@@ -12,18 +12,12 @@ TID_TITLE_ELEMENT_EXAMPLE
 Example
 TID_TEXT_ELEMENT_EXAMPLE
 This element is used to mark examples.
-TID_TITLE_ELEMENT_FACEBOOKSHARE
-Facebook Share Button
-TID_TEXT_ELEMENT_FACEBOOKSHARE
-The Facebook Share Button allows a user to share the currently viewed page via Facebook.
 TID_TITLE_ELEMENT_FORKMEONGITHUB
 Fork Me On GitHub
 TID_TEXT_ELEMENT_FORKMEONGITHUB
 This element displays a ribbon on the page with a link to a public GitHub repository. On mobile devices it will just display a banner-like link where the element is placed on the page.
 TID_TITLE_ELEMENT_FORMAT
 Format
-TID_TITLE_ELEMENT_GOOGLEMAPS
-Google Maps
 TID_TITLE_ELEMENT_HEADER
 Header
 TID_TITLE_ELEMENT_NEWSARTICLE
@@ -34,10 +28,6 @@ TID_TITLE_ELEMENT_LEGEND
 Legend
 TID_TITLE_ELEMENT_LINK
 Link
-TID_TITLE_ELEMENT_LINKEDINSHARE
-LinkedIn Share Button
-TID_TEXT_ELEMENT_LINKEDINSHARE
-The LinkedIn Share Button allows a user to share the currently viewed page via LinkedIn.
 TID_TITLE_ELEMENT_LOADING
 Loading
 TID_TITLE_ELEMENT_RESPONSIVE
@@ -118,7 +108,3 @@ TID_TITLE_ELEMENT_TEL
 Tel
 TID_TITLE_ELEMENT_YOUTUBE
 YouTube
-TID_TITLE_ELEMENT_XINGSHARE
-Xing Share Button
-TID_TEXT_ELEMENT_XINGSHARE
-The Xing Share Button allows a user to share the currently viewed page via Xing.

@@ -34,7 +34,7 @@
 				return;
 			}
 					
-			$bResult = $this->CallbackInstall();
+			$bResult = $this->OnInstall();
 			if ($bResult == false)
 			{
 				$this->Trace("INSTALLATION FAILED");
@@ -48,7 +48,7 @@
 		function Rollback()
 		{
 			$this->Trace("ROLLBACK BEGIN");
-			$bResult = $this->CallbackRollback();
+			$bResult = $this->OnRollback();
 			if ($bResult == false)
 			{
 				$this->Trace("ERROR: Rollback failed!");
@@ -62,14 +62,14 @@
 		}
 
 		
-		function CallbackInstall()
+		function OnInstall()
 		{
-			$this->Trace("CallbackInstall is not implemented!");
+			$this->Trace("OnInstall is not implemented!");
 			return true;
 		}
-		function CallbackRollback()
+		function OnRollback()
 		{
-			$this->Trace("CallbackRollback is not implemented!");
+			$this->Trace("OnRollback is not implemented!");
 			return true;
 		}
 		

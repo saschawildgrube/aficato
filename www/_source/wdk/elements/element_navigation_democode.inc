@@ -24,7 +24,7 @@ $navtree->SetContextParameterName($this->GetModuleVarName("currentcontextid"));
 /*
 	Please note: A website's main navigation structure is typically used to
 	navigate content pages.
-	Within the CWebsite::CallbackRenderNavigation function it looks like this:
+	Within the CWebsite::OnRenderNavigation function it looks like this:
 	
 	$navtree->SetCurrentContext($this->GetContent());
 	$navtree->SetContextParameter("content");

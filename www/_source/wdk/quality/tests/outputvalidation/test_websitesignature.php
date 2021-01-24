@@ -9,18 +9,18 @@
 			parent::__construct("Check UTF-8 Signature");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			$this->SetResult(true);
 			return true;
 		}
 		
 			
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->TestCase_CheckURL(
 				"http://".GetRootURL(),
@@ -41,9 +41,9 @@
 		 
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		

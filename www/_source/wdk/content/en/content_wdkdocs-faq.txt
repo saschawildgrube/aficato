@@ -26,5 +26,5 @@ Please refer to [[wdkdocs-architecture-assemblies|assemblies]] on how files and 
 ==Can I use the email as a username? What do I have to consider?==
 In {WDK} users are identified by a numberic ID and a user name string. The email address is a non-unique attribute of a user.
 In order to use a user's email address as a user name you have to go through the following steps:
-# Limit the allowed user names to strings that match an email address. Refer to CWebsite::CallbackUserCheckName() and IsValidEmail().
+# Limit the allowed user names to strings that match an email address. Refer to CWebsite::OnUserCheckName() and IsValidEmail().
 # Implement a process that allows a user to change its user name and email address in one go. Check out CUserSettingsModule and CUserEmailModule.

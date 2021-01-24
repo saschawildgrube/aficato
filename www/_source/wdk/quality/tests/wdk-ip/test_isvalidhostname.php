@@ -9,9 +9,9 @@
 			parent::__construct("Test IsValidHostName");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -40,9 +40,9 @@
 		}
 
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->TestCase_IsValidHostName("host123.tld",true);
 			$this->TestCase_IsValidHostName("localhost",true);

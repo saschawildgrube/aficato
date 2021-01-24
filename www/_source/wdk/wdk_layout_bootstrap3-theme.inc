@@ -11,9 +11,9 @@
 			parent::__construct($website, $strLayoutID);
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			
 			$this->GetWebsite()->AddHeader('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
 			$this->GetWebsite()->AddHeader('<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->');

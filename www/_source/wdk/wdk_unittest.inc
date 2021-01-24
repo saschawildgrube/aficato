@@ -11,9 +11,9 @@
 		private $m_bResult;
 		private $m_bVerbose;
 		
-		private $m_bCallbackInit;
-		private $m_bCallbackTest;
-		private $m_bCallbackCleanup;
+		private $m_bOnInit;
+		private $m_bOnTest;
+		private $m_bOnCleanup;
 		
 		
 		function __construct($strName,$arrayConfig = array())
@@ -30,9 +30,9 @@
 			$this->m_bRequestError = false;
 			$this->m_bVerbose = false;
 			
-			$this->m_bCallbackInit = false;
-			$this->m_bCallbackTest = false;
-			$this->m_bCallbackCleanup = false;
+			$this->m_bOnInit = false;
+			$this->m_bOnTest = false;
+			$this->m_bOnCleanup = false;
 			
 			if ($this->m_strName == "")
 			{
@@ -41,25 +41,16 @@
 				return;
 			}
 									
-			$this->Trace("UNIT TEST \"$strName\"");
+			$this->Trace('UNIT TEST '.$strName);
 			$this->Trace('URL '.$this->GetSelfURL());
 			$this->Trace('');
 			
-			/*
-			$arrayParams = PrepareParameterArray();
-			if (ArrayCount($arrayParams) > 0)
+		
+			$this->Trace('INIT BEGIN');
+			$bResultInit = $this->OnInit();
+			if ($this->m_bOnInit == false)
 			{
-				$this->Trace("ERROR: No parameters allowed!");
-				$this->SetResult(false);
-				return;
-			}
-			*/
-			
-			$this->Trace("INIT BEGIN");
-			$bResultInit = $this->CallbackInit();
-			if ($this->m_bCallbackInit == false)
-			{
-				$this->Trace("ERROR: CallbackInit must invoke parent implementation!");
+				$this->Trace("ERROR: OnInit must invoke parent implementation!");
 				$this->SetResult(false);
 				return;
 			}
@@ -79,10 +70,10 @@
 			}
 			
 			$this->Trace("TEST BEGIN");
-			$this->CallbackTest();
-			if ($this->m_bCallbackTest == false)
+			$this->OnTest();
+			if ($this->m_bOnTest == false)
 			{
-				$this->Trace("ERROR: CallbackTest must invoke parent implementation! Test will fail.");
+				$this->Trace("ERROR: OnTest must invoke parent implementation! Test will fail.");
 				$this->SetResult(false);
 			}
 			$this->Trace("TEST END");
@@ -92,10 +83,10 @@
 		function Cleanup()
 		{
 			$this->Trace("CLEANUP BEGIN");
-			$bResultCleanup = $this->CallbackCleanup();
-			if ($this->m_bCallbackCleanup == false)
+			$bResultCleanup = $this->OnCleanup();
+			if ($this->m_bOnCleanup == false)
 			{
-				$this->Trace("ERROR: CallbackCleanup must invoke parent implementation! Test will fail.");
+				$this->Trace("ERROR: OnCleanup must invoke parent implementation! Test will fail.");
 				$this->SetResult(false);
 			}
 			if ($bResultCleanup == false)
@@ -174,18 +165,18 @@
 		}
 
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			$this->m_bCallbackInit = true;
+			$this->m_bOnInit = true;
 			return true;
 		}
-		function CallbackTest()
+		function OnTest()
 		{
-			$this->m_bCallbackTest = true;	
+			$this->m_bOnTest = true;	
 		}
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			$this->m_bCallbackCleanup = true;
+			$this->m_bOnCleanup = true;
 			return true;
 		}
 

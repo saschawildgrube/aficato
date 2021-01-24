@@ -10,16 +10,16 @@
 			parent::__construct("php vulnerabilities");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 		
 			$this->Trace("This checks against php version which are immune against CVE-2014-3668, CVE-2014-3669 and CVE-2014-3670.");
 			$this->Trace("Refer to http://php.net/archive/2014.php#id2014-10-16-2");

@@ -34,7 +34,7 @@
 				$arrayEntityDefinitions);
 		}
 
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
 			$paramDef->AddParameterDefinitionBoolean("ignoreblacklist");
 			$paramDef->AddParameterDefinitionUsername("new_user_name");
@@ -48,10 +48,10 @@
 			$paramDef->AddParameterDefinitionString("data_name",1,40,CHARSET_NAME);
 			$paramDef->AddParameterDefinitionString("data_content",0,65535,CHARSET_TEXT);
 		
-			parent::CallbackInitParameterDefinition($paramDef);	
+			parent::OnInitParameterDefinition($paramDef);	
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
 			$commandDef->AddCommandDefinition("checkusername",array(
 				"silo_id",
@@ -99,20 +99,20 @@
 				"blocksize",
 				"offset"));
 			$commandDef->AddCommandDefinition("cleanup",array());			
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 		}
 
 		
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->DatabaseConnect() != true)
 			{
 				return false;
 			}			
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
 			switch ($strCommand)
 			{
@@ -169,7 +169,7 @@
 				return;
 							
 			default:
-				parent::CallbackCommand($strCommand);
+				parent::OnCommand($strCommand);
 				return;
 			}
 		}
@@ -329,7 +329,7 @@
 		}
 
 
-		function CallbackCommandListPrepareSQL($strEntity,&$arraySQL)
+		function OnCommandListPrepareSQL($strEntity,&$arraySQL)
 		{
 			if ($strEntity == "user")
 			{
@@ -339,7 +339,7 @@
 					"operator" => "=",
 					"right" => "$nSiloID");
 			}			
-			parent::CallbackCommandListPrepareSQL($strEntity,$arraySQL);
+			parent::OnCommandListPrepareSQL($strEntity,$arraySQL);
 		}
 		
 				
@@ -1055,7 +1055,7 @@
 			$this->Trace("strPasswordHashSeed = $strPasswordHashSeed");
 
 			$arrayItem = ArrayFilterByKeys($arrayItem,$this->GetPublicFieldsGet("user"));
-			$this->CallbackCommandGetComplete("user",$arrayItem,"authenticate");
+			$this->OnCommandGetComplete("user",$arrayItem,"authenticate");
 			$this->SetResultValue($arrayItem,"USER");
 
 

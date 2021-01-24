@@ -1,4 +1,37 @@
-={WDK} Release Notes=
+={WDK} Release Notes= 
+==Version 0.0.0.78== 
+Baselined 2021-01-17
+* '''IMPORTANT'''
+** Renamed all Callback*() functions to On*(). THIS IS A MASSIVE CHANGE!
+** Introduced plugins and removed plugin-like behaviour from assemblies.
+* Security
+** No changes
+* Defects
+** No changes
+* New features
+** Introduced the CWebsitePlugin class.
+** Added function CWebsite::IncludePlugin() to load the plugin source code file from the assembly line.
+** Added function CWebsite::GetPlugin() to access a plugin class based on its ID.
+** Added function CWebsiteSatellite::GetSatelliteType() which must be implemented by all derived classes to prefix all trace messages emitted by the website satellite class.
+* Improvements
+** Changed the breakpoint for the GitHub ribbon to align with the Bootstrap lg breakpoint (at 992 pixels).
+** The dnamic website scaffold's logout content now makes sure the user is really logged out.
+** Both basic and dynamic website scaffolds' layouts can configure background and text color.
+** Added OnInitPlugins() function to the website classes in the scaffolds.
+* Discontinued
+** CAssembly is now declared as final. It is no longer allowed to derive from the CAssembly class. Functionality from derived assembly classes must now be moved into plugins.
+** Removed function CAssembly::EventHandler(). Assemblies are no longer informed about events. CWebsite no longer sends the "website-assembly-init" event.
+** Removed functions CWebsite::IncludeAssembly() and CWebsite::RegisterAssembly().
+** Removed function CAssembly::CallbackRenderGenericOutputItem(). Use plugin classes to embedd generic output items.
+** Removed elements CGoogleMapsElement, CFacebookShareElement, CLinkedInShareElement and CXingShareElement.
+* Quality
+** Added more typos to the sourcefiles/typo test. 
+* Refactoring
+** Renamed all Callback*() functions to On*() except for real callback functions (those which are supposed to be passed as a parameter to another function).
+** Renamed functions CUnitTestRecursiveFileCheck::On_TestCase_Check*() to OnTestCaseCheck*().
+** CModule now verifies that the parent implementation of OnInit() is invoked in derived classes.
+* Documentation
+** No changes
 ==Version 0.0.0.77==
 Baselined 2020-12-27
 * '''IMPORTANT'''
@@ -343,7 +376,7 @@ Baselined 2017-12-28
 Baselined 2017-03-28
 
 
-Starting from this release WDK is licensed under the Apache Licence 2.0
+Starting from this release WDK is licensed under the Apache License 2.0
 * Security
 ** No changes
 * Defects
@@ -1612,7 +1645,7 @@ Baselined 2010-01-24
 
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
-* The "core" assembly is deprecated. All modules, content files, navigation trees, and resources of the core assembly are now part of wdk itself. It might be required to remove the "core" assembly from the assembly line in the CallbackInitAssemblyLine() function of your website class.
+* The "core" assembly is deprecated. All modules, content files, navigation trees, and resources of the core assembly are now part of wdk itself. It might be required to remove the "core" assembly from the assembly line in the OnInitAssemblyLine() function of your website class.
 * Introduced CUnitTestHub which is a derived class of CWebApplication. It serves as a hub to unit test scripts which reside in assemblies now. Please add an index.php in &lt;ROOTURL>/quality/ of your web application system to provide access to test scripts within your assemblies. Refer to /templates/testhub/readme.txt for more details.
 * Webservice system/test has been completely refactored. Test results are now stored in a database. The new command "testrun" will re-execute the oldest tests based on a test run configuration. New scheduler jobs need to be setup, install command must be executied after migration. Please also refer to the webservice's documentation for details.
 * Replaced the function ExplodeCSV: The previous version did not handle quoted values properly.

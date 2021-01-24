@@ -12,15 +12,17 @@
 * Update system requirements (versions) in wdk_website.inc (search for "WDK_SYSTEMREQUIREMENT_")
 * Test the updated version information in lab environment
 * Zip the wdk folder and archive the zip file in the baseline folder 
-* Publish {WDK} to websitedevkit.com and steelphp.com
-* Update github repository
+* Publish {WDK} on websitedevkit.com
+* Publish {WDK} on steelphp.com
+* Update GitHub repository
+* Create version tag in GitHub repository
 * Post on [https://www.xing.com xing.com]
 * Post on [https://www.linkedin.com linkedin.com]
 * Post on [https://www.twitter.com twitter.com]
 * Post on [https://www.facebook.com facebook.com]
 * Update version in wdk.inc 
 * Remove the baseline date in wdk.inc
-* Update version in wdk.txt and add "WORK IN PROGRESS" after he version number
+* Update version in wdk.txt and add "WORK IN PROGRESS" after the version number
 * Add new version chapter in content_wdkdocs-releasenotes.txt:<pre>
 ==Version 0.0.0.x WORK IN PROGRESS==
 NOT YET Baselined

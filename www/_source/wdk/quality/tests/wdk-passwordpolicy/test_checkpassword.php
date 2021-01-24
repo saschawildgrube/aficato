@@ -9,9 +9,9 @@
 			parent::__construct("CPasswordPolicy::CheckPassword");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->SetResult(true);
 			return true;
 		}
@@ -49,9 +49,9 @@
 		}
 		
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$passwordpolicy = new CPasswordPolicy();
 			$this->TestCase_CheckPassword(

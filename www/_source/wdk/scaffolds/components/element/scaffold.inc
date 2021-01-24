@@ -3,7 +3,7 @@
 	class CMyScaffolder extends CScaffolder
 	{
 		
-		function CallbackPrepareForm(CFormDefinition &$formDef)
+		function OnPrepareForm(CFormDefinition &$formDef)
 		{
 
 			$formDef->AddControlText(
@@ -24,7 +24,7 @@
 
 		}
 		
-		function CallbackGetParams(&$arrayParams)
+		function OnGetParams(&$arrayParams)
 		{
 			$arrayParams['a'] = StringLowerCase($this->GetVar('assemblyid'));
 			$arrayParams['ElementId'] = $this->GetVar('elementid');
@@ -33,7 +33,7 @@
 		} 
 		
 		
-		function CallbackCheckParams($arrayParams,&$arrayErrors)
+		function OnCheckParams($arrayParams,&$arrayErrors)
 		{
 			$strElementId = $arrayParams['ElementId'];
 			if (StringCheckCamelCase($strElementId) == false)

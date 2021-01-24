@@ -7,25 +7,25 @@
 			parent::__construct("DEMO 1");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			$this->Trace("Do some init tasks here!");
 			return true;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			
 			$this->Trace("Do the actual testing here!");
 			
 			$this->SetResult(true);
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			$this->Trace("Do some Cleanup here!");
 			return true;
 		}

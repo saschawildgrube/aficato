@@ -9,9 +9,9 @@
 			parent::__construct("CPasswordPolicy::GeneratePassword");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit();
+			parent::OnInit();
 			
 			$this->Trace("CPasswordPolicy::GeneratePassword() is not yet implemented");
 			$this->SetActive(false);			
@@ -45,9 +45,9 @@
 		}
 		
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$passwordpolicy = new CPasswordPolicy();
 			$this->TestCase_GeneratePassword($passwordpolicy);	

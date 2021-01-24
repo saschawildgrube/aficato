@@ -8,9 +8,9 @@
 			parent::__construct("Test Image Inclusion");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			$this->SetResult(true);
 			
 			//$this->SetActive(false);
@@ -33,9 +33,9 @@
 			$this->Trace("");				
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->Trace("");
 			$this->Trace("PART 1: Testing the image URL generator");

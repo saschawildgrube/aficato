@@ -9,9 +9,9 @@
 			parent::__construct("Test generic output items with WIKI content");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			return true;
 		}
 		
@@ -22,9 +22,9 @@
 				$arrayExpectedOutput);
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 			
 			for ($nCount = 1; $nCount <= 15; $nCount++)

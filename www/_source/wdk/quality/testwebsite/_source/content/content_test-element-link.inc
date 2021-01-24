@@ -2,7 +2,7 @@
 
 	class CMyContent extends CContent
 	{
-		function CallbackRenderContent(&$arrayItems)
+		function OnRenderContent(&$arrayItems)
 		{
 			$link = new CLinkElement($this->GetWebsite(), "default");
 			$arrayItems["ELEMENT_LINK_NOTEXT"] = $link->RenderLink("http://www.example.com");

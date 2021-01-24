@@ -31,58 +31,58 @@
 				$arrayEntityDefinition);
 		}
 		
-		function CallbackInitParameterDefinition(&$paramDef)
+		function OnInitParameterDefinition(&$paramDef)
 		{
-			parent::CallbackInitParameterDefinition($paramDef);
+			parent::OnInitParameterDefinition($paramDef);
 		}
 		
-		function CallbackInitCommandDefinition(&$commandDef)
+		function OnInitCommandDefinition(&$commandDef)
 		{
-			parent::CallbackInitCommandDefinition($commandDef);
+			parent::OnInitCommandDefinition($commandDef);
 		}
 
-		function CallbackInit()
+		function OnInit()
 		{
 			if ($this->DatabaseConnect() != true)
 			{
 				return false;
 			}			
-			return parent::CallbackInit();
+			return parent::OnInit();
 		}
 
 		
-		function CallbackCommand($strCommand)
+		function OnCommand($strCommand)
 		{
-			parent::CallbackCommand($strCommand);
+			parent::OnCommand($strCommand);
 		}
 		
-		function CallbackCheckParameter($strCommand,$strParamName,$strParamValue)
+		function OnCheckParameter($strCommand,$strParamName,$strParamValue)
 		{
 			return true;	
 		}
 
-		function CallbackLog($strEventSeverity,$strEventID, $strDetails)
+		function OnLog($strEventSeverity,$strEventID, $strDetails)
 		{
-			$this->CallbackLog_LogWebservice($strEventSeverity,$strEventID, $strDetails);
+			$this->OnLog_LogWebservice($strEventSeverity,$strEventID, $strDetails);
 		}
 		
-		function CallbackCommandAddPrepare($strEntity,&$arrayFields)
+		function OnCommandAddPrepare($strEntity,&$arrayFields)
 		{
 			if ($strEntity == "demoitem")
 			{
 				$arrayFields["CREATION_DATETIME"] = RenderDateTimeNow();
 				$arrayFields["LASTCHANGE_DATETIME"] = $arrayFields["CREATION_DATETIME"];
 			}
-			return parent::CallbackCommandAddPrepare($strEntity,$arrayFields);				
+			return parent::OnCommandAddPrepare($strEntity,$arrayFields);				
 		}
 
-		function CallbackCommandSetPrepare($strEntity,&$arrayFields)
+		function OnCommandSetPrepare($strEntity,&$arrayFields)
 		{
 			if ($strEntity == "demoitem")
 			{
 				$arrayFields["LASTCHANGE_DATETIME"] = RenderDateTimeNow();
 			}
-			return parent::CallbackCommandSetPrepare($strEntity,$arrayFields);
+			return parent::OnCommandSetPrepare($strEntity,$arrayFields);
 		}
 
 

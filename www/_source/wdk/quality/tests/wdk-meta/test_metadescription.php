@@ -9,9 +9,9 @@
 			parent::__construct("Test Meta Description");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			//$this->SetActive(false);
 			return true;
 		}
@@ -25,9 +25,9 @@
 			$this->TestCase_CheckURL($strURL,array("<meta name=\"description\" content=\"$strExpected\"/>"));
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 			$this->SetResult(true);
 
 			$strExpected = "defaultdescription";
@@ -45,9 +45,9 @@
 
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		 

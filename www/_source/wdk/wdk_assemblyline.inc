@@ -13,6 +13,12 @@
 			parent::__construct($website,'assemblyline');
 		}
 		
+		function GetSatelliteType()
+		{
+			return 'AssemblyLine';	
+		}
+
+		
 		final
 		function AddAssembly(CAssembly $assembly)
 		{
@@ -108,13 +114,24 @@
 				);
 		}				
 
+		function GetPluginSourceFilePath(
+			$strPluginID)
+		{
+			return $this->GetAssetFilePath(
+				'plugin',
+				array(
+					'plugin' => $strPluginID)
+				);		
+		}
+
+
 		function GetElementSourceFilePath(
 			$strElementID)
 		{
 			return $this->GetAssetFilePath(
-				"element",
+				'element',
 				array(
-					"element" => $strElementID)
+					'element' => $strElementID)
 				);		
 		}
 		
@@ -419,23 +436,7 @@
 				"layout"
 				);				
 		}		
-		
-		final
-		function CallbackRenderGenericOutputItem($strItem, $arrayAttributes)
-		{
-			foreach ($this->m_arrayAssemblies as $assembly)
-			{
-				$strOutput = $assembly->CallbackRenderGenericOutputItem($strItem, $arrayAttributes);
-				if ($strOutput != "")
-				{
-					return $strOutput;	
-				}
-			}
-			return "";
-		}
-		
-		
-		
+
 		function EnumerateElements()
 		{
 			$arrayElements = array();

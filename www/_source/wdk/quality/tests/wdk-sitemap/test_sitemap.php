@@ -8,16 +8,16 @@
 			parent::__construct("Test Sitemap");
 		}
 		
-		function CallbackInit()
+		function OnInit()
 		{
-			parent::CallbackInit(); 
+			parent::OnInit(); 
 			$this->SetResult(true);			
 			return true;
 		}
 		
-		function CallbackTest()
+		function OnTest()
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$strURL_Root = "http://".GetRootURL()."quality/testwebsite/";
 			
@@ -39,9 +39,9 @@
 				array($strSitemapXML));
 		}
 		
-		function CallbackCleanup()
+		function OnCleanup()
 		{
-			parent::CallbackCleanup();
+			parent::OnCleanup();
 			return true;
 		}
 		

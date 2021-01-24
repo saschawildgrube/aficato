@@ -9,9 +9,9 @@
 			parent::__construct("Check error log");
 		}
 
-		function CallbackTest() 
+		function OnTest() 
 		{
-			parent::CallbackTest();
+			parent::OnTest();
 
 			$this->SetResult(true);
 			

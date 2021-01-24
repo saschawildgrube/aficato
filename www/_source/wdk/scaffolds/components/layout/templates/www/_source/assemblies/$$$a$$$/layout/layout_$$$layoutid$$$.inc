@@ -4,9 +4,9 @@
 
 	class CMyLayout extends CLayoutBootstrap3
 	{
-		function CallbackInit()
+		function OnInit()
 		{
-			$bResult = parent::CallbackInit();
+			$bResult = parent::OnInit();
 			
 			// You can add addional headers
 			$this->GetWebsite()->AddHeader('<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">');
