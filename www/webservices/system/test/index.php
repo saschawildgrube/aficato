@@ -36,14 +36,7 @@
  	// The integrated bootstrap version causes a validation failure - so we must exclude this test for the time being!
  	$arrayConfig["exclude"]["tests"][] = 'w3cvalidate'; 
  	
- 	/*
-	if (GetStage() != 'dev')
-	{
-		$arrayConfig["exclude"]["tests"][] = 'w3cvalidate'; 
-	}
-	*/
- 	
- 	
+
 	$arrayParams = array();
 	//$arrayParams ["trace"] = "1";
 	
