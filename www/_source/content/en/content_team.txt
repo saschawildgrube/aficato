@@ -1,6 +1,6 @@
 =The AFiCATo team=
-<div style="float:left; padding-right: 5px;">
-	{IMAGE id="team_jesus" ext="png"}
+<div style='float:left; padding-right: 5px;'>
+	{IMAGE id='team_jesus' ext='png'}
 </div>
 <br/>
 <br/>
@@ -8,11 +8,11 @@ Jesus Loaiza
 
 [mailto:jesus.loaiza@aficato.com jesus.loaiza@aficato.com]
 
-{PHONE tel="+49-171-2164624"}
-<div style="clear:both;"></div>
+{PHONE tel='+49-171-2164624'}
+<div style='clear:both;'></div>
 <br/>
-<div style="float:left; padding-right: 5px;">
-	{IMAGE id="team_sascha" ext="png"}
+<div style='float:left; padding-right: 5px;'>
+	{IMAGE id='team_sascha' ext='png'}
 </div>
 <br/>
 <br/>
@@ -20,5 +20,5 @@ Sascha Wildgrube
 
 [mailto:sascha.wildgrube@aficato.com sascha.wildgrube@aficato.com]
 
-{PHONE tel="+49-175-5247272"}
-<div style="clear:both;"></div>
+{PHONE tel='+49-175-5247272'}
+<div style='clear:both;'></div>

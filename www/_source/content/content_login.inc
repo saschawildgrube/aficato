@@ -4,14 +4,14 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$arrayItems["MODULE_LOGIN"] = $this->GetWebsite()->m_moduleLogin->RenderModule("form");
-			$strPostLoginOutput = "";
-			if ($this->GetWebsite()->GetAuthUserID() != "")
+			$arrayItems['MODULE_LOGIN'] = $this->GetWebsite()->m_moduleLogin->RenderModule('form');
+			$strPostLoginOutput = '';
+			if ($this->GetWebsite()->GetAuthUserID() != '')
 			{
-				$message = new CMessageElement($this->GetWebsite(),"info");
-				$strPostLoginOutput = $message->RenderMessage("?TID_INFO_POSTLOGIN?");
+				$message = new CMessageElement($this->GetWebsite(),'info');
+				$strPostLoginOutput = $message->RenderMessage('?TID_INFO_POSTLOGIN?');
 			}
-			$arrayItems["POSTLOGIN"] = $strPostLoginOutput;
+			$arrayItems['POSTLOGIN'] = $strPostLoginOutput;
 		}
 	}
 	

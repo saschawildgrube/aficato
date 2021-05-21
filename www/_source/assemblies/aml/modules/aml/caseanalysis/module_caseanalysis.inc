@@ -39,7 +39,7 @@
 	
 		function OnRenderModule($strState)
 		{
-			$this->Trace('OnRenderModule("'.$strState.'")');
+			$this->Trace('OnRenderModule(''.$strState.'')');
 			
 			$strResult = parent::OnRenderModule($strState);
 			if ($strResult != '')
@@ -153,7 +153,7 @@
 					$arrayAccount = AML_ReadFileAccount($strAccountDataDir.$strFile);
 					if ($arrayAccount == false)
 					{
-						$this->Trace("AML_ReadFileAccount($strFile) returned false" );
+						$this->Trace('AML_ReadFileAccount($strFile) returned false' );
 						continue;	
 					}
 					
@@ -184,7 +184,7 @@
 		{
 			$this->RenderTabNavigation();
 			
-			$this->GetWebsite()->SetFramework("fullwidth");
+			$this->GetWebsite()->SetFramework('fullwidth');
 			$this->GetWebsite()->MaintainScrollPosition();	
 
 			$arrayAccounts = $this->GetAccounts();
@@ -205,7 +205,7 @@
 				//$arrayNetworkGraph = AML_TransformAccountsToNetworkGraph($arrayAccounts);
 				
 		
-				//$strHtml .= '<h1>Network Analysis</h1>'."\n";
+				//$strHtml .= '<h1>Network Analysis</h1>'.'\n';
 				//$this->GetWebsite()->IncludeElement('amlnetworkgraph');
 				//$amlnetworkgraph = new CAMLNetworkGraphElement($this->GetWebsite(),'demo');
 				//$strHtml .= $amlnetworkgraph->RenderAMLNetworkGraph($arrayNetworkGraph);

@@ -76,7 +76,7 @@
 							}
 							break;
 						default:
-							FatalError("Unsupported config store type \"$strStoreType\".");
+							FatalError('Unsupported config store type \'$strStoreType\'.');
 							break;	
 					}
 				}

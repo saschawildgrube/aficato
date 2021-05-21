@@ -1,15 +1,15 @@
 ={WDK} release checklist=
-* Search for "TODO" in the source code
+* Search for 'TODO' in the source code
 * Execute all automated tests
 * Test release candidate with selected websites
-* Test website scaffolder: "Basic"
-* Test website scaffolder: "Dynamic"
-* Update version information in wdk.txt (remove "WORK IN PROGRESS")
+* Test website scaffolder: 'Basic'
+* Test website scaffolder: 'Dynamic'
+* Update version information in wdk.txt (remove 'WORK IN PROGRESS')
 * Update copyright year in wdk.txt
-* Update version information in content_wdkdocs-releasenotes.txt (remove "WORK IN PROGRESS")
+* Update version information in content_wdkdocs-releasenotes.txt (remove 'WORK IN PROGRESS')
 * Update the baseline date in content_wdkdocs-releasenotes.txt
 * Update version information in wdk.inc (add the baseline date)
-* Update system requirements (versions) in wdk_website.inc (search for "WDK_SYSTEMREQUIREMENT_")
+* Update system requirements (versions) in wdk_website.inc (search for 'WDK_SYSTEMREQUIREMENT_')
 * Test the updated version information in lab environment
 * Zip the wdk folder and archive the zip file in the baseline folder 
 * Publish {WDK} on websitedevkit.com
@@ -22,7 +22,7 @@
 * Post on [https://www.facebook.com facebook.com]
 * Update version in wdk.inc 
 * Remove the baseline date in wdk.inc
-* Update version in wdk.txt and add "WORK IN PROGRESS" after the version number
+* Update version in wdk.txt and add 'WORK IN PROGRESS' after the version number
 * Add new version chapter in content_wdkdocs-releasenotes.txt:<pre>
 ==Version 0.0.0.x WORK IN PROGRESS==
 NOT YET Baselined

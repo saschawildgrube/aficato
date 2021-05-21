@@ -1,6 +1,6 @@
 <?php
 
-	require_once(GetWDKDir()."wdk_layout_bootstrap3-theme.inc"); 
+	require_once(GetWDKDir().'wdk_layout_bootstrap3-theme.inc'); 
 
 	class CMyLayout extends CLayoutBootstrap3Theme
 	{

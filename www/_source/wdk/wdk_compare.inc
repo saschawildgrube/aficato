@@ -18,8 +18,8 @@
 
 	function CompareString($v1,$v2)
 	{
-		$str1 = "$v1";	
-		$str2 = "$v2";
+		$str1 = '$v1';	
+		$str2 = '$v2';
 		$nCompare = strcasecmp($str1,$str2);
 		if ($nCompare < 0)
 		{

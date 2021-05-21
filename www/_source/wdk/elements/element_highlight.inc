@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				"highlight",
+				'highlight',
 				$strStyleID,
 				true,
 				false);
@@ -19,11 +19,11 @@
 			$strOutput = StringHTMLAddEmbracingTags(
 				$strText,
 				$strToken,
-				$this->GetLayoutDef("LAYOUT_HIGHLIGHT_TAG_START"),
-				$this->GetLayoutDef("LAYOUT_HIGHLIGHT_TAG_END"),
+				$this->GetLayoutDef('LAYOUT_HIGHLIGHT_TAG_START'),
+				$this->GetLayoutDef('LAYOUT_HIGHLIGHT_TAG_END'),
 				true,
 				array(),
-				array("input","textarea","meta")
+				array('input','textarea','meta')
 				);
 				
 				$this->Trace($strOutput);

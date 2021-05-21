@@ -11,6 +11,6 @@
 		
 		function OnGetRequiredConditions()
 		{
-			return array("devtools" => "INSUFFICIENT_PRIVILEGES");
+			return array('devtools' => 'INSUFFICIENT_PRIVILEGES');
 		}
 	}	

@@ -6,7 +6,7 @@
 
 		$ea = new CErrorAmnesty();
 		$ea->Start();
-		$file = fopen($strFile, "r");
+		$file = fopen($strFile, 'r');
 		$ea->End();
 
 		if ($file == 0)
@@ -19,14 +19,14 @@
 			$strToken = fgets($file,1000);
 			$strToken = chop($strToken);
 			$strToken = u($strToken);
-			$strValue = "";
+			$strValue = '';
 			if (!feof($file))
 			{
 				$strValue = fgets($file,1000);
 				$strValue = chop($strValue);
 				$strValue = u($strValue);
 			}
-			if ($strValue != "")
+			if ($strValue != '')
 			{
 				$arrayContents[$strToken] = $strValue;
 			}
@@ -38,7 +38,7 @@
 	
 	function LoadNamedArrayFromTextFileMultiLine($strFile, $strPrefix)
 	{
-		mb_internal_encoding("UTF-8");
+		mb_internal_encoding('UTF-8');
 
 		$arrayContentsRaw = array();
 		$arrayContents = array();
@@ -58,19 +58,19 @@
 		}
 		
 		$nPrefixLength = StringLength($strPrefix);
-		$strNextID = u("");
-		$strNextContents = u("");
+		$strNextID = u('');
+		$strNextContents = u('');
 		for ($nIndex = 0; $nIndex < $nArrayLength; $nIndex++)
 		{
 			$strCurrentLine = StringEncodeUTF8($arrayContentsRaw[$nIndex]);
-			//print($strCurrentLine . "<br>");
+			//print($strCurrentLine . '<br>');
 			if (StringSection($strCurrentLine,0,$nPrefixLength) == $strPrefix)
 			{
-				if (($strNextID != u("")) && ($strNextContents != u("")))
+				if (($strNextID != u('')) && ($strNextContents != u('')))
 				{
 					$arrayContents[chop($strNextID)] = chop($strNextContents);
-					$strNextID = u("");
-					$strNextContents = u("");
+					$strNextID = u('');
+					$strNextContents = u('');
 				}
 				$strNextID = $strCurrentLine;
 			}
@@ -80,7 +80,7 @@
 			}
 		}
 
-		if (($strNextID != u("")) && ($strNextContents != u("")))
+		if (($strNextID != u('')) && ($strNextContents != u('')))
 		{
 			$arrayContents[chop($strNextID)] = chop($strNextContents);
 		}
@@ -93,7 +93,7 @@
 	{
 		$ea = new CErrorAmnesty();
 		$ea->Start();
-		$file = fopen($strFile, "w");
+		$file = fopen($strFile, 'w');
 		$ea->End();
 
 		if ($file == 0)
@@ -101,8 +101,8 @@
 
 		for (reset($arrayContents); $strKey = key($arrayContents); next($arrayContents))
 		{
-			fputs($file,$strKey."\r\n");
-			fputs($file,pos($arrayContents)."\r\n");
+			fputs($file,$strKey.'\r\n');
+			fputs($file,pos($arrayContents).'\r\n');
 		}
 	
 		fclose($file);

@@ -22,6 +22,6 @@ Just add the following line:
 <pre>0;mynewpage;This is my new page;</pre>
 The new content is now available and visible to users.
 ==Using WIKI syntax==
-If you want to use wiki syntax in your content files you can do so. However in that case content files must use the ".txt" extention instead of ".htm".
+If you want to use wiki syntax in your content files you can do so. However in that case content files must use the '.txt' extention instead of '.htm'.
 E.g.:
 <pre>/content/en/content_mynewpage.txt</pre>

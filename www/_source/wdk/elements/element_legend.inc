@@ -26,7 +26,7 @@
 				return '';
 			}
 			
-			$strOutput .= $this->GetLayoutDef('LAYOUT_LEGEND_BEGIN')."\n";
+			$strOutput .= $this->GetLayoutDef('LAYOUT_LEGEND_BEGIN').'\n';
 			foreach ($arrayItems as $arrayItem)
 			{
 				$strOutputItem = $this->GetLayoutDef('LAYOUT_LEGEND_ITEM');
@@ -54,7 +54,7 @@
 				
 				$strOutput .= $strOutputItem;
 			}
-			$strOutput .= $this->GetLayoutDef('LAYOUT_LEGEND_END')."\n";
+			$strOutput .= $this->GetLayoutDef('LAYOUT_LEGEND_END').'\n';
 			return $strOutput;
 		}
 	}

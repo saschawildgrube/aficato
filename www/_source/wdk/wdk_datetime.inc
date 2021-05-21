@@ -83,7 +83,7 @@
 		{
 			return false;	
 		}
-		return strtotime(RenderDateTime($time)." $nSeconds sec");
+		return strtotime(RenderDateTime($time).' $nSeconds sec');
 	}
 
 	function GetTimeAddMinutes($time,$nMinutes)
@@ -92,7 +92,7 @@
 		{
 			return false;	
 		}
-		return strtotime(RenderDateTime($time)." $nMinutes minute");
+		return strtotime(RenderDateTime($time).' $nMinutes minute');
 	}
 
 	function GetTimeAddHours($time,$nHours)
@@ -101,7 +101,7 @@
 		{
 			return false;	
 		}
-		return strtotime(RenderDateTime($time)." $nHours hour");
+		return strtotime(RenderDateTime($time).' $nHours hour');
 	}
 
 	function GetTimeAddDays($time,$nDays)
@@ -110,7 +110,7 @@
 		{
 			return false;	
 		}
-		return strtotime(RenderDateTime($time)." $nDays day");
+		return strtotime(RenderDateTime($time).' $nDays day');
 	}
 	
 	function GetTimeAddMonths($time,$nMonths)
@@ -197,7 +197,7 @@
 			}
 		} 
 		return $time;		
-		//return strtotime(RenderDateTime($time)." $nYears year");
+		//return strtotime(RenderDateTime($time).' $nYears year');
 	}
 
 
@@ -293,7 +293,7 @@
 		{
 			return false;
 		}
-		if (RegExpMatch($strDateTime,"/^([0-9]{4})([-]{1})([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/") == false)
+		if (RegExpMatch($strDateTime,'/^([0-9]{4})([-]{1})([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/') == false)
 		{
 			return false;
 		}
@@ -328,7 +328,7 @@
 		{
 			return false;
 		}
-		if (RegExpMatch($strDate,"/^([0-9]{4})([-]{1})([0-9]{2})-([0-9]{2})$/") == false)
+		if (RegExpMatch($strDate,'/^([0-9]{4})([-]{1})([0-9]{2})-([0-9]{2})$/') == false)
 		{
 			return false;
 		}
@@ -345,7 +345,7 @@
 		// Consider this case: d.mm.yy
 		if (StringLength($strNonISODateTime) == 7)
 		{
-			if (RegExpMatch($strNonISODateTime,"/^[0-9]{1}\.[0-9]{2}\.[0-9]{2}$/") == true)
+			if (RegExpMatch($strNonISODateTime,'/^[0-9]{1}\.[0-9]{2}\.[0-9]{2}$/') == true)
 			{
 				$strYear = StringSection($strNonISODateTime,5,2);
 				$strMonth = StringSection($strNonISODateTime,2,2); 
@@ -365,7 +365,7 @@
 		// Consider this case: dd.mm.yy
 		else if (StringLength($strNonISODateTime) == 8)
 		{
-			if (RegExpMatch($strNonISODateTime,"/^[0-9]{2}\.[0-9]{2}\.[0-9]{2}$/") == true)
+			if (RegExpMatch($strNonISODateTime,'/^[0-9]{2}\.[0-9]{2}\.[0-9]{2}$/') == true)
 			{
 				$strYear = StringSection($strNonISODateTime,6,2);
 				$strMonth = StringSection($strNonISODateTime,3,2); 
@@ -396,7 +396,7 @@
 		// Consider this case: d.mm.yy
 		if (StringLength($strNonISODate) == 7)
 		{
-			if (RegExpMatch($strNonISODate,"/^[0-9]{1}\.[0-9]{2}\.[0-9]{2}$/") == true)
+			if (RegExpMatch($strNonISODate,'/^[0-9]{1}\.[0-9]{2}\.[0-9]{2}$/') == true)
 			{
 				$strYear = StringSection($strNonISODate,5,2);
 				$strMonth = StringSection($strNonISODate,2,2); 
@@ -416,7 +416,7 @@
 		// Consider this case: dd.mm.yy
 		else if (StringLength($strNonISODate) == 8)
 		{
-			if (RegExpMatch($strNonISODate,"/^[0-9]{2}\.[0-9]{2}\.[0-9]{2}$/") == true)
+			if (RegExpMatch($strNonISODate,'/^[0-9]{2}\.[0-9]{2}\.[0-9]{2}$/') == true)
 			{
 				$strYear = StringSection($strNonISODate,6,2);
 				$strMonth = StringSection($strNonISODate,3,2); 

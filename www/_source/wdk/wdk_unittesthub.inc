@@ -46,7 +46,7 @@
 
 			if (!IsFile($strTestFilePath))
 			{
-				$this->ErrorAndExit('Test file does not exist: "'.$strTestFilePath.'"');
+				$this->ErrorAndExit('Test file does not exist: ''.$strTestFilePath.''');
 			}
 			
 			$this->ExecuteTest($strTestFilePath);
@@ -72,15 +72,15 @@
 			require_once($strTestFilePath);
 			if (!class_exists('CTest'))
 			{
-				$this->ErrorAndExit('CTest class has not been defined in: "'.$strTestFilePath.'"');
+				$this->ErrorAndExit('CTest class has not been defined in: ''.$strTestFilePath.''');
 			}
-			print('HASH '.MakeHash(FileRead($strTestFilePath))."\n\n");
+			print('HASH '.MakeHash(FileRead($strTestFilePath)).'\n\n');
 			$test = new CTest();
 		}
 		
 		function ErrorAndExit($strErrorText)
 		{
-			print('ERROR: '.$strErrorText."\n");
+			print('ERROR: '.$strErrorText.'\n');
 			print('FAILED');
 			exit();	
 		}

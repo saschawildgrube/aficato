@@ -12,7 +12,7 @@
 		{
 			if (IsValidPluginID($strPluginID) == false)
 			{
-				FatalError("CPlugin has been initialized with an invalid plugin id.");
+				FatalError('CPlugin has been initialized with an invalid plugin id.');
 			}
 			parent::__construct($website,$strPluginID);
 		}

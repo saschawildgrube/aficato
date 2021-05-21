@@ -8,7 +8,7 @@
 		{ 
 			parent::__construct(
 				$website,
-				"imageteaser",
+				'imageteaser',
 				$strStyleID,
 				true,
 				true);
@@ -24,29 +24,29 @@
 		{
 			$strOutput = $this->GetLayoutHTML(); 
 		
-			$arrayItems["IMAGEURL"] = $strImageURL;
-			$arrayItems["TITLE"] = $strTitle; 
-			$arrayItems["TEXT"] = $strText;
-			$arrayItems["LINKURL"] = $strLinkURL;
-			$arrayItems["LINKTEXT"] = $strLinkText;
+			$arrayItems['IMAGEURL'] = $strImageURL;
+			$arrayItems['TITLE'] = $strTitle; 
+			$arrayItems['TEXT'] = $strText;
+			$arrayItems['LINKURL'] = $strLinkURL;
+			$arrayItems['LINKTEXT'] = $strLinkText;
 			
-			if ($strLinkURL != "")
+			if ($strLinkURL != '')
 			{
-				$strLinkStyle = $this->GetLayoutDef("LAYOUT_LINK_STYLE");
-				if ($strLinkStyle == "")
+				$strLinkStyle = $this->GetLayoutDef('LAYOUT_LINK_STYLE');
+				if ($strLinkStyle == '')
 				{
-					$strLinkStyle = "default";	
+					$strLinkStyle = 'default';	
 				}
 				
 				$link = new CLinkElement($this->GetWebsite(),$strLinkStyle);
-				$arrayItems["LINK"] = $link->RenderLink(
+				$arrayItems['LINK'] = $link->RenderLink(
 					$strLinkURL,
 					$strLinkText,
 					$bExternalLink);
 			}
 			else
 			{
-				$arrayItems["LINK"] = "";
+				$arrayItems['LINK'] = '';
 			}
 		
 			$this->SetOutputItems($arrayItems);

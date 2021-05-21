@@ -1,4 +1,4 @@
-$this->IncludeElement("tel");
+$this->IncludeElement('tel');
 
 
 $strTel = '+49 (175) 524 7272';

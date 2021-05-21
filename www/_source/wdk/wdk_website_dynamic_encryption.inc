@@ -1,7 +1,7 @@
 <?php
 
-	require_once("wdk_website_dynamic.inc");
-	require_once("wdk_securedatacontainer.inc");
+	require_once('wdk_website_dynamic.inc');
+	require_once('wdk_securedatacontainer.inc');
 	
 	
 
@@ -38,7 +38,7 @@
 		{
 			if (IsMcryptSupported() == false)
 			{
-				$this->Error("mcrypt is not supported!");	
+				$this->Error('mcrypt is not supported!');	
 			}
 			$this->LoadSecretPayload();
 			return parent::OnInit();
@@ -49,80 +49,80 @@
 		function LoadSecretPayload()
 		{
 			$arraySlices = array();
-			$arraySlices[0] = $this->GetVar("secretpayload");
-			$arraySlices[1] = $this->GetVar("secretpayload_session");
+			$arraySlices[0] = $this->GetVar('secretpayload');
+			$arraySlices[1] = $this->GetVar('secretpayload_session');
 			
-			if ($arraySlices[0] == "")
+			if ($arraySlices[0] == '')
 			{
-				$this->Trace("LoadSecretPayload: secretpayload is empty");
+				$this->Trace('LoadSecretPayload: secretpayload is empty');
 				return false;	
 			}
-			if ($arraySlices[1] == "")
+			if ($arraySlices[1] == '')
 			{
-				$this->Trace("LoadSecretPayload: secretpayload_session is empty");				
+				$this->Trace('LoadSecretPayload: secretpayload_session is empty');				
 				return false;
 			}
 			
 			$strGlued = StringGlue($arraySlices);
-			if ($strGlued == "")
+			if ($strGlued == '')
 			{
 				return false;	
 			}
 			
-			$bResult = $this->m_sdc->UnserializeDecrypt($strGlued,"1");
+			$bResult = $this->m_sdc->UnserializeDecrypt($strGlued,'1');
 			if (!$bResult)
 			{
-				$this->Trace("LoadSecretPayload: Failed to decrypt payload");
+				$this->Trace('LoadSecretPayload: Failed to decrypt payload');
 				return false;	
 			}
 
-			$strSecretPayload = $this->m_sdc->GetValue("payload");
+			$strSecretPayload = $this->m_sdc->GetValue('payload');
 			return $strSecretPayload;
 		}
 
 
 		function StoreSecretPayload($strSecretPayload)
 		{
-			$this->Trace("StoreSecretPayload");
-			$this->Trace("StoreSecretPayload: \"$strSecretPayload\"");
-			if ($strSecretPayload == "")
+			$this->Trace('StoreSecretPayload');
+			$this->Trace('StoreSecretPayload: \'$strSecretPayload\'');
+			if ($strSecretPayload == '')
 			{
-				$this->SetVar("secretpayload","");
-				$this->SetVar("secretpayload_session","");
+				$this->SetVar('secretpayload','');
+				$this->SetVar('secretpayload_session','');
 				return;	
 			}
-			$this->m_sdc->SetValue($strSecretPayload,"payload");
+			$this->m_sdc->SetValue($strSecretPayload,'payload');
 			
-			$strSerialized = $this->m_sdc->SerializeEncrypt("1"); 
+			$strSerialized = $this->m_sdc->SerializeEncrypt('1'); 
 			
 			$arraySlices = StringSlice($strSerialized,2);
 			
-			$this->SetVar("secretpayload",$arraySlices[0]);
-			$this->SetVar("secretpayload_session",$arraySlices[1]);
+			$this->SetVar('secretpayload',$arraySlices[0]);
+			$this->SetVar('secretpayload_session',$arraySlices[1]);
 		}
 
 		function GetSessionAwareArrayVars()
 		{
 			$arrayVarsSession = parent::GetSessionAwareArrayVars();
-			$strSecretPayload = $this->GetVar("secretpayload");
-			if ($strSecretPayload != "")
+			$strSecretPayload = $this->GetVar('secretpayload');
+			if ($strSecretPayload != '')
 			{
-				$arrayVarsSession["secretpayload"] = $strSecretPayload;
+				$arrayVarsSession['secretpayload'] = $strSecretPayload;
 			}
 	   	return $arrayVarsSession;
 		}
 
 		function OnSessionWrite($strSessionID, $arrayData)
 		{
-			$this->Trace("OnSessionWrite");
-			$arrayData = ArrayRemoveKey($arrayData,"secretpayload");
+			$this->Trace('OnSessionWrite');
+			$arrayData = ArrayRemoveKey($arrayData,'secretpayload');
 			return parent::OnSessionWrite($strSessionID, $arrayData);
 		}
 	
 		function OnUserLogin($strUserName,$strAuthenticationPayload)	
 		{
 			$strUserID = parent::OnUserLogin($strUserName,$strAuthenticationPayload);
-			if ($strUserID != "")
+			if ($strUserID != '')
 			{
 				$this->StoreSecretPayload($strAuthenticationPayload);
 			}
@@ -131,7 +131,7 @@
 		
 		function OnUserLogout()
 		{
-			$this->StoreSecretPayload("");
+			$this->StoreSecretPayload('');
 			return parent::OnUserLogout();
 		}			
 		

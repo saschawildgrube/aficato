@@ -30,7 +30,7 @@ The following steps are also recommended - however it is not specific to {WDK}-b
 There will be more steps required that may impact your server configuration. You will go through them after scaffolding the new biolerplate application and when executing automated tests.
 ==Create a new boilerplate application using the scaffolder==
 # Go to [{WDK_SCAFFOLDER_URL}].
-# Choose "New Website"
+# Choose 'New Website'
 # Choose which type of website you want to create
 # Enter the requested information as good as you can. Don't worry, you can change it later.
 # Download the zip file
@@ -44,7 +44,7 @@ Part of the instructions that you will find in the readme file is the deployment
 There are no specific requirements regarding the directory structure of your public folders.
 
 
-The source code of your application will typically reside in a folder called "_source" but you can give it any other name if you want. In that case you will have to modify the corresponding path information in the env.inc file.
+The source code of your application will typically reside in a folder called '_source' but you can give it any other name if you want. In that case you will have to modify the corresponding path information in the env.inc file.
 
 
 This source folder can be a subdirectory of the applications public root folder - given your webserver allows to block access to this folder - or any folder to which the web server has access to.
@@ -52,7 +52,7 @@ This source folder can be a subdirectory of the applications public root folder 
 
 Since {WDK}-based applications per se do not require any additional runtimes, deploy-time processing, or any other magic ingredients to run, deploying an application's source files to the right place is all it takes. There are no restrictions for the use of a specific file transfer mechanism.
 ==Run the installation script==
-The installation script provided in the scaffolded boilerplate application makes sure that database tables are initialized and setup up. It also creates an "admin" user and sets up scheduled tasks.
+The installation script provided in the scaffolded boilerplate application makes sure that database tables are initialized and setup up. It also creates an 'admin' user and sets up scheduled tasks.
 
 
 Just follow the instructions in the readme file.

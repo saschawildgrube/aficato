@@ -8,7 +8,7 @@
 		
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->SetFramework("fullwidth");
+			$this->GetWebsite()->SetFramework('fullwidth');
  		
 			$strFilePath = $this->GetDataFilePath('mandates/tour/accounts/tour.csv');  
 			$arrayAccount = AML_ReadFileAccount($strFilePath);
@@ -18,7 +18,7 @@
 				
 		//		$arrayNetworkGraph = AML_TransformAccountsToNetworkGraph($arrayAccounts);
 /*				
-				$strHtml .= '<h1>Network Analysis</h1>'."\n";
+				$strHtml .= '<h1>Network Analysis</h1>'.'\n';
 				$this->GetWebsite()->IncludeElement('amlnetworkgraph');
 				$amlnetworkgraph = new CAMLNetworkGraphElement($this->GetWebsite(),'demo');
 				$strHtml .= $amlnetworkgraph->RenderAMLNetworkGraph($arrayNetworkGraph);
@@ -30,10 +30,10 @@
 			$accountAnalysisModule = new CAccountAnalysisModule($this->GetWebsite(),'tour2',$arrayConfig); 
 			$accountAnalysisModule->SetAccount($arrayAccount);
 			$accountAnalysisModule->SetState('flows');
-			$arrayItems["ACCOUNTANALYSIS"] = $accountAnalysisModule->RenderModule();
+			$arrayItems['ACCOUNTANALYSIS'] = $accountAnalysisModule->RenderModule();
 
 			$link = new CLinkElement($this->GetWebsite(),'calltoaction');
-			$arrayItems["NEXT"] = $link->RenderLink($this->GetWebsite()->MakeContentURL('tour3'),'?TID_BUTTON_NEXT?');
+			$arrayItems['NEXT'] = $link->RenderLink($this->GetWebsite()->MakeContentURL('tour3'),'?TID_BUTTON_NEXT?');
 			
 		}
 	}

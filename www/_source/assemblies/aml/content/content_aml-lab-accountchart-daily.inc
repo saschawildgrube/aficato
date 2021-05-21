@@ -13,8 +13,8 @@
 				false,
 				';',
 				array(),
-				'"',
-				'""');
+				''',
+				'''');
 			$arrayAccount = array();
 			$arrayAccount['ID'] = 'A';
 			$arrayAccount['BALANCE_BEGIN'] = 3330.0;
@@ -32,7 +32,7 @@
 /*
 			$strJson = json_encode($arrayAccountChart,JSON_PRETTY_PRINT);
 			$strJavaScript = 'aDataAccountChart = '.$strJson.';';
-			$strJavaScript .= "D3_AML_AccountChart('#aml-accountchart',aDataAccountChart);"; 
+			$strJavaScript .= 'D3_AML_AccountChart('#aml-accountchart',aDataAccountChart);'; 
 			$this->GetWebsite()->AddJavaScriptSourceCode('aml-lab-accountchart',$strJavaScript);
 
 			$this->GetWebsite()->IncludeElement('amlaccountchartlegend');

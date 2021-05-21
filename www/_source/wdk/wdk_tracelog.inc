@@ -10,7 +10,7 @@
 		function __construct()
 		{
 			$this->m_strPrefix = '';
-			$this->m_strPostfix = "\n";
+			$this->m_strPostfix = '\n';
 			$this->m_nDebugPoint = 0;
 		}
 		
@@ -43,7 +43,7 @@
 		
 		function RenderTraceLog()
 		{
-			return "<div style=\"float:left;\"><pre style=\"text-align: left;\">" . HtmlEncode($this->GetTraceLog()) . "</pre></div>";	
+			return '<div style=\'float:left;\'><pre style=\'text-align: left;\'>' . HtmlEncode($this->GetTraceLog()) . '</pre></div>';	
 		}
 		
 		function Debug($value = null)
@@ -53,7 +53,7 @@
 				$this->m_strTraceLog = $this->m_strPrefix.'Debug mode ACTIVE'.$this->m_strPostfix.$this->m_strTraceLog;
 			}
 			$this->m_nDebugPoint++;
-			$this->Trace("DEBUG: #".$this->m_nDebugPoint.''.(($value !== null && !is_array($value))?(': '.RenderValue($value)):('')));
+			$this->Trace('DEBUG: #'.$this->m_nDebugPoint.''.(($value !== null && !is_array($value))?(': '.RenderValue($value)):('')));
 			if (is_array($value) == true)
 			{
 				$this->Trace($value);	

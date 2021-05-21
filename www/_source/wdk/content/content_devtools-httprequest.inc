@@ -4,10 +4,10 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->IncludeModule("devtools/httprequest");
+			$this->GetWebsite()->IncludeModule('devtools/httprequest');
 			$arrayConfig = array();
-			$httprequest = new CHttpRequestModule($this->GetWebsite(),"",$arrayConfig);
-			$arrayItems["MODULE_HTTPREQUEST"] = $httprequest->RenderModule();
+			$httprequest = new CHttpRequestModule($this->GetWebsite(),'',$arrayConfig);
+			$arrayItems['MODULE_HTTPREQUEST'] = $httprequest->RenderModule();
 		}
 	}
 	

@@ -200,7 +200,7 @@
 	{
 		if (is_string($value))
 		{
-			return "\"$value\"";	
+			return '\'$value\'';	
 		}	
 		if (is_array($value))
 		{
@@ -214,7 +214,7 @@
 		{
 			return RenderBool($value);	
 		}
-		return "$value";
+		return '$value';
 	}
 	
 

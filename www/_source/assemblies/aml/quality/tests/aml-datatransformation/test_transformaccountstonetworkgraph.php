@@ -1,12 +1,12 @@
 <?php
 	
-	require_once(GetSourceDir()."assemblies/aml/aml.inc");
+	require_once(GetSourceDir().'assemblies/aml/aml.inc');
 	
 	class CTest extends CUnitTest
 	{
 		function __construct()
 		{
-			parent::__construct("AML TransformAccountsToNetworkGraph");
+			parent::__construct('AML TransformAccountsToNetworkGraph');
 		}
 		  
 
@@ -17,34 +17,34 @@
 			$strDefaultCurrency,
 			$arrayExpectedResult)
 		{ 
-			$this->Trace("TestCase_TransformAccountsToNetworkGraph");
+			$this->Trace('TestCase_TransformAccountsToNetworkGraph');
 	
-			$this->Trace("Accounts");
+			$this->Trace('Accounts');
 			$this->Trace($arrayAccounts);
-			$this->Trace("Date begin      : ".$strDateBegin);
-			$this->Trace("Date end        : ".$strDateEnd);
-			$this->Trace("Default currency: ".$strDefaultCurrency);
+			$this->Trace('Date begin      : '.$strDateBegin);
+			$this->Trace('Date end        : '.$strDateEnd);
+			$this->Trace('Default currency: '.$strDefaultCurrency);
 
-			$this->Trace("Expected"); 
+			$this->Trace('Expected'); 
 			$this->Trace($arrayExpectedResult);
 
 			$arrayNetworkGraph = AML_TransformAccountsToNetworkGraph($arrayAccounts,$strDateBegin,$strDefaultCurrency,$strDateEnd);
 			
-			$this->Trace("Result");
+			$this->Trace('Result');
 			$this->Trace($arrayNetworkGraph);
 
 			if ($arrayNetworkGraph == $arrayExpectedResult)
 			{
-				$this->Trace("Testcase PASSED!");
+				$this->Trace('Testcase PASSED!');
 			}
 			else
 			{
-				$this->Trace("Testcase FAILED!");	
+				$this->Trace('Testcase FAILED!');	
 				$this->SetResult(false);	
 			}
 
-			$this->Trace("");
-			$this->Trace("");
+			$this->Trace('');
+			$this->Trace('');
 		}
 
 

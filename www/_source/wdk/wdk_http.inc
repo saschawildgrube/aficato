@@ -3,7 +3,7 @@
 	function HttpRequest(
 		$strURL,
 		$vParams = null,
-		$strMode = "get",
+		$strMode = 'get',
 		$nTimeOutSeconds = 60,
 		$arrayCookies = array(),
 		$arrayHeaders = array(),
@@ -17,12 +17,12 @@
 		$bHeadersInOutput = GetBoolValue($bHeadersInOutput);
 		$strMode = StringLowerCase($strMode);
 		$bHttps = false;
-		if (StringSection($strURL,0,8) == "https://")
+		if (StringSection($strURL,0,8) == 'https://')
 		{
 			$bHttps = true;
 		}
 		
-		if ($strMode == "get")
+		if ($strMode == 'get')
 		{
 			$arrayParams = array();
 			if (is_array($vParams))
@@ -31,7 +31,7 @@
 			}
 			$strURL = MakeURL($strURL,$arrayParams,false);
 		}
-		else if ($strMode == "post")
+		else if ($strMode == 'post')
 		{
 			if (is_array($vParams))
 			{
@@ -51,7 +51,7 @@
 		curl_setopt($ch, CURLOPT_TIMEOUT, $nTimeOutSeconds);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, $bHeadersInOutput);
-		if ($strMode == "post")
+		if ($strMode == 'post')
 		{
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $strParams);
 			curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -68,7 +68,7 @@
 		}
 		if (ArrayCount($arrayCookies) > 0)
 		{
-			$strCookie = MakeURLParameters($arrayCookies,";");
+			$strCookie = MakeURLParameters($arrayCookies,';');
 			curl_setopt($ch, CURLOPT_COOKIE, $strCookie);
 		}
 
@@ -78,17 +78,17 @@
 		}
 		if (ArrayCount($arrayHeaders) > 0)
 		{
-			if (ArrayKeyExists($arrayHeaders,"Accept-Encoding"))
+			if (ArrayKeyExists($arrayHeaders,'Accept-Encoding'))
 			{
-				$strAcceptEncoding = ArrayGetValue($arrayHeaders,"Accept-Encoding"); 
-				ArrayRemoveKey($arrayHeaders,"Accept-Encoding");
+				$strAcceptEncoding = ArrayGetValue($arrayHeaders,'Accept-Encoding'); 
+				ArrayRemoveKey($arrayHeaders,'Accept-Encoding');
 				curl_setopt($ch, CURLOPT_ENCODING, $strAcceptEncoding);
 			}
 			
 			$arrayHeadersList = array();
 			foreach ($arrayHeaders as $strHeaderKey => $strHeaderValue)
 			{
-				$arrayHeadersList[] = $strHeaderKey.": ".$strHeaderValue;
+				$arrayHeadersList[] = $strHeaderKey.': '.$strHeaderValue;
 			}
 			
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeadersList);
@@ -105,20 +105,20 @@
  	function ParseHttpResponse($strResponse)
  	{
  		$arrayResponse = array();
- 		$nPos = FindString($strResponse,"\r\n\r\n");
+ 		$nPos = FindString($strResponse,'\r\n\r\n');
  		if ($nPos  == -1)
  		{
- 			$arrayResponse["headers"] = $strResponse;
- 			$arrayResponse["content"] = "";
- 			$arrayResponse["statuscode"] = "";
+ 			$arrayResponse['headers'] = $strResponse;
+ 			$arrayResponse['content'] = '';
+ 			$arrayResponse['statuscode'] = '';
 		}
 		else
 		{
- 			$arrayResponse["headers"] = StringSection($strResponse,0,$nPos);
- 			$arrayResponse["content"] = StringSection($strResponse,$nPos+4);
- 			$nPosStatusCode = FindString($arrayResponse["headers"]," ");
- 			$strStatusCode = StringSection($arrayResponse["headers"],$nPosStatusCode+1,3);
- 			$arrayResponse["statuscode"] = $strStatusCode;
+ 			$arrayResponse['headers'] = StringSection($strResponse,0,$nPos);
+ 			$arrayResponse['content'] = StringSection($strResponse,$nPos+4);
+ 			$nPosStatusCode = FindString($arrayResponse['headers'],' ');
+ 			$strStatusCode = StringSection($arrayResponse['headers'],$nPosStatusCode+1,3);
+ 			$arrayResponse['statuscode'] = $strStatusCode;
 		}
  		return $arrayResponse;
  	}
@@ -128,37 +128,37 @@
  		$arrayResponse = ParseHttpResponse($strResponse);
 
 		// Parse headers (cookies and redirect location)
- 		$strHeaders = ArrayGetValue($arrayResponse,"headers");
- 		if ($strHeaders != "")
+ 		$strHeaders = ArrayGetValue($arrayResponse,'headers');
+ 		if ($strHeaders != '')
  		{
-			$arrayHeaderLines = StringExplode($strHeaders,"\n");
+			$arrayHeaderLines = StringExplode($strHeaders,'\n');
 			$arrayCookies = array();
 			foreach ($arrayHeaderLines as $strLine) 
 			{
-				if (FindString($strLine,"Location: ") == 0)
+				if (FindString($strLine,'Location: ') == 0)
 				{ 
-					$arrayResponse["redirect-location"] = StringTrim(StringSection($strLine,10));
+					$arrayResponse['redirect-location'] = StringTrim(StringSection($strLine,10));
 				}
-				else if (FindString($strLine,"Set-Cookie: ") == 0)
+				else if (FindString($strLine,'Set-Cookie: ') == 0)
 				{
 					$strCookieLine = StringSection($strLine,12);	
-					$arrayCookieAttributes = StringExplode($strCookieLine,";",true);
+					$arrayCookieAttributes = StringExplode($strCookieLine,';',true);
 					$strCookieKeyValue = ArrayGetValue($arrayCookieAttributes,0);
-					$arrayKeyValue = StringExplode($strCookieKeyValue,"=",true,2);
+					$arrayKeyValue = StringExplode($strCookieKeyValue,'=',true,2);
 					$strCookieName = ArrayGetValue($arrayKeyValue,0);
 					$strCookieValue = ArrayGetValue($arrayKeyValue,1);
-					if ($strCookieName != "")
+					if ($strCookieName != '')
 					{
 						$arrayCookies[$strCookieName] = $strCookieValue;
 					}
 				}
 			}
-			$arrayResponse["cookies"]	= $arrayCookies;
+			$arrayResponse['cookies']	= $arrayCookies;
  		}
 
 
- 		$strContent = ArrayGetValue($arrayResponse,"content");
- 		if ($strContent != "")
+ 		$strContent = ArrayGetValue($arrayResponse,'content');
+ 		if ($strContent != '')
  		{
  			libxml_use_internal_errors(true);
  			
@@ -175,54 +175,54 @@
 	 			$arrayAElements = $domdoc->getElementsByTagName('a');
 				foreach ($arrayAElements as $nodeA)
 				{
-					$arrayLinks[] = $nodeA->getAttribute( "href" );
+					$arrayLinks[] = $nodeA->getAttribute( 'href' );
 				}
-				$arrayResponse["links"] = $arrayLinks;
+				$arrayResponse['links'] = $arrayLinks;
 
  				// Forms
 	 			$arrayForms = array();
-	 			$arrayFormElements = $domdoc->getElementsByTagName("form");
+	 			$arrayFormElements = $domdoc->getElementsByTagName('form');
 				foreach ($arrayFormElements as $nodeForm)
 				{
 					$arrayForm = array();
-					//$arrayForm["html"] = $nodeForm->ownerDocument->saveHTML( $nodeForm );
-					$arrayForm["action"] = $nodeForm->getAttribute("action");
-					$arrayForm["method"] = $nodeForm->getAttribute("method");
+					//$arrayForm['html'] = $nodeForm->ownerDocument->saveHTML( $nodeForm );
+					$arrayForm['action'] = $nodeForm->getAttribute('action');
+					$arrayForm['method'] = $nodeForm->getAttribute('method');
 					
 					$arrayValues = array();
 					
-					$arrayElementsInput = $nodeForm->getElementsByTagName("input");
+					$arrayElementsInput = $nodeForm->getElementsByTagName('input');
 					foreach ($arrayElementsInput as $nodeInput)
 					{
-						$arrayValues[$nodeInput->getAttribute("name")] = $nodeInput->getAttribute("value");
+						$arrayValues[$nodeInput->getAttribute('name')] = $nodeInput->getAttribute('value');
 					}
-					$arrayElementsTextArea = $nodeForm->getElementsByTagName("textarea");
+					$arrayElementsTextArea = $nodeForm->getElementsByTagName('textarea');
 					foreach ($arrayElementsTextArea as $nodeTextArea)
 					{
-						$arrayValues[$nodeTextArea->getAttribute("name")] = $nodeTextArea->nodeValue;
+						$arrayValues[$nodeTextArea->getAttribute('name')] = $nodeTextArea->nodeValue;
 					}
 					
-					$arrayElementsSelect = $nodeForm->getElementsByTagName("select");
+					$arrayElementsSelect = $nodeForm->getElementsByTagName('select');
 					foreach ($arrayElementsSelect as $nodeSelect)
 					{
-						$strName = $nodeSelect->getAttribute("name");
-						$strValue = "";
-						$arrayElementsOption = $nodeForm->getElementsByTagName("option");
+						$strName = $nodeSelect->getAttribute('name');
+						$strValue = '';
+						$arrayElementsOption = $nodeForm->getElementsByTagName('option');
 						foreach ($arrayElementsOption as $nodeOption)
 						{
-							if ($nodeOption->getAttribute("selected") == "selected")
+							if ($nodeOption->getAttribute('selected') == 'selected')
 							{
-								$strValue = $nodeOption->getAttribute("value");
+								$strValue = $nodeOption->getAttribute('value');
 							}
 						}
 						$arrayValues[$strName] = $strValue;
 					}
 					
-					$arrayForm["values"] = $arrayValues;
+					$arrayForm['values'] = $arrayValues;
 
 					$arrayForms[] = $arrayForm;
 				}
-				$arrayResponse["forms"] = $arrayForms;
+				$arrayResponse['forms'] = $arrayForms;
  			}
  			
  			// identify meta tags
@@ -241,7 +241,7 @@ MakeDocType('html5').
 '<html>
 	<head>
 		'.$strHeaders.'
-		<meta http-equiv="refresh" content="0; URL='.$strURL.'"/>
+		<meta http-equiv='refresh' content='0; URL='.$strURL.''/>
 		<title>Redirecting</title>
 	</head>
 	<body>

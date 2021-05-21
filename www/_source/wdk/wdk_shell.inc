@@ -3,7 +3,7 @@
 
 	function ShellEscapeArgumentString($strArgument)
 	{
-		$strResult = "'";
+		$strResult = ''';
 		
 		if (!IsStringUTF8($strArgument))
 		{
@@ -11,21 +11,21 @@
 		}
 		$nLength = mb_strlen($strArgument);	
 		
-		echo $nLength."\n";
+		echo $nLength.'\n';
 		
 		for ($nIndex = 0; $nIndex < $nLength; $nIndex++)
 		{
 			$nChar = mb_substr($strArgument,$nIndex,1); //$strArgument[$nIndex];
-			if ($nChar == "'")
+			if ($nChar == ''')
 			{
-				$strResult .= "'\\".$nChar."'";
+				$strResult .= ''\\'.$nChar.''';
 			}
 			else
 			{
 				$strResult .= $nChar;
 			}
 		}
-		$strResult .= "'";
+		$strResult .= ''';
 		return $strResult;
 		
 	}

@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				"article",
+				'article',
 				$strStyleID,
 				true,
 				false);
@@ -16,30 +16,30 @@
 		
 		function RenderArticle($strArticle,$strFormat)
 		{
-			$strOutput = "";
+			$strOutput = '';
 			$strFormat = StringLowerCase($strFormat);
 			switch ($strFormat)
 			{
-			case "html":
+			case 'html':
 				$strOutput = HtmlDecode($strArticle);
 				break;
-			case "wiki":
+			case 'wiki':
 				$strOutput = HtmlDecode($strArticle);
-				$this->IncludeElement("wiki");
-				$wiki = new CWikiElement($this->GetWebsite(),$this->GetLayoutDef("LAYOUT_WIKI_STYLE"));
+				$this->IncludeElement('wiki');
+				$wiki = new CWikiElement($this->GetWebsite(),$this->GetLayoutDef('LAYOUT_WIKI_STYLE'));
 				$strOutput = $wiki->RenderWiki($strOutput);
 				break;
-			case "bbcode":
-				require_once(GetWDKDir()."wdk_bbcode.inc");
+			case 'bbcode':
+				require_once(GetWDKDir().'wdk_bbcode.inc');
 				$strOutput = StringBBCodeToHtml($strArticle);
 				break;
-			case "plain":
+			case 'plain':
 				$strOutput = nl2br($strArticle);
 				break;
-			case "raw":
+			case 'raw':
 			default:
-				$this->IncludeElement("console");
-   			$console = new CConsoleElement($this->GetWebsite(),$this->GetLayoutDef("LAYOUT_CONSOLE_STYLE"));
+				$this->IncludeElement('console');
+   			$console = new CConsoleElement($this->GetWebsite(),$this->GetLayoutDef('LAYOUT_CONSOLE_STYLE'));
    			$strOutput = $console->RenderConsole($strArticle);
 				break;	
 			}

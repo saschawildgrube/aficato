@@ -8,7 +8,7 @@
 		
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->SetFramework("fullwidth");
+			$this->GetWebsite()->SetFramework('fullwidth');
  		
 			$strFilePath = $this->GetDataFilePath('mandates/tour/accounts/tour.csv');  
 			$arrayAccount = AML_ReadFileAccount($strFilePath);
@@ -21,10 +21,10 @@
 			$amlnetworkgraph = new CAMLNetworkGraphElement($this->GetWebsite(),'demo');
 			$amlnetworkgraph->RenderAMLNetworkGraph($arrayNetworkGraph);
 				
-			$arrayItems["NETWORK"] = $amlnetworkgraph->RenderAMLNetworkGraph($arrayNetworkGraph);
+			$arrayItems['NETWORK'] = $amlnetworkgraph->RenderAMLNetworkGraph($arrayNetworkGraph);
 
 			$link = new CLinkElement($this->GetWebsite(),'calltoaction');
-			$arrayItems["NEXT"] = $link->RenderLink($this->GetWebsite()->MakeContentURL('tour4'),'?TID_BUTTON_NEXT?');
+			$arrayItems['NEXT'] = $link->RenderLink($this->GetWebsite()->MakeContentURL('tour4'),'?TID_BUTTON_NEXT?');
 			
 		}
 	}

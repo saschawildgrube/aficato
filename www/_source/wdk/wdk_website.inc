@@ -236,15 +236,15 @@
 			// Initialize Meta
 			if ($this->GetMeta('version') == '')
 			{
-				$this->Error("Meta: No version specified.");
+				$this->Error('Meta: No version specified.');
 			}
-			if ($this->GetMeta("author") == "")
+			if ($this->GetMeta('author') == '')
 			{
-				$this->Error("Meta: No author specified.");
+				$this->Error('Meta: No author specified.');
 			}
-			if ($this->GetMeta("copyright") == "")
+			if ($this->GetMeta('copyright') == '')
 			{
-				$this->Error("Meta: No copyright specified.");
+				$this->Error('Meta: No copyright specified.');
 			}
 
 			// Manage Cookies and parameters
@@ -260,17 +260,17 @@
 			
 			$this->m_arrayParams = ArrayMerge($this->m_arrayParams,$arrayParams);
 			$paramDef = new CParameterDefinition();
-			$paramDef->AddParameterDefinitionString("info",3,40,CHARSET_TID,false);
-			$paramDef->AddParameterDefinitionString("warning",3,40,CHARSET_TID,false);
-			$paramDef->AddParameterDefinitionString("error",3,40,CHARSET_TID,false);
+			$paramDef->AddParameterDefinitionString('info',3,40,CHARSET_TID,false);
+			$paramDef->AddParameterDefinitionString('warning',3,40,CHARSET_TID,false);
+			$paramDef->AddParameterDefinitionString('error',3,40,CHARSET_TID,false);
 			$arrayParamErrors = array();
 			if ($paramDef->CheckParameters($this->m_arrayParams, $arrayParamErrors, true) > 0)
 			{
-				$this->Trace("Parameters:");
+				$this->Trace('Parameters:');
 				$this->Trace($this->m_arrayParams);
-				$this->Trace("CheckParameters reported errors:");
+				$this->Trace('CheckParameters reported errors:');
 				$this->Trace($arrayParamErrors);
-				$this->Error("Parameter Check Failed");
+				$this->Error('Parameter Check Failed');
 			}
 
 			// Set Tracing by Parameter
@@ -278,23 +278,23 @@
 			if (GetBoolValue($this->GetParam('trace')) == true)
 			{
 				$this->SetTraceActive(true);
-				$this->Trace("Trace activated by parameter.");
+				$this->Trace('Trace activated by parameter.');
 			}
 			
 			
 			// Set Caching by parameter
 			if ($this->IsCacheActive() == true)
 			{
-				if ($this->GetConfigBoolean("cache_allow_nocache") == true)
+				if ($this->GetConfigBoolean('cache_allow_nocache') == true)
 				{
-					if ($this->GetParam("nocache") == true)
+					if ($this->GetParam('nocache') == true)
 					{
 						$this->SetCacheActive(false);	
 					}	
 				}	
 			}
 			 
-			$this->Trace("Caching is ".(($this->IsCacheActive())?("ACTIVE"):("INACTIVE")));
+			$this->Trace('Caching is '.(($this->IsCacheActive())?('ACTIVE'):('INACTIVE')));
 			
 			
 			// Initialize Variables - First Time
@@ -303,76 +303,76 @@
 			
 			// Init Messages
 			$this->m_arrayMessages = array();
-			$this->m_arrayMessages["info"] = array();
-			$this->m_arrayMessages["warning"] = array();
-			$this->m_arrayMessages["error"] = array();
+			$this->m_arrayMessages['info'] = array();
+			$this->m_arrayMessages['warning'] = array();
+			$this->m_arrayMessages['error'] = array();
 
 			
 			// Manage directories
 			$this->m_strSourceDir = $strSourceDir;
 			$this->m_strWWWDir = $strWWWDir;
-			if (StringSection($this->m_strWWWDir,-1) != "/")
+			if (StringSection($this->m_strWWWDir,-1) != '/')
 			{
-				$this->m_strWWWDir .= "/";
+				$this->m_strWWWDir .= '/';
 			}
-			$this->m_strStyleSheetsDir = 	$strWWWDir . "css/";
-			$this->m_strJavaScriptsDir = 	$strWWWDir . "js/";
-			$this->m_strImagesDir = 			$strWWWDir . "images/";
-			$this->m_strFontsDir = 				$strWWWDir . "fonts/";
-			$this->m_strVideosDir = 			$strWWWDir . "videos/";
-			$this->m_strDownloadDir = 		$strWWWDir . "download/";
+			$this->m_strStyleSheetsDir = 	$strWWWDir . 'css/';
+			$this->m_strJavaScriptsDir = 	$strWWWDir . 'js/';
+			$this->m_strImagesDir = 			$strWWWDir . 'images/';
+			$this->m_strFontsDir = 				$strWWWDir . 'fonts/';
+			$this->m_strVideosDir = 			$strWWWDir . 'videos/';
+			$this->m_strDownloadDir = 		$strWWWDir . 'download/';
 
 			// Manage Protocols
-    	$this->m_strProtocol = "http";
-			if (ArrayKeyExists($_SERVER,"HTTPS"))
+    	$this->m_strProtocol = 'http';
+			if (ArrayKeyExists($_SERVER,'HTTPS'))
 			{
-				if ($_SERVER["HTTPS"] == true)
+				if ($_SERVER['HTTPS'] == true)
 				{
-					$this->m_strProtocol = "https";
+					$this->m_strProtocol = 'https';
 				}
 			}
-			$arrayProtocols = $this->GetConfig("protocols");
+			$arrayProtocols = $this->GetConfig('protocols');
 			if ((!is_array($arrayProtocols)) && (ArrayCount($arrayProtocols) < 1))
 			{
-				$this->Error("Config: No supported protocol specified.");
+				$this->Error('Config: No supported protocol specified.');
 			}
 			if (ArrayValueExists($arrayProtocols,$this->m_strProtocol) == false)
 			{
-				$strTargetURL = $arrayProtocols[0] . "://". $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+				$strTargetURL = $arrayProtocols[0] . '://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 				RedirectAndExit($strTargetURL);
 			}
 			$this->m_arrayProtocols = $arrayProtocols;
 			
 						
 			// Manage Root URL
-			if ($strRootURL == "")
+			if ($strRootURL == '')
 			{
-				$this->Error("strRootURL must not be empty.");		
+				$this->Error('strRootURL must not be empty.');		
 			}
-			if (strstr($strRootURL,":"))
+			if (strstr($strRootURL,':'))
 			{
-				$this->Error("strRootURL (\"".$strRootURL."\") must be specified without protocol.");	
+				$this->Error('strRootURL (\''.$strRootURL.'\') must be specified without protocol.');	
 			}
 			$this->m_strRootURLnoProtocol = $strRootURL;
-			$this->Trace("Root URL (without protocol): ".$this->m_strRootURLnoProtocol);
-			$strProtocol = "http://";
-			if ($this->m_strProtocol == "https")
+			$this->Trace('Root URL (without protocol): '.$this->m_strRootURLnoProtocol);
+			$strProtocol = 'http://';
+			if ($this->m_strProtocol == 'https')
 			{
-				$strProtocol = "https://";
+				$strProtocol = 'https://';
 			}
 			$this->m_strRootURL = $strProtocol . $this->m_strRootURLnoProtocol;
-			$this->Trace("Root URL: ".$this->m_strRootURL);
+			$this->Trace('Root URL: '.$this->m_strRootURL);
 
 
 
 			// Manage current URL
-			$this->m_strCurrentURL = $strProtocol . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-			$this->Trace("Current URL: ".$this->m_strCurrentURL);
+			$this->m_strCurrentURL = $strProtocol . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+			$this->Trace('Current URL: '.$this->m_strCurrentURL);
 
 			
 			// Initialize Authentication Support
-			$this->m_bAuthenticationSupport = $this->GetConfigBoolean("authentication_support");
-			$this->m_strAuthUserID = "";
+			$this->m_bAuthenticationSupport = $this->GetConfigBoolean('authentication_support');
+			$this->m_strAuthUserID = '';
 			$this->m_arrayPrivileges = array();
 			
 			// Conditions
@@ -423,8 +423,8 @@
 					
 					// And we prepare the rendering/loading of the favicon by
 					// turning this into an image command request
-					$this->SetParam("command","image");
-					$this->SetParam("id","favicon");
+					$this->SetParam('command','image');
+					$this->SetParam('id','favicon');
 				}
 				
 				// The actual parsing of the SEO URL is done later, after the session
@@ -442,8 +442,8 @@
 
 
 			// Manage Session
-			$this->m_strSessionID = "";
-			$this->m_nSessionMode = intval($this->GetConfig("session_mode"));
+			$this->m_strSessionID = '';
+			$this->m_nSessionMode = intval($this->GetConfig('session_mode'));
 			if (IsValidSessionMode($this->m_nSessionMode) != true)
 			{
 				$this->m_nSessionMode = SESSION_MODE_NONE;
@@ -456,9 +456,9 @@
 			{
 				$bCreateSession = true;
 				$this->m_strSessionID = $this->ExtractSessionID();
-				if ($this->m_strSessionID != "")
+				if ($this->m_strSessionID != '')
 				{
-					$this->Trace("SessionID: ".$this->m_strSessionID);
+					$this->Trace('SessionID: '.$this->m_strSessionID);
 					if ($this->OnSessionRead($this->m_strSessionID,$this->m_arraySession) == true)
 					{
 						$bCreateSession = false;
@@ -471,7 +471,7 @@
 				if ($bCreateSession == true)
 				{
 					$this->m_strSessionID = $this->OnSessionCreate();
-					if ($this->m_strSessionID == "")
+					if ($this->m_strSessionID == '')
 					{
 						$bSessionCreationError = true;
 					}
@@ -493,7 +493,7 @@
 				if ((!(ArrayKeyExists($this->m_arrayParams,'trace') == true) && (GetBoolValue(ArrayGetValue($this->m_arrayParams,'trace')) == false)))
 				{
 					$this->SetTraceActive(true);
-					$this->Trace("Trace activated by session.");
+					$this->Trace('Trace activated by session.');
 				}
 			}
 			
@@ -532,15 +532,15 @@
 		
 			
 			// Initialize Assembly Line
-			$this->m_assemblyRoot = new CAssembly($this,"root",$strSourceDir);
-			$this->m_assemblyWDK = new CAssembly($this,"wdk",GetWDKDir());
+			$this->m_assemblyRoot = new CAssembly($this,'root',$strSourceDir);
+			$this->m_assemblyWDK = new CAssembly($this,'wdk',GetWDKDir());
 			$this->m_assemblyline = new CAssemblyLine($this);
 			$this->m_assemblyline->AddAssembly($this->m_assemblyRoot);
 			$this->m_bOnInitAssemblyLineCalled = false;
 			$this->OnInitAssemblyLine($this->m_assemblyline);
 			if ($this->m_bOnInitAssemblyLineCalled != true)
 			{
-				$this->Error("OnInitAssemblyLine in a derived class must invoke the parent instance function.");	
+				$this->Error('OnInitAssemblyLine in a derived class must invoke the parent instance function.');	
 			}
 			$this->m_assemblyline->AddAssembly($this->m_assemblyWDK);
 					
@@ -559,21 +559,21 @@
 			}
 	
 			// Render Image
-			if ($this->GetCommand() == "image")
+			if ($this->GetCommand() == 'image')
 			{
 				$this->RenderImage();
 				// RenderImage calls exit in all cases!				
 			}			
 
 			// Render Font
-			if ($this->GetCommand() == "font")
+			if ($this->GetCommand() == 'font')
 			{
 				$this->RenderFont();
 				// RenderFont calls exit in all cases!
 			}			
 
 			// Render Video
-			if ($this->GetCommand() == "video")
+			if ($this->GetCommand() == 'video')
 			{
 				$this->RenderVideo();
 				// RenderVideo calls exit in all cases!
@@ -581,20 +581,20 @@
 
 
 			// Render Css
-			if ($this->GetCommand() == "css")
+			if ($this->GetCommand() == 'css')
 			{
 				$this->RenderCss();
 				// RenderCss calls exit in all cases!	
 			}
 
 			// Handle Download
-			if ($this->GetCommand() == "download")
+			if ($this->GetCommand() == 'download')
 			{
 				$this->RenderDownload();
 				// RenderDownload does not exit!
 			}	
 		
-			$this->Trace("RenderDateTimeNow() = \"".RenderDateTimeNow()."\""); 
+			$this->Trace('RenderDateTimeNow() = \''.RenderDateTimeNow().'\''); 
 			
 			$this->Trace('Configuration:');
 			$this->Trace($this->GetConfigArray());
@@ -637,7 +637,7 @@
 			$arrayLanguages = $this->GetSupportedLanguages();
 			if (!is_array($arrayLanguages) || (ArrayCount($arrayLanguages) < 1))
 			{
-				$this->Error("Config: At least one supported language must be specified.");
+				$this->Error('Config: At least one supported language must be specified.');
 			}
 			if (ArrayCount($arrayLanguages) == 1)
 			{
@@ -651,19 +651,19 @@
 			{
 				if (IsValidLanguageID($strLanguage) == false)
 				{
-					$this->Error("Config: \"$strLanguage\" is not a valid language id.");
+					$this->Error('Config: \'$strLanguage\' is not a valid language id.');
 				}
 			}
-			$this->SetLanguage(GetLanguage($this->GetVar("language")));
+			$this->SetLanguage(GetLanguage($this->GetVar('language')));
 			
 			// Manage fallback language
 			$this->m_bFallbackLanguageSupported = false;
 			$strFallbackLanguage = $this->GetFallbackLanguage();			
-			if ($strFallbackLanguage != "")
+			if ($strFallbackLanguage != '')
 			{
 				if (IsValidLanguageID($strFallbackLanguage) == false)
 				{
-					$this->Error("Config: An invalid language id has been specified for the fallback language: \"$strLanguage\"");
+					$this->Error('Config: An invalid language id has been specified for the fallback language: \'$strLanguage\'');
 				}
 				else
 				{
@@ -681,47 +681,47 @@
 				$this->SetLanguage($arrayLanguages[0]);
 			}
 			
-			$this->Trace("GetLanguage = ".$this->GetLanguage());
+			$this->Trace('GetLanguage = '.$this->GetLanguage());
 			
 			// Manage Country
-			$strDefaultCountry = $this->GetConfig("country");
+			$strDefaultCountry = $this->GetConfig('country');
 
 			// Manage Message supplied by parameter
-			$this->m_strErrorMessageCode = $this->GetVar("error");
-			$this->SetVar("error","");
-			$this->m_strWarningMessageCode = $this->GetVar("warning");
-			$this->SetVar("warning","");
-			$this->m_strInfoMessageCode = $this->GetVar("info");
-			$this->SetVar("info","");
+			$this->m_strErrorMessageCode = $this->GetVar('error');
+			$this->SetVar('error','');
+			$this->m_strWarningMessageCode = $this->GetVar('warning');
+			$this->SetVar('warning','');
+			$this->m_strInfoMessageCode = $this->GetVar('info');
+			$this->SetVar('info','');
 
 			
 
 			// Manage Framework
-			$this->SetFramework($this->GetVar("framework"));
-			if ($this->GetFramework() == "")
+			$this->SetFramework($this->GetVar('framework'));
+			if ($this->GetFramework() == '')
 			{
-				$this->SetFramework("default");
+				$this->SetFramework('default');
 			}
 
 
 			// Manage Layout
 			$strLayout = $this->GetLayout();
-			if ($strLayout == "")
+			if ($strLayout == '')
 			{
-				$strLayout = "default";
+				$strLayout = 'default';
 			}
 			$this->SetLayout($strLayout);
 			
 				         
 			// Manage area and content
-			if ($this->GetArea() == "")
+			if ($this->GetArea() == '')
 			{
-				$this->SetArea("default");
+				$this->SetArea('default');
 			}
 			
-			if ($this->GetContent() == "")
+			if ($this->GetContent() == '')
 			{
-				$this->SetContent("index");
+				$this->SetContent('index');
 			}
 			
 
@@ -731,12 +731,12 @@
 			$this->OnInitRoutingMap();
 			if ($this->m_bOnInitRoutingMapCalled != true)
 			{
-				$this->Error("OnInitRoutingMap in a derived class must invoke the parent instance function.");	
+				$this->Error('OnInitRoutingMap in a derived class must invoke the parent instance function.');	
 			}
 
 		
 			// Render Sitemap
-			if ($this->GetCommand() == "sitemap")
+			if ($this->GetCommand() == 'sitemap')
 			{
 				$this->RenderSitemap();
 				// RenderSitemap calls exit in all cases!	
@@ -753,32 +753,32 @@
 			
 			// Generate URL to validate the current page
 			$strValidatorURL = w3cGetValidatorURL($this->GetCurrentURL()); 
-			$this->SetOutputItem("W3CLINK",$strValidatorURL);
+			$this->SetOutputItem('W3CLINK',$strValidatorURL);
 
 			
 			
 			// Manage unresolved TID tag check
 			$this->m_bCheckUnresolvedTID = false;
-			if (GetBoolValue($this->GetConfig("check_unresolvedtid")) == true)
+			if (GetBoolValue($this->GetConfig('check_unresolvedtid')) == true)
 			{
 				$this->m_bCheckUnresolvedTID = true;
-				$this->Trace("Unresolved TID check activated by config.");
+				$this->Trace('Unresolved TID check activated by config.');
 			}
 
 			// Manage invalid TID tag check
 			$this->m_bCheckInvalidTID = false;
-			if (GetBoolValue($this->GetConfig("check_invalidtid")) == true)
+			if (GetBoolValue($this->GetConfig('check_invalidtid')) == true)
 			{
 				$this->m_bCheckInvalidTID = true;
-				$this->Trace("Invalid TID check activated by config.");
+				$this->Trace('Invalid TID check activated by config.');
 			}
 
 		
 			// Initialize some output items
-			$this->SetOutputItem("DATETIME","");
-			$this->SetOutputItem("USERSTATUS","");
-			$this->SetOutputItem("LANGUAGESELECTION","");
-			$this->SetOutputItem("MODULE_LOGIN_FORM","");
+			$this->SetOutputItem('DATETIME','');
+			$this->SetOutputItem('USERSTATUS','');
+			$this->SetOutputItem('LANGUAGESELECTION','');
+			$this->SetOutputItem('MODULE_LOGIN_FORM','');
 		
 		
 			$this->LoadStringResources('wdk');
@@ -787,21 +787,21 @@
 			$this->LoadStringResources('default');
 			// This is because getmessage directly loads an error text and OnInit might render modules 
 
-			// Initialize "powered by"
-			$this->SetOutputItem("POWEREDBY","");
+			// Initialize 'powered by'
+			$this->SetOutputItem('POWEREDBY','');
 
 			// Initialize standard time items
-			$strCurrentYear = RenderDateTimeFormat(time(),"%Y",$this->GetTimeZone(),$this->GetLanguage());
+			$strCurrentYear = RenderDateTimeFormat(time(),'%Y',$this->GetTimeZone(),$this->GetLanguage());
 
 			// Initialize WDK Documentation related items
-			$this->SetOutputItem("WDK","WDK");
-			$this->SetOutputItem("WDK_AUTHOR","Sascha Wildgrube");
-			$this->SetOutputItem("WDK_COPYRIGHT_PERIOD",WDK_COPYRIGHT_SINCE."-".$strCurrentYear);
-			$this->SetOutputItem("WDK_DOCS_URL","http://www.websitedevkit.com/");
-			$this->SetOutputItem("WDK_SCAFFOLDER_URL","http://www.websitedevkit.com/scaffolder/");
-			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_PHP_VERSION",'7.2.24');
-			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_UBUNTU_VERSION",'18.04');
-			$this->SetOutputItem("WDK_SYSTEMREQUIREMENT_APACHE_VERSION",'2.4.29');
+			$this->SetOutputItem('WDK','WDK');
+			$this->SetOutputItem('WDK_AUTHOR','Sascha Wildgrube');
+			$this->SetOutputItem('WDK_COPYRIGHT_PERIOD',WDK_COPYRIGHT_SINCE.'-'.$strCurrentYear);
+			$this->SetOutputItem('WDK_DOCS_URL','http://www.websitedevkit.com/');
+			$this->SetOutputItem('WDK_SCAFFOLDER_URL','http://www.websitedevkit.com/scaffolder/');
+			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_PHP_VERSION','7.2.24');
+			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_UBUNTU_VERSION','18.04');
+			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_APACHE_VERSION','2.4.29');
 			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_MARIADB_VERSION','10.1.38');
 			
 		
@@ -825,7 +825,7 @@
 
 			
 			// Initialize CTA
-			$this->SetOutputItem("CTA","");
+			$this->SetOutputItem('CTA','');
 		
 		
 			// Init
@@ -869,7 +869,7 @@
 			
 			// Module Initializer
 			$this->m_bModuleRegistrationCompleted = true;
-			$this->TriggerEvent("website-module-init",array());
+			$this->TriggerEvent('website-module-init',array());
 
 			
 			// Command Handler
@@ -886,7 +886,7 @@
 			// Basic Authentication
 			if ($this->IsBasicAuthActive() == true)
 			{
-				$this->Trace("IsBasicAuthActive() == true");
+				$this->Trace('IsBasicAuthActive() == true');
 				$bContinue = $this->BasicAuth();
 				if ($bContinue == false)
 				{
@@ -897,20 +897,20 @@
 			
 			
 			// Remove values that by definition are one-time parameters
-			$this->SetVar("command","");
-			$this->SetVar($this->GetAuthUsernameVarName(),"");
-			$this->SetVar($this->GetAuthPasswordVarName(),"");
+			$this->SetVar('command','');
+			$this->SetVar($this->GetAuthUsernameVarName(),'');
+			$this->SetVar($this->GetAuthPasswordVarName(),'');
 
 
 
 			/*
-			$this->Trace("m_arrayConfig:");
+			$this->Trace('m_arrayConfig:');
 			$this->Trace($this->GetConfigArray());
 			
-			$this->Trace("m_arrayParams:");
+			$this->Trace('m_arrayParams:');
 			$this->Trace($this->m_arrayParams);
 			
-			$this->Trace("m_arrayVars:");
+			$this->Trace('m_arrayVars:');
 			$this->Trace($this->m_arrayVars);
 			*/
 			
@@ -924,11 +924,11 @@
 			// Add Errors and Warnings resulting from the initialization process
 			if ($bSessionCreationError == true)
 			{
-				$this->AddErrorMessageCode("SESSION_CREATE"); 
+				$this->AddErrorMessageCode('SESSION_CREATE'); 
 			}
 			if ($bCSRFInvalidWarning == true)
 			{
-				$this->AddWarningMessageCode("CSRF_TOKEN_INVALID"); 
+				$this->AddWarningMessageCode('CSRF_TOKEN_INVALID'); 
 			}
 			
 			
@@ -948,20 +948,20 @@
 			// Store Session Data
 			if ($this->GetSessionMode() != SESSION_MODE_NONE)
 			{
-				if ($this->GetSessionID() != "")
+				if ($this->GetSessionID() != '')
 				{
 					if ($this->IsSubsequentRequest() == false)
 					{
 						$this->Trace($this->m_arrayVars);
 						if ($this->OnSessionWrite($this->m_strSessionID,$this->m_arrayVars) != true)
 						{
-							$this->Trace("ERROR: Session data could not be written.");
+							$this->Trace('ERROR: Session data could not be written.');
 							$this->SystemEvent(
-								"WARNING",
-								"SESSION_WRITE_FAILED",
-								"Session data could not be written!",
+								'WARNING',
+								'SESSION_WRITE_FAILED',
+								'Session data could not be written!',
 								array(
-									"sessionid" => $this->m_strSessionID
+									'sessionid' => $this->m_strSessionID
 								)
 							);
 						}
@@ -973,9 +973,9 @@
 			if ($this->IsDownloadFileSet())
 			{
 				DownloadFileAndExit(
-					$this->m_arrayDownloadFile["mimetype"],	
-					$this->m_arrayDownloadFile["filename"],
-					$this->m_arrayDownloadFile["contents"]);
+					$this->m_arrayDownloadFile['mimetype'],	
+					$this->m_arrayDownloadFile['filename'],
+					$this->m_arrayDownloadFile['contents']);
 			}
 			
 			// UNRESOLVED TID CHECK
@@ -990,13 +990,13 @@
 			// Add trace output if required        
 			if ($this->IsTraceActive() == true)
 	    {
-	    	if (FindString($strOutput,"{TRACE}") != -1)
+	    	if (FindString($strOutput,'{TRACE}') != -1)
 	    	{
-	    		$strOutput = ReplaceString($strOutput,"{TRACE}",$this->RenderTraceLog());
+	    		$strOutput = ReplaceString($strOutput,'{TRACE}',$this->RenderTraceLog());
 	    	}
-				else if (FindString($strOutput,"</body>") != -1)
+				else if (FindString($strOutput,'</body>') != -1)
 				{
-					$strOutput = ReplaceString($strOutput,"</body>",$this->RenderTraceLog()."</body>");
+					$strOutput = ReplaceString($strOutput,'</body>',$this->RenderTraceLog().'</body>');
 				}
 				else
 				{
@@ -1005,7 +1005,7 @@
 			}
 			else
 			{
-				$strOutput = ReplaceString($strOutput,"{TRACE}","");
+				$strOutput = ReplaceString($strOutput,'{TRACE}','');
 			}
 
 
@@ -1013,9 +1013,9 @@
 			if ($this->m_bProfiling)
 			{
 				$fSecondsElapsed = $this->ProfilingGetSeconds();
-				$strProfiling = "\n";
-				$strProfiling .= "<!--Elapsed Seconds: ".RenderNumber($fSecondsElapsed,3)."-->\n";
-				$strProfiling .= "<!--Memory Consumed: ".memory_get_usage()."-->\n";
+				$strProfiling = '\n';
+				$strProfiling .= '<!--Elapsed Seconds: '.RenderNumber($fSecondsElapsed,3).'-->\n';
+				$strProfiling .= '<!--Memory Consumed: '.memory_get_usage().'-->\n';
      		$strOutput .= $strProfiling;
      	}
      	
@@ -1032,12 +1032,12 @@
 		final
 		function GetAssembliesDir()
 		{
-			return $this->GetSourceDir()."assemblies/";	
+			return $this->GetSourceDir().'assemblies/';	
 		}
 		final
 		function GetAssemblyDir($strAssemblyID)
 		{
-			return $this->GetAssembliesDir() . $strAssemblyID . "/";	
+			return $this->GetAssembliesDir() . $strAssemblyID . '/';	
 		}
 		
 		final
@@ -1067,15 +1067,15 @@
 		final
 		function GetModuleSourceDir($strModuleName)
 		{
-			$arrayModuleNameComponents = explode("/",$strModuleName);
+			$arrayModuleNameComponents = explode('/',$strModuleName);
 			if (!is_array($arrayModuleNameComponents) || ArrayCount($arrayModuleNameComponents) != 2)
 			{
 				$this->Trace($arrayModuleNameComponents);
-				$this->Error("GetModuleDir(\"$strModuleName\"): Invalid name");
+				$this->Error('GetModuleDir(\'$strModuleName\'): Invalid name');
 			}
 			$strModuleGroup = $arrayModuleNameComponents[0];
 			$strModuleID = $arrayModuleNameComponents[1];
-			$strModuleSourceDir = $this->GetSourceDir()."modules/".$strModuleGroup."/".$strModuleID."/";
+			$strModuleSourceDir = $this->GetSourceDir().'modules/'.$strModuleGroup.'/'.$strModuleID.'/';
 			return $strModuleSourceDir;
 		}
 
@@ -1100,7 +1100,7 @@
 			$strFile = $this->GetAssemblyLine()->GetPluginSourceFilePath($strPluginID);
 			if ($strFile == false)
 			{
-				$this->Error('IncludePlugin: Plugin source file not found: "'.$strPluginID.'"');
+				$this->Error('IncludePlugin: Plugin source file not found: ''.$strPluginID.''');
 			}
 			require_once($strFile);
 		} 
@@ -1125,7 +1125,7 @@
 			$strFile = $this->GetAssemblyLine()->GetElementSourceFilePath($strElementID);
 			if ($strFile == false)
 			{
-				$this->Error('IncludeElement: Element source file not found: "'.$strElementID.'"');
+				$this->Error('IncludeElement: Element source file not found: ''.$strElementID.''');
 			}
 			require_once($strFile);
 		} 
@@ -1137,7 +1137,7 @@
 			if ($strModuleSourceFile == false)
 			//$strModuleSourcePath = $this->GetModuleSourcePath($strModuleName);
 			{
-				$this->Error("IncludeModule: Module Source file not found: \"$strModulePath\"");
+				$this->Error('IncludeModule: Module Source file not found: \'$strModulePath\'');
 			}
 			require_once($strModuleSourceFile);	
 		}
@@ -1147,10 +1147,10 @@
 		{
 			if ($this->m_bModuleRegistrationCompleted == true)
 			{
-				$this->Error("Module registration completed. Please use RegisterModules only in or before invokation of OnInit.");	
+				$this->Error('Module registration completed. Please use RegisterModules only in or before invokation of OnInit.');	
 			}
-			$this->RegisterEvent("website-module-init",$module);
-			$this->RegisterEvent("website-user-delete",$module);
+			$this->RegisterEvent('website-module-init',$module);
+			$this->RegisterEvent('website-user-delete',$module);
 		}
 
 		final
@@ -1205,7 +1205,7 @@
 		final
 		function GetParamsInsecure()
 		{
-			$this->Trace("WARNING: Use of GetParamsInsecure() is a possible security contraint!");
+			$this->Trace('WARNING: Use of GetParamsInsecure() is a possible security contraint!');
 			return $this->m_arrayParams;
 		}
 				
@@ -1218,7 +1218,7 @@
 		final
 		function GetParamInsecure($strParam)
 		{
-			$this->Trace("WARNING: Use of GetParamInsecure() is a possible security contraint!");
+			$this->Trace('WARNING: Use of GetParamInsecure() is a possible security contraint!');
 			return ArrayGetValue($this->m_arrayParams,$strParam);
 		}
 
@@ -1252,7 +1252,7 @@
 		final
 		function GetVarInsecure($strVar)
 		{
-			$this->Trace("WARNING: Use of GetVarInsecure() is a possible security contraint!");
+			$this->Trace('WARNING: Use of GetVarInsecure() is a possible security contraint!');
 			return $this->GetVarInternal($strVar);
 		}
 		
@@ -1262,7 +1262,7 @@
 		{
 			if ($this->CheckVarName($strVar) == false)
 			{
-				$this->Error("GetVar() or GetVarInsecure() called with invalid var name parameter: \"$strVar\". Var names are also used for http request parameters and may only contain the following set of characters: \"".CHARSET_PARAMETERNAME."\"");	
+				$this->Error('GetVar() or GetVarInsecure() called with invalid var name parameter: \'$strVar\'. Var names are also used for http request parameters and may only contain the following set of characters: \''.CHARSET_PARAMETERNAME.'\'');	
 			}
 			return ArrayGetValue($this->m_arrayVars,$strVar);
 		}
@@ -1287,7 +1287,7 @@
 		final		
 		function GetAllVarsInsecure()
 		{
-			$this->Trace("WARNING: Use of GetAllVarsInsecure() is a possible security contraint!");
+			$this->Trace('WARNING: Use of GetAllVarsInsecure() is a possible security contraint!');
 			return $this->m_arrayVars;
 		}
 
@@ -1295,7 +1295,7 @@
 		final	
 		function SetVar($strVar, $strValue)
 		{
-			if ($strValue != "")
+			if ($strValue != '')
 			{
 				$this->m_arrayVars[$strVar] = $strValue;
 			}
@@ -1308,17 +1308,17 @@
 		final
 		function GetCommand()
 		{
-			return $this->GetVar("command");	
+			return $this->GetVar('command');	
 		}
 
 		final
 		function IsCSRFProtectionActive()
 		{
-			if ($this->GetAuthUserID() == "")
+			if ($this->GetAuthUserID() == '')
 			{
 				return false;	
 			}
-			$bCSRFDefuse = GetBoolValue($this->GetConfig("csrf_defuse"));
+			$bCSRFDefuse = GetBoolValue($this->GetConfig('csrf_defuse'));
 			if ($bCSRFDefuse == true)
 			{
 				return false;
@@ -1333,10 +1333,10 @@
 		final
 		function ExtractAndVerifyCSRFToken()
 		{
-			$strCSRFTokenSession = ArrayGetValue($this->m_arraySession,	"csrf-token");
-			$strCSRFTokenParam = $this->GetParam("csrf-token");
+			$strCSRFTokenSession = ArrayGetValue($this->m_arraySession,	'csrf-token');
+			$strCSRFTokenParam = $this->GetParam('csrf-token');
 			
-			if ($strCSRFTokenParam == "")
+			if ($strCSRFTokenParam == '')
 			{
 				return false;	
 			}
@@ -1352,20 +1352,20 @@
 		{
 			$this->m_strOldCSRFToken = $this->GetCSRFToken();
 			$strNewToken = MakeNumericToken(40);
-			$this->SetVar("csrf-token",$strNewToken);
+			$this->SetVar('csrf-token',$strNewToken);
 		}
 		
 		final
 		function RecoverPreviousCSRFToken()
 		{
-			$this->SetVar("csrf-token",$this->m_strOldCSRFToken);	
+			$this->SetVar('csrf-token',$this->m_strOldCSRFToken);	
 		}
 		
 		
 		final		
 		function GetCSRFToken()
 		{
-			return $this->GetVar("csrf-token");
+			return $this->GetVar('csrf-token');
 		}
 
 		
@@ -1386,17 +1386,17 @@
 			switch ($this->GetSessionMode())
 			{
 				case SESSION_MODE_SERVER_URL:
-					return $this->GetParam("sessionid");
+					return $this->GetParam('sessionid');
 				case SESSION_MODE_SERVER_COOKIE:
-					return $this->GetCookie("sessionid");
+					return $this->GetCookie('sessionid');
 				case SESSION_MODE_SERVER_COMBINED:
-					$strParam = $this->GetParam("sessionid");
-					$strCookie = $this->GetCookie("sessionid");
+					$strParam = $this->GetParam('sessionid');
+					$strCookie = $this->GetCookie('sessionid');
 					return StringGlue(array($strParam,$strCookie));
 				case SESSION_MODE_LOCAL_COOKIE:
-					return "local";
+					return 'local';
 				default:
-					return "";
+					return '';
 			}
 		}
 		
@@ -1405,11 +1405,11 @@
 			switch ($this->GetSessionMode())
 			{
 				case SESSION_MODE_SERVER_COOKIE:
-					$this->SetCookie("sessionid",$strSessionID,$this->GetSessionCookieDuration());
+					$this->SetCookie('sessionid',$strSessionID,$this->GetSessionCookieDuration());
 					break;
 				case SESSION_MODE_SERVER_COMBINED:
 					$arraySlices = StringSlice($strSessionID,2);
-					$this->SetCookie("sessionid",$arraySlices[1],$this->GetSessionCookieDuration());
+					$this->SetCookie('sessionid',$arraySlices[1],$this->GetSessionCookieDuration());
 					break;
 				case SESSION_MODE_SERVER_URL:
 				default:
@@ -1420,16 +1420,16 @@
 		function GetSessionAwareArrayVars()
 		{
 			$arrayVarsSession = array();
-			$arrayVarsSession["content"] = $this->GetContent();
+			$arrayVarsSession['content'] = $this->GetContent();
 			if ($this->IsCSRFProtectionActive())
 			{
-				$arrayVarsSession["csrf-token"] = $this->GetCSRFToken();
+				$arrayVarsSession['csrf-token'] = $this->GetCSRFToken();
 			}
 			
 			switch ($this->GetSessionMode())
 			{
 				case SESSION_MODE_SERVER_URL:
-					$arrayVarsSession["sessionid"] = $this->GetSessionID();
+					$arrayVarsSession['sessionid'] = $this->GetSessionID();
 					return $arrayVarsSession;
 
 				case SESSION_MODE_SERVER_COOKIE:
@@ -1437,7 +1437,7 @@
 
 				case SESSION_MODE_SERVER_COMBINED:
 					$arraySlices = StringSlice($this->GetSessionID(),2);
-					$arrayVarsSession["sessionid"] = $arraySlices[0];
+					$arrayVarsSession['sessionid'] = $arraySlices[0];
 					return $arrayVarsSession;
 
 				case SESSION_MODE_LOCAL_COOKIE:
@@ -1464,7 +1464,7 @@
 		function SetSubsequentRequest()
 		{
 			$this->m_bSubsequentRequest = true;
-			$this->Trace("SetSubsequentRequest");
+			$this->Trace('SetSubsequentRequest');
 		}
 		
 		final
@@ -1515,8 +1515,8 @@
 		final
 		function GetSubmitVarInsecure()
 		{
-			$strSubmitVar = $this->GetVarInsecure("submit");
-			$strVar = StringGetFromEmbracingTags($strSubmitVar,"<!--\"","\"-->");
+			$strSubmitVar = $this->GetVarInsecure('submit');
+			$strVar = StringGetFromEmbracingTags($strSubmitVar,'<!--\'','\'-->');
 			if ($strVar == false)
 			{
 				return $strSubmitVar;	
@@ -1536,7 +1536,7 @@
 		{
 			if (!IsValidCookieName($strCookie))
 			{
-				$this->Error("GetCookie() or GetCookieInsecure() called with invalid var name parameter: \"$strCookie\". Cookie names may only contain the following set of characters: \"".CHARSET_COOKIE."\" and it must not start with a digit.");	
+				$this->Error('GetCookie() or GetCookieInsecure() called with invalid var name parameter: \'$strCookie\'. Cookie names may only contain the following set of characters: \''.CHARSET_COOKIE.'\' and it must not start with a digit.');	
 			}
 			return ArrayGetValue($this->m_arrayCookies,$strCookie);
 		}
@@ -1548,7 +1548,7 @@
 		final
 		function GetCookieInsecure($strCookie)
 		{
-			$this->Trace("WARNING: Use of GetCookieInsecure() is a possible security contraint!");
+			$this->Trace('WARNING: Use of GetCookieInsecure() is a possible security contraint!');
 			return $this->GetCookieInternal($strCookie);
 		}
 		final
@@ -1559,7 +1559,7 @@
 		final
 		function GetAllCookiesInsecure()
 		{
-			$this->Trace("WARNING: Use of GetAllCookiesInsecure() is a possible security contraint!");
+			$this->Trace('WARNING: Use of GetAllCookiesInsecure() is a possible security contraint!');
 			return $this->m_arrayCookies;	
 		}
 		
@@ -1572,14 +1572,14 @@
 				return false;	
 			}
 			$arrayURL = ParseURL($this->GetRootURL());
-			$strDomain = $arrayURL["HOST"];
+			$strDomain = $arrayURL['HOST'];
 			$strPath = $this->GetRootPath();
 			
 			$strValue = StringURLEncode($strValue);
 			
 			if (StringLength($strValue) > 4000)
 			{
-				$this->Error("Cookie value too long! ");	
+				$this->Error('Cookie value too long! ');	
 			}
 
 			$timeExpiration = time()+intval($nTimeOutSeconds);
@@ -1593,17 +1593,17 @@
 				$timeExpiration,
 				$strPath,
 				$strDomain,
-				//($this->GetProtocol()=="https")?(true):(false),
+				//($this->GetProtocol()=='https')?(true):(false),
 				false,
 				false);
 
 			$ea->End();			
 
-			$this->Trace("SetCookie: $strDomain$strPath $strCookie: $strValue");
+			$this->Trace('SetCookie: $strDomain$strPath $strCookie: $strValue');
 				
 			if ($bResult == false)
 			{
-				$this->Error("SetCookie failed! Please check if there was unintended output before the use of SetCookie()!");
+				$this->Error('SetCookie failed! Please check if there was unintended output before the use of SetCookie()!');
 			}
 				
 			return $bResult;
@@ -1617,7 +1617,7 @@
 			}
 
 			$arrayURL = ParseURL($this->GetRootURL());
-			$strDomain = $arrayURL["HOST"];
+			$strDomain = $arrayURL['HOST'];
 			
 			
 			setcookie(
@@ -1626,19 +1626,19 @@
 				time()-(60*60*24),
 				$this->GetRootPath(),
 				$strDomain,
-				//($this->GetProtocol()=="https")?(true):(false),
+				//($this->GetProtocol()=='https')?(true):(false),
 				false,
 				false);			
 				
 				return true;
 		}
 		final
-		function DeleteAllCookies($strPrefix = "")
+		function DeleteAllCookies($strPrefix = '')
 		{
 			foreach ($this->m_arrayCookies as $strCookie => $strValue)
 			{
 				$bDeleteCookie = true;
-				if ($strPrefix != "")
+				if ($strPrefix != '')
 				{
 					$nPos = FindString($strCookie,$strPrefix);
 					if ($nPos != 0)
@@ -1743,13 +1743,13 @@
 		final
 		function GetRootURL_PreferHTTPS()
 		{
-			if (ArrayValueExists($this->m_arrayProtocols,"https") == false)
+			if (ArrayValueExists($this->m_arrayProtocols,'https') == false)
 			{
-				$strURL = $this->m_arrayProtocols[0] . "://";
+				$strURL = $this->m_arrayProtocols[0] . '://';
 			}
 			else
 			{
-				$strURL = "https" . "://";				
+				$strURL = 'https' . '://';				
 			}
 			$strURL .= $this->m_strRootURLnoProtocol;	
 			return $strURL;
@@ -1759,10 +1759,10 @@
 		function GetRootPath()
 		{
 			$arrayParsed = ParseURL($this->GetRootURL());
-			$strPath = ArrayGetValue($arrayParsed,"PATH");			
-			if (StringSection($strPath,0,1) != "/")
+			$strPath = ArrayGetValue($arrayParsed,'PATH');			
+			if (StringSection($strPath,0,1) != '/')
 			{
-				$strPath = "/".$strPath;	
+				$strPath = '/'.$strPath;	
 			}
 			return $strPath;
 		}
@@ -1772,8 +1772,8 @@
 		function MakeCssURL($strLayout)
 		{
 			$arrayParams = array();
-			$arrayParams["layout"] = $strLayout;
-			$arrayParams["command"] = "css";
+			$arrayParams['layout'] = $strLayout;
+			$arrayParams['command'] = 'css';
 			return MakeURL($this->m_strRootURL,$arrayParams,true);			
 		}
 
@@ -1791,9 +1791,9 @@
 		*/
 
 		
-		function GetImageRootURL($strImageFile="")
+		function GetImageRootURL($strImageFile='')
 		{
-			return $this->GetRootURL()."images/".$strImageFile;
+			return $this->GetRootURL().'images/'.$strImageFile;
 		}
 		
 		final  
@@ -1804,7 +1804,7 @@
 			{
 				return $this->GetImageRootURL($strFile);	
 			}
-			$strFile = $this->MakeLayoutImageFileName($strImageID,"default",$strImageFileExtention);
+			$strFile = $this->MakeLayoutImageFileName($strImageID,'default',$strImageFileExtention);
 			if (IsFile($this->GetImagesDir().$strFile))
 			{
 				return $this->GetImageRootURL($strFile);	
@@ -1815,24 +1815,24 @@
 		final
 		function GetImageURL($strImageID,$strImageFileExtention)
 		{
-			if ($strImageFileExtention == "")
+			if ($strImageFileExtention == '')
 			{
-				$strFile = $this->MakeImageFileName($strImageID,"svg");
+				$strFile = $this->MakeImageFileName($strImageID,'svg');
 				if (IsFile($this->GetImagesDir().$strFile))
 				{
 					return $this->GetImageRootURL($strFile);	
 				}
-				$strFile = $this->MakeImageFileName($strImageID,"png");
+				$strFile = $this->MakeImageFileName($strImageID,'png');
 				if (IsFile($this->GetImagesDir().$strFile))
 				{
 					return $this->GetImageRootURL($strFile);	
 				}
-				$strFile = $this->MakeImageFileName($strImageID,"jpg");
+				$strFile = $this->MakeImageFileName($strImageID,'jpg');
 				if (IsFile($this->GetImagesDir().$strFile))
 				{
 					return $this->GetImageRootURL($strFile);	
 				}
-				$strFile = $this->MakeImageFileName($strImageID,"gif");
+				$strFile = $this->MakeImageFileName($strImageID,'gif');
 				if (IsFile($this->GetImagesDir().$strFile))
 				{
 					return $this->GetImageRootURL($strFile);	
@@ -1844,24 +1844,24 @@
 				return $this->GetImageRootURL($strFile);	
 			}
 
-			if ($strImageFileExtention == "")
+			if ($strImageFileExtention == '')
 			{
-				$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),"svg");
+				$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),'svg');
 				if (IsFile($this->GetImagesDir().$strFile))
 				{
 					return $this->GetImageRootURL($strFile);	
 				}	
-				$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),"png");
+				$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),'png');
 				if (IsFile($this->GetImagesDir().$strFile))
 				{
 					return $this->GetImageRootURL($strFile);	
 				}
-				$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),"jpg");
+				$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),'jpg');
 				if (IsFile($this->GetImagesDir().$strFile))
 				{
 					return $this->GetImageRootURL($strFile);	
 				}
-				$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),"gif");
+				$strFile = $this->MakeLayoutImageFileName($strImageID,$this->GetLayout(),'gif');
 				if (IsFile($this->GetImagesDir().$strFile))
 				{
 					return $this->GetImageRootURL($strFile);	
@@ -1874,16 +1874,16 @@
 			}
 			
 			$arrayParams = array();
-			if ($strImageFileExtention != "")
+			if ($strImageFileExtention != '')
 			{
-				$arrayParams["ext"] = $strImageFileExtention;
+				$arrayParams['ext'] = $strImageFileExtention;
 			}
 			return $this->MakeImageURL($strImageID,$arrayParams,false);
 		}		
 
-		function GetFontRootURL($strFontFile="")
+		function GetFontRootURL($strFontFile='')
 		{
-			return $this->GetRootURL()."fonts/".$strFontFile;
+			return $this->GetRootURL().'fonts/'.$strFontFile;
 		}
 
 
@@ -1898,9 +1898,9 @@
 			return $this->MakeFontURL($strFontID,false);
 		}		
 
-		function GetVideoRootURL($strVideoFile="")
+		function GetVideoRootURL($strVideoFile='')
 		{
-			return $this->GetRootURL()."videos/".$strVideoFile;
+			return $this->GetRootURL().'videos/'.$strVideoFile;
 		}
 
 
@@ -1917,9 +1917,9 @@
 
 
 
-		function GetDownloadRootURL($strFilePath = "")   
+		function GetDownloadRootURL($strFilePath = '')   
 		{
-			return $this->GetRootURL()."download/".$strFilePath;
+			return $this->GetRootURL().'download/'.$strFilePath;
 		}
 
 		
@@ -1936,10 +1936,10 @@
 		final
 		function GetTimeZone()
 		{
-			$strTimeZone = $this->GetVar("timezone");	
+			$strTimeZone = $this->GetVar('timezone');	
 			if (!IsValidTimezoneID($strTimeZone))
 			{
-				return "UTC";
+				return 'UTC';
 			}
 			return $strTimeZone;
 		}
@@ -1949,7 +1949,7 @@
 		{
 			if (IsValidTimezoneID($strTimeZone))
 			{
-				$this->SetVar("timezone",$strTimeZone);
+				$this->SetVar('timezone',$strTimeZone);
 			}
 		}
 		
@@ -1958,7 +1958,7 @@
 		{
 			$strCountryID = $this->GetCountry();
 			$strFormat = $this->OnGetDateLocalFormat($strCountryID);
-			if ($strFormat == "")
+			if ($strFormat == '')
 			{
 				$strFormat = GetDateLocalFormat($strCountryID);
 			}
@@ -1975,7 +1975,7 @@
 		{
 			$strCountryID = $this->GetCountry();
 			$strFormat = $this->OnGetTimeLocalFormat($strCountryID);
-			if ($strFormat == "")
+			if ($strFormat == '')
 			{
 				$strFormat = GetTimeLocalFormat($strCountryID);
 			}
@@ -1992,7 +1992,7 @@
 		{
 			$strCountryID = $this->GetCountry();
 			$strFormat = $this->OnGetDateTimeLocalFormat($strCountryID);
-			if ($strFormat == "")
+			if ($strFormat == '')
 			{ 
 				$strFormat = GetDateTimeLocalFormat($strCountryID);
 			}
@@ -2005,13 +2005,13 @@
 		}
 		
 		final
-		function RenderNumber($fValue,$nPrecision=0,$strMetric="",$bUseSeparator = true)
+		function RenderNumber($fValue,$nPrecision=0,$strMetric='',$bUseSeparator = true)
 		{
 			$fValue = floatval($fValue);
 			/*
-			if (($fValue == "") || ($fValue == null))
+			if (($fValue == '') || ($fValue == null))
 			{
-				return "";	
+				return '';	
 			}
 			*/
 			$arraySettings = GetLocaleSettings(
@@ -2019,7 +2019,7 @@
 				$this->GetLanguage());
 			if ($bUseSeparator == false)
 			{
-				$arraySettings["DIGIT_GROUPING_SEPARATOR"] = "";	
+				$arraySettings['DIGIT_GROUPING_SEPARATOR'] = '';	
 			}
 			return RenderNumber(
 				$fValue,
@@ -2031,7 +2031,7 @@
 		final
 		function RenderCurrency($fValue,$strCurrencyID)
 		{
-			if ( ($fValue == "")
+			if ( ($fValue == '')
 				|| ($fValue == null)
 				|| !IsValidCurrencyID($strCurrencyID))
 			{
@@ -2047,7 +2047,7 @@
 		final
 		function GetLanguage()
 		{
-			return $this->GetVar("language");	
+			return $this->GetVar('language');	
 		}
 
 		final
@@ -2056,20 +2056,20 @@
 			$strLanguage = StringUpperCase($strLanguage);
 			if ($this->IsLanguageSupported($strLanguage))
 			{
-				$this->SetVar("language",$strLanguage);
+				$this->SetVar('language',$strLanguage);
 			}
 		}
 
 		final
 		function GetSupportedLanguages()
 		{
-			return $this->GetConfig("languages");
+			return $this->GetConfig('languages');
 		}
 
 		final
 		function GetFallbackLanguage()
 		{
-			return $this->GetConfig("fallbacklanguage");
+			return $this->GetConfig('fallbacklanguage');
 		}
 		
 		final
@@ -2094,7 +2094,7 @@
 		final
 		function GetSupportedCountries()
 		{
-			$arrayCountries = $this->GetConfig("countries");
+			$arrayCountries = $this->GetConfig('countries');
 			if (is_array($arrayCountries) == true)
 			{
 				if (ArrayCount($arrayCountries))
@@ -2114,10 +2114,10 @@
 		final
 		function GetCountry()
 		{
-			$strCountry = $this->GetVar("country");	
-			if ($strCountry == "")
+			$strCountry = $this->GetVar('country');	
+			if ($strCountry == '')
 			{
-				$strCountry = $this->GetConfig("defaultcountry");	
+				$strCountry = $this->GetConfig('defaultcountry');	
 			}
 			return $strCountry;
 		}
@@ -2125,16 +2125,16 @@
 		final
 		function SetCountry($strCountry)
 		{
-			if (IsValidCountryID($strCountry) || ($strCountry == ""))
+			if (IsValidCountryID($strCountry) || ($strCountry == ''))
 			{
-				$this->SetVar("country",$strCountry);	
+				$this->SetVar('country',$strCountry);	
 			}	
 		}
 
 		final
 		function GetSupportedCurrencies()
 		{
-			$arrayCurrencies = $this->GetConfig("currencies");
+			$arrayCurrencies = $this->GetConfig('currencies');
 			if (is_array($arrayCurrencies) == true)
 			{
 				if (ArrayCount($arrayCurrencies))
@@ -2156,16 +2156,16 @@
 		final
 		function GetLayout()
 		{
-			return $this->GetVar("layout");	
+			return $this->GetVar('layout');	
 		}
 		final
 		function SetLayout($strLayout)
 		{
 			if (ArrayValueExists($this->GetSupportedLayouts(),$strLayout) == false)
 			{
-				$strLayout = "default";	
+				$strLayout = 'default';	
 			}
-			$this->SetVar("layout",$strLayout);	
+			$this->SetVar('layout',$strLayout);	
 		}
 		
 		final
@@ -2176,12 +2176,12 @@
 			{
 				return $arrayLayouts;
 			}
-			return array("default");				
+			return array('default');				
 		}
 		
 		function OnGetSupportedLayouts()
 		{
-			return $this->GetConfig("layouts");
+			return $this->GetConfig('layouts');
 		}
 
 		final		
@@ -2198,30 +2198,30 @@
 		final
 		function GetContent()
 		{
-			return $this->GetVar("content");	
+			return $this->GetVar('content');	
 		}
 		final		
 		function SetContent($strContent)
 		{
-			$this->SetVar("content",$strContent);	
+			$this->SetVar('content',$strContent);	
 		}
 
 		final
 		function GetArea()
 		{
-			return $this->GetVar("area");	
+			return $this->GetVar('area');	
 		}
 		
 		final
 		function SetArea($strArea)
 		{
-			$this->SetVar("area",$strArea);	
+			$this->SetVar('area',$strArea);	
 		}
 		
 		final
 		function Error($strText)
 		{
-			$this->SystemLog("ERROR","FATALERROR", $strText);
+			$this->SystemLog('ERROR','FATALERROR', $strText);
 			FatalError(
 				$strText,
 				$this->GetTraceLog());
@@ -2235,39 +2235,39 @@
 
 
 		final
-		function SetErrorMessageCode($strMessageCode,$strPrefix="")
+		function SetErrorMessageCode($strMessageCode,$strPrefix='')
 		{
-			if ($strMessageCode != "")
+			if ($strMessageCode != '')
 			{
 				$this->SetErrorMessageText(
 					$this->GetMessage(
-						"error",
+						'error',
 						$strMessageCode,
 						$strPrefix));
 			}
 		}
 		
 		final		
-		function SetWarningMessageCode($strMessageCode,$strPrefix="")
+		function SetWarningMessageCode($strMessageCode,$strPrefix='')
 		{
-			if ($strMessageCode != "")
+			if ($strMessageCode != '')
 			{
 				$this->SetWarningMessageText(
 					$this->GetMessage(
-						"warning",
+						'warning',
 						$strMessageCode,
 						$strPrefix));
 			}
 		}
 		
 		final		
-		function SetInfoMessageCode($strMessageCode,$strPrefix="")
+		function SetInfoMessageCode($strMessageCode,$strPrefix='')
 		{
-			if ($strMessageCode != "")
+			if ($strMessageCode != '')
 			{
 				$this->SetInfoMessageText(
 					$this->GetMessage(
-						"info",
+						'info',
 						$strMessageCode,
 						$strPrefix));
 			}
@@ -2276,9 +2276,9 @@
 		final
 		function SetErrorMessageText($strMessageText)
 		{
-			$this->m_arrayMessages["error"] = array();
-			$this->Trace("Reset error messages");
-			if ($strMessageText != "")
+			$this->m_arrayMessages['error'] = array();
+			$this->Trace('Reset error messages');
+			if ($strMessageText != '')
 			{
 				$this->AddErrorMessageText($strMessageText);
 			}
@@ -2287,9 +2287,9 @@
 		final		
 		function SetWarningMessageText($strMessageText)
 		{
-			$this->m_arrayMessages["warning"] = array();
-			$this->Trace("Reset warning messages");
-			if ($strMessageText != "")
+			$this->m_arrayMessages['warning'] = array();
+			$this->Trace('Reset warning messages');
+			if ($strMessageText != '')
 			{
 				$this->AddWarningMessageText($strMessageText);
 			}
@@ -2298,8 +2298,8 @@
 		final		
 		function SetInfoMessageText($strMessageText)
 		{
-			$this->m_arrayMessages["info"] = array();
-			$this->Trace("Reset info messages");
+			$this->m_arrayMessages['info'] = array();
+			$this->Trace('Reset info messages');
 			if ($strMessageText)
 			{
 				$this->AddInfoMessageText($strMessageText);
@@ -2309,78 +2309,78 @@
 		final
 		function AddErrorMessageText($strMessageText)
 		{
-			$this->Trace("AddErrorMessageText(\"$strMessageText\")");
-			if ($strMessageText != "")
+			$this->Trace('AddErrorMessageText(\'$strMessageText\')');
+			if ($strMessageText != '')
 			{
-				$this->m_arrayMessages["error"][] = $strMessageText;
+				$this->m_arrayMessages['error'][] = $strMessageText;
 			}			
 		}
 
 		final
 		function AddWarningMessageText($strMessageText)
 		{
-			$this->Trace("AddWarningMessageText(\"$strMessageText\")");
-			if ($strMessageText != "")
+			$this->Trace('AddWarningMessageText(\'$strMessageText\')');
+			if ($strMessageText != '')
 			{
-				$this->m_arrayMessages["warning"][] = $strMessageText;
+				$this->m_arrayMessages['warning'][] = $strMessageText;
 			}			
 		}
 
 		final
 		function AddInfoMessageText($strMessageText)
 		{
-			$this->Trace("AddInfoMessageText(\"$strMessageText\")");
-			if ($strMessageText != "")
+			$this->Trace('AddInfoMessageText(\'$strMessageText\')');
+			if ($strMessageText != '')
 			{
-				$this->m_arrayMessages["info"][] = $strMessageText;
+				$this->m_arrayMessages['info'][] = $strMessageText;
 			}			
 		}
 
 		final
-		function AddErrorMessageCode($strMessageCode,$strPrefix="")
+		function AddErrorMessageCode($strMessageCode,$strPrefix='')
 		{
-			$this->Trace("AddErrorMessageCode(\"$strMessageCode\")");
-			if ($strMessageCode != "")
+			$this->Trace('AddErrorMessageCode(\'$strMessageCode\')');
+			if ($strMessageCode != '')
 			{
-				$this->m_arrayMessages["error"][] = $this->GetMessage("error",$strMessageCode,$strPrefix);
+				$this->m_arrayMessages['error'][] = $this->GetMessage('error',$strMessageCode,$strPrefix);
 			}			
 		}
 
 		final
-		function AddWarningMessageCode($strMessageCode,$strPrefix="")
+		function AddWarningMessageCode($strMessageCode,$strPrefix='')
 		{
-			$this->Trace("AddWarningMessageCode(\"$strMessageCode\")");
-			if ($strMessageCode != "")
+			$this->Trace('AddWarningMessageCode(\'$strMessageCode\')');
+			if ($strMessageCode != '')
 			{
-				$this->m_arrayMessages["warning"][] = $this->GetMessage("warning",$strMessageCode,$strPrefix);
+				$this->m_arrayMessages['warning'][] = $this->GetMessage('warning',$strMessageCode,$strPrefix);
 			}			
 		}
 
 		final
-		function AddInfoMessageCode($strMessageCode,$strPrefix="")
+		function AddInfoMessageCode($strMessageCode,$strPrefix='')
 		{
-			$this->Trace("AddInfoMessageCode(\"$strMessageCode\")");
-			if ($strMessageCode != "")
+			$this->Trace('AddInfoMessageCode(\'$strMessageCode\')');
+			if ($strMessageCode != '')
 			{
-				$this->m_arrayMessages["info"][] = $this->GetMessage("info",$strMessageCode,$strPrefix);
+				$this->m_arrayMessages['info'][] = $this->GetMessage('info',$strMessageCode,$strPrefix);
 			}			
 		}
 		
 		final
 		function IsError()
 		{
-			return ArrayCount(ArrayGetValue($this->m_arrayMessages,"error"));
+			return ArrayCount(ArrayGetValue($this->m_arrayMessages,'error'));
 		}
 
 		final
-		function AddJavaScript($strTitle,$strID = "")
+		function AddJavaScript($strTitle,$strID = '')
 		{
-			if ($strID == "")
+			if ($strID == '')
 			{
 				$strID = $strTitle;	
 			}
 			$this->m_arrayJavaScripts[$strTitle] = array(
-				"id" => $strID);	
+				'id' => $strID);	
 		}
 
 		final
@@ -2395,7 +2395,7 @@
 		function AddJavaScriptFile($strTitle,$strFilePath)
 		{
 			$this->m_arrayJavaScripts[$strTitle] = array(
-				"filepath" => $strFilePath);	
+				'filepath' => $strFilePath);	
 		}
 
 
@@ -2403,7 +2403,7 @@
 		function AddJavaScriptSourceCode($strTitle,$strSourceCode)
 		{
 			$this->m_arrayJavaScripts[$strTitle] = array(
-				"sourcecode" => $strSourceCode);	
+				'sourcecode' => $strSourceCode);	
 		}
 
 		final
@@ -2452,18 +2452,18 @@
 		function Redirect($strURL,$nSeconds = 0)
 		{
 			$nSeconds = intval($nSeconds);
-			$this->AddHeader('<meta http-equiv="refresh" content="'.$nSeconds.'; URL='.$strURL.'"/>');
+			$this->AddHeader('<meta http-equiv='refresh' content=''.$nSeconds.'; URL='.$strURL.''/>');
 		}
 
 		
 		final
 		function EnforceHTTPS()
 		{
-			if ($this->GetProtocol() != "https")
+			if ($this->GetProtocol() != 'https')
 			{
-				if ($this->IsProtocolSupported("https"))
+				if ($this->IsProtocolSupported('https'))
 				{
-					$strURL = $this->MakeProtocolURL("https",$this->GetParams(),false);
+					$strURL = $this->MakeProtocolURL('https',$this->GetParams(),false);
 					RedirectAndExit($strURL);
 				}	
 			}	
@@ -2472,7 +2472,7 @@
 		final		
 		function LoadStringResources($strID,$strLanguage = '')
 		{
-			if ($strLanguage == "")
+			if ($strLanguage == '')
 			{
 				$strLanguage = $this->GetLanguage();
 			}
@@ -2488,14 +2488,14 @@
 			$strFile = $this->GetAssemblyLine()->GetResourceFilePath($strLanguage,$strID);
 			if ($strFile == false)
 			{
-				$this->Trace("Warning: Can not find resources for \"$strID\" for language \"$strLanguage\".");
+				$this->Trace('Warning: Can not find resources for \'$strID\' for language \'$strLanguage\'.');
 			}
 			else
 			{
 				$bResult = $this->m_res->LoadStringResourceFile($strLanguage,$strFile);
 				if ($bResult == false)
 				{
-					$this->Trace("Warning: Failed to load resource file \"$strFile\".");
+					$this->Trace('Warning: Failed to load resource file \'$strFile\'.');
 				}
 				else
 				{
@@ -2506,25 +2506,25 @@
 			$strFallbackLanguage = $this->GetFallbackLanguage();
 			if (!IsValidLanguageID($strFallbackLanguage))
 			{
-				$this->Trace("Warning: No fallback language configured.");
+				$this->Trace('Warning: No fallback language configured.');
 				return false;
 			}
 			else
 			{
-				$this->Trace("Warning: Trying fallback language \"$strFallbackLanguage\".");	
+				$this->Trace('Warning: Trying fallback language \'$strFallbackLanguage\'.');	
 			}
 			
 			$strFile = $this->GetAssemblyLine()->GetResourceFilePath($strFallbackLanguage,$strID);
 			if ($strFile == false)
 			{
-				$this->Trace("Warning: Can not find resources for \"$strID\" for fallback language \"$strFallbackLanguage\".");
+				$this->Trace('Warning: Can not find resources for \'$strID\' for fallback language \'$strFallbackLanguage\'.');
 			}
 			else
 			{
 				$bResult = $this->m_res->LoadStringResourceFile($strFallbackLanguage,$strFile);
 				if ($bResult == false)
 				{
-					$this->Trace("Warning: Failed to load resource file \"$strFile\".");
+					$this->Trace('Warning: Failed to load resource file \'$strFile\'.');
 				}
 				else
 				{
@@ -2536,16 +2536,16 @@
 		}
 	
 		final		
-		function LoadString($strID,$strLanguage="")
+		function LoadString($strID,$strLanguage='')
 		{
-			if ($strLanguage == "")
+			if ($strLanguage == '')
 			{
 				$strLanguage = $this->GetLanguage();
 			}
 			if ($this->m_bUseRes == true)
 			{
 				$strString = $this->m_res->LoadString($strID,$strLanguage);
-				if ($strString != "")
+				if ($strString != '')
 				{
 					return $strString;
 				}
@@ -2556,21 +2556,21 @@
 						return $this->m_res->LoadString($strID,$this->GetFallbackLanguage());
 					}
 				}
-				return "";	
+				return '';	
 			}
 			else
 			{
-				$this->Trace("LoadString: \$this->m_bUseRes == false: returning \"$strID\"");
+				$this->Trace('LoadString: \$this->m_bUseRes == false: returning \'$strID\'');
 				return $strID;
 			}
 		}
 		
 		final 
-		function LoadAllStrings($strLanguage = "")
+		function LoadAllStrings($strLanguage = '')
 		{
 			if ($this->m_bUseRes == true)
 			{
-				if ($strLanguage == "")
+				if ($strLanguage == '')
 				{
 					$strLanguage = $this->GetLanguage();
 				}
@@ -2581,9 +2581,9 @@
 
 		
 		final		
-		function LoadRoutingMap($strID,$strLanguage = "")
+		function LoadRoutingMap($strID,$strLanguage = '')
 		{
-			if ($strLanguage == "")
+			if ($strLanguage == '')
 			{
 				$arrayLanguages = $this->GetSupportedLanguages();
 			}
@@ -2597,7 +2597,7 @@
 				$strFile = $this->GetAssemblyLine()->GetRoutingMapFilePath($strLanguage,$strID);
 				if ($strFile == false)
 				{
-					$this->Trace("Warning: Could not load routing map \"$strID\" for language \"$strLanguage\".");
+					$this->Trace('Warning: Could not load routing map \'$strID\' for language \'$strLanguage\'.');
 				}
 				else
 				{
@@ -2627,7 +2627,7 @@
 		function OnGetRoutingContext($strContextType,$strAlias,&$strLanguage)
 		{
 			$arrayLanguages = $this->GetSupportedLanguages();
-			if ($strLanguage != "")
+			if ($strLanguage != '')
 			{
 				$arrayLanguages = ArrayRemoveValue($arrayLanguages,$strLanguage);
 				$arrayLanguages = ArrayAppend(array($strLanguage),$arrayLanguages);
@@ -2656,7 +2656,7 @@
 			{
 				return $strLayoutFile;
 			}			
- 			return "";
+ 			return '';
 		}
 
 		final
@@ -2768,9 +2768,9 @@
 		function MakeImageURL($strImageID,$arrayParams2=array(),$bEncoded=true)
 		{
 			$arrayParams = array();
-			$arrayParams["layout"] = $this->GetLayout();
-			$arrayParams["command"] = "image";
-			$arrayParams["id"] = $strImageID;
+			$arrayParams['layout'] = $this->GetLayout();
+			$arrayParams['command'] = 'image';
+			$arrayParams['id'] = $strImageID;
 			$arrayParams = ArrayAppend($arrayParams,$arrayParams2);
 			return MakeURL($this->m_strRootURL,$arrayParams,$bEncoded);
 		}
@@ -2779,8 +2779,8 @@
 		function MakeFontURL($strFontID,$bEncoded=true)
 		{
 			$arrayParams = array();
-			$arrayParams["command"] = "font";
-			$arrayParams["id"] = $strFontID;
+			$arrayParams['command'] = 'font';
+			$arrayParams['id'] = $strFontID;
 			return MakeURL($this->m_strRootURL,$arrayParams,$bEncoded);
 		}
 
@@ -2788,8 +2788,8 @@
 		function MakeVideoURL($strVideoID,$bEncoded=true)
 		{
 			$arrayParams = array();
-			$arrayParams["command"] = "video";
-			$arrayParams["id"] = $strVideoID;
+			$arrayParams['command'] = 'video';
+			$arrayParams['id'] = $strVideoID;
 			return MakeURL($this->m_strRootURL,$arrayParams,$bEncoded);
 		}
 
@@ -2798,8 +2798,8 @@
 		function MakeDownloadURL($strFilePath,$bEncoded=true)
 		{
 			$arrayParams = array();
-			$arrayParams["command"] = "download";
-			$arrayParams["filepath"] = $strFilePath;
+			$arrayParams['command'] = 'download';
+			$arrayParams['filepath'] = $strFilePath;
 			return MakeURL($this->m_strRootURL,$arrayParams,$bEncoded);
 		}
 
@@ -2812,15 +2812,15 @@
 			}
 	   	$arrayParams = ArrayMerge($this->GetSessionAwareArrayVars(), $arrayParams);
 	   	
-	   	$strURL = "";
+	   	$strURL = '';
 		   
 		  if (in_array($strNewProtocol,$this->m_arrayProtocols) == false)
 			{
-				$strURL = $this->m_arrayProtocols[0] . "://";
+				$strURL = $this->m_arrayProtocols[0] . '://';
 			}
 			else
 			{
-				$strURL = $strNewProtocol . "://";				
+				$strURL = $strNewProtocol . '://';				
 			}
 			$strURL .= $this->m_strRootURLnoProtocol;
 			$strURL = $this->OnPrepareMakeURL($strURL,$arrayParams,$bEncoded);			
@@ -2836,40 +2836,40 @@
 		final		
 		function MakeIndexURL()
 		{
-			$arrayParams["content"] = "index";
+			$arrayParams['content'] = 'index';
 			return $this->MakeURL($arrayParams);
 		}
 		
 		final		
 		function MakeLanguageURL($strLanguage)
 		{
-			$arrayParams["language"] = $strLanguage;
+			$arrayParams['language'] = $strLanguage;
 			return $this->MakeURL($arrayParams);
 		}
 		
 		final		
 		function MakeContentURL($strNewContent)
 		{
-			$arrayParams["content"] = $strNewContent;
+			$arrayParams['content'] = $strNewContent;
 			return $this->MakeURL($arrayParams);
 		}
 
 		final
-		function MakeLayoutCssFileName($strLayout="default")
+		function MakeLayoutCssFileName($strLayout='default')
 		{
-			return "layout_".$strLayout.".css";
+			return 'layout_'.$strLayout.'.css';
 		}
 		
 		final
-		function MakeLayoutImageFileName($strImageID,$strLayout="default",$strExtention="png")
+		function MakeLayoutImageFileName($strImageID,$strLayout='default',$strExtention='png')
 		{
-			return "layout_".$strLayout."_".$strImageID.".".$strExtention;
+			return 'layout_'.$strLayout.'_'.$strImageID.'.'.$strExtention;
 		}
 		
 		final
-		function MakeImageFileName($strImageID,$strExtention="png")
+		function MakeImageFileName($strImageID,$strExtention='png')
 		{
-			return $strImageID.".".$strExtention;
+			return $strImageID.'.'.$strExtention;
 		}
 
 		final
@@ -2888,38 +2888,38 @@
 		final
 		function PrepareDocType()
 		{
-			$this->SetOutputItem("DOCTYPE",MakeDocType("html5"));
+			$this->SetOutputItem('DOCTYPE',MakeDocType('html5'));
 		}
 
 		final
 		function RenderWDKHelp()
 		{
 			return 
-MakeDocType("html5")."\n".
-"<html>
+MakeDocType('html5').'\n'.
+'<html>
 	<head>
 		<title>WDK HELP</title>
 	</head>
 	<body>
 		<h1>WDK HELP</h1>
-		<pre>".
-FileRead(GetWDKDir() . "wdk_help.txt").
-"		<pre/>		
+		<pre>'.
+FileRead(GetWDKDir() . 'wdk_help.txt').
+'		<pre/>		
 	</body>
-</html>";
+</html>';
 			
 		}
 
 		function OnRenderSpecialPages()
 		{
-			if (GetBoolValue($this->GetConfig("wdkhelp_disable")) == false)
+			if (GetBoolValue($this->GetConfig('wdkhelp_disable')) == false)
 			{
-				if (GetBoolValue($this->GetParam("wdkhelp")) == true)
+				if (GetBoolValue($this->GetParam('wdkhelp')) == true)
 				{
 					return $this->RenderWDKHelp();
 				}
 			}
-			return "";
+			return '';
 		}
 
 		final
@@ -2931,26 +2931,26 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function RenderHeader($strInput)
 		{
-			$strHeader = "<head>\n";
-			$strHeader .= "\t<title>".$this->GetWebsiteTitle()."</title>\n";
-			$strHeader .= "\t<meta charset=\"utf-8\"/>\n";  
-			$strHeader .= "\t<meta name=\"author\" content=\"" .$this->GetMeta("author"). "\"/>\n";
-			$strHeader .= "\t<meta name=\"description\" content=\"".$this->GetWebsiteDescription()."\"/>\n";
-			$strHeader .= "\t<meta name=\"keywords\" content=\"".$this->GetWebsiteKeywords()."\"/>\n";
-	   	$strHeader .= "\t<meta name=\"format-detection\" content=\"telephone=no\"/>\n"; // This is to avoid numbers to be erroneously detected as telephone numbers on mobile devices.
-			$strHeader .= "\t<meta name=\"robots\" content=\"index,follow\"/>\n";
-	  	//$strHeader .= "	<meta name=\"language\" content=\"".StringLowerCase($this->GetLanguage())."\"/>\n";
-	   	//$strHeader .= "	<meta http-equiv=\"content-language\" content=\"".StringLowerCase($this->GetLanguage())."\"/>\n";
+			$strHeader = '<head>\n';
+			$strHeader .= '\t<title>'.$this->GetWebsiteTitle().'</title>\n';
+			$strHeader .= '\t<meta charset=\'utf-8\'/>\n';  
+			$strHeader .= '\t<meta name=\'author\' content=\'' .$this->GetMeta('author'). '\'/>\n';
+			$strHeader .= '\t<meta name=\'description\' content=\''.$this->GetWebsiteDescription().'\'/>\n';
+			$strHeader .= '\t<meta name=\'keywords\' content=\''.$this->GetWebsiteKeywords().'\'/>\n';
+	   	$strHeader .= '\t<meta name=\'format-detection\' content=\'telephone=no\'/>\n'; // This is to avoid numbers to be erroneously detected as telephone numbers on mobile devices.
+			$strHeader .= '\t<meta name=\'robots\' content=\'index,follow\'/>\n';
+	  	//$strHeader .= '	<meta name=\'language\' content=\''.StringLowerCase($this->GetLanguage()).'\'/>\n';
+	   	//$strHeader .= '	<meta http-equiv=\'content-language\' content=\''.StringLowerCase($this->GetLanguage()).'\'/>\n';
 
 	   	
 	   	// This is to prevent IE from searching the browserconfig.xml file
-	   	$strHeader .= "\t<meta name=\"msapplication-config\" content=\"none\"/>\n";
+	   	$strHeader .= '\t<meta name=\'msapplication-config\' content=\'none\'/>\n';
 	   	
 	   	// Support Google to identify the URL that is really relevant for this page
 	   	$arrayParams = array();
-	   	$arrayParams["content"] = $this->GetContent();
+	   	$arrayParams['content'] = $this->GetContent();
 	   	$strPreferredLink = $this->MakeSitemapURL($arrayParams,true);
-	   	$strHeader .= "\t<link rel=\"canonical\" href=\"".$strPreferredLink."\" />\n";
+	   	$strHeader .= '\t<link rel=\'canonical\' href=\''.$strPreferredLink.'\' />\n';
 	   	
 	   	if ($this->IsMonolingual() == false)
 	   	{
@@ -2959,16 +2959,16 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 	   		{
 			   	$arrayParams['language'] = $strLanguage;
 	   			$strLanguageLink = $this->MakeSitemapURL($arrayParams,true);
-	   			$strHeader .= "\t<link rel=\"alternate\" href=\"".$strLanguageLink."\" hreflang=\"".StringLowerCase($strLanguage)."\" />\n";
+	   			$strHeader .= '\t<link rel=\'alternate\' href=\''.$strLanguageLink.'\' hreflang=\''.StringLowerCase($strLanguage).'\' />\n';
 	   		}
 	   	}
 
 			foreach ($this->m_arrayHeaders as $strAdditionalHeader)
 			{
-				$strHeader .= "\t".$strAdditionalHeader."\n";
+				$strHeader .= '\t'.$strAdditionalHeader.'\n';
 			}
 			
-			$strHeader .= "</head>\n\n";
+			$strHeader .= '</head>\n\n';
 			
 			$strOutput = ReplaceTagsBraces($strInput,array('HEADER' => $strHeader));
 		
@@ -3007,9 +3007,9 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 						$strIntegrity = ArrayGetValue($arrayStyleSheet,'integrity');
 						if ($strIntegrity != '')
 						{
-							$strIntegrityAttribute = ' integrity="'.$strIntegrity.'" crossorigin="anonymous"';
+							$strIntegrityAttribute = ' integrity=''.$strIntegrity.'' crossorigin='anonymous'';
 						}
-						$strHeader .= '	<link href="'.$strURL.'" rel="stylesheet"'.$strIntegrityAttribute.'>'."\n";						
+						$strHeader .= '	<link href=''.$strURL.'' rel='stylesheet''.$strIntegrityAttribute.'>'.'\n';						
 					}
 					continue;
 				}
@@ -3019,7 +3019,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				{
 					if (IsFile($this->m_strStyleSheetsDir.$strID.'.css'))
 					{
-						$strHeader .= '	<link href="'.$this->GetRootURL().'css/'.$strID.'.css" rel="stylesheet">'."\n";
+						$strHeader .= '	<link href=''.$this->GetRootURL().'css/'.$strID.'.css' rel='stylesheet'>'.'\n';
 					}
 					else
 					{
@@ -3034,11 +3034,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 									$strCss = ReplaceTagsBraces($strCss,$this->GetAllLayoutConfigItems());
 								}			
 								
-								$strHeader .= "	<style media=\"screen\">\n";
-								$strHeader .= "		/*<![CDATA[*/\n";
+								$strHeader .= '	<style media=\'screen\'>\n';
+								$strHeader .= '		/*<![CDATA[*/\n';
 								$strHeader .= $strCss;
-								$strHeader .= "		/*]]>*/\n";
-								$strHeader .= "	</style>\n"; 						
+								$strHeader .= '		/*]]>*/\n';
+								$strHeader .= '	</style>\n'; 						
 							}
 						}
 					}
@@ -3048,26 +3048,26 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strSourceCode = ArrayGetValue($arrayStyleSheet,'sourcecode');
 				if ($strSourceCode != '')
 				{
-					$strHeader .= "	<style media=\"screen\">\n";
-					$strHeader .= "		/*<![CDATA[*/\n";
+					$strHeader .= '	<style media=\'screen\'>\n';
+					$strHeader .= '		/*<![CDATA[*/\n';
 					$strHeader .= $strSourceCode;
-					$strHeader .= "		/*]]>*/\n";
-					$strHeader .= "	</style>\n"; 
+					$strHeader .= '		/*]]>*/\n';
+					$strHeader .= '	</style>\n'; 
 				}
 			}
 	
 			// Add Layout CSS
 
 			$strLayoutCssFile = $this->GetAssemblyLine()->GetLayoutCssFilePath($this->GetLayout());
-			if ($strLayoutCssFile != "")
+			if ($strLayoutCssFile != '')
 			{
 				$strCss = FileRead($strLayoutCssFile);
-				if ($strCss != "")
+				if ($strCss != '')
 				{
 					if (	(ArrayCount($this->GetAllLayoutConfigItems()) == 0)
 						&& 	(IsFile($this->m_strStyleSheetsDir.GetFileNameFromPath($strLayoutCssFile))))
 					{
-						$strHeader .= '	<link href="'.$this->GetRootURL().'css/'.GetFileNameFromPath($strLayoutCssFile).'" rel="stylesheet">'."\n";
+						$strHeader .= '	<link href=''.$this->GetRootURL().'css/'.GetFileNameFromPath($strLayoutCssFile).'' rel='stylesheet'>'.'\n';
 					}
 					else
 					{
@@ -3075,16 +3075,16 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 						{
 							$strCss = ReplaceTagsBraces($strCss,$this->GetAllLayoutConfigItems());
 						}
-						$strHeader .= "	<style media=\"screen\">\n";
-						$strHeader .= "		/*<![CDATA[*/\n";
+						$strHeader .= '	<style media=\'screen\'>\n';
+						$strHeader .= '		/*<![CDATA[*/\n';
 						$strHeader .= $strCss;
-						$strHeader .= "		/*]]>*/\n";
-						$strHeader .= "	</style>\n";
+						$strHeader .= '		/*]]>*/\n';
+						$strHeader .= '	</style>\n';
 					}
 				}
 			}
 
-			$strOutput = ReplaceString($strInput,'</head>',$strHeader."\n</head>");
+			$strOutput = ReplaceString($strInput,'</head>',$strHeader.'\n</head>');
 			return $strOutput;
 		}
 		
@@ -3092,7 +3092,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function LoadContent($strContentID)
 		{
-			if ($strContentID == "")
+			if ($strContentID == '')
 			{
 				return false;	
 			}
@@ -3100,15 +3100,15 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strContentID,
 				$this->GetLanguage());
 			
-      if ($strContentFilePHP != "")
+      if ($strContentFilePHP != '')
       {
-      	$this->Trace("CMyContent");
+      	$this->Trace('CMyContent');
         require_once($strContentFilePHP);
         $content = new CMyContent($this,$strContentID); 
       }
       else
       {
-      	$this->Trace("CContent");
+      	$this->Trace('CContent');
       	$content = new CContent($this,$strContentID);	
       }
       
@@ -3126,32 +3126,32 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			{
 				foreach ($arrayRequiredConditions as $strCondition => $strError)
 				{
-					if ($strCondition == "")
+					if ($strCondition == '')
 					{
-						$this->Error("OnGetRequiredConditionsForContent() returned an invalid array. The keys must contain the condition and the values must contain the error if the condition is not met - usually INSUFFICIENT_PRIVILEGES.");	
+						$this->Error('OnGetRequiredConditionsForContent() returned an invalid array. The keys must contain the condition and the values must contain the error if the condition is not met - usually INSUFFICIENT_PRIVILEGES.');	
 					}
 					if ($this->CheckCondition($strCondition) != true)
 					{
-						$this->Trace("RenderContent: Condition check for \"$strCondition\" has failed.");
+						$this->Trace('RenderContent: Condition check for \'$strCondition\' has failed.');
 						$this->SetErrorMessageCode($strError);
-						$this->SetOutputItem("CONTENT","");
+						$this->SetOutputItem('CONTENT','');
 						return;
 					}
 					else
 					{
-						$this->Trace("RenderContent: Condition check passed for \"$strCondition\".");
+						$this->Trace('RenderContent: Condition check passed for \'$strCondition\'.');
 					}
 				}	
 			}			
 			
-			$this->Trace("OnRenderSpecialContent START");
+			$this->Trace('OnRenderSpecialContent START');
 			$strSpecialContent = $this->OnRenderSpecialContent($strContentID);
-			$this->Trace("OnRenderSpecialContent END");
+			$this->Trace('OnRenderSpecialContent END');
 			
-			if ($strSpecialContent != "")
+			if ($strSpecialContent != '')
 			{
-				$this->Trace("RenderContent: Special content is used.");
-				$this->SetOutputItem("CONTENT",$strSpecialContent);	
+				$this->Trace('RenderContent: Special content is used.');
+				$this->SetOutputItem('CONTENT',$strSpecialContent);	
 				return;
 			}
     	$strContentHTML = $this->LoadContent($strContentID);
@@ -3161,7 +3161,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
     	}
     	if ($strContentHTML !== false)
     	{
-				$this->SetOutputItem("CONTENT",$strContentHTML);
+				$this->SetOutputItem('CONTENT',$strContentHTML);
 			}			
 		}
 		
@@ -3169,22 +3169,22 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function PrepareMessages()
 		{
 			// MESSAGE STACK
-			$messagestack = new CMessageStackElement($this,"default");
+			$messagestack = new CMessageStackElement($this,'default');
 			$this->SetOutputItem(
-				"MESSAGES",
+				'MESSAGES',
 				$messagestack->RenderMessageStack(
 					$this->GetAllMessages()));
 			
 			   
 		   // UNDER CONSTRUCTION
-		   $strContentHTML="";
-			if ($this->GetConfigBoolean("underconstruction"))
+		   $strContentHTML='';
+			if ($this->GetConfigBoolean('underconstruction'))
 			{
-				$strMessage = $this->GetMessage("warning","UNDERCONSTRUCTION");
-				$msg = new CMessageElement($this,"underconstruction");
+				$strMessage = $this->GetMessage('warning','UNDERCONSTRUCTION');
+				$msg = new CMessageElement($this,'underconstruction');
 				$strContentHTML = $msg->RenderMessage($strMessage);
 		   }
-		   $this->SetOutputItem("MESSAGE_UNDERCONSTRUCTION",$strContentHTML);
+		   $this->SetOutputItem('MESSAGE_UNDERCONSTRUCTION',$strContentHTML);
 		}
 
 		final		
@@ -3195,16 +3195,16 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strImageURL = $this->OnGetOpenGraphImageURL();
 				if ($strImageURL != '')
 				{
-					$this->AddHeader('<meta property="og:image" content="'.$strImageURL.'">');
+					$this->AddHeader('<meta property='og:image' content=''.$strImageURL.''>');
 				}
 		   	$arrayParams = array();
-		   	$arrayParams["content"] = $this->GetContent();
+		   	$arrayParams['content'] = $this->GetContent();
 		   	$strURL = $this->MakeSitemapURL($arrayParams,true);
-				$this->AddHeader('<meta property="og:url" content="'.$strURL.'">');
-				$this->AddHeader('<meta property="og:type" content="website">');
-				$this->AddHeader('<meta property="og:title" content="'.$this->OnGetWebsiteTitle().'">');
-				$this->AddHeader('<meta property="og:image:alt" content="'.$this->OnGetWebsiteTitle().'">');
-				$this->AddHeader('<meta property="og:description" content="'.$this->OnGetWebsiteDescription().'">');
+				$this->AddHeader('<meta property='og:url' content=''.$strURL.''>');
+				$this->AddHeader('<meta property='og:type' content='website'>');
+				$this->AddHeader('<meta property='og:title' content=''.$this->OnGetWebsiteTitle().''>');
+				$this->AddHeader('<meta property='og:image:alt' content=''.$this->OnGetWebsiteTitle().''>');
+				$this->AddHeader('<meta property='og:description' content=''.$this->OnGetWebsiteDescription().''>');
 			}			
 		}
 		
@@ -3217,19 +3217,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function GetErrorMessages()
 		{
-			return ArrayGetValue($this->m_arrayMessages,"error");
+			return ArrayGetValue($this->m_arrayMessages,'error');
 		}
 
 		final
 		function GetWarningMessages()
 		{
-			return ArrayGetValue($this->m_arrayMessages,"warning");
+			return ArrayGetValue($this->m_arrayMessages,'warning');
 		}
 
 		final
 		function GetInfoMessages()
 		{
-			return ArrayGetValue($this->m_arrayMessages,"info");
+			return ArrayGetValue($this->m_arrayMessages,'info');
 		}
 
 		final
@@ -3242,64 +3242,64 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 
 		
 		final
-		function GetMessage($strMessageType,$strMessageID,$strPrefix = "")
+		function GetMessage($strMessageType,$strMessageID,$strPrefix = '')
 		{
-			if ($strMessageType == "error")
+			if ($strMessageType == 'error')
 			{
-				$this->SetOutputItem("ERROR",StringUpperCase($strMessageID));
+				$this->SetOutputItem('ERROR',StringUpperCase($strMessageID));
 			}
 			$strPrefix = StringUpperCase($strPrefix);
-			if ($strPrefix != "")
+			if ($strPrefix != '')
 			{
-				$strPrefix .= "_";	
-				$strResID = StringUpperCase("TID_".$strPrefix.$strMessageType."_".$strMessageID);
-				$this->Trace("GetMessage: Trying \"$strResID\"");
+				$strPrefix .= '_';	
+				$strResID = StringUpperCase('TID_'.$strPrefix.$strMessageType.'_'.$strMessageID);
+				$this->Trace('GetMessage: Trying \'$strResID\'');
 				$strMessage = $this->LoadString($strResID);
-				if (($strMessage !== false) && ($strMessage != ""))
+				if (($strMessage !== false) && ($strMessage != ''))
 				{
-					$this->Trace("GetMessage: \"$strMessage\"");
+					$this->Trace('GetMessage: \'$strMessage\'');
 					return $strMessage;
 				}
 			} 
-			$strResID = StringUpperCase("TID_".$strMessageType."_".$strMessageID);
-			$this->Trace("GetMessage: Trying \"$strResID\"");
+			$strResID = StringUpperCase('TID_'.$strMessageType.'_'.$strMessageID);
+			$this->Trace('GetMessage: Trying \'$strResID\'');
 			$strMessage = $this->LoadString($strResID);
-			if (($strMessage !== false) && ($strMessage != ""))
+			if (($strMessage !== false) && ($strMessage != ''))
 			{
-				$this->Trace("GetMessage: \"$strMessage\"");				
+				$this->Trace('GetMessage: \'$strMessage\'');				
 				return $strMessage;
 			}
-			if ($strMessageType == "error")
+			if ($strMessageType == 'error')
 			{
-				$strMessage = $this->LoadString("TID_ERROR_UNKNOWN");
-				if (($strMessage !== false) && ($strMessage != ""))
+				$strMessage = $this->LoadString('TID_ERROR_UNKNOWN');
+				if (($strMessage !== false) && ($strMessage != ''))
 				{
-					$this->Trace("GetMessage: \"$strMessage\"");					
+					$this->Trace('GetMessage: \'$strMessage\'');					
 					return $strMessage;
 				}
 			}
 			// Fallback to English standard messages
-			if ($strMessageType == "error")
+			if ($strMessageType == 'error')
 			{
-				$strMessage = "An unknown error has occured (ERRORCODE={ERROR}).";
-				$this->Trace("GetMessage: \"$strMessage\"");		
+				$strMessage = 'An unknown error has occured (ERRORCODE={ERROR}).';
+				$this->Trace('GetMessage: \'$strMessage\'');		
 				return $strMessage;
 			}
-			if ($strMessageType == "underconstruction")
+			if ($strMessageType == 'underconstruction')
 			{
-				$strMessage = "This site is under construction";
-				$this->Trace("GetMessage: \"$strMessage\"");		
-				return $strMessage;
-
-			}
-			if ($strMessageType == "warning")
-			{
-				$strMessage = "A condition has occured that produced a warning.";
-				$this->Trace("GetMessage: \"$strMessage\"");		
+				$strMessage = 'This site is under construction';
+				$this->Trace('GetMessage: \'$strMessage\'');		
 				return $strMessage;
 
 			}
-			$this->Error("Could not get message for type \"$strMessageType\" and id \"$strMessageID\" (prefix=\"$strPrefix\"). LoadString returned: \"$strMessage\"");
+			if ($strMessageType == 'warning')
+			{
+				$strMessage = 'A condition has occured that produced a warning.';
+				$this->Trace('GetMessage: \'$strMessage\'');		
+				return $strMessage;
+
+			}
+			$this->Error('Could not get message for type \'$strMessageType\' and id \'$strMessageID\' (prefix=\'$strPrefix\'). LoadString returned: \'$strMessage\'');
 		}		
 		
 		
@@ -3322,8 +3322,8 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			{
 				$nNextTagStartPos = $nFirstTagStartPos-1;
 				
-				$strTagStart = "{".$strItemID;
-				$strTagEnd = "}";
+				$strTagStart = '{'.$strItemID;
+				$strTagEnd = '}';
 				
 				do
 				{
@@ -3332,15 +3332,15 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					$nNextTagStartPos = FindString($strOutput,$strTagStart,false,$nNextTagStartPos);
 					if ($nNextTagStartPos != -1)
 					{
-						$strFound = "";
+						$strFound = '';
 						$nNextTagStartPos = FindStringMultiple(
 							$strOutput, 
 							array(
 								$strTagStart.$strTagEnd,
-								$strTagStart." ",
-								$strTagStart."\t",
-								$strTagStart."\n",
-								$strTagStart."\r\n"
+								$strTagStart.' ',
+								$strTagStart.'\t',
+								$strTagStart.'\n',
+								$strTagStart.'\r\n'
 								),
 							$strFound,
 							false,
@@ -3352,11 +3352,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 							$nNextTagEndPos = FindString($strOutput, $strTagEnd, false, $nNextTagStartPos);
 							if ($nNextTagEndPos == -1)
 							{
-								$this->Error("Syntax Error after \"{".$strItemID."\": Missing end tag \"$strTagEnd\". nNextTagStartPos=$nNextTagStartPos. nNextTagEndPos=$nNextTagEndPos.");
+								$this->Error('Syntax Error after \'{'.$strItemID.'\': Missing end tag \'$strTagEnd\'. nNextTagStartPos=$nNextTagStartPos. nNextTagEndPos=$nNextTagEndPos.');
 							}
 							if ($nNextTagEndPos < $nNextTagStartPos)
 							{
-								$this->Error("nNextTagEndPos($nNextTagEndPos) < nNextTagStartPos($nNextTagStartPos)");	
+								$this->Error('nNextTagEndPos($nNextTagEndPos) < nNextTagStartPos($nNextTagStartPos)');	
 							}
 							
 							$strItemTag = StringSection(
@@ -3412,140 +3412,140 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			{
 			case 'URL':
 				$arrayParams = array();
-				$arrayParams["content"] = ArrayGetValue($arrayAttributes,"content");
-				$strLanguage = ArrayGetValue($arrayAttributes,"language");
-				if ($strLanguage == "")
+				$arrayParams['content'] = ArrayGetValue($arrayAttributes,'content');
+				$strLanguage = ArrayGetValue($arrayAttributes,'language');
+				if ($strLanguage == '')
 				{
-					$arrayParams["language"] = $this->GetLanguage();
+					$arrayParams['language'] = $this->GetLanguage();
 				}
 				else
 				{
-					$arrayParams["language"] = $strLanguage;
+					$arrayParams['language'] = $strLanguage;
 				}
 				return $this->MakeURL($arrayParams);
 			
-			case "ICON":
+			case 'ICON':
 				if ($this->m_elementIcon == null)
 				{
 					$this->m_elementIcon = new CIconElement($this,'default');	
 				}
 				return $this->m_elementIcon->RenderIcon(ArrayGetValue($arrayAttributes,'id'));
 				
-			case "IMAGEURL":
-				$strID = ArrayGetValue($arrayAttributes,"id");
-				if ($strID == "")
+			case 'IMAGEURL':
+				$strID = ArrayGetValue($arrayAttributes,'id');
+				if ($strID == '')
 				{
-					return "";	
+					return '';	
 				}
-				$strExt = ArrayGetValue($arrayAttributes,"ext");
-				$strContext = ArrayGetValue($arrayAttributes,"context");
-				if ($strContext == "")
+				$strExt = ArrayGetValue($arrayAttributes,'ext');
+				$strContext = ArrayGetValue($arrayAttributes,'context');
+				if ($strContext == '')
 				{
-					$strContext = "html";
+					$strContext = 'html';
 				}
 				$strURL = $this->GetImageURL($strID,$strExt);
 
-				if ($strContext == "html")
+				if ($strContext == 'html')
 				{
 					$strURL = HtmlEncode($strURL);
 				}
 				return $strURL;
 			
-			case "FONTURL":
-				$strID = ArrayGetValue($arrayAttributes,"id");
-				if ($strID == "")
+			case 'FONTURL':
+				$strID = ArrayGetValue($arrayAttributes,'id');
+				if ($strID == '')
 				{
-					return "";	
+					return '';	
 				}
-				$strContext = ArrayGetValue($arrayAttributes,"context");
-				if ($strContext == "")
+				$strContext = ArrayGetValue($arrayAttributes,'context');
+				if ($strContext == '')
 				{
-					$strContext = "html";
+					$strContext = 'html';
 				}
 				$strURL = $this->GetFontURL($strID);
 
-				if ($strContext == "html")
+				if ($strContext == 'html')
 				{
 					$strURL = HtmlEncode($strURL);
 				}
 				return $strURL;							
 
 
-			case "VIDEOURL":
-				$strID = ArrayGetValue($arrayAttributes,"id");
-				if ($strID == "")
+			case 'VIDEOURL':
+				$strID = ArrayGetValue($arrayAttributes,'id');
+				if ($strID == '')
 				{
-					return "";	
+					return '';	
 				}
-				$strContext = ArrayGetValue($arrayAttributes,"context");
-				if ($strContext == "")
+				$strContext = ArrayGetValue($arrayAttributes,'context');
+				if ($strContext == '')
 				{
-					$strContext = "html";
+					$strContext = 'html';
 				}
 				$strURL = $this->GetVideoURL($strID);
 
-				if ($strContext == "html")
+				if ($strContext == 'html')
 				{
 					$strURL = HtmlEncode($strURL);
 				}
 				return $strURL;							
 
 							
-			case "IMAGE":
-				$strID = ArrayGetValue($arrayAttributes,"id");
-				if ($strID == "")
+			case 'IMAGE':
+				$strID = ArrayGetValue($arrayAttributes,'id');
+				if ($strID == '')
 				{
-					return "";	
+					return '';	
 				}
-				$strExt = ArrayGetValue($arrayAttributes,"ext");
-				$strStyle = ArrayGetValue($arrayAttributes,"style");
-				if ($strStyle == "")
+				$strExt = ArrayGetValue($arrayAttributes,'ext');
+				$strStyle = ArrayGetValue($arrayAttributes,'style');
+				if ($strStyle == '')
 				{
-					$strStyle = "default";
+					$strStyle = 'default';
 				}
-				$strText = ArrayGetValue($arrayAttributes,"text");
+				$strText = ArrayGetValue($arrayAttributes,'text');
 				$strURL = $this->GetImageURL($strID,$strExt);
 
-				$this->IncludeElement("image");
+				$this->IncludeElement('image');
 				$elementImage = new CImageElement($this,$strStyle);
 				return $elementImage->RenderImage($strURL,$strText);
 
-			case "TEASER":
-				$strStyle = ArrayGetValue($arrayAttributes,"style");
-				if ($strStyle == "")
+			case 'TEASER':
+				$strStyle = ArrayGetValue($arrayAttributes,'style');
+				if ($strStyle == '')
 				{
-					$strStyle = "default";
+					$strStyle = 'default';
 				}
-				$this->IncludeElement("teaser");
+				$this->IncludeElement('teaser');
 				$teaser = new CTeaserElement($this,$strStyle);
 				return $teaser->RenderTeaser(
-					ArrayGetValue($arrayAttributes,"title"),
-					ArrayGetValue($arrayAttributes,"text"),
-					ArrayGetValue($arrayAttributes,"linkurl"),
-					ArrayGetValue($arrayAttributes,"linktext"),
-					GetBoolValue(ArrayGetValue($arrayAttributes,"externallink"))
+					ArrayGetValue($arrayAttributes,'title'),
+					ArrayGetValue($arrayAttributes,'text'),
+					ArrayGetValue($arrayAttributes,'linkurl'),
+					ArrayGetValue($arrayAttributes,'linktext'),
+					GetBoolValue(ArrayGetValue($arrayAttributes,'externallink'))
 					);
 
-			case "IMAGETEASER":
-				$strStyle = ArrayGetValue($arrayAttributes,"style");
-				if ($strStyle == "")
+			case 'IMAGETEASER':
+				$strStyle = ArrayGetValue($arrayAttributes,'style');
+				if ($strStyle == '')
 				{
-					$strStyle = "default";
+					$strStyle = 'default';
 				}
-				$this->IncludeElement("imageteaser");
+				$this->IncludeElement('imageteaser');
 				$teaser = new CImageTeaserElement($this,$strStyle);
 				return $teaser->RenderImageTeaser(
-					ArrayGetValue($arrayAttributes,"imageurl"),
-					ArrayGetValue($arrayAttributes,"title"),
-					ArrayGetValue($arrayAttributes,"text"),
-					ArrayGetValue($arrayAttributes,"linkurl"),
-					ArrayGetValue($arrayAttributes,"linktext"),
-					GetBoolValue(ArrayGetValue($arrayAttributes,"externallink"))
+					ArrayGetValue($arrayAttributes,'imageurl'),
+					ArrayGetValue($arrayAttributes,'title'),
+					ArrayGetValue($arrayAttributes,'text'),
+					ArrayGetValue($arrayAttributes,'linkurl'),
+					ArrayGetValue($arrayAttributes,'linktext'),
+					GetBoolValue(ArrayGetValue($arrayAttributes,'externallink'))
 					);
 
-			case "LINK":
+			case 'LINK':
 				$strStyle = ArrayGetValue($arrayAttributes,'style');
-				if ($strStyle == "")
+				if ($strStyle == '')
 				{
 					$strStyle = 'default';
 				}
@@ -3576,66 +3576,66 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 						ArrayGetValue($arrayAttributes,'externallink'));
 				}
 
-			case "PHONE":
+			case 'PHONE':
 				if ($this->m_elementTel == null)
 				{
-					$this->IncludeElement("tel");
-					$this->m_elementTel = new CTelElement($this,"default");	
+					$this->IncludeElement('tel');
+					$this->m_elementTel = new CTelElement($this,'default');	
 				}
 				return $this->m_elementTel->RenderTel(
-					ArrayGetValue($arrayAttributes,"tel"),
-					ArrayGetValue($arrayAttributes,"text"));
+					ArrayGetValue($arrayAttributes,'tel'),
+					ArrayGetValue($arrayAttributes,'text'));
 
-			case "DOWNLOADURL":
-				$strFilePath = ArrayGetValue($arrayAttributes,"filepath");
-				if ($strFilePath == "")
+			case 'DOWNLOADURL':
+				$strFilePath = ArrayGetValue($arrayAttributes,'filepath');
+				if ($strFilePath == '')
 				{
-					return "";	
+					return '';	
 				}
 				$strURL = $this->GetDownloadURL($strFilePath);
 				//$strURL = HtmlEncode($strURL);
 				return $strURL;
 
-			case "YOUTUBE":
-				$strID = ArrayGetValue($arrayAttributes,"id");
+			case 'YOUTUBE':
+				$strID = ArrayGetValue($arrayAttributes,'id');
 				if ($this->m_elementYouTube == null)
 				{
-					$this->IncludeElement("youtube");
-					$this->m_elementYouTube = new CYouTubeElement($this,"default");	
+					$this->IncludeElement('youtube');
+					$this->m_elementYouTube = new CYouTubeElement($this,'default');	
 				}
 				return $this->m_elementYouTube->RenderYouTube($strID);
 							
 
-			case "PORTFOLIO":
-				$strStyle = ArrayGetValue($arrayAttributes,"style");
-				if ($strStyle == "")
+			case 'PORTFOLIO':
+				$strStyle = ArrayGetValue($arrayAttributes,'style');
+				if ($strStyle == '')
 				{
-					$strStyle = "default";
+					$strStyle = 'default';
 				}
 				
-				$this->IncludeElement("portfolio");
+				$this->IncludeElement('portfolio');
 				$portfolio = new CPortfolioElement($this,$strStyle);
 				
 				$arrayPortfolio = array();
 				for ($nIndex = 1; $nIndex <= 20; $nIndex++)
 				{
 					$arrayTeaser = array();
-					$strPayload = ArrayGetValue($arrayAttributes,"payload".$nIndex);
-					if ($strPayload != "")
+					$strPayload = ArrayGetValue($arrayAttributes,'payload'.$nIndex);
+					if ($strPayload != '')
 					{
-						$arrayTeaser["payload"] = $strPayload;
+						$arrayTeaser['payload'] = $strPayload;
 					}
 					else 
 					{
-						$strTitle = ArrayGetValue($arrayAttributes,"title".$nIndex);
-						if ($strTitle != "")
+						$strTitle = ArrayGetValue($arrayAttributes,'title'.$nIndex);
+						if ($strTitle != '')
 						{
-							$arrayTeaser["imageurl"] = ArrayGetValue($arrayAttributes,"imageurl".$nIndex);
-							$arrayTeaser["title"] = ArrayGetValue($arrayAttributes,"title".$nIndex);
-							$arrayTeaser["text"] = ArrayGetValue($arrayAttributes,"text".$nIndex);
-							$arrayTeaser["linktext"] = ArrayGetValue($arrayAttributes,"linktext".$nIndex);
-							$arrayTeaser["linkurl"] = ArrayGetValue($arrayAttributes,"linkurl".$nIndex);
-							$arrayTeaser["external"] = GetBoolValue(ArrayGetValue($arrayAttributes,"external".$nIndex));
+							$arrayTeaser['imageurl'] = ArrayGetValue($arrayAttributes,'imageurl'.$nIndex);
+							$arrayTeaser['title'] = ArrayGetValue($arrayAttributes,'title'.$nIndex);
+							$arrayTeaser['text'] = ArrayGetValue($arrayAttributes,'text'.$nIndex);
+							$arrayTeaser['linktext'] = ArrayGetValue($arrayAttributes,'linktext'.$nIndex);
+							$arrayTeaser['linkurl'] = ArrayGetValue($arrayAttributes,'linkurl'.$nIndex);
+							$arrayTeaser['external'] = GetBoolValue(ArrayGetValue($arrayAttributes,'external'.$nIndex));
 						}
 					}
 					
@@ -3650,20 +3650,20 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				{
 					return $portfolio->RenderPortfolio($arrayPortfolio);
 				}
-				return "";								
+				return '';								
 
 							
-			case "GOOGLEMAPS":
+			case 'GOOGLEMAPS':
 			
-				$strLocation = ArrayGetValue($arrayAttributes,"location");
+				$strLocation = ArrayGetValue($arrayAttributes,'location');
 				if ($this->m_elementGoogleMaps == null)
 				{
-					$this->IncludeElement("googlemaps");
-					$this->m_elementGoogleMaps = new CGoogleMapsElement($this,"default");	
+					$this->IncludeElement('googlemaps');
+					$this->m_elementGoogleMaps = new CGoogleMapsElement($this,'default');	
 				}
 				return $this->m_elementGoogleMaps->RenderGoogleMaps($strLocation);
 
-			case "COUNTDOWN":
+			case 'COUNTDOWN':
 				if ($this->m_elementCountDown == null) 
 				{
 					$this->IncludeElement('countdown');
@@ -3703,7 +3703,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$arrayRes = ArrayMerge($arrayRes,$this->m_res->GetStrings($this->GetLanguage()));
 				foreach ($arrayRes as $strKey => $strValue)
 				{
-					$this->m_arrayResText[StringSection($strKey,4)] = ReplaceString($strValue,"\n","<br/>"); 
+					$this->m_arrayResText[StringSection($strKey,4)] = ReplaceString($strValue,'\n','<br/>'); 
 				}
 			}
 			return $this->m_arrayResText;
@@ -3720,12 +3720,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function ReplaceText($strSource,$bClearCache = true)
 		{
 			$arrayResText = $this->InitReplaceTextCache();
-			$this->Trace("ReplaceText: restags=".ArrayCount($this->m_arrayResText)." textlength=".StringLength($strSource));
+			$this->Trace('ReplaceText: restags='.ArrayCount($this->m_arrayResText).' textlength='.StringLength($strSource));
 			$strOutput = ReplaceTags(
 				$strSource,
 				$arrayResText,
-				"?TID_", 
-				"?");
+				'?TID_', 
+				'?');
 			if ($bClearCache == true)
 			{
 				$this->ResetReplaceTextCache();
@@ -3737,23 +3737,23 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function RenderCode($strInput)
 		{
 			$nCount = 0;
-			$strOutput = "";
+			$strOutput = '';
 			do
 			{
-				$nCodeStartPos = FindString($strInput,"<code>");
+				$nCodeStartPos = FindString($strInput,'<code>');
 				if ($nCodeStartPos != -1)
 				{
 					$strOutput .= StringSection($strInput,0,$nCodeStartPos);
 					$strInput = StringSection($strInput,$nCodeStartPos+6);
 					
-					$nCodeEndPos = FindString($strInput,"</code>");
+					$nCodeEndPos = FindString($strInput,'</code>');
 					if ($nCodeEndPos != -1)
 					{
 						$strCode = StringSection($strInput,0,$nCodeEndPos);
 						if ($this->m_elementSourceCode == null)
 						{
-							$this->IncludeElement("sourcecode");
-							$this->m_elementSourceCode = new CSourceCodeElement($this,"default");	
+							$this->IncludeElement('sourcecode');
+							$this->m_elementSourceCode = new CSourceCodeElement($this,'default');	
 						}
 						$strOutput .= $this->m_elementSourceCode->RenderSourceCode($strCode);
 						$strInput = StringSection($strInput,$nCodeEndPos+7);
@@ -3761,16 +3761,16 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					else
 					{
 						$strOutput .= $strInput;
-						$strInput = "";
+						$strInput = '';
 					}
 				}
 				else
 				{
 					$strOutput .= $strInput;
-					$strInput = "";
+					$strInput = '';
 				}
 			}
-			while ($strInput != "" && $nCount < 20);  
+			while ($strInput != '' && $nCount < 20);  
 
 			return $strOutput; 
 		}
@@ -3796,17 +3796,17 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					$strIntegrity = ArrayGetValue($arrayJavaScript,'integrity');
 					if ($strIntegrity != '')
 					{
-						$strIntegrityAttribute = ' integrity="'.$strIntegrity.'" crossorigin="anonymous"';
+						$strIntegrityAttribute = ' integrity=''.$strIntegrity.'' crossorigin='anonymous'';
 					}
 					
-					$strScriptHTML .= "\n".'<script src="'.$strURL.'"'.$strIntegrityAttribute.'></script>';
+					$strScriptHTML .= '\n'.'<script src=''.$strURL.'''.$strIntegrityAttribute.'></script>';
 					continue;
 				}
 				
 				$strSourceCode = ArrayGetValue($arrayJavaScript,'sourcecode');
-				if ($strSourceCode != "")
+				if ($strSourceCode != '')
 				{
-					$strScriptHTML .= "\n<script>\n$strSourceCode\n</script>";
+					$strScriptHTML .= '\n<script>\n$strSourceCode\n</script>';
 					continue;
 				}
 				
@@ -3815,7 +3815,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				{
 					if (IsFile($this->m_strJavaScriptsDir.$strScriptID.'.js') == true)
 					{
-						$strScriptHTML .= "\n".'<script src="'.$this->GetRootURL().'js/'.$strScriptID.'.js"></script>';
+						$strScriptHTML .= '\n'.'<script src=''.$this->GetRootURL().'js/'.$strScriptID.'.js'></script>';
 						continue;
 					}
 					$strJavaScriptFile = $this->GetJavaScriptFilePath($strScriptID);
@@ -3825,12 +3825,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					$strJavaScriptFile = 	ArrayGetValue($arrayJavaScript,'filepath');
 				}
 
-				if ($strJavaScriptFile != "")
+				if ($strJavaScriptFile != '')
 				{
 					$strJavaScriptFileContent = FileRead($strJavaScriptFile);
 					if ($strJavaScriptFileContent != '')
 					{
-						$strScriptHTML .= "\n<script>\n$strJavaScriptFileContent\n</script>";
+						$strScriptHTML .= '\n<script>\n$strJavaScriptFileContent\n</script>';
 						continue;
 					}
 				}
@@ -3839,12 +3839,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$strScriptHTML = $this->ReplaceOutputItems($strScriptHTML);
 			
 			$nLengthBefore = StringLength($strInput);
-			$strOutput = ReplaceTagsWDK($strInput,array("SCRIPTS" => $strScriptHTML));
+			$strOutput = ReplaceTagsWDK($strInput,array('SCRIPTS' => $strScriptHTML));
 			$nLengthAfter = StringLength($strOutput);
 			
 			if ($nLengthBefore == $nLengthAfter) // Nothing happened! So fallback to the body tag
 			{
-				$strOutput = ReplaceString($strOutput,"</body>",$strScriptHTML."\n\n</body>");
+				$strOutput = ReplaceString($strOutput,'</body>',$strScriptHTML.'\n\n</body>');
 			}
 			
 			$this->m_arrayJavaScripts = array();
@@ -3890,57 +3890,57 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			
 			// Prepare Layout
 			$strLayoutFilePHP = $this->GetAssemblyLine()->GetLayoutIncFilePath($this->GetLayout());
-      if ($strLayoutFilePHP != "")
+      if ($strLayoutFilePHP != '')
       {
-      	$this->Trace("CMyLayout");
+      	$this->Trace('CMyLayout');
         require_once($strLayoutFilePHP);
         $layout = new CMyLayout($this,$this->GetLayout()); 
       }
       else
       {
-      	$this->Trace("CLayout");
+      	$this->Trace('CLayout');
       	$layout = new CLayout($this,$this->GetLayout());	
       }
     	$bLayoutInit = $layout->Init();
     	if ($bLayoutInit == false)
     	{
-    		$this->Error("Layout init failed.");	
+    		$this->Error('Layout init failed.');	
     	}
 
-			$this->Trace("Loading framework file START");
+			$this->Trace('Loading framework file START');
 			$strLayoutFrameworkFile = $this->GetFrameworkLayoutFile();
-			if ($strLayoutFrameworkFile == "")
+			if ($strLayoutFrameworkFile == '')
 			{
-				$this->Error("No framework layout file found.");
+				$this->Error('No framework layout file found.');
 			}
 	
 			$strOutput = FileRead($strLayoutFrameworkFile);
-			$this->Trace("Loading framework file END");
+			$this->Trace('Loading framework file END');
 			$this->ProfilingTrace();
 			
 			// Render Navigation
-			$this->Trace("OnRenderNavigation START");
+			$this->Trace('OnRenderNavigation START');
 			$this->OnRenderNavigation($strOutput);
-			$this->Trace("OnRenderNavigation END");
+			$this->Trace('OnRenderNavigation END');
 			$this->ProfilingTrace();
 			
 			// Render Message Stack
-			$this->Trace("PrepareMessages START");
+			$this->Trace('PrepareMessages START');
 			$this->PrepareMessages();
-			$this->Trace("PrepareMessages END");
+			$this->Trace('PrepareMessages END');
 			$this->ProfilingTrace();
 			
 			// Prepare OpenGrapg
-			$this->Trace("PrepareOpenGraph START");
+			$this->Trace('PrepareOpenGraph START');
 			$this->PrepareOpenGraph();
-			$this->Trace("PrepareOpenGraph END");
+			$this->Trace('PrepareOpenGraph END');
 			$this->ProfilingTrace();
 		
 
 			// Render Header
-			$this->Trace("RenderHeader START");
+			$this->Trace('RenderHeader START');
 			$strOutput = $this->RenderHeader($strOutput);
-			$this->Trace("RenderHeader END");
+			$this->Trace('RenderHeader END');
 			$this->ProfilingTrace();
 			
 			
@@ -3952,11 +3952,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			if (ArrayCount($arrayBodyItems) > 0)
 			{
 				// No body tag, no body items!
-				if (FindString($strOutput,"</body>") != -1)
+				if (FindString($strOutput,'</body>') != -1)
 				{
 					foreach ($arrayBodyItems as $strBodyItem)
 					{
-						$strOutput = ReplaceString($strOutput,"</body>","\t".$strBodyItem."\n</body>");
+						$strOutput = ReplaceString($strOutput,'</body>','\t'.$strBodyItem.'\n</body>');
 					}
 				}
 			}
@@ -3967,7 +3967,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$this->AddJavaScript('wdk-trace-activate');
 			}
 
-			$this->Trace("Tag replacement START");
+			$this->Trace('Tag replacement START');
 			
 			$stopwatchTagReplacement = new CStopWatch();
 			$stopwatchTagReplacement->Start();
@@ -3984,11 +3984,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			
 			while ($nIteration > 0)
 			{
-				$this->Trace("Rendering: $nIteration iterations to go");
+				$this->Trace('Rendering: $nIteration iterations to go');
 
 				// Replace output items tags
 				$this->ProfilingTrace();
-				$this->Trace("Rendering: ReplaceOutputItems()");
+				$this->Trace('Rendering: ReplaceOutputItems()');
 				$stopwatchReplaceOutputItems->Start();
 				$strOutput = $this->ReplaceOutputItems($strOutput);
 				$stopwatchReplaceOutputItems->Stop();
@@ -3997,7 +3997,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				if ($nNewOutputStrLenInterim != $nOldOutputStrLen)
 				{
 				  $this->ProfilingTrace();
-					$this->Trace("Rendering: ReplaceOutputItems() (2)");
+					$this->Trace('Rendering: ReplaceOutputItems() (2)');
 					$stopwatchReplaceOutputItems->Start();
 				  $strOutput = $this->ReplaceOutputItems($strOutput);
 				  $stopwatchReplaceOutputItems->Stop();
@@ -4007,7 +4007,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				if ($this->m_bUseRes == true)
 				{
 					$this->ProfilingTrace();
-					$this->Trace("Rendering: ReplaceText()");
+					$this->Trace('Rendering: ReplaceText()');
 					
 					$stopwatchReplaceText->Start();
 					//$this->Trace($strOutput);
@@ -4015,15 +4015,15 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					$stopwatchReplaceText->Stop();
 				}
 	   
-				// Replace generic output items (e.g. "URL")
+				// Replace generic output items (e.g. 'URL')
 				$this->ProfilingTrace();
-				$this->Trace("Rendering: ReplaceGenericOutputItems()");
+				$this->Trace('Rendering: ReplaceGenericOutputItems()');
 				$stopwatchReplaceGenericOutputItems->Start();
 				$strOutput = $this->ReplaceGenericOutputItems($strOutput);
 				$stopwatchReplaceGenericOutputItems->Stop();
 				
 				$this->ProfilingTrace();
-				$this->Trace("Rendering: RenderJavaScripts()"); 
+				$this->Trace('Rendering: RenderJavaScripts()'); 
 				$strOutput = $this->RenderJavaScripts($strOutput);
 
 				
@@ -4032,8 +4032,8 @@ FileRead(GetWDKDir() . "wdk_help.txt").
  	      if ($nIteration > 0)
  	      {
  	      	$nNewOutputStrLen = StringLength($strOutput);
- 	      	$this->Trace("Rendering: Old length: $nOldOutputStrLen");
- 	      	$this->Trace("Rendering: New length: $nNewOutputStrLen");
+ 	      	$this->Trace('Rendering: Old length: $nOldOutputStrLen');
+ 	      	$this->Trace('Rendering: New length: $nNewOutputStrLen');
  	      	if ($nNewOutputStrLen == $nOldOutputStrLen)
  	      	{
  	      		$nIteration = 0;
@@ -4046,28 +4046,28 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			}
 			$stopwatchTagReplacement->Stop();
          
-			$this->Trace("Tag replacement END");
+			$this->Trace('Tag replacement END');
 			$this->ProfilingTrace();
 			
 			// Render Style Sheets
-			$this->Trace("RenderHeaderStyleSheets START");
+			$this->Trace('RenderHeaderStyleSheets START');
 			$strOutput = $this->RenderHeaderStyleSheets($strOutput);
-			$this->Trace("RenderHeaderStyleSheets END");
+			$this->Trace('RenderHeaderStyleSheets END');
 			$this->ProfilingTrace();
 	
 			// Render Code
-			$this->Trace("RenderCode START");
+			$this->Trace('RenderCode START');
 			$strOutput = $this->RenderCode($strOutput);
-			$this->Trace("RenderCode END");
+			$this->Trace('RenderCode END');
 			$this->ProfilingTrace();
 		
 
-			$this->Trace("Rendering: Total seconds elapsed during tag replacement___________: ".RenderNumber($stopwatchTagReplacement->GetTotalSeconds(),3));
-			$this->Trace("Rendering: Total seconds elapsed in ReplaceOutputItems()__________: ".RenderNumber($stopwatchReplaceOutputItems->GetTotalSeconds(),3));
-			$this->Trace("Rendering: Total seconds elapsed in ReplaceText()_________________: ".RenderNumber($stopwatchReplaceText->GetTotalSeconds(),3));
-			$this->Trace("Rendering: Total seconds elapsed in ReplaceGenericOutputItems()___: ".RenderNumber($stopwatchReplaceGenericOutputItems->GetTotalSeconds(),3));
+			$this->Trace('Rendering: Total seconds elapsed during tag replacement___________: '.RenderNumber($stopwatchTagReplacement->GetTotalSeconds(),3));
+			$this->Trace('Rendering: Total seconds elapsed in ReplaceOutputItems()__________: '.RenderNumber($stopwatchReplaceOutputItems->GetTotalSeconds(),3));
+			$this->Trace('Rendering: Total seconds elapsed in ReplaceText()_________________: '.RenderNumber($stopwatchReplaceText->GetTotalSeconds(),3));
+			$this->Trace('Rendering: Total seconds elapsed in ReplaceGenericOutputItems()___: '.RenderNumber($stopwatchReplaceGenericOutputItems->GetTotalSeconds(),3));
 			
-			$this->Trace("RenderWebsite END");
+			$this->Trace('RenderWebsite END');
 			
 			return $strOutput;         
 		}
@@ -4110,12 +4110,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		
 		function OnCommand($strCommand)
 		{
-			if ($strCommand == "logout")
+			if ($strCommand == 'logout')
 			{
 				$this->UserLogout();
 				return true;
 			}
-			if ($strCommand == "login")
+			if ($strCommand == 'login')
 			{
 				$this->UserLogin(
 					$this->GetParam($this->GetAuthUsernameVarName()),
@@ -4173,10 +4173,10 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function RenderFont()
 		{
-			$strFontID = $this->GetParam("id");
+			$strFontID = $this->GetParam('id');
 			
 			$strBinary = null;
-			if ($strFontID == "")
+			if ($strFontID == '')
 			{
 				exit();	
 			}
@@ -4205,27 +4205,27 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				.woff -> application/font-woff (as from January 2013)
 			*/
 
-			if (StringSection($strFilePath,-3) == "eot")
+			if (StringSection($strFilePath,-3) == 'eot')
 			{
 				header('Content-type: application/vnd.ms-fontobject');
 			}
-			else if (StringSection($strFilePath,-3) == "otf")
+			else if (StringSection($strFilePath,-3) == 'otf')
 			{
 				header('Content-type: application/font-sfnt');
 			}
-			else if (StringSection($strFilePath,-3) == "svg")
+			else if (StringSection($strFilePath,-3) == 'svg')
 			{
 				header('Content-type: image/svg+xml');
 			}			
-			else if (StringSection($strFilePath,-3) == "ttf")
+			else if (StringSection($strFilePath,-3) == 'ttf')
 			{
 				header('Content-type: application/font-sfnt');
 			}				
-			else if (StringSection($strFilePath,-4) == "woff")
+			else if (StringSection($strFilePath,-4) == 'woff')
 			{
 				header('Content-type: application/font-woff');
 			}
-			else if (StringSection($strFilePath,-5) == "woff2")
+			else if (StringSection($strFilePath,-5) == 'woff2')
 			{
 				header('Content-type: application/font-woff');
 			}
@@ -4242,10 +4242,10 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function RenderVideo()
 		{
-			$strVideoID = $this->GetParam("id");
+			$strVideoID = $this->GetParam('id');
 			
 			$strBinary = null;
-			if ($strVideoID != "")
+			if ($strVideoID != '')
 			{			
 				if (StringCheckCharSet($strVideoID,CHARSET_VIDEOID))
 				{
@@ -4264,27 +4264,27 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			*/
 
 /*
-			if (StringSection($strFilePath,-3) == "eot")
+			if (StringSection($strFilePath,-3) == 'eot')
 			{
 				header('Content-type: application/vnd.ms-fontobject');
 			}
-			else if (StringSection($strFilePath,-3) == "otf")
+			else if (StringSection($strFilePath,-3) == 'otf')
 			{
 				header('Content-type: application/font-sfnt');
 			}
-			else if (StringSection($strFilePath,-3) == "svg")
+			else if (StringSection($strFilePath,-3) == 'svg')
 			{
 				header('Content-type: image/svg+xml');
 			}			
-			else if (StringSection($strFilePath,-3) == "ttf")
+			else if (StringSection($strFilePath,-3) == 'ttf')
 			{
 				header('Content-type: application/font-sfnt');
 			}				
-			else if (StringSection($strFilePath,-4) == "woff")
+			else if (StringSection($strFilePath,-4) == 'woff')
 			{
 				header('Content-type: application/font-woff');
 			}
-			else if (StringSection($strFilePath,-5) == "woff2")
+			else if (StringSection($strFilePath,-5) == 'woff2')
 			{
 				header('Content-type: application/font-woff');
 			}
@@ -4374,19 +4374,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				}
 			}
 			
-			if (StringSection($strFilePath,-3) == "png")
+			if (StringSection($strFilePath,-3) == 'png')
 			{
 				header('Content-type: image/png');
 				print(FileReadBinary($strFilePath));
 				return true;
 			}
-			if (StringSection($strFilePath,-3) == "gif")
+			if (StringSection($strFilePath,-3) == 'gif')
 			{
 				header('Content-type: image/gif');
 				print(FileReadBinary($strFilePath));
 				return true;
 			}
-			if (StringSection($strFilePath,-3) == "jpg")
+			if (StringSection($strFilePath,-3) == 'jpg')
 			{
 				header('Content-type: image/jpeg');
 				print(FileReadBinary($strFilePath));
@@ -4400,7 +4400,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function RenderCss()
 		{
-			header("Content-type: css");
+			header('Content-type: css');
 			$this->OnRenderCss();
 			exit();
 		}
@@ -4414,8 +4414,8 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function RenderDownload()
 		{
-			$strFilePathRel = $this->GetParam("filepath");
-			if ($strFilePathRel == "")
+			$strFilePathRel = $this->GetParam('filepath');
+			if ($strFilePathRel == '')
 			{
 				return;	
 			}
@@ -4448,47 +4448,47 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			
 			$this->SetContent('');
 			$arraySitemap = $this->OnMakeSitemap();
-			print('<?xml version="1.0" encoding="UTF-8"?>
+			print('<?xml version='1.0' encoding='UTF-8'?>
 <urlset
-	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+	xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd'
 	>
 ');
 			if (!is_array($arraySitemap))
 			{
-				print("<!-- Sitemap is empty -->");
+				print('<!-- Sitemap is empty -->');
 			}
 			else
 			{
 				foreach ($arraySitemap as $arrayURL)
 				{
-					$strLoc = ArrayGetValue($arrayURL,"loc");
-					if ($strLoc != "")
+					$strLoc = ArrayGetValue($arrayURL,'loc');
+					if ($strLoc != '')
 					{
-						$strChangefreq = 	ArrayGetValue($arrayURL,"changefreq");
-						$strPriority = 	ArrayGetValue($arrayURL,"priority");
+						$strChangefreq = 	ArrayGetValue($arrayURL,'changefreq');
+						$strPriority = 	ArrayGetValue($arrayURL,'priority');
 						
-						print("\t<url>\n");
-						print("\t\t<loc>$strLoc</loc>\n");
-						if ($strChangefreq != "")
+						print('\t<url>\n');
+						print('\t\t<loc>$strLoc</loc>\n');
+						if ($strChangefreq != '')
 						{
-							print("\t\t<changefreq>$strChangefreq</changefreq>\n");
+							print('\t\t<changefreq>$strChangefreq</changefreq>\n');
 						}
-						if ($strPriority != "")
+						if ($strPriority != '')
 						{
-							print("\t\t<priority>$strPriority</priority>\n");
+							print('\t\t<priority>$strPriority</priority>\n');
 						}
-						print("\t</url>\n");
+						print('\t</url>\n');
 					}
 				}
 			}
-			print("</urlset>\n");			
+			print('</urlset>\n');			
 			if ($this->IsTraceActive() == true)
 			{
-				print("<!--\n");
+				print('<!--\n');
 				print($this->GetTraceLog());	
-				print("\n-->\n");
+				print('\n-->\n');
 			}		
 			exit;	
 		}
@@ -4502,19 +4502,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			{
 				$navigationtree = new CNavigationTree();
 				$navigationtree->LoadNavigationTree($this,'',$strLanguage);
-				$navigationtree->SetContextParameterName("content");
+				$navigationtree->SetContextParameterName('content');
 				$navigationtree->FilterItemsForSitemap($this);
 			
 				$arrayItems = $navigationtree->GetNavigationItemArray();
 			
 				foreach ($arrayItems as $navItem)
 				{
-					$strLoc = $navItem->GetURL($this,"content",true,$strLanguage);
+					$strLoc = $navItem->GetURL($this,'content',true,$strLanguage);
 					$this->Trace($strLoc);
 					$strPriority = RenderNumber(1.0 - (floatval($navItem->m_nLevel) * 0.1),1);
 					$arraySitemap[] = array(
-						"loc" => $strLoc, 
-						"priority" => $strPriority
+						'loc' => $strLoc, 
+						'priority' => $strPriority
 						);
 				}
 			}
@@ -4523,8 +4523,8 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			{
 				$arraySitemap = array(
 					array(
-						"loc" => $this->GetRootURL(),
-						"priority" => "1.0")
+						'loc' => $this->GetRootURL(),
+						'priority' => '1.0')
 					);
 			}
 				
@@ -4554,14 +4554,14 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				return $strFilePath;	 
 			}			
 
-			$strFilePath = $this->GetCssDir() . $this->MakeLayoutCssFileName("default");
+			$strFilePath = $this->GetCssDir() . $this->MakeLayoutCssFileName('default');
 			$this->Trace($strFilePath);
 			if (IsFile($strFilePath))
 			{
 				return $strFilePath;	
 			}
 			
-			$strFilePath = $this->GetAssemblyLine()->GetLayoutCssFilePath("default");
+			$strFilePath = $this->GetAssemblyLine()->GetLayoutCssFilePath('default');
 			$this->Trace($strFilePath);
 			if ($strFilePath != false)
 			{
@@ -4576,14 +4576,14 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$strFilePath = $this->GetLayoutCssFilePath($this->GetLayout());
 			if ($strFilePath == false)
 			{
-				print("/* ERROR: CSS file not found! */");
+				print('/* ERROR: CSS file not found! */');
 				return;
 			}
 
 			$strCss = FileRead($strFilePath);
 			if ($strCss === false)
 			{
-				print("/* ERROR: CSS file could not be read! */");
+				print('/* ERROR: CSS file could not be read! */');
 				return;
 			}
 			print($strCss);
@@ -4599,19 +4599,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			2. Check for png, then for jpg, then for gif
 			*/
 
-			if ($strExtension == "")
+			if ($strExtension == '')
 			{
-				$strFilePath = $this->GetImageFilePath($strImageID,"png");
+				$strFilePath = $this->GetImageFilePath($strImageID,'png');
 				if ($strFilePath != false)
 				{
 					return $strFilePath;	
 				}
-				$strFilePath = $this->GetImageFilePath($strImageID,"jpg");
+				$strFilePath = $this->GetImageFilePath($strImageID,'jpg');
 				if ($strFilePath != false)
 				{
 					return $strFilePath;	
 				}
-				$strFilePath = $this->GetImageFilePath($strImageID,"gif");
+				$strFilePath = $this->GetImageFilePath($strImageID,'gif');
 				if ($strFilePath != false)
 				{
 					return $strFilePath;	
@@ -4627,7 +4627,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				return $strFilePath;	
 			}
 			
-			$strFilePath = $this->GetAssemblyLine()->GetImageFilePath($strImageID.".".$strExtension);
+			$strFilePath = $this->GetAssemblyLine()->GetImageFilePath($strImageID.'.'.$strExtension);
 			$this->Trace($strFilePath);
 			if (IsFile($strFilePath))
 			{
@@ -4645,19 +4645,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			2. Check for static images dir within assemblies
 			*/
 			
-			if ($strExtension == "")
+			if ($strExtension == '')
 			{
-				$strFilePath = $this->GetLayoutImageFilePath($strImageID, $strLayout, "png");
+				$strFilePath = $this->GetLayoutImageFilePath($strImageID, $strLayout, 'png');
 				if ($strFilePath != false)
 				{
 					return $strFilePath;	
 				}
-				$strFilePath = $this->GetLayoutImageFilePath($strImageID, $strLayout, "jpg");
+				$strFilePath = $this->GetLayoutImageFilePath($strImageID, $strLayout, 'jpg');
 				if ($strFilePath != false)
 				{
 					return $strFilePath;	
 				}
-				$strFilePath = $this->GetLayoutImageFilePath($strImageID, $strLayout, "gif");
+				$strFilePath = $this->GetLayoutImageFilePath($strImageID, $strLayout, 'gif');
 				if ($strFilePath != false)
 				{
 					return $strFilePath;	
@@ -4678,16 +4678,16 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				return $strFilePath;	 
 			}			
 
-			if ($strLayout != "default")
+			if ($strLayout != 'default')
 			{
-				$strFilePath = $this->GetImagesDir() . $this->MakeLayoutImageFileName($strImageID,"default",$strExtension);
+				$strFilePath = $this->GetImagesDir() . $this->MakeLayoutImageFileName($strImageID,'default',$strExtension);
 				$this->Trace($strFilePath);
 				if (IsFile($strFilePath))
 				{
 					return $strFilePath;	
 				}
 				
-				$strFilePath = $this->GetAssemblyLine()->GetLayoutImageFilePath($strImageID,"default",$strExtension);
+				$strFilePath = $this->GetAssemblyLine()->GetLayoutImageFilePath($strImageID,'default',$strExtension);
 				$this->Trace($strFilePath);
 				if (IsFile($strFilePath))
 				{
@@ -4738,7 +4738,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function GetJavaScriptFilePath($strScriptID)
 		{
-			$strFilePath = $this->GetJavaScriptsDir() . $strScriptID.".js";
+			$strFilePath = $this->GetJavaScriptsDir() . $strScriptID.'.js';
 			if (IsFile($strFilePath))
 			{
 				return $strFilePath;	
@@ -4752,11 +4752,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		}		
 		
 		final
-		function GetNavigationTree($strNavigationID,$strContextParameter = "content")
+		function GetNavigationTree($strNavigationID,$strContextParameter = 'content')
 		{
-			if ($strNavigationID == "")
+			if ($strNavigationID == '')
 			{
-				$strNavigationID = "default";
+				$strNavigationID = 'default';
 			}
 			return $this->OnGetNavigationTree($strNavigationID,$strContextParameter);	
 		}
@@ -4765,12 +4765,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		{
 			$navigationtree = new CNavigationTree();
 			$bResult = $navigationtree->LoadNavigationTree($this,$strNavigationID);
-			if ($bResult == false && $strNavigationID == "sitemap")
+			if ($bResult == false && $strNavigationID == 'sitemap')
 			{
-				$navigationtree->LoadNavigationTree($this,"default");
+				$navigationtree->LoadNavigationTree($this,'default');
 			}
 			$navigationtree->SetContextParameterName($strContextParameter);			
-			if ($strContextParameter == "content")
+			if ($strContextParameter == 'content')
 			{
 				$navigationtree->SetCurrentContext($this->GetContent());
 			}
@@ -4784,7 +4784,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		
 		function OnRenderSpecialContent($strContentID)
 		{
-			return "";
+			return '';
 		}
 		
 		final
@@ -4793,20 +4793,20 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$strFileName,
 			$strContents)
 		{
-			$this->Trace("DownloadFile");
-			$this->Trace("Mime Type: $strMimeType");
-			$this->Trace("File Name: $strFileName");
+			$this->Trace('DownloadFile');
+			$this->Trace('Mime Type: $strMimeType');
+			$this->Trace('File Name: $strFileName');
 			
 			if ($this->IsDownloadFileSet())
 			{
-				$this->Trace("Warning: Repeated invocation of DownloadFile() will override previous setting.");	
+				$this->Trace('Warning: Repeated invocation of DownloadFile() will override previous setting.');	
 			}
 			
-			$this->m_arrayDownloadFile["mimetype"] = $strMimeType;
-			$this->m_arrayDownloadFile["filename"] = $strFileName;
-			$this->m_arrayDownloadFile["contents"] = $strContents;
+			$this->m_arrayDownloadFile['mimetype'] = $strMimeType;
+			$this->m_arrayDownloadFile['filename'] = $strFileName;
+			$this->m_arrayDownloadFile['contents'] = $strContents;
 			
-			$strDownloadToken = $this->GetVar("downloadtoken");
+			$strDownloadToken = $this->GetVar('downloadtoken');
 			if ($strDownloadToken != '')
 			{
 				$this->SetVar('downloadtoken','');
@@ -4817,15 +4817,15 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function IsDownloadFileSet()
 		{
-			if (ArrayGetValue($this->m_arrayDownloadFile,"mimetype") == "")
+			if (ArrayGetValue($this->m_arrayDownloadFile,'mimetype') == '')
 			{
 				return false;
 			}
-			if (ArrayGetValue($this->m_arrayDownloadFile,"filename") == "")
+			if (ArrayGetValue($this->m_arrayDownloadFile,'filename') == '')
 			{
 				return false;
 			}
-			if (ArrayGetValue($this->m_arrayDownloadFile,"contents") == "")
+			if (ArrayGetValue($this->m_arrayDownloadFile,'contents') == '')
 			{
 				return false;
 			}
@@ -4834,7 +4834,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			
 		function OnGetWebsiteTitle()
 		{
-			$strTitle = "";
+			$strTitle = '';
 			if (IsValidContentID($this->GetContent()) == true)
 			{
 				$strContentUC = StringUppercase($this->GetContent());
@@ -4843,7 +4843,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					if ($strContentUC != 'INDEX')
 					{
 						$strTitle = $this->LoadString('TID_TITLE_'.$strContentUC);
-						if ($strTitle == "")
+						if ($strTitle == '')
 						{
 							$strTitle = $this->LoadString('TID_NAVIGATION_'.$strContentUC);	
 						}
@@ -4870,28 +4870,28 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 
 		function OnGetWebsiteDescription()
 		{
-			$strText = $this->LoadString("TID_META_DESCRIPTION_".StringUppercase($this->GetContent()));
-			if ($strText != "")
+			$strText = $this->LoadString('TID_META_DESCRIPTION_'.StringUppercase($this->GetContent()));
+			if ($strText != '')
 			{
 				return $strText;
 			}
-			$strText = $this->LoadString("TID_META_DESCRIPTION_DEFAULT");
-			if ($strText != "")
+			$strText = $this->LoadString('TID_META_DESCRIPTION_DEFAULT');
+			if ($strText != '')
 			{
 				return $strText;
 			}
-			return "";	
+			return '';	
 		}
 
 		function OnGetWebsiteKeywords()
 		{
-			$strText = $this->LoadString("TID_META_KEYWORDS_".StringUpperCase($this->GetContent()));
-			$strTextDefault = $this->LoadString("TID_META_KEYWORDS_DEFAULT");
-			if ($strTextDefault != "")
+			$strText = $this->LoadString('TID_META_KEYWORDS_'.StringUpperCase($this->GetContent()));
+			$strTextDefault = $this->LoadString('TID_META_KEYWORDS_DEFAULT');
+			if ($strTextDefault != '')
 			{
-				if ($strText != "")
+				if ($strText != '')
 				{
-					$strText = $strText.", ".$strTextDefault;   
+					$strText = $strText.', '.$strTextDefault;   
 				}
 				else
 				{
@@ -4909,18 +4909,18 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		
 		function OnSessionCreate()
 		{
-			$this->Trace("CWebsite::OnSessionCreate");
+			$this->Trace('CWebsite::OnSessionCreate');
 			if ($this->GetSessionMode() == SESSION_MODE_LOCAL_COOKIE)
 			{
-				return "local";					
+				return 'local';					
 			}
-			$strSessionID = "";
+			$strSessionID = '';
 			return $strSessionID;			
 		}
 		
 		function OnSessionRead($strSessionID, &$arrayData)
 		{
-			$this->Trace("CWebsite::OnSessionRead");
+			$this->Trace('CWebsite::OnSessionRead');
 			$arrayData = array();
 			if ($this->GetSessionMode() == SESSION_MODE_LOCAL_COOKIE)
 			{
@@ -4932,7 +4932,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 
 		function OnSessionWrite($strSessionID, $arrayData)
 		{
-			$this->Trace("CWebsite::OnSessionWrite");
+			$this->Trace('CWebsite::OnSessionWrite');
 			if ($this->GetSessionMode() == SESSION_MODE_LOCAL_COOKIE)
 			{
 				foreach ($arrayData as $strKey => $strValue)
@@ -4946,14 +4946,14 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		
 		function OnSessionDestroy($strSessionID)
 		{
-			$this->Trace("OnSessionDestroy() is not implemented.");
+			$this->Trace('OnSessionDestroy() is not implemented.');
 			return false;
 		}
 
 
 		function OnLoadUserSettings()
 		{
-			$this->Error("OnLoadUserSettings() is not implemented.");
+			$this->Error('OnLoadUserSettings() is not implemented.');
 			return false;
 		}
 
@@ -4967,34 +4967,34 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 
 		function OnRenderContentException()
 		{
-			$navigationtree = $this->GetNavigationTree("");
-			$navigation = new CNavigationElement($this,"portfolio");
+			$navigationtree = $this->GetNavigationTree('');
+			$navigation = new CNavigationElement($this,'portfolio');
 			$strOutput = $navigation->RenderNavigationCurrentPathPortfolio($navigationtree);
-			if ($strOutput != "")
+			if ($strOutput != '')
 			{
 				return $strOutput;	
 			}
 			
-    	$this->SetErrorMessageCode("CONTENT_NOT_FOUND");
-			return $this->LoadContent("sitemap");
+    	$this->SetErrorMessageCode('CONTENT_NOT_FOUND');
+			return $this->LoadContent('sitemap');
 		}
 
 		
 		function OnUserLogin($strUserName,$strAuthenticationPayload)
 		{
-			$this->Error("OnUserLogin() is not implemented.");
+			$this->Error('OnUserLogin() is not implemented.');
 			return false;			
 		}
 		
 		function OnUserLogout()
 		{
-			$this->Error("OnUserLogout() is not implemented.");
+			$this->Error('OnUserLogout() is not implemented.');
 			return false;
 		}
 
 		function OnUserCheckName($strUsername)
 		{
-			$this->Error("OnUserCheckName() is not implemented.");
+			$this->Error('OnUserCheckName() is not implemented.');
 			return false;
 		}
 
@@ -5101,7 +5101,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		
 		function OnGetMessage($strMessageType,$strMessageID)
 		{
-			$this->Error("OnGetMessage() is not implemented.");
+			$this->Error('OnGetMessage() is not implemented.');
 			return '';
 		}
 		
@@ -5118,27 +5118,27 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function OnGetDateTimeLocalFormat($strCountryID)
 		{
 			$strDateFormat = $this->OnGetDateLocalFormat($strCountryID);
-			if ($strDateFormat == "")
+			if ($strDateFormat == '')
 			{
 				$strDateFormat = GetDateLocalFormat($strCountryID);	
 			}
 			$strTimeFormat = $this->OnGetTimeLocalFormat($strCountryID);
-			if ($strTimeFormat == "")
+			if ($strTimeFormat == '')
 			{
 				$strTimeFormat = GetTimeLocalFormat($strCountryID);	 
 			}
-			return $strDateFormat." ".$strTimeFormat;     
+			return $strDateFormat.' '.$strTimeFormat;     
 		}
 		
 		final
 		function GetAuthUsernameVarName()
 		{
-			return "username";	
+			return 'username';	
 		}
 		final		
 		function GetAuthPasswordVarName()
 		{
-			return "password";
+			return 'password';
 		}
 		final		
 		function GetAuthUsernameVar()
@@ -5172,19 +5172,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function UserInit()
 		{
-			$this->Trace("UserInit");
+			$this->Trace('UserInit');
 			if ($this->m_bAuthenticationSupport == true)
 			{
-				if ($this->GetAuthUserID() != "")
+				if ($this->GetAuthUserID() != '')
 				{
 					$this->UserLoadSettings();
 					$this->UserInitPrivileges();	
-					$this->Trace("PRIVILEGES:");
+					$this->Trace('PRIVILEGES:');
 					$this->Trace($this->m_arrayPrivileges);
 				}
 				else
 				{
-					$this->SetAuthUserID("");
+					$this->SetAuthUserID('');
 					$this->m_arrayPrivileges = array();	
 				}
 			}
@@ -5196,7 +5196,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		{
 			if (IsSessionModeServer($this->GetSessionMode()) == false)
 			{
-				$this->Error("UserLogin() requires a server based session!");
+				$this->Error('UserLogin() requires a server based session!');
 				return false;			
 			}
 			
@@ -5237,7 +5237,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function UserCheckName($strUsername)
 		{
 			$bResult = $this->OnUserCheckName($strUsername);
-			$this->Trace('UserCheckName("'.$strUsername.'") returned '.RenderBool($bResult));
+			$this->Trace('UserCheckName(''.$strUsername.'') returned '.RenderBool($bResult));
 			return $bResult;
 		}
 		
@@ -5250,9 +5250,9 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				return false;	
 			}
 			$arrayParam = array();
-			$arrayParam["oldpassword"] = $strOldPassword; 
-			$arrayParam["newpassword"] = $strNewPassword; 
-			$this->TriggerEvent("website-user-changepassword",$arrayParam);
+			$arrayParam['oldpassword'] = $strOldPassword; 
+			$arrayParam['newpassword'] = $strNewPassword; 
+			$this->TriggerEvent('website-user-changepassword',$arrayParam);
 			return $bResult;
 			
 		}
@@ -5270,11 +5270,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		}
 
 		final
-		function UserSignin($strUserName,$strPassword,$arraySigninParams = array(),&$strError = "",&$arrayResults = array())
+		function UserSignin($strUserName,$strPassword,$arraySigninParams = array(),&$strError = '',&$arrayResults = array())
 		{
 			if ($this->UserCheckName($strUserName) != true)
 			{
-				$strError = "USERNAME_INVALID";
+				$strError = 'USERNAME_INVALID';
 				return false;	
 			}
 			$strNewUserID = $this->OnUserSignin($strUserName,$strPassword,$arraySigninParams,$strError,$arrayResults);
@@ -5283,8 +5283,8 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				return false;	
 			}
 			$arrayEventParams = array();
-			$arrayEventParams["userid"] = $strNewUserID; 
-			$this->TriggerEvent("website-user-signin",$arrayEventParams);
+			$arrayEventParams['userid'] = $strNewUserID; 
+			$this->TriggerEvent('website-user-signin',$arrayEventParams);
 			return $strNewUserID;
 		}
 
@@ -5344,13 +5344,13 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		
 		function OnGetData($strContextType, $strContextID, $strDataName, $strDefaultContext)
 		{
-			$this->Error("OnGetData() is not implemented.");
+			$this->Error('OnGetData() is not implemented.');
 			return false;	
 		}
 
 		function OnSetData($strContextType, $strContextID, $strDataName, $strContext)
 		{
-			$this->Error("OnGetData() is not implemented.");
+			$this->Error('OnGetData() is not implemented.');
 			return false;	
 		}		
 
@@ -5362,12 +5362,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$bResult = true;
 			if ($this->GetSessionMode() != SESSION_MODE_NONE)
 			{
-				if ($this->GetSessionID() != "")
+				if ($this->GetSessionID() != '')
 				{
 					$bResult = $this->OnSessionDestroy($this->GetSessionID());
 				}
 			}
-			$this->m_strSessionID = "";			
+			$this->m_strSessionID = '';			
 			return $bResult;
 		}
 
@@ -5375,7 +5375,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function CheckCondition($strCondition)
 		{
 			$bInvert = false;
-			if (StringSection($strCondition,0,1) == "!")
+			if (StringSection($strCondition,0,1) == '!')
 			{
 				$bInvert = true;
 				$strCondition	= StringSection($strCondition,1);
@@ -5407,12 +5407,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		
 		function GetSiteTeamEmail()
 		{
-			return "no-reply@".GetMailDomain();
+			return 'no-reply@'.GetMailDomain();
 		}
 
 		function GetSiteTeamName()
 		{
-			return "The ".GetMailDomain(). " Team";
+			return 'The '.GetMailDomain(). ' Team';
 		}
 		
 		final
@@ -5439,7 +5439,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		function MakeCSV(
 			$arrayList)
 		{
-			$strFormat = $this->GetConfig("csvformat");
+			$strFormat = $this->GetConfig('csvformat');
 			return MakeCSV_Format(
 				$strFormat,
 				$arrayList);
@@ -5451,7 +5451,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$bHeaderRow = true,
 			$IncludeHeadersInResult = false)
 		{
-			$strFormat = $this->GetConfig("csvformat");
+			$strFormat = $this->GetConfig('csvformat');
 			return ParseCSV_Format(
 				$strFormat,
 				$strCSV,
@@ -5488,12 +5488,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			{
 				return false;	
 			}
-			if (FindString($strTrackingID,"UA-") != 0)
+			if (FindString($strTrackingID,'UA-') != 0)
 			{
 				return false;
 			}
 			$this->AddJavaScript('google-analytics');
-			$this->SetOutputItem("GOOGLEANALYTICS_TRACKINGID",$strTrackingID);
+			$this->SetOutputItem('GOOGLEANALYTICS_TRACKINGID',$strTrackingID);
 			return true;
 		}
 
@@ -5509,16 +5509,16 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			}
 			$this->AddJavaScript('google-conversion-params');
 			$this->AddJavaScriptURL('google-conversion','https://www.googleadservices.com/pagead/conversion.js');
-			$this->SetOutputItem("GOOGLECONVERSION_CONVERSIONID",$strConversionID);
-			$this->SetOutputItem("GOOGLECONVERSION_LABEL",$strLabel);
-			$this->SetBodyItem('google-conversion','<noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/{GOOGLECONVERSION_CONVERSIONID}/?label={GOOGLECONVERSION_LABEL}&amp;guid=ON&amp;script=0"/></div></noscript>');
+			$this->SetOutputItem('GOOGLECONVERSION_CONVERSIONID',$strConversionID);
+			$this->SetOutputItem('GOOGLECONVERSION_LABEL',$strLabel);
+			$this->SetBodyItem('google-conversion','<noscript><div style='display:inline;'><img height='1' width='1' style='border-style:none;' alt='' src='//www.googleadservices.com/pagead/conversion/{GOOGLECONVERSION_CONVERSIONID}/?label={GOOGLECONVERSION_LABEL}&amp;guid=ON&amp;script=0'/></div></noscript>');
 			return true;
 		}
 
 		function ActivateFacebookSDK()
 		{
 			$this->AddJavaScript('facebook-sdk');
-			$this->SetBodyItem('facebook-sdk','<div id="fb-root"></div>');
+			$this->SetBodyItem('facebook-sdk','<div id='fb-root'></div>');
 		}		
 
 		function ActivateJQuery()
@@ -5581,7 +5581,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		final
 		function SetDynamicNavigationTree($strNavigationID, CNavigationTree $navTree)
 		{
-			if ($strNavigationID == "")
+			if ($strNavigationID == '')
 			{
 				return false;	
 			} 
@@ -5598,19 +5598,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		{
 			if ($this->m_bCheckUnresolvedTID == true)
 			{
-				$this->Trace("Checking for unresolved TID tags in output...");
-				$nTIDpos = FindString($strOutput,"?TID_");
+				$this->Trace('Checking for unresolved TID tags in output...');
+				$nTIDpos = FindString($strOutput,'?TID_');
 				if ($nTIDpos != -1)
 				{
-					$this->Trace("\"?TID_\" found in output:");
+					$this->Trace('\'?TID_\' found in output:');
 					$strOutputSection = StringSection($strOutput,$nTIDpos,40);
 					$this->Trace($strOutputSection);
 					$this->SystemEvent(
-						"WARNING",
-						"UNRESOLVED_TID",
-						"Unresolved TID tags found in output!",
+						'WARNING',
+						'UNRESOLVED_TID',
+						'Unresolved TID tags found in output!',
 						array(
-							"output" => $strOutputSection
+							'output' => $strOutputSection
 							)
 						);
 				}
@@ -5622,19 +5622,19 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			// Check for invalid TIDs if required
 			if ($this->m_bCheckInvalidTID == true)
 			{
-				$this->Trace("Checking for invalid TIDs...");
+				$this->Trace('Checking for invalid TIDs...');
 				
 				$arrayErrors = GetInvalidTIDs($this->m_res->GetStrings($this->GetLanguage()));
 				if (ArrayCount($arrayErrors) > 0)
 				{
-					$this->Trace("Invalid TID detected");	
+					$this->Trace('Invalid TID detected');	
 					$this->Trace($arrayErrors);
 					$this->SystemEvent(
-						"WARNING",
-						"INVALID_TID",
-						"Invalid TIDs found",
+						'WARNING',
+						'INVALID_TID',
+						'Invalid TIDs found',
 						array(
-							"output" => $arrayErrors
+							'output' => $arrayErrors
 							)
 						);
 					
@@ -5649,13 +5649,13 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		
 		function OnBasicAuthRenderFailed() 
 		{
-			$this->SetErrorMessageCode("HTTP401");
-			return "";	
+			$this->SetErrorMessageCode('HTTP401');
+			return '';	
 		}
 
 		function OnBasicAuthRenderSuccess() 
 		{
-			return "";	
+			return '';	
 		}
 
 	}

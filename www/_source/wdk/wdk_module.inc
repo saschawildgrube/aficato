@@ -30,7 +30,7 @@
 			if (!is_array($arrayModulePathComponents) || ArrayCount($arrayModulePathComponents) != 2)
 			{
 				$this->Trace($arrayModulePathComponents);
-				$this->Error("CModule: Invalid module path: \"".$strModulePath."\"");
+				$this->Error('CModule: Invalid module path: \''.$strModulePath.'\'');
 			}
 			$strModuleGroup = $arrayModulePathComponents[0];
 			$strModuleID = $arrayModulePathComponents[1];
@@ -47,13 +47,13 @@
 			}
 			$this->m_arrayConfig = $arrayConfig;
 
-			$this->GetWebsite()->LoadStringResources("module-".$this->m_strModuleID);
+			$this->GetWebsite()->LoadStringResources('module-'.$this->m_strModuleID);
 
 			$this->m_arrayToolbarConfig = array();
 
-			$this->m_strFinalState = "";
+			$this->m_strFinalState = '';
 			$this->m_strInitialState = $this->GetState();
-			$this->m_strPreviousState = $this->GetModuleVar("previous_state");
+			$this->m_strPreviousState = $this->GetModuleVar('previous_state');
 			$this->m_bOnInit = false;
 			$this->m_bInit = $this->OnInit();
 			if ($this->m_bOnInit == false)
@@ -95,15 +95,15 @@
 		final
 		function GetState()
 		{
-			return $this->GetModuleVar("state");
+			return $this->GetModuleVar('state');
 		}
 		
 		final
 		function SetState($strNewState)
 		{
-			$this->Trace("SetState(\"$strNewState\")");
-			$this->SetModuleVar("state",$strNewState);
-			$this->SetModuleVar("previous_state",$strNewState);
+			$this->Trace('SetState(\'$strNewState\')');
+			$this->SetModuleVar('state',$strNewState);
+			$this->SetModuleVar('previous_state',$strNewState);
 		}
 		
 		final
@@ -114,7 +114,7 @@
 		
 		function GetDataFilePath($strFilePath)
 		{
-			return parent::GetDataFilePath($this->m_strModuleID."/".$strFilePath);
+			return parent::GetDataFilePath($this->m_strModuleID.'/'.$strFilePath);
 		}
 		
 		final
@@ -138,21 +138,21 @@
 		final
 		function GetModuleVarName($strVar)
 		{
-			if ($strVar != ")*(")
+			if ($strVar != ')*(')
 			{
 				// This exception is needed to construct the regular expression in GetAllModuleVars()
 				if ($this->GetWebsite()->CheckVarName($strVar) == false)
 				{
-					$this->Error("GetModuleVarName called with an invalid var name: \"$strVar\". Var names must consist of the following character set: \"".CHARSET_PARAMETERNAME."\"");
+					$this->Error('GetModuleVarName called with an invalid var name: \'$strVar\'. Var names must consist of the following character set: \''.CHARSET_PARAMETERNAME.'\'');
 				}
 			}
-			$strInstanceID = ($this->m_strInstanceID == "")?(""):($this->m_strInstanceID."_");
-			return $this->GetModuleID()."_".$strInstanceID.$strVar;
+			$strInstanceID = ($this->m_strInstanceID == '')?(''):($this->m_strInstanceID.'_');
+			return $this->GetModuleID().'_'.$strInstanceID.$strVar;
 		}
 		final
 		function GetModuleVarNameState()
 		{
-			return $this->GetModuleVarName("state");	
+			return $this->GetModuleVarName('state');	
 		}
 		final
 		function IsModuleVar($strVar)
@@ -176,7 +176,7 @@
 			$arrayModuleVars = array();
 			foreach ($arrayVars as $strName => $strVar)
 			{
-				$strRegExp = "/(".$this->GetModuleVarName(")*(").")/";
+				$strRegExp = '/('.$this->GetModuleVarName(')*(').')/';
 				if (RegExpMatch($strName,$strRegExp) != false )
 				{
 					$arrayModuleVars[$strName]	= $strVar;
@@ -205,13 +205,13 @@
 		}
 		
 		final
-		function GetModuleConfig($strConfig1,$strConfig2="",$strConfig3="",$strConfig4="")
+		function GetModuleConfig($strConfig1,$strConfig2='',$strConfig3='',$strConfig4='')
 		{
 			return ArrayGetValue($this->m_arrayConfig,$strConfig1,$strConfig2,$strConfig3,$strConfig4);	
 		}
 		
 		final
-		function GetModuleConfigBoolean($strConfig1,$strConfig2="",$strConfig3="",$strConfig4="")
+		function GetModuleConfigBoolean($strConfig1,$strConfig2='',$strConfig3='',$strConfig4='')
 		{
 			return GetBoolValue($this->GetModuleConfig($strConfig1,$strConfig2,$strConfig3,$strConfig4));
 		}
@@ -282,13 +282,13 @@
 				$this->GetWebsite()->GetLayout(),
 				$this->m_strModuleID,
 				$strStateID,
-				"");
+				'');
 			if ($strFilePath != false)
 			{
 				return FileRead($strFilePath);
 			}
   
-			$this->Error("LoadModuleLayoutFile FAILED: ModuleID: \"".$this->m_strModuleID."\", State: \"$strStateID\", Style: \"$strStyleID\"");
+			$this->Error('LoadModuleLayoutFile FAILED: ModuleID: \''.$this->m_strModuleID.'\', State: \'$strStateID\', Style: \'$strStyleID\'');
 		}
 
 		
@@ -296,14 +296,14 @@
 		final
 		function EventHandler($strEventID,$arrayParams)
 		{
-			if ($strEventID == "website-module-init")
+			if ($strEventID == 'website-module-init')
 			{
 				$this->OnWebsiteInit();	
 				return;
 			}
-			if ($strEventID == "website-user-delete")
+			if ($strEventID == 'website-user-delete')
 			{
-				$this->OnUserDelete(ArrayGetValue($arrayParams,"userid"));
+				$this->OnUserDelete(ArrayGetValue($arrayParams,'userid'));
 				return;
 			}
 			return parent::EventHandler($strEventID,$arrayParams);
@@ -314,10 +314,10 @@
 		{
 			$this->Trace('RenderModule BEGIN');
 			$this->GetWebsite()->ProfilingTrace();
-			$strOutput = "";
+			$strOutput = '';
 			if ($this->m_bInit != true)
 			{
-				$this->Trace('Module (instance: "'.$this->GetInstanceID().'") was not initialized successfully. Doing nothing.');
+				$this->Trace('Module (instance: ''.$this->GetInstanceID().'') was not initialized successfully. Doing nothing.');
 			}
 			else
 			{
@@ -327,7 +327,7 @@
 				$strOutput = $this->LoadModuleLayoutFile($strStateID,$strStyleID);
        	$strOutput = $this->ReplaceOutputItems($strOutput);
        	$this->GetWebsite()->SetOutputItems($this->m_arrayOutputItems);
-				$this->m_strStyleID = "";
+				$this->m_strStyleID = '';
 			}
 			$this->Trace('RenderModule END');
 			$this->GetWebsite()->ProfilingTrace();

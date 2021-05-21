@@ -9,7 +9,7 @@
 			$this->GetWebsite()->LoadStringResources('local');
 			
 			$this->IncludeElement('icon');
-			$icon = new CIconElement($this->GetWebsite(),"default");
+			$icon = new CIconElement($this->GetWebsite(),'default');
 
 			$arrayTable = array();
 			/*

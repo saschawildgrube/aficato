@@ -23,7 +23,7 @@
 		function AddAssembly(CAssembly $assembly)
 		{
 			$this->m_arrayAssemblies[$assembly->GetID()] = $assembly;
-			$assembly->Trace("CAssemblyLine::AddAssembly: ".$assembly->GetID()." ".$assembly->GetRootDir());
+			$assembly->Trace('CAssemblyLine::AddAssembly: '.$assembly->GetID().' '.$assembly->GetRootDir());
 		}
 
 		final
@@ -43,7 +43,7 @@
 		function GetAssetFilePath(
 			$strAssetType,
 			$arrayParams = array(),
-			$strFallbackParam = "")
+			$strFallbackParam = '')
 		{
 			foreach ($this->m_arrayAssemblies as $assembly)
 			{
@@ -55,16 +55,16 @@
 					return $strFile;
 				}
 			}
-			if ($strFallbackParam == "")
+			if ($strFallbackParam == '')
 			{
 				return false;
 			}
 			$strFallbackParamValue = ArrayGetValue($arrayParams,$strFallbackParam);
-			if ($strFallbackParamValue == "")
+			if ($strFallbackParamValue == '')
 			{
 				return false;
 			}
-			$arrayParams[$strFallbackParam] = "";
+			$arrayParams[$strFallbackParam] = '';
 			return $this->GetAssetFilePath(
 				$strAssetType,
 				$arrayParams);
@@ -76,11 +76,11 @@
 			$strLanguage)
 		{
 			return $this->GetAssetFilePath(
-				"content",
+				'content',
 				array(
-					"content" => $strContentID,
-					"language" => $strLanguage,
-					"ext" => "inc")
+					'content' => $strContentID,
+					'language' => $strLanguage,
+					'ext' => 'inc')
 				);
 		}	
 
@@ -90,12 +90,12 @@
 			$strLanguage)
 		{
 			return $this->GetAssetFilePath(
-				"content",
+				'content',
 				array(
-					"content" => $strContentID,
-					"language" => $strLanguage,
-					"ext" => "htm"),
-				"language"
+					'content' => $strContentID,
+					'language' => $strLanguage,
+					'ext' => 'htm'),
+				'language'
 				);
 		}	
 		
@@ -105,12 +105,12 @@
 			$strLanguage)
 		{
 			return $this->GetAssetFilePath(
-				"content",
+				'content',
 				array(
-					"content" => $strContentID,
-					"language" => $strLanguage,
-					"ext" => "txt"),
-				"language"
+					'content' => $strContentID,
+					'language' => $strLanguage,
+					'ext' => 'txt'),
+				'language'
 				);
 		}				
 
@@ -139,9 +139,9 @@
 			$strElementID)
 		{
 			return $this->GetAssetFilePath(
-				"element-democode",
+				'element-democode',
 				array(
-					"element" => $strElementID)
+					'element' => $strElementID)
 				);		
 		}		
 
@@ -152,13 +152,13 @@
 			$strStyle)
 		{
 			return $this->GetAssetFilePath(
-				"layout-element",
+				'layout-element',
 				array(
-					"layout" => $strLayoutID,
-					"element" => $strElementID,
-					"style" => $strStyle,
-					"ext" => "cfg"),
-				"layout"
+					'layout' => $strLayoutID,
+					'element' => $strElementID,
+					'style' => $strStyle,
+					'ext' => 'cfg'),
+				'layout'
 				);		
 		}
 
@@ -169,13 +169,13 @@
 			$strStyle)
 		{
 			return $this->GetAssetFilePath(
-				"layout-element",
+				'layout-element',
 				array(
-					"layout" => $strLayoutID,
-					"element" => $strElementID,
-					"style" => $strStyle,
-					"ext" => "htm"),
-				"layout"
+					'layout' => $strLayoutID,
+					'element' => $strElementID,
+					'style' => $strStyle,
+					'ext' => 'htm'),
+				'layout'
 				);	
 		}
 		
@@ -186,12 +186,12 @@
 			$strStyle)
 		{
 			return $this->GetAssetFilePath(
-				"layout-element-javascript",
+				'layout-element-javascript',
 				array(
-					"layout" => $strLayoutID,
-					"element" => $strElementID,
-					"style" => $strStyle),
-				"layout"
+					'layout' => $strLayoutID,
+					'element' => $strElementID,
+					'style' => $strStyle),
+				'layout'
 				);	
 		}		
 		
@@ -202,12 +202,12 @@
 			$strStyle)
 		{
 			return $this->GetAssetFilePath(
-				"layout-form",
+				'layout-form',
 				array(
-					"layout" => $strLayoutID,
-					"form" => $strFormID,
-					"style" => $strStyle),
-				"layout"
+					'layout' => $strLayoutID,
+					'form' => $strFormID,
+					'style' => $strStyle),
+				'layout'
 				);	
 			return false;
 		}		
@@ -216,12 +216,12 @@
 		function GetResourceFilePath($strLanguage,$strID)
 		{
 			return $this->GetAssetFilePath(
-				"res",
+				'res',
 				array(
-					"language" => $strLanguage,
-					"id" => $strID
+					'language' => $strLanguage,
+					'id' => $strID
 					),
-				"language"
+				'language'
 				);	
 		}
 
@@ -229,12 +229,12 @@
 		function GetRoutingMapFilePath($strLanguage,$strID)
 		{
 			return $this->GetAssetFilePath(
-				"routing",
+				'routing',
 				array(
-					"language" => $strLanguage,
-					"id" => $strID
+					'language' => $strLanguage,
+					'id' => $strID
 					),
-				""
+				''
 				);	
 		}
 
@@ -245,12 +245,12 @@
 			$strLanguage)
 		{
 			return $this->GetAssetFilePath(
-				"navigation",
+				'navigation',
 				array(
-					"language" => $strLanguage,
-					"navigation" => $strNavigationID
+					'language' => $strLanguage,
+					'navigation' => $strNavigationID
 					),
-				"language"
+				'language'
 				);	
 		}
 		
@@ -269,9 +269,9 @@
 		function GetModuleSourceFilePath($strModulePath)
 		{
 			return $this->GetAssetFilePath(
-				"module",
+				'module',
 				array(
-					"modulepath" => $strModulePath
+					'modulepath' => $strModulePath
 					)
 				);	
 		}
@@ -280,14 +280,14 @@
 		function GetModuleLayoutFilePath($strLayoutID,$strModuleID,$strState,$strStyle)
 		{
 			return $this->GetAssetFilePath(
-				"layout-module",
+				'layout-module',
 				array(
-					"layout" => $strLayoutID, 
-					"moduleid" => $strModuleID,
-					"state" => $strState,
-					"style" => $strStyle
+					'layout' => $strLayoutID, 
+					'moduleid' => $strModuleID,
+					'state' => $strState,
+					'style' => $strStyle
 					),
-				"layout"
+				'layout'
 				);				
 		}
 
@@ -295,9 +295,9 @@
 		function GetStyleSheetFilePath($strID)
 		{
 			return $this->GetAssetFilePath(
-				"stylesheet",
+				'stylesheet',
 				array(
-					"stylesheet" => $strID
+					'stylesheet' => $strID
 					)
 				);				
 		}
@@ -306,9 +306,9 @@
 		function GetJavaScriptFilePath($strID)
 		{
 			return $this->GetAssetFilePath(
-				"javascript",
+				'javascript',
 				array(
-					"javascript" => $strID
+					'javascript' => $strID
 					)
 				);				
 		}
@@ -318,9 +318,9 @@
 		function GetDataFilePath($strFilePath)
 		{
 			return $this->GetAssetFilePath(
-				"data",
+				'data',
 				array(
-					"filepath" => $strFilePath
+					'filepath' => $strFilePath
 					)
 				);				
 		}
@@ -329,9 +329,9 @@
 		function GetDownloadFilePath($strFilePath)
 		{
 			return $this->GetAssetFilePath(
-				"download",
+				'download',
 				array(
-					"filepath" => $strFilePath
+					'filepath' => $strFilePath
 					)
 				);				
 		}
@@ -342,9 +342,9 @@
 		function GetImageFilePath($strImageFileName)
 		{
 			return $this->GetAssetFilePath(
-				"image",
+				'image',
 				array(
-					"imagefilename" => $strImageFileName
+					'imagefilename' => $strImageFileName
 					)
 				);				
 		}		
@@ -353,13 +353,13 @@
 		function GetLayoutImageFilePath($strImage,$strLayout,$strExt)
 		{
 			return $this->GetAssetFilePath(
-				"image-layout",
+				'image-layout',
 				array(
-					"image" => $strImage,
-					"layout" => $strLayout,
-					"ext" => $strExt
+					'image' => $strImage,
+					'layout' => $strLayout,
+					'ext' => $strExt
 					),
-				"layout"
+				'layout'
 				);				
 		}
 
@@ -367,9 +367,9 @@
 		function GetFontFilePath($strFontFileName)
 		{
 			return $this->GetAssetFilePath(
-				"font",
+				'font',
 				array(
-					"fontfilename" => $strFontFileName
+					'fontfilename' => $strFontFileName
 					)
 				);				
 		}		
@@ -378,9 +378,9 @@
 		function GetVideoFilePath($strVideoFileName)
 		{
 			return $this->GetAssetFilePath(
-				"video",
+				'video',
 				array(
-					"videofilename" => $strVideoFileName
+					'videofilename' => $strVideoFileName
 					)
 				);				
 		}		
@@ -390,12 +390,12 @@
 		function GetFrameworkLayoutFilePath($strFramework,$strLayout)
 		{
 			return $this->GetAssetFilePath(
-				"layout-framework",
+				'layout-framework',
 				array(
-					"layout" => $strLayout,
-					"framework" => $strFramework
+					'layout' => $strLayout,
+					'framework' => $strFramework
 					),
-				"layout"
+				'layout'
 				);				
 		}
 
@@ -403,7 +403,7 @@
 		function GetLayoutConfigFilePath($strLayout,$strConfig = '')
 		{
 			return $this->GetAssetFilePath(
-				"layout-config",
+				'layout-config',
 				array(
 					'layout' => $strLayout,
 					'config' => $strConfig
@@ -417,11 +417,11 @@
 		function GetLayoutCssFilePath($strLayout)
 		{
 			return $this->GetAssetFilePath(
-				"layout-css",
+				'layout-css',
 				array(
-					"layout" => $strLayout
+					'layout' => $strLayout
 					),
-				"layout"
+				'layout'
 				);				
 		}
 		
@@ -429,11 +429,11 @@
 		function GetLayoutIncFilePath($strLayout)
 		{
 			return $this->GetAssetFilePath(
-				"layout-inc",
+				'layout-inc',
 				array(
-					"layout" => $strLayout
+					'layout' => $strLayout
 					),
-				"layout"
+				'layout'
 				);				
 		}		
 

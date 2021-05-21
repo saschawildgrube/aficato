@@ -40,7 +40,7 @@ coop,whois.nic.coop
 cx,whois.nic.cx
 cy,whois.ripe.net
 cz,whois.nic.cz
-de,whois.denic.de,"-T ace,dn"
+de,whois.denic.de,'-T ace,dn'
 dk,whois.dk-hostmaster.dk
 dm,whois.nic.cx
 dz,whois.nic.dz

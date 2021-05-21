@@ -11,7 +11,7 @@ Analysis
 TID_CASEANALYSIS_TAB_EXPORT
 Export suspicious transactions
 TID_CASEANALYSIS_TEXT_EXPORT
-Click on "Download CSV" to export all transactions that contribute to a red flag in this case. The CSV file can be loaded into Excel.
+Click on 'Download CSV' to export all transactions that contribute to a red flag in this case. The CSV file can be loaded into Excel.
 TID_CASEANALYSIS_BUTTON_EXPORT
 Download CSV
 TID_CASEANALYSIS_INFO_NODATA

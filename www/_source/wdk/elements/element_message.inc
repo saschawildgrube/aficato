@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				"message",
+				'message',
 				$strStyleID,
 				false,
 				true);
@@ -18,7 +18,7 @@
 		{
 			$strOutput = $this->GetLayoutHTML(); 
 			$this->SetOutputItem(
-				"MESSAGE_TEXT",
+				'MESSAGE_TEXT',
 				$strMessageText);
 
 			$strOutput = $this->ReplaceOutputItems($strOutput);

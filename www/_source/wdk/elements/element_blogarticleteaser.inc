@@ -8,7 +8,7 @@
 		{ 
 			CElement::__construct(
 				$website,
-				"blogarticleteaser",
+				'blogarticleteaser',
 				$strStyleID,
 				true,
 				true);
@@ -21,11 +21,11 @@
 			$strLinkText)
 		{
 			$strOutput = $this->GetLayoutHTML(); 
-			$link = new CLinkElement($this->GetWebsite(),"default");
-			$arrayItems["TITLE"] = $strTitle;    
-			//$arrayItems["TEXT"] = StringCutOff($this->RenderArticle($strContent,$strFormat),200,"[...]");
-			$arrayItems["CREATION_DATE"] = $this->GetWebsite()->RenderDate($strDateTime);
-			$arrayItems["LINK"] = $link->RenderLink($strURL,$strLinkText);
+			$link = new CLinkElement($this->GetWebsite(),'default');
+			$arrayItems['TITLE'] = $strTitle;    
+			//$arrayItems['TEXT'] = StringCutOff($this->RenderArticle($strContent,$strFormat),200,'[...]');
+			$arrayItems['CREATION_DATE'] = $this->GetWebsite()->RenderDate($strDateTime);
+			$arrayItems['LINK'] = $link->RenderLink($strURL,$strLinkText);
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);
 			return $strOutput;			

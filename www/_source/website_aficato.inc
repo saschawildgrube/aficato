@@ -266,8 +266,8 @@
 
 			
 			
-			$linkLogo = new CLinkElement($this,"logo");
-			$this->SetOutputItem("LOGO",$linkLogo->RenderLink($this->MakeContentURL('start'),"?TID_TITLE?"));
+			$linkLogo = new CLinkElement($this,'logo');
+			$this->SetOutputItem('LOGO',$linkLogo->RenderLink($this->MakeContentURL('start'),'?TID_TITLE?'));
 
 			
 			$this->SetLayout('aficato');

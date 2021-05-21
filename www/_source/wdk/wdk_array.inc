@@ -30,7 +30,7 @@
 		{
 			if (is_string($key))
 			{
-				$array1["$key"] = $value;
+				$array1['$key'] = $value;
 			}
 			else
 			{
@@ -226,9 +226,9 @@
 	{
 		if (ArrayKeyExists($array,$key1) == false)	
 		{
-			return "";
+			return '';
 		}
-		if (($key2 == null || $key2 == "") && !($key2 === 0))
+		if (($key2 == null || $key2 == '') && !($key2 === 0))
 		{
 			return $array[$key1];
 		}
@@ -257,7 +257,7 @@
 		{
 			$array = array();
 		}
-		if ($key2 == null || $key2 == "")
+		if ($key2 == null || $key2 == '')
 		{
 			$array[$key1] = $value;
 			return;	
@@ -599,7 +599,7 @@
 		foreach ($arrayKeys as $key)
 		{
 			$value = ArrayGetValue($arraySource,$key);
-			if (!$bIgnoreEmpty || $value != "")
+			if (!$bIgnoreEmpty || $value != '')
 			{
 				$arrayResult[$key] = ArrayGetValue($arraySource,$key);
 			}
@@ -688,16 +688,16 @@
 		return $arraySource;  
 	} 
 	
-	function ArrayTransformToTable($arraySource,$strHeaderKeys = "",$strHeaderValues = "")
+	function ArrayTransformToTable($arraySource,$strHeaderKeys = '',$strHeaderValues = '')
 	{
 		if (!is_array($arraySource))
 		{
 			return false;	
 		}
 		$arrayResult = array();
-		if ($strHeaderKeys != "" || $strHeaderValues != "")
+		if ($strHeaderKeys != '' || $strHeaderValues != '')
 		{
-			$arrayResult[] = array($strHeaderKeys."",$strHeaderValues."");
+			$arrayResult[] = array($strHeaderKeys.'',$strHeaderValues.'');
 		}
 		foreach ($arraySource as $strKey => $strValue)
 		{

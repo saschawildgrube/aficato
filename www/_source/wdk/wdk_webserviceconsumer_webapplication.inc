@@ -1,6 +1,6 @@
 <?php
 
-	require_once("wdk_webserviceconsumer.inc");
+	require_once('wdk_webserviceconsumer.inc');
 	
 	class CWebServiceConsumerWebApplication extends CWebServiceConsumer
 	{
@@ -20,7 +20,7 @@
 			$nTimeOut = WEBSERVICE_CONSUMER_TIMEOUT_DEFAULT)
 		{
 			$this->ProfilingTrace();
-			$this->Trace("ConsumeWebService BEGIN");
+			$this->Trace('ConsumeWebService BEGIN');
 			$this->m_webapp->ProfilingWebservicesStart();
 	
 			if (!is_array($arrayParams))
@@ -28,15 +28,15 @@
 				$arrayParams = array();
 			}
 			
-			if (!ArrayKeyExists($arrayParams,"trace"))
+			if (!ArrayKeyExists($arrayParams,'trace'))
 			{
-				$arrayParams["trace"] = ($this->m_webapp->IsTraceActive())?("1"):("0");
+				$arrayParams['trace'] = ($this->m_webapp->IsTraceActive())?('1'):('0');
 			}
 
 /*
-			if (!ArrayKeyExists($arrayParams,"nocache"))
+			if (!ArrayKeyExists($arrayParams,'nocache'))
 			{
-				$arrayParams["nocache"] = (GetBoolValue($this->m_webapp->GetParam("nocache")))?("1"):("0");
+				$arrayParams['nocache'] = (GetBoolValue($this->m_webapp->GetParam('nocache')))?('1'):('0');
 			}
 */
 			
@@ -46,17 +46,17 @@
 			}
 			else
 			{
-				$arrayWebServices = $this->m_webapp->GetConfig("webservices");
+				$arrayWebServices = $this->m_webapp->GetConfig('webservices');
 				if (!is_array($arrayWebServices))
 				{
-					$this->Trace("GetConfig(\"webservices\") did not return an array!");
-					$this->Trace("ConsumeWebService END");
+					$this->Trace('GetConfig(\'webservices\') did not return an array!');
+					$this->Trace('ConsumeWebService END');
 					return false;	
 				}
 				$strWebServiceURL = ArrayGetValue(
 					$arrayWebServices,
 					$strWebService,
-					"url");
+					'url');
 					
 				
 				$strWebServiceAccessCode = $this->m_webapp->GetWebserviceAccessCode($strWebService);
@@ -64,59 +64,59 @@
 				$strWebServiceAccessCode = ArrayGetValue(
 					$arrayWebServices,
 					$strWebService,
-					"accesscode");
+					'accesscode');
 					*/
-				if ($strWebServiceAccessCode != "")
+				if ($strWebServiceAccessCode != '')
 				{
-					$arrayParams["accesscode"] = $strWebServiceAccessCode;
+					$arrayParams['accesscode'] = $strWebServiceAccessCode;
 				}
 				
-				if (ArrayGetValue($arrayParams,"format") == "")
+				if (ArrayGetValue($arrayParams,'format') == '')
 				{
 					$strWebServiceFormat = ArrayGetValue(
 						$arrayWebServices,
 						$strWebService,
-						"format");
-					if ($strWebServiceFormat != "")
+						'format');
+					if ($strWebServiceFormat != '')
 					{
-						$arrayParams["format"] = $strWebServiceFormat;
+						$arrayParams['format'] = $strWebServiceFormat;
 					}
 				}
 
 				
 			}
 			
-			if (!ArrayKeyExists($arrayParams,"format"))
+			if (!ArrayKeyExists($arrayParams,'format'))
 			{
-				//$arrayParams["format"] = "csv";   
+				//$arrayParams['format'] = 'csv';   
 			}
 			
-			$this->Trace("Service URL: \"$strWebServiceURL\"");
-			$this->Trace("Parameter:");
+			$this->Trace('Service URL: \'$strWebServiceURL\'');
+			$this->Trace('Parameter:');
 			$this->Trace($arrayParams);
 			
 			$bResult = parent::ConsumeWebService($strWebServiceURL,$arrayParams,$nTimeOut);
 
 			if ($bResult == false)
 			{
-				$this->Trace("ERROR: ".$this->GetError());
+				$this->Trace('ERROR: '.$this->GetError());
 			}
 
 			$this->Trace($this->GetServiceOutput());
 			//$this->Trace($this->m_arrayResultEnvelope);
-			$this->Trace("Seconds elapsed during request: ".RenderNumber($this->GetSecondsRequest(),3));
-			$this->Trace("Seconds elapsed during parsing: ".RenderNumber($this->GetSecondsParsing(),3));
-			$this->Trace("Seconds elapsed during script : ".RenderNumber($this->GetSecondsScript(),3));
+			$this->Trace('Seconds elapsed during request: '.RenderNumber($this->GetSecondsRequest(),3));
+			$this->Trace('Seconds elapsed during parsing: '.RenderNumber($this->GetSecondsParsing(),3));
+			$this->Trace('Seconds elapsed during script : '.RenderNumber($this->GetSecondsScript(),3));
 			$this->m_webapp->ProfilingWebservicesStop();
-			$this->Trace("ConsumeWebService END");
-			$this->Trace("");
+			$this->Trace('ConsumeWebService END');
+			$this->Trace('');
 			$this->ProfilingTrace();	   		
 			return $bResult;
 		}
 		
 		function GetResultArrayInsecure()
 		{
-			$this->Trace("WARNING: Use of GetResultArrayInsecure() is a possible security contraint!");
+			$this->Trace('WARNING: Use of GetResultArrayInsecure() is a possible security contraint!');
 			return parent::GetResultArrayInsecure();
 		}
 		

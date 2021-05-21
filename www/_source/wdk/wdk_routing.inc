@@ -1,18 +1,18 @@
 <?php
 
-	require_once("wdk_csv.inc");
+	require_once('wdk_csv.inc');
 
 	function MakeRoutingAlias($strAlias,$bMakeLowerCase)
 	{
-		$strAlias = StringTranslateCharacters($strAlias,u(" 'ÁáÉéÍíÓóÚúÀàÈèÌìÒòÙùÂâÊêÎîÔôÛû"),"--AaEeIiOoUuAaEeIiOoUuAaEeIiOoUu");
-		$strAlias = ReplaceString($strAlias,u("Ä"),"Ae");
-		$strAlias = ReplaceString($strAlias,u("ä"),"ae");
-		$strAlias = ReplaceString($strAlias,u("Ü"),"Ue");
-		$strAlias = ReplaceString($strAlias,u("ü"),"ue");
-		$strAlias = ReplaceString($strAlias,u("Ö"),"Oe");
-		$strAlias = ReplaceString($strAlias,u("ö"),"oe");
+		$strAlias = StringTranslateCharacters($strAlias,u(' 'ÁáÉéÍíÓóÚúÀàÈèÌìÒòÙùÂâÊêÎîÔôÛû'),'--AaEeIiOoUuAaEeIiOoUuAaEeIiOoUu');
+		$strAlias = ReplaceString($strAlias,u('Ä'),'Ae');
+		$strAlias = ReplaceString($strAlias,u('ä'),'ae');
+		$strAlias = ReplaceString($strAlias,u('Ü'),'Ue');
+		$strAlias = ReplaceString($strAlias,u('ü'),'ue');
+		$strAlias = ReplaceString($strAlias,u('Ö'),'Oe');
+		$strAlias = ReplaceString($strAlias,u('ö'),'oe');
 		//$strAlias = iconv('UTF-8', 'ASCII//TRANSLIT', $strAlias);  
-		$strAlias = StringFilter($strAlias,CHARSET_ALPHANUMERIC."-_");
+		$strAlias = StringFilter($strAlias,CHARSET_ALPHANUMERIC.'-_');
 		if ($bMakeLowerCase == true)
 		{
 			$strAlias = StringLowerCase($strAlias);
@@ -41,10 +41,10 @@
 				{
 					if (is_array($arrayItem))
 					{
-						$strContextType = ArrayGetValue($arrayItem,"CONTEXTTYPE");
-						$strContextID = ArrayGetValue($arrayItem,"CONTEXT");
-						$strAlias = ArrayGetValue($arrayItem,"ALIAS");
-						if ($strContextType != "" && $strContextID != "" && $strAlias != "")
+						$strContextType = ArrayGetValue($arrayItem,'CONTEXTTYPE');
+						$strContextID = ArrayGetValue($arrayItem,'CONTEXT');
+						$strAlias = ArrayGetValue($arrayItem,'ALIAS');
+						if ($strContextType != '' && $strContextID != '' && $strAlias != '')
 						{
 							$this->m_arrayContextToAlias[StringUpperCase($strLanguage)][$strContextType][$strContextID][] = $strAlias;
 							$this->m_arrayAliasToContext[StringUpperCase($strLanguage)][$strContextType][MakeRoutingAlias($strAlias,true)] = $strContextID;
@@ -69,9 +69,9 @@
 		function GetRoutingAlias($strLanguage,$strContextType,$strContextID,$nSeed)
 		{
 			$strContextID2 = $strContextID; 
-			if ($strContextID2 == "" && $strContextType == "content")
+			if ($strContextID2 == '' && $strContextType == 'content')
 			{
-				$strContextID2 = "index";	  
+				$strContextID2 = 'index';	  
 			}
 			$arrayContext = ArrayGetValue($this->m_arrayContextToAlias,StringUpperCase($strLanguage),$strContextType,$strContextID2);
 			if (!is_array($arrayContext))
@@ -102,7 +102,7 @@
 				return $strAlias;	
 			}
 			$strContext = ArrayGetValue($arrayContextType,StringLowerCase($strAlias));
-			if ($strContext == "")
+			if ($strContext == '')
 			{
 				return $strAlias;	
 			}

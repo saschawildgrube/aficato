@@ -1,12 +1,12 @@
 <?php
 	
-	require_once(GetSourceDir()."assemblies/aml/aml.inc");
+	require_once(GetSourceDir().'assemblies/aml/aml.inc');
 	
 	class CTest extends CUnitTest
 	{
 		function __construct()
 		{
-			parent::__construct("AML TransformTransactionsToAccounts");
+			parent::__construct('AML TransformTransactionsToAccounts');
 		}
 		  
 
@@ -15,33 +15,33 @@
 			$arrayMapping,
 			$arrayExpectedResult)
 		{ 
-			$this->Trace("TestCase_TransformTransactionsToAccounts");
+			$this->Trace('TestCase_TransformTransactionsToAccounts');
 	
-			$this->Trace("Transactions");
+			$this->Trace('Transactions');
 			$this->Trace($arrayTransactions);
-			$this->Trace("Mapping");
+			$this->Trace('Mapping');
 			$this->Trace($arrayMapping);
 
-			$this->Trace("Expected"); 
+			$this->Trace('Expected'); 
 			$this->Trace($arrayExpectedResult);
 
 			$arrayAccounts = AML_TransformTransactionsToAccounts($arrayTransactions,$arrayMapping);
 			
-			$this->Trace("Result");
+			$this->Trace('Result');
 			$this->Trace($arrayAccounts);
 
 			if ($arrayAccounts == $arrayExpectedResult)
 			{
-				$this->Trace("Testcase PASSED!");
+				$this->Trace('Testcase PASSED!');
 			}
 			else
 			{
-				$this->Trace("Testcase FAILED!");	
+				$this->Trace('Testcase FAILED!');	
 				$this->SetResult(false);	
 			}
 
-			$this->Trace("");
-			$this->Trace("");
+			$this->Trace('');
+			$this->Trace('');
 		}
 
 

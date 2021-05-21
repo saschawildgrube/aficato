@@ -41,7 +41,7 @@
 	
 		function OnRenderModule($strState)
 		{
-			$this->Trace("OnRenderModule(\"$strState\")");
+			$this->Trace('OnRenderModule(\'$strState\')');
 			
 			$strResult = parent::OnRenderModule($strState);
 			if ($strResult != '')
@@ -120,9 +120,9 @@
 				return $this->StateUpload();	
 			}
 		
-			$linkicon = new CLinkIconElement($this->GetWebsite(),"default");
+			$linkicon = new CLinkIconElement($this->GetWebsite(),'default');
 			
-			$this->IncludeElement("itemmanager");
+			$this->IncludeElement('itemmanager');
 			$itemmanagerdata = new CItemManagerData();
 			
 			$arrayTable = array();
@@ -155,13 +155,13 @@
 	
 /*			
 			$arrayFilterOptionTabs = array(
-			   "all" => "All",
-			   "even" => "Even",
-			   "uneven" => "Uneven"
+			   'all' => 'All',
+			   'even' => 'Even',
+			   'uneven' => 'Uneven'
 			   );
 			$itemmanagerdata->SetFilterOptionsTabNavigation(
 			   $strFilterOptionTab,
-			   "itemmanager_filteroptions_tab",
+			   'itemmanager_filteroptions_tab',
 			   $arrayFilterOptionTabs);
 */			
 			
@@ -172,22 +172,22 @@
 			
 /*			 
 			$itemmanagerdata->SetSortOptions(
-			   "itemmanager_sort_option",
-			   $this->GetVar("itemmanager_sort_option"),
-			   "itemmanager_sort_order",
-			   $this->GetVar("itemmanager_sort_order")
+			   'itemmanager_sort_option',
+			   $this->GetVar('itemmanager_sort_option'),
+			   'itemmanager_sort_order',
+			   $this->GetVar('itemmanager_sort_order')
 			   );
 */			
 			   
 /*			
 			$itemmanagerdata->SetPageNavigation(
-			   $this->GetWebsite()->GetVar("itemmanager_offset"),
+			   $this->GetWebsite()->GetVar('itemmanager_offset'),
 			   10,
-			   "itemmanager_offset",
+			   'itemmanager_offset',
 			   20);
 */
 			
-			$itemmanager = new CItemManagerElement($this->GetWebsite(),"default");
+			$itemmanager = new CItemManagerElement($this->GetWebsite(),'default');
 			$this->SetOutputItem('LIST',$itemmanager->RenderItemManager($itemmanagerdata));			
 
 			

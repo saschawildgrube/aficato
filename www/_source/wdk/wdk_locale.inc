@@ -1,7 +1,7 @@
 <?php
 
-	require_once("wdk_country.inc");
-	require_once("wdk_language.inc");
+	require_once('wdk_country.inc');
+	require_once('wdk_language.inc');
 	
 	/*
 	To check existing locales use this command:
@@ -15,111 +15,111 @@
 	function GetAllLocales()
 	{
 		$arrayLocales = array(
-			"ARE" => array(
-				"AR" => "ar_AE"
+			'ARE' => array(
+				'AR' => 'ar_AE'
 				),
-			"AUT" => array(
-				"DE" => "de_AT"
+			'AUT' => array(
+				'DE' => 'de_AT'
 				),
-			"BEL" => array(
-				"NL" => "nl_BE",
-				"FR" => "fr_BE",
-				"DE" => "de_BE"
+			'BEL' => array(
+				'NL' => 'nl_BE',
+				'FR' => 'fr_BE',
+				'DE' => 'de_BE'
 				),
-			"CAN" => array(
-				"EN" => "en_CA",
-				"FR" => "fr_CA"
+			'CAN' => array(
+				'EN' => 'en_CA',
+				'FR' => 'fr_CA'
 				),
-			"CHE" => array(
-				"DE" => "de_CH",
-				"FR" => "fr_CH",
-				"IT" => "it_CH"
+			'CHE' => array(
+				'DE' => 'de_CH',
+				'FR' => 'fr_CH',
+				'IT' => 'it_CH'
 				),
-			"CHL" => array(
-				"ES" => "es_CL"
+			'CHL' => array(
+				'ES' => 'es_CL'
 				),
-			"CHN" => array(
-				"ZH" => "zh_CN"
+			'CHN' => array(
+				'ZH' => 'zh_CN'
 				),
-			"COL" => array(
-				"ES" => "es_CO"
+			'COL' => array(
+				'ES' => 'es_CO'
 				),
-			"CZE" => array(
-				"CS" => "cs_CZ"
+			'CZE' => array(
+				'CS' => 'cs_CZ'
 				),
-			"DEU" => array(
-				"DE" => "de_DE"
+			'DEU' => array(
+				'DE' => 'de_DE'
 				),
-			"DNK" => array(
-				"DA" => "da_DK"
+			'DNK' => array(
+				'DA' => 'da_DK'
 				),
-			"ESP" => array(
-				"ES" => "es_ES"
+			'ESP' => array(
+				'ES' => 'es_ES'
 				),
-			"FIN" => array(
-				"FI" => "fi_FI"
+			'FIN' => array(
+				'FI' => 'fi_FI'
 				),
-			"FRA" => array(
-				"FR" => "fr_FR"
+			'FRA' => array(
+				'FR' => 'fr_FR'
 				),
-			"GBR" => array(
-				"EN" => "en_GB"
+			'GBR' => array(
+				'EN' => 'en_GB'
 				),
-			"GRC" => array(
-				"EL" => "el_GR"
+			'GRC' => array(
+				'EL' => 'el_GR'
 				),
-			"ISL" => array(
-				"IS" => "is_IS"
+			'ISL' => array(
+				'IS' => 'is_IS'
 				),
-			"ITA" => array(
-				"IT" => "it_IT"
+			'ITA' => array(
+				'IT' => 'it_IT'
 				),
-			"IRL" => array(
-				"EN" => "en_IE",
-				"GA" => "ga_IE"
+			'IRL' => array(
+				'EN' => 'en_IE',
+				'GA' => 'ga_IE'
 				),
-			"JPN" => array(
-				"JA" => "ja_JP"
+			'JPN' => array(
+				'JA' => 'ja_JP'
 				),
-			"LUX" => array(
-				"DE" => "de_LU",
-				"FR" => "fr_LU"
-				//,"LB" => "lb_LU"   locale for luxembourgish is missing in ubuntu
+			'LUX' => array(
+				'DE' => 'de_LU',
+				'FR' => 'fr_LU'
+				//,'LB' => 'lb_LU'   locale for luxembourgish is missing in ubuntu
 				),
-			"MAR" => array(
-				"AR" => "ar_MA"
+			'MAR' => array(
+				'AR' => 'ar_MA'
 				),
-			"NLD" => array(
-				"NL" => "nl_NL"
+			'NLD' => array(
+				'NL' => 'nl_NL'
 				),
-			"NOR" => array(
-				"NN" => "nn_NO"
+			'NOR' => array(
+				'NN' => 'nn_NO'
 				),
-			"PHL" => array(
-				"EN" => "en_PH"
+			'PHL' => array(
+				'EN' => 'en_PH'
 				),
-			"POL" => array(
-				"PL" => "pl_PL"
+			'POL' => array(
+				'PL' => 'pl_PL'
 				),
-			"PRT" => array(
-				"PT" => "pt_PT"
+			'PRT' => array(
+				'PT' => 'pt_PT'
 				),
-			"SGP" => array(
-				"EN" => "en_SG",
-				"ZH" => "zh_SG"
+			'SGP' => array(
+				'EN' => 'en_SG',
+				'ZH' => 'zh_SG'
 				),
-			"SWE" => array(
-				"SV" => "sv_SE"
+			'SWE' => array(
+				'SV' => 'sv_SE'
 				),
-			"USA" => array(
-				"EN" => "en_US")
+			'USA' => array(
+				'EN' => 'en_US')
 			);
 
 		foreach ($arrayLocales as $strCountry => &$arrayLanguages)
 		{
 			foreach ($arrayLanguages as $strLanguage => &$strLocale)
 			{
-				$strLocale .= ".utf8";
+				$strLocale .= '.utf8';
 			}	
 		}	
 		return $arrayLocales;
@@ -210,23 +210,23 @@
   		return false;	
   	}
 		$arraySettings = array();
-		$arraySettings["COUNTRY"] = $strCountryID;
-		$arraySettings["LANGUAGE"] = $strLanguageID;
-		$arraySettings["DECIMAL_DELIMITER"] = ArrayGetValue($arrayLocalConv,"mon_decimal_point");
-		if ($arraySettings["DECIMAL_DELIMITER"] == "")
+		$arraySettings['COUNTRY'] = $strCountryID;
+		$arraySettings['LANGUAGE'] = $strLanguageID;
+		$arraySettings['DECIMAL_DELIMITER'] = ArrayGetValue($arrayLocalConv,'mon_decimal_point');
+		if ($arraySettings['DECIMAL_DELIMITER'] == '')
 		{
-			$arraySettings["DECIMAL_DELIMITER"] = ".";
+			$arraySettings['DECIMAL_DELIMITER'] = '.';
 		}
-		$arraySettings["DIGIT_GROUPING_SEPARATOR"] = ArrayGetValue($arrayLocalConv,"mon_thousands_sep");
+		$arraySettings['DIGIT_GROUPING_SEPARATOR'] = ArrayGetValue($arrayLocalConv,'mon_thousands_sep');
 		// This is to work-around a bug in earlier versions to php 5.4 where number_format does only use the first character of a multi-byte thousands separator.
-		if (strlen($arraySettings["DIGIT_GROUPING_SEPARATOR"]) > 1)  
+		if (strlen($arraySettings['DIGIT_GROUPING_SEPARATOR']) > 1)  
 		{
-			$arraySettings["DIGIT_GROUPING_SEPARATOR"] == "";
+			$arraySettings['DIGIT_GROUPING_SEPARATOR'] == '';
 		}
 		// And this is to work around an unclear bug in the norwegian locale  
-		if ($strLanguageID == "NN")
+		if ($strLanguageID == 'NN')
 		{
-			$arraySettings["DIGIT_GROUPING_SEPARATOR"] = "";
+			$arraySettings['DIGIT_GROUPING_SEPARATOR'] = '';
 		}
   	return $arraySettings;
 	}
@@ -237,15 +237,15 @@
 		{
 			$arraySettings = array();
 		}
-		$strDecimalDelimiter = ArrayGetValue($arraySettings,"DECIMAL_DELIMITER");
-		if ($strDecimalDelimiter == "")
+		$strDecimalDelimiter = ArrayGetValue($arraySettings,'DECIMAL_DELIMITER');
+		if ($strDecimalDelimiter == '')
 		{
-			$strDecimalDelimiter = ".";
+			$strDecimalDelimiter = '.';
 		}
-		$strDigitGroupingSeparator = ArrayGetValue($arraySettings,"DIGIT_GROUPING_SEPARATOR");
+		$strDigitGroupingSeparator = ArrayGetValue($arraySettings,'DIGIT_GROUPING_SEPARATOR');
 		if ($strDigitGroupingSeparator == null)
 		{
-			$strDigitGroupingSeparator = "";
+			$strDigitGroupingSeparator = '';
 		}
 		$fValue = floatval($fValue);
 		$strAbbreviation = '';
@@ -287,8 +287,8 @@
 
 		$strValue = strval($value);
    	$arraySettings = GetLocaleSettings($strCountry,$strLanguage); 
-  	$strValue = ReplaceString($strValue,$arraySettings["DIGIT_GROUPING_SEPARATOR"] , ""); 
-  	$strValue = ReplaceString($strValue,$arraySettings["DECIMAL_DELIMITER"] , "."); 
+  	$strValue = ReplaceString($strValue,$arraySettings['DIGIT_GROUPING_SEPARATOR'] , ''); 
+  	$strValue = ReplaceString($strValue,$arraySettings['DECIMAL_DELIMITER'] , '.'); 
     return floatval($strValue); 
 	} 
 	

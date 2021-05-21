@@ -2,7 +2,7 @@
 
 	function IsValidContentID($strContentID)
 	{
-		if ($strContentID == "")
+		if ($strContentID == '')
 		{
 			return false;
 		}
@@ -45,24 +45,24 @@
 				{
 					if ($this->GetWebsite()->CheckCondition($strCondition) != true)
 					{
-						$this->Trace("Condition check for \"$strCondition\" has failed.");
+						$this->Trace('Condition check for \'$strCondition\' has failed.');
 						$this->GetWebsite()->SetErrorMessageCode($strError);
-						return "";
+						return '';
 					}
 					else
 					{
-						$this->Trace("Condition check passed for \"$strCondition\".");
+						$this->Trace('Condition check passed for \'$strCondition\'.');
 					}
 				}	
 			}
 						
       $strSpecialContent = $this->OnRenderSpecialContent();
-      if ($strSpecialContent != "")
+      if ($strSpecialContent != '')
       {
       	return $strSpecialContent;
       }
 			
-			$strHTML="";
+			$strHTML='';
 
 
 			$strFile = $this->GetAssemblyLine()->GetContentTxtFilePath(
@@ -73,8 +73,8 @@
       {
 				$strTxt = FileRead($strFile);
 				$strTxt = $this->GetWebsite()->ReplaceAllOutputItems($strTxt);
-				$this->IncludeElement("wiki");
-				$wiki = new CWikiElement($this->GetWebsite(),"default");
+				$this->IncludeElement('wiki');
+				$wiki = new CWikiElement($this->GetWebsite(),'default');
 				$strHTML = $wiki->RenderWiki($strTxt);
       }
       else
@@ -88,10 +88,10 @@
 	      }
 	      else
 	      {
-	      	if (get_class($this) == "CMyContent")
+	      	if (get_class($this) == 'CMyContent')
 	      	{
 	      		FatalError(
-	      			"A CMyContent class is present but there is no htm or txt file for the contents \"$this->m_strContentID\"!",
+	      			'A CMyContent class is present but there is no htm or txt file for the contents \'$this->m_strContentID\'!',
 	      			$this->GetWebsite()->GetTraceLog());	
 	      	} 
 	      	return false;
@@ -107,18 +107,18 @@
 		
 		function OnInit()
 		{
-			$this->Error("Content \"".$this->m_strContentID."\": OnInit not implemented.");	
+			$this->Error('Content \''.$this->m_strContentID.'\': OnInit not implemented.');	
 		}
 
 		function OnRenderSpecialContent()
 		{
-			$this->Trace("Content \"".$this->m_strContentID."\" does not implement OnRenderSpecialContent");
-			return "";
+			$this->Trace('Content \''.$this->m_strContentID.'\' does not implement OnRenderSpecialContent');
+			return '';
 		}
 		
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->Trace("Content \"".$this->m_strContentID."\" uses CContent");
+			$this->Trace('Content \''.$this->m_strContentID.'\' uses CContent');
 		}
 		
 		function OnGetRequiredConditions()

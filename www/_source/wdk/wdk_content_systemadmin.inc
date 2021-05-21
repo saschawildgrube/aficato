@@ -11,6 +11,6 @@
 		
 		function OnGetRequiredConditions()
 		{
-			return array("systemadmin" => "INSUFFICIENT_PRIVILEGES");
+			return array('systemadmin' => 'INSUFFICIENT_PRIVILEGES');
 		}
 	}	

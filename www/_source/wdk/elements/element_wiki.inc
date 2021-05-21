@@ -33,7 +33,7 @@
 
 			parent::__construct(
 				$website,
-				"wiki",
+				'wiki',
 				$strStyleID,
 				true,
 				false);
@@ -56,53 +56,53 @@
 		
 		
 		
-		function RenderWiki($strSource,$strLinkTemplateInternal = "", $strChapterID = "", $strLinkTemplateChapter = "", CNavigationTree &$navigationtree = null/*, $bNumberedHeaders = false*/)
+		function RenderWiki($strSource,$strLinkTemplateInternal = '', $strChapterID = '', $strLinkTemplateChapter = '', CNavigationTree &$navigationtree = null/*, $bNumberedHeaders = false*/)
 		{
 			$this->m_arrayTOC = null;
 			$strOutput = $strSource;
 			$strOutput = trim($strOutput);
 			
-			if ($strLinkTemplateInternal == "")
+			if ($strLinkTemplateInternal == '')
 			{ 
-				$strLinkTemplateInternal = $this->GetWebsite()->MakeContentURL("{ARTICLEID}")."#{CHAPTERID}";
-				$strLinkTemplateInternal = ReplaceString($strLinkTemplateInternal,"%7B",'{'); 
-				$strLinkTemplateInternal = ReplaceString($strLinkTemplateInternal,"%7D",'}');
+				$strLinkTemplateInternal = $this->GetWebsite()->MakeContentURL('{ARTICLEID}').'#{CHAPTERID}';
+				$strLinkTemplateInternal = ReplaceString($strLinkTemplateInternal,'%7B','{'); 
+				$strLinkTemplateInternal = ReplaceString($strLinkTemplateInternal,'%7D','}');
 			}
 			if (FindString($strLinkTemplateInternal,'{ARTICLEID}') == -1) 
 			{
-				$this->Trace("strLinkTemplateInternal = \"$strLinkTemplateInternal\"");
-				$this->Error("CWikiElement::RenderWiki() called with invalid strLinkTemplate. strLinkTemplateInternal MUST contain \"{ARTICLEID}\".");
+				$this->Trace('strLinkTemplateInternal = \'$strLinkTemplateInternal\'');
+				$this->Error('CWikiElement::RenderWiki() called with invalid strLinkTemplate. strLinkTemplateInternal MUST contain \'{ARTICLEID}\'.');
 			}
 		
-			$bNumberedHeaders = GetBoolValue($this->GetLayoutDef("LAYOUT_HEADER_NUMBERED"));
+			$bNumberedHeaders = GetBoolValue($this->GetLayoutDef('LAYOUT_HEADER_NUMBERED'));
 			
 			$bTOCSupport = false;
 			
-			if ($strChapterID == "TOC")
+			if ($strChapterID == 'TOC')
 			{
 				$bTOCSupport = true;
-				if ($strLinkTemplateChapter == "")
+				if ($strLinkTemplateChapter == '')
 				{
-					$this->Trace("strLinkTemplateChapter = \"$strLinkTemplateChapter\"");
-					$this->Error("CWikiElement::RenderWiki(): if strChapterID is set to \"TOC\" strLinkTemplateChapter must not be empty. How should the links to individual chapters be constructed without a link template?");
+					$this->Trace('strLinkTemplateChapter = \'$strLinkTemplateChapter\'');
+					$this->Error('CWikiElement::RenderWiki(): if strChapterID is set to \'TOC\' strLinkTemplateChapter must not be empty. How should the links to individual chapters be constructed without a link template?');
 				}
 			}
 			
 			$strLinkTemplateTOC = $strLinkTemplateChapter;
 			
-			if ($strLinkTemplateChapter == "")
+			if ($strLinkTemplateChapter == '')
 			{
 				$strLinkTemplateChapter = $strLinkTemplateInternal;
 			}
 
 			
 			// pre tag support: on/off
-			$arrayPreTagSections = explode("<pre>",$strOutput);
+			$arrayPreTagSections = explode('<pre>',$strOutput);
 			
-			$strOutput = "";
+			$strOutput = '';
 			$nTableLevel = 0;
 			$arrayCurrentCell = array();
-			$arrayCurrentCell[0] = "";
+			$arrayCurrentCell[0] = '';
 			$arrayTableCells = array();
 			$arrayTableHeaders = array();
 			$arrayTableRow = array();
@@ -111,17 +111,17 @@
 			$nSection = 0;
 			foreach ($arrayPreTagSections as $strPreTagSection)
 			{
-				$nPreTagClosePos = FindString($strPreTagSection,"</pre>");
+				$nPreTagClosePos = FindString($strPreTagSection,'</pre>');
 				
 				if ($nSection == 0)
 				{
-					$strPreContent = "";
+					$strPreContent = '';
 					$strSection = trim($strPreTagSection);
 				}
 				else if ($nPreTagClosePos == -1)
 				{
 					$strPreContent = $strPreTagSection;
-					$strSection = "";
+					$strSection = '';
 				}
 				else
 				{
@@ -129,16 +129,16 @@
 					$strSection = trim(StringSection($strPreTagSection,$nPreTagClosePos+6));
 				}
 
-				if ($strPreContent != "")
+				if ($strPreContent != '')
 				{
 					if ($this->m_console == null)
 					{
-						$strLayoutStyle = $this->GetLayoutDef("LAYOUT_CONSOLE_STYLE");
-						if ($strLayoutStyle == "")
+						$strLayoutStyle = $this->GetLayoutDef('LAYOUT_CONSOLE_STYLE');
+						if ($strLayoutStyle == '')
 						{
-							$strLayoutStyle = "default";
+							$strLayoutStyle = 'default';
 						}
-						$this->IncludeElement("console");
+						$this->IncludeElement('console');
 						$this->m_console= new CConsoleElement($this->GetWebsite(),$strLayoutStyle);
 					}
 					$arrayCurrentCell[$nTableLevel] .= $this->m_console->RenderConsole($strPreContent);
@@ -147,7 +147,7 @@
 				
 				// Check for TOC tag
 				$nOriginalSectionLength = StringLength($strSection);
-				$strSection = ReplaceString($strSection,"__TOC__","{{__!_TOC_!__}}");
+				$strSection = ReplaceString($strSection,'__TOC__','{{__!_TOC_!__}}');
 				
 				$nNewSectionLength = StringLength($strSection); 
 				if ($nNewSectionLength != $nOriginalSectionLength)
@@ -170,44 +170,44 @@
 				$strSection = $this->ParseExternalLinks($strSection);
 				
 				$arrayDefinitionList = array();
-				$strLastTerm = "";
+				$strLastTerm = '';
 				
 				$arrayListStack = array();
 				$nStackLevel = 0;
-				$strPrevMode = "";
+				$strPrevMode = '';
 	
-				$arrayLines = explode("\n",$strSection);
-				$arrayLines[] = ""; // add an empty line at the end to make sure the section after the last header section is rendered.
+				$arrayLines = explode('\n',$strSection);
+				$arrayLines[] = ''; // add an empty line at the end to make sure the section after the last header section is rendered.
 				$nLine = 0;
 				$nLineCount = ArrayCount($arrayLines);
 				foreach($arrayLines as $strLine)
 				{
 					$strUntrimmedLine = $strLine;
 					$strLine = trim($strLine);
-					$bEmptyLine = ($strLine=="")?(true):(false);
+					$bEmptyLine = ($strLine=='')?(true):(false);
 					$strMagicChar = StringSection($strLine,0,1);
 					switch ($strMagicChar)
 					{
-						case "=":
-							$strNewMode = "header";
+						case '=':
+							$strNewMode = 'header';
 							break;
-						case "*":
-						case "#":
-							$strNewMode = "list";
+						case '*':
+						case '#':
+							$strNewMode = 'list';
 							break;
-						case ":":
-						case ";":
-							$strNewMode = "definitionlist";
+						case ':':
+						case ';':
+							$strNewMode = 'definitionlist';
 							break;
-						case "!":
+						case '!':
 							if ($nTableLevel > 0)
 							{
-								$strNewMode = "table_header";
+								$strNewMode = 'table_header';
 								$strLine = StringSection($strLine,1);
 							}
 							else
 							{
-								$strNewMode = "text";		
+								$strNewMode = 'text';		
 								$strLine = $strUntrimmedLine;		
 							}
 							break;
@@ -215,51 +215,51 @@
 							$strMagicCharPair = StringSection($strLine,0,2);
 							switch ($strMagicCharPair)
 							{
-								case "{|":
-									$strNewMode = "table_begin";
+								case '{|':
+									$strNewMode = 'table_begin';
 									$strLine = StringSection($strLine,2);
 									break;
-								case "|}":
+								case '|}':
 									if ($nTableLevel > 0)
 									{
-										$strNewMode = "table_end";
+										$strNewMode = 'table_end';
 										$strLine = StringSection($strLine,2);
 									}
 									else
 									{
-										$strNewMode = "text";		
+										$strNewMode = 'text';		
 										$strLine = $strUntrimmedLine;		
 									}
 									break;
-								case "|-":
+								case '|-':
 									if ($nTableLevel > 0)
 									{
-										$strNewMode = "table_row";
+										$strNewMode = 'table_row';
 										$strLine = StringSection($strLine,2);
 									}
 									else
 									{
-										$strNewMode = "text";		
+										$strNewMode = 'text';		
 										$strLine = $strUntrimmedLine;		
 									}
 									break;
 								default:
-									if ($strMagicChar == "|")
+									if ($strMagicChar == '|')
 									{
 										if ($nTableLevel > 0)
 										{
-											$strNewMode = "table_cell";
+											$strNewMode = 'table_cell';
 											$strLine = StringSection($strLine,1);
 										}
 										else
 										{
-											$strNewMode = "text";		
+											$strNewMode = 'text';		
 											$strLine = $strUntrimmedLine;		
 										}
 									}
 									else
 									{
-										$strNewMode = "text";		
+										$strNewMode = 'text';		
 										$strLine = $strUntrimmedLine;		
 									}
 									break;
@@ -270,17 +270,17 @@
 					if ($strPrevMode != $strNewMode)
 					{
 						// Finish previous mode	
-						if ($strPrevMode == "list")
+						if ($strPrevMode == 'list')
 						{
 							$nLevel = 0;
-							$arrayCurrentCell[$nTableLevel] .= $this->ParseList($arrayListStack,$nLevel,0) . "\n";
+							$arrayCurrentCell[$nTableLevel] .= $this->ParseList($arrayListStack,$nLevel,0) . '\n';
 							$arrayListStack = array();
 						}
-						else if ($strPrevMode == "definitionlist")
+						else if ($strPrevMode == 'definitionlist')
 						{
-							$arrayCurrentCell[$nTableLevel] .= $this->ParseDefinitionList($arrayDefinitionList) . "\n";
+							$arrayCurrentCell[$nTableLevel] .= $this->ParseDefinitionList($arrayDefinitionList) . '\n';
 							$arrayDefinitionList = array();
-							$strLastTerm = "";
+							$strLastTerm = '';
 						}
 					}
 					
@@ -289,45 +289,45 @@
 					
 						switch ($strNewMode)
 						{
-							case "header":
-								$arrayCurrentCell[$nTableLevel] .= $this->ParseHeaders($strLine,$strLinkTemplateTOC,$navigationtree,$strChapterID,$bNumberedHeaders) . "\n";
+							case 'header':
+								$arrayCurrentCell[$nTableLevel] .= $this->ParseHeaders($strLine,$strLinkTemplateTOC,$navigationtree,$strChapterID,$bNumberedHeaders) . '\n';
 								break;
-							case "list":
+							case 'list':
 								$arrayListStack[] = $strLine;
 								break;
-							case "definitionlist":
+							case 'definitionlist':
 								$strLine = trim(StringSection($strLine,1));
-								if ($strMagicChar == ";")
+								if ($strMagicChar == ';')
 								{
 									$strLastTerm = $strLine;
 								}
-								else if ($strMagicChar == ":")
+								else if ($strMagicChar == ':')
 								{
 									$arrayDefinitionList[$strLastTerm][] = $strLine;
 								}
 								break;
 							default:
-								if (StringSection($strLine,0,4) == "----")
+								if (StringSection($strLine,0,4) == '----')
 								{
-									$arrayCurrentCell[$nTableLevel] .= "<hr/>\n";
+									$arrayCurrentCell[$nTableLevel] .= '<hr/>\n';
 									$strLine = StringSection($strLine,5);
 								}
 								$strLine = $this->ParseFormats($strLine);
 								
 								// Table starts
-								if ($strNewMode == "table_begin")
+								if ($strNewMode == 'table_begin')
 								{
 									$nTableLevel++;
 									$arrayTableCells[$nTableLevel] = array();
 									$arrayTableHeaders[$nTableLevel] = array();
 									$arrayTableRow[$nTableLevel] = 0;
 									$arrayTableColumn[$nTableLevel] = -1;
-									$arrayCurrentCell[$nTableLevel] = "";
+									$arrayCurrentCell[$nTableLevel] = '';
 								}
 								// New Row
-								else if ($strNewMode == "table_row")
+								else if ($strNewMode == 'table_row')
 								{
-									if ($strPrevMode != "table_begin")
+									if ($strPrevMode != 'table_begin')
 									{
 										$arrayTableCells[$nTableLevel][ArrayGetValue($arrayTableRow,$nTableLevel)][ArrayGetValue($arrayTableColumn,$nTableLevel)] = ArrayGetValue($arrayCurrentCell,$nTableLevel);
 										$arrayTableRow[$nTableLevel] = ArrayGetValue($arrayTableRow,$nTableLevel)+1;
@@ -336,9 +336,9 @@
 									}
 								}
 								// New Cell
-								else if ($strNewMode == "table_header" || $strNewMode == "table_cell")
+								else if ($strNewMode == 'table_header' || $strNewMode == 'table_cell')
 								{
-//									if ($strPrevMode == "table_row" || $strPrevMode == "table_cell" || $strPrevMode == "table_header")
+//									if ($strPrevMode == 'table_row' || $strPrevMode == 'table_cell' || $strPrevMode == 'table_header')
 //									{
 										$strRemainingLine = $strLine;
 										do
@@ -348,36 +348,36 @@
 												$arrayTableCells[$nTableLevel][ArrayGetValue($arrayTableRow,$nTableLevel)][ArrayGetValue($arrayTableColumn,$nTableLevel)] = ArrayGetValue($arrayCurrentCell,$nTableLevel);
 											}
 											$arrayTableColumn[$nTableLevel] = ArrayGetValue($arrayTableColumn,$nTableLevel)+1;
-											$arrayTableHeaders[$nTableLevel][ArrayGetValue($arrayTableRow,$nTableLevel)][ArrayGetValue($arrayTableColumn,$nTableLevel)] = ($strNewMode == "table_header")?(true):(false);
+											$arrayTableHeaders[$nTableLevel][ArrayGetValue($arrayTableRow,$nTableLevel)][ArrayGetValue($arrayTableColumn,$nTableLevel)] = ($strNewMode == 'table_header')?(true):(false);
 											
-											$strNextToken = "";
-											$nNextCellPos = FindStringMultiple($strRemainingLine,array("||","!!"),$strNextToken);
+											$strNextToken = '';
+											$nNextCellPos = FindStringMultiple($strRemainingLine,array('||','!!'),$strNextToken);
 											
 											if ($nNextCellPos == -1)
 											{
 												$arrayCurrentCell[$nTableLevel] = $strRemainingLine;
-												$strRemainingLine = "";
+												$strRemainingLine = '';
 											}
 											else
 											{
 												$arrayCurrentCell[$nTableLevel] = StringSection($strRemainingLine,0,$nNextCellPos);
 												$strRemainingLine = StringSection($strRemainingLine,$nNextCellPos+2);
-												if ($strNextToken == "!!")
+												if ($strNextToken == '!!')
 												{
-													$strNewMode == "table_header";
+													$strNewMode == 'table_header';
 												}
 												else
 												{
-													$strNewMode == "table_cell";
+													$strNewMode == 'table_cell';
 												}
 											}
 											
 										} 
-										while ($strRemainingLine != "");
+										while ($strRemainingLine != '');
 	//								}
 								}
 								// Table ends (either explicitly or open end)
-								else if ($strNewMode == "table_end")
+								else if ($strNewMode == 'table_end')
 								{
 									if ($nTableLevel > 0)
 									{
@@ -399,14 +399,14 @@
 									// ...The current section or cell is not empty
 									if ($bEmptyLine && ($nLineCount != $nLine+1))
 									{
-										if ($arrayCurrentCell[$nTableLevel] != "")
+										if ($arrayCurrentCell[$nTableLevel] != '')
 										{
-											$arrayCurrentCell[$nTableLevel] .= "<br/>\n";
+											$arrayCurrentCell[$nTableLevel] .= '<br/>\n';
 										}
 									}
 									else
 									{
-										$arrayCurrentCell[$nTableLevel] .= $strLine . "\n";
+										$arrayCurrentCell[$nTableLevel] .= $strLine . '\n';
 									}	
 								}
 						}
@@ -428,32 +428,32 @@
 			
 			if ($bTOCSupport == true)
 			{
-				$strLayoutStyle = $this->GetLayoutDef("LAYOUT_NAVIGATION_STYLE");
-				if ($strLayoutStyle == "")
+				$strLayoutStyle = $this->GetLayoutDef('LAYOUT_NAVIGATION_STYLE');
+				if ($strLayoutStyle == '')
 				{
-					$strLayoutStyle = "verticalpath";
+					$strLayoutStyle = 'verticalpath';
 				}
 				$navigation = new CNavigationElement($this->GetWebsite(),$strLayoutStyle);
 				$strTOC = $navigation->RenderNavigationVertical($navigationtree); 
-				if ($strChapterID == "TOC")
+				if ($strChapterID == 'TOC')
 				{
 					$strOutput = $strTOC;
 				}
 				else
 				{
-					$strOutput = ReplaceString($strOutput,"{{__!_TOC_!__}}",$strTOC);  
+					$strOutput = ReplaceString($strOutput,'{{__!_TOC_!__}}',$strTOC);  
 				}
 			}
 			
-			if ($strChapterID != "" && $strChapterID != "TOC")
+			if ($strChapterID != '' && $strChapterID != 'TOC')
 			{
-				$strChapterStartTag = "<!--".$strChapterID."-->";
+				$strChapterStartTag = '<!--'.$strChapterID.'-->';
 				$nChapterStartTagLength = StringLength($strChapterStartTag);
 				$nChapterStart = FindString($strOutput,$strChapterStartTag);
 				if ($nChapterStart != -1)
 				{
 					$strOutput = StringSection($strOutput,$nChapterStart+$nChapterStartTagLength);
-					$nChapterEnd = FindString($strOutput,"<!--CHAPTER-->");
+					$nChapterEnd = FindString($strOutput,'<!--CHAPTER-->');
 					if ($nChapterEnd != -1)
 					{
 						$strOutput = StringSection($strOutput,0,$nChapterEnd);
@@ -462,7 +462,7 @@
 			}
 			else
 			{
-				$strOutput = ReplaceString($strOutput,"<!--CHAPTER-->","");	
+				$strOutput = ReplaceString($strOutput,'<!--CHAPTER-->','');	
 			}
 		
 			return $strOutput;
@@ -471,7 +471,7 @@
 		private
 		function ParseInternalLinks($strInput,$strLinkTemplate,$strLinkTemplateChapter)
 		{
-			$nFirstLinkPos = FindString($strInput,"[[");
+			$nFirstLinkPos = FindString($strInput,'[[');
 			if ($nFirstLinkPos == -1)
 			{
 				return $strInput;	
@@ -479,21 +479,21 @@
 			
 			$strOutput = StringSection($strInput,0,$nFirstLinkPos);
 			$strRest = StringSection($strInput,$nFirstLinkPos+2);
-			$arraySections = explode("[[",$strRest);	
+			$arraySections = explode('[[',$strRest);	
 			
 			foreach ($arraySections as $strSection)
 			{
-				$nPosCloseTag = FindString($strSection,"]]");
+				$nPosCloseTag = FindString($strSection,']]');
 				if ($nPosCloseTag == -1)
 				{
-					$strOutput .= "[[".$strSection;
+					$strOutput .= '[['.$strSection;
 					continue;
 				}
 				
 				$strLinkRaw = StringSection($strSection,0,$nPosCloseTag);
-				if ($strLinkRaw != "")
+				if ($strLinkRaw != '')
 				{
-					$nPosDelimiter = FindString($strLinkRaw,"|");
+					$nPosDelimiter = FindString($strLinkRaw,'|');
 					if ($nPosDelimiter != -1)
 					{
 						$strArticleIDRaw = StringSection($strLinkRaw,0,$nPosDelimiter);
@@ -506,20 +506,20 @@
 					}
 					$strText = trim($strText);
 					
-					if ($strArticleIDRaw != "")
+					if ($strArticleIDRaw != '')
 					{
 						if ($this->m_internallink == null)
 						{
-							$strLayoutStyle = $this->GetLayoutDef("LAYOUT_INTERNALLINK_STYLE");
-							if ($strLayoutStyle == "")
+							$strLayoutStyle = $this->GetLayoutDef('LAYOUT_INTERNALLINK_STYLE');
+							if ($strLayoutStyle == '')
 							{
-								$strLayoutStyle = "default";
+								$strLayoutStyle = 'default';
 							}
 							$this->m_internallink = new CLinkElement($this->GetWebsite(),$strLayoutStyle);
 						}
 						
-						$strChapterIDRaw = "";
-						$nPosHash = FindString($strArticleIDRaw,"#");
+						$strChapterIDRaw = '';
+						$nPosHash = FindString($strArticleIDRaw,'#');
 						if ($nPosHash != -1)
 						{
 							if ($nPosHash == 0)
@@ -531,14 +531,14 @@
 						}
 						
 						$strArticleID = MakeID($strArticleIDRaw);
-						if ($strArticleID == "")
+						if ($strArticleID == '')
 						{
 							$strArticleID = $this->GetWebsite()->GetContent();
 						}
 						
 						if ($strArticleID == $this->GetWebsite()->GetContent())
 						{
-							//print("ABCD: ".$strLinkTemplateChapter);
+							//print('ABCD: '.$strLinkTemplateChapter);
 							$strLinkTemplateInUse = $strLinkTemplateChapter;
 						}
 						else
@@ -547,15 +547,15 @@
 						}
 
 						$strChapterID = MakeID($strChapterIDRaw);
-						$strLink = ReplaceString($strLinkTemplateInUse,"{ARTICLEID}",$strArticleID);
-						$strLink = ReplaceString($strLink,"{CHAPTERID}",$strChapterID);
+						$strLink = ReplaceString($strLinkTemplateInUse,'{ARTICLEID}',$strArticleID);
+						$strLink = ReplaceString($strLink,'{CHAPTERID}',$strChapterID);
 						$strLinkHTML = $this->m_internallink->RenderLink($strLink,$strText);
 						$strLinkHTML = trim($strLinkHTML);
 						$strOutput .= $strLinkHTML . StringSection($strSection,$nPosCloseTag+2);
 						continue;
 					}
 				}
-				$strOutput .= "[[".$strSection;
+				$strOutput .= '[['.$strSection;
 			}
 			return $strOutput;		
 		}
@@ -563,27 +563,27 @@
 		private
 		function ParseExternalLinks($strInput)
 		{
-			$nFirstLinkPos = FindString($strInput,"[");
+			$nFirstLinkPos = FindString($strInput,'[');
 			if ($nFirstLinkPos == -1)
 			{
 				return $strInput;	
 			}
 			
 			$strOutput = StringSection($strInput,0,$nFirstLinkPos);
-			$arraySections = explode("[",StringSection($strInput,$nFirstLinkPos+1));	
+			$arraySections = explode('[',StringSection($strInput,$nFirstLinkPos+1));	
 			
 			foreach ($arraySections as $strSection)
 			{
-				$nPosCloseTag = FindString($strSection,"]");
+				$nPosCloseTag = FindString($strSection,']');
 				if ($nPosCloseTag == -1)
 				{
-					$strOutput .= "[".$strSection;
+					$strOutput .= '['.$strSection;
 					continue;
 				}
 				
 				$strLinkRaw = StringSection($strSection,0,$nPosCloseTag);
 				
-				if ($strLinkRaw != "")
+				if ($strLinkRaw != '')
 				{
 					$nPosDelimiter = FindString($strLinkRaw,' ');
 					if ($nPosDelimiter != -1)
@@ -602,13 +602,13 @@
 					
 					if (IsValidURL($strURL) || IsValidEmailURL($strURL))
 					{
-						$bExternal = GetBoolValue($this->GetLayoutDef("LAYOUT_EXTERNALLINK_EXTERNAL"));
+						$bExternal = GetBoolValue($this->GetLayoutDef('LAYOUT_EXTERNALLINK_EXTERNAL'));
 						if ($this->m_externallink == null)
 						{
-							$strLayoutStyle = $this->GetLayoutDef("LAYOUT_EXTERNALLINK_STYLE");
-							if ($strLayoutStyle == "")
+							$strLayoutStyle = $this->GetLayoutDef('LAYOUT_EXTERNALLINK_STYLE');
+							if ($strLayoutStyle == '')
 							{
-								$strLayoutStyle = "default";
+								$strLayoutStyle = 'default';
 							}
 							$this->m_externallink = new CLinkElement($this->GetWebsite(),$strLayoutStyle);
 						}
@@ -621,11 +621,11 @@
 					}
 					else
 					{
-						$this->Trace("strURL = $strURL");
+						$this->Trace('strURL = $strURL');
 						$this->Trace('IsValidURL() and IsValidEmailURL() returned false');
 					}
 				}
-				$strOutput .= "[".$strSection;
+				$strOutput .= '['.$strSection;
 			}
 			return $strOutput;		
 		}
@@ -635,12 +635,12 @@
 		{
 			if ($this->m_definitionlist == null)
 			{
-				$strLayoutStyle = $this->GetLayoutDef("LAYOUT_DEFINITIONLIST_STYLE");
-				if ($strLayoutStyle == "")
+				$strLayoutStyle = $this->GetLayoutDef('LAYOUT_DEFINITIONLIST_STYLE');
+				if ($strLayoutStyle == '')
 				{
-					$strLayoutStyle = "default";
+					$strLayoutStyle = 'default';
 				}
-				$this->IncludeElement("definitionlist");
+				$this->IncludeElement('definitionlist');
 				$this->m_definitionlist = new CDefinitionListElement($this->GetWebsite(),$strLayoutStyle);
 			}
 			return $this->m_definitionlist->RenderDefinitionList($arrayList);
@@ -648,9 +648,9 @@
 
 		
 		private
-		function ParseHeaders($strLine,$strLinkTemplate,CNavigationTree &$navigationtree = null, $strChapterID = "",$bNumberedHeaders = false)
+		function ParseHeaders($strLine,$strLinkTemplate,CNavigationTree &$navigationtree = null, $strChapterID = '',$bNumberedHeaders = false)
 		{
-			$nTocLevel = intval($this->GetLayoutDef("LAYOUT_TOC_LEVEL"));
+			$nTocLevel = intval($this->GetLayoutDef('LAYOUT_TOC_LEVEL'));
 			if ($nTocLevel < 1)
 			{
 				$nTocLevel = 1;	
@@ -660,71 +660,71 @@
 				$nTocLevel = 6;	
 			}
 			
-			if ($strLinkTemplate == "")
+			if ($strLinkTemplate == '')
 			{
-				$strLinkTemplate ="#{CHAPTERID}";
+				$strLinkTemplate ='#{CHAPTERID}';
 			}
 			$strLine = trim($strLine);
 			for ($nLevel = 6; $nLevel >= 1; $nLevel--)
 			{
-				$strTag = StringRepeat("=",$nLevel);
+				$strTag = StringRepeat('=',$nLevel);
 				if (StringSection($strLine,0,$nLevel) == $strTag)
 				{
 					if (StringSection($strLine,-$nLevel) == $strTag)
 					{
 						if ($this->m_header == null)
 						{
-							$strLayoutStyle = $this->GetLayoutDef("LAYOUT_HEADER_STYLE");
-							if ($strLayoutStyle == "")
+							$strLayoutStyle = $this->GetLayoutDef('LAYOUT_HEADER_STYLE');
+							if ($strLayoutStyle == '')
 							{
-								$strLayoutStyle = "default";
+								$strLayoutStyle = 'default';
 							}
-							$this->IncludeElement("header");
+							$this->IncludeElement('header');
 							$this->m_header = new CHeaderElement($this->GetWebsite(),$strLayoutStyle);
 						}
 						
-						$strNumber = "";
+						$strNumber = '';
 						if ($this->m_arrayTOC == null)
 						{
 							$this->m_arrayTOC = array();
 						}
-						if (ArrayKeyExists($this->m_arrayTOC,"".($nLevel)))
+						if (ArrayKeyExists($this->m_arrayTOC,''.($nLevel)))
 						{
 							$arrayTOCNew = array();
 							for ($nIndex = 1; $nIndex <= $nLevel; $nIndex++)
 							{
-								$arrayTOCNew["".$nIndex] = ArrayGetValue($this->m_arrayTOC,"".$nIndex);
+								$arrayTOCNew[''.$nIndex] = ArrayGetValue($this->m_arrayTOC,''.$nIndex);
 							}
 							$this->m_arrayTOC = $arrayTOCNew;
 						}
-						$this->m_arrayTOC["".$nLevel] = intval(ArrayGetValue($this->m_arrayTOC,"".$nLevel)) + 1;
+						$this->m_arrayTOC[''.$nLevel] = intval(ArrayGetValue($this->m_arrayTOC,''.$nLevel)) + 1;
 						foreach ($this->m_arrayTOC as $nLevelNumber)
 						{
-							$strNumber .= "$nLevelNumber.";
+							$strNumber .= '$nLevelNumber.';
 						}
 
 						
 						
 						$strHeaderText = StringSection($strLine,$nLevel,StringLength($strLine)-(2*$nLevel));
-						$strHeaderTextNumbered = $strNumber . " " .$strHeaderText;
+						$strHeaderTextNumbered = $strNumber . ' ' .$strHeaderText;
 						// What to do in case of ambiguous chapter names?include the chapter number? Then links to chapters don't work
 						$strCurrentChapterID = MakeID($strHeaderText);
 						while (ArrayValueExists($this->m_arrayChapterIDs,$strCurrentChapterID) == true)
 						{
-							$strCurrentChapterID .= "-";
+							$strCurrentChapterID .= '-';
 						}
 						$this->m_arrayChapterIDs[] = $strCurrentChapterID;
 						
 						//$strCurrentChapterID = MakeID($strHeaderTextNumbered);
 						
 						
-						$strHeader = "<!--CHAPTER-->";
-						$strHeader .= "\n<div id=\"".$strCurrentChapterID."\"></div>\n";
-						if ($strChapterID != "")
+						$strHeader = '<!--CHAPTER-->';
+						$strHeader .= '\n<div id=\''.$strCurrentChapterID.'\'></div>\n';
+						if ($strChapterID != '')
 						{
 							if ($strCurrentChapterID == $strChapterID)
 							{
-								$strHeader .= "<!--$strChapterID-->";
+								$strHeader .= '<!--$strChapterID-->';
 								$strHeaderText = $strHeaderTextNumbered;
 							}
 						}
@@ -739,8 +739,8 @@
 						{
 							$newEntry = new CNavigationItem(); 
 							$newEntry->m_nLevel = $nLevel - 1;
-							$newEntry->m_strLink = ReplaceString($strLinkTemplate,"{CHAPTERID}",$strCurrentChapterID);
-							if ($strChapterID != "")
+							$newEntry->m_strLink = ReplaceString($strLinkTemplate,'{CHAPTERID}',$strCurrentChapterID);
+							if ($strChapterID != '')
 							{
 								if ($strCurrentChapterID == $strChapterID)
 								{
@@ -769,23 +769,23 @@
 		{
 			if (is_array($arrayListStack) == false)
 			{
-				return "";	
+				return '';	
 			}
-			$strOutput = "";
+			$strOutput = '';
 
 			$nFirstLine = $nLine;
 			$arrayListItems = array();
-			$strPrevMode = "";			
+			$strPrevMode = '';			
 			for (; $nLine < ArrayCount($arrayListStack); $nLine++)
 			{
 				$strLine = $arrayListStack[$nLine];
 				$nLineLength = StringLength($strLine);
 				
-				$strModeString = "";
-				$strText = "";
+				$strModeString = '';
+				$strText = '';
 				for ($nPos = $nLevel; $nPos < $nLineLength; $nPos++)
 				{
-					if ($strLine[$nPos] == "*" || $strLine[$nPos] == "#")
+					if ($strLine[$nPos] == '*' || $strLine[$nPos] == '#')
 					{
 						$strModeString .= $strLine[$nPos];
 					}
@@ -799,7 +799,7 @@
 				$strMode = StringSection($strModeString,0,1);
 				$strSubMode = StringSection($strModeString,1,1);
 			
-				if ($strSubMode == "#" || $strSubMode == "*")
+				if ($strSubMode == '#' || $strSubMode == '*')
 				{
 					$strSubList = $this->ParseList($arrayListStack,$nLine,$nLevel+1);
 
@@ -808,12 +808,12 @@
 					if ($nLine != $nFirstLine) 
 					{
 						$nLine--;
-						$strText = "";
+						$strText = '';
 					}
 				}
 				else
 				{
-					if ($strPrevMode == "")
+					if ($strPrevMode == '')
 					{
 						$strPrevMode = $strMode;	
 					}				
@@ -825,16 +825,16 @@
 
 				if (	($strPrevMode != $strMode)
 					|| ($nLine == ArrayCount($arrayListStack)-1)
-					|| ($strPrevMode != "" && $strMode == ""))
+					|| ($strPrevMode != '' && $strMode == ''))
 				{
-					if ($strPrevMode == "*")
+					if ($strPrevMode == '*')
 					{
 						if ($this->m_list == null)
 						{
-							$strLayoutStyle = $this->GetLayoutDef("LAYOUT_LIST_STYLE");
-							if ($strLayoutStyle == "")
+							$strLayoutStyle = $this->GetLayoutDef('LAYOUT_LIST_STYLE');
+							if ($strLayoutStyle == '')
 							{
-								$strLayoutStyle = "default";
+								$strLayoutStyle = 'default';
 							}
 							$this->m_list = new CListElement($this->GetWebsite(),$strLayoutStyle);
 						}
@@ -844,24 +844,24 @@
 					{
 						if ($this->m_numberedlist == null)
 						{
-							$strLayoutStyle = $this->GetLayoutDef("LAYOUT_NUMBEREDLIST_STYLE");
-							if ($strLayoutStyle == "")
+							$strLayoutStyle = $this->GetLayoutDef('LAYOUT_NUMBEREDLIST_STYLE');
+							if ($strLayoutStyle == '')
 							{
-								$strLayoutStyle = "default";
+								$strLayoutStyle = 'default';
 							}
-							$this->IncludeElement("numberedlist");
+							$this->IncludeElement('numberedlist');
 							$this->m_numberedlist = new CNumberedListElement($this->GetWebsite(),$strLayoutStyle);
 						}
 						$strOutput .= $this->m_numberedlist->RenderNumberedList($arrayListItems);				
 					}
 					$arrayListItems = array();
-					if ($nLine != $nFirstLine && $strText != "")
+					if ($nLine != $nFirstLine && $strText != '')
 					{  
 						$arrayListItems[] = $this->ParseFormats($strText);
 					}
 				}
 				
-				if ($strMode == "")
+				if ($strMode == '')
 				{
 					return $strOutput;
 				}
@@ -873,14 +873,14 @@
 					{
 						$arrayListItems = array();
 						$arrayListItems[] = $this->ParseFormats($strText);
-						if ($strMode == "*")
+						if ($strMode == '*')
 						{
 							if ($this->m_list == null)
 							{
-								$strLayoutStyle = $this->GetLayoutDef("LAYOUT_LIST_STYLE");
-								if ($strLayoutStyle == "")
+								$strLayoutStyle = $this->GetLayoutDef('LAYOUT_LIST_STYLE');
+								if ($strLayoutStyle == '')
 								{
-									$strLayoutStyle = "default";
+									$strLayoutStyle = 'default';
 								}
 								$this->m_list = new CListElement($this->GetWebsite(),$strLayoutStyle);
 							}
@@ -890,12 +890,12 @@
 						{
 							if ($this->m_numberedlist == null)
 							{
-								$strLayoutStyle = $this->GetLayoutDef("LAYOUT_NUMBEREDLIST_STYLE");
-								if ($strLayoutStyle == "")
+								$strLayoutStyle = $this->GetLayoutDef('LAYOUT_NUMBEREDLIST_STYLE');
+								if ($strLayoutStyle == '')
 								{
-									$strLayoutStyle = "default";
+									$strLayoutStyle = 'default';
 								}
-								$this->IncludeElement("numberedlist");
+								$this->IncludeElement('numberedlist');
 								$this->m_numberedlist = new CNumberedListElement($this->GetWebsite(),$strLayoutStyle);
 							}
 							$strOutput .= $this->m_numberedlist->RenderNumberedList($arrayListItems);				
@@ -914,28 +914,28 @@
 		private
 		function ParseFormats($strInput)
 		{
-			if (FindString($strInput,"'") == -1)
+			if (FindString($strInput,''') == -1)
 			{
 				return $strInput;	
 			}
 			
-			$this->IncludeElement("format");
+			$this->IncludeElement('format');
 			
-			$arraySections = preg_split( "/(''+)/", $strInput, -1, PREG_SPLIT_DELIM_CAPTURE );
+			$arraySections = preg_split( '/(''+)/', $strInput, -1, PREG_SPLIT_DELIM_CAPTURE );
 			if (ArrayCount($arraySections) == 1)
 			{
 				return $strInput;	
 			}
 			
-			$strOutput = "";
-			$strMode = "";
-			$strPrevMode = "";
+			$strOutput = '';
+			$strMode = '';
+			$strPrevMode = '';
 			$nIndex = 0;
 			$nSectionCount = ArrayCount($arraySections);
-			$strPrevSection = "";
+			$strPrevSection = '';
 			foreach ($arraySections as $strSection)
 			{
-				$bTagSection = (StringSection($strSection,0,2) == "''")?(true):(false);
+				$bTagSection = (StringSection($strSection,0,2) == '''')?(true):(false);
 				$strPrevMode = $strMode;
 				if ($bTagSection)
 				{
@@ -943,59 +943,59 @@
 					$nLength = StringLength($strSection);
 					if ($nLength == 2) // italic
 					{
-						if ($strMode == "")
+						if ($strMode == '')
 						{
-							$strMode = "i";
+							$strMode = 'i';
 						}
-						else if ($strMode == "b")
+						else if ($strMode == 'b')
 						{
-							$strMode = "ib";	
+							$strMode = 'ib';	
 						}
-						else if ($strMode == "ib")
+						else if ($strMode == 'ib')
 						{
-							$strMode = "b";	
+							$strMode = 'b';	
 						}
-						else // e.g. strMode == "i"
+						else // e.g. strMode == 'i'
 						{
-							$strMode = "";	
+							$strMode = '';	
 						}
 					}
 					else if ($nLength == 3) // bold
 					{
-						if ($strMode == "")
+						if ($strMode == '')
 						{
-							$strMode = "b";
+							$strMode = 'b';
 						}
-						else if ($strMode == "i")
+						else if ($strMode == 'i')
 						{
-							$strMode = "ib";	
+							$strMode = 'ib';	
 						}
-						else if ($strMode == "ib")
+						else if ($strMode == 'ib')
 						{
-							$strMode = "i";	
+							$strMode = 'i';	
 						}
-						else // e.g. strMode == "b"
+						else // e.g. strMode == 'b'
 						{
-							$strMode = "";	
+							$strMode = '';	
 						}
 					}
 					else if ($nLength == 5) // italic and bold
 					{
-						if ($strMode == "")
+						if ($strMode == '')
 						{
-							$strMode = "ib";
+							$strMode = 'ib';
 						}
-						else if ($strMode == "i")
+						else if ($strMode == 'i')
 						{
-							$strMode = "b";	
+							$strMode = 'b';	
 						}
-						else if ($strMode == "b")
+						else if ($strMode == 'b')
 						{
-							$strMode = "i";	
+							$strMode = 'i';	
 						}
-						else // e.g. strMode == "ib"
+						else // e.g. strMode == 'ib'
 						{
-							$strMode = "";	
+							$strMode = '';	
 						}							
 					}
 					else 
@@ -1012,27 +1012,27 @@
 				if ($bTagSection || $nIndex == $nSectionCount-1 )
 				{
 					$strSectionOutput = $strPrevSection;
-					if (FindString($strPrevMode,"i") != -1)
+					if (FindString($strPrevMode,'i') != -1)
 					{
 						if ($this->m_formatitalic == null)
 						{
-							$strLayoutStyle = $this->GetLayoutDef("LAYOUT_FORMATITALIC_STYLE");
-							if ($strLayoutStyle == "")
+							$strLayoutStyle = $this->GetLayoutDef('LAYOUT_FORMATITALIC_STYLE');
+							if ($strLayoutStyle == '')
 							{
-								$strLayoutStyle = "italic";
+								$strLayoutStyle = 'italic';
 							}
 							$this->m_formatitalic = new CFormatElement($this->GetWebsite(),$strLayoutStyle);
 						} 
 						$strSectionOutput = trim($this->m_formatitalic->RenderFormat($strSectionOutput));
 					}
-					if (FindString($strPrevMode,"b") != -1)
+					if (FindString($strPrevMode,'b') != -1)
 					{
 						if ($this->m_formatbold == null)
 						{
-							$strLayoutStyle = $this->GetLayoutDef("LAYOUT_FORMATBOLD_STYLE");
-							if ($strLayoutStyle == "")
+							$strLayoutStyle = $this->GetLayoutDef('LAYOUT_FORMATBOLD_STYLE');
+							if ($strLayoutStyle == '')
 							{
-								$strLayoutStyle = "bold";
+								$strLayoutStyle = 'bold';
 							}
 							$this->m_formatbold = new CFormatElement($this->GetWebsite(),$strLayoutStyle);
 						}

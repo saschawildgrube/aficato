@@ -1,6 +1,6 @@
 <?php
 
-	require_once("wdk_ip.inc");
+	require_once('wdk_ip.inc');
 
 	function ScanMailWarnLogForMaliciousIPs($arrayMailWarnLog)
 	{
@@ -12,9 +12,9 @@
 		$arrayIPs = array();
 		foreach ($arrayMailWarnLog as $strLogLine)
 		{
-			if (FindString($strLogLine,"password incorrect from") != -1)
+			if (FindString($strLogLine,'password incorrect from') != -1)
 			{
-				$nPos = strrpos($strLogLine,"[");
+				$nPos = strrpos($strLogLine,'[');
 				if ($nPos != -1)
 				{
 					$strIP = StringSection($strLogLine,$nPos+1,-1);

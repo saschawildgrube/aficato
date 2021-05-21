@@ -11,7 +11,7 @@
 
 		function OnGetRequiredConditions()
 		{
-			return array("login" => "LOGIN_REQUIRED");
+			return array('login' => 'LOGIN_REQUIRED');
 		}
 
 	}	

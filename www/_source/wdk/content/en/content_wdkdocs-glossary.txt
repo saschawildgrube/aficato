@@ -12,7 +12,7 @@
 ;Content
 :A content is an HTML, WIKI and/or PHP file representing a page of a website.
 ;Element
-:A class implementing output rendering. The term is derived from "HTML element" as elements are used to render both simple HTML elements as well as complex structures. Elements may use other elements but do NOT interact with dynamic data sources.
+:A class implementing output rendering. The term is derived from 'HTML element' as elements are used to render both simple HTML elements as well as complex structures. Elements may use other elements but do NOT interact with dynamic data sources.
 ;Module
 :A class implementing a user interaction within a website. Modules interact with web services and other modules. Modules use elements to generate output.
 ;Navigation

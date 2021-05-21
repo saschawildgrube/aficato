@@ -6,15 +6,15 @@
 		function OnRenderContent(&$arrayItems)
 		{
 			
-			$strMockCSVFilePath = $this->GetWebsite()->GetDataFilePath("/mandates/demo/accounts/mockdata-account-a-transactions.csv");
+			$strMockCSVFilePath = $this->GetWebsite()->GetDataFilePath('/mandates/demo/accounts/mockdata-account-a-transactions.csv');
 			$arrayTransactions = FileReadCSV(
 				$strMockCSVFilePath,
 				true,
 				false,
 				';',
 				array(),
-				'"',
-				'""');
+				''',
+				'''');
 			$arrayAccount = array();
 			$arrayAccount['ID'] = 'A';
 			$arrayAccount['BALANCE_BEGIN'] = 3330.0;
@@ -32,8 +32,8 @@
 /*
 			$strJson = json_encode($arrayAccountChart,JSON_PRETTY_PRINT);
 			$strJavaScript = 'aDataAccountChart = '.$strJson.';';
-			$strJavaScript .= 'aPropsAccountChart = [ "data": aDataAccountChart ];';
-			$strJavaScript .= "D3_AML_AccountChart('#aml-accountchart',aPropsAccountChart);"; 
+			$strJavaScript .= 'aPropsAccountChart = [ 'data': aDataAccountChart ];';
+			$strJavaScript .= 'D3_AML_AccountChart('#aml-accountchart',aPropsAccountChart);'; 
 			$this->GetWebsite()->AddJavaScriptSourceCode('aml-lab-accountchart',$strJavaScript);
 			
 			$this->GetWebsite()->IncludeElement('amlaccountchartlegend');

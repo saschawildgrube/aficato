@@ -2036,8 +2036,8 @@
 				false,
 				';',
 				array(),
-				'"',
-				'""');
+				''',
+				'''');
 				
 		if ($arrayContents == false)
 		{
@@ -2104,8 +2104,8 @@
 				false,
 				';',
 				array(),
-				'"',
-				'""');
+				''',
+				'''');
 				
 		if ($arrayContents == false)
 		{

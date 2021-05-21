@@ -22,14 +22,14 @@
 		{
 			if (!$this->IsValid())
 			{
-				$arrayErrors[] = "PASSWORDPOLICY_INVALID";
+				$arrayErrors[] = 'PASSWORDPOLICY_INVALID';
 				return false;	
 			}
 			$bResult = true;
 			$nMinimumLength = $this->GetMinimumLength();
 			if (StringLength($strPassword) < $nMinimumLength)
 			{
-				$arrayErrors[] = "PASSWORDPOLICY_MINIMUM_LENGTH";
+				$arrayErrors[] = 'PASSWORDPOLICY_MINIMUM_LENGTH';
 				$bResult = false;  
 			}
 			
@@ -49,7 +49,7 @@
 				}
 				if (!$bOK)
 				{
-					$arrayErrors[] = "PASSWORDPOLICY_REQUIRED_CHARS_ALPHA_UPPERCASE";
+					$arrayErrors[] = 'PASSWORDPOLICY_REQUIRED_CHARS_ALPHA_UPPERCASE';
 					$bResult = false; 
 				}
 			}
@@ -69,7 +69,7 @@
 				}
 				if (!$bOK)
 				{
-					$arrayErrors[] = "PASSWORDPOLICY_REQUIRED_CHARS_ALPHA_LOWERCASE";
+					$arrayErrors[] = 'PASSWORDPOLICY_REQUIRED_CHARS_ALPHA_LOWERCASE';
 					$bResult = false; 
 				}
 			}
@@ -91,7 +91,7 @@
 					}
 					if (!$bOK)
 					{
-						$arrayErrors[] = "PASSWORDPOLICY_REQUIRED_CHARS_ALPHA";
+						$arrayErrors[] = 'PASSWORDPOLICY_REQUIRED_CHARS_ALPHA';
 						$bResult = false; 
 					}
 				}
@@ -112,7 +112,7 @@
 				}
 				if (!$bOK)
 				{
-					$arrayErrors[] = "PASSWORDPOLICY_REQUIRED_CHARS_NUMERIC";
+					$arrayErrors[] = 'PASSWORDPOLICY_REQUIRED_CHARS_NUMERIC';
 					$bResult = false; 
 				}
 			}
@@ -123,7 +123,7 @@
 		function GeneratePassword()
 		{
 			// This function is not yet implemented!
-			return "1";
+			return '1';
 		}
 		
 		function SetPolicy($arrayData)
@@ -135,48 +135,48 @@
 		
 		function SetMinimumLength($nMinimumLength)
 		{
-			$this->SetValue($nMinimumLength,"minimumlength");
+			$this->SetValue($nMinimumLength,'minimumlength');
 		}
 		function GetMinimumLength()
 		{
-			return $this->GetValue("minimumlength");
+			return $this->GetValue('minimumlength');
 		}
 		
 		function SetRequiredCharsAlpha($bValue = true)
 		{
-			$this->SetValue(($bValue)?(true):(false),"requiredcharsalpha");
+			$this->SetValue(($bValue)?(true):(false),'requiredcharsalpha');
 		}
 		function GetRequiredCharsAlpha()
 		{
-			return $this->GetValue("requiredcharsalpha");
+			return $this->GetValue('requiredcharsalpha');
 		}
 		
 		function SetRequiredCharsAlphaUppercase($bValue = true)
 		{
-			$this->SetValue(($bValue)?(true):(false),"requiredcharsalphauppercase");
+			$this->SetValue(($bValue)?(true):(false),'requiredcharsalphauppercase');
 		}
 		function GetRequiredCharsAlphaUppercase()
 		{
-			return $this->GetValue("requiredcharsalphauppercase");
+			return $this->GetValue('requiredcharsalphauppercase');
 		}		
 
 		function SetRequiredCharsAlphaLowercase($bValue = true)
 		{
-			$this->SetValue(($bValue)?(true):(false),"requiredcharsalphalowercase");
+			$this->SetValue(($bValue)?(true):(false),'requiredcharsalphalowercase');
 		}
 		function GetRequiredCharsAlphaLowercase()
 		{
-			return $this->GetValue("requiredcharsalphalowercase");
+			return $this->GetValue('requiredcharsalphalowercase');
 		}
 
 
 		function SetRequiredCharsNumeric($bValue = true)
 		{
-			$this->SetValue(($bValue)?(true):(false),"requiredcharsnumeric");
+			$this->SetValue(($bValue)?(true):(false),'requiredcharsnumeric');
 		}
 		function GetRequiredCharsNumeric()
 		{
-			return $this->GetValue("requiredcharsnumeric");
+			return $this->GetValue('requiredcharsnumeric');
 		}
 			
 		

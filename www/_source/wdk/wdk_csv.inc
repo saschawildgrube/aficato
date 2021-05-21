@@ -13,18 +13,18 @@
 	*/
 
 
-	define("CSV_INITIAL",						0);
-	define("CSV_LEADINGWHITESPACE",	1);
-	define("CSV_UNQUOTEDVALUE",			2);
-	define("CSV_QUOTESTART",				3);
-	define("CSV_QUOTEDVALUE",				4);
-	define("CSV_ESCAPEDQUOTE",			5);
-	define("CSV_QUOTEEND",					6);
-	define("CSV_TRAILINGNOISE",			7);
-	define("CSV_SEPARATOR",					8);
-	define("CSV_NEWLINE",						9);
-	define("CSV_COMMENT",						10);
-	define("CSV_END",								11);
+	define('CSV_INITIAL',						0);
+	define('CSV_LEADINGWHITESPACE',	1);
+	define('CSV_UNQUOTEDVALUE',			2);
+	define('CSV_QUOTESTART',				3);
+	define('CSV_QUOTEDVALUE',				4);
+	define('CSV_ESCAPEDQUOTE',			5);
+	define('CSV_QUOTEEND',					6);
+	define('CSV_TRAILINGNOISE',			7);
+	define('CSV_SEPARATOR',					8);
+	define('CSV_NEWLINE',						9);
+	define('CSV_COMMENT',						10);
+	define('CSV_END',								11);
 
 
 	function ParseCSV(
@@ -33,20 +33,20 @@
 		$IncludeHeadersInResult = false,
 		$strSeparator = ',',
 		$arrayCommentTokens = array(),
-		$strQuote = '"',
-		$strEscapedQuote = '""',
+		$strQuote = ''',
+		$strEscapedQuote = '''',
 		$bNewLineInQuotedValue = false)
 	{
 		if (StringTrim($strCSV) == '')
 		{
 			return array();	
 		}
-		mb_internal_encoding("UTF-8");
+		mb_internal_encoding('UTF-8');
 		
 		
 		$strCSV = StringEncodeUTF8($strCSV);
-		$strCSV = ReplaceString($strCSV,"\r\n","\n"); 
-		$strCSV = ReplaceString($strCSV,"\r",''); 
+		$strCSV = ReplaceString($strCSV,'\r\n','\n'); 
+		$strCSV = ReplaceString($strCSV,'\r',''); 
 		$strSeparator = StringEncodeUTF8($strSeparator);
 		$strQuote = StringEncodeUTF8($strQuote);
 		$strEscapedQuote = StringEncodeUTF8($strEscapedQuote);
@@ -58,7 +58,7 @@
 		{
 			$strCommentToken = StringEncodeUTF8($strCommentToken);
 		}
-		$strNewLine = "\n";
+		$strNewLine = '\n';
 
 		$nLength = StringLength($strCSV);
 		$bIsStringSingleByte = IsStringSingleByte($strCSV);
@@ -162,7 +162,7 @@
 			case CSV_SEPARATOR:
 
 				if ($cChar == ' '
-					||$cChar == "\t")
+					||$cChar == '\t')
 				{
 					$nPreviousState = CSV_LEADINGWHITESPACE;
 					continue;
@@ -180,7 +180,7 @@
 				{
 					$strNextValue = StringSection($strCSV,$nPos);
 					$arrayValues[] = StringTrim($strNextValue);
-					$strNextValue = "";
+					$strNextValue = '';
 					$arrayRows[] = $arrayValues;
 					$arrayValues = array();
 					$nPreviousState = CSV_END;
@@ -192,7 +192,7 @@
 				{
 					$strNextValue = StringSection($strCSV,$nPos,$nPosNextToken-$nPos);
 					$arrayValues[] = StringTrim($strNextValue);
-					$strNextValue = "";
+					$strNextValue = '';
 					$nPreviousState = CSV_SEPARATOR;
 					$nPos = $nPosNextToken;
 					continue;
@@ -251,7 +251,7 @@
 					
 				$strNextValue = StringSection($strCSV,$nPos,$nPosNextToken-$nPos);
 				$arrayValues[] = StringTrim($strNextValue);
-				$strNextValue = "";
+				$strNextValue = '';
 				$nPreviousState = CSV_COMMENT;
 
 				break;
@@ -284,7 +284,7 @@
 					{
 						$nPos = $nPosNextToken;
 						$arrayValues[] = StringTrim($strNextValue);
-						$strNextValue = "";
+						$strNextValue = '';
 						$arrayRows[] = $arrayValues;
 						$arrayValues = array();
 						$nPreviousState = CSV_NEWLINE;
@@ -304,21 +304,21 @@
 						if ($strNextToken == $strSeparator)
 						{
 							$arrayValues[] = StringTrim($strNextValue);
-							$strNextValue = "";
+							$strNextValue = '';
 							$nPreviousState = CSV_SEPARATOR;
 							continue;
 						}
 						if ($strNextToken == $strNewLine)  
 						{
 							$arrayValues[] = StringTrim($strNextValue);
-							$strNextValue = "";
+							$strNextValue = '';
 							$arrayRows[] = $arrayValues;
 							$arrayValues = array();
 							$nPreviousState = CSV_NEWLINE;
 							continue;
 						}
 						$arrayValues[] = StringTrim($strNextValue);
-						$strNextValue = "";
+						$strNextValue = '';
 						$nPreviousState = CSV_COMMENT;
 						continue;
 					}
@@ -332,7 +332,7 @@
 			case CSV_ESCAPEDQUOTE:
 			case CSV_QUOTEDVALUE:
 
-				$strNextToken = "";
+				$strNextToken = '';
 				
 				$nPosNextToken = FindStringMultiple(
 					$strCSV,
@@ -393,7 +393,7 @@
 			case CSV_TRAILINGNOISE:
 
 				if ($cChar == ' '
-					||$cChar == "\t")
+					||$cChar == '\t')
 				{
 					$nPreviousState = CSV_TRAILINGNOISE;
 					continue;
@@ -444,13 +444,13 @@
 
 			
 			default:
-				FatalError("Invalid state in ExplodeCSV: $nState");
+				FatalError('Invalid state in ExplodeCSV: $nState');
 			}
 			
 		}
 		if ($nPreviousState == CSV_SEPARATOR)
 		{
-			$arrayValues[] = "";
+			$arrayValues[] = '';
 		}
 		else if ($nPreviousState == CSV_UNQUOTEDVALUE)
 		{
@@ -502,7 +502,7 @@
 		$bHeaderRow = true,
 		$IncludeHeadersInResult = false)
 	{
-		FatalError("ParseCSV_AutoDetect() is NOT IMPLEMENTED!");
+		FatalError('ParseCSV_AutoDetect() is NOT IMPLEMENTED!');
 	}
 
 	function ParseCSV_Format(
@@ -513,17 +513,17 @@
 	{
 		switch ($strFormat)
 		{
-		case "rfc4180":
+		case 'rfc4180':
 			return ParseCSV_RFC4180(
 				$strCSV,
 				$bHeaderRow,
 				$IncludeHeadersInResult);
-		case "excel":
+		case 'excel':
 			return ParseCSV_Excel(
 				$strCSV,
 				$bHeaderRow,
 				$IncludeHeadersInResult);
-		case "wdk":
+		case 'wdk':
 			return ParseCSV_WDK(
 				$strCSV,
 				$bHeaderRow,
@@ -547,8 +547,8 @@
 			$IncludeHeadersInResult,
 			',',
 			array(),
-			'"',
-			'""',
+			''',
+			'''',
 			false);
 	}
 
@@ -574,8 +574,8 @@
 			$IncludeHeadersInResult,
 			';',
 			array(),
-			'"',
-			'""');
+			''',
+			'''');
 	}
 
 
@@ -590,8 +590,8 @@
 			$IncludeHeadersInResult,
 			';',
 			array('#'),
-			'"',
-			'""',  
+			''',
+			'''',  
 			true);
 	}
 
@@ -609,8 +609,8 @@
 		$IncludeHeadersInResult = false,
 		$strSeparator = ',',
 		$arrayCommentTokens = array(),
-		$strQuote = '"',
-		$strEscapedQuote = '""',
+		$strQuote = ''',
+		$strEscapedQuote = '''',
 		$bNewLineInQuotedValue = false)
 	{
 		$strCSV = FileRead($strFile);
@@ -670,7 +670,7 @@
 		$IncludeHeadersInResult = false)
 	{
 		return FileReadCSV_Format(
-			"rfc4180",
+			'rfc4180',
 			$strFile,
 			$bHeaderRow,
 			$IncludeHeadersInResult);
@@ -682,7 +682,7 @@
 		$IncludeHeadersInResult = false)
 	{
 		return FileReadCSV_Format(
-			"excel",
+			'excel',
 			$strFile,
 			$bHeaderRow,
 			$IncludeHeadersInResult);
@@ -694,7 +694,7 @@
 		$IncludeHeadersInResult = false)
 	{
 		return FileReadCSV_Format(
-			"wdk",
+			'wdk',
 			$strFile,
 			$bHeaderRow,
 			$IncludeHeadersInResult);
@@ -719,19 +719,19 @@
 	
 	function MakeCSV(
 		$arrayList,
-		$strSeparator = ",",
-		$strQuote = '"',
-		$strEscapedQuote = '""',
-		$strEOL = "\r\n")
+		$strSeparator = ',',
+		$strQuote = ''',
+		$strEscapedQuote = '''',
+		$strEOL = '\r\n')
 	{
 		if (!is_array($arrayList))
 		{
-			return "";	
+			return '';	
 		}
 		$nLines = ArrayCount($arrayList);
 		if ($nLines == 0)
 		{
-			return "";	
+			return '';	
 		}
 		$arrayColumns = array();
 		foreach ($arrayList as $arrayRow)
@@ -743,37 +743,37 @@
 		}
 		$arrayColumns = array_unique($arrayColumns);
 		
-		$strCSV = "";
+		$strCSV = '';
 		foreach ($arrayColumns as $strColumn)
 		{
-			if ($strCSV != "")
+			if ($strCSV != '')
 			{
 				$strCSV .= $strSeparator;
 			}
-			$strCSV .= "\"".StringDecodeUTF8($strColumn)."\"";
+			$strCSV .= '\''.StringDecodeUTF8($strColumn).'\'';
 		}
 		
 		foreach ($arrayList as $arrayRow)
 		{
-			if ($strCSV != "")
+			if ($strCSV != '')
 			{
 				$strCSV .= $strEOL;
 			}
 			
-			$strRow = "";
+			$strRow = '';
 			foreach ($arrayColumns as $strColumn)
 			{
-				if ($strRow != "")
+				if ($strRow != '')
 				{
 					$strRow .= $strSeparator;
 				}
 				$strValue = ArrayGetValue($arrayRow,$strColumn);
-				$strValue = ReplaceString($strValue,"\r\n","\n");
-				$strValue = ReplaceString($strValue,"\r","\n");
-				$strValue = ReplaceString($strValue,"\n",$strEOL);
+				$strValue = ReplaceString($strValue,'\r\n','\n');
+				$strValue = ReplaceString($strValue,'\r','\n');
+				$strValue = ReplaceString($strValue,'\n',$strEOL);
 				$strValue = StringDecodeUTF8($strValue);
-				$strValue = ReplaceString($strValue,'"','""');
-				$strRow .= '"'.$strValue.'"';
+				$strValue = ReplaceString($strValue,''','''');
+				$strRow .= '''.$strValue.''';
 			}
 			$strCSV .= $strRow;
 		}
@@ -787,13 +787,13 @@
 	{
 		switch ($strFormat)
 		{
-		case "rfc4180":
+		case 'rfc4180':
 			return MakeCSV_RFC4180($arrayList);
-		case "wdk":
+		case 'wdk':
 			return MakeCSV_WDK($arrayList);
-		case "excellegacy":
+		case 'excellegacy':
 			return MakeCSV_ExcelLegacy($arrayList);
-		case "excel":
+		case 'excel':
 		default:
 			return MakeCSV_Excel($arrayList);
 		}		
@@ -804,10 +804,10 @@
 	{
 		return MakeCSV(
 			$arrayList,
-			",",
-			'"',
-			'""',
-			"\r\n");
+			',',
+			''',
+			'''',
+			'\r\n');
 	}
 
 	function MakeCSV_Excel(
@@ -821,10 +821,10 @@
 	{
 		return MakeCSV(
 			$arrayList,
-			";",  
-			'"',
-			'""',
-			"\r\n");
+			';',  
+			''',
+			'''',
+			'\r\n');
 	}
 
 
@@ -833,10 +833,10 @@
 	{
 		return MakeCSV(
 			$arrayList,
-			";",
-			'"',
-			'""',
-			"\r\n");
+			';',
+			''',
+			'''',
+			'\r\n');
 	}
 
 

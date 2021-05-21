@@ -1,24 +1,24 @@
 URL PARAMETERS
 
-	"wdkhelp"
-		"1" Displays this text.
+	'wdkhelp'
+		'1' Displays this text.
 
-	"trace"
-		"1" Activates tracing and debug output.
+	'trace'
+		'1' Activates tracing and debug output.
 
 
 
 CONFIG SETTINGS
 
-	"author" (required)
+	'author' (required)
 		string: The name of the author of the website
 	
-	"languages" (required)
-		array: Two character ISO codes of languages supported by the website (e.g. "DE" and "EN")
+	'languages' (required)
+		array: Two character ISO codes of languages supported by the website (e.g. 'DE' and 'EN')
 		At least one language must be specified.
 	
-	"wdkhelp_disable" (optional)
-		"1" Disables the url parameter "wdkhelp"
+	'wdkhelp_disable' (optional)
+		'1' Disables the url parameter 'wdkhelp'
 	
 	
 	

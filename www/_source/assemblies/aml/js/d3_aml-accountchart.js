@@ -121,7 +121,7 @@ function D3_AML_AccountChart(vSelector, aProps)
     	}
     	else
     	{
-      	strScale = d3.format(",.0f")(fScale);
+      	strScale = d3.format(',.0f')(fScale);
 			}
       return '' + strScale + ' ' + aData['metric'];
     });		
@@ -137,8 +137,8 @@ function D3_AML_AccountChart(vSelector, aProps)
 		.attr('class', strCssClassPrefix+'axis-y')
 	  .call(axisY);
 
-	var sAxisX = sChart.append("g")
-		.attr("class", strCssClassPrefix+'axis-x')
+	var sAxisX = sChart.append('g')
+		.attr('class', strCssClassPrefix+'axis-x')
 		.attr('transform', 'translate(0,' + nChartHeight + ')')
 		.call(axisX);		
 		
@@ -365,7 +365,7 @@ function D3_AML_AccountChart(vSelector, aProps)
 	{
 	    //return Math.abs(fNumber) > 999999 ? Math.sign(fNumber)*((Math.abs(fNumber)/1000).toFixed(1)) + 'k' : Math.sign(fNumber)*Math.abs(fNumber);
 	    //return Math.sign(fNumber)*((Math.abs(fNumber)/1000).toFixed(1)) + 'k';
-	    return (Math.sign(fNumber)*((Math.abs(fNumber)/1000))).toLocaleString("en-GB") + 'k';
+	    return (Math.sign(fNumber)*((Math.abs(fNumber)/1000))).toLocaleString('en-GB') + 'k';
 	}
 
 

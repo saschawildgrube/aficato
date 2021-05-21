@@ -4,7 +4,7 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$arrayItems["MODULE_USERSIGNOUT"] = $this->GetWebsite()->m_moduleSignOut->RenderModule("");
+			$arrayItems['MODULE_USERSIGNOUT'] = $this->GetWebsite()->m_moduleSignOut->RenderModule('');
 		}
 	}
 	

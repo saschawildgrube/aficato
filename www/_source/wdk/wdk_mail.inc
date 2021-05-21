@@ -1,6 +1,6 @@
 <?php
 
-	define("REGEXP_EMAIL", "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/");
+	define('REGEXP_EMAIL', '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/');
 
 	function IsValidEmail($strEmail)
 	{
@@ -23,23 +23,23 @@
 		{
 			return false;			
 		}
-		if (StringSection($strEmail,-4) == ".css")
+		if (StringSection($strEmail,-4) == '.css')
 		{
 			return false;	
 		}
-		if (StringSection($strEmail,-3) == ".js")
+		if (StringSection($strEmail,-3) == '.js')
 		{
 			return false;	
 		}		
-		if (StringSection($strEmail,-3) == ".png")
+		if (StringSection($strEmail,-3) == '.png')
 		{
 			return false;	
 		}		
-		if (StringSection($strEmail,-3) == ".jpg")
+		if (StringSection($strEmail,-3) == '.jpg')
 		{
 			return false;	
 		}		
-		if (StringSection($strEmail,-3) == ".pdf")
+		if (StringSection($strEmail,-3) == '.pdf')
 		{
 			return false;	
 		}		
@@ -48,7 +48,7 @@
 
 	function IsValidEmailURL($strURL)
 	{
-		if (StringSection($strURL,0,7) != "mailto:")
+		if (StringSection($strURL,0,7) != 'mailto:')
 		{
 			return false;	
 		}
@@ -61,8 +61,8 @@
 		$arrayRecipients,
 		$strSubject,
 		$strMessage,
-		$strSenderEmail = "",
-		$strSenderName = "",
+		$strSenderEmail = '',
+		$strSenderName = '',
 		$arrayAttachments = array(),
 		$arrayRecipientsCC = array(),
 		$arrayRecipientsBCC = array())
@@ -79,9 +79,9 @@
 				return false;
 			}
 		}
-		$strRecipients = implode(",",$arrayRecipients);
+		$strRecipients = implode(',',$arrayRecipients);
 		
-		$strHeaderCCBCC = "";
+		$strHeaderCCBCC = '';
 
 		if (is_array($arrayRecipientsCC) != true)
 		{
@@ -96,7 +96,7 @@
 		}
 		if (ArrayCount($arrayRecipientsCC) > 0)
 		{
-			$strHeaderCCBCC .= "Cc:".implode(",",$arrayRecipientsCC)."\n";
+			$strHeaderCCBCC .= 'Cc:'.implode(',',$arrayRecipientsCC).'\n';
 		}
 
 		if (is_array($arrayRecipientsBCC) != true)
@@ -112,24 +112,24 @@
 		}
 		if (ArrayCount($arrayRecipientsBCC) > 0)
 		{
-			$strHeaderCCBCC .= "Bcc:".implode(",",$arrayRecipientsBCC)."\n";
+			$strHeaderCCBCC .= 'Bcc:'.implode(',',$arrayRecipientsBCC).'\n';
 		}
 
-		if ($strSubject != "")
+		if ($strSubject != '')
 		{
-			$strSubject = "=?UTF-8?B?".base64_encode(StringEncodeUTF8($strSubject))."?=";
+			$strSubject = '=?UTF-8?B?'.base64_encode(StringEncodeUTF8($strSubject)).'?=';
 		}
 
-		$strMessage = ReplaceString($strMessage,"\r","");
+		$strMessage = ReplaceString($strMessage,'\r','');
 		$strMessage = StringEncodeUTF8($strMessage);
 
-		if ($strSenderName != "")
+		if ($strSenderName != '')
 		{
-			$strSenderName = "=?UTF-8?B?".base64_encode(StringEncodeUTF8($strSenderName))."?=";
+			$strSenderName = '=?UTF-8?B?'.base64_encode(StringEncodeUTF8($strSenderName)).'?=';
 		}
 		
 		
-		if ($strSenderEmail != "")
+		if ($strSenderEmail != '')
 		{
 			if (IsValidEmail($strSenderEmail) != true)  
 			{
@@ -145,11 +145,11 @@
 			{
 				foreach ($arrayAttachments as $attachment)
 				{
-					if (ArrayGetValue($attachment,"name") == "")
+					if (ArrayGetValue($attachment,'name') == '')
 					{
 						return false;	
 					}
-					if (strlen(ArrayGetValue($attachment,"content")) == 0)
+					if (strlen(ArrayGetValue($attachment,'content')) == 0)
 					{
 						return false;	
 					}
@@ -162,50 +162,50 @@
 		$strBody = '';		
 		if ($bAttachments == false)
 		{
-			$strHeaders .= "Content-type: text/plain; charset=utf-8\n";
-			$strHeaders .= "From: $strSenderName <$strSenderEmail>\n";
-			$strHeaders .= "Return-Path: $strSenderEmail\n";
-			$strHeaders .= "Reply-To: $strSenderEmail\n";
+			$strHeaders .= 'Content-type: text/plain; charset=utf-8\n';
+			$strHeaders .= 'From: $strSenderName <$strSenderEmail>\n';
+			$strHeaders .= 'Return-Path: $strSenderEmail\n';
+			$strHeaders .= 'Reply-To: $strSenderEmail\n';
 			$strHeaders .= $strHeaderCCBCC;
-			$strHeaders .= "MIME-Version: 1.0\n"; 
-  		//$strHeaders .= "Content-Transfer-Encoding: quoted-printable\n";
+			$strHeaders .= 'MIME-Version: 1.0\n'; 
+  		//$strHeaders .= 'Content-Transfer-Encoding: quoted-printable\n';
   		$strHeaders = trim($strHeaders);
   		
   		$strBody = $strMessage;
 		}
 		else
 		{
-			$strBoundary = rand(0,9)."-".rand(10000000000,9999999999)."-".rand(10000000000,9999999999)."=:".rand(10000,99999);
+			$strBoundary = rand(0,9).'-'.rand(10000000000,9999999999).'-'.rand(10000000000,9999999999).'=:'.rand(10000,99999);
 
-			$strHeaders = "From: $strSenderName <$strSenderEmail>\n";
-			$strHeaders .= "Return-Path: $strSenderEmail\n";
-			$strHeaders .= "Reply-To: $strSenderEmail\n";
+			$strHeaders = 'From: $strSenderName <$strSenderEmail>\n';
+			$strHeaders .= 'Return-Path: $strSenderEmail\n';
+			$strHeaders .= 'Reply-To: $strSenderEmail\n';
 			$strHeaders .= $strHeaderCCBCC;
-			$strHeaders .= "MIME-Version: 1.0\n";
-			$strHeaders .= "Content-Type: multipart/mixed;\n";
-			$strHeaders .= "    boundary=\"$strBoundary\"\n";
+			$strHeaders .= 'MIME-Version: 1.0\n';
+			$strHeaders .= 'Content-Type: multipart/mixed;\n';
+			$strHeaders .= '    boundary=\'$strBoundary\'\n';
 			$strHeaders = trim($strHeaders);
 			
-			$strBody =  "\nThis is a multi-part message in MIME format.\n\n";
-			$strBody .= "--$strBoundary\n";
+			$strBody =  '\nThis is a multi-part message in MIME format.\n\n';
+			$strBody .= '--$strBoundary\n';
 			/*
-			$strBody .= "Content-Type: text/plain;\n";
-	    	$strBody .= "charset=\"windows-1256\"\n";
+			$strBody .= 'Content-Type: text/plain;\n';
+	    	$strBody .= 'charset=\'windows-1256\'\n';
 	    	*/
-	    $strBody .= "Content-Type: text/plain; charset=\"utf-8\"\n";
-			//$strBody .= "Content-Transfer-Encoding: quoted-printable\n";
-			$strBody .= "\n$strMessage\n\n";
+	    $strBody .= 'Content-Type: text/plain; charset=\'utf-8\'\n';
+			//$strBody .= 'Content-Transfer-Encoding: quoted-printable\n';
+			$strBody .= '\n$strMessage\n\n';
 			foreach ($arrayAttachments as $attachment)
 			{
-				$strBody .= "--$strBoundary\n";
-				$strBody .= "Content-Type: text/text\n";
-				$strBody .= "    name: \"".ArrayGetValue($attachment,"name")."\"\n";
-	    	$strBody .= "Content-Transfer-Encoding: base64\n";
-				$strBody .= "Content-Disposition: attachment;\n";
-			  $strBody .= "    filename=\"".ArrayGetValue($attachment,"name")."\"\n\n";
-			  $strBody .= chunk_split(base64_encode(ArrayGetValue($attachment,"content")),76,"\n")."\n";
+				$strBody .= '--$strBoundary\n';
+				$strBody .= 'Content-Type: text/text\n';
+				$strBody .= '    name: \''.ArrayGetValue($attachment,'name').'\'\n';
+	    	$strBody .= 'Content-Transfer-Encoding: base64\n';
+				$strBody .= 'Content-Disposition: attachment;\n';
+			  $strBody .= '    filename=\''.ArrayGetValue($attachment,'name').'\'\n\n';
+			  $strBody .= chunk_split(base64_encode(ArrayGetValue($attachment,'content')),76,'\n').'\n';
 			}
-			$strBody .= "--$strBoundary--\n";
+			$strBody .= '--$strBoundary--\n';
 		}	
 		
 		$erroramnesty = new CErrorAmnesty();

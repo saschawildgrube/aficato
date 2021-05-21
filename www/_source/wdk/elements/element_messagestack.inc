@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				"messagestack",
+				'messagestack',
 				$strStyleID,
 				false,
 				true);
@@ -16,24 +16,24 @@
 		
 		function RenderMessageStack($arrayMessages)
 		{
-			$strMessages = "";
+			$strMessages = '';
 			
 			if (is_array($arrayMessages))
 			{
-				$arrayErrorMessages = ArrayGetValue($arrayMessages,"error");	
+				$arrayErrorMessages = ArrayGetValue($arrayMessages,'error');	
 				if (is_array($arrayErrorMessages))
 				{
-					$message = new CMessageElement($this->GetWebsite(),"error");
+					$message = new CMessageElement($this->GetWebsite(),'error');
 					foreach ($arrayErrorMessages as $strMessage)
 					{
 						$strMessages .= $message->RenderMessage($strMessage);
 					}	
 				}
 				
-				$arrayWarningMessages = ArrayGetValue($arrayMessages,"warning");	
+				$arrayWarningMessages = ArrayGetValue($arrayMessages,'warning');	
 				if (is_array($arrayWarningMessages))
 				{
-					$message = new CMessageElement($this->GetWebsite(),"warning");
+					$message = new CMessageElement($this->GetWebsite(),'warning');
 					foreach ($arrayWarningMessages as $strMessage)
 					{
 						$strMessages .= $message->RenderMessage($strMessage);
@@ -41,10 +41,10 @@
 				}
 				
 				
-				$arrayInfoMessages = ArrayGetValue($arrayMessages,"info");	
+				$arrayInfoMessages = ArrayGetValue($arrayMessages,'info');	
 				if (is_array($arrayInfoMessages))
 				{
-					$message = new CMessageElement($this->GetWebsite(),"info");
+					$message = new CMessageElement($this->GetWebsite(),'info');
 					foreach ($arrayInfoMessages as $strMessage)
 					{
 						$strMessages .= $message->RenderMessage($strMessage);
@@ -54,7 +54,7 @@
 			
 			$strOutput = $this->GetLayoutHTML(); 
 			$this->SetOutputItem(
-				"MESSAGES",
+				'MESSAGES',
 				$strMessages);
 			$strOutput = $this->ReplaceOutputItems($strOutput);
 			return $strOutput;			

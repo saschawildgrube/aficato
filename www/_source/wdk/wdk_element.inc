@@ -70,7 +70,7 @@
 						$this->GetWebsite()->GetLayout(),
 						$this->m_strElementID,
 						$this->m_strStyleID);
-					$this->Trace("CElement::LoadLayoutFile: CFG: \"$strFileCFG\"");		
+					$this->Trace('CElement::LoadLayoutFile: CFG: \'$strFileCFG\'');		
 					if ($strFileCFG != false)
 					{
 						$this->m_arrayLayoutDef = LoadNamedArrayFromTextFileMultiLine($strFileCFG,'LAYOUT_');
@@ -78,7 +78,7 @@
 					}
 					else
 					{
-						$this->Error('No layout CFG file found for style "'.$this->m_strStyleID.'"');	
+						$this->Error('No layout CFG file found for style ''.$this->m_strStyleID.''');	
 					}					
 				}
 				if ($this->m_bLayoutHTML == true) 
@@ -87,7 +87,7 @@
 						$this->GetWebsite()->GetLayout(),
 						$this->m_strElementID,
 						$this->m_strStyleID);
-					$this->Trace("CElement::LoadLayoutFile: HTML: \"$strFileHTML\"");			
+					$this->Trace('CElement::LoadLayoutFile: HTML: \'$strFileHTML\'');			
 					if ($strFileHTML != false)
 					{
 						$this->m_strLayoutHTML = FileRead($strFileHTML);
@@ -95,7 +95,7 @@
 					}
 					else
 					{
-						$this->Error('No layout HTML file found for style "'.$this->m_strStyleID.'"');	
+						$this->Error('No layout HTML file found for style ''.$this->m_strStyleID.''');	
 					}
 				} 
 

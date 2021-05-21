@@ -4,9 +4,9 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->IncludeModule("system/datamanager");
-			$datamanager = new CDataManagerModule($this->GetWebsite(),"list");
-			$arrayItems["MODULE_DATAMANAGER"] = $datamanager->RenderModule();
+			$this->GetWebsite()->IncludeModule('system/datamanager');
+			$datamanager = new CDataManagerModule($this->GetWebsite(),'list');
+			$arrayItems['MODULE_DATAMANAGER'] = $datamanager->RenderModule();
 		}
 	}
 	

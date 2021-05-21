@@ -37,7 +37,7 @@
 			
 			$arrayItems['URL'] = $strURL;
 			$arrayItems['TOOLTIP'] = HtmlEncode($strToolTip);
-			$arrayItems['EXTERNAL'] = ($bExternal)?(' target="_blank"'):('');
+			$arrayItems['EXTERNAL'] = ($bExternal)?(' target='_blank''):('');
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

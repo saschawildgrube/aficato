@@ -18,20 +18,20 @@
 		{
 			$strLink = $this->m_strLink;
 			$bExternalLink = false;
-			if (FindStringIgnoreCase($strLink,"http://") != -1)
+			if (FindStringIgnoreCase($strLink,'http://') != -1)
 			{
 				$bExternalLink = true;
 			}
-			if (FindStringIgnoreCase($strLink,"https://") != -1)
+			if (FindStringIgnoreCase($strLink,'https://') != -1)
 			{
 				$bExternalLink = true;
 			}
-			if (FindStringIgnoreCase($strLink,"mailto:") != -1)
+			if (FindStringIgnoreCase($strLink,'mailto:') != -1)
 			{
 				$bExternalLink = true;
 			}
-			if (	(FindString($strLink,"{") == 0)
-				&& (FindString($strLink,"}") == (StringLength($strLink)-1)))
+			if (	(FindString($strLink,'{') == 0)
+				&& (FindString($strLink,'}') == (StringLength($strLink)-1)))
 			{
 				$bExternalLink = true;
 			}
@@ -97,7 +97,7 @@
 		{
 			$this->m_bCurrentPathInit = false;
 			$this->m_arrayNavigationItems = array();
-			$this->m_strContextParameterName = "content";
+			$this->m_strContextParameterName = 'content';
 		}
 		
 		function IsInitCurrentPath()
@@ -130,7 +130,7 @@
 			// no current context was found in the Navigation -> only top level items are visible
 			if ($this->m_nIndexCurrentContext == -1)
 			{
-				//printf("No current context<br>");
+				//printf('No current context<br>');
 				for ($nIndex = 0; $nIndex < ArrayCount($this->m_arrayNavigationItems); $nIndex++)
 				{
 					if ($this->m_arrayNavigationItems[$nIndex]->m_nLevel == 0)
@@ -216,9 +216,9 @@
 		function GetNavigationFilePath(
 			CWebsite &$website,
 			$strNavigationID,
-			$strLanguage = "")
+			$strLanguage = '')
 		{
-			if ($strLanguage == "")
+			if ($strLanguage == '')
 			{
 				$strLanguage = $website->GetLanguage();
 			}
@@ -229,27 +229,27 @@
 			{
 				return $strNavigationFile;
 			}
-			//$website->Error("No Navigation file found for \"$strNavigationID\" in language \"$strLanguage\".");
-			return "";
+			//$website->Error('No Navigation file found for \'$strNavigationID\' in language \'$strLanguage\'.');
+			return '';
 		}
 
 		
 		function LoadNavigationTree(
 			CWebSite $website,
 			$strNavigationID,
-			$strLanguage = "")
+			$strLanguage = '')
 		{
-			$website->Trace("CNavigationTree::LoadNavigationTree('$strNavigationID')");	
-			if ($strNavigationID == "")
+			$website->Trace('CNavigationTree::LoadNavigationTree('$strNavigationID')');	
+			if ($strNavigationID == '')
 			{
-				$strNavigationID = "default";
+				$strNavigationID = 'default';
 			}
 			
 			$strFilePath = $this->GetNavigationFilePath(
 				$website,
 				$strNavigationID,
 				$strLanguage);
-			if ($strFilePath == "")
+			if ($strFilePath == '')
 			{
 				return false;	
 			}
@@ -278,7 +278,7 @@
 			
 			if ($arrayNavigationTreeRaw == false)
 			{
-				$website->Error("FileReadCSV_WDK($strFilePath) returned false");
+				$website->Error('FileReadCSV_WDK($strFilePath) returned false');
 				return false;
 			}
 		
@@ -288,21 +288,21 @@
 			foreach ($arrayNavigationTreeRaw as $arrayItemRaw)
 			{
 				//$website->ProfilingTrace();
-				//$website->Trace("iterate items");
+				//$website->Trace('iterate items');
 				
-				$strLevel = ArrayGetValue($arrayItemRaw,"LEVEL");
+				$strLevel = ArrayGetValue($arrayItemRaw,'LEVEL');
 				$nLevel = intval($strLevel);
 				
-				$strConditions = ArrayGetValue($arrayItemRaw,"CONDITIONS");
+				$strConditions = ArrayGetValue($arrayItemRaw,'CONDITIONS');
 				$strConditions = StringTrim($strConditions);
-				$arrayConditions = explode(",",$strConditions);
+				$arrayConditions = explode(',',$strConditions);
 				
 				$bConditionCompliance = true;
 				foreach ($arrayConditions as $strCondition)
 				{
-					if ($strCondition != "")
+					if ($strCondition != '')
 					{
-						$website->Trace("Condition: ".$strCondition);
+						$website->Trace('Condition: '.$strCondition);
 						if ($website->CheckCondition($strCondition) == false)
 						{
 							$bConditionCompliance = false;
@@ -310,8 +310,8 @@
 					}
 				}				
  
-				$strContext = ArrayGetValue($arrayItemRaw,"CONTEXT");
-				if (FindString($strContext,"include:") == 0)
+				$strContext = ArrayGetValue($arrayItemRaw,'CONTEXT');
+				if (FindString($strContext,'include:') == 0)
 				{
 					$strIncludeNavID = StringSection($strContext,8);
 					
@@ -323,13 +323,13 @@
 					}
 					$this->AttachNavigationTree(
 						$navtree_include,
-						"", // attach to the (current) end
+						'', // attach to the (current) end
 						$nLevel,
 						$bConditionCompliance);
 					continue;	
 				}
 				
-				$strText = StringTrim(ArrayGetValue($arrayItemRaw,"LABEL"));
+				$strText = StringTrim(ArrayGetValue($arrayItemRaw,'LABEL'));
 
 
 
@@ -352,7 +352,7 @@
 			$bMarkmode = false;
 			for ($nIndex = 0; $nIndex < ArrayCount($this->m_arrayNavigationItems); $nIndex++)
 			{
-				//$this->GetWebsite()->Trace("BEFORE: $nIndex-".$this->m_arrayNavigationEntries[$nIndex]->m_nLevel."-$bMarkmode-$nNonCompliantLevel ".$this->m_arrayNavigationEntries[$nIndex]->m_strText." (".$this->m_arrayNavigationEntries[$nIndex]->m_bConditionCompliance.")");
+				//$this->GetWebsite()->Trace('BEFORE: $nIndex-'.$this->m_arrayNavigationEntries[$nIndex]->m_nLevel.'-$bMarkmode-$nNonCompliantLevel '.$this->m_arrayNavigationEntries[$nIndex]->m_strText.' ('.$this->m_arrayNavigationEntries[$nIndex]->m_bConditionCompliance.')');
 				if ($bMarkmode == true)
 				{
 					if ($nNonCompliantLevel < $this->m_arrayNavigationItems[$nIndex]->m_nLevel)
@@ -372,7 +372,7 @@
 						$nNonCompliantLevel = $this->m_arrayNavigationItems[$nIndex]->m_nLevel;
 					}
 				}
-				//$this->GetWebsite()->Trace("AFTER: $nIndex-".$this->m_arrayNavigationEntries[$nIndex]->m_nLevel."-$bMarkmode-$nNonCompliantLevel ".$this->m_arrayNavigationEntries[$nIndex]->m_strText." (".$this->m_arrayNavigationEntries[$nIndex]->m_bConditionCompliance.")");
+				//$this->GetWebsite()->Trace('AFTER: $nIndex-'.$this->m_arrayNavigationEntries[$nIndex]->m_nLevel.'-$bMarkmode-$nNonCompliantLevel '.$this->m_arrayNavigationEntries[$nIndex]->m_strText.' ('.$this->m_arrayNavigationEntries[$nIndex]->m_bConditionCompliance.')');
 			}
 
 			// Find the first and last item in any level
@@ -436,7 +436,7 @@
 			
 			$this->m_bCurrentPathInit = false;
 			
-			if ($strContextID == "")
+			if ($strContextID == '')
 			{
 				$arrayNavigationItemsNew = array();
 				$arrayItemsToMerge = $navtree->GetNavigationItemArray();
@@ -539,7 +539,7 @@
 			$arrayItems = array();
 			foreach ($this->m_arrayNavigationItems as $navItem)
 			{
-				$strURL = $navItem->GetURL($website,"content",true);
+				$strURL = $navItem->GetURL($website,'content',true);
 				if (IsValidURL($strURL) && $navItem->m_bConditionCompliance)
 				{
 					$arrayItems[] = $navItem;

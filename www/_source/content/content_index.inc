@@ -4,11 +4,11 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->SetFramework("fullwidth");
+			$this->GetWebsite()->SetFramework('fullwidth');
 
 
 			// Account Analysis
-			$arrayAccount = AML_ReadFileAccount($this->GetWebsite()->GetDataFilePath("mandates/demo/accounts/mockdata-account-frontpage.csv"));
+			$arrayAccount = AML_ReadFileAccount($this->GetWebsite()->GetDataFilePath('mandates/demo/accounts/mockdata-account-frontpage.csv'));
 			$arrayAccount['ID'] = '';
 
 			$this->IncludeModule('aml/accountanalysis');
@@ -22,15 +22,15 @@
 					
 			 
 			// Network Analysis
-			$strMockCSVFilePath = $this->GetWebsite()->GetDataFilePath("mandates/demo/transactions/mockdata-transactions-1.csv");
+			$strMockCSVFilePath = $this->GetWebsite()->GetDataFilePath('mandates/demo/transactions/mockdata-transactions-1.csv');
 			$arrayTransactions = FileReadCSV(
 				$strMockCSVFilePath,
 				true,
 				false,
 				';',
 				array(),
-				'"',
-				'""');
+				''',
+				'''');
 			// Transform to Accounts data format
 			$arrayMapping = array(
 				'FROM' => 'ORIGINATOR_CLEAN',

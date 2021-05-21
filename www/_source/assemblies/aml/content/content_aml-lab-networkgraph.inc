@@ -13,8 +13,8 @@
 				false,
 				';',
 				array(),
-				'"',
-				'""');
+				''',
+				'''');
 	
 			
 			// Transform to Accounts data format

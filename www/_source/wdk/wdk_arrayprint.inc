@@ -14,24 +14,24 @@
 	{
 		if (!is_array($array1))
 		{
-			return "";	
+			return '';	
 		}
-		$strList = "";
+		$strList = '';
 		$nCount = ArrayCount($array1);
 		$nIndex = 0;
 		foreach ($array1 as $vValue)
 		{
 			if ($nIndex > 0)
 			{
-				$strList .= ", ";	
+				$strList .= ', ';	
 			}
 			if (is_array($vValue))
 			{
-				$strList .= "array";	
+				$strList .= 'array';	
 			}
 			else
 			{
-				$strList .= "\"".$vValue."\"";	
+				$strList .= '\''.$vValue.'\'';	
 			}
 			$nIndex++;
 		}

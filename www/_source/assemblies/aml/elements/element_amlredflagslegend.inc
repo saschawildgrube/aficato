@@ -10,7 +10,7 @@
 		{
 			parent::__construct(
 				$website,
-				"amlredflagslegend",
+				'amlredflagslegend',
 				$strStyleID,
 				false,
 				false);

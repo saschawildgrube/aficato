@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				"thumbnailimage",
+				'thumbnailimage',
 				$strStyleID,
 				false,
 				true); 
@@ -25,21 +25,21 @@
 			
 			$arrayItems = array();
 			
-			$arrayItems["THUMBNAILIMAGEURL"] = $strThumbnailImageURL;
-			$arrayItems["IMAGEURL"] = $strImageURL;
-			$strImageSize = "";
+			$arrayItems['THUMBNAILIMAGEURL'] = $strThumbnailImageURL;
+			$arrayItems['IMAGEURL'] = $strImageURL;
+			$strImageSize = '';
 			$nImageWidth = intval($nImageWidth);
 			if ($nImageWidth > 0)
 			{
-				$strImageSize .= "width=$nImageWidth,";
+				$strImageSize .= 'width=$nImageWidth,';
 			}
 			$nImageHeight = intval($nImageHeight);
 			if ($nImageHeight > 0)
 			{
-				$strImageSize .= "height=$nImageHeight,";
+				$strImageSize .= 'height=$nImageHeight,';
 			}
-			$arrayItems["IMAGESIZE"] = $strImageSize;
-			$arrayItems["TEXT"] = $strText;
+			$arrayItems['IMAGESIZE'] = $strImageSize;
+			$arrayItems['TEXT'] = $strText;
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

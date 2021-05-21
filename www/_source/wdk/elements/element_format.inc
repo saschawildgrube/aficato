@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				"format",
+				'format',
 				$strStyleID,
 				false,
 				true);
@@ -17,7 +17,7 @@
 		function RenderFormat($strText)
 		{
 			$strOutput = $this->GetLayoutHTML(); 
-			$arrayItems["TEXT"] = $strText;
+			$arrayItems['TEXT'] = $strText;
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);
 			return $strOutput;

@@ -12,11 +12,11 @@ Even more text. This time its more text to show how a line break looks like. But
 And agin more blind text for public amusement.
 ==Images==
 ===Floating right===
-{IMAGE id="logo" style="floatright"}This is some blind text to demonstrate an image that is floating right around the text. Laram ipsom et cetera. Some more blind text to make the example work.
-<div style="clear: both;"></div>
+{IMAGE id='logo' style='floatright'}This is some blind text to demonstrate an image that is floating right around the text. Laram ipsom et cetera. Some more blind text to make the example work.
+<div style='clear: both;'></div>
 ===Floating left===
-{IMAGE id="logo" style="floatleft"}This is some blind text to demonstrate an image that is floating left next to a text. Laram ipsom et cetera. And again some more blind text to make the example work.
-<div style="clear: both;"></div>
+{IMAGE id='logo' style='floatleft'}This is some blind text to demonstrate an image that is floating left next to a text. Laram ipsom et cetera. And again some more blind text to make the example work.
+<div style='clear: both;'></div>
 ==Lists==
 ===Bullet List===
 Some text preceding the list.

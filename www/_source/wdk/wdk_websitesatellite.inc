@@ -14,7 +14,7 @@
 		{
 			if (!is_subclass_of($website,'CWebsite'))
 			{
-				FatalError('CWebsiteSatellite "'.$strID.'" has been initialized with an invalid website object.');
+				FatalError('CWebsiteSatellite ''.$strID.'' has been initialized with an invalid website object.');
 			}
 			$this->m_website = $website;
 			$this->m_strID = $strID;
@@ -53,7 +53,7 @@
 		
 		function Error($strError)
 		{
-			$this->GetWebsite()->Error($this->GetID().": ".$strError);	
+			$this->GetWebsite()->Error($this->GetID().': '.$strError);	
 		}
 		
 		function SetResPrefix($strResPrefix)
@@ -142,7 +142,7 @@
 		{
 			return $this->GetWebsite()->GetParam($strParam);
 		}
-		function GetConfig($strConfig1,$strConfig2="",$strConfig3="",$strConfig4="")
+		function GetConfig($strConfig1,$strConfig2='',$strConfig3='',$strConfig4='')
 		{
 			return $this->GetWebsite()->GetConfig($strConfig1,$strConfig2,$strConfig3,$strConfig4);
 		}		

@@ -1,8 +1,8 @@
-$this->IncludeElement("pagenavigation");
+$this->IncludeElement('pagenavigation');
 
-$pagenavigation = new CPageNavigationElement($this->GetWebsite(),"default");
+$pagenavigation = new CPageNavigationElement($this->GetWebsite(),'default');
 $strOutput = $pagenavigation->RenderPageNavigation(
-	$this->GetModuleVar("pagenav_offset"),
+	$this->GetModuleVar('pagenav_offset'),
 	150,
-	$this->GetModuleVarName("pagenav_offset"),
+	$this->GetModuleVarName('pagenav_offset'),
 	10);

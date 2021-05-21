@@ -6,7 +6,7 @@
 		$strBotsByUserAgentFile = GetWDKDir().'data/bots-by-useragent.csv';
 		if (!IsFile($strBotsByUserAgentFile))
 		{
-			return "";	
+			return '';	
 		}
 		$arrayBots = FileReadCSV_RFC4180($strBotsByUserAgentFile);
 		
@@ -27,7 +27,7 @@
 				return 'https://www.sslshopper.com/';	
 			}	
 		}
-		return "";
+		return '';
 	}
 
 

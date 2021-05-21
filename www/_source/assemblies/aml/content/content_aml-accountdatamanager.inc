@@ -4,7 +4,7 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->IncludeModule("aml/accountdatamanager");
+			$this->GetWebsite()->IncludeModule('aml/accountdatamanager');
 			$arrayConfig = array();
 			$accountdatamanager = new CAccountDataManagerModule($this->GetWebsite(),'',$arrayConfig);
 			$arrayItems['MODULE_ACCOUNTDATAMANAGER'] = $accountdatamanager->RenderModule();

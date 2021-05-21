@@ -1,6 +1,6 @@
 <?php
 
-	require_once("wdk_error.inc");
+	require_once('wdk_error.inc');
 
 	interface ICache
 	{

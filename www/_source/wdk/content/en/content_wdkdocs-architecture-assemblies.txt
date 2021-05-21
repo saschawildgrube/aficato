@@ -11,7 +11,7 @@ Essentially assemblies are folders with a specific set of subfolders and files.
 The source code directory of a {WDK}-based application is an assembly. And {WDK} is provided as an assembly, too.
 
 
-All re-usable code or component that is "plugged" into an application is part of an assmebly. All assemblies are placed in the assemblies folder of the application:
+All re-usable code or component that is 'plugged' into an application is part of an assmebly. All assemblies are placed in the assemblies folder of the application:
 <pre>
 /_source/  
 /_source/wdk/
@@ -67,7 +67,7 @@ All assemblies used by a website are be chained into the so-called assembly line
 When including components (like content pages, modules, layout files, etc.) all assemblies are scanned. The first file found in the the assembly line that matches the required file is then used.
 
 
-This means that the order of the assemblies in the assembly line defines which file from which assembly is used. Hence assemblies can be used to "override" functionality and visual appearance of features defined in other assemblies.
+This means that the order of the assemblies in the assembly line defines which file from which assembly is used. Hence assemblies can be used to 'override' functionality and visual appearance of features defined in other assemblies.
 
 
 The first assembly being searched is always the application's source root folder (which is returned by the GetSourceDir() function defined in env.inc).

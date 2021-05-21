@@ -20,8 +20,8 @@
 				false,
 				';',
 				array(),
-				'"',
-				'""');
+				''',
+				'''');
 			$strHtml = $table->RenderTable($arrayTransactions);
 			$this->SetOutputItem('DATA_TRANSACTIONS',$strHtml);
 			

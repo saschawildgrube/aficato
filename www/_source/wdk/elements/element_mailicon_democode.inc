@@ -1,6 +1,6 @@
-$this->IncludeElement("mailicon");
+$this->IncludeElement('mailicon');
 
-$mailicon = new CMailIconElement($this->GetWebsite(),"default");
+$mailicon = new CMailIconElement($this->GetWebsite(),'default');
 $strOutput = $mailicon->RenderMailIcon(
-	"info@example.com",
-	"Send a mail to info@example.com");
+	'info@example.com',
+	'Send a mail to info@example.com');

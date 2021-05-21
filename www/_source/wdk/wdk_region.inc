@@ -11,6 +11,6 @@
 	function GetAllRegionIDs()
 	{
 		return array(
-			"EU");
+			'EU');
 	}
 

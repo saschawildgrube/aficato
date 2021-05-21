@@ -1,6 +1,6 @@
 <?php
 
-	require_once("wdk_error.inc");
+	require_once('wdk_error.inc');
 
 	class CDataContainer
 	{
@@ -30,14 +30,14 @@
 		}
 
 		
-		function GetValue($key1,$key2="",$key3="",$key4="",$key5="",$key6="",$key7="")
+		function GetValue($key1,$key2='',$key3='',$key4='',$key5='',$key6='',$key7='')
 		{
 			return ArrayGetValue(
 				$this->m_arrayData,
 				$key1,$key2,$key3,$key4,$key5,$key6,$key7);	
 		}
 		
-		function SetValue($value,$key1,$key2="",$key3="",$key4="",$key5="",$key6="",$key7="")
+		function SetValue($value,$key1,$key2='',$key3='',$key4='',$key5='',$key6='',$key7='')
 		{
 			ArraySetValue($this->m_arrayData,$value,$key1,$key2,$key3,$key4,$key5,$key6,$key7);
 		}

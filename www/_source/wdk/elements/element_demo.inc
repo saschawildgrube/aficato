@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				"demo",
+				'demo',
 				$strStyleID,
 				true,
 				true);
@@ -19,9 +19,9 @@
 			$strOutput = $this->GetLayoutHTML(); 
 			
 			$arrayItems = array();
-			$arrayItems["TEXT"] = $strText;
-			$arrayItems["BEGIN"] = $this->GetLayoutDef("LAYOUT_BEGIN");
-			$arrayItems["END"] = $this->GetLayoutDef("LAYOUT_END");
+			$arrayItems['TEXT'] = $strText;
+			$arrayItems['BEGIN'] = $this->GetLayoutDef('LAYOUT_BEGIN');
+			$arrayItems['END'] = $this->GetLayoutDef('LAYOUT_END');
 			
 			$strOutput = ReplaceTagsWDK($strOutput, $arrayItems);
 			

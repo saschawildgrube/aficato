@@ -8,8 +8,8 @@ DATE;ID;AMOUNT;TYPE;DESCRIPTION
 28.09.11;;-503.85;;27.09/09.51UHR BAB-AURACH   EUR     500,00 ENTGELT 3,85
 29.09.11;;-600.0;;29.09/10.04UHR KLINGENBER
 29.09.11;;-135.68;;455487897865465
-04.10.11;;-10.15;;"Entgelte / Auslagen                                   10,15S
-10/4/11,,4.00  S ,23 00,Abrechnung 30.09.2011      ,Abrechnungszeitraum vom 01.07.2011 bis 30.09.2011"
+04.10.11;;-10.15;;'Entgelte / Auslagen                                   10,15S
+10/4/11,,4.00  S ,23 00,Abrechnung 30.09.2011      ,Abrechnungszeitraum vom 01.07.2011 bis 30.09.2011'
 04.10.11;;-89.69;;1108         UEBERSCHUSSANTEIL 2,46
 04.10.11;;-1000.0;;Martin Luther
 04.10.11;;-44.0;;Vertrag                BEITRAG 10/11         44.00
@@ -30,8 +30,8 @@ DATE;ID;AMOUNT;TYPE;DESCRIPTION
 17.10.11;;-303.8;;16.10/12.44UHR KLEINHEUB    EUR     300,00 ENTGELT 3,80
 20.10.11;;-6.48;;EC 4514231231321
 21.10.11;;-195.0;;21.10/08.47UHR OBERNBURG
-02.11.11;;-8.4;;"Entgelte / Auslagen                                    8,40S
-11/2/11,,89.69  S ,11 00,ALLIANZ LEBENSVERS. AG     ,1108         UEBERSCHUSSANTEIL 2"
+02.11.11;;-8.4;;'Entgelte / Auslagen                                    8,40S
+11/2/11,,89.69  S ,11 00,ALLIANZ LEBENSVERS. AG     ,1108         UEBERSCHUSSANTEIL 2'
 02.11.11;;-50.0;;Vertrag
 02.11.11;;-44.0;;Vertrag                BEITRAG 11/11         44.00
 02.11.11;;-742.84;;
@@ -49,8 +49,8 @@ DATE;ID;AMOUNT;TYPE;DESCRIPTION
 21.11.11;;-500.0;;/MAX HEINR. SUTOR INVESTMENTDEPOT RATE
 22.11.11;;500.0;;/MAX HEINR. SUTOR INVESTMENTDEPOT RATE
 22.11.11;;-0.55;;
-01.12.11;;-7.0;;"Entgelte / Auslagen                                    7,00S
-12/1/11,,89.69  S ,11 00,ALLIANZ LEBENSVERS. AG     ,1108         UEBERSCHUSSANTEIL 2"
+01.12.11;;-7.0;;'Entgelte / Auslagen                                    7,00S
+12/1/11,,89.69  S ,11 00,ALLIANZ LEBENSVERS. AG     ,1108         UEBERSCHUSSANTEIL 2'
 01.12.11;;-742.84;;
 01.12.11;;-400.0;;
 01.12.11;;-24.45;;BAY BEAMTVERS              ZAHLBELEGNR. /LEBEN
@@ -69,8 +69,8 @@ DATE;ID;AMOUNT;TYPE;DESCRIPTION
 28.12.11;;-6.98;;455143131
 28.12.11;;-3.44;;EC 7846123132
 29.12.11;;4000.0;;GEHALT
-30.12.11;;-7.7;;"Entgelte / Auslagen                                    7,70S
-12/30/11,,2.70  S ,23 00,Abrechnung 31.12.2011      ,Kontostand am 30.12.2011                                        5.118"
+30.12.11;;-7.7;;'Entgelte / Auslagen                                    7,70S
+12/30/11,,2.70  S ,23 00,Abrechnung 31.12.2011      ,Kontostand am 30.12.2011                                        5.118'
 02.01.12;;-89.69;;UEBERSCHUSSANTEIL 2,46
 02.01.12;;-44.0;;Vertrag
 02.01.12;;-24.45;;Beitrag

@@ -1,12 +1,12 @@
 <?php
 	
-	require_once(GetSourceDir()."assemblies/aml/aml.inc");
+	require_once(GetSourceDir().'assemblies/aml/aml.inc');
 	
 	class CTest extends CUnitTest
 	{
 		function __construct()
 		{
-			parent::__construct("AML_TransformAccountsToAccountChart");
+			parent::__construct('AML_TransformAccountsToAccountChart');
 		}
 		  
 
@@ -18,37 +18,37 @@
 			$arrayTypes,
 			$arrayExpectedResult)
 		{ 
-			$this->Trace("TestCase_TransformAccountToAccountChart");
+			$this->Trace('TestCase_TransformAccountToAccountChart');
 	
-			$this->Trace("Account:");
+			$this->Trace('Account:');
 			$this->Trace($arrayAccount);
-			$this->Trace("Date Begin : ".$strDateBegin);
-			$this->Trace("Date End   : ".$strDateEnd);
-			$this->Trace("Time Period: ".$strTimePeriod);
-			$this->Trace("Types:");
+			$this->Trace('Date Begin : '.$strDateBegin);
+			$this->Trace('Date End   : '.$strDateEnd);
+			$this->Trace('Time Period: '.$strTimePeriod);
+			$this->Trace('Types:');
 			$this->Trace($arrayTypes);
 
 
-			$this->Trace("Expected"); 
+			$this->Trace('Expected'); 
 			$this->Trace($arrayExpectedResult);
 
 			$arrayAccountChart = AML_TransformAccountToAccountChart($arrayAccount,$strDateBegin,$strDateEnd,$strTimePeriod,$arrayTypes);
 			
-			$this->Trace("Result");
+			$this->Trace('Result');
 			$this->Trace($arrayAccountChart);
 
 			if ($arrayAccountChart == $arrayExpectedResult)
 			{
-				$this->Trace("Testcase PASSED!");
+				$this->Trace('Testcase PASSED!');
 			}
 			else
 			{
-				$this->Trace("Testcase FAILED!");	
+				$this->Trace('Testcase FAILED!');	
 				$this->SetResult(false);	
 			}
 
-			$this->Trace("");
-			$this->Trace("");
+			$this->Trace('');
+			$this->Trace('');
 		}
 
 

@@ -4,10 +4,10 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->IncludeModule("aml/accountanalysis");
+			$this->GetWebsite()->IncludeModule('aml/accountanalysis');
 			$arrayConfig = array();
 			$accountanalysis = new CAccountAnalysisModule($this->GetWebsite(),'',$arrayConfig);
-			$arrayItems["MODULE_ACCOUNTANALYSIS"] = $accountanalysis->RenderModule();
+			$arrayItems['MODULE_ACCOUNTANALYSIS'] = $accountanalysis->RenderModule();
 		}
 	}
 	

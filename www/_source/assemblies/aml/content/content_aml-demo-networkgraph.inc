@@ -12,15 +12,15 @@
 
 
 
-			$strMockCSVFilePath = $this->GetWebsite()->GetDataFilePath("mockdata-transactions-1.csv");
+			$strMockCSVFilePath = $this->GetWebsite()->GetDataFilePath('mockdata-transactions-1.csv');
 			$arrayTransactions = FileReadCSV(
 				$strMockCSVFilePath,
 				true,
 				false,
 				';',
 				array(),
-				'"',
-				'""');
+				''',
+				'''');
 			
 			$arrayMapping = array(
 				'FROM' => 'ORIGINATOR_CLEAN',
@@ -40,7 +40,7 @@
 			$arrayNetwork = AML_TransformAccountsToNetworkGraph($arrayAccounts);
 			$strJson = json_encode($arrayNetwork,JSON_PRETTY_PRINT);
 			$strJavaScript = 'aDataNetwork = '.$strJson.';';
-			$strJavaScript .= "AML_NetworkGraph('#aml-demo-networkgraph',aDataNetwork);";
+			$strJavaScript .= 'AML_NetworkGraph('#aml-demo-networkgraph',aDataNetwork);';
 			$this->GetWebsite()->AddJavaScriptSourceCode('aml-demo-networkgraph',$strJavaScript);
 			
 			

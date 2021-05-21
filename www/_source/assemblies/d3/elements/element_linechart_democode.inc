@@ -1,6 +1,6 @@
 $this->IncludeElement('linechart');
 
-$linechart = new CLineChartElement($this->GetWebsite(),"default");
+$linechart = new CLineChartElement($this->GetWebsite(),'default');
 
 $arrayData = array(
 	array(
