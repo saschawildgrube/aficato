@@ -8,7 +8,7 @@
 			require_once(GetWDKDir().'wdk_shell.inc');
 			$arrayResult = array();
 			$bResultSE = ShellExecute(
-				'[ -f ''.$strFilePath.'' ]',
+				'[ -f "'.$strFilePath.'" ]',
 				array(),
 				array(),
 				'',
@@ -35,15 +35,15 @@
 	
 	function IsDirectory($strDirPath)
 	{
-		if ($strDirPath == '/')
+		if ($strDirPath == "/")
 		{
 			return true;	
 		}
-		if (StringSection($strDirPath,-1,1) != '/')
+		if (StringSection($strDirPath,-1,1) != "/")
 		{
 			return false;
 		}
-		if (FindString($strDirPath,'//') != -1)
+		if (FindString($strDirPath,"//") != -1)
 		{
 			return false;	
 		}
@@ -62,7 +62,7 @@
 			return false;	
 		}
 		$strFilePath = MakeUniqueTempFilePath($strDirPath);
-		$bResult = FileAddText($strFilePath,'test');
+		$bResult = FileAddText($strFilePath,"test");
 		if (IsFile($strFilePath))
 		{
 			DeleteFile($strFilePath);
@@ -114,7 +114,7 @@
 		{
 			return false;
 		}
-		$strFullPathPrefix = ($bFullPath)?($strDir):('');
+		$strFullPathPrefix = ($bFullPath)?($strDir):("");
 		$arrayFolders = array();
 		$arrayFiles = array();
 		
@@ -132,10 +132,10 @@
 		{ 
 			if ($strEntry != '.' && $strEntry != '..')
 			{
-				$strSubDir = $strDir.$strEntry.'/';
+				$strSubDir = $strDir.$strEntry."/";
 				if (IsDirectory($strSubDir))
 				{
-					$arrayFolders[] = $strEntry.'/';
+					$arrayFolders[] = $strEntry."/";
 					if ($bRecursive == true)
 					{
 						$arraySubDir = ReadDirectory($strSubDir,true,$bFullPath);
@@ -145,7 +145,7 @@
 							{
 								foreach ($arraySubDir as &$strSubDirEntry)
 								{
-									$strSubDirEntry = $strEntry.'/'.$strSubDirEntry;
+									$strSubDirEntry = $strEntry."/".$strSubDirEntry;
 								}
 			   			}
 							$arrayFolders = ArrayAppend($arrayFolders,$arraySubDir);
@@ -166,7 +166,7 @@
 	
 	function GetDirectoryFromPath($strPath)
 	{
-		$pos = mb_strrpos($strPath,'/');
+		$pos = mb_strrpos($strPath,"/");
 		if ($pos === false)
 		{
 			return false;	
@@ -193,26 +193,26 @@
 	
 	function GetExtentionFromPath($strPath)
 	{
-		$nSlashPos = mb_strrpos($strPath,'/');
+		$nSlashPos = mb_strrpos($strPath,"/");
 		if ($nSlashPos === false)
 		{
 			$nSlashPos = -1;	
 		}
-		$nDotPos = mb_strrpos($strPath,'.');
+		$nDotPos = mb_strrpos($strPath,".");
 		if ($nDotPos === false)
 		{
-			return '';
+			return "";
 		}
 		if ($nSlashPos > $nDotPos) // file name does not contain an extention
 		{
-			return '';	
+			return "";	
 		}
 		return StringSection($strPath,$nDotPos+1);
 	}
 
 	function GetFileNameFromPath($strPath)
 	{
-		$nSlashPos = mb_strrpos($strPath,'/');
+		$nSlashPos = mb_strrpos($strPath,"/");
 		if ($nSlashPos === false)
 		{
 			return $strPath;
@@ -223,7 +223,7 @@
 	function GetFileTitleFromPath($strPath)
 	{
 		$strFileName = GetFileNameFromPath($strPath);
-		$nDotPos = mb_strrpos($strFileName,'.');
+		$nDotPos = mb_strrpos($strFileName,".");
 		if ($nDotPos === false || $nDotPos === 0)
 		{
 			return $strFileName;
@@ -237,16 +237,16 @@
 		$strPath = GetDirectoryFromPath($strPath);
 		if ($strPath === false)
 		{
-			return '';	
+			return "";	
 		}
 		
-		$nSlashPos = mb_strrpos($strPath,'/');
+		$nSlashPos = mb_strrpos($strPath,"/");
 		if ($nSlashPos === false)
 		{
 			return $strPath;
 		}
 		$strPath = StringSection($strPath,0,$nSlashPos);
-		$nSlashPos = mb_strrpos($strPath,'/');
+		$nSlashPos = mb_strrpos($strPath,"/");
 		if ($nSlashPos === false)
 		{
 			return $strPath;
@@ -266,15 +266,15 @@
 		{
 			return false;	
 		}
-		require_once('wdk_shell.inc');
+		require_once("wdk_shell.inc");
 		$arrayResult = array();
 		ShellExecute(
-			'stat',
-			array('--format=%s',$strFilePath),
+			"stat",
+			array("--format=%s",$strFilePath),
 			array(),
-			'',
+			"",
 			$arrayResult);
-		$strStdOut = ArrayGetValue($arrayResult,'stdout');
+		$strStdOut = ArrayGetValue($arrayResult,"stdout");
 		return floatval($strStdOut);
 	}
 	
@@ -293,10 +293,10 @@
 		{
 			return false;	
 		}
-		$strFilePath = '';
+		$strFilePath = "";
 		do 
 		{
-			$strFileName = MakeNumericToken(20).'.tmp';
+			$strFileName = MakeNumericToken(20).".tmp";
 			$strFilePath = $strDirPath . $strFileName;
 		} while (IsFile($strFilePath));
 		
@@ -335,7 +335,7 @@
 		{
 			return false;
 		}
-		if (FindString($strPath,'//') != -1)
+		if (FindString($strPath,"//") != -1)
 		{
 			return false;	
 		}
@@ -370,9 +370,9 @@
 	
 	function PathAddTrainingSlash($strPath)
 	{
-		if (StringSection($strPath,-1,1) !=  '/')
+		if (StringSection($strPath,-1,1) !=  "/")
 		{
-			$strPath.='/';
+			$strPath.="/";
 		}
 		return $strPath;
 	}
@@ -429,7 +429,7 @@
 	{
 		$strExt = GetExtentionFromPath($strPath);
 		//print($strExt);
-		if ($strExt == '')
+		if ($strExt == "")
 		{
 			return false;	
 		}
@@ -440,9 +440,9 @@
 		}
 		foreach ($arrayMimeTypes as $arrayMimeType)  
 		{
-			if (ArrayGetValue($arrayMimeType,'EXTENSION') == $strExt)
+			if (ArrayGetValue($arrayMimeType,"EXTENSION") == $strExt)
 			{
-				return ArrayGetValue($arrayMimeType,'MIME-TYPE');	
+				return ArrayGetValue($arrayMimeType,"MIME-TYPE");	
 			}	
 		}
 		return false;

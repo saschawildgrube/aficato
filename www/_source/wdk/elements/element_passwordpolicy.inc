@@ -6,10 +6,10 @@
 			CWebSite $website,
 			$strStyleID)
 		{
-			$website->LoadStringResources('passwordpolicy');
+			$website->LoadStringResources("passwordpolicy");
 			parent::__construct(
 				$website,
-				'passwordpolicy',
+				"passwordpolicy",
 				$strStyleID,
 				true,
 				false);
@@ -20,37 +20,37 @@
 			$arrayList = array();
 			$arrayItems = array();
 			
-			$arrayList[] = $this->LoadString('TID_INFO_PASSWORDPOLICY_MINIMUM_LENGTH');
-			$arrayItems['MINIMUM_LENGTH'] = $passwordpolicy->GetMinimumLength();
+			$arrayList[] = $this->LoadString("TID_INFO_PASSWORDPOLICY_MINIMUM_LENGTH");
+			$arrayItems["MINIMUM_LENGTH"] = $passwordpolicy->GetMinimumLength();
 			
 			$bRequiredAlpha = false;
 			if ($passwordpolicy->GetRequiredCharsAlphaUppercase() == true)
 			{
 				$bRequiredAlpha = true;
-				$arrayList[] = $this->LoadString('TID_INFO_PASSWORDPOLICY_REQUIRED_CHARS_ALPHA_UPPERCASE');
+				$arrayList[] = $this->LoadString("TID_INFO_PASSWORDPOLICY_REQUIRED_CHARS_ALPHA_UPPERCASE");
 			}
 			if ($passwordpolicy->GetRequiredCharsAlphaLowercase() == true)
 			{
 				$bRequiredAlpha = true;
-				$arrayList[] = $this->LoadString('TID_INFO_PASSWORDPOLICY_REQUIRED_CHARS_ALPHA_LOWERCASE');
+				$arrayList[] = $this->LoadString("TID_INFO_PASSWORDPOLICY_REQUIRED_CHARS_ALPHA_LOWERCASE");
 			}
 
 			if ($bRequiredAlpha == false)
 			{
 				if ($passwordpolicy->GetRequiredCharsAlpha() == true)
 				{
-					$arrayList[] = $this->LoadString('TID_INFO_PASSWORDPOLICY_REQUIRED_CHARS_ALPHA');
+					$arrayList[] = $this->LoadString("TID_INFO_PASSWORDPOLICY_REQUIRED_CHARS_ALPHA");
 				}
 			}
 			if ($passwordpolicy->GetRequiredCharsNumeric() == true)
 			{
-				$arrayList[] = $this->LoadString('TID_INFO_PASSWORDPOLICY_REQUIRED_CHARS_NUMERIC');
+				$arrayList[] = $this->LoadString("TID_INFO_PASSWORDPOLICY_REQUIRED_CHARS_NUMERIC");
 			}
 			
 			
 			//$strOutput = $this->GetLayoutHTML(); 
 			
-			$list = new CListElement($this->GetWebsite(),'default');
+			$list = new CListElement($this->GetWebsite(),"default");
 			$strOutput = $list->RenderList($arrayList);
 			$strOutput = ReplaceTagsWDK($strOutput, $arrayItems);
 			return $strOutput;
@@ -61,12 +61,12 @@
 			$arrayList = array();
 			foreach ($arrayErrors as $strError)
 			{
-				$arrayList[] = $this->LoadString('TID_ERROR_'.$strError);
+				$arrayList[] = $this->LoadString("TID_ERROR_".$strError);
 			}
 			
 			$list = new CListElement(
 				$this->GetWebsite(),
-				$this->GetLayoutDef('LAYOUT_PASSWORDPOLICY_LISTSTYLE'));
+				$this->GetLayoutDef("LAYOUT_PASSWORDPOLICY_LISTSTYLE"));
 			$strOutput = $list->RenderList($arrayList);
 			return $strOutput;
 		}		

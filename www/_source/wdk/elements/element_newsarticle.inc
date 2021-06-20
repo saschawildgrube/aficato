@@ -1,6 +1,6 @@
 <?php
 
-	require_once('element_article.inc');
+	require_once("element_article.inc");
 
 	class CNewsArticleElement extends CArticleElement
 	{
@@ -10,7 +10,7 @@
 		{ 
 			CElement::__construct(
 				$website,
-				'newsarticle',
+				"newsarticle",
 				$strStyleID,
 				true,
 				true);
@@ -24,10 +24,10 @@
 		{
 			$strOutput = $this->GetLayoutHTML(); 
 		
-			$arrayItems['TITLE'] = $strTitle;    
-			$arrayItems['TEXT'] = $this->RenderArticle($strContent,$strFormat);
-			$arrayItems['CREATION_DATE'] = $this->GetWebsite()->RenderDate($strDateTime);
-			$arrayItems['CREATION_TIME'] = $this->GetWebsite()->RenderTime($strDateTime);
+			$arrayItems["TITLE"] = $strTitle;    
+			$arrayItems["TEXT"] = $this->RenderArticle($strContent,$strFormat);
+			$arrayItems["CREATION_DATE"] = $this->GetWebsite()->RenderDate($strDateTime);
+			$arrayItems["CREATION_TIME"] = $this->GetWebsite()->RenderTime($strDateTime);
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

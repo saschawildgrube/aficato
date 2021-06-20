@@ -6,12 +6,12 @@
 		{
 			return 0;	
 		}
-		return mb_strlen($strString,'UTF-8');
+		return mb_strlen($strString,"UTF-8");
 	}
 	
 	function StringCount($strHaystack,$strNeedle,$bIgnoreCase=false)
 	{
-		if ($strNeedle == '')
+		if ($strNeedle == "")
 		{
 			return 0;	
 		}
@@ -20,7 +20,7 @@
 			$strHaystack = StringLowerCase($strHaystack);
 			$strNeedle = StringLowerCase($strNeedle);
 		}
-		return mb_substr_count($strHaystack,$strNeedle,'UTF-8');
+		return mb_substr_count($strHaystack,$strNeedle,"UTF-8");
 	}
 	function StringCountIgnoreCase($strHaystack,$strNeedle)
 	{
@@ -47,11 +47,11 @@
 		}
 		if ($bIgnoreCase == true)
 		{
-			$nPos = mb_stripos($strHaystack, $strNeedle, $nOffset, 'UTF-8');
+			$nPos = mb_stripos($strHaystack, $strNeedle, $nOffset, "UTF-8");
 		}
 		else
 		{
-			$nPos = mb_strpos($strHaystack, $strNeedle, $nOffset, 'UTF-8');
+			$nPos = mb_strpos($strHaystack, $strNeedle, $nOffset, "UTF-8");
 		}
 		if ($nPos === false)
 		{
@@ -84,7 +84,7 @@
 				return -1;	
 			}	
 		}
-		$nPos = mb_strpos($strHaystack, $strNeedle, $nOffset, 'UTF-8');
+		$nPos = mb_strpos($strHaystack, $strNeedle, $nOffset, "UTF-8");
 		if ($nPos === false)
 		{
 			return -1;	
@@ -100,7 +100,7 @@
 	
 	function FindStringMultiple($strHaystack, $arrayNeedles, &$strNextNeedle, $bIgnoreCase = false, $nOffset = 0)
 	{
-		$strNextNeedle = '';
+		$strNextNeedle = "";
 		if (!is_array($arrayNeedles))
 		{
 			return -1;
@@ -147,12 +147,12 @@
 		//$strTo = StringEncodeUTF8($strTo);
 
     	$strRemainingString = $strString;
-    	$strString = '';
+    	$strString = "";
 		while(($nPos = FindString($strRemainingString, $strFrom, $bIgnoreCase)) != -1) 
     	{
-    		$strString .= mb_substr($strRemainingString, 0, $nPos,'UTF-8');
+    		$strString .= mb_substr($strRemainingString, 0, $nPos,"UTF-8");
     		$strString .= $strTo;
-    		$strRemainingString = mb_substr($strRemainingString, $nPos+$nStrFromLength,StringLength($strRemainingString),'UTF-8'); 
+    		$strRemainingString = mb_substr($strRemainingString, $nPos+$nStrFromLength,StringLength($strRemainingString),"UTF-8"); 
 		}
 		return $strString . $strRemainingString;
 	}
@@ -166,12 +166,12 @@
 			{
 				$nStrFromLength = StringLength($strFrom);
 				$strRemainingString = $strString;
-				$strString = '';
+				$strString = "";
 				while(($nPos = FindString($strRemainingString, $strFrom, $bIgnoreCase)) != -1) 
 				{
-					$strString .= mb_substr($strRemainingString, 0, $nPos,'UTF-8');
+					$strString .= mb_substr($strRemainingString, 0, $nPos,"UTF-8");
 					$strString .= $strTo;
-					$strRemainingString = mb_substr($strRemainingString, $nPos+$nStrFromLength,StringLength($strRemainingString),'UTF-8'); 
+					$strRemainingString = mb_substr($strRemainingString, $nPos+$nStrFromLength,StringLength($strRemainingString),"UTF-8"); 
 				}
 				return $strString . $strRemainingString;
 			}
@@ -198,13 +198,13 @@
 	{
 		$nStrFromLength = StringLength($strFrom);
     	$strRemainingString = $strString;
-    	$strString = '';
+    	$strString = "";
 		$nPos = FindString($strRemainingString, $strFrom, $bIgnoreCase);
 		if ($nPos != -1)
     	{
-    		$strString .= mb_substr($strRemainingString, 0, $nPos,'UTF-8');
+    		$strString .= mb_substr($strRemainingString, 0, $nPos,"UTF-8");
     		$strString .= $strTo;
-    		$strRemainingString = mb_substr($strRemainingString, $nPos+$nStrFromLength,StringLength($strRemainingString),'UTF-8');
+    		$strRemainingString = mb_substr($strRemainingString, $nPos+$nStrFromLength,StringLength($strRemainingString),"UTF-8");
 		}
 		return $strString . $strRemainingString;
 	}
@@ -216,18 +216,18 @@
 	
 	function StringLowerCase($strString)
 	{
-		return mb_strtolower($strString,'UTF-8');	
+		return mb_strtolower($strString,"UTF-8");	
 	}
 	function StringUpperCase($strString)
 	{
-		return mb_strtoupper($strString,'UTF-8');	
+		return mb_strtoupper($strString,"UTF-8");	
 	}
 	
 	function StringRemoveControlChars($strString)
 	{
-		$strString = ReplaceString($strString,'\n','');
-		$strString = ReplaceString($strString,'\r','');
-		$strString = ReplaceString($strString,'\t','');
+		$strString = ReplaceString($strString,"\n","");
+		$strString = ReplaceString($strString,"\r","");
+		$strString = ReplaceString($strString,"\t","");
 		$strString = trim($strString);
 		return $strString;
 	}
@@ -253,22 +253,22 @@
 	{
 		if (!is_array($arraySlices))
 		{
-			return '';	
+			return "";	
 		}
 		if (ArrayCount($arraySlices) < 1)
 		{
-			return '';
+			return "";
 		}
 		$strFirstSlice = StringEncodeUTF8($arraySlices[0]);
 		$nLength = StringLength($strFirstSlice);
-		$strGlued = '';
+		$strGlued = "";
 		for ($nIndex = 0; $nIndex < $nLength; $nIndex++)
 		{
 			foreach ($arraySlices as $strSlice)
 			{
 				$strSlice = StringEncodeUTF8($strSlice);
 				$strCharAtIndex = StringSection($strSlice,$nIndex,1);
-				if ($strCharAtIndex != '')
+				if ($strCharAtIndex != "")
 				{
 					$strGlued .= $strCharAtIndex;
 				}
@@ -285,11 +285,11 @@
 		$strEndTag,
 		$bIgnoreCase = false)
 	{
-		if ($strToken == '')
+		if ($strToken == "")
 		{
 			return $strString;
 		}
-		$strResult = '';
+		$strResult = "";
 		$strRemaining = $strString;
 		while (($nNextPos = FindString($strRemaining,$strToken,$bIgnoreCase)) != -1)
 		{
@@ -345,27 +345,31 @@
 	
 	function StringGetEndOfLineToken($strString)
 	{
-		if ($strString == '')	
+		if ($strString == "")	
 		{
-			return '';	
+			return "";	
 		}
-		if (FindString($strString,'\r\n') != -1)
+		if (FindString($strString,"\r\n") != -1)
 		{
-			return '\r\n';	
+			return "\r\n";	
 		}
-		if (FindString($strString,'\n\r') != -1)
+		if (FindString($strString,"\n\r") != -1)
 		{
-			return '\n\r';	
+			return "\n\r";	
 		}
-		if (FindString($strString,'\n') != -1)
+		if (FindString($strString,"\n") != -1)
 		{
-			return '\n';	
+			return "\n";	
 		}
-		return '';
+		return "";
 	}
 	
 	function StringFilter($strInput,$strFilter)
 	{
+		if (StringLength($strFilter) == 0)
+		{
+			return '';
+		}
 		$strOutput = '';
 		for ($nIndex = 0; $nIndex < StringLength($strInput); $nIndex++)
 		{
@@ -692,7 +696,7 @@
 		
 		
 		$nTagPrefixLength = StringLength($strTagPrefix);
-		$strResult = '';
+		$strResult = "";
 		$strRemaining = $strTemplate;
 		
 		$bEnd = false;
@@ -765,14 +769,14 @@
 		{
 			$nLength = StringLength($strString);
 		}
-		return mb_substr($strString,intval($nStart),intval($nLength),'UTF-8');	
+		return mb_substr($strString,intval($nStart),intval($nLength),"UTF-8");	
 	}
 
 	
-	function StringCutOff($strString,$nMaxLength = 100,$strTrailer = '...')
+	function StringCutOff($strString,$nMaxLength = 100,$strTrailer = "...")
 	{
-		$strString = StringWordWrap($strString, $nMaxLength, 'XXXXX',true); 
-		$nPos = FindString($strString,'XXXXX');
+		$strString = StringWordWrap($strString, $nMaxLength, "XXXXX",true); 
+		$nPos = FindString($strString,"XXXXX");
 		if ($nPos != -1)
 		{
 			$strString = mb_substr($strString,0,$nPos) . $strTrailer;
@@ -780,9 +784,9 @@
 		return $strString;	
 	}
 
-	function StringWordWrap($strString, $nWidth = 75, $strEOL = '\n', $bCut = false)
+	function StringWordWrap($strString, $nWidth = 75, $strEOL = "\n", $bCut = false)
 	{
-		mb_internal_encoding('UTF-8');
+		mb_internal_encoding("UTF-8");
 		$arrayLines = explode($strEOL,$strString);
 		if ($arrayLines == false)
 		{
@@ -792,25 +796,25 @@
 		{
 			return $strString;	
 		}
-		$strResult = '';
+		$strResult = "";
 		$nLineCount = ArrayCount($arrayLines);
 		foreach ($arrayLines as $strLine)
 		{
-			$strRemainingLine = trim($strLine,' ');
+			$strRemainingLine = trim($strLine," ");
 			while (StringLength($strRemainingLine) > 0)
 			{
-				$strRemainingLine = trim($strRemainingLine, ' ');
+				$strRemainingLine = trim($strRemainingLine, " ");
 				$nRemainingLength = StringLength($strRemainingLine);
 				if ($nRemainingLength <= $nWidth)
 				{
 					// The line fits into the intended width
 					$strResult .= $strRemainingLine;
-					$strRemainingLine = '';
+					$strRemainingLine = "";
 				}
 				else
 				{
 					// The line must be wrapped
-					$nNextWhiteSpacePos = FindString($strRemainingLine,' ');
+					$nNextWhiteSpacePos = FindString($strRemainingLine," ");
 					if ($nNextWhiteSpacePos == -1)
 					{
 						$nNextWhiteSpacePos = $nRemainingLength;
@@ -833,11 +837,11 @@
 					{
 						// the next word fits into the remaining line					
 
-						$nLastWhiteSpacePos = mb_strrpos(mb_substr($strRemainingLine,0,$nWidth+1),' ');
+						$nLastWhiteSpacePos = mb_strrpos(mb_substr($strRemainingLine,0,$nWidth+1)," ");
 						if ($nLastWhiteSpacePos == false)
 						{
 							$strResult .= $strRemainingLine;
-							$strRemainingLine = '';
+							$strRemainingLine = "";
 						}
 						else
 						{
@@ -846,7 +850,7 @@
 						}
 					}
 				}
-				if ($strRemainingLine != '')
+				if ($strRemainingLine != "")
 				{
 					$strResult .= $strEOL;	
 				}
@@ -910,12 +914,14 @@
 	
 	function StringRemoveCharacters($strInput,$strBlacklist)     
 	{
+		mb_internal_encoding('UTF-8');
+		$strInput = StringEncodeUTF8($strInput);
 		$strOutput = '';
 		for ($nIndex = 0; $nIndex < StringLength($strInput); $nIndex++)
 		{
-			if (FindString($strBlacklist,$strInput[$nIndex]) == -1)
+			if (FindString($strBlacklist,mb_substr($strInput,$nIndex,1)) == -1)
 			{
-				$strOutput .= $strInput[$nIndex];
+				$strOutput .= mb_substr($strInput,$nIndex,1);
 			}
 		}
 		return $strOutput;
@@ -924,7 +930,7 @@
 	function StringRemoveTrailingCharacters($strInput,$strBlacklist,$bMultiple = false)     
 	{
 		$strResult = $strInput;
-		while ($strResult != '')
+		while ($strResult != "")
 		{
 			$strChar = StringSection($strResult,-1,1);  
 			if (StringCheckCharSet($strChar,$strBlacklist) == false)
@@ -946,7 +952,7 @@
 	function StringRemoveLeadingCharacters($strInput,$strBlacklist,$bMultiple = false)     
 	{
 		$strResult = $strInput;
-		while ($strResult != '')
+		while ($strResult != "")
 		{
 			$strChar = StringSection($strResult,0,1);  
 			if (StringCheckCharSet($strChar,$strBlacklist) == false)
@@ -967,7 +973,7 @@
 	
 	function StringTrim($strInput)
 	{
-		return trim('$strInput');	
+		return trim("$strInput");	
 	}
 	
 	function StringExplode($strInput,$strSeparator,$bTrim = false, $nLimit = 0)
@@ -1006,8 +1012,8 @@
 	
 	function StringExplodeKeyValueList(
 		$strKeyValueList,
-		$strLineSeparator='\n',
-		$strKeySeparator='=',
+		$strLineSeparator="\n",
+		$strKeySeparator="=",
 		$bTrim = true)
 	{
 		$arrayKeyValues = array();
@@ -1016,7 +1022,7 @@
 		{
 			$arrayItem = StringExplode($strLine,$strKeySeparator,$bTrim,2);
 			$strKey = ArrayGetValue($arrayItem,0);
-			if ($strKey != '')	
+			if ($strKey != "")	
 			{
 				$strValue = ArrayGetValue($arrayItem,1);
 				$arrayKeyValues[$strKey] = $strValue;

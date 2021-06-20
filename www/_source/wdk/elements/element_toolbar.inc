@@ -96,7 +96,7 @@
 			
 			$strOutput = '';
 			
-			$strOutput .= $this->GetLayoutDef('LAYOUT_TOOLBAR_BEGIN') . '\n';
+			$strOutput .= $this->GetLayoutDef('LAYOUT_TOOLBAR_BEGIN') . "\n";
 			
 			$arrayTools = ArrayGetValue($toolbarDef->GetData(),'tools');
 			$nCount = ArrayCount($arrayTools);
@@ -147,11 +147,11 @@
 				
 				if ($nCurrent < $nCount)
 				{
-					$strOutput .= $this->GetLayoutDef('LAYOUT_TOOLBAR_SEPARATOR') . '\n'; 
+					$strOutput .= $this->GetLayoutDef('LAYOUT_TOOLBAR_SEPARATOR') . "\n"; 
 				}
 			}
 			
-			$strOutput .= $this->GetLayoutDef('LAYOUT_TOOLBAR_END') . '\n';
+			$strOutput .= $this->GetLayoutDef('LAYOUT_TOOLBAR_END') . "\n";
 			
 			return $strOutput;
 		}

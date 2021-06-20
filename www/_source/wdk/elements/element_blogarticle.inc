@@ -8,7 +8,7 @@
 		{ 
 			CElement::__construct(
 				$website,
-				'blogarticle',
+				"blogarticle",
 				$strStyleID,
 				true,
 				true);
@@ -22,9 +22,9 @@
 		{
 			$strOutput = $this->GetLayoutHTML(); 
 		
-			$arrayItems['TITLE'] = $strTitle;    
-			$arrayItems['TEXT'] = $this->RenderArticle($strContent,$strFormat);
-			$arrayItems['CREATION_DATE'] = $this->GetWebsite()->RenderDate($strDateTime);
+			$arrayItems["TITLE"] = $strTitle;    
+			$arrayItems["TEXT"] = $this->RenderArticle($strContent,$strFormat);
+			$arrayItems["CREATION_DATE"] = $this->GetWebsite()->RenderDate($strDateTime);
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

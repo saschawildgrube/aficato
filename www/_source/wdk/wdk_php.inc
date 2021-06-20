@@ -4,15 +4,15 @@
 	function GetVersionInfoPHP()
 	{
 		$arrayVersion = array();
-		$arrayVersion['NAME'] = 'php';
+		$arrayVersion["NAME"] = "php";
 		
 		$strVersionVerbose = phpversion();
-		if ($strVersionVerbose != '')
+		if ($strVersionVerbose != "")
 		{
-			$arrayVersion['VERBOSE'] = $strVersionVerbose;			
+			$arrayVersion["VERBOSE"] = $strVersionVerbose;			
 		}
 		
-		$nDashPos = FindString($strVersionVerbose,'-');
+		$nDashPos = FindString($strVersionVerbose,"-");
 		if ($nDashPos != -1)
 		{
 			$strVersion = StringSection($strVersionVerbose,0,$nDashPos);
@@ -21,7 +21,7 @@
 		{
 			$strVersion = $strVersionVerbose;
 		}
-		$arrayVersion['VERSION'] = $strVersion;
+		$arrayVersion["VERSION"] = $strVersion;
 		return $arrayVersion;
 	}
 

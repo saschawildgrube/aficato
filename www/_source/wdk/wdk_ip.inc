@@ -1,23 +1,23 @@
 <?php
 
-	require_once(GetWDKDir().'wdk_csv.inc');
+	require_once(GetWDKDir()."wdk_csv.inc");
 
-	define('DOMAIN_STATUS_UNKNOWN',		0);
-	define('DOMAIN_STATUS_FREE',			1);
-	define('DOMAIN_STATUS_TAKEN',			2);
-	define('DOMAIN_STATUS_FORSALE',		3);
-	define('DOMAIN_STATUS_INVALID',		4);
-	define('DOMAIN_STATUS_UNDEFINED',	5);
+	define("DOMAIN_STATUS_UNKNOWN",		0);
+	define("DOMAIN_STATUS_FREE",			1);
+	define("DOMAIN_STATUS_TAKEN",			2);
+	define("DOMAIN_STATUS_FORSALE",		3);
+	define("DOMAIN_STATUS_INVALID",		4);
+	define("DOMAIN_STATUS_UNDEFINED",	5);
 	
 	function GetDomainStatusArray()
 	{
 		$arrayDomainStatus = array(
-			DOMAIN_STATUS_UNKNOWN => 'UNKNOWN',
-			DOMAIN_STATUS_FREE => 'FREE',
-			DOMAIN_STATUS_TAKEN => 'TAKEN',
-			DOMAIN_STATUS_FORSALE => 'FORSALE',
-			DOMAIN_STATUS_INVALID => 'INVALID',
-			DOMAIN_STATUS_UNDEFINED => 'UNDEFINED'
+			DOMAIN_STATUS_UNKNOWN => "UNKNOWN",
+			DOMAIN_STATUS_FREE => "FREE",
+			DOMAIN_STATUS_TAKEN => "TAKEN",
+			DOMAIN_STATUS_FORSALE => "FORSALE",
+			DOMAIN_STATUS_INVALID => "INVALID",
+			DOMAIN_STATUS_UNDEFINED => "UNDEFINED"
 			);
 		return $arrayDomainStatus;
 	}
@@ -25,9 +25,9 @@
 
 	function IsValidIPv4($strIP)
 	{
-		$strIPv4regex = '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b';
-		if (RegExpMatch($strIP,'/^$strIPv4regex$/') == false) 
-		//if (preg_match('/^$strIPv4regex$/',$strIP) == false) 
+		$strIPv4regex = "\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b";
+		if (RegExpMatch($strIP,"/^$strIPv4regex$/") == false) 
+		//if (preg_match("/^$strIPv4regex$/",$strIP) == false) 
 		{ 
 			return false; 
 	  } 
@@ -90,9 +90,9 @@
 		$arrayRecords = array();
 		foreach ($arrayRecordsRaw as $arrayRecordRaw)
 		{
-			$strType = ArrayGetValue($arrayRecordRaw,'type');
-			$arrayRecordRaw = ArrayRemoveKey($arrayRecordRaw,'type');
-			$arrayRecordRaw = ArrayRemoveKey($arrayRecordRaw,'host');
+			$strType = ArrayGetValue($arrayRecordRaw,"type");
+			$arrayRecordRaw = ArrayRemoveKey($arrayRecordRaw,"type");
+			$arrayRecordRaw = ArrayRemoveKey($arrayRecordRaw,"host");
 			$arrayRecords[$strType][] = $arrayRecordRaw;
 		}
 		return $arrayRecords;		 
@@ -100,7 +100,7 @@
 	
 	function IsValidHostName($strHostName)
 	{
-		if ($strHostName == '')
+		if ($strHostName == "")
 		{
 			return false;	
 		}
@@ -108,16 +108,16 @@
 		{
 			return false;
 		}
-    $strHostRegex = '(([a-z0-9-.]*)\.([a-z]{2,20})|localhost)'; // Host with TLD or 'localhost'
-		if (preg_match('/^$strHostRegex$/', StringLowerCase($strHostName)) == false) 
+    $strHostRegex = "(([a-z0-9-.]*)\.([a-z]{2,20})|localhost)"; // Host with TLD or "localhost"
+		if (preg_match("/^$strHostRegex$/", StringLowerCase($strHostName)) == false) 
 		{ 
 			return false; 
 	  } 
-	  if (StringSection($strHostName,0,1) == '.')
+	  if (StringSection($strHostName,0,1) == ".")
 	  {
 	  	return false;	
 	  }
-	  if (FindString($strHostName,'..') != -1)
+	  if (FindString($strHostName,"..") != -1)
 	  {
 	  	return false;
 	  }
@@ -145,7 +145,7 @@
 		}
 		$strResult = $arrayResult['stdout'];
 		
-		$nPos = FindString($strResult,'domain name pointer ');
+		$nPos = FindString($strResult,"domain name pointer ");
 		if ($nPos == -1)
 		{
 			return false;	
@@ -158,19 +158,19 @@
 		return $strHostName;
 	}	
 	
-	function GetWhoisRecords($strHost,&$strWhoisServer = '')
+	function GetWhoisRecords($strHost,&$strWhoisServer = "")
 	{
-		$strWhoisServer = '';
-		$strQuery = '';
+		$strWhoisServer = "";
+		$strQuery = "";
 		if (IsValidIPv4($strHost))
 		{
-			$strWhoisServer = 'whois.ripe.net';
-			$strQuery = '{HOST}\r\n';
+			$strWhoisServer = "whois.ripe.net";
+			$strQuery = "{HOST}\r\n";
 		}
 		else if (IsValidHostName($strHost))
 		{
 			// Based on: http://www.nirsoft.net/whois_servers_list.html
-			$strWhoisServersFile = GetWDKDir().'data/whois.csv';
+			$strWhoisServersFile = GetWDKDir()."data/whois.csv";
 			if (!IsFile($strWhoisServersFile))
 			{
 				return false;	
@@ -180,7 +180,7 @@
 			$arrayShortList = array();
 			foreach ($arrayServers as $arrayServer)
 			{
-				$strTld = '.'.ArrayGetValue($arrayServer,'TLD');
+				$strTld = ".".ArrayGetValue($arrayServer,"TLD");
 				$nLength = StringLength($strTld);
 				if (StringSection($strHost,-$nLength) == $strTld)
 				{
@@ -194,24 +194,24 @@
 			
 			foreach ($arrayShortList as $arrayServer)
 			{
-				$strWhoisServer = ArrayGetValue($arrayServer,'SERVER');
-				$strQuery = ArrayGetValue($arrayServer,'QUERY');
-				if ($strQuery != '')
+				$strWhoisServer = ArrayGetValue($arrayServer,"SERVER");
+				$strQuery = ArrayGetValue($arrayServer,"QUERY");
+				if ($strQuery != "")
 				{
-					$strQuery .= ' ';
+					$strQuery .= " ";
 				}
-				$strQuery .= '{HOST}\r\n';
+				$strQuery .= "{HOST}\r\n";
 				break;
 			}
 		}
 		
-		if ($strWhoisServer == '')
+		if ($strWhoisServer == "")
 		{
 			return false;	
 		}
 			
-		$strWhois = '';
-		$strError = '';
+		$strWhois = "";
+		$strError = "";
 		$nError = 0;
   	
   	$hSocket = @fsockopen($strWhoisServer,43,$nError,$strError,15);
@@ -219,7 +219,7 @@
   	{
   		return false;
   	}
-		$strQuery = ReplaceString($strQuery,'{HOST}',$strHost);
+		$strQuery = ReplaceString($strQuery,"{HOST}",$strHost);
     fputs ($hSocket,$strQuery);
     while (!feof($hSocket))
     {
@@ -247,13 +247,13 @@
 			{
 				return DOMAIN_STATUS_UNDEFINED;
 			}
-			$strNextNeedle = '';
+			$strNextNeedle = "";
 			$nPos = FindStringMultipleIgnoreCase(
 				$strWhois,
 				array(
-					'Status: clientTransferProhibited',
-					'Status: connect',
-					'Holder of domain name:'), // for .ch domains without DNS records
+					"Status: clientTransferProhibited",
+					"Status: connect",
+					"Holder of domain name:"), // for .ch domains without DNS records
 				$strNextNeedle);
 			if ($nPos == -1)
 			{
@@ -262,17 +262,17 @@
 		}
 		if ($bCheckForSale == true)
 		{
-			$strSOAmname =  ArrayGetValue($arrayDnsRecords,'SOA',0,'mname');
-			$strNextNeedle = '';
+			$strSOAmname =  ArrayGetValue($arrayDnsRecords,"SOA",0,"mname");
+			$strNextNeedle = "";
 			$nPos = FindStringMultipleIgnoreCase(
 				$strSOAmname,
 				array(
-					'.domaincontrol.com',
-					'.parkingcrew.net',
-					'.cashparking.com',
-					'.buydomains.com',
-					'.name-services.com',
-					'.sedoparking.com'),
+					".domaincontrol.com",
+					".parkingcrew.net",
+					".cashparking.com",
+					".buydomains.com",
+					".name-services.com",
+					".sedoparking.com"),
 				$strNextNeedle);
 			if ($nPos != -1)
 			{
@@ -282,7 +282,7 @@
 			$strResponse = HttpRequest(
 				'http://'.$strDomainName,
 				array(),
-				'get',
+				"get",
 				5,
 				array(),
 				array(),
@@ -293,7 +293,7 @@
 				$strResponse = HttpRequest(
 					'https://'.$strDomainName,
 					array(),
-					'get',
+					"get",
 					5,
 					array(),
 					array(),
@@ -302,14 +302,14 @@
 			
 			if ($strResponse != false)
 			{
-				$strNextNeedle = '';
+				$strNextNeedle = "";
 				$nPos = FindStringMultipleIgnoreCase(
 					$strResponse,
 					array(
-						'sedo.com',
-						'go daddy',
-						'godaddy',
-						'Location: http://www.buydomains.com',
+						"sedo.com",
+						"go daddy",
+						"godaddy",
+						"Location: http://www.buydomains.com",
 						'Location: http://www.hugedomains.com',
 						'location.reload(true);',
 						'http://www.dsparking.com/w3c/p3p.xml',

@@ -4,9 +4,9 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->IncludeModule('devtools/scaffolder');
+			$this->GetWebsite()->IncludeModule("devtools/scaffolder");
 			$scaffolder = new CScaffolderModule($this->GetWebsite());
-			$arrayItems['SCAFFOLDER'] = $scaffolder->RenderModule();
+			$arrayItems["SCAFFOLDER"] = $scaffolder->RenderModule();
 		}
 	}
 	

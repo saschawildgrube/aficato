@@ -76,7 +76,7 @@
 			strOutput += '\n';
 			Object.keys(vValue).forEach( function(strKey)
 			{
-				strOutput += strLevel+'[''+strKey+'']: '+RenderValue(vValue[strKey],nLevel+1)+'\n';
+				strOutput += strLevel+'["'+strKey+'"]: '+RenderValue(vValue[strKey],nLevel+1)+'\n';
 			});
 		}
 		else
@@ -85,6 +85,39 @@
 		}
 		return strOutput;
 	}
+	
+	function GetBoolValue(vInput)
+	{
+		if (vInput == undefined)
+		{
+			return false;
+		}
+		if (vInput == null)
+		{
+			return false;
+		}
+		if (vInput === true)
+		{
+			return true;
+		}
+		if (vInput == 'true')
+		{
+			return true;
+		}
+		if (vInput == 'false')
+		{
+			return false;
+		}
+		if (vInput == 'null')
+		{
+			return false;
+		}
+		if (vInput != 0)
+		{
+			return true;
+		}
+		return false;
+	}	
 	
 	function GetStringValue(value)
 	{
@@ -129,6 +162,16 @@
 	{
 		return parseInt(GetNumberValue(value));	
 	}
+	
+	function ArrayKeyExists(aArray,vKey)
+	{
+		if (typeof aArray[vKey] === 'undefined')
+		{
+			return false;
+		}
+		return true;
+	}
+
 
 	function HttpRequest(strURL)
 	{
@@ -138,8 +181,8 @@
 			strResponse = this.responseText;
 		}
 		var xmlhttprequest = new XMLHttpRequest();
-		xmlhttprequest.addEventListener('load', Listener);
-		xmlhttprequest.open('GET', strURL, false);
+		xmlhttprequest.addEventListener("load", Listener);
+		xmlhttprequest.open("GET", strURL, false);
 		xmlhttprequest.send();
 		return strResponse;
 	}
@@ -148,17 +191,17 @@
 
 	function SetCookie(strName, strValue, nExpiryDays)
 	{
-		Trace('SetCookie(''+strName+'',''+strValue+'','+nExpiryDays+')');
+		Trace('SetCookie("'+strName+'","'+strValue+'",'+nExpiryDays+')');
 		var date = new Date();
 		date.setTime(date.getTime() + (nExpiryDays*24*60*60*1000));
-		var strExpires = 'expires='+date.toUTCString();
-		var strCookie = strName + '=' + strValue + '; ' + strExpires + '; path={ROOTPATH}';
+		var strExpires = "expires="+date.toUTCString();
+		var strCookie = strName + "=" + strValue + "; " + strExpires + "; path={ROOTPATH}";
 		document.cookie = strCookie;
 	} 
 	
 	function GetCookie(strName)
 	{
-		Trace('GetCookie(''+strName+'')');
+		Trace('GetCookie("'+strName+'")');
 		var strNameEquals = strName + '=';
 		var arrayCookies = document.cookie.split(';');
 		for (var i=0; i < arrayCookies.length; i++)
@@ -171,11 +214,11 @@
 			if (strCookie.indexOf(strNameEquals) != -1)
 			{
 				var strResult = strCookie.substring(strNameEquals.length,strCookie.length);
-				Trace('returns ''+strResult+''');
+				Trace('returns "'+strResult+'"');
 				return strResult;
 			}
 		}
-		Trace('returns ''');
+		Trace('returns ""');
 		return '';
 	} 
 	
@@ -199,7 +242,7 @@
 	
 	function DeleteCookie(strName)
 	{
-		Trace('DeleteCookie(''+strName+'')');
+		Trace('DeleteCookie("'+strName+'")');
 		SetCookie(strName,'',-1);	
 	}
 	
@@ -223,7 +266,7 @@
 		{
 			strToken += GetStringValue(GetRandomInteger(9));
 		}
-		Trace('returns ''+strToken+''');
+		Trace('returns "'+strToken+'"');
 		return strToken;
 	}
 	
@@ -295,4 +338,5 @@
  		StopProgressIndicator(elementContainer);
 	}
 	
+
 

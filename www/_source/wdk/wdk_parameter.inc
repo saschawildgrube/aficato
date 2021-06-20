@@ -9,9 +9,9 @@
 	define('CHARSET_ALPHANUMERIC_UPPERCASE', CHARSET_ALPHA_UPPERCASE.CHARSET_NUMERIC);
 	define('CHARSET_ALPHANUMERIC', CHARSET_ALPHA.CHARSET_NUMERIC);
 
-	define('CHARSET_SPECIAL', '!'§$%&/()=?{[]}\+*~#\'-_,.;:<>|@');
-	define('CHARSET_LINEBREAK', '\n\r');
-	define('CHARSET_WHITESPACE', ' \t\0\x0B');
+	define('CHARSET_SPECIAL', '!"§$%&/()=?{[]}\+*~#\'-_,.;:<>|@');
+	define('CHARSET_LINEBREAK', "\n\r");
+	define('CHARSET_WHITESPACE', " \t\0\x0B");
 	
 	define('CHARSET_SPECIALALPHA_GERMAN_LOWERCASE', 'ßäöü');
 	define('CHARSET_SPECIALALPHA_GERMAN_UPPERCASE', 'ÄÖÜ');

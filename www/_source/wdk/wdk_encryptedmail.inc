@@ -1,6 +1,6 @@
 <?php
 
-	require_once(GetWDKDir().'wdk_encryption-asymmetric.inc');
+	require_once(GetWDKDir()."wdk_encryption-asymmetric.inc");
 	
 	function SendEncryptedMail(
 		&$aee,
@@ -8,8 +8,8 @@
 		$arrayRecipientEmailList,
 		$strSubject,
 		$strMessage,
-		$strSenderEmail = '',
-		$strSenderName = '',
+		$strSenderEmail = "",
+		$strSenderName = "",
 		$arrayAttachments = array(),
 		$arrayRecipientEmailListCC = array(),
 		$arrayRecipientEmailListBCC = array())
@@ -26,9 +26,9 @@
 		// message.
 		$nByteLength = strlen($strMessage);
 		$nCharLength = mb_strlen($strMessage);
-		$strMessage .= str_repeat(' ',$nByteLength-$nCharLength);
+		$strMessage .= str_repeat(" ",$nByteLength-$nCharLength);
 		
-		$strEncryptedMessage = '';
+		$strEncryptedMessage = "";
 		$bResult = $aee->Encrypt(
 			$strMessage,
 			$strPublicKey,
@@ -44,20 +44,20 @@
 		{
 			foreach ($arrayAttachments as $arrayAttachment)
 			{
-				$strEncryptedFileContent = '';
-				$strFileContent = ArrayGetValue($arrayAttachment,'content');
+				$strEncryptedFileContent = "";
+				$strFileContent = ArrayGetValue($arrayAttachment,"content");
 				$bResult = $aee->Encrypt(
 					$strFileContent,
 					$strPublicKey,
 					$strEncryptedFileContent);
 				if ($bResult == false)
 				{
-					//print('Encrypt failed attachment');
+					//print("Encrypt failed attachment");
 					return false;
 				}
 				$arrayEncryptedAttachments[] = array(
-					'name' => ArrayGetValue($arrayAttachment,'name'),
-					'content' => $strEncryptedFileContent);
+					"name" => ArrayGetValue($arrayAttachment,"name"),
+					"content" => $strEncryptedFileContent);
 			}			
 		}
 

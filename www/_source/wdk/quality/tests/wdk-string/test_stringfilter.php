@@ -4,7 +4,7 @@
 	{
 		function __construct()
 		{
-			parent::__construct("StringFilter");
+			parent::__construct('StringFilter');
 		}
 		
 		function OnInit()
@@ -16,22 +16,22 @@
 		
 		function TestCase_StringFilter($strString,$strFilter,$strExpectedResult)
 		{
-			$this->Trace("TestCase_StringFilter");
-			$this->Trace("Test String    : \"$strString\"");
-			$this->Trace("Filter			  : \"$strFilter\"");
-			$this->Trace("Expected Result: \"$strExpectedResult\"");
+			$this->Trace('TestCase_StringFilter');
+			$this->Trace('Test String         : '.$strString);
+			$this->Trace('Filter              : '.$strFilter);
+			$this->Trace('Expected Result     : '.$strExpectedResult);
 			$strResult = StringFilter($strString,$strFilter); 
-			$this->Trace("StringFilter returns: \"$strResult\"");
+			$this->Trace('StringFilter returns: '.$strResult);
 			if ($strResult == $strExpectedResult)
 			{
-				$this->Trace("Testcase PASSED!");
+				$this->Trace('Testcase PASSED!');
 			}
 			else
 			{
-				$this->Trace("Testcase FAILED!");	
+				$this->Trace('Testcase FAILED!');	
 				$this->SetResult(false);
 			}
-			$this->Trace("");
+			$this->Trace('');
 			
 		}
 
@@ -42,24 +42,24 @@
 			
 		
 			$this->TestCase_StringFilter(
-				"abc",
-				"ab",
-				"ab");
+				'abc',
+				'ab',
+				'ab');
 
 			$this->TestCase_StringFilter(
-				"abc",
-				"",
-				"");
+				'abc',
+				'',
+				'');
 
 			$this->TestCase_StringFilter(
-				"abc",
-				"c",
-				"c");
+				'abc',
+				'c',
+				'c');
 
 			$this->TestCase_StringFilter(
-				"This is a test",
-				"abcdefghijklmnopqrstuvwxyz",
-				"hisisatest");
+				'This is a test',
+				'abcdefghijklmnopqrstuvwxyz',
+				'hisisatest');
 		}
 		
 

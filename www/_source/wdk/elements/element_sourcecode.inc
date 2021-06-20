@@ -8,17 +8,17 @@
 		{
 			parent::__construct(
 				$website,
-				'sourcecode',
+				"sourcecode",
 				$strStyleID,
 				false,
 				true);
 		}
 		
-		function RenderSourceCode($strSourceCode, $strSourceCodeLanguage = '')
+		function RenderSourceCode($strSourceCode, $strSourceCodeLanguage = "")
 		{
 			$strOutput = $this->GetLayoutHTML(); 
 		
-			$arrayItems['SOURCECODE'] = $strSourceCode;
+			$arrayItems["SOURCECODE"] = $strSourceCode;
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

@@ -1,9 +1,9 @@
-$this->IncludeElement('teaser');
+$this->IncludeElement("teaser");
 
-$teaser = new CTeaserElement($this->GetWebsite(),'default');
+$teaser = new CTeaserElement($this->GetWebsite(),"default");
 $strOutput = $teaser->RenderTeaser(
-	'Titulus Heador',
-	'Loram Ipsum moro dolor. Blibb blu some blind text...',
+	"Titulus Heador",
+	"Loram Ipsum moro dolor. Blibb blu some blind text...",
 	$this->GetWebsite()->MakeSelfURL(),
-	'Read more',
+	"Read more",
 	true);

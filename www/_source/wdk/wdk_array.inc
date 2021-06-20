@@ -1,5 +1,7 @@
 <?php
 
+	require_once('wdk_serialize.inc');
+
 	function IsArray($array)
 	{
 		return is_array($array);
@@ -30,7 +32,7 @@
 		{
 			if (is_string($key))
 			{
-				$array1['$key'] = $value;
+				$array1["$key"] = $value;
 			}
 			else
 			{
@@ -226,9 +228,9 @@
 	{
 		if (ArrayKeyExists($array,$key1) == false)	
 		{
-			return '';
+			return "";
 		}
-		if (($key2 == null || $key2 == '') && !($key2 === 0))
+		if (($key2 == null || $key2 == "") && !($key2 === 0))
 		{
 			return $array[$key1];
 		}
@@ -257,7 +259,7 @@
 		{
 			$array = array();
 		}
-		if ($key2 == null || $key2 == '')
+		if ($key2 == null || $key2 == "")
 		{
 			$array[$key1] = $value;
 			return;	
@@ -599,7 +601,7 @@
 		foreach ($arrayKeys as $key)
 		{
 			$value = ArrayGetValue($arraySource,$key);
-			if (!$bIgnoreEmpty || $value != '')
+			if (!$bIgnoreEmpty || $value != "")
 			{
 				$arrayResult[$key] = ArrayGetValue($arraySource,$key);
 			}
@@ -688,16 +690,16 @@
 		return $arraySource;  
 	} 
 	
-	function ArrayTransformToTable($arraySource,$strHeaderKeys = '',$strHeaderValues = '')
+	function ArrayTransformToTable($arraySource,$strHeaderKeys = "",$strHeaderValues = "")
 	{
 		if (!is_array($arraySource))
 		{
 			return false;	
 		}
 		$arrayResult = array();
-		if ($strHeaderKeys != '' || $strHeaderValues != '')
+		if ($strHeaderKeys != "" || $strHeaderValues != "")
 		{
-			$arrayResult[] = array($strHeaderKeys.'',$strHeaderValues.'');
+			$arrayResult[] = array($strHeaderKeys."",$strHeaderValues."");
 		}
 		foreach ($arraySource as $strKey => $strValue)
 		{
@@ -740,24 +742,41 @@
     }
 		return $arrayResult;
 	}
+
+	function ArraySerialize($arraySource)
+	{
+		if (!IsArray($arraySource))
+		{
+			return false;	
+		}
+		return ObjectSerialize($arraySource);
+	}
+
+	function ArrayUnserialize($vSerialized)
+	{
+		$arrayUnserialized = ObjectUnserialize($vSerialized);
+		if (!IsArray($arrayUnserialized))
+		{
+			return false;	
+		}
+		return $arrayUnserialized;
+	}
 	
 	
 	function ArrayPack($arraySource)
 	{
-		if (!is_array($arraySource))
+		$strSerialized = ArraySerialize($arraySource);
+		if ($strSerialized == false)
 		{
-			return '';	
+			return false;
 		}
-		return base64_encode(serialize($arraySource));
+		return base64_encode($strSerialized);
 	}
 
 	function ArrayUnpack($strPacked)
 	{
-		$ea = new CErrorAmnesty();
-		$ea->Start();
-		$arrayUnpacked = unserialize(base64_decode($strPacked));
-		$ea->End();
-		if (!is_array($arrayUnpacked))
+		$arrayUnpacked = ArrayUnserialize(base64_decode($strPacked));
+		if (!IsArray($arrayUnpacked))
 		{
 			return false;	
 		}
@@ -796,6 +815,74 @@
 		}
 		
 		return true;
+	}
+	
+	
+	function ArrayContains($array1, $array2)
+	{
+		if (!IsArray($array1))
+		{
+			$array1 = [];	
+		}
+		if (!IsArray($array2))
+		{
+			$array2 = [];	
+		}
+		
+   	foreach ($array2 as $vKey => $vValue)
+		{
+			if (is_numeric($vKey) == false) // associative key 
+			{
+				if (ArrayKeyExists($array1,$vKey) == false)
+				{
+					return false;	
+				}
+				if (IsArray(ArrayGetValue($array1,$vKey)) == true)
+				{
+					if (ArrayContains(ArrayGetValue($array1,$vKey),$vValue) == false)
+					{
+						return false;	
+					}
+				}
+				else
+				{
+					if (ArrayGetValue($array1,$vKey) != $vValue)
+					{
+						return false;	
+					}
+				}
+			}
+			else  // indexed value
+			{
+				if (IsArray($vValue) == true)
+				{
+					$bContained = false;
+					foreach ($array1 as $vKey1 => $vValue1)
+					{
+						if (IsArray($vValue1))
+						{
+							if (ArrayContains($vValue1,$vValue) == true)
+							{
+								$bContained = true;	
+							}
+						}
+					}
+					if ($bContained == false)
+					{
+						return false;	
+					}
+		
+				}
+				else
+				{
+					if (ArrayValueExists($array1,$vValue) == false)
+					{
+						return false;	
+					}
+				}
+			}
+		}
+		return true;	
 	}
 	
 	function ArrayUnique($arrayInput)

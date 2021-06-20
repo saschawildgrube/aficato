@@ -194,7 +194,24 @@
 				Add initialization code here!
 			*/
 			
+			
+			/*
+				This registers a 'generic output item'.
+				Output items are tags that look like this '{ITEM}'. They begin and end
+				with curly bracets and are always uppercase.
+				They are replaced with content during rendering the website.
+				A generic output item is not simply replaced by another string,
+				but each time a generic output item is found, the
+				OnRenderGenericOutputItem() function is invoked.
+				However, we must tell the website what to look for.
+				In addition generic output items support parameters.
+			*/		
 			$this->RegisterGenericOutputItem('GOOGLEURL',array('search'));
+
+			/*
+				This will cause a log event each time a page is loaded.
+				You may want to remove this if not needed.
+			*/			
 			$this->SystemLog('INFORMATIONAL','REQUEST', $this->GetContent());
 
 			$this->SetLayout('$$$websitename$$$');

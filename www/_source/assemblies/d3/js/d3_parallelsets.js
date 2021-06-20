@@ -59,10 +59,14 @@ function D3_ParallelSets(vSelector, aProps)
 			return d3.format(',.'+GetStringValue(nPrecision)+'f')(value) + strSymbol;
 		};
 
-	var D3_ParallelSets_FormatNumberPercent = d3.format('.2%');
+	var D3_ParallelSets_FormatNumberPercent = d3.format(".2%");
 	
-	// Not yet used
-	const strCssClassPrefix = 'parallelsets-';
+	var strCssClassPrefix = GetStringValue(aProps['cssclassprefix']);
+	if (strCssClassPrefix == '')
+	{
+		strCssClassPrefix = 'd3-parallelsets-';
+	}	
+
 	
 	var nSvgWidth = sSvg.node().getBoundingClientRect().width;
 	var nSvgHeight = sSvg.node().getBoundingClientRect().height;
@@ -75,7 +79,7 @@ function D3_ParallelSets(vSelector, aProps)
 		
 	d3.parsets = function()
 	{
-	  var event = d3.dispatch('sortDimensions', 'sortCategories'),
+	  var event = d3.dispatch("sortDimensions", "sortCategories"),
 	      dimensions_ = autoDimensions,
 	      dimensionFormat = String,
 	      tooltip_ = D3_ParallelSets_defaultTooltip,
@@ -111,7 +115,7 @@ function D3_ParallelSets(vSelector, aProps)
 	
 	  function d3_functor(v)
 	  {
-	    return typeof v === 'function' ? v : function() { return v; };
+	    return typeof v === "function" ? v : function() { return v; };
 	  }
 	
 	  function parsets(selection)
@@ -129,24 +133,24 @@ function D3_ParallelSets(vSelector, aProps)
 	          ribbon,
 	          ribbonEnter;
 	
-	      d3.select(window).on('mousemove.parsets.' + ++parsetsId, unhighlight);
+	      d3.select(window).on("mousemove.parsets." + ++parsetsId, unhighlight);
 	
 	      if (tension0 == null)
 	     	{
 	      	tension0 = tension;
 	      }
-	      g.selectAll('.ribbon, .ribbon-mouse')
-	        .data(['ribbon', 'ribbon-mouse'], String)
+	      g.selectAll(".ribbon, .ribbon-mouse")
+	        .data(["ribbon", "ribbon-mouse"], String)
 	     		.enter()
-	     			.append('g')
-	        	.attr('class', String);
+	     			.append("g")
+	        	.attr("class", String);
 	
 	      updateDimensions();
 	      if (tension != tension0)
 	      {
 	        var t = d3.transition(g);
 	        if (t.tween)
-	        	t.tween('ribbon', tensionTween);
+	        	t.tween("ribbon", tensionTween);
 	        else
 	        	tensionTween()(1);
 	      }
@@ -156,14 +160,14 @@ function D3_ParallelSets(vSelector, aProps)
 	        var i = d3.interpolateNumber(tension0, tension);
 	        return function(t) {
 	          tension0 = i(t);
-	          ribbon.merge(ribbonEnter).attr('d', ribbonPath);
+	          ribbon.merge(ribbonEnter).attr("d", ribbonPath);
 	        };
 	      }
 	
 	      function updateDimensions()
 	      {
 	        // Cache existing bound dimensions to preserve sort order.
-	        var dimension = g.selectAll('g.dimension'),
+	        var dimension = g.selectAll("g.dimension"),
 	            cache = {};
 	        dimension.each(function(d) { cache[d.name] = d; });
 	        dimensionNames.forEach(function(d) {
@@ -174,9 +178,9 @@ function D3_ParallelSets(vSelector, aProps)
 	        });
 	        dimensions.sort(compareY);
 	        // Populate tree with existing nodes.
-	        g.select('.ribbon').selectAll('path')
+	        g.select(".ribbon").selectAll("path")
 	            .each(function(d) {
-	              var path = d.path.split('\0'),
+	              var path = d.path.split("\0"),
 	                  node = tree,
 	                  n = path.length - 1;
 	              for (var i = 0; i < n; i++) {
@@ -214,42 +218,42 @@ function D3_ParallelSets(vSelector, aProps)
 	        });
 	        dimension = dimension.data(dimensions, dimensionName);
 	
-	        var dEnter = dimension.enter().append('g')
-	            .attr('class', 'dimension')
-	            .attr('transform', function(d) { return 'translate(0,' + d.y + ')'; })
-	            .on('mousedown.parsets', cancelEvent);
+	        var dEnter = dimension.enter().append("g")
+	            .attr("class", "dimension")
+	            .attr("transform", function(d) { return "translate(0," + d.y + ")"; })
+	            .on("mousedown.parsets", cancelEvent);
 	        dimension.merge(dEnter).each(function(d) {
 	              d.y0 = d.y;
 	              d.categories.forEach(function(d) { d.x0 = d.x; });
 	            });
-	        dEnter.append('rect')
-	            .attr('width', width)
-	            .attr('y', -45)
-	            .attr('height', 45);
-	        var textEnter = dEnter.append('text')
-	            .attr('class', 'dimension')
-	            .attr('transform', 'translate(0,-25)');
-	        textEnter.append('tspan')
-	            .attr('class', 'name')
+	        dEnter.append("rect")
+	            .attr("width", width)
+	            .attr("y", -45)
+	            .attr("height", 45);
+	        var textEnter = dEnter.append("text")
+	            .attr("class", "dimension")
+	            .attr("transform", "translate(0,-25)");
+	        textEnter.append("tspan")
+	            .attr("class", "name")
 	            .text(dimensionFormatName);
-	        textEnter.append('tspan')
-	            .attr('class', 'sort alpha')
-	            .attr('dx', '2em')
-	            .text('alpha »')
-	            .on('mousedown.parsets', cancelEvent);
-	        textEnter.append('tspan')
-	            .attr('class', 'sort size')
-	            .attr('dx', '2em')
-	            .text('size »')
-	            .on('mousedown.parsets', cancelEvent);
+	        textEnter.append("tspan")
+	            .attr("class", "sort alpha")
+	            .attr("dx", "2em")
+	            .text("alpha »")
+	            .on("mousedown.parsets", cancelEvent);
+	        textEnter.append("tspan")
+	            .attr("class", "sort size")
+	            .attr("dx", "2em")
+	            .text("size »")
+	            .on("mousedown.parsets", cancelEvent);
 	        dimension.merge(dEnter)
 	            .call(d3.drag()
 	              // .origin(identity)
-	              .on('start', function(d) {
+	              .on("start", function(d) {
 	                dragging = true;
 	                d.y0 = d.y;
 	              })
-	              .on('drag', function(d) {
+	              .on("drag", function(d) {
 	                d.y0 = d.y = d3.event.y;
 	                for (var i = 1; i < dimensions.length; i++)
 	                {
@@ -260,25 +264,25 @@ function D3_ParallelSets(vSelector, aProps)
 	                    ordinal.domain([]).range(d3.range(dimensions[0].categories.length));
 	                    nodes = layout(tree = buildTree({children: {}, value: 0}, data, dimensionNames, value_), dimensions, ordinal);
 	                    total = getTotal(dimensions);
-	                    g.selectAll('.ribbon, .ribbon-mouse').selectAll('path').remove();                      
+	                    g.selectAll(".ribbon, .ribbon-mouse").selectAll("path").remove();                      
 	                    updateCategories(dimension.merge(dEnter));
 	                    updateRibbons();
 	                    dimension.merge(dEnter).transition().duration(duration)
-	                        .attr('transform', translateY)
-	                        .tween('ribbon', ribbonTweenY);
+	                        .attr("transform", translateY)
+	                        .tween("ribbon", ribbonTweenY);
 	
 	                    // This isn't really doing anything...
-	                    event.call('sortDimensions');
+	                    event.call("sortDimensions");
 	                    break;
 	                  }
 	                }
 	                d3.select(this)
-	                    .attr('transform', 'translate(0,' + d.y + ')')
+	                    .attr("transform", "translate(0," + d.y + ")")
 	                    .transition();
 	                ribbon.filter(function(r) { return r.source.dimension === d || r.target.dimension === d; })
-	                    .attr('d', ribbonPath);
+	                    .attr("d", ribbonPath);
 	              })
-	              .on('end', function(d) {
+	              .on("end", function(d) {
 	                dragging = false;
 	                unhighlight();
 	                var y0 = 45,
@@ -287,16 +291,16 @@ function D3_ParallelSets(vSelector, aProps)
 	                  d.y = y0 + i * dy;
 	                });
 	                transition(d3.select(this))
-	                    .attr('transform', 'translate(0,' + d.y + ')')
-	                    .tween('ribbon', ribbonTweenY);
+	                    .attr("transform", "translate(0," + d.y + ")")
+	                    .tween("ribbon", ribbonTweenY);
 	              }));
-	        dimension.merge(dEnter).select('text').select('tspan.sort.alpha')
-	            .on('click.parsets', sortBy('alpha', function(a, b) { return a.name < b.name ? 1 : -1; }, dimension));
-	        dimension.merge(dEnter).select('text').select('tspan.sort.size')
-	            .on('click.parsets', sortBy('size', function(a, b) { return a.value - b.value; }, dimension));
+	        dimension.merge(dEnter).select("text").select("tspan.sort.alpha")
+	            .on("click.parsets", sortBy("alpha", function(a, b) { return a.name < b.name ? 1 : -1; }, dimension));
+	        dimension.merge(dEnter).select("text").select("tspan.sort.size")
+	            .on("click.parsets", sortBy("size", function(a, b) { return a.value - b.value; }, dimension));
 	        dimension.merge(dEnter).transition().duration(duration)
-	            .attr('transform', function(d) { return 'translate(0,' + d.y + ')'; })
-	            .tween('ribbon', ribbonTweenY);
+	            .attr("transform", function(d) { return "translate(0," + d.y + ")"; })
+	            .tween("ribbon", ribbonTweenY);
 	        dimension.exit().remove();
 	
 	        updateCategories(dimension.merge(dEnter));
@@ -307,41 +311,41 @@ function D3_ParallelSets(vSelector, aProps)
 	      {
 	        return function(d) {
 	          var direction = this.__direction = -(this.__direction || 1);
-	          d3.select(this).text(direction > 0 ? type + ' »' : '« ' + type);
+	          d3.select(this).text(direction > 0 ? type + " »" : "« " + type);
 	          d.categories.sort(function() { return direction * f.apply(this, arguments); });
 	          nodes = layout(tree, dimensions, ordinal);
 	          updateCategories(dimension.merge(dimension.enter()));
 	          updateRibbons();
 	
 	          // This isn't really doing anything...
-	          event.call('sortCategories');
+	          event.call("sortCategories");
 	        };
 	      }
 	
 	      function updateRibbons()
 	      {
-	        ribbon = g.select('.ribbon').selectAll('path')
+	        ribbon = g.select(".ribbon").selectAll("path")
 	            .data(nodes, function(d) { return d.path; });
-	        ribbonEnter = ribbon.enter().append('path')
+	        ribbonEnter = ribbon.enter().append("path")
 	            .each(function(d) {
 	              d.source.x0 = d.source.x;
 	              d.target.x0 = d.target.x;
 	            });
 	
 	        ribbonEnter.merge(ribbon)
-	            .attr('class', function(d) { return 'category-' + d.major; })
-	            .attr('d', ribbonPath);
+	            .attr("class", function(d) { return "category-" + d.major; })
+	            .attr("d", ribbonPath);
 	        ribbonEnter.merge(ribbon).sort(function(a, b) { return b.value - a.value; });
 	        ribbon.exit().remove();
 	
 	
-	        var mouse = g.select('.ribbon-mouse').selectAll('path')
+	        var mouse = g.select(".ribbon-mouse").selectAll("path")
 	            .data(nodes, function(d) { return d.path; });
-	        var mouseEnter = mouse.enter().append('path');   
+	        var mouseEnter = mouse.enter().append("path");   
 	
 	        mouseEnter.merge(mouse)
-	            .on('mousemove.parsets', function(d) {
-	              ribbon.classed('active', false);
+	            .on("mousemove.parsets", function(d) {
+	              ribbon.classed("active", false);
 	              if (dragging) return;
 	              highlight(d = d.node, true);
 	              showTooltip(tooltip_.call(this, d));
@@ -349,7 +353,7 @@ function D3_ParallelSets(vSelector, aProps)
 	            });
 	        mouse.merge(mouseEnter)
 	            .sort(function(a, b) { return b.value - a.value; })
-	            .attr('d', ribbonPathStatic);
+	            .attr("d", ribbonPathStatic);
 	        mouse.exit().remove();
 	      }
 	
@@ -366,7 +370,7 @@ function D3_ParallelSets(vSelector, aProps)
 	            n = nodes.length;
 	        return function(t) {
 	          for (var j = 0; j < n; j++) nodes[j].x0 = i[j](t);
-	          r.attr('d', ribbonPath);
+	          r.attr("d", ribbonPath);
 	        };
 	      }
 	
@@ -376,7 +380,7 @@ function D3_ParallelSets(vSelector, aProps)
 	            i = d3.interpolateNumber(d.y0, d.y);
 	        return function(t) {
 	          d.y0 = i(t);
-	          r.attr('d', ribbonPath);
+	          r.attr("d", ribbonPath);
 	        };
 	      }
 	
@@ -394,7 +398,7 @@ function D3_ParallelSets(vSelector, aProps)
 	          var active = highlight.indexOf(d.node) >= 0;
 	          if (active) this.parentNode.appendChild(this);
 	          return active;
-	        }).classed('active', true);
+	        }).classed("active", true);
 	      }
 	
 	      // Unhighlight all nodes.
@@ -402,40 +406,40 @@ function D3_ParallelSets(vSelector, aProps)
 	      {
 	        if (dragging)
 	        	return;
-	        ribbon.classed('active', false);
+	        ribbon.classed("active", false);
 	        hideTooltip();
 	      }
 	
 	      function updateCategories(g) {          
-	        var category = g.selectAll('g.category')
+	        var category = g.selectAll("g.category")
 	            .data(function(d) { return d.categories; }, function(d) { return d.name; });
 	
-	        var categoryEnter = category.enter().append('g')
-	            .attr('class', 'category');
+	        var categoryEnter = category.enter().append("g")
+	            .attr("class", "category");
 	
 	        categoryEnter.merge(category)
-	            .attr('transform', function(d) { return 'translate(' + d.x + ')'; });
+	            .attr("transform", function(d) { return "translate(" + d.x + ")"; });
 	
 	        // Don't really understand why I had to comment this one out
 	        // category.exit().remove();
 	        category
 	            .merge(categoryEnter)
-	            .on('mousemove.parsets', function(d) {
-	              ribbon.classed('active', false);
+	            .on("mousemove.parsets", function(d) {
+	              ribbon.classed("active", false);
 	              if (dragging) return;
 	              d.nodes.forEach(function(d) { highlight(d); });
 	              showTooltip(categoryTooltip.call(this, d));
 	              d3.event.stopPropagation();
 	            })
-	            .on('mouseout.parsets', unhighlight)
-	            .on('mousedown.parsets', cancelEvent)
+	            .on("mouseout.parsets", unhighlight)
+	            .on("mousedown.parsets", cancelEvent)
 	            .call(d3.drag()
 	              // .origin(identity)
-	              .on('start', function(d) {
+	              .on("start", function(d) {
 	                dragging = true;
 	                d.x0 = d.x;
 	              })
-	              .on('drag', function(d) {
+	              .on("drag", function(d) {
 	                d.x = d3.event.x;
 	                var categories = d.dimension.categories;
 	                for (var i = 0, c = categories[0]; ++i < categories.length;) {
@@ -445,7 +449,7 @@ function D3_ParallelSets(vSelector, aProps)
 	                    updateRibbons();
 	                    updateCategories(g);
 	                    highlight(d.node);
-	                    event.call('sortCategories');
+	                    event.call("sortCategories");
 	                    break;
 	                  }
 	                }
@@ -457,40 +461,40 @@ function D3_ParallelSets(vSelector, aProps)
 	                  x += e.value / total * (width - spacing) + p;
 	                });
 	                d3.select(this)
-	                    .attr('transform', function(d) { return 'translate(' + d.x0 + ')'; })
+	                    .attr("transform", function(d) { return "translate(" + d.x0 + ")"; })
 	                    .transition();
 	                ribbon.filter(function(r) { return r.source.node === d || r.target.node === d; })
-	                    .attr('d', ribbonPath);
+	                    .attr("d", ribbonPath);
 	              })
-	              .on('end', function(d)
+	              .on("end", function(d)
 	              {
 	                dragging = false;
 	                unhighlight();
 	                updateRibbons();
 	                transition(d3.select(this))
-	                    .attr('transform', 'translate(' + d.x + ')')
-	                    .tween('ribbon', ribbonTweenX);
+	                    .attr("transform", "translate(" + d.x + ")")
+	                    .tween("ribbon", ribbonTweenX);
 	              }));
 	        category.merge(categoryEnter).transition().duration(duration)
-	            .attr('transform', function(d) { return 'translate(' + d.x + ')'; })
-	            .tween('ribbon', ribbonTweenX);
+	            .attr("transform", function(d) { return "translate(" + d.x + ")"; })
+	            .tween("ribbon", ribbonTweenX);
 	
-	        categoryEnter.append('rect')
-	            .attr('width', function(d) { return d.dx; })
-	            .attr('y', -20)
-	            .attr('height', 20);
-	        categoryEnter.append('line')
-	            .style('stroke-width', 2);
-	        categoryEnter.append('text')
-	            .attr('dy', '-.3em');
-	        category.merge(categoryEnter).select('rect')
-	            .attr('width', function(d) { return d.dx; })
-	            .attr('class', function(d) {
-	              return 'category-' + (d.dimension === dimensions[0] ? ordinal(d.name) : 'background');
+	        categoryEnter.append("rect")
+	            .attr("width", function(d) { return d.dx; })
+	            .attr("y", -20)
+	            .attr("height", 20);
+	        categoryEnter.append("line")
+	            .style("stroke-width", 2);
+	        categoryEnter.append("text")
+	            .attr("dy", "-.3em");
+	        category.merge(categoryEnter).select("rect")
+	            .attr("width", function(d) { return d.dx; })
+	            .attr("class", function(d) {
+	              return "category-" + (d.dimension === dimensions[0] ? ordinal(d.name) : "background");
 	            });
-	        category.merge(categoryEnter).select('line')
-	            .attr('x2', function(d) { return d.dx; });
-	        category.merge(categoryEnter).select('text')
+	        category.merge(categoryEnter).select("line")
+	            .attr("x2", function(d) { return d.dx; });
+	        category.merge(categoryEnter).select("text")
 	            .text(truncateText(function(d) { return d.name; }, function(d) { return d.dx; }));
 	      }
 	    });
@@ -575,12 +579,12 @@ function D3_ParallelSets(vSelector, aProps)
 	  };
 	
 	
-	  var body = d3.select('body');
-	  var tooltip = body.append('div')
-	      .style('display', 'none')
-	      .attr('class', 'parsetstooltip');
+	  var body = d3.select("body");
+	  var tooltip = body.append("div")
+	      .style("display", "none")
+	      .attr("class", "parsetstooltip");
 	
-	  return d3.rebind(parsets, event, 'on').width(960).height(600);
+	  return d3.rebind(parsets, event, "on").width(960).height(600);
 	
 	
 	  function dimensionFormatName(d, i)
@@ -592,15 +596,15 @@ function D3_ParallelSets(vSelector, aProps)
 	  {
 	    var m = d3.mouse(body.node());
 	    tooltip
-	        .style('display', null)
-	        .style('left', m[0] + 30 + 'px')
-	        .style('top', m[1] - 20 + 'px')
+	        .style("display", null)
+	        .style("left", m[0] + 30 + "px")
+	        .style("top", m[1] - 20 + "px")
 	        .html(html);
 	  }
 	
 	  function hideTooltip()
 	  {
-	    tooltip.style('display', 'none');
+	    tooltip.style("display", "none");
 	  }
 	
 	  function transition(g)
@@ -673,7 +677,7 @@ function D3_ParallelSets(vSelector, aProps)
 	        var k = c.name;
 	        if (!node.children.hasOwnProperty(k)) return;
 	        var child = node.children[k];
-	        child.path = d.path + '\0' + k;
+	        child.path = d.path + "\0" + k;
 	        var target = child.target || {node: c, dimension: dimension};
 	        target.x = c.in.dx;
 	        target.dx = child.value / total * (width - spacing);
@@ -714,17 +718,17 @@ function D3_ParallelSets(vSelector, aProps)
 	  {
 	    var m0, m1;
 	    return (tension === 1 ? [
-	        'M', [sx, sy],
-	        'L', [tx, ty],
-	        'h', tdx,
-	        'L', [sx + sdx, sy],
-	        'Z']
-	     : ['M', [sx, sy],
-	        'C', [sx, m0 = tension * sy + (1 - tension) * ty], ' ',
-	             [tx, m1 = tension * ty + (1 - tension) * sy], ' ', [tx, ty],
-	        'h', tdx,
-	        'C', [tx + tdx, m1], ' ', [sx + sdx, m0], ' ', [sx + sdx, sy],
-	        'Z']).join('');
+	        "M", [sx, sy],
+	        "L", [tx, ty],
+	        "h", tdx,
+	        "L", [sx + sdx, sy],
+	        "Z"]
+	     : ["M", [sx, sy],
+	        "C", [sx, m0 = tension * sy + (1 - tension) * ty], " ",
+	             [tx, m1 = tension * ty + (1 - tension) * sy], " ", [tx, ty],
+	        "h", tdx,
+	        "C", [tx + tdx, m1], " ", [sx + sdx, m0], " ", [sx + sdx, sy],
+	        "Z"]).join("");
 	  }
 	
 	  function compareY(a, b)
@@ -767,7 +771,7 @@ function D3_ParallelSets(vSelector, aProps)
 	    var t = this.textContent = text(d, i),
 	        w = width(d, i);
 	    if (this.getComputedTextLength() < w) return t;
-	    this.textContent = '…' + t;
+	    this.textContent = "…" + t;
 	    var lo = 0,
 	        hi = t.length + 1,
 	        x;
@@ -777,7 +781,7 @@ function D3_ParallelSets(vSelector, aProps)
 	      if ((x = this.getSubStringLength(0, mid)) < w) lo = mid + 1;
 	      else hi = mid;
 	    }
-	    return lo > 1 ? t.substr(0, lo - 2) + '…' : '';
+	    return lo > 1 ? t.substr(0, lo - 2) + "…" : "";
 	  };
 	}
 	
@@ -835,7 +839,7 @@ function D3_ParallelSets(vSelector, aProps)
 	
 	function translateY(d)
 	{
-		return 'translate(0,' + d.y + ')';
+		return "translate(0," + d.y + ")";
 	}
 	
 	function D3_ParallelSets_defaultTooltip(d)
@@ -850,12 +854,12 @@ function D3_ParallelSets(vSelector, aProps)
 	    }
 	    d = d.parent;
 	  }
-	  return path.join(' / ') + '<br>' + D3_ParallelSets_FormatNumberValue(value) + ' (' + D3_ParallelSets_FormatNumberPercent(value / d.value) + ')';
+	  return path.join(" / ") + "<br>" + D3_ParallelSets_FormatNumberValue(value) + " (" + D3_ParallelSets_FormatNumberPercent(value / d.value) + ")";
 	}
 	
 	function D3_ParallelSets_defaultCategoryTooltip(d)
 	{
-	  return d.name + '<br>' + D3_ParallelSets_FormatNumberValue(d.value) + ' (' + D3_ParallelSets_FormatNumberPercent(d.value / d.dimension.value) + ')';
+	  return d.name + "<br>" + D3_ParallelSets_FormatNumberValue(d.value) + " (" + D3_ParallelSets_FormatNumberPercent(d.value / d.dimension.value) + ")";
 	}
 	  
 

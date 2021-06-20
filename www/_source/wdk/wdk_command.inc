@@ -24,7 +24,7 @@
 			
 			$strName = StringLowerCase($strName);
 			
-			$arrayCommandDef['parameter'] = $arrayParams;
+			$arrayCommandDef["parameter"] = $arrayParams;
 			
 			$this->m_arrayCommandDefs[$strName] = $arrayCommandDef;
 		}
@@ -34,35 +34,35 @@
 		{
 			$arrayParams = array();
 			$this->AddCommandDefinition(
-				'install',
+				"install",
 				$arrayParams);
 		}
 		
 		function AddCommandDefinition_list(
 			$nFilterOptions = 0,
 			$nSortOptions = 0,
-			$strPrefix = '',
+			$strPrefix = "",
 			$arrayAdditionalParameter = array())
 		{
-			if ($strPrefix != '')
+			if ($strPrefix != "")
 			{
-				$strPrefixUnderscore = $strPrefix . '_';
+				$strPrefixUnderscore = $strPrefix . "_";
 			}
 			else
 			{
-				$strPrefixUnderscore = '';
+				$strPrefixUnderscore = "";
 			}
-			$arrayParams = array('offset','blocksize');
+			$arrayParams = array("offset","blocksize");
 			for ($nIndex = 1; $nIndex <= $nFilterOptions; $nIndex++)
 			{
-				array_push($arrayParams,$strPrefixUnderscore.'filter'.$nIndex);
-				array_push($arrayParams,$strPrefixUnderscore.'filter'.$nIndex.'_operator');
-				array_push($arrayParams,$strPrefixUnderscore.'filter'.$nIndex.'_value');
+				array_push($arrayParams,$strPrefixUnderscore."filter".$nIndex);
+				array_push($arrayParams,$strPrefixUnderscore."filter".$nIndex."_operator");
+				array_push($arrayParams,$strPrefixUnderscore."filter".$nIndex."_value");
 			}
 			for ($nIndex = 1; $nIndex <= $nSortOptions; $nIndex++)
 			{
-				array_push($arrayParams,$strPrefixUnderscore.'sort'.$nIndex);
-				array_push($arrayParams,$strPrefixUnderscore.'sort'.$nIndex.'_order');
+				array_push($arrayParams,$strPrefixUnderscore."sort".$nIndex);
+				array_push($arrayParams,$strPrefixUnderscore."sort".$nIndex."_order");
 			}
 			if (is_array($arrayAdditionalParameter))
 			{
@@ -70,7 +70,7 @@
 			}
 			
 			$this->AddCommandDefinition(
-				$strPrefix.'list',
+				$strPrefix."list",
 				$arrayParams);
 			 
 		}
@@ -79,7 +79,7 @@
 		{
 			$arrayParams = array();
 			$this->AddCommandDefinition(
-				'help',
+				"help",
 				$arrayParams);
 		}
 
@@ -87,7 +87,7 @@
 		{
 			$arrayParams = array();
 			$this->AddCommandDefinition(
-				'selfcheck',
+				"selfcheck",
 				$arrayParams);
 		}
 
@@ -97,7 +97,7 @@
 			{
 				$arrayDefaultParams = array();
 			}
-			if ($strCommand == '')
+			if ($strCommand == "")
 			{
 				return 'COMMAND_MISSING';	
 			}
@@ -106,7 +106,7 @@
 				return 'COMMAND_UNKNOWN';	
 			}
 			
-			$arrayCommandParams = ArrayGetValue($this->m_arrayCommandDefs[$strCommand],'parameter');
+			$arrayCommandParams = ArrayGetValue($this->m_arrayCommandDefs[$strCommand],"parameter");
 			if (!is_array($arrayCommandParams))
 			{
 				$arrayCommandParams = array();

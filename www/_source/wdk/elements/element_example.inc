@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				'example',
+				"example",
 				$strStyleID,
 				false,
 				true);
@@ -17,7 +17,7 @@
 		function RenderExample($strPayload)
 		{
 			$strOutput = $this->GetLayoutHTML(); 
-			$arrayItems['PAYLOAD'] = $strPayload;
+			$arrayItems["PAYLOAD"] = $strPayload;
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);
 			return $strOutput;			

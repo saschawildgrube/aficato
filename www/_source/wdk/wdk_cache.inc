@@ -1,6 +1,8 @@
 <?php
 
 	require_once('wdk_error.inc');
+	require_once('wdk_serialize.inc');
+
 
 	interface ICache
 	{
@@ -238,7 +240,8 @@
 							{
 								$strFilePath = $this->GetCacheDirectory() . $strFileName;
 								$vSerializedCacheObject = FileRead($strFilePath);
-								return unserialize($vSerializedCacheObject);
+								$vCacheObject = ObjectUnserialize($vSerializedCacheObject);
+								return $vCacheObject;
 							}
 						}
 					}
@@ -256,7 +259,11 @@
 			$this->DeleteCacheObject($strID);
 			$strFileName = $this->MakeCacheObjectFileName($strID,$nSecondsTTL);
 			$strFilePath = $this->GetCacheDirectory().$strFileName;
-			$vSerializedCacheObject = serialize($vCacheObject);
+			$vSerializedCacheObject = ObjectSerialize($vCacheObject);
+			if ($vSerializedCacheObject == false)
+			{
+				return false;
+			}
 			return FileWrite($strFilePath,$vSerializedCacheObject,true);
 		}
 		

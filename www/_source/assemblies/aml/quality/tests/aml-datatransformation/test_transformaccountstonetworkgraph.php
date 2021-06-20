@@ -95,7 +95,7 @@
 				'nodes' => array(
 					array(
 						'id' => 'A',
-						'name' => 'A',
+						'label' => 'A',
 						'currency' => '€',
 						'text_transaction_amount_in' => '0',
 						'text_transaction_amount_out' => '100',
@@ -110,7 +110,7 @@
 						),
 					array(
 						'id' => 'B',
-						'name' => 'B',
+						'label' => 'B',
 						'currency' => '€',
 						'text_transaction_amount_in' => '100',
 						'text_transaction_amount_out' => '0',
@@ -162,7 +162,7 @@
 				'nodes' => array(
 					array(
 						'id' => 'A',
-						'name' => 'A',
+						'label' => 'A',
 						'currency' => '€',
 						'text_transaction_amount_in' => '0',
 						'text_transaction_amount_out' => '100',
@@ -177,7 +177,7 @@
 						),
 					array(
 						'id' => 'B',
-						'name' => 'B',
+						'label' => 'B',
 						'currency' => '€',
 						/*'text_transaction_amount_in' => '100',
 						'text_transaction_amount_out' => '0',

@@ -9,20 +9,20 @@ WDK web services accept parameters via GET parameters within the request URL and
 WDK web services can render their HTTP response as XML, JSON, HTML, different CSV variants and other formats.
 
 
-The response of a web service is an associative and numeric multilevel array. The root node of this tree is called 'WEBSERVICE'. The 'RESULT' subnode contains the actual data being returned. If an error occured the node 'ERROR' contains a string error code.
+The response of a web service is an associative and numeric multilevel array. The root node of this tree is called "WEBSERVICE". The "RESULT" subnode contains the actual data being returned. If an error occured the node "ERROR" contains a string error code.
 ==Consumption==
 ===Default Parameters===
 WDK web services support a number of parameters by default. Additional parameters depend on the command being requested.
 ;command
-:The 'command' parameter specifies the command to be executed. Some may refer to this as an 'action' or 'route' to a web service. All web services support the 'help', 'selfcheck' and 'install' commands. Each web service implements its own set of commands though. Use the 'help' command to find out which commands are supported.
+:The "command" parameter specifies the command to be executed. Some may refer to this as an 'action' or 'route' to a web service. All web services support the "help", "selfcheck" and "install" commands. Each web service implements its own set of commands though. Use the "help" command to find out which commands are supported.
 ;accesscode
 :A secret token to be supplied to authorize the consumer. This parameter should NOT be supplied as an URL parameter as it may be stored in web server log files.
 ;format
-:The format in which the response of a web service should be rendered. The following formats are supported by default: 'xml', 'jsonpretty', 'json', 'printr', 'html', 'csv' and 'csvpath'.
+:The format in which the response of a web service should be rendered. The following formats are supported by default: "xml", "jsonpretty", "json", "printr", "html", "csv" and "csvpath".
 ;csvpath
-:If the format 'csv' is used, the 'csvpath' parameter can be used to specify the node of the result tree that should be contained in the response. The 'csv' format only allows the transfer of tables but does not allow the transfer of complex tree structures.
+:If the format "csv" is used, the "csvpath" parameter can be used to specify the node of the result tree that should be contained in the response. The "csv" format only allows the transfer of tables but does not allow the transfer of complex tree structures.
 ;trace
-:Like all WDK based web applications all web services support the 'trace' parameter. If set to '1' the result contains trace output collected from its own activity and all subsequent web service calls.
+:Like all WDK based web applications all web services support the "trace" parameter. If set to "1" the result contains trace output collected from its own activity and all subsequent web service calls.
 ===Default Commands===
 ;help
 :The help command provides documentation on the web service

@@ -29,8 +29,8 @@
 				false,
 				';',
 				array(),
-				''',
-				'''');
+				'"',
+				'""');
 			// Transform to Accounts data format
 			$arrayMapping = array(
 				'FROM' => 'ORIGINATOR_CLEAN',

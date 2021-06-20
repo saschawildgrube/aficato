@@ -7,7 +7,7 @@
 		function __construct()
 		{
 			$this->m_arrayData = array();	
-			$this->m_arrayData['controls'] = array();
+			$this->m_arrayData["controls"] = array();
 		}
 		
 		function GetData()
@@ -17,131 +17,131 @@
 		
 		function SetURL($strURL,$arrayParams)
 		{
-			$this->m_arrayData['url'] = $strURL;
-			$this->m_arrayData['params'] = $arrayParams;
+			$this->m_arrayData["url"] = $strURL;
+			$this->m_arrayData["params"] = $arrayParams;
 		}
 		
 		function SetHiddenValue($strParam,$strValue)
 		{
-			$this->m_arrayData['params'][$strParam] = $strValue;
+			$this->m_arrayData["params"][$strParam] = $strValue;
 		}
 		
 		function AddControlText($strID,$strName,$strLabel,$strDefaultValue,$nSize,$nMaxLength,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'text';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strDefaultValue;
-			$arrayControl['width'] = $nSize;
-			$arrayControl['maxlength'] = $nMaxLength;
-			$arrayControl['readonly'] = $bReadOnly;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "text";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strDefaultValue;
+			$arrayControl["width"] = $nSize;
+			$arrayControl["maxlength"] = $nMaxLength;
+			$arrayControl["readonly"] = $bReadOnly;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 		
 		function AddControlTextArea($strID,$strName,$strLabel,$strDefaultValue,$nCols,$nRows,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'textarea';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strDefaultValue;
-			$arrayControl['width'] = $nCols;
-			$arrayControl['rows'] = $nRows;
-			$arrayControl['readonly'] = $bReadOnly;			
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "textarea";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strDefaultValue;
+			$arrayControl["width"] = $nCols;
+			$arrayControl["rows"] = $nRows;
+			$arrayControl["readonly"] = $bReadOnly;			
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 		function AddControlPassword($strID,$strName,$strLabel,$strDefaultValue,$nSize,$nMaxLength,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'password';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strDefaultValue;
-			$arrayControl['width'] = $nSize;
-			$arrayControl['maxlength'] = $nMaxLength;
-			$arrayControl['readonly'] = $bReadOnly;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "password";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strDefaultValue;
+			$arrayControl["width"] = $nSize;
+			$arrayControl["maxlength"] = $nMaxLength;
+			$arrayControl["readonly"] = $bReadOnly;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 		function AddControlCheckbox($strID,$strName,$strLabel,$bDefaultValue,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'checkbox';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $bDefaultValue;
-			$arrayControl['readonly'] = $bReadOnly;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "checkbox";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $bDefaultValue;
+			$arrayControl["readonly"] = $bReadOnly;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 
 		function AddControlSelect($strID,$strName,$strLabel,$arrayOptions,$strDefaultValue,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'select';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strDefaultValue;
-			$arrayControl['options'] = $arrayOptions;
-			$arrayControl['readonly'] = $bReadOnly;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "select";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strDefaultValue;
+			$arrayControl["options"] = $arrayOptions;
+			$arrayControl["readonly"] = $bReadOnly;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 		function AddControlRadio($strID,$strName,$strLabel,$arrayOptions,$strDefaultValue,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'radio';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strDefaultValue;
-			$arrayControl['options'] = $arrayOptions;
-			$arrayControl['readonly'] = $bReadOnly;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "radio";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strDefaultValue;
+			$arrayControl["options"] = $arrayOptions;
+			$arrayControl["readonly"] = $bReadOnly;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 		function AddControlDate($strID,$strName,$strLabel,$strDefaultValue,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'date';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strDefaultValue;
-			//$arrayControl['options'] = $arrayOptions;
-			$arrayControl['readonly'] = $bReadOnly;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "date";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strDefaultValue;
+			//$arrayControl["options"] = $arrayOptions;
+			$arrayControl["readonly"] = $bReadOnly;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 		function AddControlDateTime($strID,$strName,$strLabel,$strDefaultValue,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'datetime';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strDefaultValue;
-			//$arrayControl['options'] = $arrayOptions;
-			$arrayControl['readonly'] = $bReadOnly;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "datetime";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strDefaultValue;
+			//$arrayControl["options"] = $arrayOptions;
+			$arrayControl["readonly"] = $bReadOnly;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 		function AddControlFile($strID,$strName,$strLabel,$bReadOnly = false)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = $strName;
-			$arrayControl['type'] = 'file';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['readonly'] = $bReadOnly;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = $strName;
+			$arrayControl["type"] = "file";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["readonly"] = $bReadOnly;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 		/*
@@ -149,120 +149,120 @@
 		specific ID or name settings. That is why the parameter order is
 		different here.
 		*/
-		function AddControlButtonSubmit($strLabel,$strID = 'SUBMIT', $strValue='')
+		function AddControlButtonSubmit($strLabel,$strID = "SUBMIT", $strValue="")
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = 'submit';
-			$arrayControl['type'] = 'submit';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strValue;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = "submit";
+			$arrayControl["type"] = "submit";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strValue;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
-		function AddControlButtonSubmitDownload($strLabel,$strID = 'SUBMIT', $strValue='')
+		function AddControlButtonSubmitDownload($strLabel,$strID = "SUBMIT", $strValue="")
 		{
 			$strDownloadToken = MakeNumericToken(6);
-			$this->SetHiddenValue('downloadtoken',$strDownloadToken);
+			$this->SetHiddenValue("downloadtoken",$strDownloadToken);
 			
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = 'submit';
-			$arrayControl['type'] = 'submitdownload';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['defaultvalue'] = $strValue;
-			$arrayControl['downloadtoken'] = $strDownloadToken;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = "submit";
+			$arrayControl["type"] = "submitdownload";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["defaultvalue"] = $strValue;
+			$arrayControl["downloadtoken"] = $strDownloadToken;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 
 
 		function AddControlButtonReset($strLabel)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = 'RESET';
-			$arrayControl['name'] = 'reset';
-			$arrayControl['type'] = 'reset';
-			$arrayControl['label'] = $strLabel;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = "RESET";
+			$arrayControl["name"] = "reset";
+			$arrayControl["type"] = "reset";
+			$arrayControl["label"] = $strLabel;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 		
 		function AddControlStatic($strID,$strPayload)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = 'static';
-			$arrayControl['type'] = 'static';
-			$arrayControl['payload'] = $strPayload;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = "static";
+			$arrayControl["type"] = "static";
+			$arrayControl["payload"] = $strPayload;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 	
 		function AddControlSeparator()
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = 'SEPARATOR';
-			$arrayControl['name'] = 'separator';
-			$arrayControl['type'] = 'separator';
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = "SEPARATOR";
+			$arrayControl["name"] = "separator";
+			$arrayControl["type"] = "separator";
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 	
 		function AddControlReadOnly($strID,$strLabel,$strPayload)
 		{
 			$arrayControl = array();
-			$arrayControl['id'] = $strID;
-			$arrayControl['name'] = 'readonly';
-			$arrayControl['type'] = 'readonly';
-			$arrayControl['label'] = $strLabel;
-			$arrayControl['payload'] = $strPayload;
-			array_push($this->m_arrayData['controls'],$arrayControl);
+			$arrayControl["id"] = $strID;
+			$arrayControl["name"] = "readonly";
+			$arrayControl["type"] = "readonly";
+			$arrayControl["label"] = $strLabel;
+			$arrayControl["payload"] = $strPayload;
+			array_push($this->m_arrayData["controls"],$arrayControl);
 		}
 		
-		function IsValid(&$strErrorText = '')
+		function IsValid(&$strErrorText = "")
 		{
-			if (ArrayGetValue($this->m_arrayData,'url') == '')
+			if (ArrayGetValue($this->m_arrayData,"url") == "")
 			{
-				$strErrorText = 'URL is not set.';
+				$strErrorText = "URL is not set.";
 				return false;	
 			}
-			$arrayParams = ArrayGetValue($this->m_arrayData,'params');
+			$arrayParams = ArrayGetValue($this->m_arrayData,"params");
 			if (!is_array($arrayParams))
 			{
-				$strErrorText = '\'params\' is not an array.';
+				$strErrorText = "\"params\" is not an array.";
 				return false;	
 			}
-			$arrayControls = ArrayGetValue($this->m_arrayData,'controls');
+			$arrayControls = ArrayGetValue($this->m_arrayData,"controls");
 			if (!is_array($arrayControls))
 			{
-				$strErrorText = '\'controls\' is not an array.';
+				$strErrorText = "\"controls\" is not an array.";
 				return false;	
 			}
 			foreach ($arrayControls as $control)
 			{
-				$strType = ArrayGetValue($control,'type');
-				if ($strType == '')
+				$strType = ArrayGetValue($control,"type");
+				if ($strType == "")
 				{
-					$strErrorText = '\'type\' is not set.';
+					$strErrorText = "\"type\" is not set.";
 					return false;	
 				}				
-				$strID = ArrayGetValue($control,'id');
-				if ($strID == '')
+				$strID = ArrayGetValue($control,"id");
+				if ($strID == "")
 				{
-					$strErrorText = '\'id\' is not set.';
+					$strErrorText = "\"id\" is not set.";
 					return false;	
 				}
 				if ($strID != StringUpperCase($strID))
 				{
-					$strErrorText = 'id \'$strID\' must be uppercase.';
+					$strErrorText = "id \"$strID\" must be uppercase.";
 					return false;	
 				}
 				if (!ctype_alpha(StringSection($strID,0,1)))
 				{
-					$strErrorText = 'id \'$strID\' must start with a character (it must not be a number).';
+					$strErrorText = "id \"$strID\" must start with a character (it must not be a number).";
 					return false;	
 				}
-				$strName = ArrayGetValue($control,'name');
-				if ($strName == '')
+				$strName = ArrayGetValue($control,"name");
+				if ($strName == "")
 				{
-					$strErrorText = '\'name\' is not set.';
+					$strErrorText = "\"name\" is not set.";
 					return false;	
 				}				
 			}
@@ -305,31 +305,31 @@
 		protected
 		function GetValueForControl($control,&$arrayValues)
 		{
-			$strName = ArrayGetValue($control,'name');
+			$strName = ArrayGetValue($control,"name");
 			if (ArrayKeyExists($arrayValues,$strName) == true)
 			{
 				return ArrayGetValue($arrayValues,$strName);
 			}
-			return ArrayGetValue($control,'defaultvalue');
+			return ArrayGetValue($control,"defaultvalue");
 		}
 		
 		protected
 		function RenderLabel($control,$arrayErrors)
 		{
-			$strID = ArrayGetValue($control,'id');
-			$strName = ArrayGetValue($control,'name');
-			$strType = ArrayGetValue($control,'type');
-			$strLabelText = '';
+			$strID = ArrayGetValue($control,"id");
+			$strName = ArrayGetValue($control,"name");
+			$strType = ArrayGetValue($control,"type");
+			$strLabelText = "";
 			$bLabelFirst = true;
-			if ($strType == 'checkbox')
+			if ($strType == "checkbox")
 			{
-				$bLabelFirst = GetBoolValue($this->GetLayoutDef('LAYOUT_CONTROL_CHECKBOX_LABELFIRST'));
+				$bLabelFirst = GetBoolValue($this->GetLayoutDef("LAYOUT_CONTROL_CHECKBOX_LABELFIRST"));
 			}
 			if ($bLabelFirst == true)
 			{
-				$strLabelText = ArrayGetValue($control,'label');
+				$strLabelText = ArrayGetValue($control,"label");
 			}
-			$bMandatory = (ArrayGetValue($control,'mandatory') != '')?(true):(false);
+			$bMandatory = (ArrayGetValue($control,"mandatory") != "")?(true):(false);
 			if (ArrayKeyExists($arrayErrors,$strID) == true)
 			{
 				$bError = true;	
@@ -340,123 +340,123 @@
 			}
 			
 			
-			$strLayoutPostfix = '';
-			$strErrorText = '';
+			$strLayoutPostfix = "";
+			$strErrorText = "";
 			if ($bMandatory)
 			{
-				$strLayoutPostfix .= '_MANDATORY';
+				$strLayoutPostfix .= "_MANDATORY";
 			}
 			if ($bError)
 			{
-				$strLayoutPostfix .= '_ERROR';
-				if ($arrayErrors[$strID] != '')
+				$strLayoutPostfix .= "_ERROR";
+				if ($arrayErrors[$strID] != "")
 				{
-					$strLayoutPostfix .= 'WITHTEXT';
+					$strLayoutPostfix .= "WITHTEXT";
 					$strErrorText = $arrayErrors[$strID];
 				}
 			}
-			$strLabel = $this->GetLayoutDef('LAYOUT_LABEL'.$strLayoutPostfix.'_'.StringUpperCase($strType));
-			if ($strLabel == '')
+			$strLabel = $this->GetLayoutDef("LAYOUT_LABEL".$strLayoutPostfix."_".StringUpperCase($strType));
+			if ($strLabel == "")
 			{
-				$strLabel = $this->GetLayoutDef('LAYOUT_LABEL'.$strLayoutPostfix);
+				$strLabel = $this->GetLayoutDef("LAYOUT_LABEL".$strLayoutPostfix);
 			}
 			
 			$strID = $this->GetControlID($control);
 			$strClassLabel = $this->GetClassHTML_Label($control);			
-			if ($strType == 'readonly')
+			if ($strType == "readonly")
 			{
-				$strLabelTag = '<label $strClassLabel>$strLabelText</label>';
+				$strLabelTag = "<label $strClassLabel>$strLabelText</label>";
 			}
 			else
 			{
-				$strLabelTag = '<label for=\''. $strID . '\'$strClassLabel>$strLabelText</label>';
+				$strLabelTag = "<label for=\"". $strID . "\"$strClassLabel>$strLabelText</label>";
 			}
 				
-			$strLabel = ReplaceString($strLabel,'{LABELTEXT}',$strLabelTag);
-			if ($strErrorText != '')
+			$strLabel = ReplaceString($strLabel,"{LABELTEXT}",$strLabelTag);
+			if ($strErrorText != "")
 			{
-				$strLabel = ReplaceString($strLabel,'{ERRORTEXT}',$strErrorText);
+				$strLabel = ReplaceString($strLabel,"{ERRORTEXT}",$strErrorText);
 			}
-			return $strLabel . '\n';
+			return $strLabel . "\n";
 		}
 		
 		protected
 		function GetClassHTML_Form()
 		{
-			$strClass = $this->GetLayoutDef('LAYOUT_CLASS_FORM');
-			if ($strClass == '')
+			$strClass = $this->GetLayoutDef("LAYOUT_CLASS_FORM");
+			if ($strClass == "")
 			{
-				return '';						
+				return "";						
 			}
-			return ' class=\'$strClass\'';
+			return " class=\"$strClass\"";
 		}		
 		
 		protected
 		function GetClassHTML_Control($control)
 		{
-			$strType = ArrayGetValue($control,'type');
-			$strClass = $this->GetLayoutDef('LAYOUT_CLASS_CONTROL_'.StringUpperCase($strType));
-			if ($strClass == '')
+			$strType = ArrayGetValue($control,"type");
+			$strClass = $this->GetLayoutDef("LAYOUT_CLASS_CONTROL_".StringUpperCase($strType));
+			if ($strClass == "")
 			{
-				if ($strType == 'submitdownload')
+				if ($strType == "submitdownload")
 				{
-					$strClass = $this->GetLayoutDef('LAYOUT_CLASS_CONTROL_SUBMIT');
+					$strClass = $this->GetLayoutDef("LAYOUT_CLASS_CONTROL_SUBMIT");
 				}
-				if ($strClass == '')
+				if ($strClass == "")
 				{
-					$strClass = $this->GetLayoutDef('LAYOUT_CLASS_CONTROL');
-					if ($strClass == '')
+					$strClass = $this->GetLayoutDef("LAYOUT_CLASS_CONTROL");
+					if ($strClass == "")
 					{
-						return '';						
+						return "";						
 					}
 				}					
 			}
-			if ($strClass == '!')
+			if ($strClass == "!")
 			{
-				return '';	
+				return "";	
 			}
-			return ' class=\'$strClass\'';
+			return " class=\"$strClass\"";
 		}
 
 		protected
 		function GetClassHTML_Label($control)
 		{
-			$strType = ArrayGetValue($control,'type');
-			$strClass = $this->GetLayoutDef('LAYOUT_CLASS_LABEL_'.StringUpperCase($strType));
-			if ($strClass == '!')
+			$strType = ArrayGetValue($control,"type");
+			$strClass = $this->GetLayoutDef("LAYOUT_CLASS_LABEL_".StringUpperCase($strType));
+			if ($strClass == "!")
 			{
-				return '';	
+				return "";	
 			}
-			if ($strClass == '')
+			if ($strClass == "")
 			{
-				$strClass = $this->GetLayoutDef('LAYOUT_CLASS_LABEL');
-				if ($strClass == '')
+				$strClass = $this->GetLayoutDef("LAYOUT_CLASS_LABEL");
+				if ($strClass == "")
 				{
-					return '';						
+					return "";						
 				}
 			}
-			return ' class=\'$strClass\'';
+			return " class=\"$strClass\"";
 		}
 
 
 		protected 
 		function RenderControlText($control,&$arrayValues)
 		{
-			if (ArrayGetValue($control,'type') != 'text')
+			if (ArrayGetValue($control,"type") != "text")
 			{
-				$this->Error('Control is not of text type.');	
+				$this->Error("Control is not of text type.");	
 			}
 			
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
+			$strName = ArrayGetValue($control,"name");
 			$strValue = $this->GetValueForControl($control,$arrayValues);
 			
-			$nSize = intval(ArrayGetValue($control,'width'));
-			$nMaxLength = intval(ArrayGetValue($control,'maxlength'));
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$nSize = intval(ArrayGetValue($control,"width"));
+			$nMaxLength = intval(ArrayGetValue($control,"maxlength"));
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);
 
-			$strInputHTML = '<input type=\'text\' id=\'$strID\' name=\'$strName\' value=\'$strValue\' size=\'$nSize\' maxlength=\'$nMaxLength\'$strReadOnlyHTML$strClassHTML/>\n';
+			$strInputHTML = "<input type=\"text\" id=\"$strID\" name=\"$strName\" value=\"$strValue\" size=\"$nSize\" maxlength=\"$nMaxLength\"$strReadOnlyHTML$strClassHTML/>\n";
 			return $strInputHTML;
 		
 		}
@@ -465,21 +465,21 @@
 		protected 
 		function RenderControlPassword($control,&$arrayValues)
 		{
-			if (ArrayGetValue($control,'type') != 'password')
+			if (ArrayGetValue($control,"type") != "password")
 			{
-				$this->Error('Control is not of password type.');	
+				$this->Error("Control is not of password type.");	
 			}
 			
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
+			$strName = ArrayGetValue($control,"name");
 			$strValue = $this->GetValueForControl($control,$arrayValues);
 			
-			$nSize = intval(ArrayGetValue($control,'width'));
-			$nMaxLength = intval(ArrayGetValue($control,'maxlength'));
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$nSize = intval(ArrayGetValue($control,"width"));
+			$nMaxLength = intval(ArrayGetValue($control,"maxlength"));
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);
 									
-			$strInputHTML = '<input type=\'password\' id=\'$strID\' name=\'$strName\' value=\'$strValue\' size=\'$nSize\' maxlength=\'$nMaxLength\'$strReadOnlyHTML$strClassHTML/>\n';
+			$strInputHTML = "<input type=\"password\" id=\"$strID\" name=\"$strName\" value=\"$strValue\" size=\"$nSize\" maxlength=\"$nMaxLength\"$strReadOnlyHTML$strClassHTML/>\n";
 			
 			return $strInputHTML;
 		
@@ -488,54 +488,54 @@
 		protected 
 		function RenderControlTextArea($control,&$arrayValues)
 		{
-			if (ArrayGetValue($control,'type') != 'textarea')
+			if (ArrayGetValue($control,"type") != "textarea")
 			{
-				$this->Error('Control is not of textarea type.');	
+				$this->Error("Control is not of textarea type.");	
 			}
 			
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
+			$strName = ArrayGetValue($control,"name");
 			$strValue = $this->GetValueForControl($control,$arrayValues);
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);
 			
-			$nRows = intval(ArrayGetValue($control,'rows'));
-			$nCols = intval(ArrayGetValue($control,'width'));
-			$strInputHTML = '<textarea name=\'$strName\' id=\'$strID\' rows=\'$nRows\' cols=\'$nCols\'$strReadOnlyHTML$strClassHTML>$strValue</textarea>\n';
+			$nRows = intval(ArrayGetValue($control,"rows"));
+			$nCols = intval(ArrayGetValue($control,"width"));
+			$strInputHTML = "<textarea name=\"$strName\" id=\"$strID\" rows=\"$nRows\" cols=\"$nCols\"$strReadOnlyHTML$strClassHTML>$strValue</textarea>\n";
 			return $strInputHTML;
 		}
 
 		protected 
 		function RenderControlSelect($control,&$arrayValues)
 		{
-			if (ArrayGetValue($control,'type') != 'select')
+			if (ArrayGetValue($control,"type") != "select")
 			{
-				$this->Error('Control is not of select type.');	
+				$this->Error("Control is not of select type.");	
 			}
 			
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
+			$strName = ArrayGetValue($control,"name");
 			$strValue = $this->GetValueForControl($control,$arrayValues);
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);
 		
-			$arrayOptions = ArrayGetValue($control,'options');
+			$arrayOptions = ArrayGetValue($control,"options");
 			if (!is_array($arrayOptions))
 			{
-				$this->Error('Form select rendering failed. arrayOptions is not an array.');	
+				$this->Error("Form select rendering failed. arrayOptions is not an array.");	
 			}
-			$strInputHTML = '<select id=\'$strID\' name=\'$strName\'$strReadOnlyHTML$strClassHTML>\n';
+			$strInputHTML = "<select id=\"$strID\" name=\"$strName\"$strReadOnlyHTML$strClassHTML>\n";
 			
 			foreach ($arrayOptions as $strOptionValue => $strOptionLabel)
 			{
-				$strSelectedHTML = '';
+				$strSelectedHTML = "";
 				if (strval($strOptionValue) == strval($strValue))
 				{
-					$strSelectedHTML = ' selected=\'selected\'';
+					$strSelectedHTML = " selected=\"selected\"";
 				}
-				$strInputHTML .= '<option value=\'$strOptionValue\'$strSelectedHTML>$strOptionLabel</option>\n';
+				$strInputHTML .= "<option value=\"$strOptionValue\"$strSelectedHTML>$strOptionLabel</option>\n";
 			}
-			$strInputHTML .= '</select>\n';
+			$strInputHTML .= "</select>\n";
 			
 			return $strInputHTML;
 		}
@@ -544,56 +544,56 @@
 		protected 
 		function RenderControlRadio($control,&$arrayValues)
 		{
-			if (ArrayGetValue($control,'type') != 'radio')
+			if (ArrayGetValue($control,"type") != "radio")
 			{
-				$this->Error('Control is not of radio type.');	
+				$this->Error("Control is not of radio type.");	
 			}
-			$arrayOptions = ArrayGetValue($control,'options');
+			$arrayOptions = ArrayGetValue($control,"options");
 			if (!is_array($arrayOptions))
 			{
-				$this->Error('Form radio rendering failed. arrayOptions is not an array.');	
+				$this->Error("Form radio rendering failed. arrayOptions is not an array.");	
 			}
 			$nCount = ArrayCount($arrayOptions);
 			if ($nCount == 0)
 			{
-				$this->Error('Form radio rendering failed. arrayOptions is empty.');	
+				$this->Error("Form radio rendering failed. arrayOptions is empty.");	
 			}
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
+			$strName = ArrayGetValue($control,"name");
 			$strValue = $this->GetValueForControl($control,$arrayValues);
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);			
 			
-			$strInputHTML = $this->GetLayoutDef('LAYOUT_CONTROL_RADIO_BEGIN');
+			$strInputHTML = $this->GetLayoutDef("LAYOUT_CONTROL_RADIO_BEGIN");
 			$nCurrent = 1;
 			foreach ($arrayOptions as $option_value => $option_label)
 			{
-				$strIDHTML = '';
+				$strIDHTML = "";
 				if ($nCurrent == 1)
 				{
-					$strIDCurrent = '$strID';	
-					$strIDHTML = 'id=\'$strID\'';
+					$strIDCurrent = "$strID";	
+					$strIDHTML = "id=\"$strID\"";
 				}
 				else
 				{
-					$strIDCurrent = '$strID-$nCurrent';	
-					$strIDHTML = 'id=\'$strIDCurrent\'';
+					$strIDCurrent = "$strID-$nCurrent";	
+					$strIDHTML = "id=\"$strIDCurrent\"";
 				}
 				
-				$strCheckedHTML = '';
+				$strCheckedHTML = "";
 				if ($option_value == $strValue)
 				{
-					$strCheckedHTML = ' checked=\'checked\'';
+					$strCheckedHTML = " checked=\"checked\"";
 				}
 				$strClassLabel = $this->GetClassHTML_Label($control);    
-				$strInputHTML .= '<input type=\'radio\' $strIDHTML name=\'$strName\' value=\'$option_value\'$strCheckedHTML$strReadOnlyHTML$strClassHTML/>$option_label\n';   // <label for=\'$strIDCurrent\'>   </label>
+				$strInputHTML .= "<input type=\"radio\" $strIDHTML name=\"$strName\" value=\"$option_value\"$strCheckedHTML$strReadOnlyHTML$strClassHTML/>$option_label\n";   // <label for=\"$strIDCurrent\">   </label>
 				if ($nCurrent < $nCount)
 				{
-					$strInputHTML .= $this->GetLayoutDef('LAYOUT_CONTROL_RADIO_SEPARATOR');
+					$strInputHTML .= $this->GetLayoutDef("LAYOUT_CONTROL_RADIO_SEPARATOR");
 				}
 				$nCurrent++;
 			}
-			$strInputHTML .= $this->GetLayoutDef('LAYOUT_CONTROL_RADIO_END');	
+			$strInputHTML .= $this->GetLayoutDef("LAYOUT_CONTROL_RADIO_END");	
 			
 			return $strInputHTML;
 		}
@@ -601,42 +601,42 @@
 		protected 
 		function RenderControlCheckbox($control,&$arrayValues)
 		{
-			if (ArrayGetValue($control,'type') != 'checkbox')
+			if (ArrayGetValue($control,"type") != "checkbox")
 			{
-				$this->Error('Control is not of checkbox type.');	
+				$this->Error("Control is not of checkbox type.");	
 			}			
 		
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);			
 		
-			$strLabelHTML = '';
-			$strLabel = ArrayGetValue($control,'label');
-			$strName = ArrayGetValue($control,'name');
+			$strLabelHTML = "";
+			$strLabel = ArrayGetValue($control,"label");
+			$strName = ArrayGetValue($control,"name");
 			$strID = $this->GetControlID($control);
 			
-			$strCheckedHTML = '';
+			$strCheckedHTML = "";
 			$bValue = intval($this->GetValueForControl($control,$arrayValues));
 			if ($bValue == 1)
 			{
-				$strCheckedHTML = ' checked=\'checked\'';
+				$strCheckedHTML = " checked=\"checked\"";
 			}
 			else
 			{
-				$this->Trace('checkbox is off');	
+				$this->Trace("checkbox is off");	
 			}
 			
-			$bLabelFirst = GetBoolValue($this->GetLayoutDef('LAYOUT_CONTROL_CHECKBOX_LABELFIRST'));
+			$bLabelFirst = GetBoolValue($this->GetLayoutDef("LAYOUT_CONTROL_CHECKBOX_LABELFIRST"));
 			if ($bLabelFirst == false)
 			{
-				$strLabelHTML = '<label for=\'$strID\'>$strLabel</label>';
+				$strLabelHTML = "<label for=\"$strID\">$strLabel</label>";
 			}
 			else
 			{
-				$strLabelHTML = '';
+				$strLabelHTML = "";
 			}
 			
-			$strInputHTML = '<input type=\'checkbox\' id=\'$strID\' name=\'$strName\' value=\'1\'$strCheckedHTML$strReadOnlyHTML$strClassHTML/>$strLabelHTML\n';
-			$strHiddenHTML = '<input type=\'hidden\' name=\''.$strName.'\' value=\'0\'/>\n';
+			$strInputHTML = "<input type=\"checkbox\" id=\"$strID\" name=\"$strName\" value=\"1\"$strCheckedHTML$strReadOnlyHTML$strClassHTML/>$strLabelHTML\n";
+			$strHiddenHTML = "<input type=\"hidden\" name=\"".$strName."\" value=\"0\"/>\n";
 			$strInputHTML = $strHiddenHTML . $strInputHTML;
 						
 			/*
@@ -656,7 +656,7 @@
 			Because the parameter is not present, no modification of a session stored
 			value is triggered and the session stored value remains unchanged.
 			
-			This conflicts with the 'var' logic of the WDK.
+			This conflicts with the "var" logic of the WDK.
 			
 			Solution:
 			All components in a form can override each other
@@ -670,22 +670,22 @@
 		protected 
 		function RenderControlDate($control,&$arrayValues)
 		{
-			if (ArrayGetValue($control,'type') != 'date')
+			if (ArrayGetValue($control,"type") != "date")
 			{
-				$this->Error('Control is not of date type.');	
+				$this->Error("Control is not of date type.");	
 			}					
 			
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
+			$strName = ArrayGetValue($control,"name");
 			$strValue = $this->GetValueForControl($control,$arrayValues);
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);			
 
 
 			$nSize = 10;
 			$nMaxLength = 10;
 												
-			$strInputHTML = '<input type=\'text\' id=\'$strID\' name=\'$strName\' value=\'$strValue\' size=\'$nSize\' maxlength=\'$nMaxLength\'$strReadOnlyHTML$strClassHTML/>\n';
+			$strInputHTML = "<input type=\"text\" id=\"$strID\" name=\"$strName\" value=\"$strValue\" size=\"$nSize\" maxlength=\"$nMaxLength\"$strReadOnlyHTML$strClassHTML/>\n";
 			
 			return $strInputHTML;
 		}		
@@ -693,15 +693,15 @@
 		protected 
 		function RenderControlDateTime($control,&$arrayValues)
 		{
-			if (ArrayGetValue($control,'type') != 'datetime')
+			if (ArrayGetValue($control,"type") != "datetime")
 			{
-				$this->Error('Control is not of datetime type.');	
+				$this->Error("Control is not of datetime type.");	
 			}					
 			
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
+			$strName = ArrayGetValue($control,"name");
 			$strValue = $this->GetValueForControl($control,$arrayValues);
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);			
 
 			$nDateTimeLength = StringLength(
@@ -711,7 +711,7 @@
 			$nSize = $nDateTimeLength;
 			$nMaxLength = $nDateTimeLength;
 												
-			$strInputHTML = '<input type=\'text\' id=\'$strID\' name=\'$strName\' value=\'$strValue\' size=\'$nSize\' maxlength=\'$nMaxLength\'$strReadOnlyHTML$strClassHTML/>\n';
+			$strInputHTML = "<input type=\"text\" id=\"$strID\" name=\"$strName\" value=\"$strValue\" size=\"$nSize\" maxlength=\"$nMaxLength\"$strReadOnlyHTML$strClassHTML/>\n";
 			
 			return $strInputHTML;
 		}	
@@ -719,22 +719,22 @@
 		protected 
 		function RenderControlFile($control)
 		{
-			if (ArrayGetValue($control,'type') != 'file')
+			if (ArrayGetValue($control,"type") != "file")
 			{
-				$this->Error('Control is not of file type.');	
+				$this->Error("Control is not of file type.");	
 			}					
 			
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
-			$strReadOnlyHTML = (ArrayGetValue($control,'readonly'))?(' readonly=\'readonly\''):('');
+			$strName = ArrayGetValue($control,"name");
+			$strReadOnlyHTML = (ArrayGetValue($control,"readonly"))?(" readonly=\"readonly\""):("");
 			$strClassHTML = $this->GetClassHTML_Control($control);			
 
 
-			$nSize = ArrayGetValue($control,'size');
+			$nSize = ArrayGetValue($control,"size");
 			
 												
-			//$strInputHTML = '<input type=\'file\' id=\'$strID\' name=\'$strName\' size=\'$nSize\' $strReadOnlyHTML/>\n';
-			$strInputHTML = '<input type=\'file\' id=\'$strID\' name=\'$strName\' $strReadOnlyHTML$strClassHTML/>\n';
+			//$strInputHTML = "<input type=\"file\" id=\"$strID\" name=\"$strName\" size=\"$nSize\" $strReadOnlyHTML/>\n";
+			$strInputHTML = "<input type=\"file\" id=\"$strID\" name=\"$strName\" $strReadOnlyHTML$strClassHTML/>\n";
 			
 			return $strInputHTML;
 		}
@@ -742,35 +742,35 @@
 		protected 
 		function RenderControlButtonSubmit($control)
 		{
-			$strType = ArrayGetValue($control,'type');
-			if ($strType != 'submit' && $strType != 'submitdownload')
+			$strType = ArrayGetValue($control,"type");
+			if ($strType != "submit" && $strType != "submitdownload")
 			{
-				$this->Error('Control is not of type submit or submitdownload.');	
+				$this->Error("Control is not of type submit or submitdownload.");	
 			}					
 
-			$strLabelHTML = '';
+			$strLabelHTML = "";
 			$strLabel = ArrayGetValue($control,'label');
 			$strID = $this->GetControlID($control);
-			$strName = ArrayGetValue($control,'name');
-			$strValue = ArrayGetValue($control,'defaultvalue');
+			$strName = ArrayGetValue($control,"name");
+			$strValue = ArrayGetValue($control,"defaultvalue");
 			
-			$strButtonInnerArea = ReplaceString($this->GetLayoutDef('LAYOUT_CONTROL_BUTTON_INNERAREA'),'{BUTTONLABEL}',$strLabel);
-			$strButtonInnerArea = '<!--\'$strValue\'-->'.$strButtonInnerArea;
+			$strButtonInnerArea = ReplaceString($this->GetLayoutDef("LAYOUT_CONTROL_BUTTON_INNERAREA"),"{BUTTONLABEL}",$strLabel);
+			$strButtonInnerArea = "<!--\"$strValue\"-->".$strButtonInnerArea;
 			$strClassHTML = $this->GetClassHTML_Control($control);			
 
-			$strDataAttributes = '';
+			$strDataAttributes = "";
 			
-			if ($strType == 'submitdownload')
+			if ($strType == "submitdownload")
 			{
 				$strDownloadToken = ArrayGetValue($control,'downloadtoken');
 				if ($strDownloadToken != '')
 				{
-					$strDataAttributes .= ' data-downloadtoken=''.$strDownloadToken.''';
+					$strDataAttributes .= ' data-downloadtoken="'.$strDownloadToken.'"';
 				}
 			}
 			
 
-			$strInputHTML = '<button type=\'submit\' id=\'$strID\' name=\'$strName\' value=\'$strValue\'$strClassHTML$strDataAttributes>$strButtonInnerArea</button>\n';
+			$strInputHTML = "<button type=\"submit\" id=\"$strID\" name=\"$strName\" value=\"$strValue\"$strClassHTML$strDataAttributes>$strButtonInnerArea</button>\n";
 			
 			return $strInputHTML;
 		}
@@ -778,130 +778,130 @@
 		protected 
 		function RenderControlButtonReset($control)
 		{
-			if (ArrayGetValue($control,'type') != 'reset')
+			if (ArrayGetValue($control,"type") != "reset")
 			{
-				$this->Error('Control is not of reset button type.');	
+				$this->Error("Control is not of reset button type.");	
 			}					
-			$strLabelHTML = '';
-			$strLabel = ArrayGetValue($control,'label');
+			$strLabelHTML = "";
+			$strLabel = ArrayGetValue($control,"label");
 			$strID = $this->GetControlID($control);
 			$strClassHTML = $this->GetClassHTML_Control($control);
 			
-			$strButtonInnerArea = ReplaceString($this->GetLayoutDef('LAYOUT_CONTROL_BUTTON_INNERAREA'),'{BUTTONLABEL}',$strLabel);
-			$strInputHTML = '<button type=\'reset\' id=\'$strID\'$strClassHTML>$strButtonInnerArea</button>\n';
+			$strButtonInnerArea = ReplaceString($this->GetLayoutDef("LAYOUT_CONTROL_BUTTON_INNERAREA"),"{BUTTONLABEL}",$strLabel);
+			$strInputHTML = "<button type=\"reset\" id=\"$strID\"$strClassHTML>$strButtonInnerArea</button>\n";
 			return $strInputHTML;
 		}
 		
 		protected
 		function GetControlID($control)
 		{
-			return ArrayGetValue($control,'id') . '_'.$this->GetFormInstanceToken();	
+			return ArrayGetValue($control,"id") . "_".$this->GetFormInstanceToken();	
 		}
 		
 		protected 
 		function RenderControl($control,$strMode,&$arrayValues,&$arrayErrors,&$strLabelHTML,&$strControlHTML)
 		{
-			$strLabelHTML = '';
-			$strControlHTML = '';
+			$strLabelHTML = "";
+			$strControlHTML = "";
 			
-			$strType = ArrayGetValue($control,'type');
+			$strType = ArrayGetValue($control,"type");
 			
-			$nMaxWidth = intval($this->GetLayoutDef('LAYOUT_CONTROL_'.StringUpperCase($strType).'_MAXWIDTH'));
+			$nMaxWidth = intval($this->GetLayoutDef("LAYOUT_CONTROL_".StringUpperCase($strType)."_MAXWIDTH"));
 			if ($nMaxWidth > 0)
 			{
-				$control['width'] = min(ArrayGetValue($control,'width'),$nMaxWidth);
+				$control["width"] = min(ArrayGetValue($control,"width"),$nMaxWidth);
 			}
 			
 			switch ($strType)
 			{
-			case 'text':
+			case "text":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlText($control,$arrayValues);
 					break;
 				}		
-			case 'password':
+			case "password":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlPassword($control,$arrayValues);
 					break;
 				}
-			case 'textarea':
+			case "textarea":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlTextArea($control,$arrayValues);
 					break;
 				}
-			case 'select':
+			case "select":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlSelect($control,$arrayValues);
 					break;
 				}
-			case 'radio':
+			case "radio":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlRadio($control,$arrayValues);
 					break;
 				}
-			case 'checkbox':
+			case "checkbox":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlCheckbox($control,$arrayValues);
 					break;
 				}
-			case 'date':
+			case "date":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlDate($control,$arrayValues);
 					break;
 				}
-			case 'datetime':
+			case "datetime":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlDateTime($control,$arrayValues);
 					break;
 				}
-			case 'file':
+			case "file":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
 					$strControlHTML = $this->RenderControlFile($control,$arrayValues);
 					break;
 				}	
-			case 'submit':
-			case 'submitdownload':
+			case "submit":
+			case "submitdownload":
 				{
-					$strLabelHTML = '';
+					$strLabelHTML = "";
 					$strControlHTML = $this->RenderControlButtonSubmit($control);
 					break;
 				}
-			case 'reset':
+			case "reset":
 				{
-					$strLabelHTML = '';
+					$strLabelHTML = "";
 					$strControlHTML = $this->RenderControlButtonReset($control);
 					break;
 				}
-			case 'static':
+			case "static":
 				{
-					$strLabelHTML = '';
-					$strControlHTML = ArrayGetValue($control,'payload');
+					$strLabelHTML = "";
+					$strControlHTML = ArrayGetValue($control,"payload");
 					break;
 				}
-			case 'separator':
+			case "separator":
 				{
-					$strLabelHTML = '';
-					$strControlHTML = '';
+					$strLabelHTML = "";
+					$strControlHTML = "";
 					break;
 				}
-			case 'readonly':
+			case "readonly":
 				{
 					$strLabelHTML = $this->RenderLabel($control,$arrayErrors);
-					$strControlHTML = ArrayGetValue($control,'payload');
+					$strControlHTML = ArrayGetValue($control,"payload");
 					break;
 				}
 			default:
 				{
-					$this->Error('Unknown form control type: $strType.');	
+					$this->Error("Unknown form control type: $strType.");	
 				}
 			}
 			
@@ -911,9 +911,9 @@
 		protected 
 		function LoadIndividualFormLayoutFile($strFormID)
 		{
-			if ($strFormID == '')
+			if ($strFormID == "")
 			{
-				$this->GetWebsite()->Error('No form id specified.');
+				$this->GetWebsite()->Error("No form id specified.");
 			}
 			
 			$strFile = $this->GetAssemblyLine()->GetFormLayoutFilePath(
@@ -922,11 +922,11 @@
 				$this->GetStyle());
 		
 					
-			//$strFile = $strLayoutDir . 'layout_' .$this->GetWebsite()->GetLayout().'_form_'.$strFormID.'_'.$this->m_strStyleID.'.htm';
-			$this->Trace('CElement::LoadIndividualFormLayoutFile: \'$strFile\'');
+			//$strFile = $strLayoutDir . "layout_" .$this->GetWebsite()->GetLayout()."_form_".$strFormID."_".$this->m_strStyleID.".htm";
+			$this->Trace("CElement::LoadIndividualFormLayoutFile: \"$strFile\"");
 			if (IsFile($strFile) != true)
 			{
-				$this->Error('No form layout file found: \'$strFile\'');
+				$this->Error("No form layout file found: \"$strFile\"");
 			}
 			return FileRead($strFile);
 	
@@ -941,7 +941,7 @@
 		{
 			parent::__construct(
 				$website,
-				'form',
+				"form",
 				$strStyleID,
 				true,
 				false);
@@ -950,44 +950,44 @@
 	
 		function RenderForm($formDef, $arrayValues, $arrayErrors = array())
 		{
-			$this->Trace('RenderForm');
+			$this->Trace("RenderForm");
 			
 			if (!is_object($formDef))
 			{
-				$this->Error('formDef is not an object.');	
+				$this->Error("formDef is not an object.");	
 			}
 			
-			$strErrorText = '';
+			$strErrorText = "";
 			if ($formDef->IsValid($strErrorText) != true)
 			{
-				$this->Error('formDef->IsValid() != true. Error: $strErrorText');	
+				$this->Error("formDef->IsValid() != true. Error: $strErrorText");	
 			}
 			
 			if (!is_array($arrayValues))
 			{
-				$this->Error('arrayValues is not an array');	
+				$this->Error("arrayValues is not an array");	
 			}
 			
 			$this->InitFormInstanceToken();
 			
 			
-			$strOutput = '';
+			$strOutput = "";
 			
 			// Visible Framework starts
-			$strOutput .= $this->GetLayoutDef('LAYOUT_FORM_BEGIN') . '\n';
+			$strOutput .= $this->GetLayoutDef("LAYOUT_FORM_BEGIN") . "\n";
 			
 			
 			// Form begins
 			$strClassForm = $this->GetClassHTML_Form();
-			$strMethod = 'post';
-			$strOutput .= '<form action=\''. ArrayGetValue($formDef->GetData(),'url').'\' method=\''.$strMethod.'\' $strClassForm enctype=\'multipart/form-data\'>\n';
+			$strMethod = "post";
+			$strOutput .= "<form action=\"". ArrayGetValue($formDef->GetData(),"url")."\" method=\"".$strMethod."\" $strClassForm enctype=\"multipart/form-data\">\n";
 
 			// Start of inner frame
-			$strOutput .= $this->GetLayoutDef('LAYOUT_INNER_BEGIN') . '\n';
+			$strOutput .= $this->GetLayoutDef("LAYOUT_INNER_BEGIN") . "\n";
 
 
 			// Hidden parameters
-			$arrayParams = ArrayGetValue($formDef->GetData(),'params');
+			$arrayParams = ArrayGetValue($formDef->GetData(),"params");
 			if (!is_array($arrayParams))
 			{
 				$arrayParams = array();
@@ -997,46 +997,46 @@
 			
 			// Render controls
 			
-			$arrayControls = ArrayGetValue($formDef->GetData(),'controls');
+			$arrayControls = ArrayGetValue($formDef->GetData(),"controls");
 			
 			for ($nIndex = 0; $nIndex < ArrayCount($arrayControls); $nIndex++)
 			{
 				
 				$control = $arrayControls[$nIndex];
-				$strType = ArrayGetValue($control,'type');
-				$strName = ArrayGetValue($control,'name');
+				$strType = ArrayGetValue($control,"type");
+				$strName = ArrayGetValue($control,"name");
 				
 				$arrayParams = ArrayRemoveKey($arrayParams,$strName);	
 				
-				$strSpecialLayoutPostfix = '';
+				$strSpecialLayoutPostfix = "";
 				
-				$this->RenderControl($control,'generic',$arrayValues,$arrayErrors,$strLabelHTML,$strInputHTML);
+				$this->RenderControl($control,"generic",$arrayValues,$arrayErrors,$strLabelHTML,$strInputHTML);
 				
 				switch ($strType)
 				{
 									
-				case 'submit':
-				case 'reset':
+				case "submit":
+				case "reset":
 					{
-						$strSpecialLayoutPostfix = '_BUTTON';
+						$strSpecialLayoutPostfix = "_BUTTON";
 						break;
 					}
 				default:
 					{
-						$strSpecialLayoutPostfix = '_'.StringUpperCase($strType);
+						$strSpecialLayoutPostfix = "_".StringUpperCase($strType);
 						break;
 					}
 				}
 				
-				$strControlHTML = $this->GetLayoutDef('LAYOUT_CONTROL'.$strSpecialLayoutPostfix);
-				if ($strControlHTML == '')
+				$strControlHTML = $this->GetLayoutDef("LAYOUT_CONTROL".$strSpecialLayoutPostfix);
+				if ($strControlHTML == "")
 				{
-					$strControlHTML = $this->GetLayoutDef('LAYOUT_CONTROL');
+					$strControlHTML = $this->GetLayoutDef("LAYOUT_CONTROL");
 				}
-				$strControlHTML .= '\n';
+				$strControlHTML .= "\n";
 				
-				$strControlHTML = ReplaceString($strControlHTML,'{CONTROL}',$strInputHTML);
-				$strControlHTML = ReplaceString($strControlHTML,'{LABEL}',$strLabelHTML);
+				$strControlHTML = ReplaceString($strControlHTML,"{CONTROL}",$strInputHTML);
+				$strControlHTML = ReplaceString($strControlHTML,"{LABEL}",$strLabelHTML);
 				$strOutput .= $strControlHTML;
 
 				
@@ -1044,22 +1044,22 @@
 			}
 
 			// End of inner frame
-			$strOutput .= $this->GetLayoutDef('LAYOUT_INNER_END') . '\n';
+			$strOutput .= $this->GetLayoutDef("LAYOUT_INNER_END") . "\n";
 		
 			
 			// Hidden parameters
-			$strHiddenHTML = '';
+			$strHiddenHTML = "";
 			foreach ($arrayParams as $param_name => $param_value)
 			{					
-				$strHiddenHTML .= '<input type=\'hidden\' name=\''.$param_name.'\' value=\''.$param_value.'\'/>\n';
+				$strHiddenHTML .= "<input type=\"hidden\" name=\"".$param_name."\" value=\"".$param_value."\"/>\n";
 			}
 			$strOutput .= $strHiddenHTML;
 
 			// End of form		
-			$strOutput .= '</form>\n';
+			$strOutput .= "</form>\n";
 
 			// End of visible framework
-			$strOutput .= $this->GetLayoutDef('LAYOUT_FORM_END') . '\n';
+			$strOutput .= $this->GetLayoutDef("LAYOUT_FORM_END") . "\n";
 
 			
 			return $strOutput;
@@ -1074,7 +1074,7 @@
 		{
 			parent::__construct(
 				$website,
-				'formtemplate',
+				"formtemplate",
 				$strStyleID,
 				true,
 				false);
@@ -1082,21 +1082,21 @@
 
 		function RenderFormTemplate($formDef,$arrayValues,$arrayErrors,$strFormID,$arrayAdditionalItems = array())
 		{
-			$this->Trace('RenderFormTemplate');
+			$this->Trace("RenderFormTemplate");
 			
 			if (!is_object($formDef))
 			{
-				$this->Error('formDef is not an object.');	
+				$this->Error("formDef is not an object.");	
 			}
 			
 			if ($formDef->IsValid() != true)
 			{
-				$this->Error('formDef->IsValid != true.');	
+				$this->Error("formDef->IsValid != true.");	
 			}
 			
 			if (!is_array($arrayValues))
 			{
-				$this->Error('arrayValues is not an array');	
+				$this->Error("arrayValues is not an array");	
 			}
 			
 			
@@ -1112,11 +1112,11 @@
 			$this->InitFormInstanceToken();
 						
 			// FORM BEGIN
-			$strMethod = 'post';
-			$strFormBegin = '<form action=\''. ArrayGetValue($formDef->GetData(),'url').'\' method=\''.$strMethod.'\' enctype=\'multipart/form-data\'>\n';
+			$strMethod = "post";
+			$strFormBegin = "<form action=\"". ArrayGetValue($formDef->GetData(),"url")."\" method=\"".$strMethod."\" enctype=\"multipart/form-data\">\n";
 
 			// Hidden parameters
-			$arrayParams = ArrayGetValue($formDef->GetData(),'params');
+			$arrayParams = ArrayGetValue($formDef->GetData(),"params");
 			if (!is_array($arrayParams))
 			{
 				$arrayParams = array();
@@ -1127,40 +1127,40 @@
 			
 		   // Render controls and labels
 			
-			$arrayControls = ArrayGetValue($formDef->GetData(),'controls');
+			$arrayControls = ArrayGetValue($formDef->GetData(),"controls");
 			
 			for ($nIndex = 0; $nIndex < ArrayCount($arrayControls); $nIndex++)
 			{ 
 				
 			
 				$control = $arrayControls[$nIndex];
-				$strType = ArrayGetValue($control,'type');
-				$strName = ArrayGetValue($control,'name');
-				$strID = ArrayGetValue($control,'id');
+				$strType = ArrayGetValue($control,"type");
+				$strName = ArrayGetValue($control,"name");
+				$strID = ArrayGetValue($control,"id");
 				
 				$arrayParams = ArrayRemoveKey($arrayParams,$strName);
 				
-				$this->RenderControl($control,'individual',$arrayValues,$arrayErrors,$strLabelHTML,$strInputHTML);
+				$this->RenderControl($control,"individual",$arrayValues,$arrayErrors,$strLabelHTML,$strInputHTML);
 				
-				$arrayItems[StringUpperCase($strID).'_LABEL'] = $strLabelHTML;
-				$arrayItems[StringUpperCase($strID).'_CONTROL'] = $strInputHTML;
+				$arrayItems[StringUpperCase($strID)."_LABEL"] = $strLabelHTML;
+				$arrayItems[StringUpperCase($strID)."_CONTROL"] = $strInputHTML;
 				
 			
 			}
 			
 			// FORM END
 			
-			$strFormEnd = '';
+			$strFormEnd = "";
 			
 			// Hidden parameters
 			foreach ($arrayParams as $param_name => $param_value)
 			{					
-				$strFormEnd .= '<input type=\'hidden\' name=\''.$param_name.'\' value=\''.$param_value.'\'/>\n';
+				$strFormEnd .= "<input type=\"hidden\" name=\"".$param_name."\" value=\"".$param_value."\"/>\n";
 			}
 		
 			// End of form		
 			
-			$strFormEnd .= '</form>\n';
+			$strFormEnd .= "</form>\n";
 
 
 			// COMPILE FORM			

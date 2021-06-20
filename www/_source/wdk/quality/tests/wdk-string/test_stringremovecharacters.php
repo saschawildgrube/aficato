@@ -4,7 +4,7 @@
 	{
 		function __construct()
 		{
-			parent::__construct("StringRemoveCharacters");
+			parent::__construct('StringRemoveCharacters');
 		}
 		
 		function OnInit()
@@ -16,22 +16,22 @@
 		
 		function TestCase_StringRemoveCharacters($strString,$strBlacklist,$strExpectedResult)
 		{
-			$this->Trace("TestCase_StringRemoveCharacters");
-			$this->Trace("Test String                   : \"$strString\"");
-			$this->Trace("Blacklist                     : \"$strBlacklist\"");
-			$this->Trace("Expected Result               : \"$strExpectedResult\"");
+			$this->Trace('TestCase_StringRemoveCharacters');
+			$this->Trace('Test String                   : "'.$strString.'"');
+			$this->Trace('Blacklist                     : "'.$strBlacklist.'"');   
+			$this->Trace('Expected Result               : "'.$strExpectedResult.'"');
 			$strResult = StringRemoveCharacters($strString,$strBlacklist); 
-			$this->Trace("StringRemoveCharacters returns: \"$strResult\"");
+			$this->Trace('StringRemoveCharacters returns: "'.$strResult.'"');
 			if ($strResult == $strExpectedResult)
 			{
-				$this->Trace("Testcase PASSED!");
+				$this->Trace('Testcase PASSED!');
 			}
 			else
 			{
-				$this->Trace("Testcase FAILED!");	
+				$this->Trace('Testcase FAILED!');	
 				$this->SetResult(false);
 			}
-			$this->Trace("");
+			$this->Trace('');
 			
 		}
 
@@ -42,34 +42,44 @@
 			
 		
 			$this->TestCase_StringRemoveCharacters(
-				"abc",
-				"ab",
-				"c");
+				'abc',
+				'ab',
+				'c');
 
 			$this->TestCase_StringRemoveCharacters(
-				"abc",
-				"",
-				"abc");
+				'abc',
+				'',
+				'abc');
 
 			$this->TestCase_StringRemoveCharacters(
-				"abc",
-				"c",
-				"ab");
+				'abc',
+				'c',
+				'ab');
 
 			$this->TestCase_StringRemoveCharacters(
-				"This is a test",
-				"abcdefghijklmnopqrstuvwxyz",
-				"T   ");
+				'This is a test',
+				'abcdefghijklmnopqrstuvwxyz',
+				'T   ');
 
 			$this->TestCase_StringRemoveCharacters(
-				"",
-				"",
-				"");
+				'',
+				'',
+				'');
 
 			$this->TestCase_StringRemoveCharacters(
-				"abc",
-				"def",
-				"abc");
+				'abc',
+				'def',
+				'abc');
+
+			$this->TestCase_StringRemoveCharacters(
+				'=ÄÖÜ=',
+				'=',
+				u('ÄÖÜ'));
+
+			$this->TestCase_StringRemoveCharacters(
+				u('=ÄÖÜ='),
+				'=',
+				u('ÄÖÜ'));
 
 
 		}

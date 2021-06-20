@@ -39,7 +39,7 @@
 	
 		function OnRenderModule($strState)
 		{
-			$this->Trace('OnRenderModule(''.$strState.'')');
+			$this->Trace('OnRenderModule('.$strState.')');
 			
 			$strResult = parent::OnRenderModule($strState);
 			if ($strResult != '')
@@ -202,13 +202,6 @@
 			else
 			{
 				
-				//$arrayNetworkGraph = AML_TransformAccountsToNetworkGraph($arrayAccounts);
-				
-		
-				//$strHtml .= '<h1>Network Analysis</h1>'.'\n';
-				//$this->GetWebsite()->IncludeElement('amlnetworkgraph');
-				//$amlnetworkgraph = new CAMLNetworkGraphElement($this->GetWebsite(),'demo');
-				//$strHtml .= $amlnetworkgraph->RenderAMLNetworkGraph($arrayNetworkGraph);
 				$this->IncludeModule('aml/accountanalysis');
 				$nIndex = 0;
 				foreach ($arrayAccounts as $arrayAccount)

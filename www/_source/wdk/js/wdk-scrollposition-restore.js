@@ -3,7 +3,7 @@
 
 $(document).ready(function()
 	{
-		var nScrollPositionY = GetCookie('wdk-scrollposition-y');
+		var nScrollPositionY = GetCookie("wdk-scrollposition-y");
 		$(document).scrollTop(nScrollPositionY);
 	}
 );

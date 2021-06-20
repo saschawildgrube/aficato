@@ -8,32 +8,32 @@
 	ini_set('expose_php',false);
 	header('X-Powered-By:'); 
 
-	require_once('wdk_env.inc');
-	require_once('wdk.inc');
-	require_once('wdk_arrayprint.inc');
-	require_once('wdk_array.inc');
-	require_once('wdk_string.inc');
-	require_once('wdk_regexp.inc');
-	require_once('wdk_typeconversion.inc');
-	require_once('wdk_locale.inc');
-	require_once('wdk_fileio.inc');
-	require_once('wdk_filesys.inc');
-	require_once('wdk_utf8.inc');
-	require_once('wdk_html.inc');
-	require_once('wdk_datetime.inc');
-	require_once('wdk_tracelog.inc');
-	require_once('wdk_error.inc');
-	require_once('wdk_http.inc');
-	require_once('wdk_url.inc');
-	require_once('wdk_domain.inc');
-	require_once('wdk_config.inc');
-	require_once('wdk_eventdispatcher.inc');
-	require_once('wdk_websecurity.inc');
-	require_once('wdk_parameter.inc');
-	require_once('wdk_stopwatch.inc');
-	require_once('wdk_eventseverity.inc');
-	require_once('wdk_version.inc');
-	require_once('wdk_ip.inc');
+	require_once("wdk_env.inc");
+	require_once("wdk.inc");
+	require_once("wdk_arrayprint.inc");
+	require_once("wdk_array.inc");
+	require_once("wdk_string.inc");
+	require_once("wdk_regexp.inc");
+	require_once("wdk_typeconversion.inc");
+	require_once("wdk_locale.inc");
+	require_once("wdk_fileio.inc");
+	require_once("wdk_filesys.inc");
+	require_once("wdk_utf8.inc");
+	require_once("wdk_html.inc");
+	require_once("wdk_datetime.inc");
+	require_once("wdk_tracelog.inc");
+	require_once("wdk_error.inc");
+	require_once("wdk_http.inc");
+	require_once("wdk_url.inc");
+	require_once("wdk_domain.inc");
+	require_once("wdk_config.inc");
+	require_once("wdk_eventdispatcher.inc");
+	require_once("wdk_websecurity.inc");
+	require_once("wdk_parameter.inc");
+	require_once("wdk_stopwatch.inc");
+	require_once("wdk_eventseverity.inc");
+	require_once("wdk_version.inc");
+	require_once("wdk_ip.inc");
 
 	abstract class CWebApplication extends CEventDispatcher
 	{
@@ -80,12 +80,12 @@
 		
 			// Init obfuscation items
 			$this->m_arrayObfuscationItems = array(
-				'accesscode',
-				'/webservice.*accesscode/',
-				'password',
-				'passwordhash',
-				'authenticationpayload',
-				'database_password');
+				"accesscode",
+				"/webservice.*accesscode/",
+				"password",
+				"passwordhash",
+				"authenticationpayload",
+				"database_password");
 			$this->m_arrayObfuscationItems = ArrayAppend($this->m_arrayObfuscationItems,$arrayObfuscationItems);
 			
 			// Instantiate trace log
@@ -165,14 +165,14 @@
 		{
 			return ArrayGetValue($this->m_arrayConfig,$strConfig1,$strConfig2,$strConfig3,$strConfig4);	
 		}
-		function GetConfigBoolean($strConfig1,$strConfig2='',$strConfig3='',$strConfig4='')
+		function GetConfigBoolean($strConfig1,$strConfig2="",$strConfig3="",$strConfig4="")
 		{
 			return GetBoolValue($this->GetConfig($strConfig1,$strConfig2,$strConfig3,$strConfig4));
 		}
 		
 		function GetWebserviceURL($strWebservice)
 		{
-			return $this->GetConfig('webservices',$strWebservice,'url');
+			return $this->GetConfig("webservices",$strWebservice,"url");
 		}
 
 		function GetWebserviceAccessCode($strWebservice)
@@ -213,12 +213,12 @@
 		
 		function GetRequestMethod()
 		{
-			$strRequestMethod = ArrayGetValue($_SERVER,'REQUEST_METHOD');
-			if ($strRequestMethod == 'POST')
+			$strRequestMethod = ArrayGetValue($_SERVER,"REQUEST_METHOD");
+			if ($strRequestMethod == "POST")
 			{
-				return 'post';	
+				return "post";	
 			}
-			return 'get';
+			return "get";
 		}
 
 		function GetTimeZone()
@@ -340,12 +340,12 @@
 				$this->GetTraceLog());
 		}
 
-		function SendMailToAdmin($strSubject,$strMessage = '')
+		function SendMailToAdmin($strSubject,$strMessage = "")
 		{
 			$strAdminEmail = $this->GetAdminEmail();
 			if (IsValidEmail($strAdminEmail) == false)
 			{
-				$this->Trace('Mail is NOT sent to admin: $strSubject');
+				$this->Trace("Mail is NOT sent to admin: $strSubject");
 				return false;	
 			}
 			$bResult = $this->SendMail(
@@ -354,11 +354,11 @@
 				$strMessage);
 			if ($bResult == true)
 			{
-				$this->Trace('Mail sent to admin ($strAdminEmail): $strSubject');
+				$this->Trace("Mail sent to admin ($strAdminEmail): $strSubject");
 			}
 			else
 			{
-				$this->Trace('Failed to send mail to admin ($strAdminEmail): $strSubject');
+				$this->Trace("Failed to send mail to admin ($strAdminEmail): $strSubject");
 			}
 			return $bResult;
 		}		
@@ -376,9 +376,9 @@
 		
 		function SystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails=array())
 		{
-			if ($this->GetConfigBoolean('disable_log') == true)
+			if ($this->GetConfigBoolean("disable_log") == true)
 			{
-				$this->Trace('SYSTEM LOG: $strEventSeverity: $strEventID: Logging is deactivated by config.');
+				$this->Trace("SYSTEM LOG: $strEventSeverity: $strEventID: Logging is deactivated by config.");
 				return;
 			}
 			return $this->OnSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
@@ -386,24 +386,24 @@
 		
 		function SystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails=array())
 		{
-			if ($this->GetConfigBoolean('disable_events') == true)
+			if ($this->GetConfigBoolean("disable_events") == true)
 			{
-				$this->Trace('SYSTEM EVENT: $strEventSeverity: $strEventID: Event Management is deactivated by config.');
+				$this->Trace("SYSTEM EVENT: $strEventSeverity: $strEventID: Event Management is deactivated by config.");
 				return;
 			}
-			$arrayDetails['instancetoken'] = $this->GetInstanceToken();			
+			$arrayDetails["instancetoken"] = $this->GetInstanceToken();			
 			return $this->OnSystemEvent($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails);
 		}
 
 		function OnSystemLog($strEventSeverity,$strEventID,$strEventMessage,$arrayDetails)
 		{
-			$this->Trace('SYSTEM LOG: '.RenderValue($strEventSeverity).': '.RenderValue($strEventID).': '.RenderValue($strEventMessage));
-			$this->Trace('No log handler implemented.');
+			$this->Trace("SYSTEM LOG: ".RenderValue($strEventSeverity).": ".RenderValue($strEventID).": ".RenderValue($strEventMessage));
+			$this->Trace("No log handler implemented.");
 		}
 	
 		function OnSystemEvent($strEventSeverity,$strEventID,$strEventMessage, $arrayDetails)
 		{
-			$this->Trace('SYSTEM EVENT: '.RenderValue($strEventSeverity).': '.RenderValue($strEventID).': '.RenderValue($strEventMessage));
+			$this->Trace("SYSTEM EVENT: ".RenderValue($strEventSeverity).": ".RenderValue($strEventID).": ".RenderValue($strEventMessage));
 			$this->Trace($arrayDetails);
 			
 			$this->SystemLog($strEventSeverity, $strEventID, $strEventMessage, $arrayDetails);
@@ -411,14 +411,14 @@
 			if (GetEventSeverityNumeric($strEventSeverity) <= $this->GetEmailAlertSeverityThreshold())
 			{
 				$strSubject = $strEventSeverity.' - '.$strEventID;
-				if ($strEventMessage != '')
+				if ($strEventMessage != "")
 				{
 					$strSubject .= ' - '.$strEventMessage;
 				}
 				$this->SendMailToAdmin(
 					$strSubject,
 					ArrayRender($arrayDetails)
-					.'\n\n'.
+					."\n\n".
 					$this->GetTraceLog());
 			}
 		}
@@ -440,9 +440,9 @@
 		
 		function TriggerEvent($strEventID, $arrayParams)
 		{
-			$this->Trace('TriggerEvent(''.$strEventID.'', ...) BEGIN');
+			$this->Trace('TriggerEvent("'.$strEventID.'", ...) BEGIN'); 
 			parent::TriggerEvent($strEventID, $arrayParams);
-			$this->Trace('TriggerEvent(''.$strEventID.'', ...) END');
+			$this->Trace('TriggerEvent("'.$strEventID.'", ...) END');
 		}
 		
 		function CheckUnintendedOutput()
@@ -486,7 +486,7 @@
 			{
 				$strText = $this->OnBasicAuthGetText();
 				
-  			header('WWW-Authenticate: Basic realm=''.$strText.''');
+  			header('WWW-Authenticate: Basic realm="'.$strText.'"');
   			header('HTTP/1.0 401 Unauthorized');
 				
 				$strOutput = $this->OnBasicAuthRenderFailed();
@@ -506,7 +506,7 @@
 		final
 		function IsBasicAuthActive()
 		{
-			return $this->GetConfigBoolean('basicauth');
+			return $this->GetConfigBoolean("basicauth");
 		}
 		
 		final
@@ -529,7 +529,7 @@
 		
 		function OnBasicAuthGetText()
 		{
-			return '';	
+			return "";	
 		}
 		
 		function OnBasicAuth($strUser,$strPassword)

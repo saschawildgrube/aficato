@@ -1,16 +1,16 @@
 <?php
 
-	require_once('wdk_shell.inc');
+	require_once("wdk_shell.inc");
 
 	function IPTablesExecute(
 		$arrayParams,
 		&$arrayResult)
 	{
 		return SudoShellExecute(
-			'/sbin/iptables',
+			"/sbin/iptables",
 			$arrayParams,
 			array(),
-			'',
+			"",
 			$arrayResult);
 	}
 
@@ -18,14 +18,14 @@
 	{
 		$arrayResult = array();
 		$bResult = IPTablesExecute(
-			array('-h'),
+			array("-h"),
 			$arrayResult);
 		return $bResult;
 	}
 
 	function IPTablesCheckRule($strRule)
 	{
-		$strParameter = '-C '.$strRule;
+		$strParameter = "-C ".$strRule;
 		$arrayResult = array();
 		$bResult = IPTablesExecute(
 			array($strParameter),
@@ -34,7 +34,7 @@
 		{
 			return false; // could not execute iptables	
 		}
-		if (ArrayGetValue($arrayResult,'return') == 1)
+		if (ArrayGetValue($arrayResult,"return") == 1)
 		{
 			return false;	// no matching rule was found
 		}
@@ -44,7 +44,7 @@
 
 	function IPTablesAppendRule($strRule)
 	{
-		$strParameter = '-A '.$strRule;
+		$strParameter = "-A ".$strRule;
 		$arrayResult = array();
 		$bResult = IPTablesExecute(
 			array($strParameter),
@@ -55,7 +55,7 @@
 
 	function IPTablesDeleteRule($strRule)
 	{
-		$strParameter = '-D '.$strRule;
+		$strParameter = "-D ".$strRule;
 		$arrayResult = array();
 		$bResult = IPTablesExecute(
 			array($strParameter),
@@ -68,16 +68,16 @@
 
 	function IPTablesIsIPBlocked($strIP)
 	{
-		return IPTablesCheckRule('INPUT -s $strIP -j DROP');	
+		return IPTablesCheckRule("INPUT -s $strIP -j DROP");	
 	}
 	
 	function IPTablesBlockIP($strIP)
 	{
-		return IPTablesAppendRule('INPUT -s $strIP -j DROP');	
+		return IPTablesAppendRule("INPUT -s $strIP -j DROP");	
 	}
 	
 	function IPTablesUnblockIP($strIP)
 	{
-		return IPTablesDeleteRule('INPUT -s $strIP -j DROP');
+		return IPTablesDeleteRule("INPUT -s $strIP -j DROP");
 	}
 

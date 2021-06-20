@@ -1,11 +1,11 @@
 <?php
 
 	
-	define('SESSION_MODE_NONE',							0);
-	define('SESSION_MODE_LOCAL_COOKIE',			1);
-	define('SESSION_MODE_SERVER_URL',				2);
-	define('SESSION_MODE_SERVER_COOKIE',		3);
-	define('SESSION_MODE_SERVER_COMBINED',	4);
+	define("SESSION_MODE_NONE",							0);
+	define("SESSION_MODE_LOCAL_COOKIE",			1);
+	define("SESSION_MODE_SERVER_URL",				2);
+	define("SESSION_MODE_SERVER_COOKIE",		3);
+	define("SESSION_MODE_SERVER_COMBINED",	4);
 	
 	
 	function IsValidSessionMode($nSessionMode) 

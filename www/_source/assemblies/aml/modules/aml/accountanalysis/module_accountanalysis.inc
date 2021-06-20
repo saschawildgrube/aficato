@@ -71,7 +71,7 @@
 				return $this->StateChart();
 			}
 			*/
-			$this->Trace('OnRenderModule(\'$strState\')');
+			$this->Trace('OnRenderModule('.$strState.')');
 			switch ($strState)
 			{
 				case 'data':

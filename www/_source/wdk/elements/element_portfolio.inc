@@ -8,7 +8,7 @@
 		{ 
 			parent::__construct(
 				$website,
-				'portfolio',
+				"portfolio",
 				$strStyleID,
 				true,
 				true);
@@ -19,36 +19,36 @@
 		{
 			if (!is_array($arrayPortfolio))
 			{
-				return '';	
+				return "";	
 			}
 			if (ArrayCount($arrayPortfolio) == 0)
 			{
-				return '';				
+				return "";				
 			}
 			$strOutput = $this->GetLayoutHTML(); 
 			
-			$strStyle = $this->GetLayoutDef('LAYOUT_PORTFOLIO_TEASER_STYLE');
-			if ($strStyle == '')
+			$strStyle = $this->GetLayoutDef("LAYOUT_PORTFOLIO_TEASER_STYLE");
+			if ($strStyle == "")
 			{
-				$strStyle = 'default';	
+				$strStyle = "default";	
 			}
-			$this->IncludeElement('teaser');
+			$this->IncludeElement("teaser");
 			$teaser = new CTeaserElement($this->GetWebsite(),$strStyle);
 
-			$strStyle = $this->GetLayoutDef('LAYOUT_PORTFOLIO_IMAGETEASER_STYLE');
-			if ($strStyle == '')
+			$strStyle = $this->GetLayoutDef("LAYOUT_PORTFOLIO_IMAGETEASER_STYLE");
+			if ($strStyle == "")
 			{
-				$strStyle = 'default';	
+				$strStyle = "default";	
 			}
-			$this->IncludeElement('imageteaser');
+			$this->IncludeElement("imageteaser");
 			$imageteaser = new CImageTeaserElement($this->GetWebsite(),$strStyle);
 
 			
-			$strOutputPortfolio = '';
+			$strOutputPortfolio = "";
 			
-			$strTeaserBegin = $this->GetLayoutDef('LAYOUT_PORTFOLIO_TEASER_BEGIN');
-			$strTeaserEnd = $this->GetLayoutDef('LAYOUT_PORTFOLIO_TEASER_END');
-			$strTeaserSeparator = $this->GetLayoutDef('LAYOUT_PORTFOLIO_TEASER_SEPARATOR');
+			$strTeaserBegin = $this->GetLayoutDef("LAYOUT_PORTFOLIO_TEASER_BEGIN");
+			$strTeaserEnd = $this->GetLayoutDef("LAYOUT_PORTFOLIO_TEASER_END");
+			$strTeaserSeparator = $this->GetLayoutDef("LAYOUT_PORTFOLIO_TEASER_SEPARATOR");
 			
 			$nCount = 0;
 			foreach ($arrayPortfolio as $arrayTeaser)
@@ -63,37 +63,37 @@
 				}
 				$nCount++;
 				$strOutputPortfolio .= $strTeaserBegin;
-				$strPayload = ArrayGetValue($arrayTeaser,'PAYLOAD');
-				if ($strPayload != '')
+				$strPayload = ArrayGetValue($arrayTeaser,"PAYLOAD");
+				if ($strPayload != "")
 				{
 					$strOutputPortfolio .= $strPayload;
 				}
 				else
 				{
-					$strImageURL = ArrayGetValue($arrayTeaser,'imageurl');
-					if ($strImageURL != '')
+					$strImageURL = ArrayGetValue($arrayTeaser,"imageurl");
+					if ($strImageURL != "")
 					{
 						$strOutputPortfolio .= $imageteaser->RenderImageTeaser(
 							$strImageURL,
-							ArrayGetValue($arrayTeaser,'title'),
-							ArrayGetValue($arrayTeaser,'text'),
-							ArrayGetValue($arrayTeaser,'linkurl'),
-							ArrayGetValue($arrayTeaser,'linktext'),
-							ArrayGetValue($arrayTeaser,'external'));
+							ArrayGetValue($arrayTeaser,"title"),
+							ArrayGetValue($arrayTeaser,"text"),
+							ArrayGetValue($arrayTeaser,"linkurl"),
+							ArrayGetValue($arrayTeaser,"linktext"),
+							ArrayGetValue($arrayTeaser,"external"));
 					}
 					else
 					{
 						$strOutputPortfolio .= $teaser->RenderTeaser(
-							ArrayGetValue($arrayTeaser,'title'),
-							ArrayGetValue($arrayTeaser,'text'),
-							ArrayGetValue($arrayTeaser,'linkurl'),
-							ArrayGetValue($arrayTeaser,'linktext'),
-							ArrayGetValue($arrayTeaser,'external'));
+							ArrayGetValue($arrayTeaser,"title"),
+							ArrayGetValue($arrayTeaser,"text"),
+							ArrayGetValue($arrayTeaser,"linkurl"),
+							ArrayGetValue($arrayTeaser,"linktext"),
+							ArrayGetValue($arrayTeaser,"external"));
 					}
 				}
 				$strOutputPortfolio .= $strTeaserEnd;
 			}
-			$arrayItems['PORTFOLIO'] = $strOutputPortfolio;
+			$arrayItems["PORTFOLIO"] = $strOutputPortfolio;
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);
 			return $strOutput;			

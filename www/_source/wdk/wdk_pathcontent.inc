@@ -1,20 +1,20 @@
 <?php
 
-	require_once('wdk_typeconversion.inc');
+	require_once("wdk_typeconversion.inc");
 
-	function RenderPathContent($arrayData,$strPathPrefix = '') 
+	function RenderPathContent($arrayData,$strPathPrefix = "") 
 	{
 		if (!is_array($arrayData))
 		{
-			return '';	
+			return "";	
 		}
-		$strData = '';
+		$strData = "";
 		foreach ($arrayData as $key => $value)   
 		{
 			$strKey = $strPathPrefix;
 			if (is_numeric($key))
 			{
-				$strKey .= '#'.$key;
+				$strKey .= "#".$key;
 			}
 			else
 			{
@@ -24,17 +24,17 @@
 			{
 				if (ArrayCount($value) == 0)
 				{
-					$strData .= '$strKey,\n';
+					$strData .= "$strKey,\n";
 				}
 				else
 				{
-					$strData .= RenderPathContent($value,$strKey.'/').'\n';
+					$strData .= RenderPathContent($value,$strKey."/")."\n";
 				}
 			}
 			else
 			{
-				$strData .= $strKey . ',';
-				$strData .= StringURLEncode($value).'\n'; 
+				$strData .= $strKey . ",";
+				$strData .= StringURLEncode($value)."\n"; 
 			}
 		}
 		return StringTrim($strData);
@@ -42,13 +42,13 @@
 	
 	function ParsePathContent($strData)
 	{
-		if ($strData == '')
+		if ($strData == "")
 		{
 			return array();	
 		}
 		$strEOLToken = StringGetEndOfLineToken($strData);
-		//print('1'.RenderHex($strEOLToken).'2');
-		if ($strEOLToken == '')
+		//print("1".RenderHex($strEOLToken)."2");
+		if ($strEOLToken == "")
 		{
 			$arrayLines = array($strData);	
 		}
@@ -61,15 +61,15 @@
 		$arrayPathContent = array();
 		foreach ($arrayLines as $strLine)
 		{
-			if ($strLine != '')
+			if ($strLine != "")
 			{
-				$arrayLine = explode(',',$strLine,2);
+				$arrayLine = explode(",",$strLine,2);
 				if (is_array($arrayLine))
 				{
 					if (ArrayCount($arrayLine) == 2)
 					{
 						$strPath = trim($arrayLine[0]);
-						if ($strPath != '')
+						if ($strPath != "")
 						{
 							$strContent = trim($arrayLine[1]);
 							$arrayPathContent[$strPath] = $strContent;
@@ -84,7 +84,7 @@
 		foreach ($arrayPathContent as $strPath => $strContent)
 		{
 			$strContent = StringURLDecode($strContent);
-			$arrayPathSegments = explode('/',$strPath);
+			$arrayPathSegments = explode("/",$strPath);
 			if (is_array($arrayPathSegments))
 			{
 				
@@ -93,21 +93,21 @@
 				{
 					foreach ($arrayPathSegments as &$strPathSegment)
 					{
-						if (StringSection($strPathSegment,0,1) == '#')
+						if (StringSection($strPathSegment,0,1) == "#")
 						{
 							$nIndex = intval(StringSection($strPathSegment,1));
 							//$strPathSegment = intval(StringSection($strPathSegment,1));	
-							$strEvalCode .= '[$nIndex]';
+							$strEvalCode .= "[$nIndex]";
 						}
 						else
 						{
-							$strEvalCode .= '['' .ReplaceString(StringURLDecode($strPathSegment),''','\\''). '']';
+							$strEvalCode .= "['" .ReplaceString(StringURLDecode($strPathSegment),"'","\\'"). "']";
 						}
 					}
 				}
 				else
 				{
-					$strEvalCode .= '[]';
+					$strEvalCode .= "[]";
 				}
 				
 				$strEvalCode .= ' = $strContent;';

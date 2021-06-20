@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				'header',
+				"header",
 				$strStyleID,
 				true,
 				false);
@@ -25,12 +25,12 @@
 			{
 				$nLevel = 6;	
 			}
-			$strLayoutDef = $this->GetLayoutDef('LAYOUT_HEADER_'.$nLevel);
-			if ($strLayoutDef == '')
+			$strLayoutDef = $this->GetLayoutDef("LAYOUT_HEADER_".$nLevel);
+			if ($strLayoutDef == "")
 			{
 				return $strHeader;	
 			}
-			$strOutput = ReplaceString($strLayoutDef,'{HEADER}',$strHeader);
+			$strOutput = ReplaceString($strLayoutDef,"{HEADER}",$strHeader);
 			return $strOutput;
 		}
 	}

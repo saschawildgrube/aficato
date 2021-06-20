@@ -34,28 +34,28 @@
 	}
 	
 	
-	function FatalError($strText,$strDetails = '')
+	function FatalError($strText,$strDetails = "")
 	{
 		$strMail = GetAdminEmail();
-		if ($strMail != '')
+		if ($strMail != "")
 		{
 			SendMail(
 					$strMail,
-					'FATAL ERROR: '.$strText,
-					$strText.'\n\n'.$strDetails,
+					"FATAL ERROR: ".$strText,
+					$strText."\n\n".$strDetails,
 					GetSystemEmail(),
 					GetSystemEmailSenderName());
 		}
-		print(MakeDocType('xhtml11').
-'<html>
+		print(MakeDocType("xhtml11").
+"<html>
 	<head>
-		<title>'.HtmlEncode($strText).'</title>
+		<title>".HtmlEncode($strText)."</title>
 	</head>
 	<body>
-		<h1>FATAL ERROR</h1><p>'.HtmlEncode($strText).'</p>
-		<pre>'.HtmlEncode($strDetails).'</pre>
+		<h1>FATAL ERROR</h1><p>".HtmlEncode($strText)."</p>
+		<pre>".HtmlEncode($strDetails)."</pre>
 	</body>
-</html>');
+</html>");
 		exit();		
 	}
 

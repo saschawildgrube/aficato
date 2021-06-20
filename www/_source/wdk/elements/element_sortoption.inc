@@ -12,7 +12,7 @@
 			$this->m_icon = null;
 			parent::__construct(
 				$website,
-				'sortoption',
+				"sortoption",
 				$strStyleID,
 				false,
 				true);
@@ -30,64 +30,64 @@
 		
 			if ($this->m_linkicon == null)
 			{
-				$this->m_linkicon = new CLinkIconElement($this->GetWebsite(),'default');
+				$this->m_linkicon = new CLinkIconElement($this->GetWebsite(),"default");
 			}
 			if ($this->m_icon == null)
 			{
-				$this->GetWebsite()->IncludeElement('icon');
-				$this->m_icon = new CIconElement($this->GetWebsite(),'default');
+				$this->GetWebsite()->IncludeElement("icon");
+				$this->m_icon = new CIconElement($this->GetWebsite(),"default");
 			}
 
 			// ASC
 			$arrayParams = array();
 			$arrayParams[$strSortOptionParam] = $strSortOption;
-			$arrayParams[$strSortOrderParam] = 'asc';
+			$arrayParams[$strSortOrderParam] = "asc";
 			$strURL = $this->GetWebsite()->MakeURL($arrayParams);
-			$strASC = $this->m_linkicon->RenderLinkIcon($strURL,'chevron-down',$strToolTipAsc);
+			$strASC = $this->m_linkicon->RenderLinkIcon($strURL,"chevron-down",$strToolTipAsc);
 
 			// ASC ACTIVE
-			$strASC_ACTIVE = $this->m_icon->RenderIcon('chevron-circle-down',$strToolTipAsc);
+			$strASC_ACTIVE = $this->m_icon->RenderIcon("chevron-circle-down",$strToolTipAsc);
 			
 			// DESC
 			$arrayParams = array();
 			$arrayParams[$strSortOptionParam] = $strSortOption;
-			$arrayParams[$strSortOrderParam] = 'desc';
+			$arrayParams[$strSortOrderParam] = "desc";
 			$strURL = $this->GetWebsite()->MakeURL($arrayParams);
-			$strDESC = $this->m_linkicon->RenderLinkIcon($strURL,'chevron-up',$strToolTipDesc);
+			$strDESC = $this->m_linkicon->RenderLinkIcon($strURL,"chevron-up",$strToolTipDesc);
 
 			// DESC ACTIVE
-			$strDESC_ACTIVE = $this->m_icon->RenderIcon('chevron-circle-up',$strToolTipDesc);
+			$strDESC_ACTIVE = $this->m_icon->RenderIcon("chevron-circle-up",$strToolTipDesc);
 
 		
 			
 			$arrayItems = array();
 			switch ($strSortOrder)
 			{
-				case 'asc':
+				case "asc":
 				{
-					$arrayItems['ASC'] 	= $strASC_ACTIVE;
-					$arrayItems['DESC']	= $strDESC;
+					$arrayItems["ASC"] 	= $strASC_ACTIVE;
+					$arrayItems["DESC"]	= $strDESC;
 					break;	
 				}
 				
-				case 'desc':
+				case "desc":
 				{
-					$arrayItems['ASC'] 	= $strASC;
-					$arrayItems['DESC']	= $strDESC_ACTIVE;
+					$arrayItems["ASC"] 	= $strASC;
+					$arrayItems["DESC"]	= $strDESC_ACTIVE;
 					
 					break;	
 				}
 				
-				case '':
+				case "":
 				{
-					$arrayItems['DESC']	= $strDESC;
-					$arrayItems['ASC']	= $strASC;
+					$arrayItems["DESC"]	= $strDESC;
+					$arrayItems["ASC"]	= $strASC;
 					break;	
 				}
 				
 				default:
 				{
-					$this->Error('Invalid sort order: \'$strSortOrder\'');
+					$this->Error("Invalid sort order: \"$strSortOrder\"");
 					break;	
 				}
 					

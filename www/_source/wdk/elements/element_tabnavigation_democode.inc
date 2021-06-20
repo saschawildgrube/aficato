@@ -1,18 +1,18 @@
-$this->IncludeElement('tabnavigation');
+$this->IncludeElement("tabnavigation");
 
 $tabnavigationDef = new CTabNavigationDefinition();
 	
 for ($nIndex = 1; $nIndex <= 5; $nIndex++)
 {
-	$strText = 'Tab $nIndex';
+	$strText = "Tab $nIndex";
 	if ($nIndex==4)
 	{
-		$strText .= ' with more text';
+		$strText .= " with more text";
 	}
 	$arrayParams = array();
-	$arrayParams['tab'] = 'tab_$nIndex';
+	$arrayParams["tab"] = "tab_$nIndex";
 	$tabnavigationDef->AddTab(
-		$arrayParams['tab'],
+		$arrayParams["tab"],
 		$strText,
 		$this->GetWebsite()->MakeURL($arrayParams));
 }
@@ -20,7 +20,7 @@ for ($nIndex = 1; $nIndex <= 5; $nIndex++)
 
 $tabnavigation = new CTabNavigationElement(
 	$this->GetWebsite(),
-	'default');
+	"default");
 $strOutput = $tabnavigation->RenderTabNavigation(
 	$tabnavigationDef,
-	$this->GetWebsite()->GetVar('tab'));
+	$this->GetWebsite()->GetVar("tab"));

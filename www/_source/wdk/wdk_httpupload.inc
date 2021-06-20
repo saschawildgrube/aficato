@@ -18,32 +18,32 @@
    function GetUploadedFileName($strFileID)
    {
    	$fileinfo = GetUploadedFileInfo($strFileID);
-   	return ArrayGetValue($fileinfo,'name');
+   	return ArrayGetValue($fileinfo,"name");
    }
 
    function GetUploadedFilePath($strFileID)
    {
    	$fileinfo = GetUploadedFileInfo($strFileID);
-   	return ArrayGetValue($fileinfo,'tmp_name');
+   	return ArrayGetValue($fileinfo,"tmp_name");
    }
    
    function GetUploadedFileSize($strFileID)
    {
    	$fileinfo = GetUploadedFileInfo($strFileID);
-   	return ArrayGetValue($fileinfo,'size');
+   	return ArrayGetValue($fileinfo,"size");
    }   
 
    function GetUploadedFileMimeType($strFileID)
    {
    	$fileinfo = GetUploadedFileInfo($strFileID);
-   	return ArrayGetValue($fileinfo,'type');
+   	return ArrayGetValue($fileinfo,"type");
    }   
 
 
    function GetUploadedFileContents($strFileID)
    {
    	$fileinfo = GetUploadedFileInfo($strFileID);
-   	return FileRead(ArrayGetValue($fileinfo,'tmp_name'));
+   	return FileRead(ArrayGetValue($fileinfo,"tmp_name"));
    }
 	
 

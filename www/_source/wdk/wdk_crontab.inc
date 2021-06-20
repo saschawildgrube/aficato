@@ -1,8 +1,8 @@
 <?php
 
 
-	require_once('wdk_parameter.inc');
-	require_once('wdk_datetime.inc');
+	require_once("wdk_parameter.inc");
+	require_once("wdk_datetime.inc");
 
 /*
 	
@@ -15,30 +15,30 @@ Monat            1-12 (oder Namen, siehe unten)
 Wochentag        0-7 (0 oder 7 ist Sonntag, oder Namen)
 
 Ein Feld kann ein Stern (*) sein, was immer für
-'Erster-Letzter' steht.
+"Erster-Letzter" steht.
 
 Zahlenbereiche sind erlaubt. Bereiche sind zwei Zahlen,
 getrennt durch einen Bindestrich. Die angegebenen Grenzen sind
 inklusive.
-Beispielsweise: 8-11 in 'Stunde' bewirkt die Ausführung um 8,
+Beispielsweise: 8-11 in "Stunde" bewirkt die Ausführung um 8,
 9, 10, 11 Uhr.
 
 Listen sind erlaubt. Eine Liste ist eine Menge von Nummern
 (oder Bereichen), getrennt durch Kommata.
-Beispiele: '1,2,5,9', '0-4,8-2'. 
+Beispiele: "1,2,5,9", "0-4,8-2". 
 
 Schrittweiten können in Verbindung mit Bereichen genutzt
-werden. Hinter einem Bereich mit '/<Schrittweite>' angegeben,
+werden. Hinter einem Bereich mit "/<Schrittweite>" angegeben,
 bestimmt die Schrittweite, ob Werte innerhalb des Bereiches
 übersprungen werden.
-Beispiel: '0-23/2' kann unter Stunden benutzt werden, um ein
+Beispiel: "0-23/2" kann unter Stunden benutzt werden, um ein
 spezielles Kommando alle zwei Stunden auszuführen. Die
 Alternative wäre:
-'0,2,4,6,8,10,12,14,16,18,20,22'. Schrittweiten sind auch nach
-Sternen (*) erlaubt, 'alle zwei Stunden' lässt sich auch durch
-'* / 2' beschreiben.
+"0,2,4,6,8,10,12,14,16,18,20,22". Schrittweiten sind auch nach
+Sternen (*) erlaubt, "alle zwei Stunden" lässt sich auch durch
+"* / 2" beschreiben.
 
-Namen können für 'Monat' und 'Wochentag' benutzt
+Namen können für "Monat" und "Wochentag" benutzt
 werden. Benutzen Sie die ersten drei Buchstaben des
 entsprechenden Tages oder Monats (Groß-/Kleinschreibung wird
 nicht beachtet). Bereiche oder Listen sind mit Namen nicht
@@ -49,7 +49,7 @@ erlaubt.
 
 	function CrontabParseDefinition($strCrontabDef,$nMin,$nMax)
 	{
-		if ($strCrontabDef == '')
+		if ($strCrontabDef == "")
 		{
 			return false;
 		}
@@ -59,7 +59,7 @@ erlaubt.
 		}
 		$arrayValues = array();
 		
-		$arrayAtomicDefs = explode(',',$strCrontabDef);
+		$arrayAtomicDefs = explode(",",$strCrontabDef);
 		if (ArrayCount($arrayAtomicDefs) == 0)
 		{
 			return false;	
@@ -67,7 +67,7 @@ erlaubt.
 		
 		foreach ($arrayAtomicDefs as $strAtomicDef)
 		{
-			$arrayFrameAndRepetition = explode('/',$strAtomicDef);
+			$arrayFrameAndRepetition = explode("/",$strAtomicDef);
 			$strFrameDef = $arrayFrameAndRepetition[0];
 			if (ArrayCount($arrayFrameAndRepetition) > 1)
 			{
@@ -78,7 +78,7 @@ erlaubt.
 				$nRepetition = 1;	
 			}
 			
-			$arrayFrameDef = explode('-',$strFrameDef);
+			$arrayFrameDef = explode("-",$strFrameDef);
 			$strFrameMin  = $arrayFrameDef[0];
 			if (ArrayCount($arrayFrameDef)>1)
 			{
@@ -86,18 +86,18 @@ erlaubt.
 			}
 			else
 			{
-				$strFrameMax = '';
+				$strFrameMax = "";
 			}
 
-			if ($strFrameMax == '' && $strFrameMin != '*') // no frame and NOT all -> a single value
+			if ($strFrameMax == "" && $strFrameMin != "*") // no frame and NOT all -> a single value
 			{
-				//print('$strFrameMin ');
+				//print("$strFrameMin ");
 				if (StringCheckCharSet($strFrameMin,CHARSET_INTEGER) != true)
 				{
 					return false;	
 				}
 				$nValue = intval($strFrameMin);
-				//print('$nValue ');
+				//print("$nValue ");
 				if (($nValue < $nMin) || ($nValue > $nMax))
 				{
 					return false;	
@@ -106,7 +106,7 @@ erlaubt.
 				return $arrayValues;
 			}
 			
-			if ($strFrameMin == '*')
+			if ($strFrameMin == "*")
 			{
 				$nFrameMin = $nMin;
 				$nFrameMax = $nMax;
@@ -166,27 +166,27 @@ erlaubt.
 
 		if ($arrayMinutes == false)
 		{
-			$strError = 'CRONTAB_DEFINITION_MINUTE';
+			$strError = "CRONTAB_DEFINITION_MINUTE";
 			return false;
 		}
 		if ($arrayHours == false)
 		{
-			$strError = 'CRONTAB_DEFINITION_HOUR';
+			$strError = "CRONTAB_DEFINITION_HOUR";
 			return false;
 		}
 		if ($arrayDayOfMonth == false)
 		{
-			$strError = 'CRONTAB_DEFINITION_DAYOFMONTH';
+			$strError = "CRONTAB_DEFINITION_DAYOFMONTH";
 			return false;
 		}
 		if ($arrayMonth == false)
 		{
-			$strError = 'CRONTAB_DEFINITION_MONTH';
+			$strError = "CRONTAB_DEFINITION_MONTH";
 			return false;
 		}
  		if ($arrayDayOfWeek == false)
 		{
-			$strError = 'CRONTAB_DEFINITION_DAYOFWEEK';
+			$strError = "CRONTAB_DEFINITION_DAYOFWEEK";
 			return false;
 		}
 
@@ -203,29 +203,29 @@ erlaubt.
 		$timePivot = strtotime($strPivotDatetime);
 		if ($timePivot == false)
 		{
-			$strError = 'CRONTAB_PIVOTTIME_INVALID';	
+			$strError = "CRONTAB_PIVOTTIME_INVALID";	
 			return false;
 		}
 		
 		
 		// SETUP
 		$arrayTimePivot = getdate($timePivot);
-		$nOriginalPivotDayOfYear = $arrayTimePivot['yday'];
-		$nOriginalPivotYear = $arrayTimePivot['year'];
+		$nOriginalPivotDayOfYear = $arrayTimePivot["yday"];
+		$nOriginalPivotYear = $arrayTimePivot["year"];
 		
 		
 		// IGNORE SECONDS
-		$timePivot = GetTimeAddSeconds($timePivot,-$arrayTimePivot['seconds']);
+		$timePivot = GetTimeAddSeconds($timePivot,-$arrayTimePivot["seconds"]);
 		$timeNew = $timePivot;
 		
 		
 		// CALCULATE NEXT MINUTE
-		$nPivotMinute = intval($arrayTimePivot['minutes']);
+		$nPivotMinute = intval($arrayTimePivot["minutes"]);
 		for ($nIndex=0;$nIndex < ArrayCount($arrayMinutes);$nIndex++)
 		{
 			if ($arrayMinutes[$nIndex] > $nPivotMinute )	
 			{
-				//print(''.intval($arrayMinutes[$nIndex]).' - '.$nPivotMinute.'<br/>');
+				//print("".intval($arrayMinutes[$nIndex])." - ".$nPivotMinute."<br/>");
 				$timeNew = GetTimeAddMinutes($timeNew, intval($arrayMinutes[$nIndex]) - $nPivotMinute);
 				break;
 			}
@@ -239,7 +239,7 @@ erlaubt.
 		
 		// CALCULATE NEXT HOUR
 		$arrayTimePivot = getdate($timeNew);
-		$nPivotHour = intval($arrayTimePivot['hours']);
+		$nPivotHour = intval($arrayTimePivot["hours"]);
 		for ($nIndex=0;$nIndex < ArrayCount($arrayHours);$nIndex++)
 		{
 			if ($arrayHours[$nIndex] >= $nPivotHour )	
@@ -259,9 +259,9 @@ erlaubt.
 		while ($bMatch == false)
 		{
 			$arrayTimePivot = getdate($timeNew);
-			$nPivotDayOfMonth = intval($arrayTimePivot['mday']);
-			$nPivotDayOfWeek = intval($arrayTimePivot['wday']);
-			$nPivotMonth = intval($arrayTimePivot['mon']);
+			$nPivotDayOfMonth = intval($arrayTimePivot["mday"]);
+			$nPivotDayOfWeek = intval($arrayTimePivot["wday"]);
+			$nPivotMonth = intval($arrayTimePivot["mon"]);
 			
 			if ( ArrayValueExists($arrayDayOfMonth,$nPivotDayOfMonth)
 				&& ArrayValueExists($arrayDayOfWeek,$nPivotDayOfWeek)
@@ -279,12 +279,12 @@ erlaubt.
 		}
 		
 		// DAY SWITCH MINUTE AND HOUR CORRECTION
-		if (	$nOriginalPivotDayOfYear != $arrayTimePivot['yday']
-			|| $nOriginalPivotYear != $arrayTimePivot['year'])
+		if (	$nOriginalPivotDayOfYear != $arrayTimePivot["yday"]
+			|| $nOriginalPivotYear != $arrayTimePivot["year"])
 		{
 			$timeNew = GetTimeAddMinutes($timeNew,
-				-$arrayTimePivot['minutes']
-				-(60*$arrayTimePivot['hours'])
+				-$arrayTimePivot["minutes"]
+				-(60*$arrayTimePivot["hours"])
 				+$arrayMinutes[0]
 				+(60*$arrayHours[0]));
 		}

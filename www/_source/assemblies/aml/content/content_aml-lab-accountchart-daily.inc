@@ -13,8 +13,8 @@
 				false,
 				';',
 				array(),
-				''',
-				'''');
+				'"',
+				'""');
 			$arrayAccount = array();
 			$arrayAccount['ID'] = 'A';
 			$arrayAccount['BALANCE_BEGIN'] = 3330.0;

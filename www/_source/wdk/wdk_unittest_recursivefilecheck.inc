@@ -1,6 +1,6 @@
 <?php
 
-	require_once('wdk_unittest.inc');
+	require_once("wdk_unittest.inc");
 		
 	abstract class CUnitTestRecursiveFileCheck extends CUnitTest
 	{
@@ -27,20 +27,20 @@
 			{
 				if (RegExpMatch($strFileContent,$strRegExp) != $bExpectedMatch)
 				{
-					$this->Trace('strFilePath = \'$strFilePath\'');
-					$this->Trace('strRegExp = \'$strRegExp\'');
-					$this->Trace('bExpectedMatch = '.RenderBool($bExpectedMatch));
+					$this->Trace("strFilePath = \"$strFilePath\"");
+					$this->Trace("strRegExp = \"$strRegExp\"");
+					$this->Trace("bExpectedMatch = ".RenderBool($bExpectedMatch));
 					if ($bExpectedMatch == false)
 					{
-						$this->Trace('The regular expression matched in the file.');
+						$this->Trace("The regular expression matched in the file.");
 					}
 					else
 					{
-						$this->Trace('The regular expression WAS NOT matched in the file.');
+						$this->Trace("The regular expression WAS NOT matched in the file.");
 					}
-					$this->Trace('Testcase FAILED!');	
-					$this->Trace('');
-					$this->Trace('');
+					$this->Trace("Testcase FAILED!");	
+					$this->Trace("");
+					$this->Trace("");
 					$this->SetResult(false);
 				}
 				
@@ -73,13 +73,13 @@
 		
 		function CheckDirectory($strDir,$bRecursive)
 		{
-			$this->Trace('');
-			$this->Trace('CheckDirectory(\'$strDir\')');
-			$this->Trace('');
-			$this->Trace('');
+			$this->Trace("");
+			$this->Trace("CheckDirectory(\"$strDir\")");
+			$this->Trace("");
+			$this->Trace("");
 			if (IsDirectory($strDir) == false)
 			{
-				$this->Trace('IsDirectory(\'$strDir\') returned false.');
+				$this->Trace("IsDirectory(\"$strDir\") returned false.");
 				return;
 			}
 			$arrayFiles = ReadDirectory($strDir,$bRecursive);
@@ -96,7 +96,7 @@
 				}
 
 			}
-			$this->Trace('');
+			$this->Trace("");
 		}
 		
 		function CheckSourceDirectories()
@@ -106,14 +106,14 @@
 			$this->CheckDirectory(GetSourceDir(),true);
 			if (FindString(GetWDKDir(),GetSourceDir()) == -1)
 			{
-				$this->Trace('GetWDKDir() is not within GetSourceDir()');
+				$this->Trace("GetWDKDir() is not within GetSourceDir()");
 				$this->CheckDirectory(GetWDKDir(),true);
 			}
 
 			$this->CheckDirectory(GetWebservicesDir(),true);
 			
-			$this->CheckDirectory(GetDocumentRootDir().'install/',true);
-			$this->CheckDirectory(GetDocumentRootDir().'quality/',true);
+			$this->CheckDirectory(GetDocumentRootDir()."install/",true);
+			$this->CheckDirectory(GetDocumentRootDir()."quality/",true);
 
 		}
 

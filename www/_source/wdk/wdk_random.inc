@@ -15,11 +15,11 @@
 	{
 		if ($nLength <= 0)
 		{
-			return '';	
+			return "";	
 		}
 		$strToken = sha1(microtime(true).rand());
 		$strToken = StringLowerCase($strToken);
-		$strToken = strtr($strToken,'abcdef','123456');
+		$strToken = strtr($strToken,"abcdef","123456");
 		$strToken = StringSection($strToken,0,min(intval($nLength),40));
 		return $strToken;
 	}
@@ -28,7 +28,7 @@
 	{
 		if ($nLength <= 0)
 		{
-			return '';	
+			return "";	
 		}
 		$strToken = sha1(microtime(true).rand());
 		$strToken = StringLowerCase($strToken);
@@ -46,7 +46,7 @@
 		{
 			$bDone = true;
 			$strUniqueToken = MakeNumericToken(10);
-			if ($strHaystack != '')
+			if ($strHaystack != "")
 			{
 				if (FindString($strHaystack,$strUniqueToken) != -1)
 				{
@@ -57,7 +57,7 @@
 			{
 				foreach ($arrayTokens as $strToken)
 				{
-					if ($strToken != '')
+					if ($strToken != "")
 					{
 						if (FindString($strUniqueToken,$strToken) != -1)
 						{

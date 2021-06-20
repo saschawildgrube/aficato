@@ -2,7 +2,7 @@
 
 	function IsValidAssemblyID($strAssemblyID)
 	{
-		if ($strAssemblyID == '')	
+		if ($strAssemblyID == "")	
 		{
 			return false;	
 		}
@@ -36,16 +36,16 @@
 		{
 			if (IsValidAssemblyID($strAssemblyID) == false)
 			{
-				FatalError('CAssembly has been initialized with an invalid assembly id.');
+				FatalError("CAssembly has been initialized with an invalid assembly id.");
 			}
 			
-			if ($strRootDir == '')
+			if ($strRootDir == "")
 			{
 				$strRootDir = $website->GetAssemblyDir($strAssemblyID);	
 			}
 			if (!IsDirectory($strRootDir))
 			{
-				FatalError('CAssembly has been initialized with an invalid root path: \'$strRootDir\'');
+				FatalError("CAssembly has been initialized with an invalid root path: \"$strRootDir\"");
 			}
 			$this->SetRootDir($strRootDir);
 			$this->m_bPluginsDir = IsDirectory($this->GetPluginsDir());			
@@ -82,38 +82,38 @@
 		final
 		function GetContentDir()
 		{
-			return $this->m_strRootDir . 'content/';	
+			return $this->m_strRootDir . "content/";	
 		}
 
 		final
 		function GetResDir()
 		{
-			return $this->m_strRootDir . 'res/';	
+			return $this->m_strRootDir . "res/";	
 		}
 
 		final
 		function GetRoutingDir()
 		{
-			return $this->m_strRootDir . 'routing/';	
+			return $this->m_strRootDir . "routing/";	
 		}
 
 
 		final
 		function GetModulesDir()
 		{
-			return $this->m_strRootDir . 'modules/';	
+			return $this->m_strRootDir . "modules/";	
 		}
 
 		final
 		function GetElementsDir()
 		{
-			return $this->m_strRootDir . 'elements/';	
+			return $this->m_strRootDir . "elements/";	
 		}
 
 		final
 		function GetNavigationDir()
 		{
-			return $this->m_strRootDir . 'navigation/';	
+			return $this->m_strRootDir . "navigation/";	
 		}
 
 		final
@@ -125,64 +125,64 @@
 		final
 		function GetLayoutDir()
 		{
-			return $this->m_strRootDir . 'layout/';	
+			return $this->m_strRootDir . "layout/";	
 		}		
 
 		final
 		function GetDataDir()
 		{
-			return $this->m_strRootDir . 'data/';	
+			return $this->m_strRootDir . "data/";	
 		}		
 
 		final
 		function GetDownloadDir()
 		{
-			return $this->m_strRootDir . 'download/';	
+			return $this->m_strRootDir . "download/";	
 		}	
 
 		final
 		function GetImagesDir()
 		{
-			return $this->m_strRootDir . 'images/';	
+			return $this->m_strRootDir . "images/";	
 		}	
 
 		final
 		function GetFontsDir()
 		{
-			return $this->m_strRootDir . 'fonts/';	
+			return $this->m_strRootDir . "fonts/";	
 		}	
 
 		final
 		function GetVideosDir()
 		{
-			return $this->m_strRootDir . 'videos/';	
+			return $this->m_strRootDir . "videos/";	
 		}	
 
 
 		final
 		function GetStyleSheetsDir()
 		{
-			return $this->m_strRootDir . 'css/';	
+			return $this->m_strRootDir . "css/";	
 		}	
 
 		final
 		function GetJavaScriptsDir()
 		{
-			return $this->m_strRootDir . 'js/';	
+			return $this->m_strRootDir . "js/";	
 		}	
 
 		function GetAssetFilePath(
 			$strAssetType,
 			$arrayParams)
 		{
-			$strFilePath = '';
+			$strFilePath = "";
 			switch ($strAssetType)
 			{
-			case 'content':
+			case "content":
 				$strFilePath = $this->MakeContentFilePath(
-					ArrayGetValue($arrayParams,'content'),
-					ArrayGetValue($arrayParams,'language'),
-					ArrayGetValue($arrayParams,'ext')
+					ArrayGetValue($arrayParams,"content"),
+					ArrayGetValue($arrayParams,"language"),
+					ArrayGetValue($arrayParams,"ext")
 					);
 				break;
 			case 'plugin':
@@ -192,189 +192,189 @@
 				break;
 			case 'element':
 				$strFilePath = $this->MakeElementSourceFilePath(
-					ArrayGetValue($arrayParams,'element')
+					ArrayGetValue($arrayParams,"element")
 					);
 				break;					
-			case 'element-democode':
+			case "element-democode":
 				$strFilePath = $this->MakeElementDemoCodeFilePath(
-					ArrayGetValue($arrayParams,'element')
+					ArrayGetValue($arrayParams,"element")
 					);
 				break;					
-			case 'layout-element':
+			case "layout-element":
 				if ($this->m_bLayoutDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeElementLayoutFilePath(
-					ArrayGetValue($arrayParams,'layout'),
-					ArrayGetValue($arrayParams,'element'),
-					ArrayGetValue($arrayParams,'style'),
-					ArrayGetValue($arrayParams,'ext')
+					ArrayGetValue($arrayParams,"layout"),
+					ArrayGetValue($arrayParams,"element"),
+					ArrayGetValue($arrayParams,"style"),
+					ArrayGetValue($arrayParams,"ext")
 					);
 				break;					
-			case 'layout-element-javascript':
+			case "layout-element-javascript":
 				if ($this->m_bJavaScriptsDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeElementLayoutJavaScriptFilePath(
-					ArrayGetValue($arrayParams,'layout'),
-					ArrayGetValue($arrayParams,'element'),
-					ArrayGetValue($arrayParams,'style')
+					ArrayGetValue($arrayParams,"layout"),
+					ArrayGetValue($arrayParams,"element"),
+					ArrayGetValue($arrayParams,"style")
 					);
 				break;					
-			case 'layout-form':
+			case "layout-form":
 				if ($this->m_bLayoutDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeFormLayoutFilePath(
-					ArrayGetValue($arrayParams,'layout'),
-					ArrayGetValue($arrayParams,'form'),
-					ArrayGetValue($arrayParams,'style')
+					ArrayGetValue($arrayParams,"layout"),
+					ArrayGetValue($arrayParams,"form"),
+					ArrayGetValue($arrayParams,"style")
 					);
 				break;					
-			case 'layout-module':
+			case "layout-module":
 				if ($this->m_bLayoutDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeModuleLayoutFilePath(
-					ArrayGetValue($arrayParams,'layout'),
-					ArrayGetValue($arrayParams,'moduleid'),
-					ArrayGetValue($arrayParams,'state'),			
-					ArrayGetValue($arrayParams,'style')
+					ArrayGetValue($arrayParams,"layout"),
+					ArrayGetValue($arrayParams,"moduleid"),
+					ArrayGetValue($arrayParams,"state"),			
+					ArrayGetValue($arrayParams,"style")
 					);
 				break;					
-			case 'layout-framework':
+			case "layout-framework":
 				if ($this->m_bLayoutDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeFrameworkLayoutFilePath(
-					ArrayGetValue($arrayParams,'framework'),     
-					ArrayGetValue($arrayParams,'layout')
+					ArrayGetValue($arrayParams,"framework"),     
+					ArrayGetValue($arrayParams,"layout")
 					);
 				break;					
-			case 'layout-config':
+			case "layout-config":
 				if ($this->m_bLayoutDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeLayoutConfigFilePath(
-					ArrayGetValue($arrayParams,'layout'),
-					ArrayGetValue($arrayParams,'config')
+					ArrayGetValue($arrayParams,"layout"),
+					ArrayGetValue($arrayParams,"config")
 					);
 				break;					
-			case 'layout-css':
+			case "layout-css":
 				if ($this->m_bLayoutDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeLayoutCssFilePath(
-					ArrayGetValue($arrayParams,'layout')
+					ArrayGetValue($arrayParams,"layout")
 					);
 				break;		
-			case 'layout-inc':
+			case "layout-inc":
 				if ($this->m_bLayoutDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeLayoutIncFilePath(
-					ArrayGetValue($arrayParams,'layout')
+					ArrayGetValue($arrayParams,"layout")
 					);
 				break;								
-			case 'stylesheet':
+			case "stylesheet":
 				if ($this->m_bStyleSheetsDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeStyleSheetFilePath(
-					ArrayGetValue($arrayParams,'stylesheet')
+					ArrayGetValue($arrayParams,"stylesheet")
 					);
 				break;					
-			case 'javascript':
+			case "javascript":
 				if ($this->m_bJavaScriptsDir == false)
 				{
 					return false;	
 				}
 				$strFilePath = $this->MakeJavaScriptFilePath(
-					ArrayGetValue($arrayParams,'javascript')
+					ArrayGetValue($arrayParams,"javascript")
 					);
 				break;					
-			case 'res':
+			case "res":
 				if ($this->m_bResDir == false)
 				{
 					return false;
 				}
 				$strFilePath = $this->MakeResourceFilePath(
-					ArrayGetValue($arrayParams,'language'),
-					ArrayGetValue($arrayParams,'id')
+					ArrayGetValue($arrayParams,"language"),
+					ArrayGetValue($arrayParams,"id")
 					);
 				break;					
-			case 'routing':
+			case "routing":
 				if ($this->m_bRoutingDir == false)
 				{
 					return false;
 				}
 				$strFilePath = $this->MakeRoutingMapFilePath(
-					ArrayGetValue($arrayParams,'language'),
-					ArrayGetValue($arrayParams,'id')
+					ArrayGetValue($arrayParams,"language"),
+					ArrayGetValue($arrayParams,"id")
 					);
 				break;					
-			case 'navigation':
+			case "navigation":
 				if ($this->m_bNavigationDir == false)
 				{
 					return false;
 				}
 				$strFilePath = $this->MakeNavigationFilePath(
-					ArrayGetValue($arrayParams,'navigation'),
-					ArrayGetValue($arrayParams,'language')
+					ArrayGetValue($arrayParams,"navigation"),
+					ArrayGetValue($arrayParams,"language")
 					);
 				break;					
-			case 'module':
+			case "module":
 				if ($this->m_bModulesDir == false)
 				{
 					return false;
 				}
 				$strFilePath = $this->MakeModuleSourceFilePath(
-					ArrayGetValue($arrayParams,'modulepath')
+					ArrayGetValue($arrayParams,"modulepath")
 					);
 				break;					
-			case 'image-layout':
+			case "image-layout":
 				$strFilePath = $this->MakeLayoutImageFilePath(
-					ArrayGetValue($arrayParams,'image'),
-					ArrayGetValue($arrayParams,'layout'),
-					ArrayGetValue($arrayParams,'ext')
+					ArrayGetValue($arrayParams,"image"),
+					ArrayGetValue($arrayParams,"layout"),
+					ArrayGetValue($arrayParams,"ext")
 					);
 				break;					
-			case 'image':
+			case "image":
 				$strFilePath = $this->MakeImageFilePath(
-					ArrayGetValue($arrayParams,'imagefilename')
+					ArrayGetValue($arrayParams,"imagefilename")
 					);
 				break;					
-			case 'font':
+			case "font":
 				$strFilePath = $this->MakeFontFilePath(
-					ArrayGetValue($arrayParams,'fontfilename')
+					ArrayGetValue($arrayParams,"fontfilename")
 					);
 				break;					
-			case 'video':
+			case "video":
 				$strFilePath = $this->MakeVideoFilePath(
-					ArrayGetValue($arrayParams,'videofilename')
+					ArrayGetValue($arrayParams,"videofilename")
 					);
 				break;					
-			case 'data':
+			case "data":
 				$strFilePath = $this->MakeDataFilePath(
-					ArrayGetValue($arrayParams,'filepath')
+					ArrayGetValue($arrayParams,"filepath")
 					);
 				break;					
-			case 'download':
+			case "download":
 				$strFilePath = $this->MakeDownloadFilePath(
-					ArrayGetValue($arrayParams,'filepath')
+					ArrayGetValue($arrayParams,"filepath")
 					);
 				break;					
 			default:
-				$this->Error('GetAssetFilePath() has been called with an unsupported asset type: \'$strAssetType\'');
+				$this->Error("GetAssetFilePath() has been called with an unsupported asset type: \"$strAssetType\"");
 				break;				
 			}
 			
@@ -390,16 +390,16 @@
 			$strLanguage,
 			$strExt)
 		{
-			if ($strExt == '')
+			if ($strExt == "")
 			{
-				$strExt = 'htm';
+				$strExt = "htm";
 			}
-			$strLanguagePath = '';
-			if ($strLanguage != '' && $strExt != 'inc')
+			$strLanguagePath = "";
+			if ($strLanguage != "" && $strExt != "inc")
 			{
-				$strLanguagePath = StringLowerCase($strLanguage) . '/';
+				$strLanguagePath = StringLowerCase($strLanguage) . "/";
 			}
-			return $this->GetContentDir().$strLanguagePath.'content_' .$strContentID.'.'.$strExt;
+			return $this->GetContentDir().$strLanguagePath."content_" .$strContentID.".".$strExt;
 		}
 
 		function MakePluginSourceFilePath(
@@ -418,7 +418,7 @@
 		function MakeElementDemoCodeFilePath(
 			$strElementID)
 		{
-			return $this->GetElementsDir().'element_'.$strElementID.'_democode.inc';
+			return $this->GetElementsDir()."element_".$strElementID."_democode.inc";
 		}		
 		
 		function MakeElementLayoutFilePath(
@@ -427,11 +427,11 @@
 			$strStyleID,
 			$strExt)
 		{
-			if ($strLayoutID == '')
+			if ($strLayoutID == "")
 			{
-				$strLayoutID = 'default';
+				$strLayoutID = "default";
 			}
-			$strFilePath = $this->GetLayoutDir().'layout_' .$strLayoutID.'_element_'.$strElementID.'_'.$strStyleID.'.'.$strExt;
+			$strFilePath = $this->GetLayoutDir()."layout_" .$strLayoutID."_element_".$strElementID."_".$strStyleID.".".$strExt;
 			//$this->Trace($strFilePath);
 			return $strFilePath;
 		}
@@ -441,11 +441,11 @@
 			$strElementID,
 			$strStyleID)
 		{
-			if ($strLayoutID == '')
+			if ($strLayoutID == "")
 			{
-				$strLayoutID = 'default';
+				$strLayoutID = "default";
 			}			
-			return $this->GetJavaScriptsDir().'layout_element_'.$strElementID.'_'.$strStyleID.'.js';
+			return $this->GetJavaScriptsDir()."layout_element_".$strElementID."_".$strStyleID.".js";
 		}
 		
 		function MakeFormLayoutFilePath(
@@ -453,11 +453,11 @@
 			$strFormID,
 			$strStyleID)
 		{
-			if ($strLayoutID == '')
+			if ($strLayoutID == "")
 			{
-				$strLayoutID = 'default';
+				$strLayoutID = "default";
 			}
-			$strFilePath = $this->GetLayoutDir(). 'layout_' .$strLayoutID.'_form_'.$strFormID.'_'.$strStyleID.'.htm';	
+			$strFilePath = $this->GetLayoutDir(). "layout_" .$strLayoutID."_form_".$strFormID."_".$strStyleID.".htm";	
 			//$this->Trace($strFilePath);
 			return $strFilePath;
 			
@@ -467,35 +467,35 @@
 			$strNavigationID,
 			$strLanguage)
 		{
-			if ($strLanguage == '')
+			if ($strLanguage == "")
 			{
-				$strLanguage = 'int';	
+				$strLanguage = "int";	
 			}
-			return $this->GetNavigationDir() . 'navigation_' .$strNavigationID.'_'. StringLowerCase($strLanguage) .'.txt';
+			return $this->GetNavigationDir() . "navigation_" .$strNavigationID."_". StringLowerCase($strLanguage) .".txt";
 		}
 		
 		function MakeResourceFilePath($strLanguage,$strResID)
 		{
-			return $this->GetResDir().'res_'.$strResID.'_'.StringLowerCase($strLanguage).'.txt';
+			return $this->GetResDir()."res_".$strResID."_".StringLowerCase($strLanguage).".txt";
 		}
 
 		function MakeRoutingMapFilePath($strLanguage,$strID)
 		{
-			return $this->GetRoutingDir().'routing_'.$strID.'_'.StringLowerCase($strLanguage).'.txt';
+			return $this->GetRoutingDir()."routing_".$strID."_".StringLowerCase($strLanguage).".txt";
 		}
 
 		
 		function MakeModuleSourceFilePath(
 			$strModulePath)
 		{
-			$arrayModulePathComponents = explode('/',$strModulePath);
+			$arrayModulePathComponents = explode("/",$strModulePath);
 			if (!is_array($arrayModulePathComponents) || ArrayCount($arrayModulePathComponents) != 2)
 			{
 				return false;
 			}
 			$strModuleGroup = $arrayModulePathComponents[0];
 			$strModuleID = $arrayModulePathComponents[1];
-			$strFile = $this->GetModulesDir().$strModuleGroup.'/'.$strModuleID.'/module_'.$strModuleID.'.inc';
+			$strFile = $this->GetModulesDir().$strModuleGroup."/".$strModuleID."/module_".$strModuleID.".inc";
 			return $strFile;
 		}
 		
@@ -505,24 +505,24 @@
 			$strState,
 			$strStyle)
 		{
-			if ($strLayoutID == '')
+			if ($strLayoutID == "")
 			{
-				$strLayoutID = 'default';	
+				$strLayoutID = "default";	
 			}
-			if ($strState == '')
+			if ($strState == "")
 			{
-				$strState = 'default';	
+				$strState = "default";	
 			}
-			if ($strStyle == 'default')
+			if ($strStyle == "default")
 			{
-				$strStyle = '';
+				$strStyle = "";
 			}
-			if ($strStyle != '')
+			if ($strStyle != "")
 			{
-				$strStyle = '_'.$strStyle;	
+				$strStyle = "_".$strStyle;	
 			}
 			return $this->GetLayoutDir().
-				'layout_'.$strLayoutID.'_module_'.$strModuleID.'_'.$strState.$strStyle.'.htm';
+				"layout_".$strLayoutID."_module_".$strModuleID."_".$strState.$strStyle.".htm";
 		}
 		
 		function MakeDataFilePath($strFilePath)
@@ -538,18 +538,18 @@
 
 		function MakeStyleSheetFilePath($strID)
 		{
-			return $this->GetStyleSheetsDir().$strID.'.css';
+			return $this->GetStyleSheetsDir().$strID.".css";
 		}
 
 		function MakeJavaScriptFilePath($strID)
 		{
-			return $this->GetJavaScriptsDir().$strID.'.js';
+			return $this->GetJavaScriptsDir().$strID.".js";
 		}
 
 		
 		function MakeLayoutImageFilePath($strImageID, $strLayout, $strExt)
 		{
-			return $this->GetImagesDir() . 'layout_'.$strLayout.'_'.$strImageID.'.'.$strExt;
+			return $this->GetImagesDir() . "layout_".$strLayout."_".$strImageID.".".$strExt;
 		}
 
 		function MakeImageFilePath($strImageFileName)
@@ -570,11 +570,11 @@
 			
 		function MakeFrameworkLayoutFilePath($strFramework,$strLayout)
 		{
-			if ($strLayout == '')
+			if ($strLayout == "")
 			{
-				$strLayout = 'default';
+				$strLayout = "default";
 			}			
-			return $this->GetLayoutDir() . 'layout_'.$strLayout.'_framework_'.$strFramework.'.htm';
+			return $this->GetLayoutDir() . "layout_".$strLayout."_framework_".$strFramework.".htm";
 		}	
 			
 		function MakeLayoutConfigFilePath($strLayout,$strConfig='')
@@ -592,20 +592,20 @@
 		
 		function MakeLayoutCssFilePath($strLayout)
 		{
-			if ($strLayout == '')
+			if ($strLayout == "")
 			{
-				$strLayout = 'default';
+				$strLayout = "default";
 			}			
-			return $this->GetLayoutDir() . 'layout_'.$strLayout.'.css';
+			return $this->GetLayoutDir() . "layout_".$strLayout.".css";
 		}		
 		
 		function MakeLayoutIncFilePath($strLayout)
 		{
-			if ($strLayout == '')
+			if ($strLayout == "")
 			{
-				$strLayout = 'default';
+				$strLayout = "default";
 			}			
-			return $this->GetLayoutDir() . 'layout_'.$strLayout.'.inc';
+			return $this->GetLayoutDir() . "layout_".$strLayout.".inc";
 		}		
 		
 		
@@ -633,11 +633,11 @@
 			$arrayElements = array();
 			foreach ($arrayFileNames as $strFileName)
 			{
-				if (StringSection($strFileName,0,8) == 'element_')
+				if (StringSection($strFileName,0,8) == "element_")
 				{
-					if (FindString($strFileName,'_democode.inc') == -1)
+					if (FindString($strFileName,"_democode.inc") == -1)
 					{
-						if (GetExtentionFromPath($strFileName) == 'inc')
+						if (GetExtentionFromPath($strFileName) == "inc")
 						{
 							$strElementID = StringSection($strFileName,8);
 							$strElementID = StringSection($strElementID,0,-4);

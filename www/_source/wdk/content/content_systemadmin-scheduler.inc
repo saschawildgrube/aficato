@@ -4,9 +4,9 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->IncludeModule('system/schedulermanager');
-			$manager = new CSchedulerManagerModule($this->GetWebsite(),'');
-			$arrayItems['MODULE_SCHEDULERMANAGER'] = $manager->RenderModule();
+			$this->GetWebsite()->IncludeModule("system/schedulermanager");
+			$manager = new CSchedulerManagerModule($this->GetWebsite(),"");
+			$arrayItems["MODULE_SCHEDULERMANAGER"] = $manager->RenderModule();
 		}
 	}
 	

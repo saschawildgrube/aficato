@@ -64,18 +64,18 @@
 					{
 						return false;	
 					}
-					$strColumn = ArrayGetValue($arrayOption,'field');
-					// This is behaviour by design. If the field does not exist, it will not be considered. It will not just be assumed the fields is '' or 0.
+					$strColumn = ArrayGetValue($arrayOption,"field");
+					// This is behaviour by design. If the field does not exist, it will not be considered. It will not just be assumed the fields is "" or 0.
 					if (!ArrayKeyExists($arrayElement,$strColumn))
 					{
 						continue;	
 					}
-					$strValue = ArrayGetValue($arrayOption,'value');
-					$strOperator = ArrayGetValue($arrayOption,'operator');
+					$strValue = ArrayGetValue($arrayOption,"value");
+					$strOperator = ArrayGetValue($arrayOption,"operator");
 
 					switch ($strOperator)
 					{
-						case '=':
+						case "=":
 						{
 							if ((ArrayGetValue($arrayElement,$strColumn) == $strValue) != true)
 							{
@@ -83,7 +83,7 @@
 							}
 							break;
 						}
-						case '!=':
+						case "!=":
 						{
 							if ((ArrayGetValue($arrayElement,$strColumn) != $strValue) != true)
 							{
@@ -91,7 +91,7 @@
 							}
 							break;	
 						}
-						case '<':
+						case "<":
 						{
 							if ((ArrayGetValue($arrayElement,$strColumn) < $strValue) != true)
 							{
@@ -99,7 +99,7 @@
 							}							
 							break;	
 						}
-						case '>':
+						case ">":
 						{
 							if ((ArrayGetValue($arrayElement,$strColumn) > $strValue) != true)
 							{
@@ -107,7 +107,7 @@
 							}
 							break;	
 						}
-						case '<=':
+						case "<=":
 						{
 							if ((ArrayGetValue($arrayElement,$strColumn) <= $strValue) != true)
 							{
@@ -115,7 +115,7 @@
 							}
 							break;	
 						}
-						case '>=':
+						case ">=":
 						{
 							if ((ArrayGetValue($arrayElement,$strColumn) >= $strValue) != true)
 							{
@@ -123,7 +123,7 @@
 							}
 							break;	
 						}
-						case 'contains':
+						case "contains":
 						{
 							if ((FindString(StringLowerCase(ArrayGetValue($arrayElement,$strColumn)),StringLowerCase($strValue)) != -1) != true)
 							{
@@ -131,11 +131,11 @@
 							}							
 							break;	
 						}
-						case 'in':
+						case "in":
 						{
 							$strElementValue = ArrayGetValue($arrayElement,$strColumn);
 							$bAddToResult = false;
-          				$arrayValues = explode(',',$strValue);
+          				$arrayValues = explode(",",$strValue);
           				foreach ($arrayValues as $strValue2)
           				{
           					if ($strElementValue == $strValue2)
@@ -146,7 +146,7 @@
           				}
           				break;
 						}
-						case 'like':
+						case "like":
 							// mysql like search is not (yet) supported.
 						default:
 							return false;	
@@ -178,17 +178,17 @@
 			}
  			foreach ($arraySortOptions as $strKey => $strSortOrder)
  			{
- 				// Protection against code injection: Without ' and ; a code injection will not be possible.
-				if (FindString($strKey,'\'') != -1)
+ 				// Protection against code injection: Without " and ; a code injection will not be possible.
+				if (FindString($strKey,"\"") != -1)
 				{
 					return false;	
 				}
-				if (FindString($strKey,';') != -1)
+				if (FindString($strKey,";") != -1)
 				{
 					return false;	
 				}
 
-				if ($strSortOrder != 'asc' && $strSortOrder != 'desc')
+				if ($strSortOrder != "asc" && $strSortOrder != "desc")
 				{
 					return false;	
 				}
@@ -217,7 +217,7 @@
   
   		// Create Sort Expression 
 			$i = 0; 
-			$strParameter = '';
+			$strParameter = "";
 			foreach ($arraySortOptions as $strKey => $strSortOrder)
 			{ 
 				if (ArrayKeyExists($arrayColumns,$strKey))
@@ -225,9 +225,9 @@
 					$i++; 
     			if($i > 1)
     			{
-    				$strParameter .= ',';
+    				$strParameter .= ",";
     			} 
-    			$strParameter .= '$arrayColumns[''.$strKey.'']'; 
+    			$strParameter .= '$arrayColumns["'.$strKey.'"]'; 
     			$strParameter .= ',SORT_'.StringUpperCase($strSortOrder);
     		}
 			}
@@ -379,7 +379,7 @@
 			{
 				foreach ($arrayIterator as $strKey => $strValue)
 				{
-					$arrayCountedValues['$strKey']['$strValue'] = 1 + intval(ArrayGetValue($arrayCountedValues,'$strKey','$strValue'));
+					$arrayCountedValues["$strKey"]["$strValue"] = 1 + intval(ArrayGetValue($arrayCountedValues,"$strKey","$strValue"));
 				}	
 			}
 			return $arrayCountedValues;
@@ -395,24 +395,24 @@
 				{
 					if (is_numeric($vValue))
 					{
-						$arrayStats[$strKey]['count'] = 1 + intval(ArrayGetValue($arrayStats,$strKey,'count'));
-						$arrayStats[$strKey]['sum'] = $vValue + intval(ArrayGetValue($arrayStats,$strKey,'sum'));
-						$arrayStats[$strKey]['max'] = max(ArrayGetValue($arrayStats,$strKey,'max'),$vValue);
+						$arrayStats[$strKey]["count"] = 1 + intval(ArrayGetValue($arrayStats,$strKey,'count'));
+						$arrayStats[$strKey]["sum"] = $vValue + intval(ArrayGetValue($arrayStats,$strKey,'sum'));
+						$arrayStats[$strKey]["max"] = max(ArrayGetValue($arrayStats,$strKey,'max'),$vValue);
 						if (ArrayKeyExists($arrayStats[$strKey],'min'))
 						{
 							$arrayStats[$strKey]['min'] = min(ArrayGetValue($arrayStats,$strKey,'min'),$vValue);		
 						}
 						else
 						{
-							$arrayStats[$strKey]['min'] = $vValue;
+							$arrayStats[$strKey]["min"] = $vValue;
 						}
 					}
 				}	
 			}
 			foreach ($arrayStats as $strKey => $arrayKeyStats)
 			{
-				$arrayStats[$strKey]['dif'] = $arrayStats[$strKey]['max'] - $arrayStats[$strKey]['min'];
-				$arrayStats[$strKey]['avg'] = $arrayStats[$strKey]['sum'] / $arrayStats[$strKey]['count'];
+				$arrayStats[$strKey]["dif"] = $arrayStats[$strKey]["max"] - $arrayStats[$strKey]["min"];
+				$arrayStats[$strKey]["avg"] = $arrayStats[$strKey]["sum"] / $arrayStats[$strKey]["count"];
 			}
 			return $arrayStats;
 		}						
@@ -424,24 +424,24 @@
 	function GetFilterOptionsFromParams(
 		$arrayParams,
 		$arrayFilterConfig,
-		$strPrefix = '',
+		$strPrefix = "",
 		$nFilterParams = 10)
 	{
-		if ($strPrefix != '')
+		if ($strPrefix != "")
 		{
-			$strPrefix .= '_';
+			$strPrefix .= "_";
 		}
 		$arrayFilterOptions = array();
 		for ($nIndex = 1; $nIndex <= $nFilterParams; $nIndex++)
 		{
-			$strFilterOption = ArrayGetValue($arrayParams,$strPrefix.'filter$nIndex');
-			if ($strFilterOption != '')
+			$strFilterOption = ArrayGetValue($arrayParams,$strPrefix."filter$nIndex");
+			if ($strFilterOption != "")
 			{
 				array_push($arrayFilterOptions,
 					array(
-						'field' => $arrayFilterConfig[$strFilterOption],
-						'operator' => ArrayGetValue($arrayParams,$strPrefix.'filter'.$nIndex.'_operator'),
-						'value' => ArrayGetValue($arrayParams,$strPrefix.'filter'.$nIndex.'_value')
+						"field" => $arrayFilterConfig[$strFilterOption],
+						"operator" => ArrayGetValue($arrayParams,$strPrefix."filter".$nIndex."_operator"),
+						"value" => ArrayGetValue($arrayParams,$strPrefix."filter".$nIndex."_value")
 					)
 				);
 			}
@@ -452,23 +452,23 @@
 	function GetSortOptionsFromParams(
 		$arrayParams,
 		$arraySortConfig,
-		$strPrefix = '',
+		$strPrefix = "",
 		$nSortParams = 10)
 	{
-		if ($strPrefix != '')
+		if ($strPrefix != "")
 		{
-			$strPrefix .= '_';
+			$strPrefix .= "_";
 		}
 		$arraySortOptions = array();
 		for ($nIndex = 1; $nIndex <= $nSortParams; $nIndex++)
 		{
-			$strSortOption = ArrayGetValue($arrayParams,$strPrefix.'sort'.$nIndex);
-			$strSortOrder = ArrayGetValue($arrayParams,$strPrefix.'sort'.$nIndex.'_order');
-			if ($strSortOption != '')
+			$strSortOption = ArrayGetValue($arrayParams,$strPrefix."sort".$nIndex);
+			$strSortOrder = ArrayGetValue($arrayParams,$strPrefix."sort".$nIndex."_order");
+			if ($strSortOption != "")
 			{
-				if ($strSortOrder != 'desc')
+				if ($strSortOrder != "desc")
 				{
-					$strSortOrder = 'asc';
+					$strSortOrder = "asc";
 				}
 				$arraySortOptions[$arraySortConfig[$strSortOption]] = $strSortOrder;
 			}

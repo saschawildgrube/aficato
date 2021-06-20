@@ -1,6 +1,6 @@
 <?php
 
-	require_once(GetWDKDir().'wdk_zip.inc');
+	require_once(GetWDKDir()."wdk_zip.inc");
 
 	class CScaffolder extends CWebsiteSatellite
 	{
@@ -22,10 +22,10 @@
 			$this->m_strScaffoldID = $strScaffoldID;
 			$this->m_strCategory = $strCategory;
 			$website = $this->m_module->GetWebSite();
-			parent::__construct($website,$strCategory.'/'.$strScaffoldID);
-			$this->GetWebsite()->LoadStringResources('scaffold-'.$this->GetCategory().'-'.$this->GetScaffoldID());	
-			$this->m_arrayCfg = LoadNamedArrayFromTextFile($this->m_strScaffoldDir.'scaffold.cfg');
-			$this->m_strZipFileName = 'wdk-scaffold.zip';
+			parent::__construct($website,$strCategory."/".$strScaffoldID);
+			$this->GetWebsite()->LoadStringResources("scaffold-".$this->GetCategory()."-".$this->GetScaffoldID());	
+			$this->m_arrayCfg = LoadNamedArrayFromTextFile($this->m_strScaffoldDir."scaffold.cfg");
+			$this->m_strZipFileName = "wdk-scaffold.zip";
 		}
 
 		function GetSatelliteType()
@@ -56,11 +56,11 @@
 		final
 		function GetTID($strTIDPart)
 		{
-			return 	'?TID_SCAFFOLD_'
+			return 	"?TID_SCAFFOLD_"
 							.StringUpperCase($this->GetCategory())
-							.'_'
+							."_"
 							.StringUpperCase($this->GetScaffoldID())
-							.'_'.$strTIDPart.'?';
+							."_".$strTIDPart."?";
 		}
 		
 		
@@ -98,16 +98,16 @@
 		function Create()
 		{
 			$arrayScaffoldParams = array();
-			$arrayScaffoldParams['wdk'] = $this->GetWebsite()->GetOutputItem('WDK');
-			$arrayScaffoldParams['wdk-docs-url'] = $this->GetWebsite()->GetOutputItem('WDK_DOCS_URL');
-			$arrayScaffoldParams['wdk-scaffolder-url'] = $this->GetWebsite()->GetOutputItem('WDK_SCAFFOLDER_URL');
+			$arrayScaffoldParams["wdk"] = $this->GetWebsite()->GetOutputItem("WDK");
+			$arrayScaffoldParams["wdk-docs-url"] = $this->GetWebsite()->GetOutputItem("WDK_DOCS_URL");
+			$arrayScaffoldParams["wdk-scaffolder-url"] = $this->GetWebsite()->GetOutputItem("WDK_SCAFFOLDER_URL");
 			$this->OnGetParams($arrayScaffoldParams);
 			
-			$strZipFileTitle = ArrayGetValue($this->m_arrayCfg,'ZIPFILETITLE');
-			if ($strZipFileTitle != '')
+			$strZipFileTitle = ArrayGetValue($this->m_arrayCfg,"ZIPFILETITLE");
+			if ($strZipFileTitle != "")
 			{
-				$strZipFileTitle = ReplaceTags($strZipFileTitle, $arrayScaffoldParams, '$$$', '$$$');	
-				$this->m_strZipFileName = $strZipFileTitle.'.zip';
+				$strZipFileTitle = ReplaceTags($strZipFileTitle, $arrayScaffoldParams, "$$$", "$$$");	
+				$this->m_strZipFileName = $strZipFileTitle.".zip";
 			}
 			
 			$arrayArchiveFiles = array();
@@ -130,19 +130,19 @@
 		final
 		function GetVarName($strVar) 
 		{
-			return $this->GetModule()->GetModuleVarName($this->GetScaffoldID().'_'.$strVar);    
+			return $this->GetModule()->GetModuleVarName($this->GetScaffoldID()."_".$strVar);    
 		}
 		
 		final
 		function GetVar($strVar)
 		{
-			return $this->GetModule()->GetModuleVar($this->GetScaffoldID().'_'.$strVar);
+			return $this->GetModule()->GetModuleVar($this->GetScaffoldID()."_".$strVar);
 		}		
 
 		final
 		function GetVarInsecure($strVar)
 		{
-			return $this->GetModule()->GetModuleVarInsecure($this->GetScaffoldID().'_'.$strVar);
+			return $this->GetModule()->GetModuleVarInsecure($this->GetScaffoldID()."_".$strVar);
 		}		
 
 		
@@ -176,8 +176,8 @@
 			return false;	
 		}
 		
-		$strTemplatesDir = $strScaffoldDir.'templates/';
-		$strSnippetsDir = $strScaffoldDir.'snippets/';
+		$strTemplatesDir = $strScaffoldDir."templates/";
+		$strSnippetsDir = $strScaffoldDir."snippets/";
 		
 		$arrayTemplateFiles = ReadDirectory($strTemplatesDir,true,false);
 		$arraySnippetsFiles = ReadDirectory($strSnippetsDir,true,false);
@@ -197,22 +197,22 @@
 			$strFileContents = FileReadBinary($strTemplatesDir.$strFile);
 			
 			$strFileExt = GetExtentionFromPath($strFile);
-			if (	$strFileExt == 'htm'
-				|| 	$strFileExt == 'txt'
-				|| 	$strFileExt == 'inc'
-				|| 	$strFileExt == 'php'
-				|| 	$strFileExt == 'cfg'
-				|| 	$strFileExt == 'htaccess'
+			if (	$strFileExt == "htm"
+				|| 	$strFileExt == "txt"
+				|| 	$strFileExt == "inc"
+				|| 	$strFileExt == "php"
+				|| 	$strFileExt == "cfg"
+				|| 	$strFileExt == "htaccess"
 				)
 			{
-				$strFileContents = ReplaceTags($strFileContents, $arrayParams, '$$$', '$$$');
+				$strFileContents = ReplaceTags($strFileContents, $arrayParams, "$$$", "$$$");
 			}
-			$strFile = ReplaceTags($strFile, $arrayParams, '$$$', '$$$');
-			$strFile = ReplaceString($strFile,'//','/'); 
+			$strFile = ReplaceTags($strFile, $arrayParams, "$$$", "$$$");
+			$strFile = ReplaceString($strFile,"//","/"); 
 
 			$arrayArchiveFiles[] = array(
-				'archivefilepath' => $strFile,
-				'contents' => $strFileContents
+				"archivefilepath" => $strFile,
+				"contents" => $strFileContents
 				);
 		}
 		

@@ -1,11 +1,11 @@
-$this->IncludeElement('sourcecode');
+$this->IncludeElement("sourcecode");
 
-$sourcecode = new CSourceCodeElement($this->GetWebsite(),'default');
-$strOutput = $sourcecode->RenderSourceCode('
+$sourcecode = new CSourceCodeElement($this->GetWebsite(),"default");
+$strOutput = $sourcecode->RenderSourceCode("
 function HelloWorld(\$strName)
 {
-	print(\'Hello World says \$strName\');
+	print(\"Hello World says \$strName\");
 }
-',
-'php'
+",
+"php"
 );

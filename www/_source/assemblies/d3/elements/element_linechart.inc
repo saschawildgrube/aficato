@@ -19,7 +19,7 @@
 		function RenderLineChart($arrayData, $arrayConfig = array())
 		{
 			$this->AddJavaScript('d3_linechart');
-			$this->AddStyleSheet('d3_linechart');			 
+			$this->AddStyleSheet('d3-linechart');			 
 
 			$this->AddJavaScript('react_linechart');
 
@@ -28,6 +28,7 @@
 			$arrayProps['config'] = $arrayConfig;
 			$arrayProps['height'] = intval($this->GetLayoutDef('LAYOUT_SVG_HEIGHT'));
 			$arrayProps['width'] = intval($this->GetLayoutDef('LAYOUT_SVG_WIDTH'));
+			$arrayProps['cssclassprefix'] = $this->GetLayoutDef('LAYOUT_CSSCLASSPREFIX');
 	
 			return $this->RenderReactComponent(
 				'LineChartD3ReactComponent',

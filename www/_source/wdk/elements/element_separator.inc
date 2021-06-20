@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				'separator',
+				"separator",
 				$strStyleID,
 				false,
 				true);

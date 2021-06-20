@@ -4,14 +4,14 @@
 	function GetVersionInfoMySQL()
 	{
 		$arrayVersion = array();
-		$arrayVersion['NAME'] = 'MySQL';
+		$arrayVersion["NAME"] = "MySQL";
 		
 		$arrayResult = array();
 		$bResult = ShellExecute(
-			'mysql',
-			array('--version'),
+			"mysql",
+			array("--version"),
 			array(),
-			'',
+			"",
 			$arrayResult);
 
 		if ($bResult == false)
@@ -19,24 +19,24 @@
 			return $arrayVersion;		
 		}
 		
-		$strStdout = ArrayGetValue($arrayResult,'stdout');
-		$arrayVersion['VERBOSE'] = $strStdout;
+		$strStdout = ArrayGetValue($arrayResult,"stdout");
+		$arrayVersion["VERBOSE"] = $strStdout;
 		
-		$nPos = FindString($strStdout,'Distrib ');
+		$nPos = FindString($strStdout,"Distrib ");
 		if ($nPos == -1)
 		{
 			return $arrayVersion;
 		}
 		
 		$strVersion = StringSection($strStdout,$nPos+8);
-		$nPos = FindString($strVersion,',');
+		$nPos = FindString($strVersion,",");
 		if ($nPos == -1)
 		{
 			return $arrayVersion;	
 		}
 		
 		$strVersion = StringSection($strVersion,0,$nPos);
-		$arrayVersion['VERSION'] = $strVersion;
+		$arrayVersion["VERSION"] = $strVersion;
 
 		return $arrayVersion;
 	}
@@ -54,7 +54,7 @@
 		{
 			$this->m_arrayData = array();
 			$this->m_nDBLink = 0;
-			$this->m_strTableNamePrefix = '';
+			$this->m_strTableNamePrefix = "";
 			$this->m_result = false;
 		}
 		
@@ -64,14 +64,14 @@
 			$strDBUser,
 			$strDBPassword,
 			$strDBName,
-			$strTableNamePrefix = '',
-			$strDBPort = ''
+			$strTableNamePrefix = "",
+			$strDBPort = ""
 			)
 		{
 			$nDBPort = intval($strDBPort);	
 			if ($nDBPort == 0)
 			{
-				$nDBPort = intval(ini_get('mysqli.default_port'));
+				$nDBPort = intval(ini_get("mysqli.default_port"));
 			}
 			$ea = new CErrorAmnesty();
 			$ea->Start();
@@ -88,7 +88,7 @@
 			}
 			$this->m_nDBLink = $nDBLink;
 			$this->m_strTableNamePrefix = $strTableNamePrefix;
-			$this->Query('SET NAMES 'utf8''); 
+			$this->Query("SET NAMES 'utf8'"); 
 			return true;		
 		}
 		
@@ -143,7 +143,7 @@
 				$strSQL,
 				$this->GetTableNamePrefix());
 				
-			if ($strSQL == '')
+			if ($strSQL == "")
 			{
 				return false;	
 			}
@@ -170,7 +170,7 @@
 		
 		function QueryFoundRows()
 		{
-			$result = mysqli_query($this->m_nDBLink,'SELECT FOUND_ROWS()');
+			$result = mysqli_query($this->m_nDBLink,"SELECT FOUND_ROWS()");
 			if ($result == false)
 			{
 				return -1;
@@ -211,7 +211,7 @@
 	
   	function TransactionBegin()
   	{ 
-  		$result = mysqli_query($this->m_nDBLink,'BEGIN');
+  		$result = mysqli_query($this->m_nDBLink,"BEGIN");
   		if ($result == false)
 			{
 				return false;
@@ -221,7 +221,7 @@
   	
   	function TransactionRollback()
   	{ 
-   		$result = mysqli_query($this->m_nDBLink,'ROLLBACK'); 
+   		$result = mysqli_query($this->m_nDBLink,"ROLLBACK"); 
   		if ($result == false)
 			{
 				return false;
@@ -231,7 +231,7 @@
 
 		function TransactionCommit()
 		{ 
-  		$result = mysqli_query($this->m_nDBLink,'COMMIT'); 
+  		$result = mysqli_query($this->m_nDBLink,"COMMIT"); 
   		if ($result == false)
 			{
 				return false;
@@ -241,7 +241,7 @@
 		
 		function LockTable($strTable)
 		{
-			$strSQL = 'LOCK TABLES '.MakeSQL_Helper_Table($strTable).' WRITE;';
+			$strSQL = "LOCK TABLES ".MakeSQL_Helper_Table($strTable)." WRITE;";
 
 			$strSQL = MakeSQL_PrefixTables(
 			$strSQL,
@@ -257,7 +257,7 @@
 
 		function UnlockTables()
 		{
-			$result = mysqli_query($this->m_nDBLink,'UNLOCK TABLES;'); 
+			$result = mysqli_query($this->m_nDBLink,"UNLOCK TABLES;"); 
   		if ($result == false)
 			{
 				return false;
@@ -283,51 +283,51 @@
 
 		if (!is_array($vCondition))
 		{
-			$strError = 'vCondition is not an array.';
+			$strError = "vCondition is not an array.";
 			return false;
 		}
 		if (ArrayCount($vCondition)==0)
 		{
-			$strError = 'vCondition is an empty array.';
+			$strError = "vCondition is an empty array.";
 			return false;	
 		}
-		$strSQL = ArrayGetValue($vCondition,'sql');
-		if ($strSQL != '')
+		$strSQL = ArrayGetValue($vCondition,"sql");
+		if ($strSQL != "")
 		{
 			return $strSQL;
 		}
-		$strField = ArrayGetValue($vCondition,'field');
-		$strTable = ArrayGetValue($vCondition,'table');
-		$vLeft = ArrayGetValue($vCondition,'left');
-		$vRight = ArrayGetValue($vCondition,'right');
-		$strOperator = ArrayGetValue($vCondition,'operator');
-		$arrayAnd = ArrayGetValue($vCondition,'and');
-		$arrayValues = ArrayGetValue($vCondition,'values');
-		$strSQL = '';
+		$strField = ArrayGetValue($vCondition,"field");
+		$strTable = ArrayGetValue($vCondition,"table");
+		$vLeft = ArrayGetValue($vCondition,"left");
+		$vRight = ArrayGetValue($vCondition,"right");
+		$strOperator = ArrayGetValue($vCondition,"operator");
+		$arrayAnd = ArrayGetValue($vCondition,"and");
+		$arrayValues = ArrayGetValue($vCondition,"values");
+		$strSQL = "";
 		if (is_array($arrayAnd))
 		{
-			$strSQL = '';
+			$strSQL = "";
 			foreach ($arrayAnd as $vCondition)
 			{
-				if ($strSQL != '')
+				if ($strSQL != "")
 				{
-					$strSQL .= ' AND ';
+					$strSQL .= " AND ";
 				}
 				$strSQL2 = MakeSQL_Helper_ConditionalExpression($vCondition,$strError,false);
 				if ($strSQL2 == false)
 				{
-					$strError = 'MakeSQL_Helper_ConditionalExpression(vCondition[and][]) returned false. '.$strError;
+					$strError = "MakeSQL_Helper_ConditionalExpression(vCondition[and][]) returned false. ".$strError;
 					return false;
 				}
 				$strSQL .= $strSQL2;
 			}
 			return $strSQL;
 		}
-		if ($strField != '')
+		if ($strField != "")
 		{
-			if ($vLeft != NULL || $vRight != NULL || $strOperator != '' || $arrayValues != NULL)
+			if ($vLeft != NULL || $vRight != NULL || $strOperator != "" || $arrayValues != NULL)
 			{
-				$strError = 'If vCondition[field] is set vCondition[left], vCondition[right], vCondition[values] and vCondition[operator] must be empty.';
+				$strError = "If vCondition[field] is set vCondition[left], vCondition[right], vCondition[values] and vCondition[operator] must be empty.";
 				return false;	
 			}
 			$strSQL .= MakeSQL_Helper_Field($strField,$strTable);
@@ -335,35 +335,35 @@
 		}
 		if ($vLeft != NULL)
 		{
-			if ($vRight === NULL || $strOperator == '')
+			if ($vRight === NULL || $strOperator == "")
 			{
-				$strError = 'If vCondition[left] is set vCondition[right] and vCondition[operator] must also be set.';
+				$strError = "If vCondition[left] is set vCondition[right] and vCondition[operator] must also be set.";
 				return false;	
 			}
-			$arrayOperators = array('=','>=','>','<=','<','<>','!=','OR','||','XOR','AND','&&','NOT','IN','LIKE');
+			$arrayOperators = array("=",">=",">","<=","<","<>","!=","OR","||","XOR","AND","&&","NOT","IN","LIKE");
 			if (ArrayValueExists($arrayOperators,$strOperator)==false)
 			{
-				$strError = 'Operator $strOperator is not supported.';
+				$strError = "Operator $strOperator is not supported.";
 				return false;
 			}
   
 			
-			$strSQL = '(';
+			$strSQL = "(";
 			$strLeft = MakeSQL_Helper_ConditionalExpression($vLeft,$strError,false);
 			if ($strLeft === false)
 			{
-				$strError = 'MakeSQL_Helper_ConditionalExpression(vCondition[left]) returned false. '.$strError;
+				$strError = "MakeSQL_Helper_ConditionalExpression(vCondition[left]) returned false. ".$strError;
 				return false;	
 			}
 			$strSQL .= $strLeft;
-			$strSQL .= ' '.$strOperator.' ';
+			$strSQL .= " ".$strOperator." ";
 			$strRight = MakeSQL_Helper_ConditionalExpression($vRight,$strError,false);
 			if ($strRight === false)
 			{
-				$strError = 'MakeSQL_Helper_ConditionalExpression(vCondition[right]) returned false. '.$strError;
+				$strError = "MakeSQL_Helper_ConditionalExpression(vCondition[right]) returned false. ".$strError;
 				return false;	
 			}
-			$strSQL .= $strRight.')';
+			$strSQL .= $strRight.")";
 			return $strSQL;
 		}
 		if ($arrayValues != NULL)
@@ -371,12 +371,12 @@
 			$strSQLValues = MakeSQL_Helper_Assignments($arrayValues,$strError);
 			if ($strSQLValues === false)
 			{
-				$strError = 'MakeSQL_Helper_Assignments(vCondition[values]) returned false. '.$strError;
+				$strError = "MakeSQL_Helper_Assignments(vCondition[values]) returned false. ".$strError;
 				return false;
 			}
-			return '('.$strSQLValues.')';
+			return "(".$strSQLValues.")";
 		}
-		$strError = 'Neither vCondition[and] nor vCondition[field] nor vCondition[left] nor vCondition[values] is set.';
+		$strError = "Neither vCondition[and] nor vCondition[field] nor vCondition[left] nor vCondition[values] is set.";
 		return false;
 	}
 
@@ -384,47 +384,47 @@
 	{
 		if (!is_array($arraySQL))
 		{
-			$strError = 'Parameter arraySQL is not an array.';
+			$strError = "Parameter arraySQL is not an array.";
 			return false;	
 		}
 		if (ArrayCount($arraySQL)==0)
 		{
-			$strError = 'Parameter arraySQL is an empty array.';
+			$strError = "Parameter arraySQL is an empty array.";
 			return false;	
 		}
-		$arrayAllowedKeys = array('command','tables','where','groupby','limit','orderby','calculate_found_rows','fields','values','on_duplicate_key_update');   
+		$arrayAllowedKeys = array("command","tables","where","groupby","limit","orderby","calculate_found_rows","fields","values","on_duplicate_key_update");   
 		$arrayForbiddenKeys = array();
 		if (ArrayCheckKeysByWhiteList($arraySQL,$arrayAllowedKeys,$arrayForbiddenKeys) == false)
 		{
-			$strError = 'Parameter arraySQL contains forbidden keys: '.ArrayRenderList($arrayForbiddenKeys);
+			$strError = "Parameter arraySQL contains forbidden keys: ".ArrayRenderList($arrayForbiddenKeys);
 			return false;	
 		}
 		
-		$strSQL = '';
-		$strCommand = ArrayGetValue($arraySQL,'command');
-		$arrayCommands = array('SELECT','INSERT','UPDATE','REPLACE','DELETE');
+		$strSQL = "";
+		$strCommand = ArrayGetValue($arraySQL,"command");
+		$arrayCommands = array("SELECT","INSERT","UPDATE","REPLACE","DELETE");
 		if (ArrayValueExists($arrayCommands,$strCommand) == false)
 		{
-			$strError = 'Specified arraySQL[command] \'$strCommand\' is not supported.';
+			$strError = "Specified arraySQL[command] \"$strCommand\" is not supported.";
 			return false;	
 		}
 		
-		if ($strCommand == 'SELECT')
+		if ($strCommand == "SELECT")
 		{
-			$strSQL = 'SELECT ';
-			if (ArrayGetValue($arraySQL,'calculate_found_rows') == true)
+			$strSQL = "SELECT ";
+			if (ArrayGetValue($arraySQL,"calculate_found_rows") == true)
 			{
-				$strSQL .= 'SQL_CALC_FOUND_ROWS ';
+				$strSQL .= "SQL_CALC_FOUND_ROWS ";
 			}
-			$arrayFields = ArrayGetValue($arraySQL,'fields');
+			$arrayFields = ArrayGetValue($arraySQL,"fields");
 			$strSQL .= MakeSQL_Helper_Fields($arrayFields,$strError);
-			if ($strError != '')
+			if ($strError != "")
 			{
 				return false;	
 			}
 
-			$strSQL .= ' FROM ';
-			$vFrom = ArrayGetValue($arraySQL,'tables');	
+			$strSQL .= " FROM ";
+			$vFrom = ArrayGetValue($arraySQL,"tables");	
 			if (is_string($vFrom))
 			{
 				$strSQL .= MakeSQL_Helper_Table($vFrom);	
@@ -433,12 +433,12 @@
 			{
 				if (!is_array($vFrom))
 				{
-					$strError = 'arraySQL[from] is neither string nor array.';
+					$strError = "arraySQL[from] is neither string nor array.";
 					return false;	
 				}
 				if (ArrayCount($vFrom) == 0)
 				{
-					$strError = 'arraySQL[from] is an empty array.';
+					$strError = "arraySQL[from] is an empty array.";
 					return false;	
 				}
 				$bFirst = true;
@@ -446,47 +446,47 @@
 				{
 					if (!is_array($arrayTableRef))	
 					{
-						$strError = 'arraySQL[from][] is not an array.';
+						$strError = "arraySQL[from][] is not an array.";
 						return false;	
 					}
-					$strTable = ArrayGetValue($arrayTableRef,'table');
-					if ($strTable == '')
+					$strTable = ArrayGetValue($arrayTableRef,"table");
+					if ($strTable == "")
 					{
-						$strError = 'arraySQL[from][][table] must not be empty.';
+						$strError = "arraySQL[from][][table] must not be empty.";
 						return false;	
 					}
-					$strJoin = ArrayGetValue($arrayTableRef,'join');
+					$strJoin = ArrayGetValue($arrayTableRef,"join");
 					if ($bFirst)
 					{
-						if ($strJoin != '')
+						if ($strJoin != "")
 						{
-							$strError = 'arraySQL[from][][join] must not be empty.';
+							$strError = "arraySQL[from][][join] must not be empty.";
 							return false;	
 						}
 					}
 					else
 					{
-						$arrayJoins = array('LEFT JOIN','JOIN','RIGHT JOIN',);
+						$arrayJoins = array("LEFT JOIN","JOIN","RIGHT JOIN",);
 						if (ArrayValueExists($arrayJoins,$strJoin) == false)
 						{
-							$strError = 'arraySQL[from][][join] = $strJoin is not supported.';
+							$strError = "arraySQL[from][][join] = $strJoin is not supported.";
 							return false;	
 						}
-						$strSQL .= $strJoin.' ';
+						$strSQL .= $strJoin." ";
 						
 					}
-					$strSQL .= MakeSQL_Helper_Table($strTable).' ';	
-					$strAS = ArrayGetValue($arrayTableRef,'as');
-					if ($strAS != '')
+					$strSQL .= MakeSQL_Helper_Table($strTable)." ";	
+					$strAS = ArrayGetValue($arrayTableRef,"as");
+					if ($strAS != "")
 					{
-						$strSQL .= 'AS '.MakeSQL_Helper_Table($strAS).' ';	
+						$strSQL .= "AS ".MakeSQL_Helper_Table($strAS)." ";	
 					}
-					$vOn = ArrayGetValue($arrayTableRef,'on');
+					$vOn = ArrayGetValue($arrayTableRef,"on");
 					if ($bFirst)
 					{
 						if ($vOn != NULL)
 						{
-							$strError = 'arraySQL[from][][on] must be null for the first table reference.';							
+							$strError = "arraySQL[from][][on] must be null for the first table reference.";							
 							return false;	
 						}
 					}
@@ -497,119 +497,119 @@
 							$strConditionalExpression = MakeSQL_Helper_ConditionalExpression($vOn,$strError);
 							if ($vOn == false)
 							{
-								$strError = 'MakeSQL_Helper_ConditionalExpression(arraySQL[from][][on]) returned false. '.$strError;
+								$strError = "MakeSQL_Helper_ConditionalExpression(arraySQL[from][][on]) returned false. ".$strError;
 								return false;	
 							}
-							$strSQL .= 'ON '.$strConditionalExpression;
+							$strSQL .= "ON ".$strConditionalExpression;
 						}
 					}
 					$bFirst	= false;
 				}
 			}
-			$vWhere = ArrayGetValue($arraySQL,'where');
+			$vWhere = ArrayGetValue($arraySQL,"where");
 			if ($vWhere != NULL)
 			{
 				$strWhereCondition = MakeSQL_Helper_ConditionalExpression($vWhere,$strError);
 				if ($strWhereCondition == false)
 				{
-					$strError = 'MakeSQL_Helper_ConditionalExpression(arraySQL[where]) returned false. '.$strError;
+					$strError = "MakeSQL_Helper_ConditionalExpression(arraySQL[where]) returned false. ".$strError;
 					return false;	
 				}
-				$strSQL .= ' WHERE '.$strWhereCondition;
+				$strSQL .= " WHERE ".$strWhereCondition;
 			}
-			$arraySQLGroupBy = ArrayGetValue($arraySQL,'groupby');
+			$arraySQLGroupBy = ArrayGetValue($arraySQL,"groupby");
 			$strSQL .= MakeSQL_Helper_GroupBy($arraySQLGroupBy,$strError);
-			if ($strError != '')
+			if ($strError != "")
 			{
 				return false;	
 			}
 		
-			$arrayOrderBy = ArrayGetValue($arraySQL,'orderby');
+			$arrayOrderBy = ArrayGetValue($arraySQL,"orderby");
 			$strSQL .= MakeSQL_Helper_OrderBy($arrayOrderBy);
 
-			$arrayLimit = ArrayGetValue($arraySQL,'limit');
+			$arrayLimit = ArrayGetValue($arraySQL,"limit");
 			$strSQL .= MakeSQL_Helper_Limit($arrayLimit);
 			
-			$strSQL .= ';';
+			$strSQL .= ";";
 			return $strSQL;
 		}
 
 
-		if ($strCommand == 'UPDATE')
+		if ($strCommand == "UPDATE")
 		{
-			$strSQL = 'UPDATE ';
+			$strSQL = "UPDATE ";
 						
-			$vTable = ArrayGetValue($arraySQL,'tables');	
+			$vTable = ArrayGetValue($arraySQL,"tables");	
 			if (is_string($vTable))
 			{
 				$strSQL .= MakeSQL_Helper_Table($vTable);	
 			}
 			else
 			{
-				$strError = 'arraySQL[tables] is not a string.';
+				$strError = "arraySQL[tables] is not a string.";
 				return false;
 			}
 			
-			$arrayValues = ArrayGetValue($arraySQL,'values');
+			$arrayValues = ArrayGetValue($arraySQL,"values");
 			
 			$strSQLValues = MakeSQL_Helper_Assignments($arrayValues,$strError);
-			if ($strSQLValues == '')
+			if ($strSQLValues == "")
 			{
 				return false;	
 			}
-			$strSQL .= ' SET '.$strSQLValues; 
+			$strSQL .= " SET ".$strSQLValues; 
 
-			$vWhere = ArrayGetValue($arraySQL,'where');
+			$vWhere = ArrayGetValue($arraySQL,"where");
 			if ($vWhere != NULL)
 			{
 				$strWhereCondition = MakeSQL_Helper_ConditionalExpression($vWhere,$strError);
 				if ($strWhereCondition == false)
 				{
-					$strError = 'MakeSQL_Helper_ConditionalExpression(arraySQL[where]) returned false. '.$strError;
+					$strError = "MakeSQL_Helper_ConditionalExpression(arraySQL[where]) returned false. ".$strError;
 					return false;	
 				}
-				$strSQL .= ' WHERE '.$strWhereCondition;
+				$strSQL .= " WHERE ".$strWhereCondition;
 			}
 			
-			$arrayOrderBy = ArrayGetValue($arraySQL,'orderby');
+			$arrayOrderBy = ArrayGetValue($arraySQL,"orderby");
 			$strSQL .= MakeSQL_Helper_OrderBy($arrayOrderBy);
 
-			$arrayLimit = ArrayGetValue($arraySQL,'limit');
+			$arrayLimit = ArrayGetValue($arraySQL,"limit");
 			$strSQL .= MakeSQL_Helper_Limit($arrayLimit);
 			
-			$strSQL .= ';';
+			$strSQL .= ";";
 			return $strSQL;
 		}
 
 
-		if ($strCommand == 'INSERT')
+		if ($strCommand == "INSERT")
 		{
-			$strSQL = 'INSERT ';
+			$strSQL = "INSERT ";
 			
-			$strSQL .= 'INTO ';
-			$vInto = ArrayGetValue($arraySQL,'tables');	
+			$strSQL .= "INTO ";
+			$vInto = ArrayGetValue($arraySQL,"tables");	
 			if (is_string($vInto))
 			{
 				$strSQL .= MakeSQL_Helper_Table($vInto);	
 			}
 			else
 			{
-				$strError = 'arraySQL[into] is not a string.';
+				$strError = "arraySQL[into] is not a string.";
 				return false;
 			}
 			
-			$arrayValues = ArrayGetValue($arraySQL,'values');
+			$arrayValues = ArrayGetValue($arraySQL,"values");
 			$strSQLValues = MakeSQL_Helper_Assignments($arrayValues,$strError);
 			if ($strSQLValues == false)
 			{
 				return false;	
 			}
-			$strSQL .= ' SET '.$strSQLValues; 
+			$strSQL .= " SET ".$strSQLValues; 
 
-			$arraySQLValues = ArrayGetValue($arraySQL,'on_duplicate_key_update');
+			$arraySQLValues = ArrayGetValue($arraySQL,"on_duplicate_key_update");
 			if ($arraySQLValues === true)
 			{
-				$strSQL .= ' ON DUPLICATE KEY UPDATE '.$strSQLValues;
+				$strSQL .= " ON DUPLICATE KEY UPDATE ".$strSQLValues;
 			}
 			else
 			{
@@ -618,98 +618,98 @@
 				{
 					return false;	
 				}
-				if ($strSQLValues != '')
+				if ($strSQLValues != "")
 				{
-					$strSQL .= ' ON DUPLICATE KEY UPDATE '.$strSQLValues;	
+					$strSQL .= " ON DUPLICATE KEY UPDATE ".$strSQLValues;	
 				}
 			}
-			$strSQL .= ';';
+			$strSQL .= ";";
 			return $strSQL;
 		}
 
-		if ($strCommand == 'REPLACE')
+		if ($strCommand == "REPLACE")
 		{
-			$strSQL = 'REPLACE ';
+			$strSQL = "REPLACE ";
 			
-			$strSQL .= 'INTO ';
-			$vInto = ArrayGetValue($arraySQL,'tables');	
+			$strSQL .= "INTO ";
+			$vInto = ArrayGetValue($arraySQL,"tables");	
 			if (is_string($vInto))
 			{
 				$strSQL .= MakeSQL_Helper_Table($vInto);	
 			}
 			else
 			{
-				$strError = 'arraySQL[into] is not a string.';
+				$strError = "arraySQL[into] is not a string.";
 				return false;
 			}
 
-			$arrayValues = ArrayGetValue($arraySQL,'values');
+			$arrayValues = ArrayGetValue($arraySQL,"values");
 			$strSQLValues = MakeSQL_Helper_Assignments($arrayValues,$strError);
 			if ($strSQLValues == false)
 			{
 				return false;	
 			}
-			$strSQL .= ' SET '.$strSQLValues; 
+			$strSQL .= " SET ".$strSQLValues; 
 
-			$strSQL .= ';';
+			$strSQL .= ";";
 			return $strSQL;
 		}
 
 
 
 
-		if ($strCommand == 'DELETE')
+		if ($strCommand == "DELETE")
 		{
-			$strSQL = 'DELETE ';
-			if (ArrayGetValue($arraySQL,'calculate_found_rows') == true)
+			$strSQL = "DELETE ";
+			if (ArrayGetValue($arraySQL,"calculate_found_rows") == true)
 			{
-				$strError = 'SQL_CALC_FOUND_ROWS must not be specified';
+				$strError = "SQL_CALC_FOUND_ROWS must not be specified";
 				return false;
 			}
 			
-			$arrayFields = ArrayGetValue($arraySQL,'fields');
+			$arrayFields = ArrayGetValue($arraySQL,"fields");
 			if (is_array($arrayFields))
 			{
-				$strError = 'Fields must not be specified';
+				$strError = "Fields must not be specified";
 				return false;
 			}
 
-			$strSQL .= 'FROM ';
-			$vFrom = ArrayGetValue($arraySQL,'tables');	
+			$strSQL .= "FROM ";
+			$vFrom = ArrayGetValue($arraySQL,"tables");	
 			if (is_string($vFrom))
 			{
 				$strSQL .= MakeSQL_Helper_Table($vFrom);	
 			}
 			else
 			{
-				$strError = 'arraySQL[from] is not a string.';
+				$strError = "arraySQL[from] is not a string.";
 				return false;
 			}
 
-			$vWhere = ArrayGetValue($arraySQL,'where');
+			$vWhere = ArrayGetValue($arraySQL,"where");
 			if ($vWhere != NULL)
 			{
 				$strWhereCondition = MakeSQL_Helper_ConditionalExpression($vWhere,$strError);
 				if ($strWhereCondition == false)
 				{
-					$strError = 'MakeSQL_Helper_ConditionalExpression(arraySQL[where]) returned false. '.$strError;
+					$strError = "MakeSQL_Helper_ConditionalExpression(arraySQL[where]) returned false. ".$strError;
 					return false;	
 				}
-				$strSQL .= ' WHERE '.$strWhereCondition;
+				$strSQL .= " WHERE ".$strWhereCondition;
 			}
 			
-			$arrayOrderBy = ArrayGetValue($arraySQL,'orderby');
+			$arrayOrderBy = ArrayGetValue($arraySQL,"orderby");
 			$strSQL .= MakeSQL_Helper_OrderBy($arrayOrderBy);
 
-			$arrayLimit = ArrayGetValue($arraySQL,'limit');
+			$arrayLimit = ArrayGetValue($arraySQL,"limit");
 			$strSQL .= MakeSQL_Helper_Limit($arrayLimit);
 			
-			$strSQL .= ';';
+			$strSQL .= ";";
 			return $strSQL;
 		}
 
 
-		$strError = 'Command not supported';
+		$strError = "Command not supported";
 		return false;
 	}
 	
@@ -722,8 +722,8 @@
 			return $strString;
 		}
 		$strString = str_replace(
-			array('\\', '\0', '\n', '\r', ''', ''', '\x1a'),
-			array('\\\\', '\\0', '\\n', '\\r', '\\'', '\\'', '\\Z'),
+			array('\\', "\0", "\n", "\r", "'", '"', "\x1a"),
+			array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z'),
 			$strString); 
 		return StringEncodeUTF8($strString);
  } 
@@ -732,25 +732,25 @@
 
 	function MakeSQL_Helper_Fields($vFields,&$strError = null)
 	{
-		$strError = '';
-		$strSQL = '';
+		$strError = "";
+		$strSQL = "";
 		
 		if (is_array($vFields))
 		{
 			foreach ($vFields as $vField)
 			{
-				if ($strSQL != '')
+				if ($strSQL != "")
 				{
-					$strSQL .= ', ';
+					$strSQL .= ", ";
 				}
 				if (is_array($vField))
 				{
-					$strTable = ArrayGetValue($vField,'table');
-					$strField = ArrayGetValue($vField,'field');
-					$strFieldAlias = ArrayGetValue($vField,'as');
-					if ($strField == '')
+					$strTable = ArrayGetValue($vField,"table");
+					$strField = ArrayGetValue($vField,"field");
+					$strFieldAlias = ArrayGetValue($vField,"as");
+					if ($strField == "")
 					{
-						$strError = 'Field is not specified';
+						$strError = "Field is not specified";
 						return false;	
 					}
 					$strSQL .= MakeSQL_Helper_Field($strField,$strTable,$strFieldAlias);
@@ -761,56 +761,56 @@
 				}
 			}
 		}
-		else if (is_string($vFields) && $vFields != '')
+		else if (is_string($vFields) && $vFields != "")
 		{
 			$strSQL = $vFields;
 		}
 		else
 		{
-			$strSQL = '*';
+			$strSQL = "*";
 		}
 		return $strSQL;
 	}
 
 	function MakeSQL_Helper_Assignment($strField,$strValue)
 	{
-		$strSQL = MakeSQL_Helper_Field($strField).' = ';
-		if (''.$strValue == '++')
+		$strSQL = MakeSQL_Helper_Field($strField)." = ";
+		if ("".$strValue == "++")
 		{
-			return $strSQL . '$strField + 1';
+			return $strSQL . "$strField + 1";
 		}
-		if (''.$strValue == '--')
+		if ("".$strValue == "--")
 		{
-			return $strSQL . '$strField - 1';
+			return $strSQL . "$strField - 1";
 		}
 		return $strSQL . MakeSQL_Helper_Value($strValue);
 	}
 	
 	function MakeSQL_Helper_Assignments($arraySQLValues,&$strError = null)
 	{
-		$strError = '';
+		$strError = "";
 		if (!is_array($arraySQLValues))
 		{
 			$arraySQLValues = array();
-			$strError = 'No values are specified';
-			return '';
+			$strError = "No values are specified";
+			return "";
 		}
-		$strSQLValues = '';
+		$strSQLValues = "";
 		foreach ($arraySQLValues as $vValue)
 		{
-			if ($strSQLValues != '')
+			if ($strSQLValues != "")
 			{
-				$strSQLValues .= ', ';
+				$strSQLValues .= ", ";
 			}				
 			if (is_array($vValue))
 			{
-				$strField = ArrayGetValue($vValue,'field');
-				if ($strField == '')
+				$strField = ArrayGetValue($vValue,"field");
+				if ($strField == "")
 				{
-					$strError = 'Field is not specified';
+					$strError = "Field is not specified";
 					return false;	
 				}
-				$strValue = ArrayGetValue($vValue,'value');				
+				$strValue = ArrayGetValue($vValue,"value");				
 				$strSQLValues .= MakeSQL_Helper_Assignment($strField,$strValue);
 			}
 			else
@@ -833,64 +833,64 @@
 	function MakeSQL_Helper_Value($vValue)
 	{
 		// This is dangerous as it makes the system vulnerable to sql injection attacks. But this also makes sql statements impossible that contain '-quotes intentionally. A trade-off we can live with!
-		/*if (strpos($strValue,''') !== false)
+		/*if (strpos($strValue,"'") !== false)
 		{
 			return $strValue;
 		}*/
 		if (is_integer($vValue) || is_float($vValue))
 		{
-			return ''.RenderNumber($vValue);
+			return "".RenderNumber($vValue);
 		}
-		if ($vValue == 'NOW()')
+		if ($vValue == "NOW()")
 		{
 			return $vValue;
 		}
-		if ($vValue == 'NULL')
+		if ($vValue == "NULL")
 		{
 			return $vValue;
 		}
 		if (IsValidDateTime($vValue))
 		{
-			return '''.$vValue.''';
+			return "'".$vValue."'";
 		}
-		return '''.MakeSQL_Helper_EscapeString($vValue).''';
+		return "'".MakeSQL_Helper_EscapeString($vValue)."'";
 	}
 	
 	function MakeSQL_Helper_Table($strTable)
 	{
-		return '/*TablePrefix*/`'.MakeSQL_Helper_EscapeString($strTable).'`';
+		return "/*TablePrefix*/`".MakeSQL_Helper_EscapeString($strTable)."`";
 	}
 
-	function MakeSQL_Helper_Field($strField,$strTable='',$strFieldAlias='')
+	function MakeSQL_Helper_Field($strField,$strTable="",$strFieldAlias="")
 	{
-		if ($strField == '')
+		if ($strField == "")
 		{
-			return '';
+			return "";
 		}
 		return 
-			(($strTable=='')?(''):(MakeSQL_Helper_Table($strTable).'.'))
-			.'`'.MakeSQL_Helper_EscapeString($strField).'`'
-			.(($strFieldAlias=='')?(''):(' AS `'.MakeSQL_Helper_EscapeString($strFieldAlias).'`'));
+			(($strTable=="")?(""):(MakeSQL_Helper_Table($strTable)."."))
+			."`".MakeSQL_Helper_EscapeString($strField)."`"
+			.(($strFieldAlias=="")?(""):(" AS `".MakeSQL_Helper_EscapeString($strFieldAlias)."`"));
 	}
 	
 	function MakeSQL_Helper_Limit($arrayLimit)
 	{
 		if (!is_array($arrayLimit))
 		{
-			return '';	
+			return "";	
 		}
-		$nOffset = intval(ArrayGetValue($arrayLimit,'offset'));
-		$nRowCount = intval(ArrayGetValue($arrayLimit,'rowcount'));
+		$nOffset = intval(ArrayGetValue($arrayLimit,"offset"));
+		$nRowCount = intval(ArrayGetValue($arrayLimit,"rowcount"));
 		if ($nRowCount == 0)
 		{
-			return '';	
+			return "";	
 		}
-		$strSQL = ' LIMIT ';
+		$strSQL = " LIMIT ";
 		if ($nOffset > 0)
 		{
-			$strSQL .= '$nOffset, ';
+			$strSQL .= "$nOffset, ";
 		}
-		$strSQL .= '$nRowCount';
+		$strSQL .= "$nRowCount";
 		return $strSQL;
 	}
 
@@ -898,42 +898,42 @@
 	{
 		if (!is_array($arrayOrderBy))
 		{
-			return '';	
+			return "";	
 		}
-		$strSQL = ''; 
+		$strSQL = ""; 
 		if (ArrayCount($arrayOrderBy) > 0)
 		{
-			$strSQL .= ' ORDER BY ';
+			$strSQL .= " ORDER BY ";
 			$bFirst = true;
 			foreach ($arrayOrderBy as $arrayColumn)
 			{
 				if ($bFirst == false)
 				{
-					$strSQL .= ', ';
+					$strSQL .= ", ";
 				}
 				if (!is_array($arrayColumn))	
 				{
-					$strError = 'arraySQL[orderby][] is not an array.';
+					$strError = "arraySQL[orderby][] is not an array.";
 					return false;	
 				}
-				$strField = ArrayGetValue($arrayColumn,'field');
-				if ($strField == '')
+				$strField = ArrayGetValue($arrayColumn,"field");
+				if ($strField == "")
 				{
-					$strError = 'arraySQL[orderby][][field] is empty.';
+					$strError = "arraySQL[orderby][][field] is empty.";
 					return false;	
 				}
-				$strTable = ArrayGetValue($arrayColumn,'table');
+				$strTable = ArrayGetValue($arrayColumn,"table");
 				$strSQL .= MakeSQL_Helper_Field($strField,$strTable);
-				$strOrder = ArrayGetValue($arrayColumn,'order');
-				$arrayOrders = array('','ASC','DESC');
+				$strOrder = ArrayGetValue($arrayColumn,"order");
+				$arrayOrders = array("","ASC","DESC");
 				if (!ArrayValueExists($arrayOrders,$strOrder))
 				{
-					$strError = 'arraySQL[orderby][][order] = $strOrder is not supported.';
+					$strError = "arraySQL[orderby][][order] = $strOrder is not supported.";
 					return false;
 				}
-				if ($strOrder != '')
+				if ($strOrder != "")
 				{
-					$strSQL .= ' '.$strOrder;
+					$strSQL .= " ".$strOrder;
 				}
 				$bFirst = false;
 			}
@@ -944,43 +944,43 @@
 
 	function MakeSQL_Helper_GroupBy($arrayGroupBy,&$strError = null)
 	{
-		$strError = '';
-		$strSQL = '';
+		$strError = "";
+		$strSQL = "";
 		if (is_array($arrayGroupBy) == true)
 		{
 			if (ArrayCount($arrayGroupBy) > 0)
 			{
-				$strSQL .= ' GROUP BY ';
+				$strSQL .= " GROUP BY ";
 				$bFirst = true;
 				foreach ($arrayGroupBy as $arrayColumn)
 				{
 					if ($bFirst == false)
 					{
-						$strSQL .= ', ';
+						$strSQL .= ", ";
 					}
 					if (!is_array($arrayColumn))	
 					{
-						$strError = 'arraySQL[groupby][] is not an array.';
+						$strError = "arraySQL[groupby][] is not an array.";
 						return false;	
 					}
-					$strField = ArrayGetValue($arrayColumn,'field');
-					if ($strField == '')
+					$strField = ArrayGetValue($arrayColumn,"field");
+					if ($strField == "")
 					{
-						$strError = 'arraySQL[groupby][][field] is empty.';
+						$strError = "arraySQL[groupby][][field] is empty.";
 						return false;	
 					}
-					$strTable = ArrayGetValue($arrayColumn,'table');
+					$strTable = ArrayGetValue($arrayColumn,"table");
 					$strSQL .= MakeSQL_Helper_Field($strField,$strTable);
-					$strOrder = ArrayGetValue($arrayColumn,'order');
-					$arrayOrders = array('','ASC','DESC');
+					$strOrder = ArrayGetValue($arrayColumn,"order");
+					$arrayOrders = array("","ASC","DESC");
 					if (!ArrayValueExists($arrayOrders,$strOrder))
 					{
-						$strError = 'arraySQL[groupby][][order] = $strOrder is not supported.';
+						$strError = "arraySQL[groupby][][order] = $strOrder is not supported.";
 						return false;
 					}
-					if ($strOrder != '')
+					if ($strOrder != "")
 					{
-						$strSQL .= ' '.$strOrder;
+						$strSQL .= " ".$strOrder;
 					}
 					$bFirst = false;
 				}
@@ -1002,14 +1002,14 @@
 		foreach ($arrayFields as $strField => $strValue)
 		{
 			$arraySQLValues[] = array(
-				'field' => $strField,
-				'value' => $strValue);
+				"field" => $strField,
+				"value" => $strValue);
 		}
 		$arraySQL = array(
-			'command' => 'INSERT',
-			'tables' => $strTable,
-			'values' => $arraySQLValues,
-			'on_duplicate_key_update' => $bOnDuplicateKeyUpdate);
+			"command" => "INSERT",
+			"tables" => $strTable,
+			"values" => $arraySQLValues,
+			"on_duplicate_key_update" => $bOnDuplicateKeyUpdate);
 		return MakeSQL($arraySQL);		
 	}
 
@@ -1022,13 +1022,13 @@
 		{
 			$arrayFields = array();
 		}
-		$strSQL = 'REPLACE INTO '.MakeSQL_Helper_Table($strTable).' ';
+		$strSQL = "REPLACE INTO ".MakeSQL_Helper_Table($strTable)." ";
 		
 		$nCount = ArrayCount($arrayFields);
 		
 		if ($nCount > 0)
 		{
-			$strSQL .= 'SET ';
+			$strSQL .= "SET ";
 		}
 
 		$nIndex = 0;
@@ -1037,12 +1037,12 @@
 			$strSQL .= MakeSQL_Helper_Assignment($strField,$strValue);
 			if ($nIndex < $nCount-1)
 			{
-				$strSQL .= ', ';
+				$strSQL .= ", ";
 			}
 			$nIndex++;
 		}
 		
-		$strSQL .= ';';
+		$strSQL .= ";";
 		
 		return $strSQL;
 	}
@@ -1052,9 +1052,9 @@
 		$vConditions)
 	{
 		$arraySQL = array(
-			'command' => 'DELETE',
-			'tables' => $strTable,
-			'where' => $vConditions
+			"command" => "DELETE",
+			"tables" => $strTable,
+			"where" => $vConditions
 			);
 		return MakeSQL($arraySQL);
 	}
@@ -1064,7 +1064,7 @@
 		$arrayFields,
 		$strCondition)
 	{
-		$strSQL = 'UPDATE '.MakeSQL_Helper_Table($strTable).' SET ';
+		$strSQL = "UPDATE ".MakeSQL_Helper_Table($strTable)." SET ";
 		
 		$nCount = ArrayCount($arrayFields);
 
@@ -1074,11 +1074,11 @@
 			$strSQL .= MakeSQL_Helper_Assignment($strField,$strValue);
 			if ($nIndex < $nCount-1)
 			{
-				$strSQL .= ', ';
+				$strSQL .= ", ";
 			}
 			$nIndex++;
 		}
-		$strSQL .= ' WHERE $strCondition';
+		$strSQL .= " WHERE $strCondition";
 		return $strSQL;	
 	}
 	
@@ -1088,33 +1088,33 @@
 		$vConditions)
 	{
 		$arraySQL = array(
-			'command' => 'SELECT',
-			'tables' => $strTable,
-			'fields' => $vFields,
-			'where' => $vConditions
+			"command" => "SELECT",
+			"tables" => $strTable,
+			"fields" => $vFields,
+			"where" => $vConditions
 			);
 		return MakeSQL($arraySQL);		
 		
 	}
 	
-	function MakeSQL_PrefixTables($strSQL,$strTablePrefix = '')
+	function MakeSQL_PrefixTables($strSQL,$strTablePrefix = "")
 	{
-		if ($strTablePrefix == '')
+		if ($strTablePrefix == "")
 		{
 			return $strSQL;
 		}
-		return ReplaceString($strSQL,'/*TablePrefix*/`','`'.$strTablePrefix);
+		return ReplaceString($strSQL,"/*TablePrefix*/`","`".$strTablePrefix);
 	}
 	
 	function SQL_GetReservedNames()
 	{
 		return array(
-			'ACCESSIBLE','ADD','ALL','ALTER','ANALYZE','AND','AS','ASC','ASENSITIVE','BEFORE','BETWEEN','BIGINT','BINARY','BLOB','BOTH','BY','CALL','CASCADE','CASE','CHANGE','CHAR','CHARACTER','CHECK','COLLATE','COLUMN','CONDITION','CONNECTION','CONSTRAINT','CONTINUE','CONVERT','CREATE','CROSS','CURRENT_DATE','CURRENT_TIME','CURRENT_TIMESTAMP','CURRENT_USER','CURSOR','DATABASE','DATABASES','DAY_HOUR','DAY_MICROSECOND','DAY_MINUTE','DAY_SECOND','DEC','DECIMAL','DECLARE','DEFAULT','DELAYED','DELETE','DESC','DESCRIBE','DETERMINISTIC','DISTINCT','DISTINCTROW','DIV','DOUBLE','DROP','DUAL','EACH','ELSE','ELSEIF','ENCLOSED','ESCAPED','EXISTS','EXIT','EXPLAIN','FALSE','FETCH','FLOAT','FLOAT4','FLOAT8','FOR','FORCE','FOREIGN','FROM','FULLTEXT','GOTO','GRANT','GROUP','HAVING','HIGH_PRIORITY','HOUR_MICROSECOND','HOUR_MINUTE','HOUR_SECOND','IF','IGNORE','IN','INDEX','INFILE','INNER','INOUT','INSENSITIVE','INSERT','INT','INT1','INT2','INT3','INT4','INT8','INTEGER','INTERVAL','INTO','IS','ITERATE','JOIN','KEY','KEYS','KILL','LABEL','LEADING','LEAVE','LEFT','LIKE','LIMIT','LINEAR','LINES','LOAD','LOCALTIME','LOCALTIMESTAMP','LOCK','LONG','LONGBLOB','LONGTEXT','LOOP','LOW_PRIORITY','MASTER_SSL_VERIFY_SERVER_CERT','MATCH','MEDIUMBLOB','MEDIUMINT','MEDIUMTEXT','MIDDLEINT','MINUTE_MICROSECOND','MINUTE_SECOND','MOD','MODIFIES','NATURAL','NOT','NO_WRITE_TO_BINLOG','NULL','NUMERIC','ON','OPTIMIZE','OPTION','OPTIONALLY','OR','ORDER','OUT','OUTER','OUTFILE','PRECISION','PRIMARY','PROCEDURE','PURGE','RANGE','READ','READS','READ_ONLY','READ_WRITE','REAL','REFERENCES','REGEXP','RELEASE','RENAME','REPEAT','REPLACE','REQUIRE','RESTRICT','RETURN','REVOKE','RIGHT','RLIKE','SCHEMA','SCHEMAS','SECOND_MICROSECOND','SELECT','SENSITIVE','SEPARATOR','SET','SHOW','SMALLINT','SPATIAL','SPECIFIC','SQL','SQLEXCEPTION','SQLSTATE','SQLWARNING','SQL_BIG_RESULT','SQL_CALC_FOUND_ROWS','SQL_SMALL_RESULT','SSL','STARTING','STRAIGHT_JOIN','TABLE','TERMINATED','THEN','TINYBLOB','TINYINT','TINYTEXT','TO','TRAILING','TRIGGER','TRUE','UNDO','UNION','UNIQUE','UNLOCK','UNSIGNED','UPDATE','UPGRADE','USAGE','USE','USING','UTC_DATE','UTC_TIME','UTC_TIMESTAMP','VALUES','VARBINARY','VARCHAR','VARCHARACTER','VARYING','WHEN','WHERE','WHILE','WITH','WRITE','XOR','YEAR_MONTH','ZEROFILL');	
+			"ACCESSIBLE","ADD","ALL","ALTER","ANALYZE","AND","AS","ASC","ASENSITIVE","BEFORE","BETWEEN","BIGINT","BINARY","BLOB","BOTH","BY","CALL","CASCADE","CASE","CHANGE","CHAR","CHARACTER","CHECK","COLLATE","COLUMN","CONDITION","CONNECTION","CONSTRAINT","CONTINUE","CONVERT","CREATE","CROSS","CURRENT_DATE","CURRENT_TIME","CURRENT_TIMESTAMP","CURRENT_USER","CURSOR","DATABASE","DATABASES","DAY_HOUR","DAY_MICROSECOND","DAY_MINUTE","DAY_SECOND","DEC","DECIMAL","DECLARE","DEFAULT","DELAYED","DELETE","DESC","DESCRIBE","DETERMINISTIC","DISTINCT","DISTINCTROW","DIV","DOUBLE","DROP","DUAL","EACH","ELSE","ELSEIF","ENCLOSED","ESCAPED","EXISTS","EXIT","EXPLAIN","FALSE","FETCH","FLOAT","FLOAT4","FLOAT8","FOR","FORCE","FOREIGN","FROM","FULLTEXT","GOTO","GRANT","GROUP","HAVING","HIGH_PRIORITY","HOUR_MICROSECOND","HOUR_MINUTE","HOUR_SECOND","IF","IGNORE","IN","INDEX","INFILE","INNER","INOUT","INSENSITIVE","INSERT","INT","INT1","INT2","INT3","INT4","INT8","INTEGER","INTERVAL","INTO","IS","ITERATE","JOIN","KEY","KEYS","KILL","LABEL","LEADING","LEAVE","LEFT","LIKE","LIMIT","LINEAR","LINES","LOAD","LOCALTIME","LOCALTIMESTAMP","LOCK","LONG","LONGBLOB","LONGTEXT","LOOP","LOW_PRIORITY","MASTER_SSL_VERIFY_SERVER_CERT","MATCH","MEDIUMBLOB","MEDIUMINT","MEDIUMTEXT","MIDDLEINT","MINUTE_MICROSECOND","MINUTE_SECOND","MOD","MODIFIES","NATURAL","NOT","NO_WRITE_TO_BINLOG","NULL","NUMERIC","ON","OPTIMIZE","OPTION","OPTIONALLY","OR","ORDER","OUT","OUTER","OUTFILE","PRECISION","PRIMARY","PROCEDURE","PURGE","RANGE","READ","READS","READ_ONLY","READ_WRITE","REAL","REFERENCES","REGEXP","RELEASE","RENAME","REPEAT","REPLACE","REQUIRE","RESTRICT","RETURN","REVOKE","RIGHT","RLIKE","SCHEMA","SCHEMAS","SECOND_MICROSECOND","SELECT","SENSITIVE","SEPARATOR","SET","SHOW","SMALLINT","SPATIAL","SPECIFIC","SQL","SQLEXCEPTION","SQLSTATE","SQLWARNING","SQL_BIG_RESULT","SQL_CALC_FOUND_ROWS","SQL_SMALL_RESULT","SSL","STARTING","STRAIGHT_JOIN","TABLE","TERMINATED","THEN","TINYBLOB","TINYINT","TINYTEXT","TO","TRAILING","TRIGGER","TRUE","UNDO","UNION","UNIQUE","UNLOCK","UNSIGNED","UPDATE","UPGRADE","USAGE","USE","USING","UTC_DATE","UTC_TIME","UTC_TIMESTAMP","VALUES","VARBINARY","VARCHAR","VARCHARACTER","VARYING","WHEN","WHERE","WHILE","WITH","WRITE","XOR","YEAR_MONTH","ZEROFILL");	
 	}
 	
 	function SQL_IsValidTableName($strTable)
 	{
-		if ($strTable == '')
+		if ($strTable == "")
 		{
 			return false;	
 		}

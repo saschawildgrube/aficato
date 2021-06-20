@@ -1,13 +1,13 @@
 <?php
 
-	require_once(GetWDKDir().'wdk_list.inc');
+	require_once(GetWDKDir()."wdk_list.inc");
 
 	// CPC codes are taken from: http://unstats.un.org/unsd/cr/registry/cpc-2.asp
 	// Tax rates are taken from: http://en.wikipedia.org/wiki/Value-added_tax
 
-	function GetVAT($strCountry,$strArea='',$strDate='',$strCPC='')
+	function GetVAT($strCountry,$strArea="",$strDate="",$strCPC="")
 	{
-		if ($strCountry != 'TEST')
+		if ($strCountry != "TEST")
 		{
 			if (IsValidCountryID($strCountry) == false)
 			{
@@ -15,7 +15,7 @@
 			}
 		}
 		
-		$strVATFile = GetWDKDir().'data/vat.csv';
+		$strVATFile = GetWDKDir()."data/vat.csv";
 		if (!IsFile($strVATFile))
 		{
 			return false;	
@@ -25,7 +25,7 @@
 		{
 			return false;	
 		}
-		if ($strDate == '')
+		if ($strDate == "")
 		{
 			$strDate = RenderDateNow();	
 		}
@@ -36,9 +36,9 @@
 		
 		foreach ($arrayVAT as &$arrayRow)
 		{
-			if (ArrayGetValue($arrayRow,'DATE_END') == '')
+			if (ArrayGetValue($arrayRow,"DATE_END") == "")
 			{
-				$arrayRow['DATE_END'] = 'Z';	
+				$arrayRow["DATE_END"] = "Z";	
 			}
 		}
 		
@@ -50,9 +50,9 @@
 		
 		$listVAT->Filter(
 			array(array(
-				'field' => 'COUNTRY',
-				'operator' => '=',
-				'value' => $strCountry
+				"field" => "COUNTRY",
+				"operator" => "=",
+				"value" => $strCountry
 				))
 			);
 
@@ -66,9 +66,9 @@
 			
 		$listVAT->Filter(
 			array(array(
-				'field' => 'AREA',
-				'operator' => '=',
-				'value' => $strArea
+				"field" => "AREA",
+				"operator" => "=",
+				"value" => $strArea
 				))
 			);
 
@@ -83,9 +83,9 @@
 				
 		$listVAT->Filter(
 			array(array(
-				'field' => 'DATE_START',
-				'operator' => '<',
-				'value' => $strDate
+				"field" => "DATE_START",
+				"operator" => "<",
+				"value" => $strDate
 				))
 			);
 
@@ -93,9 +93,9 @@
 				
 		$listVAT->Filter(
 			array(array(
-				'field' => 'DATE_END',
-				'operator' => '>',
-				'value' => $strDate
+				"field" => "DATE_END",
+				"operator" => ">",
+				"value" => $strDate
 				))
 			);
 
@@ -113,9 +113,9 @@
 			$listVAT2->SetListArray($listVAT->GetListArray());
 			$listVAT2->Filter(
 				array(array(
-					'field' => 'CPC',
-					'operator' => '=',
-					'value' => $strCPC
+					"field" => "CPC",
+					"operator" => "=",
+					"value" => $strCPC
 					))
 				);
 
@@ -126,7 +126,7 @@
 			}
 			$strCPC = StringSection($strCPC,0,-1);
 			
-		} while ($strCPC != '');
+		} while ($strCPC != "");
 		
 		
 		
@@ -142,7 +142,7 @@
 		{
 			$listVAT->Sort(
 				array(
-					'DATE_START' => 'desc',
+					"DATE_START" => "desc",
 					)
 				);
 		}
@@ -150,7 +150,7 @@
 		$arrayVAT = $listVAT->GetListArray();
 		$arrayVATrow = ArrayGetValue($arrayVAT,0);
 		
-		$fVAT = floatval(ArrayGetValue($arrayVATrow,'RATE'));
+		$fVAT = floatval(ArrayGetValue($arrayVATrow,"RATE"));
 
 		return $fVAT;
 	}

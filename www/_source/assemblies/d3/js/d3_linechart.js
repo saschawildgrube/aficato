@@ -86,7 +86,11 @@ function D3_LineChart(vSelector, aProps)
 		strLegendPriority = config.legendpriority;
 	}
 	
-	const strCssClassPrefix = 'linechart-';
+	var strCssClassPrefix = GetStringValue(aProps['cssclassprefix']);
+	if (strCssClassPrefix == '')
+	{
+		strCssClassPrefix = 'd3-linechart-';
+	}	
 	
 	var nSvgWidth = sSvg.node().getBoundingClientRect().width;
 	var nSvgHeight = sSvg.node().getBoundingClientRect().height;
@@ -162,8 +166,8 @@ function D3_LineChart(vSelector, aProps)
 		.attr('class', strCssClassPrefix+'axis-y')
 	  .call(axisY);
 
-	var sAxisX = sChart.append('g')
-		.attr('class', strCssClassPrefix+'axis-x')
+	var sAxisX = sChart.append("g")
+		.attr("class", strCssClassPrefix+'axis-x')
 		.attr('transform', 'translate(0,' + nChartHeight + ')')
 		.call(axisX);		
 		
@@ -228,11 +232,11 @@ function D3_LineChart(vSelector, aProps)
 		var strNumber;
 		if (bShortHand)
 		{
-			strNumber = (Math.sign(fNumber)*((Math.abs(fNumber)/1000))).toLocaleString('en-GB') + 'k';
+			strNumber = (Math.sign(fNumber)*((Math.abs(fNumber)/1000))).toLocaleString("en-GB") + 'k';
 		}
 		else
 		{
-			strNumber = d3.format(',.0f')(fNumber);
+			strNumber = d3.format(",.0f")(fNumber);
 		}
 		return '' + strNumber + ' ' + strMetric;
 	}

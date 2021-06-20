@@ -14,7 +14,7 @@
 		{
 			if (!is_subclass_of($website,'CWebsite'))
 			{
-				FatalError('CWebsiteSatellite ''.$strID.'' has been initialized with an invalid website object.');
+				FatalError('CWebsiteSatellite "'.$strID.'" has been initialized with an invalid website object.');
 			}
 			$this->m_website = $website;
 			$this->m_strID = $strID;
@@ -53,13 +53,19 @@
 		
 		function Error($strError)
 		{
-			$this->GetWebsite()->Error($this->GetID().': '.$strError);	
+			$this->GetWebsite()->Error($this->GetID().": ".$strError);	
 		}
 		
 		function SetResPrefix($strResPrefix)
 		{
 			$this->m_strResPrefix = $strResPrefix;
 		}
+
+		function GetSiteTeamEmail()
+		{
+			return $this->GetWebsite()->GetSiteTeamEmail();
+		}
+
 
 		function AddErrorMessageCode($strErrorMessageCode)
 		{
@@ -142,15 +148,23 @@
 		{
 			return $this->GetWebsite()->GetParam($strParam);
 		}
-		function GetConfig($strConfig1,$strConfig2='',$strConfig3='',$strConfig4='')
+		function GetConfig($strConfig1,$strConfig2="",$strConfig3="",$strConfig4="")
 		{
 			return $this->GetWebsite()->GetConfig($strConfig1,$strConfig2,$strConfig3,$strConfig4);
-		}		
+		}	
+		function GetContent()
+		{
+			return $this->GetWebsite()->GetContent();	
+		}
+		function GetLanguage()
+		{
+			return $this->GetWebsite()->GetLanguage();
+		}
 		function GetWebserviceURL($strWebservice)
 		{
 			return $this->GetWebsite()->GetWebserviceURL($strWebservice);
 		}
-
+		
 		function IsVar($strVar)
 		{
 			return $this->GetWebsite()->IsVar($strVar);
@@ -189,6 +203,16 @@
 		}
 		
 		
+		function CheckCondition($strCondition)
+		{
+			return $this->GetWebsite()->CheckCondition($strCondition);	
+		}
+		function SetCondition($strCondition, $bValue)
+		{
+			$this->GetWebsite()->SetCondition($strCondition, $bValue);
+		}
+		
+		
 		function EventHandler($strEventID,$arrayParams)
 		{
 		}
@@ -216,6 +240,16 @@
 			return $this->GetWebsite()->MakeURL($arrayParams, $bEncoded);
 		}
 		
+		
+		function GetCurrentURL()
+		{
+			return $this->GetWebsite()->GetCurrentURL();
+		}
+		
+		function GetImageURL($strImageID,$strImageFileExtention)
+		{
+			return $this->GetWebsite()->GetImageURL($strImageID,$strImageFileExtention);
+		}
 		
 		function AddJavaScript($strTitle,$strID='')
 		{
@@ -281,6 +315,13 @@
 		{
 			return $this->GetWebsite()->RenderCurrency($fValue,$strCurrencyID);
 		}
+		
+		
+		function SetLayoutConfigItem($strItem, $strContents)
+		{
+			$this->GetWebsite()->SetLayoutConfigItem($strItem, $strContents);	
+		}
+
 		
 	}
 

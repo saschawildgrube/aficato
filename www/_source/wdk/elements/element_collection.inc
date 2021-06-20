@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				'collection',
+				"collection",
 				$strStyleID,
 				true,
 				false);  
@@ -18,7 +18,7 @@
 		{
 			if (!is_array($arrayCollection))
 			{
-				return '';	
+				return "";	
 			}
 			$nHeaderLevelBase = intval($nHeaderLevelBase);
 			if ($nHeaderLevelBase < 1)
@@ -29,7 +29,7 @@
 			{
 				$nHeaderLevelBase = 6;
 			}
-			$strOutput = '';
+			$strOutput = "";
 			$header = null;
 			$paragraph = null;
 			$text = null;
@@ -39,89 +39,89 @@
 			$console = null;
 			foreach ($arrayCollection as $arrayElement)
 			{
-				$strElement = ArrayGetValue($arrayElement,'element');
+				$strElement = ArrayGetValue($arrayElement,"element");
 				switch ($strElement)
 				{
-				case 'raw':
-					$strOutput .= ArrayGetValue($arrayElement,'data');
+				case "raw":
+					$strOutput .= ArrayGetValue($arrayElement,"data");
 					break;
 
-				case 'separator':
+				case "separator":
 					if ($separator == null)
 					{
-						$strStyle = $this->GetLayoutDef('LAYOUT_SEPARATOR_STYLE');
-						if ($strStyle == '')
+						$strStyle = $this->GetLayoutDef("LAYOUT_SEPARATOR_STYLE");
+						if ($strStyle == "")
 						{
-							$strStyle = 'default';
+							$strStyle = "default";
 						}
-						$this->IncludeElement('separator');
+						$this->IncludeElement("separator");
 						$separator = new CSeparatorElement($this->GetWebsite(),$strStyle);
 					}
 					$strOutput .= $separator->RenderSeparator();
 					break;
 
 
-				case 'header':
+				case "header":
 					if ($header == null)
 					{
-						$strStyle = $this->GetLayoutDef('LAYOUT_HEADER_STYLE');
-						if ($strStyle == '')
+						$strStyle = $this->GetLayoutDef("LAYOUT_HEADER_STYLE");
+						if ($strStyle == "")
 						{
-							$strStyle = 'default';
+							$strStyle = "default";
 						}
-						$this->IncludeElement('header');
+						$this->IncludeElement("header");
 						$header = new CHeaderElement($this->GetWebsite(),$strStyle);
 					}
-					$nHeaderLevel = min(6,max(0,intval(ArrayGetValue($arrayElement,'headerlevel')))) - 1;
-					$strHeader = ArrayGetValue($arrayElement,'header');
+					$nHeaderLevel = min(6,max(0,intval(ArrayGetValue($arrayElement,"headerlevel")))) - 1;
+					$strHeader = ArrayGetValue($arrayElement,"header");
 					$strOutput .= $header->RenderHeader($strHeader,$nHeaderLevelBase + $nHeaderLevel);
 					break;
 					
-				case 'paragraph':
+				case "paragraph":
 					if ($paragraph == null)
 					{
-						$strStyle = $this->GetLayoutDef('LAYOUT_PARAGRAPH_STYLE');  
-						if ($strStyle == '')
+						$strStyle = $this->GetLayoutDef("LAYOUT_PARAGRAPH_STYLE");  
+						if ($strStyle == "")
 						{
-							$strStyle = 'default';
+							$strStyle = "default";
 						}
-						$this->IncludeElement('paragraph');
+						$this->IncludeElement("paragraph");
 						$paragraph = new CParagraphElement($this->GetWebsite(),$strStyle);
 					}
-					$strParagraph = ArrayGetValue($arrayElement,'paragraph');
+					$strParagraph = ArrayGetValue($arrayElement,"paragraph");
 					$strOutput .= $paragraph->RenderParagraph($strParagraph);
 				
 					break;
 
-				case 'text':
+				case "text":
 					if ($text == null)
 					{
-						$strStyle = $this->GetLayoutDef('LAYOUT_TEXT_STYLE');
-						if ($strStyle == '')
+						$strStyle = $this->GetLayoutDef("LAYOUT_TEXT_STYLE");
+						if ($strStyle == "")
 						{
-							$strStyle = 'default';
+							$strStyle = "default";
 						}
-						$this->IncludeElement('text');
+						$this->IncludeElement("text");
 						$text = new CTextElement($this->GetWebsite(),$strStyle);
 					}
-					$strHeadline = ArrayGetValue($arrayElement,'headline');
-					$strText = ArrayGetValue($arrayElement,'text');
+					$strHeadline = ArrayGetValue($arrayElement,"headline");
+					$strText = ArrayGetValue($arrayElement,"text");
 					$strOutput .= $text->RenderText($strHeadline,$strText);
 					break;
 
 					
-				case 'table':
+				case "table":
 					if ($table == null)
 					{
-						$strStyle = $this->GetLayoutDef('LAYOUT_TABLE_STYLE');   
-						if ($strStyle == '')
+						$strStyle = $this->GetLayoutDef("LAYOUT_TABLE_STYLE");   
+						if ($strStyle == "")
 						{
-							$strStyle = 'default';
+							$strStyle = "default";
 						}
 						$table = new CTableElement($this->GetWebsite(),$strStyle);
 					}
-					$arrayData = ArrayGetValue($arrayElement,'data');
-					$arrayHeaders = ArrayGetValue($arrayElement,'headers');
+					$arrayData = ArrayGetValue($arrayElement,"data");
+					$arrayHeaders = ArrayGetValue($arrayElement,"headers");
 					if (is_array($arrayHeaders))
 					{
 						$strOutput .= $table->RenderTableEx(
@@ -132,33 +132,33 @@
 					{
 						$strOutput .= $table->RenderTable(
 							$arrayData,
-							ArrayGetValue($arrayElement,'headerfirstrow'),
-							ArrayGetValue($arrayElement,'headerfirstcol'));  
+							ArrayGetValue($arrayElement,"headerfirstrow"),
+							ArrayGetValue($arrayElement,"headerfirstcol"));  
 					}
 					break;
 
-				case 'console':
+				case "console":
 					if ($console == null)
 					{
-						$strStyle = $this->GetLayoutDef('LAYOUT_CONSOLE_STYLE');
-						if ($strStyle == '')
+						$strStyle = $this->GetLayoutDef("LAYOUT_CONSOLE_STYLE");
+						if ($strStyle == "")
 						{
-							$strStyle = 'default';
+							$strStyle = "default";
 						} 
-						$this->IncludeElement('console');
+						$this->IncludeElement("console");
 						$console = new CConsoleElement($this->GetWebsite(),$strStyle);
 					}
-					$strData = ArrayGetValue($arrayElement,'data');
+					$strData = ArrayGetValue($arrayElement,"data");
 					$strOutput .= $console->RenderConsole($strData);
 					break;
 
 					
-				case 'collection':
+				case "collection":
 					if ($collection == null)
 					{
 						$collection = new CCollectionElement($this->GetWebsite(),$this->GetStyle());
 					}
-					$arrayCollection2 = ArrayGetValue($arrayElement,'collection');
+					$arrayCollection2 = ArrayGetValue($arrayElement,"collection");
 					$strOutput .= $collection->RenderCollection(
 						$arrayCollection2,
 						$nHeaderLevelBase+1);  
@@ -166,9 +166,9 @@
 				
 					
 				default:
-					FatalError('CCollectionElement::RenderCollection(): unsupported element \'$strElement\'');
+					FatalError("CCollectionElement::RenderCollection(): unsupported element \"$strElement\"");
 				}
-				$strOutput .= '\n';
+				$strOutput .= "\n";
 			}
 		
 			return $strOutput;			

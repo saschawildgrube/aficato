@@ -104,7 +104,7 @@ function D3_AML_NetworkGraph(vSelector, aProps)
 			.append('text')
 				.attr('dx', function(node) { return 15 - node.radius; })
 				.attr('dy', -20)
-				.text(function(node) { return node.name; });
+				.text(function(node) { return node.label; });
 					
 	  sNodes
 			.append('text')

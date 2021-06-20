@@ -16,7 +16,7 @@
 		{
 			return false;	
 		}   	
-		$strContents = ReplaceString($strContents,'\r\n','\n');
+		$strContents = ReplaceString($strContents,"\r\n","\n");
 		return StringEncodeUTF8($strContents);
 	}
    

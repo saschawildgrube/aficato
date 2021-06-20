@@ -103,20 +103,18 @@
 	function AML_TransformAccountsToNetworkGraph($arrayAccounts, $strDateBegin = '', $strDateEnd = '')
 	{
 		$arrayNetwork	= array();
-		$arrayNetwork['nodes'] = array();
-		$arrayNetwork['links'] = array();
+		$arrayNetwork['nodes'] = [];
+		$arrayNetwork['links'] = [];
 		
-		if (is_array($arrayAccounts) == false)
+		if (IsArray($arrayAccounts) == false)
 		{
 			return false;	
 		}
 		
 		$arrayAccounts = AML_CreateMissingCounterpartyAccounts($arrayAccounts, $strDateBegin, $strDateEnd);
 		$arrayAccounts = AML_CalculateAccounts($arrayAccounts, $strDateBegin, $strDateEnd);
-
-		$arrayNetwork['nodes'] = array();
-		$arrayNetwork['links'] = array();
 		
+	
 		$arrayNodes = array();
 		$arrayLinks = array();
 		
@@ -132,7 +130,7 @@
 				continue;	
 			}
 			$arrayNode['id'] = $strID;
-			$arrayNode['name'] = AML_MakeNetworkNodeName($arrayAccount);
+			$arrayNode['label'] = AML_MakeNetworkNodeName($arrayAccount);
 			$arrayNode['currency'] = GetCurrencySymbol(ArrayGetValue($arrayAccount,'CURRENCY'));
 			$arrayNode['text_transaction_amount_in'] = RenderNumber(ArrayGetValue($arrayAccount,'TRANSACTION_AMOUNT_IN'),-3);
 			$arrayNode['text_transaction_amount_out'] = RenderNumber(ArrayGetValue($arrayAccount,'TRANSACTION_AMOUNT_OUT'),-3);
@@ -238,9 +236,9 @@
 
 	function AML_CalculateAccounts($arrayAccounts,$strDateBegin = '', $strDateEnd = '')
 	{
-		if (!is_array($arrayAccounts))
+		if (IsArray($arrayAccounts) == false)
 		{
-			return array();
+			return [];
 		}
 		
 		foreach ($arrayAccounts as &$arrayAccount)
@@ -252,9 +250,9 @@
 
 	function AML_CreateMissingCounterpartyAccounts($arrayAccounts,$strDateBegin = '', $strDateEnd = '',$strDefaultCurrency = 'EUR')
 	{
-		if (!is_array($arrayAccounts))
+		if (IsArray($arrayAccounts) == false)
 		{
-			return array();
+			return [];
 		}
 		
 		$arrayAccountIDs = array();
@@ -342,10 +340,11 @@
 	
 	function AML_CalculateAccount($arrayAccount,$strDateBegin = '', $strDateEnd = '')
 	{
-		if (!is_array($arrayAccount))
+		if (IsArray($arrayAccount) == false)
 		{
 			return false;
 		}
+
 		if (ArrayCount($arrayAccount) == 0)
 		{
 			return false;	
@@ -1730,6 +1729,10 @@
 	function AML_RaiseRedFlags_RoundAmounts($arrayAccount,$arrayDefinition,$strDateStart = '', $strDateEnd = '')
 	{
 		$arrayTransactions = ArrayGetValue($arrayAccount,'TRANSACTIONS');
+		if (IsArray($arrayTransactions) == false)
+		{
+			return false;
+		}
 		
 		$strAccountCurrency = ArrayGetValue($arrayAccount,'CURRENCY');
 		if (IsValidCurrencyID($strAccountCurrency) == false)
@@ -2036,8 +2039,8 @@
 				false,
 				';',
 				array(),
-				''',
-				'''');
+				'"',
+				'""');
 				
 		if ($arrayContents == false)
 		{
@@ -2104,8 +2107,8 @@
 				false,
 				';',
 				array(),
-				''',
-				'''');
+				'"',
+				'""');
 				
 		if ($arrayContents == false)
 		{

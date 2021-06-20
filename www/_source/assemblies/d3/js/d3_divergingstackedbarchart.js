@@ -1,15 +1,5 @@
 'use strict';
 
-function ArrayKeyExists(aArray,vKey)
-{
-	if (typeof aArray[vKey] === 'undefined')
-	{
-		return false;
-	}
-	return true;
-}
-
-
 function D3_DivergingStackedBarChart(vSelector, aProps)
 {
 	var sSvg = d3.select(vSelector);
@@ -27,6 +17,13 @@ function D3_DivergingStackedBarChart(vSelector, aProps)
 		console.error('aLegends must be an array containing 5 strings!');
 		return;	
 	}
+
+	var strCssClassPrefix = GetStringValue(aProps['cssclassprefix']);
+	if (strCssClassPrefix == '')
+	{
+		strCssClassPrefix = 'd3-divergingstackedbarchart-';
+	}
+
 	
 	var nSections = aLegends.length;
 	
@@ -46,9 +43,8 @@ function D3_DivergingStackedBarChart(vSelector, aProps)
 			$nColumn = 3;
 		}
 		var aClassMapping = ['left2','left1','center','right1','right2'];
-		const strPrefix = 'd3-divergingstackedbarchart-';
 		const strPostfix = aClassMapping[nColumn-1];
-		const strClassName = strPrefix + strPostfix;
+		const strClassName = strCssClassPrefix + strPostfix;
 		return strClassName;	
 	}
 	
@@ -146,7 +142,7 @@ function D3_DivergingStackedBarChart(vSelector, aProps)
     .attr('y', scaleY.bandwidth()/2)
     .attr('dy', '0.5em')
     .attr('dx', '0.5em')
-    .attr('class','d3-divergingstackedbarchart-bar-text') 
+    .attr('class',strCssClassPrefix+'bar-text') 
     .style('text-anchor', 'begin')
     .text(function(box) { return box.n !== 0 && (box.x1-box.x0)>3 ? box.n : '' });
 	
@@ -155,14 +151,13 @@ function D3_DivergingStackedBarChart(vSelector, aProps)
 	    .attr('x', '1')
 	    .attr('width', nChartWidth)
 	    .attr('fill-opacity', '0.5')
-	    //.attr('class','d3-divergingstackedbarchart-bar-background') 
-	    .attr('class', 'd3-divergingstackedbarchart-bar-background ' + function(row,index)
+	    .attr('class', strCssClassPrefix+'bar-background ' + function(row,index)
 	    	{
 	    		return index%2==0 ? 'even' : 'uneven';
 	    	});
 	
 	sChart.append('g')
-	    .attr('class', 'y d3-divergingstackedbarchart-axis')
+	    .attr('class', 'y '+strCssClassPrefix+'axis')
 			.append('line')
 	    	.attr('x1', scaleX(0))
 	    	.attr('x2', scaleX(0))
@@ -188,7 +183,7 @@ function D3_DivergingStackedBarChart(vSelector, aProps)
 	    .attr('x', 22)
 	    .attr('y', 9)
 	    .attr('dy', '.35em')
-	    .attr('class','d3-divergingstackedbarchart-legend-text')
+	    .attr('class',strCssClassPrefix+'legend-text')
 	    .style('text-anchor', 'begin')
 	    .text(function(d) { return d; });
 	

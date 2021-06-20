@@ -46,8 +46,8 @@
 		unset($_POST);
 		unset($_REQUEST);
 		unset($_COOKIE);
-		unset($GLOBALS['_POST']);
-		unset($GLOBALS['_GET']);
+		unset($GLOBALS["_POST"]);
+		unset($GLOBALS["_GET"]);
 	}
 
 

@@ -1,17 +1,16 @@
 <?php
 
 
-
 	class CWikiPadModule extends CModule
 	{
 		function __construct(
 			CWebSite $website,
-			$strWikiPageID = "default",
+			$strWikiPageID = 'default',
 			$arrayConfig = array())
 		{
 			parent::__construct(
 				$website,
-				"cms/wikipad",
+				'cms/wikipad',
 				$strWikiPageID,
 				$arrayConfig);
 		}
@@ -19,12 +18,12 @@
 		function OnInit()
 		{
 			$bResult = parent::OnInit();
-			$this->IncludeElement("wiki");
-			$this->IncludeElement("tabnavigation");
+			$this->IncludeElement('wiki');
+			$this->IncludeElement('tabnavigation');
 			
 			if ($this->GetConfigIsUserSpecific() == true)
 			{
-				if ($this->GetWebsite()->GetAuthUserID() == "")
+				if ($this->GetWebsite()->GetAuthUserID() == '')
 				{
 					return false;	
 				}
@@ -39,21 +38,21 @@
 		{
 			if ($this->IsViewOnly() == true)
 			{
-				$strState = "view";	
+				$strState = 'view';	
 			}
 			
 			
 			switch ($strState)
 			{
-				case "submit":
+				case 'submit':
 				{
 					return $this->StateSubmit();	
 				}
-				case "edit":
+				case 'edit':
 				{
 					return $this->StateEdit();	
 				}
-				case "view":
+				case 'view':
 				default:	
 				{
 					return $this->StateView();
@@ -63,156 +62,168 @@
 
 		function IsViewOnly()
 		{
-			return $this->GetModuleConfigBoolean("viewonly");	
+			return $this->GetModuleConfigBoolean('viewonly');	
 		}
 		
 		function PrepareTabNav($strState)
 		{
 			if ($this->IsViewOnly() == true)
 			{
-				$this->SetOutputItem("TABNAV","");
+				$this->SetOutputItem('TABNAV','');
 				return;
 			}
 			
 			$tabnavigationDef = new CTabNavigationDefinition();
 
-			$arrayParams = array();
-   		$arrayParams[$this->GetModuleVarNameState()] = "view";
-   		$tabnavigationDef->AddTab(
-      		"view",
-      		"?TID_WIKIPAD_TAB_VIEW?",
-      		$this->GetWebsite()->MakeURL($arrayParams));
+			if ($this->IsToolVisible('view') == true)
+			{
+				$arrayParams = array();
+	   		$arrayParams[$this->GetModuleVarNameState()] = 'view';
+	   		$tabnavigationDef->AddTab(
+	      		'view',
+	      		'?TID_WIKIPAD_TAB_VIEW?',
+	      		$this->GetWebsite()->MakeURL($arrayParams));
+			}
 
-			$arrayParams = array();
-   		$arrayParams[$this->GetModuleVarNameState()] = "edit";
-   		$tabnavigationDef->AddTab(
-      		"edit",
-      		"?TID_WIKIPAD_TAB_EDIT?",
-      		$this->GetWebsite()->MakeURL($arrayParams));
+			if ($this->IsToolVisible('edit') == true)
+			{
+
+				$arrayParams = array();
+	   		$arrayParams[$this->GetModuleVarNameState()] = 'edit';
+	   		$tabnavigationDef->AddTab(
+	      		'edit',
+	      		'?TID_WIKIPAD_TAB_EDIT?',
+	      		$this->GetWebsite()->MakeURL($arrayParams));
+			}
 
 			$tabnav = new CTabNavigationElement(
 			   $this->GetWebsite(),
-   			"default");
+   			'default');
 
-			$this->SetOutputItem("TABNAV",
+			$this->SetOutputItem('TABNAV',
 				$tabnav->RenderTabNavigation(
 					$tabnavigationDef,
 					$strState));	
 		}
 		
+		function OnIsToolVisible($strToolID)
+		{
+			return true;	
+		}
+		
 		
 		function StateView()
 		{
-			$this->Trace("StateView");
+			$this->Trace('StateView');
 			
-			$this->PrepareTabNav("view");
+			$this->PrepareTabNav('view');
 
 
 			$strContent = $this->GetData($this->GetDataName());
 			if ($strContent === false)
 			{
-				$this->SetErrorMessageCode("WIKIPAD_GET");
-				$this->SetOutputItem("WIKI","");
-				$strContent = "";
+				$this->SetErrorMessageCode('WIKIPAD_GET');
+				$this->SetOutputItem('WIKI','');
+				$strContent = '';
 			}
 
-			$wiki = new CWikiElement($this->GetWebSite(),"default");
+			$wiki = new CWikiElement($this->GetWebSite(),'default');
 			$this->SetOutputItem(
-				"WIKI",
+				'WIKI',
 				$wiki->RenderWiki(
 					$strContent));
 	
-			return "view";
+			return 'view';
 		}
 		
 		
 		function StateEdit()
 		{
-			$this->Trace("StateEdit");
+			$this->Trace('StateEdit');
 
 			$this->m_formDef = new CFormDefinition();
 			
 			$arrayParams = array();
-			$arrayParams[$this->GetModuleVarNameState()] = "submit";
+			$arrayParams[$this->GetModuleVarNameState()] = 'submit';
 			$this->m_formDef->SetURL($this->GetWebsite()->GetRootURL(),$arrayParams);
 
-			$strContent = $this->GetModuleVarInsecure("content");
-			if ($strContent == "")
+			$strContent = $this->GetModuleVarInsecure('content');
+			if ($strContent == '')
 			{
 				$strContent = $this->GetData($this->GetDataName());
 				if ($strContent == false)
 				{
-					$strContent = "";
+					$strContent = '';
 				}
 			}
 
-			$nLines = intval($this->GetModuleConfig("lines"));
+			$nLines = intval($this->GetModuleConfig('lines'));
 			if ($nLines == 0)
 			{
 				$nLines = 30;
 			}
-			$nColumns = $this->GetModuleConfig("columns");
+			$nColumns = $this->GetModuleConfig('columns');
 			if ($nColumns == 0)
 			{
 				$nColumns = 70;
 			}
 
-			$strContent = ReplaceString($strContent,"<code>","<CODE>");
-			$strContent = ReplaceString($strContent,"</code>","</CODE>");
+			$strContent = ReplaceString($strContent,'<code>','<CODE>');
+			$strContent = ReplaceString($strContent,'</code>','</CODE>');
 
-			$bShowSubmitButtonSaveAndStay = $this->GetModuleConfig("showsubmitbuttonsaveandstay");  
+			$bShowSubmitButtonSaveAndStay = $this->GetModuleConfig('showsubmitbuttonsaveandstay');  
 
-			$bShowSubmitButtonOnTop = $this->GetModuleConfig("showsubmitbuttonontop");
+			$bShowSubmitButtonOnTop = $this->GetModuleConfig('showsubmitbuttonontop');
 			if ($bShowSubmitButtonOnTop == true)
 			{
-				$this->m_formDef->AddControlButtonSubmit("?TID_WIKIPAD_BUTTON_SAVE?");
+				$this->m_formDef->AddControlButtonSubmit('?TID_WIKIPAD_BUTTON_SAVE?');
 				if ($bShowSubmitButtonSaveAndStay == true)
 				{
-					$this->m_formDef->AddControlButtonSubmit("?TID_WIKIPAD_BUTTON_SAVE_AND_STAY?","SUBMIT-STAY",'stay');
+					$this->m_formDef->AddControlButtonSubmit('?TID_WIKIPAD_BUTTON_SAVE_AND_STAY?','SUBMIT-STAY','stay');
 				}
 			}
-			$this->m_formDef->AddControlTextArea("CONTENT",$this->GetModuleVarName("content"),"",$strContent,$nColumns,$nLines); 
-			$this->m_formDef->AddControlButtonSubmit("?TID_WIKIPAD_BUTTON_SAVE?","SUBMIT-2");
+			$this->m_formDef->AddControlTextArea('CONTENT',$this->GetModuleVarName('content'),'',$strContent,$nColumns,$nLines); 
+			$this->m_formDef->AddControlButtonSubmit('?TID_WIKIPAD_BUTTON_SAVE?','SUBMIT-2');
 			if ($bShowSubmitButtonSaveAndStay == true)
 			{
-				$this->m_formDef->AddControlButtonSubmit("?TID_WIKIPAD_BUTTON_SAVE_AND_STAY?","SUBMIT-STAY-2",'stay');
+				$this->m_formDef->AddControlButtonSubmit('?TID_WIKIPAD_BUTTON_SAVE_AND_STAY?','SUBMIT-STAY-2','stay');
 			}
 	
-			$form = new CFormElement($this->GetWebsite(),"onecolumn");
+			$form = new CFormElement($this->GetWebsite(),'onecolumn');
 			
 			$this->SetOutputItem(
-				"FORM",
+				'FORM',
 				$form->RenderForm(
 					$this->m_formDef,
 					array()));
 					
-			$this->PrepareTabNav("edit");
+			$this->PrepareTabNav('edit');
 	
-			return "edit";
+			return 'edit';
 		}
 
 		function StateSubmit()
 		{
-			$this->Trace("StateSubmit");
+			$this->Trace('StateSubmit');
 			
 			$this->Trace($this->GetAllModuleVars());
 			
-			$strContent = $this->GetModuleVarInsecure("content");
+			$strContent = $this->GetModuleVarInsecure('content');
 			
-			$strContent = ReplaceString($strContent,"<CODE>","<code>");
-			$strContent = ReplaceString($strContent,"</CODE>","</code>");
+			$strContent = ReplaceString($strContent,'<CODE>','<code>');
+			$strContent = ReplaceString($strContent,'</CODE>','</code>');
 
 			
-			$this->SetState("");
+			$this->SetState('');
 		
 			if ($this->SetData($this->GetDataName(),$strContent) == false)
 			{
-				$this->SetErrorMessageCode("WIKIPAD_SET");
+				$this->SetErrorMessageCode('WIKIPAD_SET');
 				return $this->StateEdit();
 			}
-			$this->SetModuleVar("content","");
+			$this->SetModuleVar('content','');
 			
-			$strSubmitValue = $this->GetVar("submit");
+			$strSubmitValue = $this->GetVar('submit');
 			
 			if ($strSubmitValue == 'stay')
 			{
@@ -226,19 +237,19 @@
 		
 		function GetConfigIsUserSpecific()
 		{
-			return $this->GetModuleConfigBoolean("userspecific");	
+			return $this->GetModuleConfigBoolean('userspecific');	
 		}
 		
 		function GetDataName()
 		{
-			return "wikipad_".$this->GetInstanceID();	
+			return 'wikipad_'.$this->GetInstanceID();	
 		}
 
 
 
 		function GetData($strDataName)
 		{
-			$strDefaultContent = $this->GetModuleConfig("defaultcontent");
+			$strDefaultContent = $this->GetModuleConfig('defaultcontent');
 			if ($this->GetConfigIsUserSpecific())
 			{
 				return $this->GetWebsite()->GetAuthUserData($strDataName,$strDefaultContent);

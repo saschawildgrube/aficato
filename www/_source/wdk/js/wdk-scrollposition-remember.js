@@ -4,6 +4,6 @@
 $(window).scroll(function()
 	{ 
 		var nScrollPositionY = $(document).scrollTop().valueOf();
-	 	SetCookie('wdk-scrollposition-y',nScrollPositionY,1);
+	 	SetCookie("wdk-scrollposition-y",nScrollPositionY,1);
 	}
 );

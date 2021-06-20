@@ -75,7 +75,7 @@
 				
 				$arrayNetworkGraph = AML_TransformAccountsToNetworkGraph($arrayAccounts);
 				
-				$strHtml .= '<h1>Network Analysis</h1>'.'\n';
+				$strHtml .= '<h1>Network Analysis</h1>'."\n";
 				$this->GetWebsite()->IncludeElement('amlnetworkgraph');
 				$amlnetworkgraph = new CAMLNetworkGraphElement($this->GetWebsite(),'demo');
 				$strHtml .= $amlnetworkgraph->RenderAMLNetworkGraph($arrayNetworkGraph);
@@ -92,17 +92,8 @@
 			}
 			
 			
-			
-			
-
-			
-			
-			
-			
-			
 			return $strHtml;
-			
-			
+		
 		}
 	}
 	

@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				'text',
+				"text",
 				$strStyleID,
 				false,
 				true);
@@ -18,8 +18,8 @@
 		{
 			$strOutput = $this->GetLayoutHTML(); 
 		
-			$arrayItems['HEADLINE'] = $strHeadline;
-			$arrayItems['TEXT'] = $strText;
+			$arrayItems["HEADLINE"] = $strHeadline;
+			$arrayItems["TEXT"] = $strText;
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

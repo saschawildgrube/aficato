@@ -12,7 +12,7 @@ http://www.baidu.com/,+http://www.baidu.com
 http://www.domaintools.com/,(DomainTools)
 https://www.ssllabs.com/,SSL Labs (https://www.ssllabs.com/about/assessment.html)
 http://www.baidu.com/,+http://www.baidu.com
-https://moz.com/researchtools/ose/,'DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com'
+https://moz.com/researchtools/ose/,"DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com"
 http://www.slack.com/,Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots)
 http://internetmemory.org/,Mozilla/5.0 (compatible; memoryBot/1.21.24 +http://internetmemory.org/en/)
 http://fulltext.sblog.cz/en/history-of-web-search/,Mozilla/5.0 (compatible; SeznamBot/3.2; +http://fulltext.sblog.cz/)

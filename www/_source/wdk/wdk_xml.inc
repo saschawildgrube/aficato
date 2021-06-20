@@ -16,51 +16,51 @@
 		function Init()
 		{
 			$this->m_nErrorCode = 0;
-			$this->m_strErrorCode = '';
+			$this->m_strErrorCode = "";
 
-			$this->SetValue(array(),'children');	
-			$this->SetValue(array(),'attributes');
-			$this->SetData('');
-			$this->SetName('');
+			$this->SetValue(array(),"children");	
+			$this->SetValue(array(),"attributes");
+			$this->SetData("");
+			$this->SetName("");
 		}
 		
 		function SetName($strName)
 		{
-			$this->SetValue($strName,'name');	
+			$this->SetValue($strName,"name");	
 		}
 		
 		function GetName()
 		{
-			return $this->GetValue('name');	
+			return $this->GetValue("name");	
 		}
 		
 		function SetAttribute($strAttributeName, $strAttributeContent)
 		{
-			$this->SetValue($strAttributeContent,'attributes',$strAttributeName);
+			$this->SetValue($strAttributeContent,"attributes",$strAttributeName);
 		}
 		function GetAttribute($strAttributeName)
 		{
-			$this->GetValue('attributes',	$strAttributeName);
+			$this->GetValue("attributes",	$strAttributeName);
 		}
 		function GetAttributes()
 		{
-			return $this->GetValue('attributes');
+			return $this->GetValue("attributes");
 		}
 		
 		function SetData($strData)
 		{
-			$this->SetValue($strData,'data');	
+			$this->SetValue($strData,"data");	
 		}
 		function GetData()
 		{ 
-			return $this->GetValue('data');	
+			return $this->GetValue("data");	
 		}		
 		
 		function AddChild(CXMLElement $xmlelement)
 		{
-			$arrayChildren = $this->GetValue('children');
+			$arrayChildren = $this->GetValue("children");
 			array_push($arrayChildren,$xmlelement->GetDataArray());
-			$this->SetValue($arrayChildren,'children');
+			$this->SetValue($arrayChildren,"children");
 		}
 		
 		function AddChildData($strChildName,$strData)
@@ -73,17 +73,17 @@
 		
 		function GetChildByIndex($nIndex)
 		{
-			$arrayChildren = $this->GetValue('children');
+			$arrayChildren = $this->GetValue("children");
 			return ArrayGetValue($arrayChildren,$nIndex);
 		}
 		
 			
 		function GetFirstChildByName($strName)
 		{
-			$arrayChildren = $this->GetValue('children');
+			$arrayChildren = $this->GetValue("children");
 			for ($nIndex = 0; $nIndex < ArrayCount($arrayChildren); $nIndex++)
 			{
-				$strChildName = ArrayGetValue($arrayChildren[$nIndex],'name');
+				$strChildName = ArrayGetValue($arrayChildren[$nIndex],"name");
 				if ($strChildName == $strName)
 				{
 					$element = new CXMLElement();
@@ -96,7 +96,7 @@
 		
 		function GetChildren()
 		{
-			$arrayChildrenRaw = $this->GetValue('children');
+			$arrayChildrenRaw = $this->GetValue("children");
 			if (!is_array($arrayChildrenRaw))
 			{
 				return array();	
@@ -117,15 +117,15 @@
 			$xmlChild = $this->GetFirstChildByName($strName);
 			if ($xmlChild == false)
 			{
-				return '';
+				return "";
 			}
 			return $xmlChild->GetData();
 		}
 		
 		function SetRecursiveArray($arrayData)
 		{
-			$this->SetData('');
-			$this->SetValue(array(),'children');
+			$this->SetData("");
+			$this->SetValue(array(),"children");
 			if (!is_array($arrayData))
 			{
 				return true;
@@ -134,7 +134,7 @@
 			$nCount = ArrayCount($arrayData);
 			if ($nCount > 0)
 			{
-				$this->SetAttribute('COUNT',ArrayCount($arrayData));
+				$this->SetAttribute("COUNT",ArrayCount($arrayData));
 			}
 		
 			foreach ($arrayData as $key => $value)
@@ -142,8 +142,8 @@
 				$elementChild = new CXMLElement();
 				if (is_int($key)) 
 				{ 
-					$strKey = 'ELEMENT'; 
-					$elementChild->SetAttribute('INDEX',$key); 
+					$strKey = "ELEMENT"; 
+					$elementChild->SetAttribute("INDEX",$key); 
 				} 
 				else 
 				{
@@ -184,11 +184,11 @@
 				}
 	
 				$key = $strName;
-				if ($strName == 'ELEMENT')
+				if ($strName == "ELEMENT")
 				{
 					$arrayAttributes = $elementChild->GetAttributes();
-					$strIndex = ArrayGetValue($arrayAttributes,'INDEX');
-					if ($strIndex != '' || $strIndex == 0)
+					$strIndex = ArrayGetValue($arrayAttributes,"INDEX");
+					if ($strIndex != "" || $strIndex == 0)
 					{
 						$key = intval($strIndex);
 					}
@@ -202,7 +202,7 @@
 		
 		function Parse($strXML)
 		{
-			//$strXML = ReplaceString($strXML,'<br />','\n');
+			//$strXML = ReplaceString($strXML,'<br />',"\n");
 			$this->Init();
 			$arrayData = array();
 			$arrayIndex = array();
@@ -239,12 +239,12 @@
 				{
 					return false;	
 				}
-				if ($arrayDataItem['type'] != 'complete')
+				if ($arrayDataItem["type"] != "complete")
 				{
 					return false;	
 				}
-				$this->SetName($arrayDataItem['tag']);
-				$this->SetData(ArrayGetValue($arrayDataItem,'value'));
+				$this->SetName($arrayDataItem["tag"]);
+				$this->SetData(ArrayGetValue($arrayDataItem,"value"));
 				return true;
 			}
 
@@ -256,16 +256,16 @@
 				$arrayDataItem = $arrayData[$nIndex];
 				$arrayData = ArrayRemoveKey($arrayData,$nIndex);
 				
-				$strType = $arrayDataItem['type'];
-				$nLevel = $arrayDataItem['level'];
-				$strTag = $arrayDataItem['tag'];
+				$strType = $arrayDataItem["type"];
+				$nLevel = $arrayDataItem["level"];
+				$strTag = $arrayDataItem["tag"];
 				
 				switch ($strType)	
 				{
-				case 'open':
+				case "open":
 					$arrayXmlElements[$nCurrentLevel] = new CXMLElement();
 					$arrayXmlElements[$nCurrentLevel]->SetName($strTag);
-					$arrayAttributes = ArrayGetValue($arrayDataItem,'attributes');
+					$arrayAttributes = ArrayGetValue($arrayDataItem,"attributes");
 					if (is_array($arrayAttributes))
 					{
 						foreach ($arrayAttributes as $key => $value)
@@ -276,7 +276,7 @@
 					$nCurrentLevel++;
 					break;
 					
-				case 'close':
+				case "close":
 					$nCurrentLevel--;
 					if ($nCurrentLevel > 1)
 					{
@@ -286,10 +286,10 @@
 					
 					break;				
 				
-				case 'complete':
+				case "complete":
 					$xmlNew = new CXMLElement();
 					$xmlNew->SetName($strTag);
-					$arrayAttributes = ArrayGetValue($arrayDataItem,'attributes');
+					$arrayAttributes = ArrayGetValue($arrayDataItem,"attributes");
 					if (is_array($arrayAttributes))
 					{
 						foreach ($arrayAttributes as $key => $value)
@@ -297,10 +297,10 @@
 							$xmlNew->SetAttribute($key,$value);
 						}
 					}
-					$strValue = ArrayGetValue($arrayDataItem,'value');
-					if ($strValue!='')
+					$strValue = ArrayGetValue($arrayDataItem,"value");
+					if ($strValue!="")
 					{
-						$strValue = html_entity_decode($strValue,ENT_QUOTES,'UTF-8');
+						$strValue = html_entity_decode($strValue,ENT_QUOTES,"UTF-8");
 						//$strValue = html_entity_decode($strValue);
 						$xmlNew->SetData($strValue);
 					}
@@ -331,23 +331,23 @@
 		
 		
 		
-		function Render($bRawData = false,$strEOL = '\n', $nLevel = 0)
+		function Render($bRawData = false,$strEOL = "\n", $nLevel = 0)
 		{
-			$strOutput = '';
+			$strOutput = "";
 
 			$strName = $this->GetName();
-			if ($strName == '')
+			if ($strName == "")
 			{
 				if ($strName == 0)
 				{
-					$strName = '0';	
+					$strName = "0";	
 				}
 				else
 				{
-					return '';
+					return "";
 				}
 			}
-			$strAttributes = '';
+			$strAttributes = "";
 			
 			$arrayAttributes = $this->GetAttributes();
 			if (is_array($arrayAttributes))
@@ -355,20 +355,20 @@
 				
 				for (reset($arrayAttributes); $strKey = key($arrayAttributes); next($arrayAttributes))
 				{
-					if ($strKey != '')
+					if ($strKey != "")
 					{
-						$strAttributes .= ' '.$strKey.'=\''. HtmlEncode(pos($arrayAttributes)) . '\'';
+						$strAttributes .= " ".$strKey."=\"". HtmlEncode(pos($arrayAttributes)) . "\"";
 					}
 				}
 			}
 				
-			$strIndent = str_repeat('\t',$nLevel);
+			$strIndent = str_repeat("\t",$nLevel);
 		
 			$bHasData = false;
 			$bHasChildren = false;
 			
 			$strData = $this->GetData();
-			if ($strData != '')
+			if ($strData != "")
 			{
 				$bHasData = true;
 			}
@@ -380,10 +380,10 @@
 					$bHasChildren = true;
 				}
 			}
-			$strOutput .= $strIndent. '<'.$strName.$strAttributes;
+			$strOutput .= $strIndent. "<".$strName.$strAttributes;
 			if ($bHasData || $bHasChildren)
 			{
-				$strOutput .= '>';
+				$strOutput .= ">";
 				if ($bHasData)
 				{
 					$strData = strval($strData);
@@ -405,11 +405,11 @@
 					$strOutput .= $strEOL;
 					$strOutput .= $strIndent;
 				}
-				$strOutput .= '</'.$strName.'>';	
+				$strOutput .= "</".$strName.">";	
 			}
 			else
 			{
-				$strOutput .= '/>';
+				$strOutput .= "/>";
 			}
 			if ($nLevel == 0)
 			{
@@ -423,8 +423,8 @@
 		function MakeCDATA($strData)
 		{
 			$strData = ReplaceString(strval($strData),']]>',']]]]><![CDATA[>');
-			//$strData = ReplaceString($strData,'\n','&#xA;&#xD;');
-			//$strData = ReplaceString($strData,'\n','<br />');
+			//$strData = ReplaceString($strData,"\n",'&#xA;&#xD;');
+			//$strData = ReplaceString($strData,"\n",'<br />');
 			
 			$strData =  '<![CDATA['.$strData.']]>';
 			return $strData;
@@ -437,7 +437,7 @@
 	{
 		function RenderDocument()
 		{
-			$strOutput = '<?xml version='1.0' encoding='utf-8' ?>\n';
+			$strOutput = "<?xml version='1.0' encoding='utf-8' ?>\n";
 			$strOutput .= parent::Render(); 
 			return $strOutput;
 		}	
@@ -450,13 +450,13 @@
 	abstract
 	class CXMLProcessor
 	{
-		function Process($strXML,$arrayParams,$strIndent = '\t')
+		function Process($strXML,$arrayParams,$strIndent = "\t")
 		{
-			$strOutputXML = '';
+			$strOutputXML = "";
 			$arrayData = array();
 			$arrayIndex = array();
 			
-			$xml_parser = xml_parser_create('UTF-8');
+			$xml_parser = xml_parser_create("UTF-8");
 			xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, 0);
 			$bXMLParseResult = xml_parse_into_struct(
 				$xml_parser,
@@ -467,7 +467,7 @@
 				
 			if ($bXMLParseResult == 0)
 			{
-				//print('bXMLParseResult = $bXMLParseResult\nError: '.xml_error_string(xml_get_error_code($xml_parser)).' at line '.xml_get_current_line_number($xml_parser). ', column '.xml_get_current_column_number($xml_parser).'\n');  
+				//print("bXMLParseResult = $bXMLParseResult\nError: ".xml_error_string(xml_get_error_code($xml_parser))." at line ".xml_get_current_line_number($xml_parser). ", column ".xml_get_current_column_number($xml_parser)."\n");  
 				xml_parser_free($xml_parser);
 				return false;
 			}
@@ -491,61 +491,61 @@
 			{
 				$arrayDataItem = $arrayData[$nIndex];
 				
-				$strType = $arrayDataItem['type'];
-				$nLevel = $arrayDataItem['level'];
-				$strTag = $arrayDataItem['tag'];
+				$strType = $arrayDataItem["type"];
+				$nLevel = $arrayDataItem["level"];
+				$strTag = $arrayDataItem["tag"];
 				
 				switch ($strType)	
 				{
-				case 'open':
-					$strAttributes = '';
-					$arrayAttributes = ArrayGetValue($arrayDataItem,'attributes');
+				case "open":
+					$strAttributes = "";
+					$arrayAttributes = ArrayGetValue($arrayDataItem,"attributes");
 					if (is_array($arrayAttributes))
 					{
 						foreach ($arrayAttributes as $key => $value)
 						{
-							$strAttributes .= ' $key=\'$value\'';
+							$strAttributes .= " $key=\"$value\"";
 						}
 					}
 					$strOutputXML .= 
 						str_repeat($strIndent,$nCurrentLevel)
-						.'<'.$strTag.$strAttributes.'>'
+						."<".$strTag.$strAttributes.">"
 						.$strEOL;
 					$nCurrentLevel++;
 					break;
 					
-				case 'close':
+				case "close":
 					$nCurrentLevel--;
 					$strOutputXML .= 
 						str_repeat($strIndent,$nCurrentLevel)
-						.'</'.$strTag.'>'
+						."</".$strTag.">"
 						.$strEOL;
 					break;				
 				
-				case 'complete':
-					$strAttributes = '';
-					$arrayAttributes = ArrayGetValue($arrayDataItem,'attributes');
+				case "complete":
+					$strAttributes = "";
+					$arrayAttributes = ArrayGetValue($arrayDataItem,"attributes");
 					if (is_array($arrayAttributes))
 					{
 						foreach ($arrayAttributes as $key => $value)
 						{
-							$strAttributes .= ' $key=\'$value\'';
+							$strAttributes .= " $key=\"$value\"";
 						}
 					}
-					$strValue = trim(ArrayGetValue($arrayDataItem,'value'));
+					$strValue = trim(ArrayGetValue($arrayDataItem,"value"));
 					$strValue = $this->OnData($strTag,$strValue,$arrayParams);
-					if ($strValue == '')
+					if ($strValue == "")
 					{
 						$strOutputXML .= 
 							str_repeat($strIndent,$nCurrentLevel)
-							.'<'.$strTag.$strAttributes.'/>'
+							."<".$strTag.$strAttributes."/>"
 							.$strEOL;
 					}
 					else
 					{
 						$strOutputXML .= 
 							str_repeat($strIndent,$nCurrentLevel)
-							.'<'.$strTag.$strAttributes.'>'
+							."<".$strTag.$strAttributes.">"
 							.$strEOL;
 						$strOutputXML .=
 							str_repeat($strIndent,$nCurrentLevel+1)
@@ -553,16 +553,16 @@
 							.$strEOL;
 						$strOutputXML .= 
 							str_repeat($strIndent,$nCurrentLevel)
-							.'</'.$strTag.'>'
+							."</".$strTag.">"
 							.$strEOL;							
 
 						
 						/*
 						$strOutputXML .= 
 							str_repeat($strIndent,$nCurrentLevel)
-							.'<'.$strTag.$strAttributes.'>'
+							."<".$strTag.$strAttributes.">"
 							.$strValue
-							.'</'.$strTag.'>'
+							."</".$strTag.">"
 							.$strEOL;														
 							*/
 					}
@@ -603,19 +603,19 @@
 			$arrayTagBlacklist)
 		{
 			$arrayParams = array();
-			$arrayParams['token'] = $strToken;
-			$arrayParams['tagstart'] = $strTagStart;
-			$arrayParams['tagend'] = $strTagEnd;
-			$arrayParams['ignorecase'] = $bIgnoreCase;
-			$arrayParams['whitelist'] = $arrayTagWhitelist;
-			$arrayParams['blacklist'] = $arrayTagBlacklist;
-			return $this->Process($strXML,$arrayParams,'');
+			$arrayParams["token"] = $strToken;
+			$arrayParams["tagstart"] = $strTagStart;
+			$arrayParams["tagend"] = $strTagEnd;
+			$arrayParams["ignorecase"] = $bIgnoreCase;
+			$arrayParams["whitelist"] = $arrayTagWhitelist;
+			$arrayParams["blacklist"] = $arrayTagBlacklist;
+			return $this->Process($strXML,$arrayParams,"");
 		}
 		
 		function OnData($strElementName,$strData,$arrayParams)
 		{
 			$strData = StringXMLEntities($strData);
-			$arrayWhitelist = $arrayParams['whitelist'];
+			$arrayWhitelist = $arrayParams["whitelist"];
 			if (is_array($arrayWhitelist))
 			{
 				if (ArrayCount($arrayWhitelist)>0)
@@ -627,7 +627,7 @@
 				}
 			}
 
-			$arrayBlacklist = $arrayParams['blacklist'];
+			$arrayBlacklist = $arrayParams["blacklist"];
 			if (is_array($arrayBlacklist))
 			{
 				if (ArrayCount($arrayBlacklist)>0)
@@ -640,10 +640,10 @@
 			}
 
 			
-			$strTagStart = $arrayParams['tagstart'];
-			$strTagEnd = $arrayParams['tagend'];
-			$strToken = $arrayParams['token'];
-			$bIgnoreCase = $arrayParams['ignorecase'];	
+			$strTagStart = $arrayParams["tagstart"];
+			$strTagEnd = $arrayParams["tagend"];
+			$strToken = $arrayParams["token"];
+			$bIgnoreCase = $arrayParams["ignorecase"];	
 
 	
 			if ($bIgnoreCase == true)
@@ -669,7 +669,7 @@
 		$arrayTagWhitelist,
 		$arrayTagBlacklist)
 	{
-		if ($strToken == '')
+		if ($strToken == "")
 		{
 			return $strXML;
 		}
@@ -680,9 +680,9 @@
 					(FindString($strUnique,$strToken) != -1)
 			&&	(FindString($strUnique,$strXML) != -1));
 		
-		$strXML_tweak = '<ROOT_'.$strUnique.'>'.$strXML.'</ROOT_'.$strUnique.'>';
-		$strXML_tweak = ReplaceString($strXML_tweak,'&amp;','AMP_'.$strUnique);
-		$strToken = ReplaceString($strToken,'&amp;','AMP_'.$strUnique);
+		$strXML_tweak = "<ROOT_".$strUnique.">".$strXML."</ROOT_".$strUnique.">";
+		$strXML_tweak = ReplaceString($strXML_tweak,"&amp;","AMP_".$strUnique);
+		$strToken = ReplaceString($strToken,"&amp;","AMP_".$strUnique);
 		
 		$xmlProcessor = new CAddEmbracingTagsXMLProcessor();
 		$strOutput = $xmlProcessor->AddEmbracingTags(
@@ -697,9 +697,9 @@
 		{
 			return false;
 		}
-		$strOutput = ReplaceString($strOutput,'<ROOT_'.$strUnique.'>','');
-		$strOutput = ReplaceString($strOutput,'</ROOT_'.$strUnique.'>','');
-		$strOutput = ReplaceString($strOutput,'AMP_'.$strUnique,'&amp;');
+		$strOutput = ReplaceString($strOutput,"<ROOT_".$strUnique.">","");
+		$strOutput = ReplaceString($strOutput,"</ROOT_".$strUnique.">","");
+		$strOutput = ReplaceString($strOutput,"AMP_".$strUnique,"&amp;");
 		return $strOutput;	
 	}
 
@@ -709,24 +709,24 @@
 	{
 		$strValue = StringGetFromEmbracingTags(
 			$strTag,
-			' '.$strAttrID.'='',
-			''');
+			' '.$strAttrID.'="',
+			'"');
 		if ($strValue != '')
 		{
 			return $strValue;
 		}
 		$strValue = StringGetFromEmbracingTags(
 			$strTag,
-			'\t'.$strAttrID.'='',
-			''');
+			"\t".$strAttrID.'="',
+			'"');
 		if ($strValue != '')
 		{
 			return $strValue;
 		}
 		$strValue = StringGetFromEmbracingTags(
 			$strTag,
-			'\n'.$strAttrID.'='',
-			''');
+			"\n".$strAttrID.'="',
+			'"');
 		return $strValue;
 	}
 
@@ -738,14 +738,14 @@
     // Only do the slow convert if there are 8-bit characters
 		// avoid using 0xA0 (\240) in ranges. RH73 does not like that
 
-		if (! preg_match('/[\200-\237]/',$strValue) && !preg_match('/[\241-\377]/',$strValue))
+		if (! preg_match("/[\200-\237]/",$strValue) && !preg_match("/[\241-\377]/",$strValue))
 		{
 			return $strValue; 
 		}
 
 		// decode three byte unicode characters 
 		$strValue = preg_replace_callback(
-			'/([\340-\357])([\200-\277])([\200-\277])/',
+			"/([\340-\357])([\200-\277])([\200-\277])/",
 			function($arrayMatch)
 			{
 				return '&#'.((ord($arrayMatch[1])-224)*4096 + (ord($arrayMatch[2])-128)*64 + (ord($arrayMatch[3])-128)).';';
@@ -754,7 +754,7 @@
 
 		// decode two byte unicode characters 
 		$strValue = preg_replace_callback(
-			'/([\300-\337])([\200-\277])/',
+			"/([\300-\337])([\200-\277])/",
 			function ($arrayMatch)
 			{
 				return '&#'.((ord($arrayMatch[1])-192)*64+(ord($arrayMatch[2])-128)).';';

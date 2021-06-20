@@ -1,9 +1,43 @@
 ={WDK} Release Notes= 
+==Version 0.0.0.79 WORK IN PROGRESS==
+NOT YET Baselined
+* '''IMPORTANT'''
+** CEntityManagerModule::CheckCondition() has been renamed to ::CheckEntityCondition() to avoid a conflict with the newly introduced CWebsiteSatellite::CheckCondition() function.
+* Security
+** No changes
+* Defects
+** Function StringRemoveCharacters() was not unicode aware. This has been fixed.
+* New features
+** Added CWebsitePlugin::OnGetWebsiteTitle(), ::OnGetWebsiteDescription() and ::OnGetOpenGraphImageURL() functions and corresponding support in CWebsite functions to override default behavior via plugins.
+** Added functions ObjectSerialize() and ObjectUnserialize() to provide proper error handling for serialize() and unserialize() php functions.
+** Added functions ArraySerialize() and ArrayUnserialize() to wrap ObjectSerialize() and ObjectDeserialize() and verify that input and output are arrays. 
+** Added function TransformListToTree() to convert a list with a numberic level indicator into a tree structure based on the defined levels.
+** Added function ArrayContains() to check if one array recursively contains another.
+** Added javascript function ArrayKeyExists() to wdk.js.
+** Added javascript function GetBoolValue() to wdk.js.
+** Added shell script filesys-cleanup.sh to free up disc space by deleting various log files and backups.
+* Improvements
+** Added CWebsitePlugin::SetOutputItem() and ::SetOutputItem() to avoid the CWebsiteSatellite default behavior.
+** Added CWebsiteSatellite::GetContent(), ::SetCondition(), ::SetLayoutConfigItem(), ::CheckCondition(), ::GetSiteTeamEmail() and ::GetCurrentURL().
+** Updated IsValidURL() to cover cases with brackets in the get parameter part of URLs, the exclamation mark in the path and question mark at the end.
+** IsValidURL() is now entirely based on one regular expression.
+** IsValidURL() can now deal with anchors that start with a number.
+* Discontinued
+** Removed the GOOGLEMAPS generic output item from CWebsite. The underlying element has already been removed in an earlier release.
+** Removed outdated shell script beanc.sh
+** Removed shell script listcoredumps.sh
+* Quality
+** No changes
+* Refactoring
+** ArrayPack() and ArrayUnpack() are now using ArraySerialize() and ArrayUnserialize() for consistent error handling.
+** Added function ParseWiki() to start separating the concerns of parsing a wiki text vs. rendering the html representation.
+* Documentation
+** No changes
 ==Version 0.0.0.78== 
 Baselined 2021-01-17
 * '''IMPORTANT'''
 ** Renamed all Callback*() functions to On*(). THIS IS A MASSIVE CHANGE!
-** Introduced plugins and removed plugin-like behaviour from assemblies.
+** Introduced plugins and removed plugin-like behavior from assemblies.
 * Security
 ** No changes
 * Defects
@@ -20,7 +54,7 @@ Baselined 2021-01-17
 ** Added OnInitPlugins() function to the website classes in the scaffolds.
 * Discontinued
 ** CAssembly is now declared as final. It is no longer allowed to derive from the CAssembly class. Functionality from derived assembly classes must now be moved into plugins.
-** Removed function CAssembly::EventHandler(). Assemblies are no longer informed about events. CWebsite no longer sends the 'website-assembly-init' event.
+** Removed function CAssembly::EventHandler(). Assemblies are no longer informed about events. CWebsite no longer sends the "website-assembly-init" event.
 ** Removed functions CWebsite::IncludeAssembly() and CWebsite::RegisterAssembly().
 ** Removed function CAssembly::CallbackRenderGenericOutputItem(). Use plugin classes to embedd generic output items.
 ** Removed elements CGoogleMapsElement, CFacebookShareElement, CLinkedInShareElement and CXingShareElement.
@@ -47,12 +81,12 @@ Baselined 2020-12-27
 ** Added native support for open graph headers. Overload the function CWebsite::OnGetOpenGraphImageURL() to provide an open graph image. Title and description is taken from the corresponding functions OnGetWebsiteTitle() and OnGetWebsiteDescription().
 ** Added opengraph.png to demonstrate the open graph feature.
 ** Module system/testmanager now displays a rotating spinner icon when executing all tests.
-** The Loading element now has an 'inline' style to be used when embedded into a message text.
-** CWebApplication now sets the header 'X-Frame-Options: DENY' to prevent integration into an iframe unless the config setting 'iframe_allow' is set to true.
+** The Loading element now has an "inline" style to be used when embedded into a message text.
+** CWebApplication now sets the header "X-Frame-Options: DENY" to prevent integration into an iframe unless the config setting "iframe_allow" is set to true.
 ** Added function CWebsite::ActivateFontAwesome5() for font awesome 5.x support.
 * Improvements
-** The release notes now contain the 'Improvements' section to better highlight improvements on existing features.
-** The release notes now also contain the 'Discontinued' section to highlight features that have been removed.
+** The release notes now contain the "Improvements" section to better highlight improvements on existing features.
+** The release notes now also contain the "Discontinued" section to highlight features that have been removed.
 ** The GitHub ribbon now uses div instead of span tag to improve layout on mobile devices.
 * Discontinued
 ** Removed CGoogleMapsElement
@@ -94,14 +128,14 @@ Baselined 2020-12-15
 ** Removed bootstrap files from the distribution. All files are now loaded from the corresponding CDNs.
 ** WDK JS functions to store and remember scroll positions are now JQuery 3 compatible.
 * New Features
-** The 'install' command is now supported by all webservices (not just database based webservices).
+** The "install" command is now supported by all webservices (not just database based webservices).
 ** Added the function IsStringURLEncoded()
 ** Added the CLinkImageElement class
 ** Added the CResponsiveElement class
 ** Added CWebsite::ActivateBootstrap4() to include js and css components of Bootstrap 4.x
 ** CWebsite::AddStyleSheetURL() and CWebsite::AddJavaScriptURL() now support the integrity attribute
-** CWikipadModule now support a 'Save and stay' button to save changes and return to edit mode. It can be activated using the module config option 'showsubmitbuttonsaveandstay'.
-** CFormElement: In the 'onecolumn' layout style multiple buttons in a row are now displayed next to each other instead of above each other.
+** CWikipadModule now support a "Save and stay" button to save changes and return to edit mode. It can be activated using the module config option "showsubmitbuttonsaveandstay".
+** CFormElement: In the "onecolumn" layout style multiple buttons in a row are now displayed next to each other instead of above each other.
 * Quality
 ** No changes
 * Documentation
@@ -151,7 +185,7 @@ Baselined 2020-10-20
 ** Test sourcefiles/typo has been updated to detect 'teh'.
 ** Test sourcefiles/deprecated now checks against GetDatabaseConfigID() and GetStage().
 * Documentation
-** Removed 'Prologue' and 'Introduction' chapters and moved all contained contents to the first level.
+** Removed "Prologue" and "Introduction" chapters and moved all contained contents to the first level.
 ** Added article on publishing a WDK based project on GitHub.
 ==Version 0.0.0.74==
 Baselined 2020-05-06
@@ -161,26 +195,26 @@ Baselined 2020-05-06
 ** GetDnsRecords() now uses CErrorAmnesty to supress errors emitted from dns_get_records() to stdout.
 ** LoadStringResourceFile() erroneously merged previously loaded strings over new ones instead of vice-versa. This has been fixed. Strings loaded later now have higher priority.
 ** IsValidURL() can now also cope with URLs that have a @ character in the path and {}? characters in the query.
-** GetDomainStatus() did not properly consider TAKEN domains in case there are DNS entries. The function now also checks for 'status: connect' and reports such domains as TAKEN.
+** GetDomainStatus() did not properly consider TAKEN domains in case there are DNS entries. The function now also checks for "status: connect" and reports such domains as TAKEN.
 ** GetSSLCertificatesFromHost() did not properly handle errors when receiving an SSL certificate. This has been fixed.
 ** CElement now works properly in case neither a layout HTML not CFG file is required.
 ** ReplaceTags() did not replace more than 10 tags if the tag prefix parameter was empty. This has been fixed.
 ** ConvertToDate() and ConvertToDateTime() did not always interpret the date format dd.mm.yy correctly due to a faulty implementation of strtotime. This has been fixed.
 ** Element CFormTemplateElement erroneously tried to load a layout html file. This has been fixed.
 ** CWebsite::EnforceHTTPS() used the outdated function MakeProtocolLink(). This has been fixed.
-** CCommandDefinition::CheckCommand() erroneously returned error strings containing the outdated 'ERROR_' prefix.
+** CCommandDefinition::CheckCommand() erroneously returned error strings containing the outdated "ERROR_" prefix.
 ** When trace was activated and the state was stored in the session, it took 2 requests to deactivate traceing via parameter (since the session data took precedence) - this has been fixed. 
 * Refactoring
-** Webservice output format 'jsonpretty' has been deprecated. The new default is 'json' (which is always pretty printed).
+** Webservice output format "jsonpretty" has been deprecated. The new default is "json" (which is always pretty printed).
 ** CMonitoringUnitTest::TestCase_DomainStatus() no longer checks if the domain is for sale.
 ** GetFloatValue() has been renamed to GetLocalFloatValue(). A new GetFloatValue() function is introduced which detects separators and delimiters automatically.
 ** GetHostNameFromIP() does no longer logs an error in case the shell_exec call fails.
-** GetAllCurrencySymbols() returns an array with all currency symbols indexed by the currency IDs. In return the TID_CURRENCY_*_SYMBOL items have been removed from the 'local' text resource files.
+** GetAllCurrencySymbols() returns an array with all currency symbols indexed by the currency IDs. In return the TID_CURRENCY_*_SYMBOL items have been removed from the "local" text resource files.
 ** ParseDateTime() now returns 1 for Monday to 7 for Sunday as the WEEKDAY value (before it was 0 for Sundays).
 ** exec() has been replaced by ShellExecute() in IsFile() and DeleteFile().
 ** shell_exec() has been replaced by ShellExecute() in GetHostNameFromIP() and GetIPFromHostName().
 ** Added 'use strict' to all WDK related java script files.
-** GetVersionInfoApache() now uses the command 'apachectl -v' instead of 'apachectl status'. This seems to be more resilient to different server configurations.
+** GetVersionInfoApache() now uses the command "apachectl -v" instead of "apachectl status". This seems to be more resilient to different server configurations.
 ** Javascript file wdk-progressindicator.js has been renamed to wdk-progressindicator-activate.js. The test sourcfiles/depracated checks if the old file is still added.
 ** Javascript file wdk-progressindicator-download.js has been renamed to wdk-progressindicatordownload-activate.js. The test sourcfiles/depracated checks if the old file is still added.
 ** CWebsite::RenderJavaScripts() now makes sure the query, wdk, and wdk-trace-activate javascripts are loaded first - so that wdk-trace-activate can be included to activate trace display late in the website's life cycle. 
@@ -214,7 +248,7 @@ Baselined 2020-05-06
 ** CWebsite::GetImageURL() now also supports svg.
 ** Added function FileWrite() to (over)write files.
 ** CWebservice::CallbackError() is now called whenever CWebservice::SetError() is used to set a new error state in the web service. Feel free to overload it.
-** Checking for 'error_log' as part of the test sourcefiles/debugdebris.
+** Checking for "error_log" as part of the test sourcefiles/debugdebris.
 ** Added function AddStyleSheet*() to CWebsiteSatellite.
 ** Added JavaScript functions GetStringValue() and GetNumberValue() to wdk.js.
 ** Added JavaScript function GetRandomInteger() to wdk.js.
@@ -234,8 +268,8 @@ Baselined 2020-05-06
 ** Changed the warning threshold for expiring SSL certificates from 21 to 14 days.
 ** Added test wdk-currency/getcurrencysymbol to check GetCurrencySymbol() - and inherently GetAllCurrencySymbols().
 ** Added test wdk-filesys/isfilepath, wdk-filesys/isdirectorypath and wdk-filesys/isvalidpath
-** Test sourcefiles/deprecated checks if the string 'jsonpretty' is used.
-** Test sourcefiles/deprecated checks if the string ' _construct' is used.
+** Test sourcefiles/deprecated checks if the string "jsonpretty" is used.
+** Test sourcefiles/deprecated checks if the string " _construct" is used.
 ** Added test wdk-genericoutputitems/url-wiki and wdk-genericoutputitems/wiki to check if generic output item rendering works properly in combination with wiki formatted content files.
 ** Deactivated the test wdk-locale/getalllocales because GetAllLocales() does not yet support ALL countries.
 ** CUnitTest::TestCase_CheckURL() now also checks the http status code and the test is failed if the status code is 5*.
@@ -303,7 +337,7 @@ Baselined 2019-04-29
 ** CWebApplication::SendMailToAdmin() now returns true or false.
 ** CWebApplication::SendErrorMailToAdmin() now returns true or false.
 ** Added CWebsite::CreateImageDefaultFavicon() to render a default favicon
-** CWebsite::CallbackCreateImage() supports the creation of a default image with the id 'favicon'.
+** CWebsite::CallbackCreateImage() supports the creation of a default image with the id "favicon".
 ** Added CWebsite::SetParam()
 ** GetDomainStatus() has been improved. More strings are now being checked to determine the FORSALE status.
 ** GetDomainStatus() now also requests the domain via https if no response is provided via http to determine the FORSALE status.
@@ -316,7 +350,7 @@ Baselined 2019-04-29
 ** MakeURL() can now deal with URLs that already have some parameters when adding parameters from the array.
 ** The website scaffolds now contain a robots.txt that discourages indexing /css /js /fonts /images /videos folders.
 ** The website scaffolds GetRootURL() functions now use the SERVER_NAME variable instead of the hard coded root URL to support multiple environments.
-** The website scaffolds GetEnvID() function now checks if the root URL starts with 'dev.' to identify a DEV environment.
+** The website scaffolds GetEnvID() function now checks if the root URL starts with "dev." to identify a DEV environment.
 * Quality
 ** CUnitTest::TestCase_CheckURL() can now also check the validity period of an SSL certificate.
 ** CMonitoringUnitTest::TestCase_MonitorURL() by default warns if the the SSL certificate validity period ends within the next 21 days.
@@ -341,24 +375,24 @@ Baselined 2017-12-28
 ** Module devtools/scaffolder tried to call undefined function CScaffolderModule::GetPreselectedScaffold(). This has been fixed.
 ** When using the SESSION_MODE_SERVER_COOKIE together with CSRF protection logins may eventually get lost when using Chrome. This has been fixed. Chrome is very special (i.e. different from other browsers) when handling cookie data in subsequent requests following an initial page load. This has caused issues in the session handling and the csrf protection and made it necessary to create a mechanism to detect subsequent requests and ignore CSRF protection within these calls. This may not be the ideal solution but provides a fix to the issue in the first place.
 * Refactoring
-** Replaced deprecated pattern &lt;script language='PHP'&gt;. Updated related tests.
-** Element layout config files do now support multi line values. All layout definition items must be prefixed by 'LAYOUT_'.
+** Replaced deprecated pattern &lt;script language="PHP"&gt;. Updated related tests.
+** Element layout config files do now support multi line values. All layout definition items must be prefixed by "LAYOUT_".
 ** CWebsite::UserLogin() now checks if the session mode is server based and issues an error if not.
 ** CWebsite::CallbackPreContent() and CWebsite::CallbackPostContent() no longer have to be implemented in derived classes.
 * New Features
-** CWebSite now supports the LOGO output item. By default it renders a link with the website title leading to the start page using the link element with style 'logo'.
-** CWebSite now supports the CTA output item. By default it is empty. The navigation element (when used with style 'horizontalpath') contains the placeholder.
+** CWebSite now supports the LOGO output item. By default it renders a link with the website title leading to the start page using the link element with style "logo".
+** CWebSite now supports the CTA output item. By default it is empty. The navigation element (when used with style "horizontalpath") contains the placeholder.
 ** Documentation has been extended
-** Module devtools/scaffolder now supports the 'preselectedscaffold' configuration parameter to control which scaffold the module should offer.
-** Module cms/wikipad now supports the config setting 'viewonly' to deactivate the edit mode and the toolbar.
-** CDynamicWebSite now supports the 'session_duration' configuration to set the duration of a user session.
+** Module devtools/scaffolder now supports the "preselectedscaffold" configuration parameter to control which scaffold the module should offer.
+** Module cms/wikipad now supports the config setting "viewonly" to deactivate the edit mode and the toolbar.
+** CDynamicWebSite now supports the "session_duration" configuration to set the duration of a user session.
 ** Added CHARSET_WHITESPACE
 ** CWebSite now checks for valid info, warning, and error parameters.
 ** The reference design page now also contains lists and all header levels.
 ** ArraySort() and ArraySortByKeys now also support optional callback compare functions. Corresponding tests wdk-array/arraysort-callback and wdk-array/arraysortbykeys-callback have been added.
 ** CompareStringIgnoreHyphen() has been added to support string sorting that creates a natural order of strings in which hyphens are ignored.
 ** Module devtools/domaincheck now displays the results in a more intutive order. Domains without and with hyphens are now ordered directly after each other.
-** CWebApplication::GetClientIP() now considers valid IPv4 addresses supplied via the 'X-Forwarded-For' header.
+** CWebApplication::GetClientIP() now considers valid IPv4 addresses supplied via the "X-Forwarded-For" header.
 ** In case of identified parameter errors, the parameters are also contained in the trace log (and hence the error mail).
 ** CWebSite::RedirectAtOnce() now supports the optional strHeaders parameter to allow more html headers to be added. 
 ** ENTITY_STRINGLENGTH_MAX is now defined as 1048575 (1 MB - 1 byte)
@@ -366,11 +400,11 @@ Baselined 2017-12-28
 ** Added new functions CWebsite::GetData(), CWebsite::SetData(), CWebsite::GetAuthUserData() and CWebsite::SetAuthUserData() to encapsulate system/data webservice calls. These functions are now used by module cms/wikipad to store and retrieve data.
 ** Added new functions CWebsite::IsSubsequentRequest(), CWebsite::CallbackIsSubsequentRequest() and CWebsite::SetSubsequentRequest().
 ** Module devtools/httprequest now decompresses content if Content-Encoding is gzip and displays it properly.
-** The generic output item LINK now supports the 'content' and the 'style' parameter.
+** The generic output item LINK now supports the "content" and the "style" parameter.
 * Quality 
-** Test sourcefiles/deprecated now also checks for language='javascript'. Refer to https://support.google.com/adwords/answer/1722021?hl=de
+** Test sourcefiles/deprecated now also checks for language="javascript". Refer to https://support.google.com/adwords/answer/1722021?hl=de
 * Documentation
-** Added the 'about' article
+** Added the "about" article
 ** More articles are in draft status
 ==Version 0.0.0.70==
 Baselined 2017-03-28
@@ -389,7 +423,7 @@ Starting from this release WDK is licensed under the Apache License 2.0
 ** Alignment of radio buttons was not correct in default form layout. This has been fixed.
 ** In the scaffolder for dynamic websites the website's member variable m_moduleSigninOneStep was not declared properly. This has been fixed.
 ** Server and client side SetCookie / DeleteCookie functions were not consistent as the client side did not consider the path parameter. This resulted in a fail to delete a cookie via JavaScript SetCookie() function. This has been fixed.
-** Under some circumstances requesting the root URL of a website resulted in an error page in Chrome. This has been fixed. Chrome sends stored cookie data when requesting the favicon.ico. Other browser do not do that. If the seourl feature is activated an there is no favicon.ico file in the document root and the session data is stored directly in a cookie, the term favicon.ico was interpreted as the seourl parameter which resulted in an unsuccessful attempt to load the content with the id 'favicon.ico' which did not work either. When 'favicon.ico' is supplied in the sourl parameter, it will be ignored.
+** Under some circumstances requesting the root URL of a website resulted in an error page in Chrome. This has been fixed. Chrome sends stored cookie data when requesting the favicon.ico. Other browser do not do that. If the seourl feature is activated an there is no favicon.ico file in the document root and the session data is stored directly in a cookie, the term favicon.ico was interpreted as the seourl parameter which resulted in an unsuccessful attempt to load the content with the id "favicon.ico" which did not work either. When "favicon.ico" is supplied in the sourl parameter, it will be ignored.
 ** Module cms/newsarticlebrowser did not load the newsarticle element properly and produced an error. This has been fixed.
 ** The module cms/articleeditor is far from being complete. Currently only the article view is supported. But it does no longer produce error when used.
 ** The generic output item URL did not transport the language parameter properly. This caused URLs being created that did not consider the language parameter properly. This has been fixed.
@@ -401,35 +435,35 @@ Starting from this release WDK is licensed under the Apache License 2.0
 ** Colors in the scaffolded websites have been changed to variants of blue. It looks nicer now.
 ** The bootstrap distribution is now in the 3rdparty subfolder
 * New Features
-** Introduced the download token feature. A download token is a cookie named 'downloadtoken' that is being sent when the a file for download is being returned in a http request. As soon as this cookie is set, a client side JavaScript can determine that the downloading of a previously requested file just started and the browser is displaying the file save dialog. This is used to turn on a progress indicator within a download button (the submit button of a form) and stop the progress indicator as soon as the actual download starts.
+** Introduced the download token feature. A download token is a cookie named "downloadtoken" that is being sent when the a file for download is being returned in a http request. As soon as this cookie is set, a client side JavaScript can determine that the downloading of a previously requested file just started and the browser is displaying the file save dialog. This is used to turn on a progress indicator within a download button (the submit button of a form) and stop the progress indicator as soon as the actual download starts.
 ** Introcduced wdk.js as the new place for general JavaScript helper functions delivered with WDK
 ** Added CWebsite::ActivateGoogleConversionTracking() to add code that sends a tracking signal to Google Adsense. The conversion ID and the label must be provided.
 ** Added CModule::GetFinalState() to return the state ID that was finally used by RenderModule(). Note: this does not necessarily be the internal current state of the module. Use GetFinalState() to determine which state was actually rendered.
-** Added the 'onecolumn' style for the form element. As the name suggests, the form is displayed in one column with all labels and controls in separate lines.
-** Module cms/wikipad now supports user specific storage of data. Use the config setting 'userspecific' to store the data using the currently logged in user context.
-** Module cms/wikipad now uses the 'onecolumn' form style for its editing view
-** Module cms/wikipad: The button to save changes now reads 'Save' instead of 'Change'.
-** Added standard bootstrap 'jumbotron' layout for the Teaser element
+** Added the "onecolumn" style for the form element. As the name suggests, the form is displayed in one column with all labels and controls in separate lines.
+** Module cms/wikipad now supports user specific storage of data. Use the config setting "userspecific" to store the data using the currently logged in user context.
+** Module cms/wikipad now uses the "onecolumn" form style for its editing view
+** Module cms/wikipad: The button to save changes now reads "Save" instead of "Change".
+** Added standard bootstrap "jumbotron" layout for the Teaser element
 ** Buttons in the default form layout are now right aligned (not left aligned as before)
-** Added CWebApplication::GetRequestMethod() which either returns 'get' or 'post' depending on what was used.
+** Added CWebApplication::GetRequestMethod() which either returns "get" or "post" depending on what was used.
 ** Added functions GetDeviceType() and IsDevice*() in wdk_devices.inc.
-** Submit buttons in form now display a spinning icon once clicked. Search for 'progressindicator' to see how it works.
+** Submit buttons in form now display a spinning icon once clicked. Search for "progressindicator" to see how it works.
 ** Added JavaScript helper functions Trace() and SetTraceActive()
 ** Added JavaScript helper function GetAllCookies()
 ** Added CWebsite::GetRootPath() function to retrieve the root path of the website. It is used when setting and deleting cookies both on the server and client side.
-** Added the output item 'WDK' to enable the use of a marketing name for WDK e.g. 'SteelPHP'
+** Added the output item "WDK" to enable the use of a marketing name for WDK e.g. "SteelPHP"
 ** Added the output item SCAFFOLDER_URL to enable the use of different scaffolder URLs in online documentation
 * Quality
 ** Added tests to verify GetDeviceType() and IsDevice*() functions
 ** Added test to verify the URL generic output item
 * Documentation
 ** Added glossary
-** Changed wording from 'webservice' to 'web service' in documentation
+** Changed wording from "webservice" to "web service" in documentation
 ** Added navigation structure for documentation articles that are yet to come
 ==Version 0.0.0.69==
 Baselined 2017-01-24
 * Refactoring
-** The webservice system/server protect command now issues different event names. The 'SERVER_' prefix has been removed.
+** The webservice system/server protect command now issues different event names. The "SERVER_" prefix has been removed.
 * Quality
 ** The unit test wdk-ip/gethostnamefromip used a Google owned IP address to demonstrate the reverse lookup. On 2017-01-23 Google changed the server's behaviour and deactivated the reverse lookup. So the test started to fail. Now an IP address resolving to www.denic.de is used.
 ==Version 0.0.0.68==
@@ -440,20 +474,20 @@ Baselined 2017-01-22
 ** Using the PORTFOLIO generic output item caused an error - although the feature itself worked. This has been fixed.
 ** A defect in the w3cValidateURL() function caused the agent header not to be sent properly to the w3c validator website. Due to a change released on 2016-12-05 this hidden defect started to cause issues with the validator. This has been fixed.
 * Refactoring
-** WDK now follows its own version schema. There are no 'Revisions' any more. Just versions. It starts with this version 0.0.0.68.
+** WDK now follows its own version schema. There are no "Revisions" any more. Just versions. It starts with this version 0.0.0.68.
 ** Webservices contained in WDK no longer have their own version history in the online help text. All changes will be tracked here.
 ** Webservices contained in WDK will always derive their version from the WDK version - even though the specific webservices may still be fully compatible to its predecessor.
 ** Module devtools/hostcheck does no longer display the bash commands to block the corresponding IP address.
 * New Features
-** Added the 'protect' command in the system/server webservice. To start with it supports the 'mailserver' protection feature which scans for failed login attempts and blocks originating IP addresses. Use this config setting to activate the feature: protect/mailserver/active. Use protect/mailserver/mailwarnfilepath to define where the mail.warn file can be found.
+** Added the "protect" command in the system/server webservice. To start with it supports the "mailserver" protection feature which scans for failed login attempts and blocks originating IP addresses. Use this config setting to activate the feature: protect/mailserver/active. Use protect/mailserver/mailwarnfilepath to define where the mail.warn file can be found.
 ** Added function GetVersionInfoWDK() in wdk.inc which is included in wdk_webapplication.inc. The WDK now has an official requestable source for its version.
 ** Constants WDK_VERSION and WDK_VERSION_DATE are defined in wdk.inc
 ** Added function CWebApplication::TraceVersionWDK()
 ** Websites and Webservices display the WDK version information in trace output
-** Added function SudoShellExecute() as a wrapper for ShellExecute using 'sudo'.
+** Added function SudoShellExecute() as a wrapper for ShellExecute using "sudo".
 ** Added IPTables*() functions as a wrapper for iptables. Requires /sbin/iptables to be added to the file /etc/sudoers.d/wdk. Handle with care!
 ** Added generic output item LINK to create a LINK element in content areas. A corresponding test has been added, too.
-** Added default layout framework 'fullwidth' which comes without the left hand menu. This is only suitable for websites with one one menu level as long as no other navigation options are provided.
+** Added default layout framework "fullwidth" which comes without the left hand menu. This is only suitable for websites with one one menu level as long as no other navigation options are provided.
 * Quality
 ** Test case server has been changed. The threshold for the mail log file is now 3.6 MB.
 ** Added test wdk-genericoutputitems/portfolio to check if the generic output item function works properly.
@@ -464,31 +498,31 @@ Baselined 2016-11-11
 * Defects
 ** Module cms/articlemanager did not include all required elements which caused the module to fail when rendered. This has been fixed.
 ** IsValidURL() now considers URLs containing the equal sign in the path as valid URLs - which enables some Amazon product links that did not work before.
-** Replaced the term 'imprint' by 'About this website'
+** Replaced the term "imprint" by "About this website"
 ** Module user/signin did not load the password policy element and hence failed. This has been fixed.
 ** The dynamic website scaffolder had a bug that prevented the sign-in process properly. The disclaimer was processed before the signin parameter. This has been fixed.
 * Refactoring
 ** The constants CHARSET_ALPHALOWERCASE, CHARSET_ALPHAUPPERCASE, CHARSET_ALPHANUMERICUPPERCASE and CHARSET_ALPHANUMERICLOWERCASE have been renamed to CHARSET_ALPHA_LOWERCASE, CHARSET_ALPHA_UPPERCASE, CHARSET_ALPHANUMERIC_UPPERCASE and CHARSET_ALPHANUMERICLOWERCASE.
 * New Features
-** MakeSQL_Helper_ConditionalExpression() now supports the IN operator. The condition may now contain the element 'values' which transforms into a list of comma separated values or assignments. MakeSQL_Helper_Assignments() has been extended to support comma separated value lists, too.
+** MakeSQL_Helper_ConditionalExpression() now supports the IN operator. The condition may now contain the element "values" which transforms into a list of comma separated values or assignments. MakeSQL_Helper_Assignments() has been extended to support comma separated value lists, too.
 ** CDatabaseEntityWebservice now supports the IN operator in the list command.
 ** The constants CHARSET_SPECIAL, CHARSET_LINEBREAK, CHARSET_SPECIALALPHA_GERMAN_LOWERCASE, CHARSET_SPECIALALPHA_GERMAN_UPPERCASECASE and CHARSET_SPECIALALPHA_GERMAN have been added.
 ** CWebApplication::IsCacheActive() returns if cache functions are enabled or not. CWebApplication::SetCacheActive() sets if cache functions should be active.
-** In CWebApplication The config setting 'cache_deactivate' controls if cache functions should be disabled.
-** CWebService and CWebSite now support the parameter 'nocache' by default. If set the cache functions are disabled for this request only.
-** In CWebSite the config setting 'cache_allow_nocache' controls if the 'nocache' parameter can be used. By default this option is not available.
+** In CWebApplication The config setting "cache_deactivate" controls if cache functions should be disabled.
+** CWebService and CWebSite now support the parameter "nocache" by default. If set the cache functions are disabled for this request only.
+** In CWebSite the config setting "cache_allow_nocache" controls if the "nocache" parameter can be used. By default this option is not available.
 ** Added CWebApplication::GetBasicAuthPassword() and CWebApplication::GetBasicAuthUser()
-** Added Basic-Auth support. Set the config setting 'basicauth' to true to activate basic authentication. Added functions CWebApplication::BasicAuth(), CWebApplication::CallbackBasicAuth(), CWebApplication::CallbackBasicAuthGetText(), CWebApplication::CallbackBasicAuthRenderSuccess() and CWebApplication::CallbackBasicAuthRenderFailed()
+** Added Basic-Auth support. Set the config setting "basicauth" to true to activate basic authentication. Added functions CWebApplication::BasicAuth(), CWebApplication::CallbackBasicAuth(), CWebApplication::CallbackBasicAuthGetText(), CWebApplication::CallbackBasicAuthRenderSuccess() and CWebApplication::CallbackBasicAuthRenderFailed()
 * Quality
-** Added test webservice-demo-databasedemo/list to check list 'in' operator.
-** Added test language/english to track common mistakes in copy text and translations such as 'imprint' as the translation for the German 'Impressum'.
+** Added test webservice-demo-databasedemo/list to check list "in" operator.
+** Added test language/english to track common mistakes in copy text and translations such as "imprint" as the translation for the German "Impressum".
 ==Revision 66==
 Baselined 2016-07-23
 
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
 * Security
-** As a response to CVE-2016-5385	(PHP) and CVE-2016-5387 (Apache) the test security/httpoxy was added. The .htaccess file contained in website scaffolds now contains an apache configuration statement to drop a 'proxy' header contained in a request.
+** As a response to CVE-2016-5385	(PHP) and CVE-2016-5387 (Apache) the test security/httpoxy was added. The .htaccess file contained in website scaffolds now contains an apache configuration statement to drop a "proxy" header contained in a request.
 ** CMonitoringUnitTest::TestCase_Server() - OpenSSL is now required to be built on May 2nd 2016 or later to fix the vulnerability to CVE-2016-2107.
 * Defects
 ** Scaffolder feature/entity: The module did not include the format element. This has been fixed.
@@ -501,7 +535,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Module devtools/httprequest is now really sending http headers in the request. This feature was deactivated for unknown reasons.
 * Refactoring
 ** GetVersionInfo*() functions are now consistent regarding their return value. Tests that use these functions have been updated.
-** Webservice system/server command 'info' now uses the GetVersionInfo*() function return value structure in its output. So expect incompatibilities here!
+** Webservice system/server command "info" now uses the GetVersionInfo*() function return value structure in its output. So expect incompatibilities here!
 ** The SESSION_WRITE_FAILED event is now considered a WARNING (not an ERROR anymore)
 ** CMessageElement is now included in CWebsite by default.
 ** The function IsFeatureDisabled() is replaced by IsFeatureActive() and the opposite meaning. IsFeatureDisabled() is now deprecated.
@@ -511,9 +545,9 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Added the CExampleElement to mark examples of something.
 ** Module devtools/elementgallery is now using the example element when rendering an element's demo code.
 ** Added function CWebservice::SetParam()
-** CEntityManagerModule now supports select type filters based on the 'selectfromwebservice' configuration.
-** ParseVersion() now returns the 'PACKAGE' version part (the part separated by a dash).
-** CompareVersion() now considers the 'PACKAGE' version part.
+** CEntityManagerModule now supports select type filters based on the "selectfromwebservice" configuration.
+** ParseVersion() now returns the "PACKAGE" version part (the part separated by a dash).
+** CompareVersion() now considers the "PACKAGE" version part.
 ** Added CompareString() function to compare strings ignoring case.
 ** Added CWebService::GetFormat() to get the selected webservice rendering format.
 * Quality
@@ -534,7 +568,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** The sitemap.xml no longer contains navigation items that are not condition compliant.
 ** Forms no longer have a role attribute.
 ** Module crm/contact used html entities in the name value when sending the contact mail. This has been fixed.
-** Generic output item PORTFOLIO did not support external links properly. If 'false' was set as the attribute value it was interpreted as true. This has been fixed.
+** Generic output item PORTFOLIO did not support external links properly. If "false" was set as the attribute value it was interpreted as true. This has been fixed.
 * Refactoring
 ** WARNING: Elements now have to be included explicitly using CWebsite::IncludeElement() - this reduces the amount of included code significantly. This may cause existing module code inoperational!
 ** WARNING: CPortfolioElement expects lowercase key names in the portfolio array containing the data for the individual teasers.
@@ -557,24 +591,24 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Assembly and assembly line classes now support GetElementDemoCodeFilePath() to retrieve element demo (as used in the Element Gallery module) from assemblies.
 ** Assembly and assembly line classes now support GetElementLayoutJavaScriptFilePath() to retrieve element layout specific java script files from assemblies.
 ** The test sourcefiles/debugdebris now also checks for calls to flush() in order to avoid headers being sent before time.
-** Added CWebsite::SetLayoutConfigItem(), CWebsite::GetLayoutConfigItem(), CWebsite::SetLayoutConfigItems(), and GetAllLayoutConfigItems() to manage a tag value array of config specific 'output item' like values specific for layout purposes. These values should also be used to control layout details depending on functions or content.
+** Added CWebsite::SetLayoutConfigItem(), CWebsite::GetLayoutConfigItem(), CWebsite::SetLayoutConfigItems(), and GetAllLayoutConfigItems() to manage a tag value array of config specific "output item" like values specific for layout purposes. These values should also be used to control layout details depending on functions or content.
 ** Added class CBootstrapThemeLayout in addition to CBootstrapLayout to differenciate layouts based on pure bootstrap and those which use the bootstrap theme css stack on top.
 ** The position of the trace output can now be explicitly controlled by using the {TRACE} output item in the framework layout.
-** Module crm/contact now offers to enter the message first, then all contact details. If the text field should be at the bottom use config 'text_bottom'.
-** Module crm/contact now allows to hide the salutation, company, and phone form fields by config (e.g. by setting 'salutation_hide' to true).
+** Module crm/contact now offers to enter the message first, then all contact details. If the text field should be at the bottom use config "text_bottom".
+** Module crm/contact now allows to hide the salutation, company, and phone form fields by config (e.g. by setting "salutation_hide" to true).
 ** Module crm/contact now displays input errors directly at the form values.
 ** Module crm/contact sends improved messages to the recipient that can be forwarded.
-** Module crm/contact can now be configured which target contact 'email' is to be used. If not configured explicitly it uses CWebsite::GetSiteTeamEmail().
-** Added element 'button' with styles 'calltoaction' and 'calltoaction-small'.
+** Module crm/contact can now be configured which target contact "email" is to be used. If not configured explicitly it uses CWebsite::GetSiteTeamEmail().
+** Added element "button" with styles "calltoaction" and "calltoaction-small".
 ** Font files are now fully supported. Font files can be loaded from assemblies or the /fonts folder directly.
 ** Added CWebsite::RestoreScrollPosition() and CWebsite::RememberScrollPosition() in addition to MaintainScrollPosition() to control explicitly whether the scroll position is remembered and/or restored.
 ** CWebsite::SetCondition() can now be used to set conditions explicitly as an alternative to handling the call by overloading ::CallbackCheckCondition().
-** The portfolio element can now be integrated as a generic output item ('PORTFOLIO').
+** The portfolio element can now be integrated as a generic output item ("PORTFOLIO").
 ** The portfolio element now also support image teasers.
 ** Add CNavigationTree::FilterItemsForSitemap() to prepare a navigation tree to be used for a publicly visible sitemap. Items this are not supposed to be visible and items the only consist of an anchor URL are filtered.
-** The framework layout now includes the {POWEREDBY} and {COPYRIGHT} output items by default. CWebsite initialized {COPYRIGHT} with '?TID_COPYRIGHT?' and {POWEREDBY} with an empty string.
-** CWebsite::CheckCondition() now supports inverted checks if the condition name is prefixed by '!'.
-** CWebsite: Generic output items 'PORTFOLIO' and 'CAROUSSEL' now support up to 20 elements.
+** The framework layout now includes the {POWEREDBY} and {COPYRIGHT} output items by default. CWebsite initialized {COPYRIGHT} with "?TID_COPYRIGHT?" and {POWEREDBY} with an empty string.
+** CWebsite::CheckCondition() now supports inverted checks if the condition name is prefixed by "!".
+** CWebsite: Generic output items "PORTFOLIO" and "CAROUSSEL" now support up to 20 elements.
 ** Module devtools/elementgallery now enumerates all available elements and displays a description text if it is available.
 ** Added CAssembly::EnumerateElements() to retrieve a list of all elements contained in the assembly.
 ** Added CAssemblyLine::EnumerateElements() to retrieve a list of all elements contained in all assemblies.
@@ -624,13 +658,13 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CUnitTest::TestCase_Domain() now correctly checks for the redirection domain.
 ** The content php file assumed to contain the definiton of the CMyContent class is now included using require_once. Before this was done by using include which produced an erratic error under unknown conditions.
 * Refactoring
-** WARNING: Config setting 'tidwarning' has been renamed to 'check_unresolvedtid'.
-** WARNING: Config setting 'unintendedoutputcheck_defuse' has been renamed to 'check_unintendedoutput_defuse'.
+** WARNING: Config setting "tidwarning" has been renamed to "check_unresolvedtid".
+** WARNING: Config setting "unintendedoutputcheck_defuse" has been renamed to "check_unintendedoutput_defuse".
 ** WARNING: class CUnitTest no longer contains TestCase_* functions. The functions are now members of the new abstract class CMonitoringUnitTest.
 ** WARNING: CMonitoringUnitTest::TextCase_Domain() can now handle both www and non-www variants of a domain. This interface has changed!
 ** CWebsite::RenderGenericOutputItems() has been optimized significantly. However there is still room for improvement.
 * New Features
-** Config setting 'check_invalidtid' has been added to control if loaded text IDs should be checked for validity.
+** Config setting "check_invalidtid" has been added to control if loaded text IDs should be checked for validity.
 ==Revision 61==
 Baselined 2015-06-09
 
@@ -651,7 +685,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 * New Features
 ** Webservice system/test can now be configured to exlude specific tests (in addition to assembles and groups)
 ** The RewriteRule creating the seourl parameter now also considers blanks and plus characters in the URL. The new website scaffolder files have been updated accordingly.
-** Module system/webservicemanager can now handle the case that no system/test webservice has been configured and displays a warning in the 'Test' section instead of displayed an unknown error.
+** Module system/webservicemanager can now handle the case that no system/test webservice has been configured and displays a warning in the "Test" section instead of displayed an unknown error.
 * Quality
 ** Test environment/errorlog now fails if GetErrorLogFile() provides a path to a file thatcannot be read.
 ==Revision 60==
@@ -674,8 +708,8 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** GetHostNameFromIP() now returns the actual host name of the localhost - not just the name of the host by which it is known in the local area network - this compensates a weakness in php's gethostbyaddr().
 ** Webservice system/scheduler used SystemLog() incorrectly when adding a job and caused errors. This regression was introduced in revision 48.
 ** When including a sub menu the conditions were not considered. This has been fixed.
-** Removed 'word-break: break-all' style from the default table cell.
-** CWebserviceDatabaseEntity did not return empty float, integer, and numericid values as empty strings if 'zerounset' is true for the corresponding attribute. This has been fixed.
+** Removed "word-break: break-all" style from the default table cell.
+** CWebserviceDatabaseEntity did not return empty float, integer, and numericid values as empty strings if "zerounset" is true for the corresponding attribute. This has been fixed.
 ** GetDomainStatus() now works correctly for .ch domains without DNS records.
 ** Entity attributes of type float without a proper max value were created with only one decimal digit instead of assuming the highest possible float value. The entity definition check now objects if max values are equal or below the min value. So max or min values must be specified explicitly.
 ** CTabNavigationElement ignored the use of LAYOUT_TABNAVIGATION_STYLE_ACTIVE in the layout definition. This has been fixed.
@@ -694,8 +728,8 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** SendMailToAdmin() and SendErrorMailToAdmin() has been replaced by SystemEvent() at several places. The email functions are used in cases of configuration or database related problems - the cases in which one may expect that SystemEvent() may not work, too.
 ** Webservice system/test now returns the test status history from latest to oldest by default.
 ** CWebsite::AddHeaderRefresh() has been renamed to CWebsite::Redirect()
-** Config setting 'phpwarning' has been deprecated and replaced by 'unintendedoutputcheck'. The function CWebApplication::UnintendedOutputCheck() has been added is is now used by both web sites and web services.
-** Content 'cms-newsadmin' has been renamed to 'cms-newseditor' and the corresponding privilege has been renamed to 'newseditor'.
+** Config setting "phpwarning" has been deprecated and replaced by "unintendedoutputcheck". The function CWebApplication::UnintendedOutputCheck() has been added is is now used by both web sites and web services.
+** Content "cms-newsadmin" has been renamed to "cms-newseditor" and the corresponding privilege has been renamed to "newseditor".
 ** CElement::m_strLayoutHTML and CElement::m_strStyleID are now declared as private and can no longer be accessed directly. CElement::GetLayoutHTML() must be used instead.
 ** Entity attributes using the foreignkey property must no longer specify max, min, maxlen, or minlen.
 ** CParameterDefinition::AddParameterDefinition() and all related functions now return false if the same parameter is added twice with different definitions. This is used by CDatabaseEntityWebService to emit an IMPLEMENTATION error if multiple entities with conflicting attribute definitions are used.
@@ -708,18 +742,18 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** GetDomainStatusArray() returns all possible domain status options.
 ** Added ArrayCount() as a type-safe wrapper for count(). count() has been replaced throughout wdk source code.
 ** Added GetVersionInfoApache() to get the apache version installed on a server.
-** Webservice system/server: The 'info' command now also delivers the apache version.
+** Webservice system/server: The "info" command now also delivers the apache version.
 ** Added funtion ParseHttpResponseEx() to parse the response of an http request in more detail (it will return a link list, set cookies, and form data)
 ** Module devtools/httprequest was added to execute http requests and display the response (it makes use of the ParseHttpResponseEx() function).
 ** Added function StringExplodeKeyValueList() to convert a multi-line string with key value pairs into an associated array.
 ** Added support for CallbackRenderGenericOutputItem() in assemblies. Asselblies can now implement their own handlers for generic output items.
-** Added wdk_version.inc with function ParseVersion() which convers a version string (e.g. '1.0.1.34') into an array.
+** Added wdk_version.inc with function ParseVersion() which convers a version string (e.g. "1.0.1.34") into an array.
 ** CUnitTest::TestCase_Server() now also checks for a secure php version.
 ** CUnitTest::TestCase_Server() also checks for the PTR record if requested.
 ** CUnitTest::TestCase_Domain() now checks if the domain is NOT a mail domain and fails if the domain has an MX record.
 ** Added crm/newsletter module to collect email addresses from visitors.
 ** CWebsite now checks for unintended output (e.g. caused by php notices, warning, or errors) and triggers a system event (severity is warning).
-** CWebsite now supports the 'fallbacklanguage' configuration. If set, resources are for the configured fallback language if no resource file for the current language is not found.
+** CWebsite now supports the "fallbacklanguage" configuration. If set, resources are for the configured fallback language if no resource file for the current language is not found.
 ** Added ArrayUnique() as a wrapper for array_unique().
 ** Added RegExpMatchMultiple() as wrapper for preg_match_all().
 ** Added function MakeHexToken()
@@ -730,11 +764,11 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CWebsite::PrepareHeader() now adds the msapplication-config header by default to prevent IE from requesting the browserconfig.xml file
 ** The hostcheck module now also displays the dns reverse lookup host name for a domain.
 ** Add GetVAT() function to retrieve VAT rates depending on country, area, point in time, in CPC based product categories. Added vat.csv and cpc.csv to the data folder.
-** Entity attributes now support the 'hidenooption' setting. If set to true a selection dropdown is not shown if there is only one option to be selected.
+** Entity attributes now support the "hidenooption" setting. If set to true a selection dropdown is not shown if there is only one option to be selected.
 ** If CWebApplication::Debug() is used, the trace output is activated automatically in all cases.
 ** Added ArrayGetValueByPosition() to get a value at a specific position (not key) from an array.
 ** MakeID() now also takes arrays and transforms them into string IDs.
-** Entities and entity attributes can now use the 'textarealines' property to control how many lines the corresponding text area control should have. This can be done on entity level and per attribute. Per attribute settings override the per entity setting.
+** Entities and entity attributes can now use the "textarealines" property to control how many lines the corresponding text area control should have. This can be done on entity level and per attribute. Per attribute settings override the per entity setting.
 ** Module system/testmanager now executes all, local, or failed tests by executing one test, refreshing, and then executing the next one.
 ** Test_CheckDomain() now also checks if there is NO SPF record if the domain is NOT a mail domain.
 ** Added CompareVersion() and a corresponding test
@@ -755,7 +789,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ==Revision 58==
 Baselined 2014-10-02
 * Refactoring
-** The csv format 'excel' has been adapted to the latest Microsoft Office generation which finally accepted csv according to RFC 4180. Use 'excellegacy' as a format identifier to support Excel versions prior to 2013.
+** The csv format "excel" has been adapted to the latest Microsoft Office generation which finally accepted csv according to RFC 4180. Use "excellegacy" as a format identifier to support Excel versions prior to 2013.
 * New Features
 ** The new module devtools/domaincheck helps to check the availability of many domain names within many top level domains easily.
 ** Added support for the DOWNLOADURL generic output item. The generic output item creates a URL to the website which loads a file directly from an assembly (so it does not have to be in the /download dir under the website's root directory).
@@ -763,10 +797,10 @@ Baselined 2014-10-02
 ** Added element CYouTubeElement to embedd videos hosted by youtube.com
 ** Added support for the YOUTUBE generic output item to use the CYouTubeElement more easily
 ** Module system/sessionmanager now allows to actually view the session details and the data contained in the session.
-** The new config option 'tidconfig' controls if CWebsite checks for unresolved TID tags in the output. If a tag is found, a mail is sent to the admin.
+** The new config option "tidconfig" controls if CWebsite checks for unresolved TID tags in the output. If a tag is found, a mail is sent to the admin.
 ** Added function ArraySortByKeys() as a wrapper for ksort()
-** Added CWebsite::MakeCSV() which creates a CSV table according to the 'csvformat' configuration setting.
-** Added GetDomainStatus() which returns a string indicating the availability of a domain ('FREE','FORSALE','TAKEN'). 
+** Added CWebsite::MakeCSV() which creates a CSV table according to the "csvformat" configuration setting.
+** Added GetDomainStatus() which returns a string indicating the availability of a domain ("FREE","FORSALE","TAKEN"). 
 * Quality
 ** Added test wdk-element/table
 ==Revision 57==
@@ -775,7 +809,7 @@ Baselined 2014-09-21
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
 * Defects
-** URLs containing bracets ('(' and ')') or percent signs ('%') were not considered valid URLs. This has been fixed.
+** URLs containing bracets ("(" and ")") or percent signs ("%") were not considered valid URLs. This has been fixed.
 ** Requesting static images was defective. This has been fixed.
 ** ArrayReverse() now checks if the input parameter is really an array.
 ** RenderValue() erroneously used ArrayPrint() instead of ArrayRender(), this caused PHP Notices in several unit test scripts.
@@ -787,15 +821,15 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CWebsite::GetImageURL() has been renamed to GetImageRootURL()
 ** urlencode() is no longer used directly. StringURLEncode() is always used.
 ** StringExplode() now also trims the string before splitting it into the array. This means that if new line is the separator, empty lines at the beginning and the end are skipped.
-** Within CEntityManagerModule the generic attribute called 'index' is renamed to 'INDEX'. The naming convention is: All defined attributes of the entity are lowercase. All generic or generated attributes ('INDEX' and 'TASKS') are uppercase.
+** Within CEntityManagerModule the generic attribute called "index" is renamed to "INDEX". The naming convention is: All defined attributes of the entity are lowercase. All generic or generated attributes ("INDEX" and "TASKS") are uppercase.
 * New Features
 ** GetErrorLogFile() function added to env.inc to specify the location of the vhost's error_log file.
 ** HttpRequest() now supports HTTP headers to be sent. WARNING: Function interface has changed!
 ** CUnitTest::TestCase_MonitorURL() and CUnitTest::TestCase_CheckURL() now support HTTP Headers. WARNING: Function interfaces have changed!
-** Layout options are now checked via Cwebsite::CallbackGetSupportedLayouts() which by default uses the config 'layout'.
+** Layout options are now checked via Cwebsite::CallbackGetSupportedLayouts() which by default uses the config "layout".
 ** Added functions ArrayCheckKeysByWhiteList() and ArrayRenderList()
 ** CWebsite::GetStaticImagePath() now also supports jpg - this means that the image command will find a jpg image based on the given imageid parameter.
-** HttpRequest() now supports the 'Accept-Encoding' header explicitly
+** HttpRequest() now supports the "Accept-Encoding" header explicitly
 ** CUnitTest::TestCase_CheckURL() now supports binary safe comparison with white list and blacklist patterns
 ** Added new function CWebsite::GetDownloadRootURL()
 ** Webservice system/server now also returns the number of core dump files if possible.
@@ -803,13 +837,13 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Added Debug() method to CTraceLog, CWebApplication, and CWebsiteSatellite. The function can be used like Trace() or TraceArray() but the sourcefiles/debugdebris test will fail so that the function calls are removed when no longer needed.
 ** CEntityManagerModule: The list view can now be configured to offer a refresh button in the list or view states.
 * Quality
-** The test group 'htmlvalidation' has been renamed to 'outputvalidation'. The test 'w3cvalidate' has been reactivated.
+** The test group "htmlvalidation" has been renamed to "outputvalidation". The test "w3cvalidate" has been reactivated.
 ** The test sourcefiles/unintendedfiles now also checks for unwanted copies left by Dropbox.
 ** Added a test for StringURLEncode()
 ** Added a test for RenderValue()
-** The test 'environment/errorlog' is added to check if the error log file contains PHP notices, warnings, or errors.
-** The test 'environment/server-status' now also checks for core dump files.
-** Test 'wdk-filesys/readdirectory' now also considers '/' (which should not be accessible due to the base dir restriction)
+** The test "environment/errorlog" is added to check if the error log file contains PHP notices, warnings, or errors.
+** The test "environment/server-status" now also checks for core dump files.
+** Test "wdk-filesys/readdirectory" now also considers "/" (which should not be accessible due to the base dir restriction)
 ==Revision 56==
 Baselined 2014-07-10
 
@@ -823,8 +857,8 @@ WARNING: This WDK version requires PHP 5.4.x
 ** CWebserviceDatabaseEntity::GetGenericCommandAndEntity() helps to find out which command fits to which entity and generic command.
 ** Renamed function MakeSQL_RealEscapeString() to MakeSQL_EscapeString()
 * New Features
-** Webservices now supports the output format 'jsonpretty' (which requires php 5.4)
-** Webservices now support the 'csv' format which returns a pure 2 dimensional result list
+** Webservices now supports the output format "jsonpretty" (which requires php 5.4)
+** Webservices now support the "csv" format which returns a pure 2 dimensional result list
 ** CWebservice::CallbackGetDefaultCsvPath() can be used to define the default tag that should be returned (csv does not support tree structures) if the csvpath parameter is not given.
 * Quality
 ** openssl test now demands the build to be as of June 20th or later
@@ -850,18 +884,18 @@ Baselined 2014-06-01
 ** CFormElement: The use of forms rendered the page as invalid HTML5 since for whatever reason a form and input start tag must not be within a table or tbody element. This has been fixed by introducing and using the LAYOUT_INNER_BEGIN and LAYOUT_INNER_END layout definition.
 ** The basic and dynmaic website scaffolder did not prepare menu rendering properly. This has been fixed.
 * New Features
-** CTableElement::RenderTableEx() now supports cell styles. By default, additional cell styles 'center' and 'right' are supported to control text alignment.
+** CTableElement::RenderTableEx() now supports cell styles. By default, additional cell styles "center" and "right" are supported to control text alignment.
 ** CItemManagerElement (and CItemmanagerData) now support cell styles on column level. Note that only one cell style can be applied for combined columns (last one wins).
-** Module cms/staticfilebrowser supports the 'portfolio' style for browsing files.
+** Module cms/staticfilebrowser supports the "portfolio" style for browsing files.
 ** Module cms/staticfilebrowser displays file size right aligned.
 ==Revision 52==
 Baselined 2014-05-24
 * Security
-** All devtool contents are now dependant on the 'devtools' privilege.
+** All devtool contents are now dependant on the "devtools" privilege.
 * Defects
 ** CWebservice::CallbackSystemEvent() now uses SystemLog instead of CallbackSystemLog(). So the disable_log configuration is now considered.
-** Webservice system/test returned an invalid result if the command 'liststatushistory' was used without active database support
-** StringCheckCharSet() did not recognize a lowercase 'x' not being part of a char set. This has been fixed.
+** Webservice system/test returned an invalid result if the command "liststatushistory" was used without active database support
+** StringCheckCharSet() did not recognize a lowercase "x" not being part of a char set. This has been fixed.
 * Refactoring
 ** When taking parameters from _GET and _POST arrays the PrepareParameterArray() function now considers the case that _GET and _POST are already unset.
 ** VerifyTextID() has been renamed to IsValidTID()
@@ -872,7 +906,7 @@ Baselined 2014-05-24
 ** Added module cms/staticfilebrowser which can display files and folders in a configured root folder as a list and offers files for download.
 ** Added function GetParentDirectoryFromPath()
 ** Added function StringRemoveLeadingCharacters()
-** Added element CTelElement and the generic output item 'PHONE' to render telephone numbers depending on the target device.
+** Added element CTelElement and the generic output item "PHONE" to render telephone numbers depending on the target device.
 ** Now using the 3rd party component mobile_detect to identify mobile devices.
 * Quality
 ** Added tests for StringRemoveLeadingCharacters()
@@ -885,7 +919,7 @@ Baselined 2014-05-14
 ** Functions TimeAddMonths(), TimeAddYears() and TimeGetEndOfMonth() produced incorrect results if the input month's day was not contained in the resulting month. Php's own functions are producing wrong results which adding or substracting months and years - the WDK functions now contain a correction feature for this defect.
 ** CEntityManagerModule: CSV import: The module did not send valid date and date/time values to the underlying webserivce which provoked errors. This has been fixed.
 ** CEntityManagerModule: CSV import: Under uncertain conditions the last item was not imported due to a bug in php when handling references arrays in foreach loops. A workaround is in place to mitigate this php bug.
-** When loading text resource files that contain the same TIDs the 'last one wins' principle was not obeyed. This has been fixed. If a resource file is loaded later and contains TIDs that are already contained in a previously loaded resource file - the later loaded version is used.
+** When loading text resource files that contain the same TIDs the "last one wins" principle was not obeyed. This has been fixed. If a resource file is loaded later and contains TIDs that are already contained in a previously loaded resource file - the later loaded version is used.
 ** The scaffolder for static websites did not prepare the protocols array in the website class properly and produced a syntax error.
 ** The scaffolder for static websites was missing the TID_NAVIGATION_START tag.
 ** Removed support for the publisher meta tag as it is no longer supported in HTML5.
@@ -897,12 +931,12 @@ Baselined 2014-05-14
 ** ArraySort() now returns the sorted array instead of modifying the input array as a reference.
 ** Functions TimeGetEndOfMonth() and TimeGetEndOfQuarter() have been renamed to GetTimeMonthEnd() and GetTimeQuarterEnd().
 ** Standard output items CURRENTTIME_YEAR and CURRENTTIME_DATE_ISO have been removed.
-** Entity attribute key 'enumtidpattern' is now called 'tidpattern'
+** Entity attribute key "enumtidpattern" is now called "tidpattern"
 ** The list of supported webservice formats can now be overloaded using CWebService::CallbackGetSupportedFormats().
 ** Renamed GetBoolString() to RenderBool()
 ** GetIntegerValue() now returns rounded values
 * New Features
-** CWebsite now supports seo friendly URLs. the feature can be activated by setting the 'seourl' config setting and the corresponding rewrite rules.
+** CWebsite now supports seo friendly URLs. the feature can be activated by setting the "seourl" config setting and the corresponding rewrite rules.
 ** The canonical link header also uses seo friendly URLs now
 ** CRoutingMap class is added to manage context id to alias mapping (which is used by the new seo friendly URL feature)
 ** Support for sitemaps has been added. A sitemap.xml can now be created (via command=sitemap) which is compatible to this specification: http://www.sitemaps.org/protocol.html.
@@ -927,14 +961,14 @@ Baselined 2014-05-14
 ** Added ArrayKeyFirst() and ArrayKeyLast()
 ** Added ArrayStrictCompare() to compensate weaknesses when using '==' on two arrays
 ** A web service now returns ERROR_COMMAND_MISSING if no command was specified
-** Added CEntityManagerModule::CallbackPrepareImportedValues() to prepare values loaded from an imported csv file before they are checked for validity and consistency. E.g. when working with Excel csv data must be checked for '#NAME?' to prevent strings from being damaged in the database.
+** Added CEntityManagerModule::CallbackPrepareImportedValues() to prepare values loaded from an imported csv file before they are checked for validity and consistency. E.g. when working with Excel csv data must be checked for "#NAME?" to prevent strings from being damaged in the database.
 ** CEntityManagerModule takes care for strings starting with a dash and prevents Excel from confusing those strings with a calculation formula
 ** CEntityManagerModule now allows a user to choose the decimal delimiter explicitly when exporting data to csv. This is to support Excel versions with different local settings that the logged in user.
 ** CEntityManagerModule now uses tidpattern also for strings (if they do not use the textarea control)
 ** CWebsite::LoadAllStrings() was added to get all strings for the current language
 ** Added StringExplode() as a wrapper for explode. StringExplode supports to trim all strings and interprets the limit parameter set to 0 as if the parameter was not set at all (explode interprets 0 as 1, which is a questionable function design in php).
-** CEntityManagerModule::CallbackGetExportFileTitle() can now be used to control the file name for the exported csv file. The default is '<entity>_YYYY-MM-DD_HH-MM-SS.csv'.
-** A new external link layout has been adeed using the rel='nofollow' attribute to prevent external links from inheriting the site's reputation when crawled by search engines - use this for user generated posts that contain links
+** CEntityManagerModule::CallbackGetExportFileTitle() can now be used to control the file name for the exported csv file. The default is "<entity>_YYYY-MM-DD_HH-MM-SS.csv".
+** A new external link layout has been adeed using the rel="nofollow" attribute to prevent external links from inheriting the site's reputation when crawled by search engines - use this for user generated posts that contain links
 ** CWebSite::CallbackGetWebsiteTitle() now supports content specific titles and combines the content specific title with the default title if set
 ** CWebSite::CallbackGetWebsiteDescription() now support content specific meta descriptions
 ** CWebSite::CallbackGetWebsiteKeywords() now supports content specific keywords and combines them with the default keywords if set
@@ -947,7 +981,7 @@ Baselined 2014-05-14
 ** The wiki element now also supports mailto links
 ** RenderDateTimeNow(), RenderDateNow(), and RenderDate() now support the time zone parameter 
 * Quality
-** The pattern ' xmlns='http://www.w3.org/1999/xhtml'' should no longer be used in htm and cfg files.
+** The pattern ' xmlns="http://www.w3.org/1999/xhtml"' should no longer be used in htm and cfg files.
 ** A new test checks for unintended files within the source directory starting with .db and .tmp.
 ** A new test checks for suspicious memory sections that may indicate an ebury infection on the server
 ** Two tests have been added to check the meat keyword and description (fallback) feature.
@@ -959,7 +993,7 @@ Baselined 2013-12-24
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
 * Security
-** SecureParameterArray() now filters array parameters. The array parameter 'arr' will simply not get through: http://www.example.com?arr[]=test1&arr[]=test2
+** SecureParameterArray() now filters array parameters. The array parameter "arr" will simply not get through: http://www.example.com?arr[]=test1&arr[]=test2
 * Deprecation
 ** GetDataArrayFromCSV() has been replaced by ParseCSV*() functions.
 ** ReadFileCSV*() has been replaced by FileReadCSV*() functions.
@@ -977,22 +1011,22 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CSRF protection didn't work with file downloads. After a download took place, users were logged out. This has been corrected.
 ** ArrayGetValue() and ArraySetValue() now deal with numeric keys correctly. If the deepest array used numeric keys, using the index key 0 produced unexpected results.
 ** system/test sent alert mails without failed test's log output. Has been fixed.
-** Assemblyies did not accept '-' in the assembly id. This has been fixed.
+** Assemblyies did not accept "-" in the assembly id. This has been fixed.
 * Refactoring
 ** WARNING: former function CUnitTestURL::TestURL() has changed parameter order and was renamed to CUnitTest::TestCase_CheckURL()
-** Removed classes CUnitTestURL, CUnitTestServer, CUnitTestDomain. Moved all functions to CUnitTest. Renamed 'Test*()' functions to 'TestCase_*()'
+** Removed classes CUnitTestURL, CUnitTestServer, CUnitTestDomain. Moved all functions to CUnitTest. Renamed "Test*()" functions to "TestCase_*()"
 ** CDatabaseEntityWebservice has been refactored to use SQL syntax definition arrays instead of string based SQL queries. This affects all functions that use SQL requests.
 ** CDatabaseEntityWebservice::CallbackCommandListPrepareSQL() has been refactored to use the SQL syntax array instead of two strings.
 ** Introduced CDatabaseEntityWebservice::MakeSQL_Field() which will prefix each SQL field string with a table alias and table prefix. It must be used whenever SQL statements are combined with quieres created by CDatabaseEntityWebservice core functions - like in MakeIndexSQLCondition()
 ** FatalError() no longer supports the strTitle parameter
 ** Introduced CEntityManagerModule::MakeEntityTID() which uses the entity name as a prefix to identify entity related text. This requires to change existing TIDs.
-** CEntityManagerModule and CDatabaseEntityWebservice now suppport 'email' as an attribute type
+** CEntityManagerModule and CDatabaseEntityWebservice now suppport "email" as an attribute type
 ** CEntityManagerModule::CallbackPrepareItemDataExport() changed order of parameter
 ** CEntityManagerModule::CallbackCheckInputValues() changed order of parameter
 ** CEntityManagerModule::CallbackPrepareItemDataModify() changed order of parameter
 ** CEntityManagerModule::CallbackPrepareItemDataView() changed order of parameter
 ** CEntityManagerModule::CallbackItemView() is now using the original item data as received from the webservice.
-** CEntityManagerModule::StateView() will now expect an output item named 'ITEM' instead of 'TABLE' in the module state layout file.
+** CEntityManagerModule::StateView() will now expect an output item named "ITEM" instead of "TABLE" in the module state layout file.
 ** CTabNavigationElement now uses div tags instead of layout tables in the WDK default layout.
 ** Module crm/contact and crm/feedback now use GetSiteTeamEmail() instead of GetAdminEmail()
 ** Calls to array_key_exists() have been replaced by ArrayKeyExists()
@@ -1011,26 +1045,26 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Added function ConvertToDate() to convert a non-ISO date string into an ISO date string.
 ** CEntityManagerModule now supports generic support for enum display, filtering, and selection.
 ** CEntityManagerModule now supports the importing of csv files. If the index attribute column is set for an item, the existing item is updated. If it is withheld, new items are added to the list.
-** CEntityManagerModule now support the 'readonly' config setting. It will hide any options for change and deny all change actions.
+** CEntityManagerModule now support the "readonly" config setting. It will hide any options for change and deny all change actions.
 ** CEntityManagerModule can now be configured to use specific default values when adding an item - and override the entity definition defaults.
 ** CEntityManagerModule does now do standard parameter checks for integer attributes
 ** CEntityManagerModule::CallbackPrepareItemDataDefaultValues() can be overloaded to fine-tune default values before the form is populated
 ** CEntityManagerModule now supports the duplication of item instances.
 ** CEntityManagerModule now supports [Add|Set][Warning|Error|Info]MessageCodeEntity() functions
 ** CEntityManagerModule now allows to import csv files that do not contain all attributes / columns for already existing entities.
-** CEntityManagerModule::CallbackItemView() can now return a state id. If the function returns a string != '' then the string is used to identify the view state layout file. If not then 'view' is used.
+** CEntityManagerModule::CallbackItemView() can now return a state id. If the function returns a string != "" then the string is used to identify the view state layout file. If not then "view" is used.
 ** CWikiElement can now be configured to show a limited depth of headers in the table of contents. This is part of the element's layout definition.
 ** Introduced CCollectionElement which renders a number of elements based on an associative array with element descriptions. This is useful if the compilation of a structured page should be separate from the actual rendering process or if a structured display of information should be rendered in completely different ways.
-** Some elements support the 'wikisyntax' style as a layout style option. The wikisyntax style is used to produce native wiki syntax.
+** Some elements support the "wikisyntax" style as a layout style option. The wikisyntax style is used to produce native wiki syntax.
 ** Introduced ParseCSV*() functions with full support for CSV according to RFC4180, WDK-style, and Excel
 ** Introduced FileReadCSV*() functions that use ParseCSV*() accordingly
 ** Introduced MakeCSV*() functions to create different variants of CSV files
 ** CWebsiteSatellite now supports all variants of the [Add|Set][Warning|Error|Info]Message[Code|Text]() functions
-** Entities now support the entity type 'language'
+** Entities now support the entity type "language"
 ** Module system/usermanager can now filter users by their preferred language
 ** CList::GetStatistics() can be used to get min, max, sum, avg, and dif from all numeric values contained in a list.
-** Webservice system/server now supports the 'performance' command to gather perfromance information about a server
-** Added functions IsValidRegionID() and GetAllRegionIDs() to support structures like the European Union. Since there is no coding scheme standard available - all 'region' must be a 2 letter code. The 'EU' is currently the only supported region.
+** Webservice system/server now supports the "performance" command to gather perfromance information about a server
+** Added functions IsValidRegionID() and GetAllRegionIDs() to support structures like the European Union. Since there is no coding scheme standard available - all "region" must be a 2 letter code. The "EU" is currently the only supported region.
 ** Added ArrayRemoveKey() as a wrapper for unset() for arrays.
 ** Added locale support for Austria (AUT)
 ** Added locale support for the Netherlands (NLD)
@@ -1038,7 +1072,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Added locale support for Greece (GRC)
 ** Added locale support for Belgium (BEL)
 ** Added locale support for Portugal (PRT)
-** Added GetIntegerValue() to convert string like '2MB' or '2M' to integer values
+** Added GetIntegerValue() to convert string like "2MB" or "2M" to integer values
 ** Webservice system/session now logs the amount of deleted sessions during cleanup
 ** Added IsStringSingleByte() to find out if a string consists of single byte characters only.
 ** Webservice system/server now returns if a Plesk server is running on the server
@@ -1055,7 +1089,7 @@ Baselined 2013-06-11
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
 * Security
-** Added protection against CSRF attacks: The new feature protects logged-in users against CSRF attacks by ensuring that a user may not leave the current browser page. Session highjacking and request forgery is effectively prevented. However: using two browser windows or reloading a page will cause the immediate closure of the session. The feature can be deactivated by setting the config item 'csrf_defuse' to 'true'.
+** Added protection against CSRF attacks: The new feature protects logged-in users against CSRF attacks by ensuring that a user may not leave the current browser page. Session highjacking and request forgery is effectively prevented. However: using two browser windows or reloading a page will cause the immediate closure of the session. The feature can be deactivated by setting the config item "csrf_defuse" to "true".
 ** Added support for user IP aware sessions
 * Defects
 ** In case a scaffold does not have any configuration options, an empty step was displayed. This has been fixed.
@@ -1075,7 +1109,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Website scaffolders now also contains security related options and explanations
 ** Website scaffolders contain ISO-style date and time display
 * Quality
-** Added 'CContentDefault' to the sourcefiles/deprecation test.
+** Added "CContentDefault" to the sourcefiles/deprecation test.
 ==Revision 48==
 Baselined 2013-04-13
 
@@ -1084,7 +1118,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 * Security
 ** Bcrypt support for password hashes: MakeHash() now accepts a seed and the hash mode as a parameter
 ** Added function VerifyPassword() that takes a clear text password and validates it against a hashed password and its seed. VerifyPassword is backward compatible and will also validate password hashes based on sha1.
-** Encrypt() and Decrypt() now support different password hash methods. The default remains 'sha1'.
+** Encrypt() and Decrypt() now support different password hash methods. The default remains "sha1".
 * Deprecation
 ** The function GetWebserviceURL() defined in webservices_directory.inc is no longer used. So the function can be removed.
 ** Removed the long unnecessary functions CWebsite::UserAuthentication() and CWebsite::CallbackUserAuthentication()
@@ -1093,18 +1127,18 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 * Refactoring
 ** WARNING: Layout definition files are renamed from layout_*.txt to layout_*.cfg.
 ** WARNING: Webservice and website member function Log() and Event() have been renamed to SystemLog() and SystemEvent()
-** WARNING: Some configuration option names have been changed: 'nolog' is now 'disable_log', 'databasesupport' is now 'database_support', etc. The wdk/sourcefiles/deprecated test result will indicate regressions.
+** WARNING: Some configuration option names have been changed: "nolog" is now "disable_log", "databasesupport" is now "database_support", etc. The wdk/sourcefiles/deprecated test result will indicate regressions.
 ** WARNING: MakePasswordHash() The order of parameter has changed!
 ** SystemEvent and SystemLog are now members of CWebApplication. CWebsite and CWebService implement these functions differently.
 ** CFormElement::AddControlFile() no longer accepts the nSize parameter.
 ** CTeaserElement now uses different tags AND does NO LONGER support a SUBHEADER. Please check your own layout_element_teaser* files!
 ** Removed the files res_error_en.txt and res_error_de.txt. The contained strings are contained in res_wdk_*.txt.
-** CWebserviceDatabaseEntity: Optimized SQL requests for the list command. The 'AND 1' pattern has been removed.
+** CWebserviceDatabaseEntity: Optimized SQL requests for the list command. The "AND 1" pattern has been removed.
 ** CAssemblyLine is now moved into new file wdk_assemblyline.inc
 * New Features
 ** WARNING: system/user now supports user silos which implies a database model change. Check out the webservice documentation for details. 
-** WARNING: system/log now supports a new attribute 'event_message' which allows to add a short message text AND an associative array with details to a log entry.
-** Webservices now support the 'load_tolerance' configuration setting. 'load_tolerance' can be configured for each command. If set the webservice will check the current load (1 minute average) and if the load exceed the load tolerance an error will be returned.
+** WARNING: system/log now supports a new attribute "event_message" which allows to add a short message text AND an associative array with details to a log entry.
+** Webservices now support the "load_tolerance" configuration setting. "load_tolerance" can be configured for each command. If set the webservice will check the current load (1 minute average) and if the load exceed the load tolerance an error will be returned.
 ** A database configuration now supports a table name prefix. Use the TABLENAMEPREFIX configuration tag name.
 ** MakeSQL_Table() now accepts a table name prefix
 ** Introduced MakeSQL_PrefixTableNamesInQuery(). This function tries to identify all table names in a query and adds a prefix. Be cautious: The function has certain limitations.
@@ -1112,7 +1146,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CWebApplication::GetWebserviceAccessCode() has been introduced
 ** Added scaffolder to the devtools navigation
 ** Added CWebsiteUserPostCreation(). This function should be called whenever a new user has been created. It invokes CWebsite::CallbackPostUserCreation() which by default adds configured default privileges. Module user/signin, user/signinonestep, and system/usermanager now make use of this function.
-** Entity attributes of type 'date' and 'datetime' now support the 'inputrequired' flag that will cause a check if a date or datetime value has been provided by the user.
+** Entity attributes of type "date" and "datetime" now support the "inputrequired" flag that will cause a check if a date or datetime value has been provided by the user.
 ** Updated the pdf icon in accordance with http://www.adobe.com/misc/linking.html
 ** Introduced ArrayTransformToTable() to convert an (associative or indexed) Array into a two column array that can be used as input to a table element.
 ** Introduced IsFileUTF8BOM() to check if a file starts with a UTF8 Byte Order Mask
@@ -1120,9 +1154,9 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Introduced res_error*.txt that contain additional error text resources (currently only for webservice request related errors) that you may or may not want to use. If they are to be used the resources must be loaded explictly.
 ** Introduced CAssemblyLine::GetAssemblyList() to retrieve the ids of all added assemblies.^
 ** webservice system/test: LASTEXECUTION_RUNTIME_SECONDS is always truncated to 3 decimal digits
-** IsValidURL() now detects 'localhost' and valid IPv4 addresses as valid URLs
+** IsValidURL() now detects "localhost" and valid IPv4 addresses as valid URLs
 ** Introduced CUnitTestRecursiveFileCheck for BOM and bad white space checks
-** FatalError() and CWebsite::RedirectAtOnce() no longer make use of the '&lt;?' tag which caused issues if short_open_tag was not set (refer to http://de3.php.net/manual/en/ini.core.php#ini.short-open-tag)
+** FatalError() and CWebsite::RedirectAtOnce() no longer make use of the "&lt;?" tag which caused issues if short_open_tag was not set (refer to http://de3.php.net/manual/en/ini.core.php#ini.short-open-tag)
 ** Scaffolds for basic and dynamic websites user shorter folder pathes now in template folder. 
 ** Scaffold for dynamic websites now support configuration for database table names prefixes
 ** Scaffolds now take their names and descriptions from res files
@@ -1135,30 +1169,30 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CFormElement now supports the layout definition LAYOUT_CONTROL_CHECKBOX_LABELFIRST. If set to 1 (or true) the label of a checkbox behaves like all other labels (display in BEFORE the control) instead of display AFTER the control which is the typical use of a checkbox. However there might be layout considerations that justify the display of the label in front of the checkbox.
 ** Added error message strings for HTTP 413 and added error document handling in scaffolds for basic and dynamic websites.
 ** CThumbnailImageElement::RenderThumbnailImage() now considers the case that no width or height of the large version of the image is provided.
-** Added support for layout configuration files (like 'layout_default.txt') that contain tag value pairs which are added to the output item list. You can use it to vary colors in a given layout easily.
-** MakeSQL_Select() now supports empty condition parameter. In this case, the 'WHERE' part is omitted.
-** Added two new functions ArrayPrint() and ArrayRender() which encapsulate print_r. The test sourcefiles/debugdebris has been added to check if all source files contain unintended debug output. It checks for 'print_r', 'var_dump', and 'echo' calls.
+** Added support for layout configuration files (like "layout_default.txt") that contain tag value pairs which are added to the output item list. You can use it to vary colors in a given layout easily.
+** MakeSQL_Select() now supports empty condition parameter. In this case, the "WHERE" part is omitted.
+** Added two new functions ArrayPrint() and ArrayRender() which encapsulate print_r. The test sourcefiles/debugdebris has been added to check if all source files contain unintended debug output. It checks for "print_r", "var_dump", and "echo" calls.
 ** The text input control for date time input in a form now considers that total string length depending on local settings.
 ** Added function IsValidAssemblyID() and corresponding tests
 ** Added function SQL_IsValidTableName() and corresponding tests
 ** Entity's data base tables can now contain alphanumeric characters, underscores, and dashes
-** Entity Manager Module now defaults attributes with type 'enum' to control 'select'
+** Entity Manager Module now defaults attributes with type "enum" to control "select"
 ** Event severities are now defined in a separate file named wdk_eventseverity.inc. Numeric constants are now also available.
-** The new constructor paramter of CWebApplication called arrayObfuscationItems allows to define additional items that shoudl be obfuscated in trace output and parameter reflection. This enabled webservice authors to add items that should not be shown in trace output in addition to e.g. 'accesscode' or 'password'.
+** The new constructor paramter of CWebApplication called arrayObfuscationItems allows to define additional items that shoudl be obfuscated in trace output and parameter reflection. This enabled webservice authors to add items that should not be shown in trace output in addition to e.g. "accesscode" or "password".
 * Defects
 ** MakeCssURL() has been fixed.
 ** CWebserviceConsumer: If a request returned syntactically valid, parseable data (like an xml-valid 404 html page) this was not detected as an error. This has been rectified. 
-** CWebserviceDatabaseEntity: For each filter option, the 'list' command was configured for 2 filter option parameters. But only the amount of filter options were configured and processed as parameters. Using a filter option with a number beyond the amount of filter options produced an error. This is fixed now.
+** CWebserviceDatabaseEntity: For each filter option, the "list" command was configured for 2 filter option parameters. But only the amount of filter options were configured and processed as parameters. Using a filter option with a number beyond the amount of filter options produced an error. This is fixed now.
 ** CWebserviceDatabaseEntity: When using the index item as a sort option, the sql query contained the corresponding field sort order twice. This did not cause a malfunction, but may have impacted performance. This has been fixed.
 ** Webservice system/entitlement: A defect prevented privileges from being deleted. This has been fixed.
 ** CNavigationElement::RenderNavigationVertical() did not check for conditions and hence displayed all entries. This has been fixed.
 ** CImageElement::RenderImage() did not URL encode the image URL when creating html. Has been fixed.
-** When using the 'image' command a new session was created unintendedly. This has been fixed. However session data is accessible if a valid session id is provided. 
+** When using the "image" command a new session was created unintendedly. This has been fixed. However session data is accessible if a valid session id is provided. 
 ** Webservice system/test was still using format=csv to request system/test webservices of remote sites. This has been fixed.
 ** Event severities were not fully correct. WARNING and higher were given a numeric value which was one too high. This has been corrected.
 * Quality
 ** The test for IsDirectoryReadWriteAccess now provides a possible explanation why a PHP handler process may have write access to the application source code files.
-** Added a test that scans the application's source code for deprecated functions (e.g. 'CheckCharSet').
+** Added a test that scans the application's source code for deprecated functions (e.g. "CheckCharSet").
 ** Added test for ArraySetValueRecursive()
 ** Added test for MakeInitVector()
 ==Revision 47==
@@ -1172,8 +1206,8 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Text resource files with pattern *_int.txt are no longer considered.
 * Refactoring
 ** WARNING: CContentDefault has been renamed to CContent. User specific content classes must be named CMyContent. This may break existing code!
-** WARNING: Image URLs have been changed. Images are now requested using the 'command' parameter and identified by the 'id' parameter. This may break existing code!
-** WARNING: Webservice output format 'csv' has been renamed to 'csvpath'
+** WARNING: Image URLs have been changed. Images are now requested using the "command" parameter and identified by the "id" parameter. This may break existing code!
+** WARNING: Webservice output format "csv" has been renamed to "csvpath"
 ** WARNING: MakeLink() (in all its various variants) has been renamed to MakeURL()
 ** WARNING: CElement::__construct now requires two additional parameters to control if the element should look for layout definition txt files and/or layout html files. This may break existing code implementing CElement derived classes.
 ** WARNING: IsEmailValid() has been renamed to IsValidEmail()
@@ -1183,23 +1217,23 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Introduced the CScaffolder class and devtools/scaffolder module to support code scaffolding for building new websites and adding new features to existing websites
 ** Webservice system/scheduler: Job URLs can now be specified as webservice names. In this case, the access code parameter is automatically added. Additional post parameters can now be specified for a job.
 ** CContentDefault::RenderContent() now returns false if the content is not found. Subsequently CWebsite::CallbackRenderContentException() is called.
-** CEntity::MakeSQL_CreateTable() now creates date and datetime fields as NOT NULL. This enables those fields to be used in sql WHERE conditions. Since NOT NULL leads to artefacts like '0000-00-00 00:00:00' to be returned by the database, CDatabaseEntityWebService::CallbackCommandGetComplete() is now emptying date and datetime zero values before returning.
+** CEntity::MakeSQL_CreateTable() now creates date and datetime fields as NOT NULL. This enables those fields to be used in sql WHERE conditions. Since NOT NULL leads to artefacts like "0000-00-00 00:00:00" to be returned by the database, CDatabaseEntityWebService::CallbackCommandGetComplete() is now emptying date and datetime zero values before returning.
 ** CWebServiceConsumer::ConsumeWebservice(): The maximum allowed execution time for a webservice when called is now 600 seconds. However, it is not sure if the environment really supports this.
 ** CWebsite::CallbackRenderSpecialContent() now has a default implementation which does nothing.
 ** Introduced CWebsite::CallbackPrepareMakeURL() to control and modify all URLs (and their parameters) before being created using CWebsite::MakeURL(). This can be used to remove parameters you don't need or rename them to implement a short parameter policy.
 ** Webservice system/test: Alert mail layout has been redesigned to show more relevant information when being sent as an SMS.
 ** All profiling output displays the amount of elapsed seconds with a precision of 3
 ** ArrayFilterByKeys has a new parameter: $bIgnoreEmpty. The default is false. If set to true, empty fields will not be copied to the output array.
-** Form Element now supports so-called separators. A separator is html snippet defined in the layout file for generic forms. It can be set via CFormDefinition::AddControlSeparator(). It is also supported by the entity manager module: Each filter option in the entity definition array can set the value 'separator' to 'true' to add a separator AFTER the filter control.
+** Form Element now supports so-called separators. A separator is html snippet defined in the layout file for generic forms. It can be set via CFormDefinition::AddControlSeparator(). It is also supported by the entity manager module: Each filter option in the entity definition array can set the value "separator" to "true" to add a separator AFTER the filter control.
 ** Form Elements now support LAYOUT-tags for labels specific to the type of the control. This made it possible to fix a layout inconsistency in case of an displayed error for a text area control.
-** CWebServiceDatabase will now emit a warning via email if a sql query takes longer than 15 seconds. The threshold in seconds can be set by using the config value 'query_alert_threshold_seconds'.
+** CWebServiceDatabase will now emit a warning via email if a sql query takes longer than 15 seconds. The threshold in seconds can be set by using the config value "query_alert_threshold_seconds".
 ** The new test wdk/security/cgivulnerability checks if the server is vulnerable to the cgi vulnerability described here http://www.php.net/archive/2012.php#id2012-05-03-1.
 ** StringBBCodeToHtml() now also supports [list] and [*]
 ** StringBBCodeToHtml() now also supports [table], [tr], [td], and [th]
 ** Introduced CWebSite::AddHeaderRefresh() to add a header which tells the browser to redirect to the specified URL after a defined number of seconds
 ** Introduced ArrayValueExists() as a wrapper for in_array()
 ** Webservices and consumers now supports json as a format (but not json-rpc)
-** CWebServiceConsumer_WebApplication now allows to override the 'format' configuration by using the 'format' parameter.
+** CWebServiceConsumer_WebApplication now allows to override the "format" configuration by using the "format" parameter.
 ** CWebserviceConsumer_WebApplication now outputs the error code in case of into the trace log
 ** CWebserviceDatabase now adds DATABASEQUERIES_SECONDS to the PROFILING section of the webservice result to report the number of seconds spent in sql queries.
 ** CWebsite::GetCountry() will return the default country if no country is set yet.
@@ -1211,13 +1245,13 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** The amount of IsFile() calls has been significantly reduced which improved overall performance.
 * Defects
 ** The framework layout still used INDEXLINK instead of INDEXURL for the logo image link target. Has been corrected.
-** Webservice system/test command 'testall' did not return any data. Defect has been corrected.
-** Webservice system/test command 'alert': The alert mail did not contain any test logs. This has been rectified.
+** Webservice system/test command "testall" did not return any data. Defect has been corrected.
+** Webservice system/test command "alert": The alert mail did not contain any test logs. This has been rectified.
 ** CUnitTestURL::TestURL() did not set the test result to false if the URL could not be loaded.
 ** CParameterDefinition::CheckParameters() did not allow the min and max value for datetime parameters. This has been fixed now.
-** StringBBCodeToHtml() did not add 'px' to font size definitions. This has been fixed. '[size=15]' will now start a span with a font size of 15px.
+** StringBBCodeToHtml() did not add "px" to font size definitions. This has been fixed. "[size=15]" will now start a span with a font size of 15px.
 ** StringBBCodeToHtml() had difficulties to detect a pair of open and closing tags if there were line breaks in between. This has been fixed.
-** IsValidURL() did not detect some cases of incorrect URLs (e.g. 'http://' was considered as valid)
+** IsValidURL() did not detect some cases of incorrect URLs (e.g. "http://" was considered as valid)
 ** Webservices fell back to xml output if invalid format parameters were supplied. In this case the default format was ignored. This has been fixed.
 * Quality
 ** Added test script for IsFile()
@@ -1233,23 +1267,23 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** WARNING: FindStringMultiple has changed completely. It now returns the position of the nearest needle.
 ** WARNING: CDatabaseEntityWebservice::CallbackCommandAdd() has been renamed to CDataBaseEntityWebservice::CallbackCommandAddPrepare() and the parameter $strEntity has been added (it was missing before).
 ** WARNING: CDatabaseEntityWebservice::CallbackCommandSet() has been renamed to CDataBaseEntityWebservice::CallbackCommandSetPrepare() and the parameter $strEntity has been added (it was missing before).
-** WARNING: CDatabaseEntityWebservice::GetPublicFieldsList() and CDatabaseEntityWebservice::GetPublicFieldsGet() replace CDatabaseEntityWebservice::GetPublicFields() to support the new entity attribute property 'excludefromlist'
+** WARNING: CDatabaseEntityWebservice::GetPublicFieldsList() and CDatabaseEntityWebservice::GetPublicFieldsGet() replace CDatabaseEntityWebservice::GetPublicFields() to support the new entity attribute property "excludefromlist"
 ** WARNING: Webservice system/test: Several parameter names have changed. The webservice is now based on CDatabaseEntityWebservice.
 ** WARNING: Webservice system/scheduler: Several parameter names have changed. The webservice is now based on CDatabaseEntityWebservice.
 ** WARNING: Webservice system/entitlement: Several parameter names have changed. The webservice is now based on CDatabaseEntityWebservice.
 ** WARNING: Webservice system/user: Several parameter names have changed. The webservice is now based on CDatabaseEntityWebservice.
 ** WARNING: Webservice system/data: Several parameter names have changed. The webservice is now based on CDatabaseEntityWebservice.
-** WARNING: The 'vintage' version of CDatabaseWebservice has been removed
+** WARNING: The "vintage" version of CDatabaseWebservice has been removed
 ** WARNING: Introduction of new entity attribute naming scheme: Parameters are now aligned with database table names and contain underscores to separate name and type. Impacts webservice system/log, demo/databasedemo.
 ** WARNING: AppendArray() now returns the resulting array instead of modifying the first input parameter.
-** WARNING: The 'maintenance' area has been renamed to 'systemadmin'. Please check links the content files, navigation includes, module includes, and user privileges.
+** WARNING: The "maintenance" area has been renamed to "systemadmin". Please check links the content files, navigation includes, module includes, and user privileges.
 ** WARNING: Renamed generic output item LINK to URL. Please check your content files and modules!
 ** WARNING: Renamed output item SELFLINK to SELFURL. Please check your content files and modules!
 ** WARNING: Renamed output item INDEXLINK to INDEXURL. Please check your content files and modules!
 ** WARNING: Renamed CWebsite::ReplaceOutputItemTags() to CWebsite::ReplaceOutputItems()
-** WARNING: CDatabaseEntityWebservice: 'Item' was replaced by 'Entity' where appropriate including some member function names.
+** WARNING: CDatabaseEntityWebservice: "Item" was replaced by "Entity" where appropriate including some member function names.
 ** WARNING: CMessageElement always uses {MESSAGE_TEXT} as a placeholder. This might affect existing custom layout files.
-** WARNING: ParseTestPath() now uses new naming convention: 'site_path', 'assembly_id', 'group_id', and 'test_id'.
+** WARNING: ParseTestPath() now uses new naming convention: "site_path", "assembly_id", "group_id", and "test_id".
 ** WARNING: Shell_GetUser() has been renamed to GetSystemUser() and is moved to wdk_system.inc
 ** Removed most occurances of strlen, mb_strlen, strpos, and mb_strpos from wdk source code.
 * Deprecation
@@ -1261,12 +1295,12 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CDatabaseEntityWebservice now creates twice as many filter parameter groups per configured filter to allow lower and uppoer bound filtering for all supported options.
 ** Wiki Element now supports tables
 ** Wiki Element now supports links to chapters within a wiki article like this: [ [Article#Chapter|Text]]
-** New generic output item 'IMAGE' has been introduced to render an image element.
-** Image URL function (e.g. 'www.example.com?image=test') now also supports non-layout images.
+** New generic output item "IMAGE" has been introduced to render an image element.
+** Image URL function (e.g. "www.example.com?image=test") now also supports non-layout images.
 ** Introduced CTableElement::RenderTableEx() to allow any combination of header and data cells within a table.
 ** Added example robots.txt files for two typical uses cases to the templates folder
-** Entities now support UNIQUE KEYs. Use 'uniqueindices' in entity definition arrays!
-** Introduced webservice system/server with 'status' command to retrieve some basic status information on the server (like available disk space)
+** Entities now support UNIQUE KEYs. Use "uniqueindices" in entity definition arrays!
+** Introduced webservice system/server with "status" command to retrieve some basic status information on the server (like available disk space)
 ** Function ArrayRemoveValue() was added to remove a key from an array based on it's value.
 ** Added function GetSystemAverageLoad() which encapsulates the shell uptime command
 ** Added function GetSystemResourceConsumption() which provides current and maximum usage of various system resources (like memory, tcp sockets, etc.)
@@ -1274,16 +1308,16 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CEntityManagerModule: If TID_MODULENAME_TABLEHEADER_ATTRIBUTE is empty, the module will try TID_MODULENAME_LABEL_ATTRIBUTE.
 * Defects
 ** CModuleEntityManager erroneously cleared all form fields if a modify attempt failed.
-** GetAttributeFromXMLTag() did not extract attributes properly if one attribute name is the trailing part of another attribute name (e.g. if attribute 'context' and attribute 'ext' existed). This caused an error while creating image urls for images embedded using the generic output item IMAGEURL.
+** GetAttributeFromXMLTag() did not extract attributes properly if one attribute name is the trailing part of another attribute name (e.g. if attribute "context" and attribute "ext" existed). This caused an error while creating image urls for images embedded using the generic output item IMAGEURL.
 ** Module crm/feedback did not render it's form and hence did not work at all.
-** When loading wiki content in CContent output item tags were not replaced. This resulted in links not being identified as links. Example: '[{SOMEURL}file.pdf Some file to download]'
+** When loading wiki content in CContent output item tags were not replaced. This resulted in links not being identified as links. Example: "[{SOMEURL}file.pdf Some file to download]"
 ** CHARSET_URL did not include ; - this caused some links in wiki content to be ignored.
 ** Module maintenance/logmanager produced an error due to an invalid entity definition
-** Module maintenance/entitlementmanager produced an error due to an invalid entity definition. To fix this, entity definitions now allows 'blocksize' to be 0 which will make sure, the blocksize parameter is not used in webservice calls.
+** Module maintenance/entitlementmanager produced an error due to an invalid entity definition. To fix this, entity definitions now allows "blocksize" to be 0 which will make sure, the blocksize parameter is not used in webservice calls.
 ** Wiki Element: A simple line break in the wiki source code should lead to a line break in html - this is the case now.
 ** CDatabaseWebserviceEntity did not produce an error in delete command id no index attrubute was specified.
 ** Element Form did not render datetime controls at all. This has been fixed.
-** Database Entity Webservice returned 'IMPLEMENTAION_ERROR' instead of 'IMPLEMENTATION_ERROR' in some cases.
+** Database Entity Webservice returned "IMPLEMENTAION_ERROR" instead of "IMPLEMENTATION_ERROR" in some cases.
 ** Module crm/wikipad did not handle errors properly. If loading or saving failed a proper error message is displayed.
 ==Revision 45==
 Baselined 2011-10-11
@@ -1311,19 +1345,19 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** The test website now shows an explanation on what it is on it's default landing page.
 ** Preparation of the W3CLINK is now part of CWebsite::__construct.
 ** Introduced the module user/layoutselection which enables to select from a defined set of layouts.
-** 'password', 'passwordhash', and 'authenticationpayload' are now obfuscated in parameter reflection and trace output. Up to now, only 'accesscode' was obfuscated.
+** "password", "passwordhash", and "authenticationpayload" are now obfuscated in parameter reflection and trace output. Up to now, only "accesscode" was obfuscated.
 ** Introduced CDefinitionListElement class
 ** Wiki Element now supports the __TOC_<>_ tag with numbering.
-** Wiki Element now supports the '----' syntax for a horizontal rule.
+** Wiki Element now supports the "----" syntax for a horizontal rule.
 ** Wiki Element now uses Media wiki like styles for pre-formatted text.
 ** Wiki Element layout definition supports to control if headers should be numbered or not
-** Wiki Element now support ';' and ':' tags to create definition lists
+** Wiki Element now support ";" and ":" tags to create definition lists
 ** Added module WikiChapters: The module allows to display a lengthy wiki article chapter by chapter and allows to navigate to the toc, the previous page, and the next page.
-** Added icon images for 'back' and 'next'.
+** Added icon images for "back" and "next".
 * Defects
 ** The internal cache used in CWebsite::ReplaceText() caused test resources not to be used which were loaded _after_ CWebsite::ReplaceText() was used for the first time. Cache usage must now explicitly activated by parameter. This makes the function backward compatible.
 ** Console element did not add line breaks for lines which are too long. This has been fixed.
-** Inclusion of css into the html file now produces valid html in case of urls containing '&' characters used in css. 
+** Inclusion of css into the html file now produces valid html in case of urls containing "&" characters used in css. 
 ** ReadOnly controls in a form element contained a label tag which caused warnings when checked by the w3c validator.
 ** Wiki Element did not ignore link tags within &lt;pre> sections. This has been rectified.
 ** Module EntityManager now checks if the modulevarname has been set for the index attribute of an entity.
@@ -1337,14 +1371,14 @@ Baselined 2011-07-14
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
 * Refactoring
 ** RenderPathContent() and ParsePathContent() now uses '#' instead of '!' to indicate indexed array elements.
-** CInstaller::TestAll() has been renamed to CInstaller::Test(). By defaul the function will use the 'testlocal' command of the system/test webservice instead of the 'testall' command.
+** CInstaller::TestAll() has been renamed to CInstaller::Test(). By defaul the function will use the "testlocal" command of the system/test webservice instead of the "testall" command.
 ** file_exists() has been replaced by IsFile()
 ** GetAllLocales() now returns only utf8 locale ids
 * Deprecation
 ** Checklist, glossary, and feature section has been removed from wdk.txt
 * New Features
-** Webservice now support csv as a result format. Each line in the csv result table contains a path comma separated to a value. The result format can be specified using the parameter 'format'. xml remains the default but CWebserviceConsumerWebApplication will request csv by default.
-** The output format can also be configurd in the webservice configuration: use index 'format'='xml' to support dependencies to webservices based on WDK Revision 43 or earlier.
+** Webservice now support csv as a result format. Each line in the csv result table contains a path comma separated to a value. The result format can be specified using the parameter "format". xml remains the default but CWebserviceConsumerWebApplication will request csv by default.
+** The output format can also be configurd in the webservice configuration: use index "format"="xml" to support dependencies to webservices based on WDK Revision 43 or earlier.
 ** CSecureDataContainer::SerializeEncrypt() and CSecureDataContainer::UnserializeDecrypt() now use IsMcryptSupported() to check if mcrypt is supported or not.
 ** CUsersEncryptionWebSite now checks if mcrypt is supported. If not a fatal error is reprted.
 ** CDatabaseWebservice returns error DATABASE_INSTALL_REQUIRED if a table is not found.
@@ -1354,7 +1388,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CWikiPadModule introduced. The module allows to edit one configurable wiki page. It uses the system/data webservice as a storage device.
 ** Test pathes and test ids may now contain underscores.
 * Defects
-** IsDirectory() now always returns true for '/'
+** IsDirectory() now always returns true for "/"
 ** IsDirectory() will suppress warning messages caused by open_basedir restrictions and simply return false
 ** ParsePathContent() had an error parsing multiple values within an indexed array element. 
 ** CWebsite::CallbackRenderNavigation() has been added for the case the the actual website class does not implement the function.
@@ -1368,9 +1402,9 @@ Baselined 2011-05-31
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
 * New Features
-** WARNING: Database model has changed: Unit tests now display a hash value of the test script which is stored in the test result database if appropriate. The hash value is stored in a new database field in both tables 'System-TestStatus' and 'System-TestStatusHistory'. The maintenance/testmanager module displays the hash value. Please see system/test documentation for more information.
+** WARNING: Database model has changed: Unit tests now display a hash value of the test script which is stored in the test result database if appropriate. The hash value is stored in a new database field in both tables "System-TestStatus" and "System-TestStatusHistory". The maintenance/testmanager module displays the hash value. Please see system/test documentation for more information.
 ** Introduced IsValidConfigID() to check if a string is a valid configuration store identifier.
-** Improved IsValidURL() by added charset check and 'ftp://' as an allowed protocol.
+** Improved IsValidURL() by added charset check and "ftp://" as an allowed protocol.
 ** Introduced RenderPathContent() and ParsePathContent()
 * Quality
 ** Added a test for IsValidConfigID()
@@ -1384,12 +1418,12 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 * Refactoring
 ** WARNING: GetWwwrunDir() is renamed to GetTempDir(). Please check your env.inc!
 ** WARNING: CheckCharSet() has been renamed to StringCheckCharSet(), moved to wdk_string.inc, and is now UTF8 aware.
-** IsDirectory() will now return false if there is no trailing slash ('/') or if double slashes are contained ('//').
+** IsDirectory() will now return false if there is no trailing slash ("/") or if double slashes are contained ("//").
 * New Features
 ** Introduced IsFloatString() with corresponding tests
 ** Introduced IsUnsignedIntegerString() with corresponding tests
 ** Introduced ArrayCheckCharSet() to check keys and/or values against a character set
-** Introduced CWebApplication::GetServerIP() as a wrapper for $_SERVER['SERVER_ADDR']
+** Introduced CWebApplication::GetServerIP() as a wrapper for $_SERVER["SERVER_ADDR"]
 ** CEntityManagerModule::AddTool() now supports to create external (target blank) links
 ** CWebservice checks the charset of result tags before rendering the xml result.
 ** CTestManagerModule: after executing a test in browse mode, the current view is pertained instead of showing the test details
@@ -1402,9 +1436,9 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** CList::Sort() uses eval() which is a security risk in itself. Additional tests have been made to ensure that CList::Sort() is protected against a code injection attack.
 * Defects
 ** UTF-8 characters were not stored correctly in mysql databases. This affected alphabetic sorting and caused symptoms when e.g. umlauts were involved. This has been fixed by issuing sql statement SET NAMES 'utf8' prior to the first UPDATE or INSERT statement. Please note that existing database entries will not be sorted or returned correctly before being updated.
-** A bug caused a quote ' to be displayed in the head-area if embedded css files are used. This has been fixed.
+** A bug caused a quote " to be displayed in the head-area if embedded css files are used. This has been fixed.
 ** Rectifed various defects in test webservice-system-data/context
-** Generic output item 'IMAGEURL' now delivers html encoded urls
+** Generic output item "IMAGEURL" now delivers html encoded urls
 ** Module maintenance/datamanager caused a strict standards warning in CallbackPrepareWebserviceParams(). Is corrected now.
 ** CUnitTestURL::TestURL now checks if HttpRequest returned false BEFORE Ccontrol characters are removed for pattern checks.
 * Quality
@@ -1420,7 +1454,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 ** Added a test for the functionsdefined in env.inc
 ** Added a test to check the php environment
 ** All source code file (*.inc and *.php) are now checked for leading and trailing white space characters (not only files in GetWDKDir())
-** Add new standard command 'selfcheck' in webservices. For database webservices it checks the mysql multi query capability.
+** Add new standard command "selfcheck" in webservices. For database webservices it checks the mysql multi query capability.
 ** Added test webservices/webservices which calls the new selfcheck command for all webservices in the webservice directory
 ** The entity attributes filter options are now checked for consistency within the entity definition array.
 ** CEntityDefinitions::CheckEntityDefinition() now checks for valid entity attribute type float precision settings.
@@ -1440,11 +1474,11 @@ Baselined 2011-02-28
 ==Revision 39==
 Baselined 2011-02-22
 * User's local settings are only used if they are set. E.g. the country is only set if a setting exists for the user.
-* Entity Config Array: Introduced 'excludefromget' and 'excludefromlist' attribute flags to indicate whether the webservice should send the attribute in get or list commands.
-* Entity Config Array: An attribute can now specify the way a data item is displayed and edited. A new config tag 'control' can be either empty, 'select', or 'textarea'.
+* Entity Config Array: Introduced "excludefromget" and "excludefromlist" attribute flags to indicate whether the webservice should send the attribute in get or list commands.
+* Entity Config Array: An attribute can now specify the way a data item is displayed and edited. A new config tag "control" can be either empty, "select", or "textarea".
 * CEntityManagerModule: Introduced CheckCondition() to control features based on given conditions.
 * CEntityManagerModule: The return code of CallbackCheckInputValues() is now ignored. Input is considered as fault if the arrayErrors is non-empty.
-* CEntityManagerModule: Introduced the support of text editing of type 'numericid'.
+* CEntityManagerModule: Introduced the support of text editing of type "numericid".
 * CEntityManagerModule: If input errors are detected during modification, the incorrect values were set back to their original values, making it difficult to the user to see what was wrong. This has been changed now. The incorrect input value stays as it is.
 * CEntityManagerModule: CallbackPrepareSelectOptions() now also receives the index value
 * CEntityManagerModule: Is now aware of upper- and lowercase of enums.
@@ -1454,7 +1488,7 @@ Baselined 2011-02-22
 * Introduced ArrayKeysUpperCase() to uppercase all keys in an associative array.
 * Introduced CWebsite::IsError() to check if at least one error has been added.
 * CWebsite::RenderNumer() now supports to render numbers explicitly without digit separator
-* ArrayAppend() does now consider associative keys that 'look' like numeric keys like '1'. array_merge treats '1' like 1 which renders the php function useless.
+* ArrayAppend() does now consider associative keys that "look" like numeric keys like "1". array_merge treats "1" like 1 which renders the php function useless.
 * CUserWebsite::LogUserAction() has been deprecated
 * CWebsite::Event() and CWebsite::CallbackEvent() have been introduced.
 * CLogManagerModule and CLogWebservice have been extended with additional filter, sorting, and display capabilities
@@ -1470,8 +1504,8 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 * WARNING: ReadDirectory() now appends a training slash for directory entries (THIS MAY RENDER EXISTING CODE INCOMPATIBLE!)
 * CEntityManagerModule has been introduced and used in several maintenance modules.
 * WARNING: CItemManagerModule has been deprecated.
-* Added icon png file for 'externallink'.
-* Added generic output item 'ICON' which draws a default styled icon element.
+* Added icon png file for "externallink".
+* Added generic output item "ICON" which draws a default styled icon element.
 * Wiki Element now supports the &lt;pre&gt; tag
 * Added unit test for element wiki and the wiki integration feature
 * ArraySort() now supports to maintain index associations and ordered numeric keys (makes use of sort() or asort() internally)
@@ -1484,8 +1518,8 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 * Module maintenance/sessionmanager now uses local resources for all displayed text
 * Module maintenance/datamanager is now based on CModuleEntityManager
 * Element wiki: A bug prevented a bullet list to be displayed if it was at the end of the wiki source. This has been fixed.
-* Element Form: Add the control type 'readonly' which is basically a 'static' control with a label.
-* Element Form: Add the control type 'datetime' which covers date and time input in one control.
+* Element Form: Add the control type "readonly" which is basically a "static" control with a label.
+* Element Form: Add the control type "datetime" which covers date and time input in one control.
 * Columbia has been added to the list of supported countries
 * Flag icons have been added for all supported languages
 * Layout framework files are now also loaded from assemblies
@@ -1494,18 +1528,18 @@ Baselined 2010-12-14
 
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
-* Introduction of the Developer Tools area: A new submenu and several content files have been added. Please note: The Element Gallery is no longer part of the maintenance area but has been moved to the devtools area. The devtools content files require the 'devtools' condition to be set und the 'devtools' resources to be loaded.
+* Introduction of the Developer Tools area: A new submenu and several content files have been added. Please note: The Element Gallery is no longer part of the maintenance area but has been moved to the devtools area. The devtools content files require the "devtools" condition to be set und the "devtools" resources to be loaded.
 * The Wiki Element now supports wiki style headers, bullet lists, numbered lists, italic and bold text format, as well as internal and external links.
 * The content class now also loads *.txt files and assumes that they contain wiki syntax and sends their contents into the Wiki Element.
 * Module cms/contentbrowser did not render the filtered list properly under php 5.2.14. Issue has been fixed.
 * Introduced CDatabaseEntityWebService. This class encapsulates the generic support of list, add, set, get commands for configurable database entities.
 * CDatabaseWebservice now only supports the actual database wrapper - it does no longer contain entity support functions.
-* CDatabaseEntityWebService::CommandList() had a bug when using 'contains' or 'in' filter operators. Bug has been fixed.
+* CDatabaseEntityWebService::CommandList() had a bug when using "contains" or "in" filter operators. Bug has been fixed.
 * CWebservice::CallbackCheckParam() has been introduced. This callback function is called for each given parameter.
 * GetDateLocalFormat now delivers the correct date format for GBP, ESP, FRA, and the USA.
 * CUnitTestURL now supports to check an array of regular expression, too.
 * Fixed a bug that prevented static images to be provided properly (Caused by whitespaces in one of the include files).
-* Introduced TweakURL(). This function converts incomplete URLs into valid URLs. E.g. it adds 'http://' if the URL string starts with 'www.'.
+* Introduced TweakURL(). This function converts incomplete URLs into valid URLs. E.g. it adds "http://" if the URL string starts with "www.".
 * Renamed wdk_http.inc to wdk_url.inc
 * CListElement and CNumberedListElement did not manage empty arrays properly. This has been fixed.
 ==Revision 36==
@@ -1533,7 +1567,7 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 * Introduced CStopWatch::GetTotalSeconds(): The stopwatch can now resume (by calling Start() after Stop() and GetTotalSeconds() will return the total number of seconds passed during all Start/Stop phases until Reset() is called.
 * CWebApplication now also displays the total seconds passed during webservice consumption
 * Introduced ReplaceStringOnce[IgnoreCase]() which replaces only the first occurence of the needle.
-* Document type specific cleanup has been removed. Replacement of '/>' to '>' anymore.
+* Document type specific cleanup has been removed. Replacement of "/>" to ">" anymore.
 * Module user/login has it's own resource file. Some text IDs have changed. A recommendation is made to review existing text items overriding res files.
 * Introduced StringSection() as a UTF-8 aware wrapper for substr. Replaced all usage of substr() and mb_substr() in wdk source code except wdk_string.inc
 * Introduced StringLowerCase() and StringUpperCase() as UTF-8 aware wrappers for (mb_)strtoupper() and (mb_)strtolower()
@@ -1545,14 +1579,14 @@ WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO 
 * FileRead() converts the result directly into UTF-8
 * LoadNamedArrayFromTextFileMultiLine() converts the result directly into UTF-8
 * CWebsite::ReplaceGenericOutputItemTags() is now UTF-8 aware
-* Module cms/contentbrowser support the global config setting 'csvformat' to determine the preferred csv file format (classic or Excel)
+* Module cms/contentbrowser support the global config setting "csvformat" to determine the preferred csv file format (classic or Excel)
 ==Revision 35==
 Baselined 2010-07-01
 * Introduced RenderTimeNow()
 * Added test for RenderDateTimeNow(), RenderTimeNow() and RenderDateNow()
 * Introduced StringWordWrap() as a replacement for PHP's wordwrap function. wordwrap() does not support UTF8, StringWordWrap() does.
 * StringCutOff() now uses StringWordWrap() instead of wordwrap().
-* Element Console layout has been repaired. IE used to misinterpret wrapped text on a random basis while processing css 2.1 attribute 'white-space: pre-wrap'.
+* Element Console layout has been repaired. IE used to misinterpret wrapped text on a random basis while processing css 2.1 attribute "white-space: pre-wrap".
 * CWebService will only try a second time to execute the system/log webservice if the first attempt failed.
 ==Revision 34==
 Baselined 2010-05-23
@@ -1564,12 +1598,12 @@ Baselined 2010-05-23
 * Introduced StringXMLEntities() which converts non-ASCII characters into XML entities
 * Introduced StringHTMLtoXMLEntities() which converts non-ASCII characters AND existing HTML entities into XML entities
 * Introduced StringHTMLAddEmbracingTags() and StringXMLAddEmbracingTags()
-* CHighlightElement now works properly due to utf-8 safety of new 'add embracing tags' functions
+* CHighlightElement now works properly due to utf-8 safety of new "add embracing tags" functions
 * CThumbnailImageElement now also works if active scripting is deactivated
 * CWebsite now also outputs profiling information in trace output. Please note: profiling info contained in trace is not the same as in the html comment. This is because adding trace output to the html output is a operation on its own.
 * Introduced StringCutOff() to cut off strings at a given position considering word wrapping.
 * Introduced the test translation/tidcheck to make sure that no untranslated text identifiers are on the root url of the application.
-* Introduced CModule::GetModuleVarNameState as an alias for GetModuleVarName('state')
+* Introduced CModule::GetModuleVarNameState as an alias for GetModuleVarName("state")
 * SendMail() has been improved: Sender name and subject now support utf-8 strings, the line break before the first body text line has been removed
 * SendMail() now supports CC and BCC recipients
 * SendMail() now supports empty sender names and subject lines correctly
@@ -1578,7 +1612,7 @@ Baselined 2010-05-23
 * Introduced RegExpMatch() as a wrapper for regualr expression matching functions
 * CWebsite: Session initialization is now done BEFORE assemblies are initialized. This enables to include or not include assemblies in the assembly line based on session stored variables.
 * CSV related functions are now UTF-8 safe
-* HtmlEncode() now also converts selected bbcode entities into html ('[br]' only at the moment)
+* HtmlEncode() now also converts selected bbcode entities into html ("[br]" only at the moment)
 * Module maintenance/testmanager: Added tool bar option to re-test all failed tests at once (by executing the webservice in a new window)
 * Module maintenance/testmanager: Added alphabetical sorting for assembly, site, and group id dropdowns
 * Webservice system/test: command testlist can now combine status filter option and the dotest option (this was required for the new re-test failed tests option the the testmanager module)
@@ -1598,7 +1632,7 @@ Baselined 2010-05-23
 * Introduced ParseURLParameters() to encapsulate php's parse_str()
 * ReadFileCSV() now checks if the file exists before it tries to read it via file_get_contents. This avoids on screen error messages for non-existent files.
 * Introduced MakeHash() as a wrapper for sha1()
-* Moved MakePasswordHash(), MakePasswordHashSeed() into wdk_hash.inc. Please check your includes of 'wdk_random.inc'.
+* Moved MakePasswordHash(), MakePasswordHashSeed() into wdk_hash.inc. Please check your includes of "wdk_random.inc".
 * Trace was deactivated due to erroneous session data handling. As a result trace output was only generated if trace=1 was explicitly set via parameter. Bug has been fixed.
 * Introduced CWebsite::GetSubmitVar(). GetSubmitVar() returns the value passed with a submit button. A submit button generated using CFormDefinition::AddControlButtonSubmit() / CFormElement::RenderControlSubmitButton() will add the optional value to the value tag and as a comment into the button's inner area. GetSubmitVar extracts this value while considering differing behaviour of IE8 and FF3.
 * Introduced StringGetFromEmbracingTags() to extract a string that is embraced by a start and an end tag.
@@ -1613,7 +1647,7 @@ Baselined 2010-05-23
 * CWebService::SetError() now supports a parameter to override a previous error code.
 ==Revision 33==
 Baselined 2010-02-17
-* SendMail() now removes ',&lt;>' characters from sender names to avoid invalid mail headers to be generated.
+* SendMail() now removes ",&lt;>" characters from sender names to avoid invalid mail headers to be generated.
 * SendMail() now fails with false if an invalid sender email is supplied.
 * CNavigationTree::AttachNavigationTree() now properly adds menu item levels in case of simply adding an included menu tree to the current end of the menu tree.
 * ReadDirectory() now uses ArraySort() instead of sort()
@@ -1634,35 +1668,35 @@ Baselined 2010-02-01
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS
 * All test scripts no longer include env.inc and wdk_unittest.inc by themselves. Test scripts must be included by the CUnitTestHub. This allows to situate the /_source folder in subfolders of the DOCUMENT_ROOT folder.
-* Module maintenance/webservicemanager now only shows 'local' tests for the selected webservice.
+* Module maintenance/webservicemanager now only shows "local" tests for the selected webservice.
 * Webservice system/test: Counting of test executions was always adding 2 instead of 1.
 * Webservice system/test: A single test may now run for 30 seconds instead of 15 before it is reported as UNDEFINED.
 * CIconElement: HtmlEncode() is now also used on the image URL
-* CUnitTest now creates the instance of the test by itself. So the test script is no longer required to create the instance. Remove '$test = new CTest();' from the test script!
+* CUnitTest now creates the instance of the test by itself. So the test script is no longer required to create the instance. Remove "$test = new CTest();" from the test script!
 * CWebsite::GetSessionAwareArrayVars() now als returns the current content parameter. This is to make sure that links which do not explicitly contain the target content work if the content id changes within the session after a page has been loaded (for example by requesting a page in another browser window with the same session id)
 ==Revision 30==
 Baselined 2010-01-24
 
 
 WARNING: PLEASE READ THE VERSION HISTORY CAREFULLY. EXPECT INCOMPATIBILITIES TO PREVIOUS VERSIONS!
-* The 'core' assembly is deprecated. All modules, content files, navigation trees, and resources of the core assembly are now part of wdk itself. It might be required to remove the 'core' assembly from the assembly line in the OnInitAssemblyLine() function of your website class.
+* The "core" assembly is deprecated. All modules, content files, navigation trees, and resources of the core assembly are now part of wdk itself. It might be required to remove the "core" assembly from the assembly line in the OnInitAssemblyLine() function of your website class.
 * Introduced CUnitTestHub which is a derived class of CWebApplication. It serves as a hub to unit test scripts which reside in assemblies now. Please add an index.php in &lt;ROOTURL>/quality/ of your web application system to provide access to test scripts within your assemblies. Refer to /templates/testhub/readme.txt for more details.
-* Webservice system/test has been completely refactored. Test results are now stored in a database. The new command 'testrun' will re-execute the oldest tests based on a test run configuration. New scheduler jobs need to be setup, install command must be executied after migration. Please also refer to the webservice's documentation for details.
+* Webservice system/test has been completely refactored. Test results are now stored in a database. The new command "testrun" will re-execute the oldest tests based on a test run configuration. New scheduler jobs need to be setup, install command must be executied after migration. Please also refer to the webservice's documentation for details.
 * Replaced the function ExplodeCSV: The previous version did not handle quoted values properly.
 * GetDataArrayFromCSV() now also deals with CRLF files
-* The 'default assembly' is now called the 'root assembly'
+* The "default assembly" is now called the "root assembly"
 * Introduced function Now() which returns the current time stamp using microtime(true)
 * ReadDirectory() now returns an alphabetically sorted file/folder list
-* CDatabase::Query() used ResourceToArray to convert the result handle into an associative array if the query string contains 'SELECT ' or 'SHOW '. Now it only does this if the query begins with one of these patterns.
+* CDatabase::Query() used ResourceToArray to convert the result handle into an associative array if the query string contains "SELECT " or "SHOW ". Now it only does this if the query begins with one of these patterns.
 * Scheduled jobs may run for 180 seconds (60 seconds was the default set in HttpRequest())
 * CItemManager::SetFilterOptions() has been renamed to SetFilterOptionsForm()
 * CItemManager::SetTabNavigation() has been renamed to SetColumnsTabNavigation()
 * Introduced CItemManager::SetFilterOptionsTabNavigation()
-* CList::Filter() has been extended to support the 'in' operand
+* CList::Filter() has been extended to support the "in" operand
 * MakeSQL_Insert() now supports ON DUPLICATE KEY UPDATE syntax correctly.
 * CDatabase::Query() now supports multiple commands in a query
-* Introduced MakeSQL_Assignment(). The function create a part of an SQL statement of the form FIELD=VALUE. It uses MakeSQL_Value() internally and support special expressions like '++' to form an increment statement.
-* Module Webservice Manager now creates an 'install' command link instead of 'init' command
+* Introduced MakeSQL_Assignment(). The function create a part of an SQL statement of the form FIELD=VALUE. It uses MakeSQL_Value() internally and support special expressions like "++" to form an increment statement.
+* Module Webservice Manager now creates an "install" command link instead of "init" command
 ==Revision 29==
 Baselined 2009-12-21
 * CWebsite::RenderWebsite() now replaces output items five times (also after managing generic output items)
@@ -1672,7 +1706,7 @@ Baselined 2009-12-20
 * Introduced CWebsite::RegisterGenericOutputItem and CWebsite::CallbackRenderGenericOutputItem (CWebsite::CallbackReplaceGenericOutputItemTags is deprecated)
 * Introduced CTagCloudElement
 * Introduced CThumbnailImageElement
-* CDatabaseWebservice: Added support for filter operator 'in'
+* CDatabaseWebservice: Added support for filter operator "in"
 * CModule::GetModuleVarName(), CWebsite::GetVar(), and CWebsite::GetVarInsecure() now check if the var name is correct by using CWebsite::CheckVarName(). A fatal error is produced if not. 
 * Introduced IsFile() and DeleteFile() in wdk_filesys.inc. These functions are wrappers for is_file and unlink in the first place. However, they might use different means for cases where is_file and unlink don't work as expected.
 * CXMLElement::Parse() frees some memory during the interpretation process by using unset()
@@ -1683,7 +1717,7 @@ Baselined 2009-12-20
 * CWebsite::RenderNumber() and CWebsite::RenderCurrency() now return empty strings if $fValue is null or an empty string
 * CWebsite::RenderCurrency() uses LoadString to include the currency symbol
 * Introduced CInstaller::TestAll()
-* CWebService will not call CallbackLog if 'nolog' config is set to true.
+* CWebService will not call CallbackLog if "nolog" config is set to true.
 * TID_METAKEYWORDS_DEFAULT is renamed to TID_META_KEYWORDS_DEFAULT
 * TID_METADESCRIPTION_DEFAULT is renamed to TID_META_DESCRIPTION_DEFAULT
 * One time parameters (command, password, username) are no longer added to links in non-session mode
@@ -1710,7 +1744,7 @@ Baselined 2009-11-08
 * CWebService::SetResultValue() always uppercases all tag names
 * CFormElement uses the label tag for checkboxes and radio buttons, too
 * CFormElement provides specific error messages if CFormDefinition::IsValid() fails
-* CConsoleElement() does support word wrapping (75 characters) and the 'additional new line' bug has been fixed
+* CConsoleElement() does support word wrapping (75 characters) and the "additional new line" bug has been fixed
 * MakeNumericToken(), MakePasswordHashSeed(), and MakePasswordHash() moved to wdk_random.inc
 * wdk_encryption.inc is renamed to wdk_encryption-symmetric.inc
 ==Revision 26==
@@ -1728,7 +1762,7 @@ Baselined 2009-10-09
 * Introduced CWebsite::SetCountry and CWebsite::GetCountry
 * Introduced CWebsite::RenderDateTime, GetDateLocalFormat, and GetTimeLocalFormat with corresponding callback functions to override default behaviour
 * Introduced GetDateTimeLocalFormat, GetTimeLocalFormat, and GetDateLocalFormat (but yet without any real country specific format coverage)
-* Introduced CWebsite::SetTimezone and CWebsite::GetTimezone, var 'usertimezone' is deprecated
+* Introduced CWebsite::SetTimezone and CWebsite::GetTimezone, var "usertimezone" is deprecated
 * DateIsValid and DateTimeIsValid renamed to IsValidDate and IsValidDateTime
 * Introduced CModule::GetModuleConfigBoolean()
 * CLinkIconElement: Encoding of icon url was missing. This caused HTML validation errors.
@@ -1737,7 +1771,7 @@ Baselined 2009-10-09
 * SendMail function did not work with comma separated multiple email recipients. This has been fixed. 
 ==Revision 24==
 Baselined 2009-08-14
-* SendMail had a logic to replace '=' by '== '. This addition has been made to mitigate regression issues which started to appear when the quoted-printable header was introduced. After removing the quoted-printable encoding this effect went away.
+* SendMail had a logic to replace "=" by "== ". This addition has been made to mitigate regression issues which started to appear when the quoted-printable header was introduced. After removing the quoted-printable encoding this effect went away.
 * SendMail now sends the sender's mail in the Return-Path header. This avoids false spam filtering.
 * Introduced CWebsite::UserNameInputCorrection - This function invokes CallbackUserNameInputCorrection to rectify user name inputs. The default implementation converts to lower case and removes whitespaces at the beginning and the end.
 * IsEmailValid no longer accepts commas and other special characters
@@ -1751,9 +1785,9 @@ Baselined 2009-07-31
 * Introduced CWebsite::GetWebsiteTitle()
 * Introduced CWebsite::GetWebsiteDescription()
 * Introduced CWebsite::GetWebsiteKeywords()
-* CWebsite now loads 'wdk' resources before content rendering and 'default' resources after that. This ensures that the default resource file can override wdk and module resources.
+* CWebsite now loads "wdk" resources before content rendering and "default" resources after that. This ensures that the default resource file can override wdk and module resources.
 * Introduced CUserWebsite: LogArray to add log entries with details supplied as a array
-* Introduced CUserWebsite: LogUserAction to log user related events. Fields 'operatinguserid' and 'opertingusername' are automatically added to the details array.
+* Introduced CUserWebsite: LogUserAction to log user related events. Fields "operatinguserid" and "opertingusername" are automatically added to the details array.
 * CUserWebsite::CallbackUserLogout now returns true instead of false
 * CWebsite::UserDelete now checks if the currently logged in user is to be deleted. If so the user is logged out before deletion.
 * CUserWebsite::CallbackUserDelete now checks for errors and returns true or false
@@ -1771,10 +1805,10 @@ Baselined 2009-07-31
 ==Revision 22==
 Baselined 2009-06-20
 * WARNING: Element Highlight cannot be used with input text containing html entities!
-* Webservice system/user: User names now must not start with a blacklisted name, too. So e.g. 'badname22' does not work either.
-* CWebservice: Fixed a bug in Install_AddScheduledJob which led to the '?' missing in scheduled job URLs
+* Webservice system/user: User names now must not start with a blacklisted name, too. So e.g. "badname22" does not work either.
+* CWebservice: Fixed a bug in Install_AddScheduledJob which led to the "?" missing in scheduled job URLs
 * CWensite: Bugfix: The event trigger for changing user passwords did not send the correct new password to the event handlers. As a result, the assembly callback function could not work properly.
-* CWebApplication: The constructor now initializes the time zone to 'UTC'
+* CWebApplication: The constructor now initializes the time zone to "UTC"
 * CWebSite::UserLogin now returns true if the authentication was successful.
 * CWebservice: Renamed tag from REQUEST_TIME to REQUEST_DATETIME and RESPONSE_TIME to RESPONSE_DATETIME
 * XML Parsing and Rendering functions are now utf-8 aware
@@ -1787,7 +1821,7 @@ Baselined 2009-06-20
 * CUnitTest: Does no longer send Content-type: text/plain - as a result, IE displays the text, but without line breaks
 * CModuleItemManager: Introduced function GetItemModuleVarsInsecure()
 * CWebserviceConsumer: Introduced GetResultListInsecure() function
-* w3cValidate* functions now return 'PASSED', 'FAILED', 'UNDEFINED' if the w3c validation service does not yield a defined result.
+* w3cValidate* functions now return "PASSED", "FAILED", "UNDEFINED" if the w3c validation service does not yield a defined result.
 * Renamed wdk_security.inc to wdk_encryption.inc
 * Renamed wdk_xss.inc to wdk_websecurity.inc
 * Introduced wdk_html with HtmlEncode and HtmlDecode functions
@@ -1804,20 +1838,20 @@ Baselined 2009-04-30
 Baselined 2009-04-08
 * Introduced CAssembly and CAssemblyLine classes to support runtime selection of layout, content, navigation, and source code files.
 * Added GetQualityDir function to global env functions
-* CModule: Renamed 'module name' to 'module path' because the term better reflects the path character (within an assembly) of the value.
+* CModule: Renamed "module name" to "module path" because the term better reflects the path character (within an assembly) of the value.
 * Introduced SecureOutput function (which is used by GetVar and its derivatives) to protect against xss issues by utf8 decoding and converting to html entities. Also introduced GetVarInsecure (and derived functions) to enable overriding.
 * Introduced CWebApplication::TraceArrayInsecure to avoid accesscode filtering from tracelogs if required.
 * CDatabaseWebservice: multiple filters can now be applied to the same field
 * Renamed class CInit to CInstaller and changed names of callback functions
-* Renamed generic 'init' command for webservices to 'install'
+* Renamed generic "init" command for webservices to "install"
 * Added InstallWebservice and AddUser functions to CInstall class
 * Introduced the concept of log entry severities
 * Added GetSystemEmail and GetSystemEmailSenderName functions to env.inc
 * Standardized system email sender names
 * Element ItemManager: If a tab is not associated to any column, it will not be displayed.
-* Added GetOperationMode to env.inc. The function is supposed to return either 'normal' or 'readonly' to indicate whether database write access is possible. Database write access could be denied during maintenance slots or in a drbc scenario when a secondary database is used to recover from a primary database outage.
+* Added GetOperationMode to env.inc. The function is supposed to return either "normal" or "readonly" to indicate whether database write access is possible. Database write access could be denied during maintenance slots or in a drbc scenario when a secondary database is used to recover from a primary database outage.
 * CList::Sort uses eval to invoke array_multisort. A theoretical code injection attack is now impossible.
-* HttpRequest is not completely curl-based. Mode 'get' used file_get_contents previously. 
+* HttpRequest is not completely curl-based. Mode "get" used file_get_contents previously. 
 * Added DatabaseLockTable and DatabaseUnlockTables to CDatabaseWebService
 * Fixed a bug in CDatabase::LockTables that caused tables not to be locked (this should heal the system/log webservice race condition)
 ==Revision 19==
@@ -1838,21 +1872,21 @@ Baselined 2009-02-24
 * CUnitTest::SetVerbose also controls ::SetTraceActive which indirectly tells all consumed webservices to activate tracing.
 * MakeSQL_Value now supports NULL values.
 * CFormElement now supports control ids that link labels to their respective input fields.
-* CWebService: renamed 'INPUT' reflection xml tag to 'REQUEST', 'URL' is renamed to 'GET' - this is to prevent IE to interpret the xml webservice output as html, since 'input' seems to be an indicator to ie that this is a html form.
-* CWebsite: MakeLink and MakeProtocolLink now support the 'bEncoded' parameter to define whether a link should use html character encoding
+* CWebService: renamed "INPUT" reflection xml tag to "REQUEST", "URL" is renamed to "GET" - this is to prevent IE to interpret the xml webservice output as html, since "input" seems to be an indicator to ie that this is a html form.
+* CWebsite: MakeLink and MakeProtocolLink now support the "bEncoded" parameter to define whether a link should use html character encoding
 * CWebsite: Introduced EnforceHTTPS function. This will RedirectAtOnce if https is supported while keeping the current request parameters.
-* CModule: Modules can now store their default layout files in the 'layout/' subdir of the module dir
+* CModule: Modules can now store their default layout files in the "layout/" subdir of the module dir
 * Introduction of CPasswordPolicy class and CPasswordPolicyElement
 * Extended ArrayGetValue and related functions by 3 additional levels
 * Support for canonical link for Google (and other search engines)
 * Support profiling in CWebsite based applications
-* CWebApplication::TraceArray: The key 'accesscode' is set to '*' recursively before the array is added to trace output. This avoids trace output driven security leaks.
+* CWebApplication::TraceArray: The key "accesscode" is set to "*" recursively before the array is added to trace output. This avoids trace output driven security leaks.
 * Added new function ArraySetValueRecursive
 ==Revision 17==
 Baselined 2009-02-02
 * Warning: Revision 17 contains numerous class interface changes. Applications based on Revesion 16 or earlier have to undergo significant change in order to migrate to Revision 17.
-* Output items no longer use XML style: '&lt;ITEM/>'. Braces are used instead: '{ITEM}'
-* CWebsite::CallbackInit is now responsible to handle 'commands' to the website. By default it supports the 'login' and 'logout' command.
+* Output items no longer use XML style: "&lt;ITEM/>". Braces are used instead: "{ITEM}"
+* CWebsite::CallbackInit is now responsible to handle "commands" to the website. By default it supports the "login" and "logout" command.
 * CWebsite::CallbackInit will cause a fatal error if it does not return true.
 * Element Navigation: Major Refactoring. CNavigationTree and CNavigationElement have new interfaces
 * Element Form: RenderForm* functions now require an additional parameter to contain the actual values of the controls. The existing parameter in the AddControl* functions is now redefined as the default value. This enables to do to error checking, to transfer values via CModule::GetAllModuleVars, and reuse of form definiton for add and modify use cases.
@@ -1862,7 +1896,7 @@ Baselined 2009-02-02
 * CWebSiteSatellite::m_website is now private. Added CWebSiteSatellite::GetWebsite(). 
 * SendMail function now supports attachments
 * Refactoring of Login/Logout functions. Renamed functions to obey new nomenclature: User* and CallbackUser*.
-* Modules are now organized in a two-tier structure (grouped). CWebSite::IncludeModule expects module names like 'group/id' and verifies the name and path.
+* Modules are now organized in a two-tier structure (grouped). CWebSite::IncludeModule expects module names like "group/id" and verifies the name and path.
 * Fixed bug in the Error function implementation
 * CWebsiteSatellite now maintains its own output item array. Elements and modules have been migrated to avoid using ReplaceTags directly.
 * CTest class is deprecated. All test scripts must use CUnitTest.
@@ -1878,7 +1912,7 @@ Baselined 2009-02-02
 * Introduced CConfig
 * CWebserviceDatabase uses database config from the array instead of loading it by itself.
 * Introduced Event Dispatcher pattern
-* CWebsite and CModule uses the dispatcher pattern to implement a post init, pre command event trigger for 'registered' modules.
+* CWebsite and CModule uses the dispatcher pattern to implement a post init, pre command event trigger for "registered" modules.
 * Webservice system/test: Improved job execution error mail
 * XML_* functions are now deprecated. Use CXMlElement class. CWebservice and CWebserviceConsumer classes have been updated.
 ==Revision 16==
@@ -1906,12 +1940,12 @@ Baselined 2008-10-15
 * Added documentation on development process model, and included webservice, module, and element checklists to wdk.txt
 ==Revision 14==
 Baselined 2008-09-28
-* webservices: replaced the 'performance' tag with a new 'profiling' tag including RUNTIME_SECONDS and MEMORY_USAGE in byte.
+* webservices: replaced the "performance" tag with a new "profiling" tag including RUNTIME_SECONDS and MEMORY_USAGE in byte.
 * Added third level of text id replacement
 * webservices now support a default CallbackCommand function for unified error handling of missing function implementations.
 * CUnitTest class added: A class representing a unit test script based on the CWebApplication class. The new CUnitTest class deprecates the existing CTest class. CTest is going to be removed from WDK in upcoming versions.
 * m_arrayConfig and m_arrayMeta are now members of CWebApplication
-* Revisied the webservices naming scheme. The internal name of the webservice now contains the 'subdirectory' in which it is situated.
+* Revisied the webservices naming scheme. The internal name of the webservice now contains the "subdirectory" in which it is situated.
 * Introduced GetWebservicesDirectory function as a replacement to the previous global GetWebserviceURL function
 ==Revision 13==
 * Adapted the string to identify a successful w3c validation check
@@ -1925,7 +1959,7 @@ Baselined 2008-09-28
 ==Revision 12==
 * Refactoring: Content is now represented by a class
 * website config: language ids are now checked against a subset of ISO 639-2 Alpha 2 codes (refer to http://www.loc.gov/standards/iso639-2/php/code_list.php)
-* parameter 'language' is now supported
+* parameter "language" is now supported
 * Support for country ids added
 * Support for timezone ids added
 * country and language ids are all uppercase now

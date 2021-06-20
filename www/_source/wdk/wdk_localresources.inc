@@ -1,6 +1,6 @@
 <?php
 
-	require_once('wdk_arraytextfile.inc');
+	require_once("wdk_arraytextfile.inc");
 
 	
 	function IsValidTID($strID)
@@ -9,15 +9,15 @@
 		{
 			return false;
 		}
-		if (StringSection($strID,4) == 'TID_')
+		if (StringSection($strID,4) == "TID_")
 		{
 			return false;	
 		}
-		if (StringSection($strID,-1) == '_')
+		if (StringSection($strID,-1) == "_")
 		{
 			return false;	
 		}
-		if (StringSection($strID,-1) == '-')
+		if (StringSection($strID,-1) == "-")
 		{
 			return false;	
 		}
@@ -45,17 +45,17 @@
 	{
 		$strID = $strUserFriendly;
 		$strID = StringUpperCase($strID);
-		$strID = StringTranslateCharacters($strID,'/ .','__-');
+		$strID = StringTranslateCharacters($strID,"/ .","__-");
 		$strID = StringFilter($strID,CHARSET_TID);
-		$strID = StringRemoveLeadingCharacters($strID,'_-',true);
-		$strID = StringRemoveTrailingCharacters($strID,'_-',true);
-		if ($strID == '')
+		$strID = StringRemoveLeadingCharacters($strID,"_-",true);
+		$strID = StringRemoveTrailingCharacters($strID,"_-",true);
+		if ($strID == "")
 		{
-			return '';
+			return "";
 		}
-		if (StringSection($strID,0,4) != 'TID_')
+		if (StringSection($strID,0,4) != "TID_")
 		{
-			$strID = 'TID_'.$strID;
+			$strID = "TID_".$strID;
 		}
 		return $strID;
 	}
@@ -77,7 +77,7 @@
 			{
 				$this->m_arrayLocalStrings = array();	
 			}			
-			$arrayNewStrings = LoadNamedArrayFromTextFileMultiline($strFile,'TID_');
+			$arrayNewStrings = LoadNamedArrayFromTextFileMultiline($strFile,"TID_");
 			if (is_array($arrayNewStrings))
 			{
 				$arrayExistingStrings = ArrayGetValue($this->m_arrayLocalStrings,StringLowerCase($strLanguage));
@@ -109,9 +109,9 @@
 		
 		function LoadString($strID,$strLanguage)
 		{
-			if ($strID == '')
+			if ($strID == "")
 			{
-				return '';	
+				return "";	
 			}
 			if ($this->m_bStringResourceFileLoaded == false)
 			{

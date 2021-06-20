@@ -4,9 +4,9 @@
 	{
 		function OnRenderContent(&$arrayItems)
 		{
-			$this->GetWebsite()->IncludeModule('devtools/cookiemanager');
-			$cookiemanager = new CCookieManagerModule($this->GetWebsite(),'list');
-			$arrayItems['MODULE_COOKIEMANAGER'] = $cookiemanager->RenderModule();
+			$this->GetWebsite()->IncludeModule("devtools/cookiemanager");
+			$cookiemanager = new CCookieManagerModule($this->GetWebsite(),"list");
+			$arrayItems["MODULE_COOKIEMANAGER"] = $cookiemanager->RenderModule();
 		}
 	}
 	

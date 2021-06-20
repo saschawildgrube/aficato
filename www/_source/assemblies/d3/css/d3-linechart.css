@@ -1,4 +1,4 @@
-.linechart-svg
+.d3-linechart-svg
 {
 	background-color: white;
 	padding: 14px;
@@ -8,28 +8,28 @@
 }
 
 
-.linechart-axis-x
+.d3-linechart-axis-x
 {
 	font-size: 14px;
 }
 
-.linechart-axis-y
+.d3-linechart-axis-y
 {
 	font-size: 14px;
 }
 
-
-.linechart-column-background
+.d3-linechart-column-background
 {
-	fill: #F5F5F5;
+	//fill: #F5F5F5;
+	fill: lightgrey;
 }
 
-.linechart-dot
+.d3-linechart-dot
 {
 	stroke-width: 0;
 }
 
-.linechart-line
+.d3-linechart-line
 {
 	stroke-width: 2;
 }

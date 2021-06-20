@@ -15,7 +15,7 @@ The entity pattern supports database abstraction and a powerful toolset to creat
 {WDK} has it's own template engine. Refer to the [[wdkdocs-components-elements|element] component for more information.
 ==Does {WDK} work well with SASS or LASS?==
 From {WDK}'s perspective CSS files are an asset. The {WDK} [[wdkdocs-architecture-assemblies|assemlby] file structure defines where css files should reside and in some cases which file names are to be used - but {WDK} does not interfere with any tools used to create CSS files in the first place.
-==I can't find the 'app' and 'vendor' folders. Where are they?==
+==I can't find the "app" and "vendor" folders. Where are they?==
 Please refer to [[wdkdocs-architecture-assemblies|assemblies]] on how files and folders are structured in {WDK}.
 ==How does {WDK} work with tools like gulp or webpack?==
 {WDK} does not intefere with you build or deployment tools. It's just source code files.

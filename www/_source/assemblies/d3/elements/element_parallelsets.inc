@@ -25,6 +25,7 @@
 			$arrayProps = array();
 			$arrayProps['height'] = intval($this->GetLayoutDef('LAYOUT_SVG_HEIGHT'));
 			$arrayProps['width'] = intval($this->GetLayoutDef('LAYOUT_SVG_WIDTH'));
+			$arrayProps['cssclassprefix'] = $this->GetLayoutDef('LAYOUT_CSSCLASSPREFIX');
 			$arrayProps['dimensions'] = $arrayDimensions;  
 			$arrayProps['data'] = $arrayData;
 			$arrayProps['valueattribute'] = $strValueAttribute;

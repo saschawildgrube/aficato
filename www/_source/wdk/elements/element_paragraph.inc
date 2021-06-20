@@ -8,7 +8,7 @@
 		{
 			parent::__construct(
 				$website,
-				'paragraph',
+				"paragraph",
 				$strStyleID,
 				false,
 				true);
@@ -17,7 +17,7 @@
 		function RenderParagraph($strParagraph)
 		{
 			$strOutput = $this->GetLayoutHTML(); 
-			$arrayItems['PARAGRAPH'] = $strParagraph;
+			$arrayItems["PARAGRAPH"] = $strParagraph;
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);
 			return $strOutput;			

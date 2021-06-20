@@ -34,7 +34,7 @@
 			$this->m_bOnTest = false;
 			$this->m_bOnCleanup = false;
 			
-			if ($this->m_strName == '')
+			if ($this->m_strName == "")
 			{
 				$this->Trace('ERROR: UNIT TEST WITHOUT A NAME!');	
 				$this->SetResult(false);
@@ -50,52 +50,52 @@
 			$bResultInit = $this->OnInit();
 			if ($this->m_bOnInit == false)
 			{
-				$this->Trace('ERROR: OnInit must invoke parent implementation!');
+				$this->Trace("ERROR: OnInit must invoke parent implementation!");
 				$this->SetResult(false);
 				return;
 			}
 			if ($bResultInit == false)
 			{
-				$this->Trace('ERROR: Init failed!');
+				$this->Trace("ERROR: Init failed!");
 				$this->SetResult(false);
 				return;
 			}
-			$this->Trace('INIT END');
-			$this->Trace('');
+			$this->Trace("INIT END");
+			$this->Trace("");
 			
 			if ($this->m_bActive != true)
 			{
-				$this->Trace('Test set inactive during initialization!');
+				$this->Trace("Test set inactive during initialization!");
 				return;	
 			}
 			
-			$this->Trace('TEST BEGIN');
+			$this->Trace("TEST BEGIN");
 			$this->OnTest();
 			if ($this->m_bOnTest == false)
 			{
-				$this->Trace('ERROR: OnTest must invoke parent implementation! Test will fail.');
+				$this->Trace("ERROR: OnTest must invoke parent implementation! Test will fail.");
 				$this->SetResult(false);
 			}
-			$this->Trace('TEST END');
-			$this->Trace('');
+			$this->Trace("TEST END");
+			$this->Trace("");
 		}
 		
 		function Cleanup()
 		{
-			$this->Trace('CLEANUP BEGIN');
+			$this->Trace("CLEANUP BEGIN");
 			$bResultCleanup = $this->OnCleanup();
 			if ($this->m_bOnCleanup == false)
 			{
-				$this->Trace('ERROR: OnCleanup must invoke parent implementation! Test will fail.');
+				$this->Trace("ERROR: OnCleanup must invoke parent implementation! Test will fail.");
 				$this->SetResult(false);
 			}
 			if ($bResultCleanup == false)
 			{
-				$this->Trace('ERROR: Cleanup failed!');
+				$this->Trace("ERROR: Cleanup failed!");
 				$this->SetResult(false);
 			}
-			$this->Trace('CLEANUP END');
-			$this->Trace('');
+			$this->Trace("CLEANUP END");
+			$this->Trace("");
 		}
 		
 		function __destruct()
@@ -103,22 +103,22 @@
 			$this->Cleanup();
 			if (!$this->m_bActive)
 			{
-    			print('INACTIVE\n');
+    			print("INACTIVE\n");
 			}
 			$this->ProfilingTrace();
 			print($this->GetTraceLog());
-			print('\n\n');
+			print("\n\n");
 			if ($this->m_bRequestError == true)
 			{
-				print('REQUESTERROR');
+				print("REQUESTERROR");
 			}
 			else
 			{
-				print(($this->m_bResult == true)?('OK'):('FAILED'));
+				print(($this->m_bResult == true)?("OK"):("FAILED"));
 			}
 			if (!$this->m_bActive)
   		{
-  			print('\nINACTIVE');	
+  			print("\nINACTIVE");	
   		} 
 		}
 
@@ -157,9 +157,9 @@
 		
 		function RequireWebservice($strWebservice)
 		{
-			if ($this->GetWebserviceURL($strWebservice) == '')
+			if ($this->GetWebserviceURL($strWebservice) == "")
 			{
-				$this->Trace('Web service '.$strWebservice.' is not configured for this web application system. This test is deactivated.');
+				$this->Trace("Web service ".$strWebservice." is not configured for this web application system. This test is deactivated.");
 				$this->SetActive(false);	
 			}
 		}
@@ -191,7 +191,7 @@
 			$arrayParams = array(),
 			$arrayCookies = array(),
 			$arrayHeaders = array(),
-			$strMode = 'get',
+			$strMode = "get",
 			$nTimeoutSeconds = 15,
 			$bSetRequestErrorOnTimeout = true,
 			$bBinary = false,
@@ -199,28 +199,28 @@
 		{			
 	
 			$bResult = true;
-			if ($strMode == 'get')
+			if ($strMode == "get")
 			{
-				$this->Trace('Test URL: '.MakeURL($strURL,$arrayParams,false) . ' ($nTimeoutSeconds)');
+				$this->Trace("Test URL: ".MakeURL($strURL,$arrayParams,false) . " ($nTimeoutSeconds)");
 			}
 			else
 			{
-				$this->Trace('Test URL: '.$strURL);
-				$this->Trace('Post parameters:');
+				$this->Trace("Test URL: ".$strURL);
+				$this->Trace("Post parameters:");
 				$this->Trace($arrayParams);
 			}
 			if (ArrayCount($arrayCookies))
 			{
-				$this->Trace('Cookies:');
+				$this->Trace("Cookies:");
 				$this->Trace($arrayCookies);	
 			}
 			if (ArrayCount($arrayHeaders))
 			{
-				$this->Trace('Headers:');
+				$this->Trace("Headers:");
 				$this->Trace($arrayHeaders);	
 			}
 			
-			//$this->Trace('Timeout : '.$nTimeoutSeconds);
+			//$this->Trace("Timeout : ".$nTimeoutSeconds);
 
 			$strResponse = HttpRequest(
 				$strURL,
@@ -233,10 +233,10 @@
 				
 			if ($strResponse == false)
 			{
-				$this->Trace('Failed to load $strURL');
+				$this->Trace("Failed to load $strURL");
 				if ($bSetRequestErrorOnTimeout == true)
 				{
-					$this->Trace('Test result is now set to REQUESTERROR!');
+					$this->Trace("Test result is now set to REQUESTERROR!");
 					$this->SetRequestError(true);
 				}
 				else
@@ -272,14 +272,14 @@
 			
 			if ($this->GetVerbose())
 			{
-				$this->Trace('Result length after removing control chars: '.StringLength($strContent));
+				$this->Trace("Result length after removing control chars: ".StringLength($strContent));
 			}
 		
 			if (is_array($arrayExpectedPatternWhitelist))
 			{
 				if ($this->GetVerbose())
 				{
-					$this->Trace('Checking for must-have patterns');
+					$this->Trace("Checking for must-have patterns");
 				}
 				foreach ($arrayExpectedPatternWhitelist as $strPattern)       
 				{
@@ -290,7 +290,7 @@
 					$strPattern = StringRemoveControlChars($strPattern);
 					if (FindString($strContent,$strPattern) == -1)    
 					{
-						$this->Trace('Expected pattern not found:\n\''.StringCutOff($strPattern,300).'\'');	
+						$this->Trace("Expected pattern not found:\n\"".StringCutOff($strPattern,300)."\"");	
 						$bResult = false;
 					}
 				}
@@ -299,7 +299,7 @@
 			{
 				if ($this->GetVerbose())
 				{
-					$this->Trace('Checking for forbidden patterns');
+					$this->Trace("Checking for forbidden patterns");
 				}
 				foreach ($arrayExpectedPatternBlacklist as $strPattern)
 				{
@@ -310,7 +310,7 @@
 					$strPattern = StringRemoveControlChars($strPattern);
 					if (FindString($strContent,$strPattern) != -1)
 					{
-						$this->Trace('Unexpected pattern (\''.StringCutOff($strPattern,200).'\') found!');	
+						$this->Trace("Unexpected pattern (\"".StringCutOff($strPattern,200)."\") found!");	
 						$bResult = false;
 					}
 				}
@@ -319,13 +319,13 @@
 			{
 				if ($this->GetVerbose())
 				{
-					$this->Trace('Checking for regular expressions');
+					$this->Trace("Checking for regular expressions");
 				}
 				foreach ($arrayRegExpPattern as $strPattern)
 				{
 					if (RegExpMatch($strContent,$strPattern) != true)
 					{
-						$this->Trace('Regular Expression did not match (\''.StringCutOff($strPattern,100).'\')!');	
+						$this->Trace("Regular Expression did not match (\"".StringCutOff($strPattern,100)."\")!");	
 						$bResult = false;
 					}	
 				}	
@@ -342,7 +342,7 @@
 					$arrayCert = ArrayGetValue($arrayCerts,0);
 					if (!is_array($arrayCert))
 					{
-						$this->Trace('Could not retrieve SSL certificate.');	
+						$this->Trace("Could not retrieve SSL certificate.");	
 						$bResult = false;
 					}
 					else

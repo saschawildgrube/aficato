@@ -1,6 +1,6 @@
 <?php
 
-	require_once(GetWDKDir().'wdk_navigationtree.inc');
+	require_once(GetWDKDir()."wdk_navigationtree.inc");
 
 	class CNavigationElement extends CElement
 	{
@@ -10,7 +10,7 @@
 		{
 			parent::__construct(
 				$website,
-				'navigation',
+				"navigation",
 				$strStyleID,
 				true,
 				false);
@@ -22,80 +22,80 @@
 			$strContextParameterName,
 			$nStartingLevel = 0)
 		{
-			$strLayoutTagPrefix = 'LAYOUT_NAVIGATION_ITEM';
-			$strLayoutTagLevel = '_LEVEL'.($navitem->m_nLevel - $nStartingLevel);
+			$strLayoutTagPrefix = "LAYOUT_NAVIGATION_ITEM";
+			$strLayoutTagLevel = "_LEVEL".($navitem->m_nLevel - $nStartingLevel);
 
 			if ($navitem->m_bCurrentContext)
 			{
-				$strLayoutTagContext = '_ACTIVE';
+				$strLayoutTagContext = "_ACTIVE";
 			}
 			else if ($navitem->m_bCurrentPath)
 			{
-				$strLayoutTagContext = '_ACTIVEPATH';
+				$strLayoutTagContext = "_ACTIVEPATH";
 			}
 			else if ($navitem->IsExternalLink())
 			{
-				$strLayoutTagContext = '_EXTERNAL';
+				$strLayoutTagContext = "_EXTERNAL";
 			}
 			else
 			{ 
-				$strLayoutTagContext = '_INACTIVE';
+				$strLayoutTagContext = "_INACTIVE";
 			}
 			
-			$strLayoutTagPos = '';
+			$strLayoutTagPos = "";
 			if ($navitem->m_bFirstInLevel && $navitem->m_bLastInLevel)
 			{
-				$strLayoutTagPos = '_ALONE';
+				$strLayoutTagPos = "_ALONE";
 			}
 			else if ($navitem->m_bFirstInLevel)
 			{
-				$strLayoutTagPos = '_FIRST';
+				$strLayoutTagPos = "_FIRST";
 			}
 			else if ($navitem->m_bLastInLevel)
 			{
-				$strLayoutTagPos = '_LAST';
+				$strLayoutTagPos = "_LAST";
 			}
 			
 			$strLayoutTag = $strLayoutTagPrefix . $strLayoutTagLevel . $strLayoutTagContext . $strLayoutTagPos;
 			$strTemplate = $this->GetLayoutDef($strLayoutTag);
 
-			if ($strTemplate == '')
+			if ($strTemplate == "")
 			{
 				$strLayoutTag = $strLayoutTagPrefix . $strLayoutTagLevel . $strLayoutTagContext;
 				$strTemplate = $this->GetLayoutDef($strLayoutTag);
 			}
-			if ($strTemplate == '')
+			if ($strTemplate == "")
 			{
-				$strLayoutTag = $strLayoutTagPrefix . $strLayoutTagLevel . '_DEFAULT' . $strLayoutTagPos;
+				$strLayoutTag = $strLayoutTagPrefix . $strLayoutTagLevel . "_DEFAULT" . $strLayoutTagPos;
 				$strTemplate = $this->GetLayoutDef($strLayoutTag);
 			}
-			if ($strTemplate == '')
+			if ($strTemplate == "")
 			{
-				$strLayoutTag = $strLayoutTagPrefix . $strLayoutTagLevel . '_DEFAULT';
+				$strLayoutTag = $strLayoutTagPrefix . $strLayoutTagLevel . "_DEFAULT";
 				$strTemplate = $this->GetLayoutDef($strLayoutTag);
 			}
-			if ($strTemplate == '')
+			if ($strTemplate == "")
 			{
 				$strLayoutTag = $strLayoutTagPrefix . $strLayoutTagContext;
 				$strTemplate = $this->GetLayoutDef($strLayoutTag);
 			}
-			if ($strTemplate == '')
+			if ($strTemplate == "")
 			{
-				$strLayoutTag = $strLayoutTagPrefix . '_DEFAULT';
+				$strLayoutTag = $strLayoutTagPrefix . "_DEFAULT";
 				$strTemplate = $this->GetLayoutDef($strLayoutTag);
 			}
 
-			if ($strTemplate == '')
+			if ($strTemplate == "")
 			{
-				$this->GetWebsite()->Error('Navigation layout template $strLayoutTag is empty');
+				$this->GetWebsite()->Error("Navigation layout template $strLayoutTag is empty");
 			}
 			$strOutput = ReplaceString(
 				$strTemplate,
-				'{NAVIGATION_TEXT}',
+				"{NAVIGATION_TEXT}",
 				$navitem->m_strText);
 			$strOutput = ReplaceString(
 				$strOutput,
-				'{NAVIGATION_LINK}',
+				"{NAVIGATION_LINK}",
 				$navitem->GetURL(
 					$this->GetWebsite(),
 					$strContextParameterName,
@@ -107,8 +107,8 @@
 		
 		function RenderNavigationVertical(CNavigationTree $navtree)
 		{
-			$strOutput = '';
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_BEGIN') . '\n';
+			$strOutput = "";
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_BEGIN") . "\n";
 			$arrayNavigationItems = $navtree->GetNavigationItemArray();
 			$nCount = ArrayCount($arrayNavigationItems);
 			for ($nIndex = 0; $nIndex < $nCount; $nIndex++)
@@ -117,14 +117,14 @@
 				{
 					$strOutput .= $this->RenderNavigationItem(
 						$arrayNavigationItems[$nIndex],
-						$navtree->GetContextParameterName()) . '\n';
+						$navtree->GetContextParameterName()) . "\n";
 					if ($nIndex < $nCount-1)
 					{
-						$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_SEPARATOR') . '\n';
+						$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_SEPARATOR") . "\n";
 					}
 				}
 			}
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_END'). '\n';
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_END"). "\n";
 			return $strOutput;
 		}
 		
@@ -135,19 +135,19 @@
 		{
 			if ($nStartLevel > $nEndLevel)
 			{
-				$this->GetWebsite()->Error('RenderNavigationPathMode: nStartLevel > nEndLevel');
+				$this->GetWebsite()->Error("RenderNavigationPathMode: nStartLevel > nEndLevel");
 			}
 			
 			if ($navtree->IsInitCurrentPath() == false)
 			{
-				$this->GetWebsite()->Error('IsInitCurrentPath() returned false ');
+				$this->GetWebsite()->Error("IsInitCurrentPath() returned false ");
 			}
 
 			
 			$arrayNavigationEntries = $navtree->GetNavigationItemArray();
 			
-			$strOutput = '';
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_BEGIN');
+			$strOutput = "";
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_BEGIN");
 			
 			$nVisibleEntries = 0;
 			for ($nIndex = 0; $nIndex < ArrayCount($arrayNavigationEntries); $nIndex++)
@@ -172,15 +172,15 @@
 					$strOutput .= $this->RenderNavigationItem(
 						$arrayNavigationEntries[$nIndex],
 						$navtree->GetContextParameterName(),
-						$nStartLevel) . '\n';
+						$nStartLevel) . "\n";
 					if ($nRenderedEntries < $nVisibleEntries-1)
 					{
-						$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_SEPARATOR') . '\n';
+						$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_SEPARATOR") . "\n";
 					}
 					$nRenderedEntries++;
 				}
 			}
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_END');
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_END");
 			return $strOutput;
 		}			
 
@@ -191,20 +191,20 @@
 		{
 			if ($nStartLevel > $nEndLevel)
 			{
-				$this->GetWebsite()->Error('RenderNavigationPathMode: nStartLevel > nEndLevel');
+				$this->GetWebsite()->Error("RenderNavigationPathMode: nStartLevel > nEndLevel");
 			}
 			
 			if ($navtree->IsInitCurrentPath() == false)
 			{
-				$this->GetWebsite()->Error('IsInitCurrentPath() returned false ');
+				$this->GetWebsite()->Error("IsInitCurrentPath() returned false ");
 			}
 
 			
 			$arrayNavigationEntries = $navtree->GetNavigationItemArray();
 			$nDeepestLevel = $navtree->m_nDeepestLevelVisibleInPathMode;
 			
-			$strOutput = '';
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_BEGIN');
+			$strOutput = "";
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_BEGIN");
 			
 			$nVisibleEntries = 0;
 			for ($nIndex = 0; $nIndex < ArrayCount($arrayNavigationEntries); $nIndex++)
@@ -233,15 +233,15 @@
 					$strOutput .= $this->RenderNavigationItem(
 						$arrayNavigationEntries[$nIndex],
 						$navtree->GetContextParameterName(),
-						$nStartLevel) . '\n';
+						$nStartLevel) . "\n";
 					if ($nRenderedEntries < $nVisibleEntries-1)
 					{
-						$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_SEPARATOR') . '\n';
+						$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_SEPARATOR") . "\n";
 					}
 					$nRenderedEntries++;
 				}
 			}
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_END');
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_END");
 			return $strOutput;
 		}			
 
@@ -250,11 +250,11 @@
 		{
 			if ($navtree->IsInitCurrentPath() == false)
 			{
-				$this->GetWebsite()->Error('IsInitCurrentPath() returned false ');
+				$this->GetWebsite()->Error("IsInitCurrentPath() returned false ");
 			}
 			
-			$strOutput = '';
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_BEGIN');
+			$strOutput = "";
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_BEGIN");
 			
 			$arrayNavigationItems = $navtree->GetNavigationItemArray();
 			
@@ -268,13 +268,13 @@
 				}
 			}
 			
-			$nMoreThreshold = intval($this->GetLayoutDef('LAYOUT_NAVIGATION_MORE_THRESHOLD'));
-			$strMoreBegin = '';
-			$strMoreEnd = '';
+			$nMoreThreshold = intval($this->GetLayoutDef("LAYOUT_NAVIGATION_MORE_THRESHOLD"));
+			$strMoreBegin = "";
+			$strMoreEnd = "";
 			if ($nMoreThreshold > 0)
 			{
-				$strMoreBegin = $this->GetLayoutDef('LAYOUT_NAVIGATION_MORE_BEGIN');
-				$strMoreEnd = $this->GetLayoutDef('LAYOUT_NAVIGATION_MORE_END');
+				$strMoreBegin = $this->GetLayoutDef("LAYOUT_NAVIGATION_MORE_BEGIN");
+				$strMoreEnd = $this->GetLayoutDef("LAYOUT_NAVIGATION_MORE_END");
 			}
 			
 			$bMore = false;
@@ -286,32 +286,32 @@
 				{
 					$strOutput .= $this->RenderNavigationItem(
 						$arrayNavigationItems[$nIndex],
-						$navtree->GetContextParameterName()) . '\n';
+						$navtree->GetContextParameterName()) . "\n";
 					if ($nRenderedEntries < $nVisibleEntries-1)
 					{
 						if (	$bMore == false
 							&&	$nRenderedEntries == ($nMoreThreshold-1)
 							&&	$nMoreThreshold > 0)
 						{
-							$strOutput .= $strMoreBegin . '\n';
+							$strOutput .= $strMoreBegin . "\n";
 							$bMore = true;
 						}
 						else
 						{
-							$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_SEPARATOR') . '\n';
+							$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_SEPARATOR") . "\n";
 						}
 					}
 					else
 					{
 						if ($bMore == true)
 						{
-							$strOutput .= $strMoreEnd . '\n';
+							$strOutput .= $strMoreEnd . "\n";
 						}	
 					}
 					$nRenderedEntries++;
 				}
 			}
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_END');
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_END");
 			return $strOutput;				
 		}
 		
@@ -322,11 +322,11 @@
 		{
 			if ($navtree->IsInitCurrentPath() == false)
 			{
-				$this->GetWebsite()->Error('IsInitCurrentPath() returned false ');
-				return '';
+				$this->GetWebsite()->Error("IsInitCurrentPath() returned false ");
+				return "";
 			}
 			
-			$strOutput = '';
+			$strOutput = "";
 			
 			$arrayNavigationItems = $navtree->GetNavigationItemArray();
 			
@@ -349,7 +349,7 @@
 
 			
 			
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_BEGIN');
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_BEGIN");
 			
 
 			$nRenderedEntries = 0;
@@ -363,26 +363,26 @@
 					$strOutput .= $this->RenderNavigationItem(
 						$arrayNavigationItems[$nIndex],
 						$navtree->GetContextParameterName(),
-						$nStartLevel) . '\n';
+						$nStartLevel) . "\n";
 					if ($nRenderedEntries < $nVisibleEntries-1)
 					{
-						$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_SEPARATOR') . '\n';
+						$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_SEPARATOR") . "\n";
 					}
 					$nRenderedEntries++;
 				}
 			}
-			$strOutput .= $this->GetLayoutDef('LAYOUT_NAVIGATION_END');
+			$strOutput .= $this->GetLayoutDef("LAYOUT_NAVIGATION_END");
 			return $strOutput;
 		}
 		
 		
 		function RenderNavigationCurrentPathPortfolio(
 			CNavigationTree $navtree,
-			$strLinkText = '?TID_LINK_NEXT?')
+			$strLinkText = "?TID_LINK_NEXT?")
 		{
 			if ($navtree->IsInitCurrentPath() == false)
 			{
-				$this->GetWebsite()->Error('IsInitCurrentPath() returned false ');
+				$this->GetWebsite()->Error("IsInitCurrentPath() returned false ");
 			}
 
 			
@@ -391,7 +391,7 @@
 			
 			if ($nDeepestLevel == $navtree->m_nCurrentContextLevel)
 			{
-				return '';	
+				return "";	
 			}
 			
 			$nVisibleEntries = 0;
@@ -408,20 +408,20 @@
 			
 			if ($nVisibleEntries == 0)
 			{
-				return '';	
+				return "";	
 			}
 
-			$strPortfolioStyle = $this->GetLayoutDef('LAYOUT_NAVIGATION_PORTFOLIO_STYLE');
-			if ($strPortfolioStyle == '')
+			$strPortfolioStyle = $this->GetLayoutDef("LAYOUT_NAVIGATION_PORTFOLIO_STYLE");
+			if ($strPortfolioStyle == "")
 			{
-				$strPortfolioStyle = 'default';
+				$strPortfolioStyle = "default";
 			}
-			$this->IncludeElement('portfolio');
+			$this->IncludeElement("portfolio");
 			$portfolio = new CPortfolioElement($this->GetWebsite(),$strPortfolioStyle);
 			$arrayPortfolio = array();
 
 			$nRenderedEntries = 0;
-			$strOutput = '';
+			$strOutput = "";
 			for ($nIndex = 0; $nIndex < ArrayCount($arrayNavigationEntries); $nIndex++)
 			{
 				if (	($arrayNavigationEntries[$nIndex]->m_bVisibleInPathMode == true)
@@ -430,12 +430,12 @@
 					)
 				{
 					$arrayTeaser = array();
-					$arrayTeaser['title'] = $arrayNavigationEntries[$nIndex]->m_strText;
+					$arrayTeaser["title"] = $arrayNavigationEntries[$nIndex]->m_strText;
 					$strLink = $arrayNavigationEntries[$nIndex]->m_strLink;
-					$strText = $this->GetWebsite()->LoadString('TID_TEXT_'.StringUpperCase($strLink));
-					$arrayTeaser['text'] = $strText;
-					$arrayTeaser['linkurl'] = $arrayNavigationEntries[$nIndex]->GetURL($this->GetWebsite(),$navtree->GetContextParameterName());
-					$arrayTeaser['linktext'] = $strLinkText;
+					$strText = $this->GetWebsite()->LoadString("TID_TEXT_".StringUpperCase($strLink));
+					$arrayTeaser["text"] = $strText;
+					$arrayTeaser["linkurl"] = $arrayNavigationEntries[$nIndex]->GetURL($this->GetWebsite(),$navtree->GetContextParameterName());
+					$arrayTeaser["linktext"] = $strLinkText;
 					$arrayPortfolio[] = $arrayTeaser;
 				}
 			}

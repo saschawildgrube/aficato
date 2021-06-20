@@ -1,6 +1,6 @@
-$this->IncludeElement('wiki');
+$this->IncludeElement("wiki");
 
-$strWiki = '
+$strWiki = "
 =Text=
 Some blind text
 =Lists=
@@ -35,10 +35,10 @@ Some blind text
 ===Without Caption===
 * [http://www.example.com]
 =Embedded HTML=
-This is some text with html <span style=\'color:red\'>formatting</span>.
-';
+This is some text with html <span style=\"color:red\">formatting</span>.
+";
 
-$strOutput = '';
+$strOutput = "";
 
-$wiki = new CWikiElement($this->GetWebsite(),'default');
+$wiki = new CWikiElement($this->GetWebsite(),"default");
 $strOutput .= $wiki->RenderWiki($strWiki);

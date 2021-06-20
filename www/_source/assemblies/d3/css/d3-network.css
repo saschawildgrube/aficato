@@ -1,0 +1,49 @@
+.d3-network-svg
+{
+	background-color: white;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+
+.d3-network-link
+{
+  stroke: black;
+}
+.d3-network-link-arrow1
+{
+  stroke: black;
+}
+.d3-network-link-arrow2
+{
+  stroke: black;
+}
+
+.d3-network-node text
+{
+	font-size: 14px;
+	font-family: sans-serif;
+	text-align: center;
+	stroke: #333;
+	cursor: pointer;
+}
+
+.d3-network-node circle
+{
+	stroke: #fff;
+	stroke-width: 3px;
+	cursor: pointer;
+}
+
+.d3-network-node-default circle
+{
+	fill: lightgrey;
+}
+.d3-network-node-green circle
+{
+	fill: green;
+}
+.d3-network-node-red circle
+{
+	fill: red;
+}

@@ -10,6 +10,12 @@ function D3_SimpleBarChart(selector, aProps)
 	}
 
 	var arrayData = aProps['data'];
+	
+	var strCssClassPrefix = GetStringValue(aProps['cssclassprefix']);
+	if (strCssClassPrefix == '')
+	{
+		strCssClassPrefix = 'd3-simplebarchart-';
+	}
 
 	var nSvgWidth = svg.node().getBoundingClientRect().width;
 	var nSvgHeight = svg.node().getBoundingClientRect().height;
@@ -18,41 +24,41 @@ function D3_SimpleBarChart(selector, aProps)
 	
 	var nBarWidth = (nSvgWidth / arrayData.length);		
 
-	svg.attr('class', 'd3-simplebarchart-svg');
+	svg.attr('class', strCssClassPrefix+'svg');
 
 	var yScale = d3.scaleLinear()
     .domain([0, d3.max(arrayData)])
     .range([0, nSvgHeight]);
 
-	var barChart = svg.selectAll('rect')
+	var barChart = svg.selectAll("rect")
 	    .data(arrayData)
 	    .enter()
-	    .append('rect')
-	    .attr('class', 'd3-simplebarchart-bar')
-	    .attr('y', function(nValue) {
+	    .append("rect")
+	    .attr("class", strCssClassPrefix+'bar')
+	    .attr("y", function(nValue) {
 	         return nSvgHeight - yScale(nValue)
 	    })
-	    .attr('height', function(d) { 
+	    .attr("height", function(d) { 
 	        return yScale(d);
 	    })
-	    .attr('width', nBarWidth - nBarPadding)
-	    .attr('transform', function (nValue, i) {
+	    .attr("width", nBarWidth - nBarPadding)
+	    .attr("transform", function (nValue, i) {
 	        var translate = [nBarWidth * i, 0]; 
-	        return 'translate('+ translate +')';
+	        return "translate("+ translate +")";
 	    });
 
-	var text = svg.selectAll('text')
+	var text = svg.selectAll("text")
 	    .data(arrayData)
 	    .enter()
-	    .append('text')
+	    .append("text")
 	    .text(function(d) {
 	        return d;
 	    })
-	    .attr('y', function(d, i) {
+	    .attr("y", function(d, i) {
 	        return nSvgHeight - d - 2;
 	    })
-	    .attr('x', function(d, i) {
+	    .attr("x", function(d, i) {
 	        return nBarWidth * i;
 	    })
-	    .attr('class', 'd3-simplebarchart-text');
+	    .attr("class", strCssClassPrefix+'text');
 }

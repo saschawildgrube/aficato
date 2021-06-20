@@ -74,12 +74,24 @@
  			$this->TestCase_IsValidURL('https://www.example.com/test1//test2/',true);
  			$this->TestCase_IsValidURL('https://www.example.com/test1=1/',true);
  			$this->TestCase_IsValidURL('https://www.example.com/test1_1/',true);
+ 			$this->TestCase_IsValidURL('https://www.example.com?',true);
+ 			$this->TestCase_IsValidURL('https://www.example.com/?',true);
+ 			$this->TestCase_IsValidURL('https://www.example.com/test/?',true);
+ 			$this->TestCase_IsValidURL('https://www.example.com?#',true);
+ 			$this->TestCase_IsValidURL('https://www.example.com/?#',true);
+ 			$this->TestCase_IsValidURL('https://www.example.com/test/?#',true);
  			$this->TestCase_IsValidURL('http://fonts.googleapis.com/css?family=Montserrat%3A400%2C700',true);
  			$this->TestCase_IsValidURL('http://fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C700italic%2C800italic%2C400%2C300%2C600%2C700%2C800',true);
  			$this->TestCase_IsValidURL('http://www.cio.de/a/die-10-wichtigsten-technologie-trends-2016,3248934.html',true);
  			$this->TestCase_IsValidURL('https://www.amazon.de/Game-Penetrating-Secret-Society-Artists/dp/0061240168/ref=sr_1_6?ie=UTF8&qid=1473444983&sr=8-6&keywords=the+game',true);
  			$this->TestCase_IsValidURL('https://analytics.google.com/analytics/web/#embed/report-home/a7THIS46IS10A79TESTp114482491/',true);
  			$this->TestCase_IsValidURL('https://store.servicenow.com/sn_appstore_store.do#!/store/application/f13e0cce0fabaa003e0b87ece1050ec3/2.0.0?referer=%2Fstore%2Fsearch%3Flistingtype%3Dallintegrations%25253Bancillary_app%25253Bcertified_apps%25253Bcontent%25253Bindustry_solution%25253Boem%25253Butility%26q%3Dfile&sl=sh',true);
+			$this->TestCase_IsValidURL('https://this-is-my.sharepoint.com/:p:/p/john_Doe/ETDr3RtNrenxTv_gBZVXHzsmHOwU2bJQeQ?e=gVdI0a',true);
+			$this->TestCase_IsValidURL('https://services.service-now.com/nav_to.do?uri=%2Frm_story_list.do%3Fsysparm_fixed_query%3Dsys_class_name%3Drm_story%26sysparm_view%3Dscrum%26sysparm_first_row%3D1%26sysparm_query%3Dactive%3Dtrue%5Esys_domain%3Djavascript:gs.getUser().getDomainID();%5Eproduct.display_nameSTARTSWITHHello@World%5Eepic.parent_epic.numberSTARTSWITHEPIC0000000%26sysparm_clear_stack%3Dtrue',true);
+			$this->TestCase_IsValidURL('https://servicenow.sharepoint.com/:x:/r/sites/HelloWorld/_layouts/15/doc2.aspx?sourcedoc=%7B81dcd5cf-0832-459e-914a-d025273f7a9f%7D&action=edit&activeCell=%27Action%20items%27!B25&wdinitialsession=a223cbcf-1ff9-49a5-9910-459dc4c951be&wdrldsc=3&wdrldc=1&wdrldr=AccessTokenExpiredWarning&cid=9578f9a6-ff14-4791-9a17-9b9667eaf038&wdLOR=c3A4FA22B-7EC4-2686-9A24-AB25C196A043&CID=0914377F-1523-AF46-8CE1-7288FA1AB6CC',true);
+			$this->TestCase_IsValidURL('https://consent.google.com/ml?continue=https://www.google.com/maps/place/Hello%2BWorld/@1.2345,2.2345,10z/data%3D!4m18!1m9!3m8!1s0x478fa1053c87a8bc:0x537d8e8f30277fbd!2sHello%2BWorld!5m2!4m1!1i2!8m2!3d46.5932396!4d1.234567!3m7!1s0x478fa1053c87a866:0x537d8e8f30277fbd!5m2!4m1!1i2!8m2!3d1.23456!4d2.3456?hl%3Dde&gl=DE&m=0&pc=m&hl=de&src=1',true);
+			$this->TestCase_IsValidURL('https://servicenow.highspot.com/items/aa680zz1c714334388233c9c?lfrm=srp.1#1',true);
+
 
  			
  			$this->TestCase_IsValidURL('https://groups.google.com/a/test/forum/#managemembers/hello-world/members/active',true);
@@ -121,7 +133,9 @@
 			$this->TestCase_IsValidURL('http:www.example.com',false);
 			$this->TestCase_IsValidURL(u('http://www.exämple.com'),false);
 			$this->TestCase_IsValidURL('http://http://www.example.com',false);
-
+			$this->TestCase_IsValidURL('HTTP://www.example.com',false);
+			$this->TestCase_IsValidURL('HTTPS://www.example.com',false);
+			$this->TestCase_IsValidURL('FTP://www.example.com',false);
 		
 			
 		}
