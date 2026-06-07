@@ -430,7 +430,7 @@
 			*/
 			if ($this->GetVar('signin') != '')
 			{
-				$this->SetVar('disclaimerconfirmed','1');
+				$this->SetVar('consent','1');
 				$strOutput = $this->m_moduleSignin->RenderModule('default');
 				$strOutput .= $this->m_moduleLogin->RenderModule('form');
 				return $strOutput;
@@ -448,7 +448,7 @@
 			*/			
 			if ($this->GetVar('verifymail') != '')
 			{
-				$this->SetVar('disclaimerconfirmed','1');
+				$this->SetVar('consent','1');
 				$this->m_moduleUserEmail->SetState('validation');
 				$strOutput = $this->m_moduleUserEmail->RenderModule();
 				return $strOutput;
@@ -458,11 +458,11 @@
 				The following code demonstrates a way to override the loading of content
 				based on given parameters.
 			*/
-			if ($this->GetVar('disclaimerconfirmed') != '1')
+			if ($this->GetVar('consent') != '1')
 			{
-				$this->IncludeModule('compliance/disclaimer');
-				$disclaimer = new CDisclaimerModule($this);
-				return $disclaimer->RenderModule('default');
+				$this->IncludeModule('compliance/consent');
+				$consent = new CConsentModule($this);
+				return $consent->RenderModule('default');
 			}
 			
 			
@@ -626,7 +626,7 @@
 			switch ($strCountryID)
 			{
 			case 'USA':
-				return '%Y-%m-%d';
+				return 'Y-m-d';
 			default:
 				return '';
 			}
@@ -644,9 +644,9 @@
 			switch ($strCountryID)
 			{
 				case 'USA':				
-					return '%H:%M:%S';
+					return 'H:i:s';
 				default:
-					return '%I:%M:%S%P';
+					return 'h:i:sa';
 			}
 		}
 		

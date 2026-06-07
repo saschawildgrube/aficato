@@ -2,7 +2,7 @@
 
 	class CLinkImageElement extends CElement
 	{
-		private $m_icon;
+		private $m_image;
 		
 		function __construct(
 			CWebSite $website,

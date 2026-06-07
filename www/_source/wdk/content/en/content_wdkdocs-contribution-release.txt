@@ -16,7 +16,6 @@
 * Publish {WDK} on steelphp.com
 * Update GitHub repository
 * Create version tag in GitHub repository
-* Post on [https://www.xing.com xing.com]
 * Post on [https://www.linkedin.com linkedin.com]
 * Post on [https://www.twitter.com twitter.com]
 * Post on [https://www.facebook.com facebook.com]

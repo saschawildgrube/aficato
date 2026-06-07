@@ -383,7 +383,7 @@
 			
 			$strLanguage = $this->GetParam("user_language");
 			$strCountry = $this->GetParam("user_country");
-			$strTimezone = $this->GetParam("user_timezone");
+			$strTimeZone = $this->GetParam("user_timezone");
 			
 			$strEmail = $this->GetParam("user_email");
 			$bEmailValidation = $this->GetParamBoolean("user_email_validation");
@@ -436,9 +436,9 @@
 			$arrayFields["PASSWORDHASH_SEED"] = $strPasswordHashSeed;
 			$arrayFields["USER_LANGUAGE"] = $strLanguage;
 			$arrayFields["USER_COUNTRY"] = $strCountry;
-			if ($strTimezone != "")
+			if ($strTimeZone != "")
 			{
-				$arrayFields["USER_TIMEZONE"] = $strTimezone;
+				$arrayFields["USER_TIMEZONE"] = $strTimeZone;
 			}
 			
 			$strValidationToken = "";

@@ -163,6 +163,72 @@
 		return parseInt(GetNumberValue(value));	
 	}
 	
+	function GetArrayValue(vValue,strSplit)
+	{
+		if (vValue == undefined)
+		{
+			return [];
+		}
+		if (vValue === null)
+		{
+			return [];
+		}	
+		if (vValue === false)
+		{
+			return [];
+		}
+		if (IsArray(vValue))
+		{
+			return vValue;
+		}
+		if (strSplit == '')
+		{
+			strSplit = ',';
+		}
+		var strType = GetType(vValue);
+		if (strType == 'string' || strType == 'String')
+		{
+			if (vValue == '')
+			{
+				return [];
+			}
+			return vValue.split(strSplit);
+		}
+		return [vValue];
+	}	
+
+	function CompareString(str1, str2)
+	{
+		str1 = GetStringValue(str1);
+		str2 = GetStringValue(str2);
+		return str1.localeCompare(str2);	
+	}
+
+
+ 	function CompareStringIgnoreCase(str1, str2)
+	{
+		str1 = GetStringValue(str1);
+		str2 = GetStringValue(str2);
+		return str1.toLowerCase().localeCompare(str2.toLowerCase());	
+	}
+
+	function StringCutOff(strString, nMaxLength = 100, strTrailer = '...')
+	{
+		strString = GetStringValue(strString);
+		if (strString.length > nMaxLength)
+		{
+    	return strString.substring(0, nMaxLength) + '...';
+  	}
+   	return strString;
+	}
+	
+	function StringReplace(strHaystack,strNeedle,strReplace)
+	{
+		strHaystack = GetStringValue(strHaystack);
+		return strHaystack.replaceAll(strNeedle,strReplace);
+	}	
+
+	
 	function ArrayKeyExists(aArray,vKey)
 	{
 		if (typeof aArray[vKey] === 'undefined')
@@ -194,8 +260,8 @@
 		Trace('SetCookie("'+strName+'","'+strValue+'",'+nExpiryDays+')');
 		var date = new Date();
 		date.setTime(date.getTime() + (nExpiryDays*24*60*60*1000));
-		var strExpires = "expires="+date.toUTCString();
-		var strCookie = strName + "=" + strValue + "; " + strExpires + "; path={ROOTPATH}";
+		var strExpires = 'expires='+date.toUTCString();
+		var strCookie = strName + '=' + strValue + '; ' + strExpires + '; path={ROOTPATH}';
 		document.cookie = strCookie;
 	} 
 	
@@ -338,5 +404,79 @@
  		StopProgressIndicator(elementContainer);
 	}
 	
+	function BindAllFunctionsToThis(vValue)
+	{
+		if (GetType(vValue) != 'Object')
+		{
+			return false;
+		}
+		var aFunctions = GetFunctions(vValue);
+		for (var nFunction = 0; nFunction < aFunctions.length; nFunction++)
+		{
+			var strFunction = aFunctions[nFunction];
+			vValue[strFunction] = vValue[strFunction].bind(vValue);
+		}
+		return true;
+	}
+	
+	function GetType(vValue)
+	{
+		// https://stackoverflow.com/questions/1249531/how-to-get-a-javascript-objects-class
+		// https://docs.servicenow.com/bundle/madrid-application-development/page/script/javascript-tools/reference/r_IsJavaObject.html
+		
+		var strType = typeof vValue;
+		if (strType == 'undefined')
+		{
+			return 'undefined';
+		}
+		if (vValue == null)
+		{
+			return 'null';
+		}
+		if (strType == 'object')
+		{
+			var strObject = GetStringValue(Object.prototype.toString.call(vValue));
+			strType = GetValue(strObject.match(/^\[object\s(.*)\]$/),1);
+			if (strType == 'JavaObject')
+			{
+				return strType;
+			}
+			return strType;
+		}
+		return strType;
+	}	
+	
+	function IsArray(vInput)
+	{
+		var strType = GetType(vInput);
+		if (strType != 'Array')
+		{
+			return false;
+		}
+		return true;
+	}	
 
+	function GetProperties(vValue)
+	{
+		if (GetType(vValue) != 'Object')
+		{
+			return [];
+		}
+		var aProperties = Object.getOwnPropertyNames(Object.getPrototypeOf(vValue));
+		return aProperties;
+	}
 
+	function GetFunctions(vValue)
+	{
+		var aProperties = GetProperties(vValue);
+		var aFunctions = [];
+		for (var nProperty = 0; nProperty < aProperties.length; nProperty++)
+		{
+			var strProperty = aProperties[nProperty];
+			if (GetType(vValue[strProperty]) == 'function')
+			{
+				aFunctions.push(strProperty);
+			}
+		}
+		return aFunctions;
+	}

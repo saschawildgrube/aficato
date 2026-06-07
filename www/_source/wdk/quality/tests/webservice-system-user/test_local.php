@@ -60,14 +60,14 @@
 			$strCountry1 = "DEU";
 			$strCountry2 = "GBR";
 			$strCountry3 = "ZZZ";
-			$strTimezoneDefault = "UTC";
-			$strTimezone2 = "Europe/London";
-			$strTimezone3 = "Europe/Frankfurt";
+			$strTimeZoneDefault = "UTC";
+			$strTimeZone2 = "Europe/London";
+			$strTimeZone3 = "Europe/Frankfurt";
 		 
 		
 		
 		
-			$this->Trace("Test User Webservice: User Local Settings (Language, Timezone)");
+			$this->Trace("Test User Webservice: User Local Settings (Language, TimeZone)");
 		
 		
 			$this->Trace("0. DELETE USER:");
@@ -84,7 +84,7 @@
 			$arrayParams["password"] = "changeme";
 			$arrayParams["user_language"] = $strLanguage1;
 			$arrayParams["user_country"] = $strCountry1;
-			//$arrayParams["timezone"] = $strTimezone1;
+			//$arrayParams["timezone"] = $strTimeZone1;
 			$arrayParams["command"] = "add";
 			$consumer->ConsumeWebService($this->m_strWebservice,$arrayParams);
 			if ($consumer->GetError() != "")	
@@ -116,10 +116,10 @@
 			}
 			$strLanguage = $consumer->GetResultValue("USER","USER_LANGUAGE");
 			$strCountry = $consumer->GetResultValue("USER","USER_COUNTRY");
-			$strTimezone = $consumer->GetResultValue("USER","USER_TIMEZONE");
+			$strTimeZone = $consumer->GetResultValue("USER","USER_TIMEZONE");
 			$this->Trace("USER_LANGUAGE = $strLanguage");
 			$this->Trace("USER_COUNTRY = $strCountry");
-			$this->Trace("USER_TIMEZONE = $strTimezone");
+			$this->Trace("USER_TIMEZONE = $strTimeZone");
 			if ($strLanguage != $strLanguage1)
 			{
 				$this->Trace("\"$strLanguage\" != \"$strLanguage1\"");
@@ -130,9 +130,9 @@
 				$this->Trace("\"$strCountry\" != \"$strCountry1\"");
 				return;	
 			}
-			if ($strTimezone != $strTimezoneDefault)
+			if ($strTimeZone != $strTimeZoneDefault)
 			{
-				$this->Trace("\"$strTimezone\" != \"$strTimezoneDefault\"");
+				$this->Trace("\"$strTimeZone\" != \"$strTimeZoneDefault\"");
 				return;	
 			}
 			$this->Trace("");
@@ -143,7 +143,7 @@
 			$arrayParams["user_id"] = $this->m_strUserID;
 			$arrayParams["user_language"] = $strLanguage2;
 			$arrayParams["user_country"] = $strCountry2;
-			$arrayParams["user_timezone"] = $strTimezone2;
+			$arrayParams["user_timezone"] = $strTimeZone2;
 			$arrayParams["command"] = "set";
 			$consumer->ConsumeWebService($this->m_strWebservice,$arrayParams);
 			if ($consumer->GetError() != "")	
@@ -166,10 +166,10 @@
 			}
 			$strLanguage = $consumer->GetResultValue("USER","USER_LANGUAGE");
 			$strCountry = $consumer->GetResultValue("USER","USER_COUNTRY");
-			$strTimezone = $consumer->GetResultValue("USER","USER_TIMEZONE");
+			$strTimeZone = $consumer->GetResultValue("USER","USER_TIMEZONE");
 			$this->Trace("USER_LANGUAGE = $strLanguage");
 			$this->Trace("USER_COUNTRY = $strCountry");
-			$this->Trace("USER_TIMEZONE = $strTimezone");
+			$this->Trace("USER_TIMEZONE = $strTimeZone");
 			if ($strLanguage != $strLanguage2)
 			{
 				$this->Trace("\"$strLanguage\" != \"$strLanguage2\"");
@@ -180,9 +180,9 @@
 				$this->Trace("\"$strCountry\" != \"$strCountry2\"");
 				return;	
 			}
-			if ($strTimezone != $strTimezone2)
+			if ($strTimeZone != $strTimeZone2)
 			{
-				$this->Trace("\"$strTimezone\" != \"$strTimezone2\"");
+				$this->Trace("\"$strTimeZone\" != \"$strTimeZone2\"");
 				return;	
 			}
 			$this->Trace("");
@@ -195,7 +195,7 @@
 			$arrayParams["user_id"] = $this->m_strUserID;
 			$arrayParams["user_language"] = $strLanguage3;
 			$arrayParams["user_country"] = $strCountry3;
-			$arrayParams["user_timezone"] = $strTimezone3;
+			$arrayParams["user_timezone"] = $strTimeZone3;
 			$arrayParams["command"] = "set";
 			$consumer->ConsumeWebService($this->m_strWebservice,$arrayParams);
 			if ($consumer->GetError() == "")	
@@ -220,10 +220,10 @@
 			}
 			$strLanguage = $consumer->GetResultValue("USER","USER_LANGUAGE");
 			$strCountry = $consumer->GetResultValue("USER","USER_COUNTRY");
-			$strTimezone = $consumer->GetResultValue("USER","USER_TIMEZONE");
+			$strTimeZone = $consumer->GetResultValue("USER","USER_TIMEZONE");
 			$this->Trace("USER_LANGUAGE = $strLanguage");
 			$this->Trace("USER_COUNTRY = $strCountry");
-			$this->Trace("USER_TIMEZONE = $strTimezone");
+			$this->Trace("USER_TIMEZONE = $strTimeZone");
 			if ($strLanguage != $strLanguage2)
 			{
 				$this->Trace("\"$strLanguage\" != \"$strLanguage2\"");
@@ -234,9 +234,9 @@
 				$this->Trace("\"$strCountry\" != \"$strCountry2\"");
 				return;	
 			}
-			if ($strTimezone != $strTimezone2)
+			if ($strTimeZone != $strTimeZone2)
 			{
-				$this->Trace("\"$strTimezone\" != \"$strTimezone2\"");
+				$this->Trace("\"$strTimeZone\" != \"$strTimeZone2\"");
 				return;	
 			}
 		
@@ -251,7 +251,7 @@
 			$arrayParams["user_id"] = $this->m_strUserID;
 			$arrayParams["user_language"] = "";
 			$arrayParams["user_country"] = "";
-			$arrayParams["user_timezone"] = $strTimezoneDefault;
+			$arrayParams["user_timezone"] = $strTimeZoneDefault;
 			$arrayParams["command"] = "set";
 			$consumer->ConsumeWebService($this->m_strWebservice,$arrayParams);
 			if ($consumer->GetError() != "")	
@@ -274,10 +274,10 @@
 			}
 			$strLanguage = $consumer->GetResultValue("USER","USER_LANGUAGE");
 			$strCountry = $consumer->GetResultValue("USER","USER_COUNTRY");
-			$strTimezone = $consumer->GetResultValue("USER","USER_TIMEZONE");
+			$strTimeZone = $consumer->GetResultValue("USER","USER_TIMEZONE");
 			$this->Trace("USER_LANGUAGE = $strLanguage");
 			$this->Trace("USER_COUNTRY = $strCountry");
-			$this->Trace("USER_TIMEZONE = $strTimezone");
+			$this->Trace("USER_TIMEZONE = $strTimeZone");
 			if ($strLanguage != "")
 			{
 				$this->Trace("\"$strLanguage\" != \"\"");
@@ -288,9 +288,9 @@
 				$this->Trace("\"$strCountry\" != \"\"");
 				return;	
 			}
-			if ($strTimezone != $strTimezoneDefault)
+			if ($strTimeZone != $strTimeZoneDefault)
 			{
-				$this->Trace("\"$strTimezone\" != \"$strTimezoneDefault\"");
+				$this->Trace("\"$strTimeZone\" != \"$strTimeZoneDefault\"");
 				return;	
 			}
 			$this->Trace("");

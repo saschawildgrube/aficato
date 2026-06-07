@@ -91,9 +91,8 @@
 			$this->TestCase_IsValidURL('https://servicenow.sharepoint.com/:x:/r/sites/HelloWorld/_layouts/15/doc2.aspx?sourcedoc=%7B81dcd5cf-0832-459e-914a-d025273f7a9f%7D&action=edit&activeCell=%27Action%20items%27!B25&wdinitialsession=a223cbcf-1ff9-49a5-9910-459dc4c951be&wdrldsc=3&wdrldc=1&wdrldr=AccessTokenExpiredWarning&cid=9578f9a6-ff14-4791-9a17-9b9667eaf038&wdLOR=c3A4FA22B-7EC4-2686-9A24-AB25C196A043&CID=0914377F-1523-AF46-8CE1-7288FA1AB6CC',true);
 			$this->TestCase_IsValidURL('https://consent.google.com/ml?continue=https://www.google.com/maps/place/Hello%2BWorld/@1.2345,2.2345,10z/data%3D!4m18!1m9!3m8!1s0x478fa1053c87a8bc:0x537d8e8f30277fbd!2sHello%2BWorld!5m2!4m1!1i2!8m2!3d46.5932396!4d1.234567!3m7!1s0x478fa1053c87a866:0x537d8e8f30277fbd!5m2!4m1!1i2!8m2!3d1.23456!4d2.3456?hl%3Dde&gl=DE&m=0&pc=m&hl=de&src=1',true);
 			$this->TestCase_IsValidURL('https://servicenow.highspot.com/items/aa680zz1c714334388233c9c?lfrm=srp.1#1',true);
-
-
- 			
+			$this->TestCase_IsValidURL('https://servicenow.sabacloud.com/Saba/Web_spf/NA1PRD0015/app/shared;spf-url=common%2Flearningeventdetail%2Fcrtfy0123456789%3Fcontext%3Duser&learnerId%3Demplo0123456789&returnPage%3DMyLearning',true);
+			 			
  			$this->TestCase_IsValidURL('https://groups.google.com/a/test/forum/#managemembers/hello-world/members/active',true);
  			$this->TestCase_IsValidURL('https://groups.google.com/a/test/forum/#manage!members/hello-world/members/active',true);
  			

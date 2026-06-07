@@ -8,33 +8,63 @@
 		{
 			return [];	
 		}
+		if (ArrayCount($arrayList) == 0)
+		{
+			return [];	
+		}
 		if ($strLevelKey == '')
 		{
 			$strLevelKey = 'level';
+		}
+
+		// Align the items on the lowest level
+		$bContinue = true;
+		$nBaseLevel = 0;
+		while ($bContinue)
+		{
+			$nLowestLevel = INTEGER_MAX;
+			foreach ($arrayList as $arrayItem)
+			{
+				$nLowestLevel = min($nLowestLevel,max($nBaseLevel,ArrayGetValue($arrayItem,$strLevelKey)));
+			}
+			$bContinue = false;
+			foreach ($arrayList as &$arrayItem2)
+			{
+				$nLevel = ArrayGetValue($arrayItem2,$strLevelKey);
+				if ($nLevel >= $nBaseLevel)
+				{
+					if ($nLevel == $nLowestLevel)
+					{
+						$bContinue = true;
+						$arrayItem2[$strLevelKey] = $nBaseLevel;
+					}
+				}
+			}
+			$nBaseLevel++;
 		}
 		
 		$nLastCorrectLevel = 0;
 		$nPreviousLevel = -1;
 		$nLevelGap = 0;
-		foreach ($arrayList as &$arrayItem)
+		foreach ($arrayList as &$arrayItem3)
 		{
-			$nLevel = ArrayGetValue($arrayItem,$strLevelKey);
+			$nLevel = ArrayGetValue($arrayItem3,$strLevelKey);
 			if ($nLevel <= $nPreviousLevel + 1)
 			{
-				$arrayItem[$strLevelKey] = $nLevel;
+				$arrayItem3[$strLevelKey] = $nLevel;
 				$nLastCorrectLevel = $nLevel;
 				$nLevelGap = 0;
 			}
 			else if ($nLevel > $nLastCorrectLevel + 1 && $nLevelGap > 0)
 			{
 				$nLevel -= $nLevelGap;
-				$arrayItem[$strLevelKey] = $nLevel;
+				$arrayItem3[$strLevelKey] = $nLevel;
 			}
 			else
 			{
 				$nLevelGap = $nLevel - $nPreviousLevel - 1;
 				$nLevel -= $nLevelGap;
-				$arrayItem[$strLevelKey] = $nLevel;
+				$arrayItem3[$strLevelKey] = $nLevel;
 			}
 			$nPreviousLevel = $nLevel;
 		}

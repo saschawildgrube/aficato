@@ -91,9 +91,12 @@
 				{
 					if (FindString($strSPF,$strIP) == -1)
 					{
-						$this->Trace('SPF record does not refer to the IP of the domain:');
-						$this->Trace('"'.$strSPF.'"');
-						$bResult = false;
+						if ($strSPF != 'v=spf1 include:_spf.google.com ~all')
+						{
+							$this->Trace('SPF record does neither refer to the IP of the domain nor is the default Google Workspaces SPF record ("v=spf1 include:_spf.google.com ~all"):');
+							$this->Trace('"'.$strSPF.'"');
+							$bResult = false;
+						}
 					}
 				}
 			}
@@ -611,7 +614,7 @@
 				$nTimeoutSeconds,
 				false,
 				false,
-				14);
+				4);
 		}
 
 		

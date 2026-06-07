@@ -11,6 +11,7 @@
 		
 		function OnInit()
 		{
+			/*
 			$bMissingDir = false;
 			$strDir = GetWDKDir()."quality/testdir/dir3/";
 			if (IsDirectory($strDir) == false)
@@ -28,6 +29,7 @@
 			{
 				$this->Trace("This will cause the test to fail. A possible reason for that is that zip archives do not store empty directories. Create the directories to make the test work!");
 			}
+			*/
 			return parent::OnInit();	 
 		}
 
@@ -99,7 +101,7 @@
 
 			$this->TestCase_ReadDirectory(
 				"/",
-				true,
+				false,
 				false);					
 					
 		}

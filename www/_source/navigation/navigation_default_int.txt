@@ -1,7 +1,7 @@
 LEVEL	;CONTEXT								;LABEL																		;CONDITIONS
 0			;index									;?TID_NAVIGATION_START?										;
 0			;tour1									;?TID_NAVIGATION_TOUR?										;nologin, hide
-0			;team										;?TID_NAVIGATION_TEAM?										;
+0			;contact								;?TID_NAVIGATION_CONTACT?									;
 0			;signin									;?TID_NAVIGATION_SIGNIN?									;nologin, hide
 0			;login									;?TID_NAVIGATION_LOGIN?										;nologin
 0			;aml-accountdatamanager	;?TID_NAVIGATION_AML-ACCOUNTDATAMANAGER?	;login 

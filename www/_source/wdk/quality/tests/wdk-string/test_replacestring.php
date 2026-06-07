@@ -103,7 +103,20 @@
 				u("xxx"),
 				u("abcdefg"));
 
-				
+
+			$this->TestCase_ReplaceString(
+				u("=Hello World=\n----\nA separator after a heading."),
+				u("=\n----\n"),
+				u("=\n"),
+				u("=Hello World=\nA separator after a heading."));				
+			
+			$this->TestCase_ReplaceString(
+				u("Hello—World"),
+				u("—"),
+				u("--"),
+				u("Hello--World"));
+	
+			
 			
 			$this->TestCase_ReplaceStringIgnoreCase(
 				"abcdefGhijklmnopqrstuvwxyz",

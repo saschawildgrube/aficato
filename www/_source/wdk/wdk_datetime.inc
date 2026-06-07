@@ -3,9 +3,9 @@
 	define('TIMESTAMP_INFINITE',2147483647);
 	define('DATETIME_INFINITE','2038-01-19 03:14:07');
 	
-	define('FORMAT_TIME','%H:%M:%S');
-	define('FORMAT_DATE','%Y-%m-%d'); 
-	define('FORMAT_DATETIME',FORMAT_DATE.' '.FORMAT_TIME);
+	define('FORMAT_TIME','H:i:s'); 
+	define('FORMAT_DATE','Y-m-d'); 
+	define('FORMAT_DATETIME',FORMAT_DATE.' '.FORMAT_TIME);  
 
 
 	function GetTimeNow()
@@ -56,7 +56,13 @@
 		{
 			SetTimeLocale($strLanguage);	
 		}
-		$strOutput = strftime($strFormat,$time);
+		
+		//$strFormat = ReplaceString();
+		
+		$dt = new DateTime();
+		$dt->setTimestamp($time);
+		$strOutput = $dt->format($strFormat);
+		
 		if ($strTimeZoneServer != '')
 		{
 			date_default_timezone_set($strTimeZoneServer);		
@@ -200,6 +206,12 @@
 		//return strtotime(RenderDateTime($time)." $nYears year");
 	}
 
+	function GetTimeDayBegin($time, $strTimeZone = 'UTC')
+	{
+		$arrayDateTime = ParseTime($time);  
+		$strDateTime = $arrayDateTime['YEAR'].'-'.$arrayDateTime['MONTH'].'-'.$arrayDateTime['DAY'].' 00:00:00';
+		return GetTime($strDateTime);
+	}
 
 	function GetTimeWeekBegin($time)
 	{
@@ -453,7 +465,9 @@
 		{
 			return false;	
 		}
-		$arrayResult2 = strptime($strDateTime,FORMAT_DATETIME);
+		$arrayResult2 = strptime($strDateTime,'%'.'Y-%'.'m-%'.'d %'.'H:%'.'M:%'.'S');   
+		//$arrayResult2 = DateTime::createFromFormat(FORMAT_DATETIME, $strDateTime);
+		
 		if (!is_array($arrayResult2))   
 		{
 			return false;	
@@ -499,17 +513,17 @@
 		switch ($strCountryID)
 		{
 			case 'DEU':
-				return '%d.%m.%Y';
+				return 'd.m.Y';
 			case 'USA':
-				return '%m/%d/%Y';		
+				return 'm/d/Y';		
 			case 'GBR':
-				return '%d/%m/%Y';
+				return 'd/m/Y';
 			case 'FRA':
-				return '%d/%m/%Y';
+				return 'd/m/Y';
 			case 'ESP':
-				return '%d/%m/%Y';
+				return 'd/m/Y';
 			default:
-				return '%Y-%m-%d';
+				return 'Y-m-d';
 		}
 	}
 
@@ -519,9 +533,9 @@
 		{
 			case 'GBR':
 			case 'USA':
-				return '%I:%M:%S%P';
+				return 'h:i:s a';
 			default:
-				return '%H:%M:%S';
+				return 'H:i:s';
 		}
 	}
 
@@ -545,12 +559,22 @@
 		return setlocale(LC_TIME,0);	
 	}
 	
-	function IsValidTimezoneID($strTimezone)
+	function GetTimeZoneOffset($strTimeZone, $time)
 	{
-		return ArrayValueExists(GetAllTimezoneIDs(),$strTimezone);	
+		if (IsValidTimeZoneID($strTimeZone) == false)
+		{
+			return 0;
+		}
+		$datetimezone = new DateTimeZone($strTimeZone);
+		return $datetimezone->getOffset(new DateTime(RenderDateTime($time)));  
 	}
 	
-	function GetAllTimezoneIDs()
+	function IsValidTimeZoneID($strTimeZone)
+	{
+		return ArrayValueExists(GetAllTimeZoneIDs(),$strTimeZone);	
+	}
+	
+	function GetAllTimeZoneIDs()
 	{
 		return array(
 			'UTC',

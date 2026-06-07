@@ -251,6 +251,15 @@
 		$vResult = current($array);
 		return $vResult;
 	}
+	
+	function ArrayGetLastValue($array)
+	{
+		if (IsArray($array) == false)
+		{
+			return false;
+		}
+		return end($array);
+	}
 
 
 	function ArraySetValue(&$array,$value,$key1,$key2=null,$key3=null,$key4=null,$key5=null,$key6=null,$key7=null)

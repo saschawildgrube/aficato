@@ -13,7 +13,8 @@
 				false,
 				true);
 
-			$this->GetWebsite()->AddJavaScript('jquery','jquery-1.11.2.min');
+			//$this->GetWebsite()->AddJavaScript('jquery','jquery-1.11.2.min');
+			$this->GetWebsite()->ActivateJQuery();
 			$this->GetWebsite()->AddJavaScript('jquery-countdown','jquery.countdown.min');
 			$this->GetWebsite()->AddJavaScript('wdk-element-countdown','wdk-element-countdown');			
 		}
@@ -24,7 +25,6 @@
 
 
 			// How to configure the countdown: http://hilios.github.io/jQuery.countdown/documentation.html -->
-			//$arrayItems['CONFIG'] = RenderDateTimeFormat($time, '%Y/%m/%d %H:%M:%S'/*,$this->GetWebsite()->GetTimeZone()*/);
 			$arrayItems['CONFIG'] = ''.round($time*1000);
 			$arrayItems['DATETIME_COMMENT'] = 'UTC: '.RenderDateTime($time).' / '.$this->GetWebsite()->GetTimeZone().': '.RenderDateTime($time,$this->GetWebsite()->GetTimeZone());
 						 

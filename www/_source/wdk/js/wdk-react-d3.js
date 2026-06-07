@@ -1,17 +1,11 @@
 // WDK D3ReactComponent
 'use strict';
 
-class D3ReactComponent extends React.Component
+class D3ReactComponent extends WDKReactComponent
 {
-  constructor(props)
-  {
-    super(props);
-  	this.m_strId = 'd3_'+GetRandomToken(5);  
-  }
-  
   componentDidMount()
   {
-  	this.RenderD3('#'+this.m_strId, this.props);
+  	this.RenderD3('#'+this.GetID(), this.props);
   }
 
   render()
@@ -29,7 +23,7 @@ class D3ReactComponent extends React.Component
   	return e(
   		'svg',
   		{
-  			id: this.m_strId,
+  			id: this.GetID(),
   			height: nHeight,
   			width: nWidth
   		},

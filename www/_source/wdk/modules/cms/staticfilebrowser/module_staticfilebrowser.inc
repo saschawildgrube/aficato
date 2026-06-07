@@ -318,7 +318,7 @@
 					{
 						$strFileCategory = GetFileCategory($strPathAbs);
 						
-						$arrayRow["NAME"] = $linkicon->RenderLinkIcon($strLink,GetIconIDByFileCategory($strFileCategory),$strPathRel);
+						$arrayRow["NAME"] = $linkicon->RenderLinkIcon($strLink,GetIconIdByFileCategory($strFileCategory),$strPathRel);
 					}
 				}
 				

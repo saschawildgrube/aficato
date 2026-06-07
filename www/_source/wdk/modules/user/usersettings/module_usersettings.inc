@@ -65,7 +65,7 @@
 			$strUserName = $consumer->GetResultValue("USER","USER_NAME");
 			$strUserLanguage = $consumer->GetResultValue("USER","USER_LANGUAGE");
 			$strUserCountry = $consumer->GetResultValue("USER","USER_COUNTRY");
-			$strUserTimezone = $consumer->GetResultValue("USER","USER_TIMEZONE");
+			$strUserTimeZone = $consumer->GetResultValue("USER","USER_TIMEZONE");
 			
 			
 			
@@ -97,13 +97,13 @@
 			$formDef->AddControlSelect("USERCOUNTRY",$this->GetModuleVarName("usercountry"),"?TID_USERSETTINGS_LABEL_USERCOUNTRY?",$arrayCountryOptions,$strUserCountry);
 
 
-			$arrayAllTimezones = GetAllTimezoneIDs();
-			$arrayTimezoneOptions = array();
-			foreach ($arrayAllTimezones as $strTimezone)
+			$arrayAllTimeZones = GetAllTimeZoneIDs();
+			$arrayTimeZoneOptions = array();
+			foreach ($arrayAllTimeZones as $strTimeZone)
 			{
-				$arrayTimezoneOptions[$strTimezone] = "$strTimezone";
+				$arrayTimeZoneOptions[$strTimeZone] = "$strTimeZone";
 			}
-			$formDef->AddControlSelect("USERTIMEZONE",$this->GetModuleVarName("usertimezone"),"?TID_USERSETTINGS_LABEL_USERTIMEZONE?",$arrayTimezoneOptions,$strUserTimezone);
+			$formDef->AddControlSelect("USERTIMEZONE",$this->GetModuleVarName("usertimezone"),"?TID_USERSETTINGS_LABEL_USERTIMEZONE?",$arrayTimeZoneOptions,$strUserTimeZone);
 
 
 			$formDef->AddControlButtonSubmit("?TID_USERSETTINGS_BUTTON_EDIT?");
@@ -129,7 +129,7 @@
 			
 			$strUserLanguage = $this->GetModuleVar("userlanguage");
 			$strUserCountry = $this->GetModuleVar("usercountry");
-			$strUserTimezone = $this->GetModuleVar("usertimezone");
+			$strUserTimeZone = $this->GetModuleVar("usertimezone");
 			
 			$arrayLanguages = $this->GetWebsite()->GetSupportedLanguages("languages");
 			array_push($arrayLanguages,""); // to allow unsetting the language setting!
@@ -146,7 +146,7 @@
 				
 			}
 			
-			if (!IsValidTimezoneID($strUserTimezone))
+			if (!IsValidTimeZoneID($strUserTimeZone))
 			{
 				$this->SetErrorMessageCode("TIMEZONE_INVALID");	
 				return $this->StateEdit();
@@ -160,7 +160,7 @@
 			$arrayParams["user_id"] = $strUserID;
 			$arrayParams["user_language"] = $strUserLanguage;
 			$arrayParams["user_country"] = $strUserCountry;
-			$arrayParams["user_timezone"] = $strUserTimezone;
+			$arrayParams["user_timezone"] = $strUserTimeZone;
 			$arrayParams["command"] = "set";
 			$consumer->ConsumeWebService("system/user",$arrayParams);
 			
@@ -171,7 +171,7 @@
 			{
 				$this->SetInfoMessageCode("USER_EDIT_SUCCESS");
 				
-				$this->GetWebsite()->SetTimezone($strUserTimezone); 
+				$this->GetWebsite()->SetTimeZone($strUserTimeZone); 
 
 				$this->SetModuleVar('state','');
 			}

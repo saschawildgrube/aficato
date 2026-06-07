@@ -10,22 +10,26 @@
 				$website,
 				'console',
 				$strStyleID,
-				false,
+				true,
 				true);
 		}
 		
 		function RenderConsole($strConsole)
 		{
 			$strOutput = $this->GetLayoutHTML(); 
-		
+			
+			$nLineMaxWidth = GetIntegerValue($this->GetLayoutDef('LAYOUT_LINE_MAX_WIDTH'));
+			if ($nLineMaxWidth == 0)
+			{
+				$nLineMaxWidth = 100;
+			}
+					
 			$strConsole = ReplaceString($strConsole,"\r",''); 
-			//print($strConsole);
 			$strConsole = ReplaceString($strConsole,' ','&nbsp;');
 			$strConsole = HtmlDecode($strConsole);
-			$strConsole = StringWordWrap($strConsole,75,"\n",true);
+			$strConsole = StringWordWrap($strConsole,$nLineMaxWidth,"\n",true);
 			$strConsole = HtmlEncode($strConsole);
 			$strConsole = ReplaceString($strConsole,"\n",'<br/>');
-			//$strConsole = ReplaceString($strConsole,' ','&nbsp;');
 			$strConsole = ReplaceString($strConsole,"\t",'&nbsp;&nbsp;&nbsp;');
 			$arrayItems['CONSOLE'] = $strConsole;
 			

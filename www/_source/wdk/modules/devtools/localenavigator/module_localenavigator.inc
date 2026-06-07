@@ -30,7 +30,7 @@
 				case 'currencies':
 					return $this->StateCurrencies();
 				case 'timezones':
-					return $this->StateTimezones();				
+					return $this->StateTimeZones();				
 				case '':
 					$this->SetState('countries');
 				default:
@@ -210,11 +210,11 @@
 		}
 
 
-		function StateTimezones() 
+		function StateTimeZones() 
 		{
 			$this->RenderTabNavigation();
 
-			$arrayList = GetAllTimezoneIDs();
+			$arrayList = GetAllTimeZoneIDs();
 			
 			$list = new CListElement($this->GetWebsite(),'default');
 			$this->SetOutputItem('LIST',$list->RenderList($arrayList));

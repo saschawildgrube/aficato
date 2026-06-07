@@ -105,6 +105,100 @@
 				);
 			$this->TestCase_AlignListLevels($arrayList,'level',$arrayExpectedResult);
 
+
+
+			$arrayList = array(
+				array(
+					'label' => 'Project 1',
+					'level' => 1),
+				array(
+					'label' => 'Epic Alpha',
+					'level' => 10),
+				array(
+					'label' => 'Story A.1',
+					'level' => 11),
+				array(
+					'label' => 'Story A.2',
+					'level' => 11),
+				array(
+					'label' => 'Epic Beta',
+					'level' => 10),
+				array(
+					'label' => 'Story B.1',
+					'level' => 11),
+				array(
+					'label' => 'Story B.2',
+					'level' => 11),
+				array(
+					'label' => 'Project 2',
+					'level' => 1),
+				array(
+					'label' => 'Epic Alpha',
+					'level' => 10),
+				array(
+					'label' => 'Story A.1',
+					'level' => 11),
+				array(
+					'label' => 'Story A.2',
+					'level' => 11),
+				array(
+					'label' => 'Epic Beta',
+					'level' => 10),
+				array(
+					'label' => 'Story B.1',
+					'level' => 11),
+				array(
+					'label' => 'Story B.2',
+					'level' => 11)				);
+
+			$arrayExpectedResult = array(
+				array(
+					'label' => 'Project 1',
+					'level' => 0),
+				array(
+					'label' => 'Epic Alpha',
+					'level' => 1),
+				array(
+					'label' => 'Story A.1',
+					'level' => 2),
+				array(
+					'label' => 'Story A.2',
+					'level' => 2),
+				array(
+					'label' => 'Epic Beta',
+					'level' => 1),
+				array(
+					'label' => 'Story B.1',
+					'level' => 2),
+				array(
+					'label' => 'Story B.2',
+					'level' => 2),
+				array(
+					'label' => 'Project 2',
+					'level' => 0),
+				array(
+					'label' => 'Epic Alpha',
+					'level' => 1),
+				array(
+					'label' => 'Story A.1',
+					'level' => 2),
+				array(
+					'label' => 'Story A.2',
+					'level' => 2),
+				array(
+					'label' => 'Epic Beta',
+					'level' => 1),
+				array(
+					'label' => 'Story B.1',
+					'level' => 2),
+				array(
+					'label' => 'Story B.2',
+					'level' => 2)
+				);
+			$this->TestCase_AlignListLevels($arrayList,'level',$arrayExpectedResult);
+
+
+
 		}
 		
 		

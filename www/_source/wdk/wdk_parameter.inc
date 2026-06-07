@@ -505,11 +505,11 @@
 				$arrayEnum);
 		}
 
-		function AddParameterDefinition_timezone()
+		function AddParameterDefinition_timezone() 
 		{
 			return $this->AddParameterDefinitionEnum(
 				'timezone',
-				GetAllTimezoneIDs());
+				GetAllTimeZoneIDs());
 		}
 
 

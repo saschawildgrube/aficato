@@ -636,7 +636,7 @@
 			
 			$strCommand = "";
 			$strCommand .="cat >$strFilePath <<EOF\n"; 
-     		$strCommand .="%ech"."o Generating a key\n" ;
+     		$strCommand .="%"."ech"."o Generating a key\n" ;  // to avoid deprecation error due to str_f_time patterns
      		$strCommand .="Key-Type: DSA\n" ;
      		$strCommand .="Key-Length: 1024\n"; 
      		$strCommand .="Subkey-Type: ELG-E\n"; 

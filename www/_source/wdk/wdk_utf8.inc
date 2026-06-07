@@ -44,7 +44,7 @@
 			$g_arrayByteMap_StringEncodeUTF8 = array();
 			for($nChar = 128; $nChar < 256; $nChar++)
 			{
-    			$g_arrayByteMap_StringEncodeUTF8[chr($nChar)]=utf8_encode(chr($nChar));
+    			$g_arrayByteMap_StringEncodeUTF8[chr($nChar)] = mb_convert_encoding(chr($nChar),'UTF-8', 'ISO-8859-1');
  			}
  			$arrayCP1252Map = array(
 				"\x80" => "\xE2\x82\xAC",  // EURO SIGN
@@ -117,9 +117,10 @@
 	{
 		if (!is_string($str))
 		{
-			return '';	
+			return '';	  
 		}
-		return utf8_decode($str);	
+		//return utf8_decode($str);	
+		return mb_convert_encoding($str, 'ISO-8859-1', 'UTF-8');
 	}
 	
 	function IsFileUTF8BOM($strFilePath)

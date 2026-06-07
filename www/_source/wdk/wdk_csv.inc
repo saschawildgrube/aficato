@@ -165,7 +165,7 @@
 					||$cChar == "\t")
 				{
 					$nPreviousState = CSV_LEADINGWHITESPACE;
-					continue;
+					continue 2;
 				}
 
 				$strNextToken = '';
@@ -185,7 +185,7 @@
 					$arrayValues = array();
 					$nPreviousState = CSV_END;
 					$nPos = $nLength;
-					continue;	
+					continue 2;	
 				}
 
 				if ($strNextToken == $strSeparator)
@@ -195,7 +195,7 @@
 					$strNextValue = "";
 					$nPreviousState = CSV_SEPARATOR;
 					$nPos = $nPosNextToken;
-					continue;
+					continue 2;
 				}
 
 
@@ -207,7 +207,7 @@
 					{
 						$nPreviousState = CSV_NEWLINE;
 						$nPos = $nPosNextToken;
-						continue;
+						continue 2;
 					}
 					$strNextValue = StringSection($strCSV,$nPos,$nPosNextToken-$nPos);
 					$arrayValues[] = StringTrim($strNextValue);
@@ -216,7 +216,7 @@
 					$arrayValues = array();
 					$nPreviousState = CSV_NEWLINE;
 					$nPos = $nPosNextToken;
-					continue;
+					continue 2;
 				}
 			
 				if ($strNextToken == $strQuote)
@@ -225,12 +225,12 @@
 					{
 						$nPos += $nLengthQuote - 1;
 						$nPreviousState = CSV_QUOTESTART;
-						continue;
+						continue 2;
 					}
 					$strNextValue = StringSection($strCSV,$nPos,$nPosNextToken-$nPos);
 					$nPos += $nPosNextToken - $nPos - 1;
 					$nPreviousState = CSV_UNQUOTEDVALUE;
-					continue;
+					continue 2;
 				}
 
 				// It must be a comment
@@ -242,11 +242,11 @@
 					{
 						$nPos = $nPosNewLine;
 						$nPreviousState = CSV_NEWLINE;
-						continue;
+						continue 2;
 					}
 					$nPreviousState = CSV_END;
 					$nPos = $nLength;
-					continue;
+					continue 2;
 				}
 					
 				$strNextValue = StringSection($strCSV,$nPos,$nPosNextToken-$nPos);
@@ -278,7 +278,7 @@
 						$arrayValues[] = StringTrim($strNextValue);
 						$strNextValue = '';
 						$nPreviousState = CSV_SEPARATOR;
-						continue;
+						continue 2;
 					}	
 					if ($strNextToken == $strNewLine)
 					{
@@ -288,13 +288,13 @@
 						$arrayRows[] = $arrayValues;
 						$arrayValues = array();
 						$nPreviousState = CSV_NEWLINE;
-						continue;
+						continue 2;
 					}
 
 					$arrayValues[] = StringTrim($strNextValue);
 					$strNextValue = '';
 					$nPreviousState = CSV_COMMENT;
-					continue;
+					continue 2;
 					
 				}
 				else
@@ -306,7 +306,7 @@
 							$arrayValues[] = StringTrim($strNextValue);
 							$strNextValue = "";
 							$nPreviousState = CSV_SEPARATOR;
-							continue;
+							continue 2;
 						}
 						if ($strNextToken == $strNewLine)  
 						{
@@ -315,12 +315,12 @@
 							$arrayRows[] = $arrayValues;
 							$arrayValues = array();
 							$nPreviousState = CSV_NEWLINE;
-							continue;
+							continue 2;
 						}
 						$arrayValues[] = StringTrim($strNextValue);
 						$strNextValue = "";
 						$nPreviousState = CSV_COMMENT;
-						continue;
+						continue 2;
 					}
 				}
 				$strNextValue .= $cChar;
@@ -346,7 +346,7 @@
 					$strNextValue .= StringSection($strCSV,$nPos,$nPosNextToken-$nPos);
 					$nPos = $nPosNextToken-1;
 					$nPreviousState = CSV_QUOTEDVALUE;
-					continue;
+					continue 2;
 				}
 
 
@@ -356,7 +356,7 @@
 					$strNextValue .= $strQuote;
 					$nPos += $nLengthEscapedQuote - 1;
 					$nPreviousState = CSV_ESCAPEDQUOTE;
-					continue;	
+					continue 2;	
 				}
 
 				$nPosQuote = FindString($strCSV, $strQuote, false, $nPos);						
@@ -367,7 +367,7 @@
 
 					$nPos += $nLengthQuote - 1;
 					$nPreviousState = CSV_QUOTEEND;
-					continue;
+					continue 2;
 				}
 				
 				if ($bNewLineInQuotedValue == false)
@@ -381,7 +381,7 @@
 						$arrayValues = array();
 						$nPos += $nLengthNewLine - 1;
 						$nPreviousState = CSV_NEWLINE;
-						continue;
+						continue 2;
 					}
 				}
 
@@ -396,14 +396,14 @@
 					||$cChar == "\t")
 				{
 					$nPreviousState = CSV_TRAILINGNOISE;
-					continue;
+					continue 2;
 				}
 
 				$nPosSeparator = FindString($strCSV, $strSeparator, false, $nPos);
 				if ($nPosSeparator == $nPos)
 				{
 					$nPreviousState = CSV_SEPARATOR;
-					continue;
+					continue 2;
 				}
 				
 				$nPosNewLine = FindString($strCSV, $strNewLine, false, $nPos);
@@ -412,14 +412,14 @@
 					$arrayRows[] = $arrayValues;
 					$arrayValues = array();
 					$nPreviousState = CSV_NEWLINE;
-					continue;
+					continue 2;
 				}
 				
 				$nPosCommentToken = FindStringMultiple($strCSV, $arrayCommentTokens, $strNextToken, false, $nPos);
 				if ($nPosCommentToken == $nPos)
 				{
 					$nPreviousState = CSV_COMMENT;
-					continue;
+					continue 2;
 				}				
 
 				$nPreviousState = CSV_TRAILINGNOISE;
@@ -435,7 +435,7 @@
 					
 					$nPos = $nPosNewLine;
 					$nPreviousState = CSV_NEWLINE;
-					continue;
+					continue 2;
 				}
 				
 				$nPos = $nLength; 

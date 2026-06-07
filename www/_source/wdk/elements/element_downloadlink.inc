@@ -26,10 +26,10 @@
 			}
 			
 			$icon = new CIconElement($this->GetWebsite(),'default');
-			$strIcon = $icon->RenderIcon(GetIconIDByFileCategory(GetFileCategory('bogus.'.$strFileType)));
+			$strIconId = $icon->RenderIcon(GetIconIdByFileCategory(GetFileCategory('bogus.'.$strFileType)));
 			
 			$arrayItems['URL'] = $strFileURL;
-			$arrayItems['ICON'] = $strIcon;
+			$arrayItems['ICON'] = $strIconId;
 			$arrayItems['TEXT'] = $strLinkText;
 			
 			$this->SetOutputItems($arrayItems);

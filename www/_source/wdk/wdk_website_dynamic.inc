@@ -357,10 +357,10 @@
 				return false;
 			}
 						
-			$strUserTimezone = $consumer->GetResultValue("USER","USER_TIMEZONE");
-			if ($strUserTimezone != "")
+			$strUserTimeZone = $consumer->GetResultValue("USER","USER_TIMEZONE");
+			if ($strUserTimeZone != "")
 			{
-				$this->SetTimezone($strUserTimezone); 
+				$this->SetTimeZone($strUserTimeZone); 
 			}
 			
 			$strUserLanguage = $consumer->GetResultValue("USER","USER_LANGUAGE");
@@ -375,7 +375,7 @@
 				$this->SetCountry($strUserCountry);
 			}
 			
-			$this->Trace("OnLoadUserSettings ($strUserTimezone,$strUserLanguage)");
+			$this->Trace("OnLoadUserSettings ($strUserTimeZone,$strUserLanguage)");
 			return true;
 		}
 		

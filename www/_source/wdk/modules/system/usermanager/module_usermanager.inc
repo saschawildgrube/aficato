@@ -92,13 +92,13 @@
 				
 				if ($strAttributeID == "user_timezone")
 				{
-					$arrayAllTimezones = GetAllTimezoneIDs();
-					$arrayTimezoneOptions = array();
-					foreach ($arrayAllTimezones as $strTimezone)
+					$arrayAllTimeZones = GetAllTimeZoneIDs();
+					$arrayTimeZoneOptions = array();
+					foreach ($arrayAllTimeZones as $strTimeZone)
 					{
-						$arrayTimezoneOptions[$strTimezone] = $strTimezone;
+						$arrayTimeZoneOptions[$strTimeZone] = $strTimeZone;
 					}
-					return $arrayTimezoneOptions;
+					return $arrayTimeZoneOptions;
 				}
 				
 				if ($strAttributeID == "user_country")
@@ -259,7 +259,7 @@
 			$strUserActive = $this->GetModuleVar("user_active");		
 			$strUserLanguage = $this->GetModuleVar("user_language");			
 			$strUserCountry = $this->GetModuleVar("user_country");
-			$strUserTimezone = $this->GetModuleVar("user_timezone");
+			$strUserTimeZone = $this->GetModuleVar("user_timezone");
 			
 			$arrayLanguages = $this->GetWebsite()->GetSupportedLanguages();
 			array_push($arrayLanguages,""); // to allow unsetting the language setting!
@@ -276,7 +276,7 @@
 				
 			}
 			
-			if (!IsValidTimezoneID($strUserTimezone))
+			if (!IsValidTimeZoneID($strUserTimeZone))
 			{
 				$this->SetErrorMessage("TIMEZONE_INVALID");	
 				return $this->StateModify("user");
@@ -291,7 +291,7 @@
 			$arrayParams["user_active"] = $strUserActive;
 			$arrayParams["user_language"] = $strUserLanguage;
 			$arrayParams["user_country"] = $strUserCountry;
-			$arrayParams["user_timezone"] = $strUserTimezone;
+			$arrayParams["user_timezone"] = $strUserTimeZone;
 			if ($strNewPassword != "")
 			{
 				$arrayParams["password"] = $strNewPassword;	

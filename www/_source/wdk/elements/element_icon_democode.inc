@@ -20,3 +20,10 @@ $strOutput .= $icon->RenderIcon('undo');
 $strOutput .= $icon->RenderIcon('import');
 $strOutput .= $icon->RenderIcon('export');
 $strOutput .= $icon->RenderIcon('execute');
+
+$strOutput .= '<br/>';
+
+$iconspin = new CIconElement($this->GetWebsite(), 'spin');
+$strOutput .= $iconspin->RenderIcon('spinner');
+$strOutput .= $iconspin->RenderIcon('refresh');
+$strOutput .= $iconspin->RenderIcon('circle-o-notch');

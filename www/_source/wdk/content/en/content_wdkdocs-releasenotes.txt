@@ -2,33 +2,77 @@
 ==Version 0.0.0.79 WORK IN PROGRESS==
 NOT YET Baselined
 * '''IMPORTANT'''
+** All externak assets (JQuery, Bootstrap and Fontawesome) have been integrated into WDK to avoid loading them from external sources. This is to comply with a recent German court ruling which renders loading anything from external sources as illegal.
 ** CEntityManagerModule::CheckCondition() has been renamed to ::CheckEntityCondition() to avoid a conflict with the newly introduced CWebsiteSatellite::CheckCondition() function.
+** CDislaimerModule has been renamed to CConsentModule, TIDs have been renamed accordingly.
+** The w3c validation check had to be deactivated for the time being. The operators of the w3c website think that it's not ok to use the test in an unattended automated fashion and added captcha checks. That is disappointing and does not contribute to make the world a better place. It is what it is.
+** Function ScanMailWarnLogForMaliciousIPs() has been renamed to ScanMailLogForMaliciousIPs()
 * Security
 ** No changes
 * Defects
+** Loading a font from an assembly did not work. This has been fixed.
 ** Function StringRemoveCharacters() was not unicode aware. This has been fixed.
+** CForkMeOnGithubElement prevented links from being clicked that are (partly) underneath the ribbon. This has been fixed.
+** CCountDownElement required an outdated version of jquery. This has been fixed. 
+** CWebsite::GetDownloadURL() did not produce working download urls for files in the download folder that contain spaces in their file names. This has been fixed.
 * New features
-** Added CWebsitePlugin::OnGetWebsiteTitle(), ::OnGetWebsiteDescription() and ::OnGetOpenGraphImageURL() functions and corresponding support in CWebsite functions to override default behavior via plugins.
+** Integrated JQuery 3.5.1 into the WDK to avoid having to load it from a CDN.
+** Integrated Bootstrap 3.3.7 into the WDK to avoid having to load it from a CDN.
+** Integrated FontAwesome 4.7.0 into the WDK to avoid having to load it from a CDN.
+** Integrated React 16.14.0 into the WDK to avoid having to load it from a CDN.
+** Integrated D3 5.16.0 into the WDK to avoid having to load it from a CDN.
+** Added function CWebsite::MakeCommandURL().
+** Added CWebsitePlugin::OnCheckCondition(), CWebsitePlugin::OnGetWebsiteTitle(), ::OnGetWebsiteDescription() and ::OnGetOpenGraphImageURL() functions and corresponding support in CWebsite functions to override default behavior via plugins.
 ** Added functions ObjectSerialize() and ObjectUnserialize() to provide proper error handling for serialize() and unserialize() php functions.
 ** Added functions ArraySerialize() and ArrayUnserialize() to wrap ObjectSerialize() and ObjectDeserialize() and verify that input and output are arrays. 
 ** Added function TransformListToTree() to convert a list with a numberic level indicator into a tree structure based on the defined levels.
 ** Added function ArrayContains() to check if one array recursively contains another.
+** Added function ArrayGetLastValue() to return the last element from an array. This is to encapsulate end() without the need to provide a reference variable.
+** Added function GetTimeDayBegin() to get the time of the start of the day of a given time.
+** Added function GetTimeZoneOffset() to get the offset to a given time zone based on a given time.
+** CWebsite now supports webp images.
+** Introduced the concept of layout variants. Additional layout config files are loaded if CWebsite::SetLayoutVariant() is used with a non-empty string. The variant config file overrides layout config items which are previously defined in the main layout config file.
+** Introduced the javascript class WDKReactComponent to establish a place for common behavior of react components.
+** Added react components Button, ButtonSelection, InfoMessage and ErrorMessage
 ** Added javascript function ArrayKeyExists() to wdk.js.
+** Added javascript function GetArrayValue() to wdk.js.
+** Added javascript function IsArray() to wdk.js.
 ** Added javascript function GetBoolValue() to wdk.js.
+** Added javascript function CompareString() and CompareStringIgnoreCase() to wdk.js.
+** Added javascript function StringCutOff() to wdk.js.
+** Added javascript function BindAllFunctionsToThis() to wdk.js.
+** Added javascript function GetType() to wdk.js.
+** Added javascript function GetProperties() to wdk.js.
+** Added javascript function GetFunctions() to wdk.js.
 ** Added shell script filesys-cleanup.sh to free up disc space by deleting various log files and backups.
+** Added CIconTeaserElement and corresponding generic output item.
+** Added form element layout style "compact" for small compact inline forms.
+** CIconElement has a new layout "spin" for spinning icons.
+** CWebsite supports the new standard output item "PROGRESSINDICATOR" which contains a spinning icon.
 * Improvements
+** CWikiPadModule replaces the "mdash" charachter by two regular dashes. When editing a wiki pad using Safari on iPhone, entering two regular dashes leads to their replacement by the "mdash" character. Nice try to be smarter than the user by Apple, but incompatible to wiki syntax.
 ** Added CWebsitePlugin::SetOutputItem() and ::SetOutputItem() to avoid the CWebsiteSatellite default behavior.
 ** Added CWebsiteSatellite::GetContent(), ::SetCondition(), ::SetLayoutConfigItem(), ::CheckCondition(), ::GetSiteTeamEmail() and ::GetCurrentURL().
-** Updated IsValidURL() to cover cases with brackets in the get parameter part of URLs, the exclamation mark in the path and question mark at the end.
+** Updated IsValidURL() to cover cases with brackets in the get parameter part of URLs, the exclamation mark, semi-colon and ampersand in the path and question mark at the end.
 ** IsValidURL() is now entirely based on one regular expression.
 ** IsValidURL() can now deal with anchors that start with a number.
+** CReactElement uses css styles to improve the integration of a react component into an existing layout.
+** CFormElement layouts now use the new output item "PROGRESSINDICATOR".
+** CUnitTestMonitoring::TestCase_Domain() now allows for the default Google Workspaces SPF record.
+** Optimized the order of generic output items so that e.g. DOWNLOADURL can be used as a parameter to the ICONTEASER etc.
+** Reduced the threshold for alerting on exiring SSL certificates in CMonitoringUnitTest::TestCase_MonitorURL() to 4 days.
+** CServerWebService has been updated to reflect the disappearance of the "mail.warn" log file and instead considers the "maillog" file.
+** CServerManagerModule now also shows the Plesk link if the Server is reported to be down.
 * Discontinued
 ** Removed the GOOGLEMAPS generic output item from CWebsite. The underlying element has already been removed in an earlier release.
 ** Removed outdated shell script beanc.sh
 ** Removed shell script listcoredumps.sh
 * Quality
-** No changes
+** Extended test for HtmlEncode() to check for double quote encoding.
 * Refactoring
+** CIconElement now loads the fontawesome alias icon ids from a csv file (instead from a layout cfg file).
+** IsValidTimezoneID() has been renamed to IsValidTimeZoneID().
+** GetAllTimezoneIDs() has been renamed to GetAllTimeZoneIDs().
 ** ArrayPack() and ArrayUnpack() are now using ArraySerialize() and ArrayUnserialize() for consistent error handling.
 ** Added function ParseWiki() to start separating the concerns of parsing a wiki text vs. rendering the html representation.
 * Documentation

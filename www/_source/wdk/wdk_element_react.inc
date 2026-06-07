@@ -26,7 +26,7 @@
 		{
 			$strJson = JsonEncode($arrayProps);
 			$strPropsVarName = $strDomElementID.'_props';
-			$strJavaScript = $strPropsVarName.' = '.$strJson.";";
+			$strJavaScript = $strPropsVarName.' = '.$strJson.';';
 			$strJavaScript .= "ReactDOM.render(e(".$strReactComponent.",".$strPropsVarName."),document.getElementById('".$strDomElementID."'));";
 			$this->AddJavaScriptSourceCode(
 				$this->GetElementID().'-'.$strDomElementID,
@@ -45,7 +45,9 @@
 				$strDomElementID,
 				$arrayProps);
 				
-			$strOutput = '<div id="'.$strDomElementID.'"></div>';
+			$strCss = 'width: fit-content; margin-left:auto; margin-right: auto';
+				
+			$strOutput = '<div id="'.$strDomElementID.'" style="'.$strCss.'"></div>';
 			return $strOutput;				
 		}	
 

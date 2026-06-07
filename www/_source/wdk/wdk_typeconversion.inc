@@ -184,7 +184,7 @@
     $i = 0;
 		for ($i = 0; $i < $nLength; $i++)
     {
-			$strHex .= sprintf('%02x', ord($strRaw{$i}));
+			$strHex .= sprintf('%02x', ord($strRaw[$i]));
     }
     return $strHex;
 	}

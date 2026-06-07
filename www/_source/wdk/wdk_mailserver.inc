@@ -2,7 +2,7 @@
 
 	require_once("wdk_ip.inc");
 
-	function ScanMailWarnLogForMaliciousIPs($arrayMailWarnLog)
+	function ScanMailLogForMaliciousIPs($arrayMailWarnLog)
 	{
 		if (!is_array($arrayMailWarnLog))
 		{

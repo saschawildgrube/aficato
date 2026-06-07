@@ -133,7 +133,7 @@
 				"?TID_SERVERMANAGER_LABEL_LOAD_AVERAGE_5MINUTES?",
 				"?TID_SERVERMANAGER_LABEL_LOAD_AVERAGE_15MINUTES?",
 				"?TID_SERVERMANAGER_LABEL_DISK_USED_PERCENT?",
-				"?TID_SERVERMANAGER_LABEL_PLESK_ACTIVE?"); 
+				"?TID_SERVERMANAGER_LABEL_PLESK_STATUS?"); 
 			
 			$this->IncludeElement("format");
 			$formatError = new CFormatElement($this->GetWebsite(),"testfailed");
@@ -148,7 +148,7 @@
 				$strLoadAvg5 = "";
 				$strLoadAvg15 = "";
 				$strDiskUsedPct = "";
-				$strPleskActive = "";
+				$strPleskStatus = "";
 				if ($strName != "")
 				{
 					$arrayWebservice = ArrayGetValue($arrayServer,"webservice");
@@ -161,6 +161,7 @@
 						{
 							$strIP = GetIPFromHostName($strHost);
 						}
+						$bPleskActive = false;
 
 						$consumer = new CWebServiceConsumerWebApplication($this->GetWebsite());	
 						$arrayParams = array();
@@ -208,17 +209,15 @@
 								$strDiskUsedPct = $formatError->RenderFormat($strDiskUsedPct);
 							}
 							$bPleskActive = $consumer->GetResultValue("PLESK_ACTIVE");
-							if ($bPleskActive == true)
-							{
-								$strPleskURL = "https://".$strHost.":8443/login_up.php";
-								$link = new CLinkElement($this->GetWebsite(),"default");
-								$strPleskActive = $link->RenderLink($strPleskURL,"?TID_ITEM_ACTIVE?",true);
-							}
-							else
-							{
-								$strPleskActive = "?TID_ITEM_INACTIVE?";
-							}
 						}
+						$strPleskLinkLabel = "?TID_ITEM_INACTIVE?";
+						if ($bPleskActive == true)
+						{
+							$strPleskLinkLabel = "?TID_ITEM_ACTIVE?";
+						}
+						$strPleskURL = "https://".$strHost.":8443/login_up.php";
+						$link = new CLinkElement($this->GetWebsite(),"default");							
+						$strPleskStatus = $link->RenderLink($strPleskURL,$strPleskLinkLabel,true);						
 					} 
 				}
 				$arrayDashboard[] = array(
@@ -229,7 +228,7 @@
 					$strLoadAvg5,
 					$strLoadAvg15,
 					$strDiskUsedPct,
-					$strPleskActive);
+					$strPleskStatus);
 			}
 			
 			$table = new CTableElement($this->GetWebsite(),"default");

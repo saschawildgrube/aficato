@@ -556,42 +556,25 @@
 		}
 		
 		
-		
-		
 		function OnGetDateLocalFormat($strCountryID)
 		{
-			/*
-				Use this function to override defaults defined in GetDateLocalFormat().
-				return an empty string or remove the function completely to use defaults.
-				
-				The implementation below uses the ISO format for the USA.
-			*/
 			switch ($strCountryID)
 			{
-			case 'USA':
-				return '%Y-%m-%d';
 			default:
-				return '';
+				return 'Y-m-d';
 			}
 		}
 
 		function OnGetTimeLocalFormat($strCountryID)
 		{
-			/*
-				Use this function to override defaults defined in GetTimeLocalFormat().
-				return an empty string or remove the function completely to use defaults.
-				
-				The implementation below defaults to the 24 hours clock format for the USA
-				instead of the 12 hours clock format.
-			*/
 			switch ($strCountryID)
 			{
-				case 'USA':				
-					return '%H:%M:%S';
-				default:
-					return '%I:%M:%S%P';
+			default:
+				return 'H:i:s';
 			}
-		}
+		}		
+		
+
 
 	}
 	

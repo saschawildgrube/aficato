@@ -23,8 +23,10 @@
 			$this->GetWebsite()->AddHeader('<![endif]-->');
 
 			// BOOTSTRAP THEME
-			$this->AddStyleSheetURL('bootstrap-theme','https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css');
+			//$this->AddStyleSheetURL('bootstrap-theme','https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css');
 			// integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"
+			$this->AddStyleSheet('bootstrap-theme','bootstrap-3.3.7-theme.min');
+
 			
 			$this->GetWebsite()->AddJavaScript('layout-element-navigation-horizontalpath','layout_default_element_navigation_horizontalpath');
 			

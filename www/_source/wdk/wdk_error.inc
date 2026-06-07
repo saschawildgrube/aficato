@@ -4,6 +4,7 @@
 	{
 		private $m_errorReporting;
 		private $m_strDisplayErrors;
+		private $m_bActive;
 		
 		function __construct()
 		{

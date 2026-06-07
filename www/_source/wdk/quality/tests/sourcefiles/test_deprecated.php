@@ -137,7 +137,25 @@
 						'/On_TestCase_CheckFile\(/',
 						'/On_TestCase_CheckFolder\(/',
 						'/::Callback/',
-						'/m_bCallback/'
+						'/m_bCallback/',
+						'/Timezone/',
+						'/GetIconIDByFileCategory/',
+						'/CDisclaimerModule/',
+						'/disclaimerconfirmed/',
+						'/strftime/',
+						'/\%Y/',
+						'/\%H/',
+						'/\%h/',						
+						'/\%M/',
+						'/\%A/',
+						'/\%B/',
+						'/\%S/',
+						'/\%I/',
+						'/\%P/',		
+						'/\%e/',
+						'/\%m/',
+						'/\%d/',										
+						
 					);
 					
 				if ($strFileName != 'wdk_url.inc')

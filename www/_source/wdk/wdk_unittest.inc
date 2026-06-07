@@ -9,6 +9,7 @@
 		 
 		private $m_bActive;
 		private $m_bResult;
+		private $m_bRequestError;
 		private $m_bVerbose;
 		
 		private $m_bOnInit;

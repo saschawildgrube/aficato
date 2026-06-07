@@ -42,7 +42,7 @@
 			$commandDef->AddCommandDefinition('info',array());
 			$commandDef->AddCommandDefinition('status',array());
 			$commandDef->AddCommandDefinition('performance',array());
-			$commandDef->AddCommandDefinition('protect',array());
+			//$commandDef->AddCommandDefinition('protect',array());  
 			parent::OnInitCommandDefinition($commandDef);
 		}
 		
@@ -178,9 +178,8 @@
 			$this->Trace('');				
 			$this->Trace('Check Mail Server');	
 			
-			$this->SetResultValue(GetFileSize('/var/log/mail.warn',true),'MAIL_MAILWARN_FILESIZE');
 			$this->SetResultValue(GetFileSize('/var/log/mail.err',true),'MAIL_MAILERR_FILESIZE');
-			$this->SetResultValue(GetFileSize('/var/log/mail.info',true),'MAIL_MAILINFO_FILESIZE');
+			$this->SetResultValue(GetFileSize('/var/log/maillog',true),'MAIL_MAILLOG_FILESIZE');
 			
 			$nMailQueueSize = GetMailQueueSize();
 			if ($nMailQueueSize !== false)
@@ -326,24 +325,24 @@
 				$this->Trace('No action taken, since iptables cannot be run. Check sudo configuration!');
 				$this->SystemEvent(
 					'ERROR',
-					'SERVER_PROTECT_MAILSERVER_MAILWARN_IPTABLES_NOT_EXECUTABLE',
+					'SERVER_PROTECT_MAILSERVER_IPTABLES_NOT_EXECUTABLE',
 					'iptables could not be executed.',
 					array());					
 			}
 			else
 			{
-				$strMailWarnFilePath = $this->GetConfig('protect','mailserver','mailwarnfilepath');
-				if ($strMailWarnFilePath == '')
+				$strMailLogFilePath = $this->GetConfig('protect','mailserver','logfilepath');
+				if ($strMailLogFilePath == '')
 				{
-					$strMailWarnFilePath = '/var/log/mail.warn';
+					$strMailLogFilePath = '/var/log/maillog';
 				}
 
-				$bIsFile = IsFile($strMailWarnFilePath,true);
+				$bIsFile = IsFile($strMailLogFilePath,true);
 				
 				if ($bIsFile == false)
 				{
-					$this->Trace('File $strMailWarnFilePath does not exist.');					
-					if ($this->GetConfigBoolean('protect','mailserver','ignore_missing_mail_warn_file') == true)
+					$this->Trace('File '.$strMailLogFilePath.' does not exist.');					
+					if ($this->GetConfigBoolean('protect','mailserver','ignore_missing_mail_log_file') == true)
 					{
 						$this->SystemEvent(
 							'NOTICE',
@@ -355,7 +354,7 @@
 						$this->SystemEvent(
 							'ERROR',
 							'SERVER_PROTECT_MAILSERVER_MAILWARN_FILE_NOT_FOUND',
-							'File $strMailWarnFilePath does not exist',
+							'File '.$strMailLogFilePath.' does not exist',
 							array());
 					}
 					
@@ -363,23 +362,23 @@
 				else
 				{
 				
-					$this->Trace('Reading the mail.warn file: $strMailWarnFilePath');
-					$arrayMailWarnLog = FileReadToArray($strMailWarnFilePath);
-					if ($arrayMailWarnLog == false)
+					$this->Trace('Reading the mail log file: '.$strMailLogFilePath);
+					$arrayMailLog = FileReadToArray($strMailLogFilePath);
+					if ($arrayMailLog == false)
 					{
-						$this->Trace('Could not read mail warn file! Check file path and access rights. Also check open basedir restrictions.');
+						$this->Trace('Could not read mail log file! Check file path and access rights. Also check open basedir restrictions.');
 						$this->SystemEvent(
 							'ERROR',
-							'SERVER_PROTECT_MAILSERVER_MAILWARN_FILE_NOT_ACCESSIBLE',
-							'File $strMailWarnFilePath is not accessible',
+							'SERVER_PROTECT_MAILSERVER_LOG_FILE_NOT_ACCESSIBLE',
+							'File '.$strMailLogFilePath.' is not accessible',
 							array());												
 					}
 					else
 					{
-						$this->Trace('Scanning the mail.warn file...');
+						$this->Trace('Scanning the mail log file...');
 						
 						require_once(GetWDKDir().'wdk_mailserver.inc');
-						$arrayIPs = ScanMailWarnLogForMaliciousIPs($arrayMailWarnLog);
+						$arrayIPs = ScanMailLogForMaliciousIPs($arrayMailLog);
 						
 						$this->Trace('The following IPs have been identified as sources for unsuccessful login attempts:');
 						$this->Trace($arrayIPs);
@@ -390,25 +389,25 @@
 							$nThreshold = 25;
 						}
 						
-						$this->Trace('Blocking all IPs with more than $nThreshold attempts...');
+						$this->Trace('Blocking all IPs with more than '.$nThreshold.' attempts...');
 	
 						foreach ($arrayIPs as $strIP => $nCount)
 						{
 							if ($nCount > $nThreshold)
 							{
-								$this->Trace('Blocking IP $strIP because of $nCount unsuccessful attempts...');
+								$this->Trace('Blocking IP '.$strIP.' because of '.$nCount.' unsuccessful attempts...');
 								
 								$bResult = IPTablesIsIPBlocked($strIP);
 								if ($bResult == true)
 								{
-									$this->Trace('IP $strIP is already blocked. No further action required.');
+									$this->Trace('IP '.$strIP.' is already blocked. No further action required.');
 								}
 								else
 								{
 									$bResult = IPTablesBlockIP($strIP);
 									if ($bResult == false)
 									{
-										$this->Trace('IPTablesBlockIP($strIP) returned false');
+										$this->Trace('IPTablesBlockIP('.$strIP.') returned false');
 									}
 									else
 									{
@@ -426,7 +425,7 @@
 							$this->SystemEvent(
 								'NOTICE',
 								'SERVER_PROTECT_MAILSERVER',
-								'$nBlockedIPs new IPs have been blocked!',
+								$nBlockedIPs.' new IPs have been blocked!',
 								$arrayBlockedIPs);	 
 						}
 					}

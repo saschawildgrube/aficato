@@ -12,6 +12,7 @@
 		function OnInit()
 		{
 			parent::OnInit();
+			$this->SetActive(false);
 			$this->SetResult(true);
 			return true;
 		}

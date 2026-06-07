@@ -213,7 +213,7 @@
 					"webserviceparam" => true,
 					"type" => "enum",
 					"dbtype" => "string",
-					"enum" => GetAllTimezoneIDs(),
+					"enum" => GetAllTimeZoneIDs(),
 					"tidpattern" => "{VALUE}",
 					"default" => "UTC",
 					"control" => "select",

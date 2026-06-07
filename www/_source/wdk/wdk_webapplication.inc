@@ -43,7 +43,7 @@
 		private $m_bCacheActive;
 		
 		private $m_arrayMeta;
-		private $m_arrayConfig;
+		protected $m_arrayConfig;
 		
 		private $m_strInstanceToken;
 		private $m_strClientIP;

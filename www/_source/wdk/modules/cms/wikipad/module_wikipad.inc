@@ -212,7 +212,8 @@
 			
 			$strContent = ReplaceString($strContent,'<CODE>','<code>');
 			$strContent = ReplaceString($strContent,'</CODE>','</code>');
-
+			
+			$strContent = ReplaceString($strContent,u("—"),'--'); 
 			
 			$this->SetState('');
 		

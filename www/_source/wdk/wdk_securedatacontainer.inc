@@ -97,7 +97,9 @@
 			{
 				return false;	
 			}
-			$this->m_arrayData = array();
+			
+			$this->SetDataArray(array());
+			
 			$ea = new CErrorAmnesty();
 			$ea->Start();
 			$this->m_arrayHeader = unserialize(base64_decode($strSerialized));
@@ -118,8 +120,6 @@
 			{
 				return false;
 			}
-
-			$this->m_arrayData = array();
 			$strEncrypted = base64_decode(ArrayGetValue($this->m_arrayHeader,"payload"));
 			if ($strEncrypted == "")
 			{
