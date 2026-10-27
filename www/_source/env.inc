@@ -126,9 +126,9 @@
 	{
 		if (GetEnvID() == 'dev')
 		{
-			return GetDocumentRootDir().'../../logs-dev/error_log';
+			return GetDocumentRootDir().'../../logs-dev/error.log';
 		}
-		return GetDocumentRootDir().'../../logs/error_log';	
+		return GetDocumentRootDir().'../../logs/error.log';	
 	}
 
 
