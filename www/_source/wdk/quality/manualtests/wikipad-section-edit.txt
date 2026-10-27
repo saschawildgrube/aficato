@@ -1,0 +1,51 @@
+=Base WikiPad section editing=
+# Deploy the modified WikiPad module, wiki element, and resource file before testing. Use a disposable CWikiPadModule instance with showsubmitbuttonsaveandstay and showsubmitbuttonontop enabled. This test must use the base cms/wikipad module, not a subclass that overrides its view or section methods.
+# Back up the pad's original content. Paste the fixture below using whole-page Edit and save.
+# Verify a regular-text-size Edit link appears beside every heading (levels 1 through 6) and every separator. The fixture has nine sections. Each section starts with its heading/separator and ends immediately before the next heading/separator, irrespective of heading level. The introduction has no section link.
+# Verify literal heading/separator lines inside pre and syntaxhighlight blocks, raw HTML headings/rules, and table-of-contents entries get no section-edit links and do not shift later section indexes.
+# Open each of the nine links. Verify a page navigation occurs and the editor contains exactly the selected section, including its boundary line. In particular, level 1 does not include level 2, level 2 ends at the separator, and a separator editor includes only the content following that separator until the next boundary.
+# Rename a nested heading, change a separator section, and edit the last section. Save each; verify introduction, neighboring sections, blank lines, and literal blocks remain unchanged. Reopen whole-page Edit to compare the complete source.
+# Save a middle section without a trailing newline. Verify the next heading/separator still starts on its own line. Test CRLF input and non-ASCII text.
+# Save and stay twice in a heading section and twice in a separator section. Verify the editor stays on the correct section, the refreshed hash allows the next save, and the final URL is editsection rather than submitsection.
+# Delete the selected boundary and use Save and stay. Verify View opens if no boundary remains at the section's start. Clear a section completely and save; verify only that section disappears. Test adjacent separators and a separator at end-of-file.
+# Cancel via View. Switch from a section editor to whole-page Edit; verify all current page content appears. Verify both editors honor rows, columns, top Save buttons, and optional Save and stay.
+# Open a section in tab A, change the page in tab B, then submit A. Verify an error, preserved submitted draft, and unchanged newer stored content. Retry the rejected form: it must still be rejected. Select whole-page Edit after the error: it must show the complete stored page, not the rejected draft.
+# Load View in tab A, change the page in tab B, then click an old section link in A. Verify the stale link is rejected rather than selecting a different section. Repeat after deleting the selected section.
+# Test invalid section IDs (negative, text, out-of-range) and a changed/missing hash on submission. Verify no content is written. For a viewonly pad and a pad whose edit tool is hidden, verify no edit links and no writes through direct editsection/submitsection requests.
+# After each successful save, reload the final page twice. Verify no repeated write/resubmission; save newer content in another tab and verify refreshing the old result cannot overwrite it. Check whole-page saving still works normally.
+# Where storage failure can be simulated safely, reject a write and verify the error/draft remain visible without a success redirect.
+# Verify another page rendering CWikiElement directly (without WikiPad) has unchanged heading/separator HTML and TOC behavior. Run existing wdk-elements/wiki and wdk-elements/wikitoc tests, plus wdk-wikipad/sections.
+# Restore the original pad content.
+
+==Fixture==
+<syntaxhighlight lang="text">
+Introduction must remain unchanged.
+__TOC__
+=Level 1=
+First section.
+==Level 2==
+Second section.
+----
+Separator section.
+===Level 3===
+<pre>
+=Literal heading=
+----
+</pre>
+====Level 4====
+Fourth-level section.
+=====Level 5=====
+Fifth-level section.
+======Level 6======
+Sixth-level section.
+----
+----
+Last separator section.
+</syntaxhighlight>
+
+==Rendering performance regression==
+# Before deployment, record several reload timings for a long WikiPad and keep its content unchanged. After deploying modules/cms/wikipad/module_wikipad.inc and elements/element_wiki.inc, repeat with the same account, language, trace settings, and content. Compare median server response times, excluding the first warm-up request.
+# Test an editable pad with hundreds of headings/separators as well as viewonly. Check that every Edit link remains translated, its section index selects the correct source, and stale-page protection still rejects old links. Repeat in a second language and with the edit tool hidden.
+# Compare rendered content for Unicode before and inside internal/external links, headings, list items, and table cells. Include an external link at the start of the page, malformed/unclosed links, duplicate headings, and a separator immediately followed by a non-ASCII character.
+# Check a plain pad without section boundaries: it must not build a section-edit URL or resolve the section Edit label. Check TOCs and literal pre/syntaxhighlight blocks using the fixture above.
+# With profiling enabled, compare both wiki rendering and the later ReplaceText phase: section labels now resolve once in a small link template instead of triggering one whole-page string rebuild per section.

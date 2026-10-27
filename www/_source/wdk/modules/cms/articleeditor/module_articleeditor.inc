@@ -334,8 +334,7 @@
 		
 		function OnInit()
 		{
-			
-			return true;
+			return parent::OnInit();
 		}
 	}
 

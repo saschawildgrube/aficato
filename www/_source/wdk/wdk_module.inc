@@ -325,9 +325,13 @@
 				$this->m_strStyleID = $strStyleID;
 				$strStateID = $this->OnRenderModule($this->GetState());
 				$this->m_strFinalState = $strStateID;
-				$strOutput = $this->LoadModuleLayoutFile($strStateID,$strStyleID);
-       	$strOutput = $this->ReplaceOutputItems($strOutput);
-       	$this->GetWebsite()->SetOutputItems($this->m_arrayOutputItems);
+				// A redirecting handler can return false to skip its module output.
+				if ($strStateID !== false)
+				{
+					$strOutput = $this->LoadModuleLayoutFile($strStateID,$strStyleID);
+					$strOutput = $this->ReplaceOutputItems($strOutput);
+					$this->GetWebsite()->SetOutputItems($this->m_arrayOutputItems);
+				}
 				$this->m_strStyleID = "";
 			}
 			$this->Trace('RenderModule END');

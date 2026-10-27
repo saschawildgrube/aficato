@@ -22,9 +22,10 @@
 			parent::OnTest();
 		
 			$this->Trace('');
-			$this->Trace("This test requires that the www user (e.g. www-data) can execute the\nopenssl command with root privileges.");
-			$this->Trace("In order to do this, you'll need to create a file\nin /etc/sudoers.d/ with mode 0440 that contains the following line:");
-			$this->Trace("www-data ALL=(ALL) NOPASSWD: /usr/bin/openssl");
+			$this->Trace("This test requires that the system user can execute the\nopenssl command with root privileges.");
+			$this->Trace("In order to do this, you'll need to create or edit the file\n /etc/sudoers.d/wdk with mode 0440 that contains the following lines:");
+			$this->Trace("User_Alias WDK_USERS = <name of system user>");
+			$this->Trace("WDK_USERS ALL=(ALL) NOPASSWD: /usr/bin/openssl");
 			$this->Trace('');
 
 		

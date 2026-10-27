@@ -19,6 +19,13 @@
 			$strOutput = $this->GetLayoutHTML(); 
 		
 			$arrayItems["SOURCECODE"] = $strSourceCode;
+			$strSourceCodeLanguage = StringLowerCase($strSourceCodeLanguage);
+			$strSourceCodeLanguage = StringFilter(
+				$strSourceCodeLanguage,
+				CHARSET_ALPHANUMERIC_LOWERCASE."-_");
+			$arrayItems["SOURCECODELANGUAGECLASS"] = ($strSourceCodeLanguage == "")
+				?("")
+				:(" language-".$strSourceCodeLanguage);
 			
 			$this->SetOutputItems($arrayItems);
 			$strOutput = $this->ReplaceOutputItems($strOutput);

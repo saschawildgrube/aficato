@@ -20,7 +20,4 @@ Every project based on {WDK} that is published on GitHub is a great contribution
 * Provide a website for the project (if applicable)
 * Make the repository public
 * Add the fork me on GitHub ribbon on the website if applicable
-* Post on [https://www.xing.com xing.com]
 * Post on [https://www.linkedin.com linkedin.com]
-* Post on [https://www.twitter.com twitter.com]
-* Post on [https://www.facebook.com facebook.com]

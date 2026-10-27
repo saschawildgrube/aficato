@@ -36,6 +36,35 @@ Some blind text
 * [http://www.example.com]
 =Embedded HTML=
 This is some text with html <span style=\"color:red\">formatting</span>.
+=Preformatted Text=
+<pre>
+Wiki ''formatting'' and <strong>HTML</strong> remain literal here.
+</pre>
+=Code=
+<code>
+function HelloWorld(\$strName)
+{
+	print(\"Hello \$strName\");
+}
+</code>
+=Syntax Highlighting=
+<syntaxhighlight lang=\"php\">
+function HelloWorld(\$strName)
+{
+	print(\"Hello \$strName\");
+}
+</syntaxhighlight>
+=Table=
+{|
+! Name
+! Type
+|-
+| Apple
+| Fruit
+|-
+| Cabbage
+| Vegetable
+|}
 ";
 
 $strOutput = "";

@@ -9,7 +9,7 @@
 	define('LOG_MAILWARN_FILESIZE_THRESHOLD', 	(4*1024*1024));
 	define('LOG_PANEL_FILESIZE_THRESHOLD', 			100);
 
-	abstract class CMonitoringUnitTest extends CUnitTest
+	abstract class CMonitoringUnitTest extends CUnitTest 
 	{
 		function __construct($strName,$arrayConfig = array())
 		{
@@ -429,18 +429,18 @@
 				$arrayPHPVersion = ParseVersion($strPHPVersion);
 				if ($arrayPHPVersion["MAJOR"] == 7)
 				{
-					if ($arrayPHPVersion["MINOR"] == 2)   
+					if ($arrayPHPVersion["MINOR"] < 4)   
 					{
-						if ($arrayPHPVersion["PATCH"] < 22)
-						{
-							$this->Trace("FAILED: PHP patch version is below 22.");   
-							$bResult = false;
-						}
+						$this->Trace("FAILED: PHP minor version is below 4.");
+						$bResult = false;
 					}
 					else
 					{
-						$this->Trace("FAILED: PHP minor version is not 2.");
-						$bResult = false;
+						if ($arrayPHPVersion["PATCH"] < 33)
+						{
+							$this->Trace("FAILED: PHP patch version is below 7.4.33. Potential vulnerability to CVE-2026-109618 and CVE-2026-109619.");   
+							$bResult = false;
+						}
 					}
 				}
 				else

@@ -354,7 +354,7 @@
 					{
 						$this->SetResult(false);						
 						$this->Trace('');
-						$this->Trace('The log file does not exist or the www-data user does not have access to it.');
+						$this->Trace('The log file does not exist or the system user does not have access to it.');
 						$this->Trace('');
 						$this->Trace('If the file exists:');
 						$this->Trace("Execute \"chmod a+x logs\" where 'logs' is the directory in which the log file is stored.");

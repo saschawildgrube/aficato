@@ -1,6 +1,7 @@
 <?php
 
 	require_once(GetWDKDir()."wdk_module.inc");
+	require_once(GetWDKDir()."modules/cms/staticfileviewer/module_staticfileviewer.inc");
 	
 	class CStaticFileBrowserModule extends CModule
 	{
@@ -43,6 +44,8 @@
 			$this->Trace("OnRenderModule(\"$strState\")");
 			switch ($strState)
 			{
+				case 'view':
+					return $this->StateView();
 				case 'download':
 					return $this->StateDownload();
 				case 'refresh':
@@ -61,18 +64,19 @@
 			$strCurrentDir = $this->GetModuleVar("currentdir");
 			if ($strCurrentDir != "")
 			{
+				$arrayParams = array();
+				$arrayParams[$this->GetModuleVarNameState()] = "browse";
+				$arrayParams[$this->GetModuleVarName("currentdir")] = "";
+				$strLink = $this->GetWebsite()->MakeURL($arrayParams);
+				$toolbarDef->AddTool($strLink, "chevron-right", "?TID_STATICFILEBROWSER_TOOL_ROOTDIR?");
+			
 				$strParentDir = GetParentDirectoryFromPath($strCurrentDir);
 				$arrayParams = array();
 				$arrayParams[$this->GetModuleVarNameState()] = "browse";
 				$arrayParams[$this->GetModuleVarName("currentdir")] = $strParentDir;
 				$strLink = $this->GetWebsite()->MakeURL($arrayParams);
-				$toolbarDef->AddTool($strLink, "level-up", "?TID_STATICFILEBROWSER_TOOL_PARENTDIR?");
+				$toolbarDef->AddTool($strLink, "chevron-up", "?TID_STATICFILEBROWSER_TOOL_PARENTDIR?");
 
-				$arrayParams = array();
-				$arrayParams[$this->GetModuleVarNameState()] = "browse";
-				$arrayParams[$this->GetModuleVarName("currentdir")] = "";
-				$strLink = $this->GetWebsite()->MakeURL($arrayParams);
-				$toolbarDef->AddTool($strLink, "level-up", "?TID_STATICFILEBROWSER_TOOL_ROOTDIR?");
 			}
 			
 			
@@ -201,7 +205,7 @@
 				if (IsFile($strPathAbs))
 				{
 					$arrayParams = array();
-					$arrayParams[$this->GetModuleVarNameState()] = "download";
+					$arrayParams[$this->GetModuleVarNameState()] = CStaticFileViewerModule::IsTextFile($strPathRel) ? "view" : "download";
 					$arrayParams[$this->GetModuleVarName("file")] = $strCurrentDirRel.$strPathRel;
 					$strLink = $this->GetWebsite()->MakeURL($arrayParams);
 					$strFileInfo = $this->GetFileInfoText($strPathAbs);
@@ -210,7 +214,7 @@
    					"title" => "$strPathRel",  
    					"text" => $strFileInfo,
    					"linkurl" => $strLink,
-   					"linktext" => "?TID_LINK_DOWNLOAD?");
+					"linktext" => CStaticFileViewerModule::IsTextFile($strPathRel) ? "?TID_STATICFILEBROWSER_LINK_VIEW?" : "?TID_LINK_DOWNLOAD?");
 					
 				}
 				
@@ -302,7 +306,7 @@
 				else if (IsFile($strPathAbs))
 				{
 					$arrayParams = array();
-					$arrayParams[$this->GetModuleVarNameState()] = "download";
+					$arrayParams[$this->GetModuleVarNameState()] = CStaticFileViewerModule::IsTextFile($strPathRel) ? "view" : "download";
 					$arrayParams[$this->GetModuleVarName("file")] = $strCurrentDirRel.$strPathRel;
 					$strLink = $this->GetWebsite()->MakeURL($arrayParams);
 					
@@ -408,13 +412,31 @@ $itemmanagerdata->SetSortOptions(
 		}
 
 		
+		function StateView()
+		{
+			$viewer = new CStaticFileViewerModule($this->GetWebsite(),$this->GetInstanceID(),array(
+				"rootdir" => $this->GetRootDir(),
+				"file" => $this->GetModuleVar("file")));
+			$this->SetOutputItem("STATICFILEVIEWER",$viewer->RenderModule());
+			$arrayParams = array();
+			$arrayParams[$this->GetModuleVarNameState()] = "browse";
+			$toolbarDef = new CToolbarDefinition();
+			$toolbarDef->AddTool($this->GetWebsite()->MakeURL($arrayParams),"chevron-left","?TID_STATICFILEBROWSER_TOOL_BACK?");
+			$arrayParams[$this->GetModuleVarNameState()] = "download";
+			$arrayParams[$this->GetModuleVarName("file")] = $this->GetModuleVar("file");
+			$toolbarDef->AddTool($this->GetWebsite()->MakeURL($arrayParams),"download","?TID_STATICFILEBROWSER_LINK_DOWNLOAD?");
+			$toolbar = new CToolbarElement($this->GetWebsite(),'default');
+			$this->SetOutputItem("TOOLBAR",$toolbar->RenderToolbar($toolbarDef));
+			return "view";
+		}
+
 		function StateDownload()
 		{
 			$strFilePathRel = $this->GetModuleVar("file");
-			$strFilePathAbs = $this->GetRootDir().$strFilePathRel;
-			$strFileName = GetFilenameFromPath($strFilePathAbs);
+			$strFilePathAbs = CStaticFileViewerModule::ResolveFile($this->GetRootDir(),$strFilePathRel);
+			$strFileName = GetFilenameFromPath($strFilePathRel);
 			
-			if (IsFile($strFilePathAbs))
+			if ($strFilePathAbs !== false)
 			{
 				
 				$this->GetWebsite()->DownloadFile(

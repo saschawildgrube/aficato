@@ -2,7 +2,7 @@
 
 	require_once(GetWDKDir()."wdk_compare.inc");
 
-	function ParseVersion($strVerboseVersion,$nComponents = 4)
+	function ParseVersion($strVerboseVersion,$nComponents = 3)
 	{
 		
 		$arrayVerboseVersionComponents = StringExplode($strVerboseVersion,"-",true,2);
@@ -46,11 +46,11 @@
 		return $arrayVersion;
 	}
 	
-	function CompareVersion($vVersion1, $vVersion2)
+	function CompareVersion($vVersion1, $vVersion2, $nComponents = 3)
 	{
 		if (!is_array($vVersion1))
 		{
-			$arrayVersion1 = ParseVersion($vVersion1);
+			$arrayVersion1 = ParseVersion($vVersion1, $nComponents);
 		}
 		else
 		{
@@ -58,7 +58,7 @@
 		}
 		if (!is_array($vVersion2))
 		{
-			$arrayVersion2 = ParseVersion($vVersion2);
+			$arrayVersion2 = ParseVersion($vVersion2, $nComponents);
 		}
 		else
 		{

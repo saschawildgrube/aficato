@@ -1,8 +1,57 @@
 ={WDK} Release Notes= 
-==Version 0.0.0.79 WORK IN PROGRESS==
-NOT YET Baselined
+==Version 0.0.80==
+Baselined 2026-10-25
 * '''IMPORTANT'''
-** All externak assets (JQuery, Bootstrap and Fontawesome) have been integrated into WDK to avoid loading them from external sources. This is to comply with a recent German court ruling which renders loading anything from external sources as illegal.
+** Minimum required PHP Version is now 7.4.33 (due to the php2shell vulnerability)
+* Security
+** Updated symmetric Rijndael-128, Rijndael-192 and Rijndael-256 encryption for PHP 7.4.33 using the bundled phpseclib 2.0.55 implementation. Legacy key derivation, CBC mode, zero padding and payload handling are retained for binary compatibility in both directions with the mcrypt implementation.
+** IsMcryptSupported() checks for the mcrypt extension and is used by the legacy mcrypt code paths and the bidirectional compatibility test. Removed mcrypt availability guards from encryption callers and regular tests because phpseclib is a bundled dependency.
+** CMonitoringUnitTest::TestCase_Server() now fails if PHP is below 7.4.33 due to potential exposure to CVE-2026-109618 and CVE-2026-109619.
+** MakeInitVector() now uses random_bytes() for Rijndael initialization vectors.
+** Static file viewing and downloading now resolve file paths within the configured root directory, rejecting files outside that directory.
+* Defects
+** Fixed calls to non-existent functions in wdk_website.inc.
+** CWikiPadModule now clears remembered editing and submission states when returning to a page through navigation, preventing reopened editors and stale-section errors. Explicit editing requests and pages configured to open in edit mode remain supported.
+* New features
+** Added CStaticFileViewerModule (cms/staticfileviewer) to display local server text and source code files based on their extensions, with escaped contents and preserved formatting.
+** CStaticFileBrowserModule now opens supported text files in the viewer in both list and portfolio layouts. Other files remain downloads. The file view includes Back to folder and Download actions.
+** CWikiElement now supports the MediaWiki-style &lt;syntaxhighlight&gt; tag with an optional language attribute. The &lt;syntaxhighlighting&gt; alias is also supported.
+** Added GetPleskVersion(). The system/server status command now returns the installed Plesk version and CServerManagerModule displays it.
+** Added GetVersionInfoOS(). The system/server status command and CServerManagerModule now expose the operating system name and version.
+** CServerManagerModule now displays and compares Plesk versions and highlights servers below the highest detected version.
+** CServerManagerModule now displays and compares PHP versions and highlights servers below the highest detected version.
+** The system/server status command now returns the PHP version. 
+** Added check.sh shell script to perform a series of read-only analysis checks on a server.
+* Improvements
+** The static file viewer uses a single frame with horizontal and vertical scrolling confined to the file pane. CSS-only sizing follows the viewport without changing the surrounding page or navigation layout.
+** CWikiPadModule Module now supports the re-direct logic to prevent mobile browsers to offer form resubmission.
+** ParseVersion() now defaults to 3 version components - and hence assumes semantic versions by default.
+** CompareVersions() now supports the $nComponents parameter and defaults to sematic versions with 3 components.
+** CElement now uses a memory cache for loaded CFG and HTML files to improve rendering performance.
+** Removed not needed calls to deprecated imagedestroy().
+** Rendering JavaScript code into the page only in later rendering iterations to improve performance.
+** The Wiki demonstration in the Element Gallery now covers preformatted text, code, syntax highlighting and tables.
+** The .htaccess contained in website scaffolds now contains the directive "CGIPassAuth On" to ensure that Apache forwards authentication headers to the PHP handler.
+** The env.inc contained in website scaffolds now refers to "error.log" instead of "error_log" (as this is the default error file name used by FPM).
+* Discontinued
+** No changes
+* Quality
+** Deactivated tests for source code write access - to maintain compatibility with FPM PHP runmode.
+** Added symmetric encryption round-trip, initialization-vector validation, block-boundary and NUL-byte tests. When mcrypt is installed, tests also check byte-for-byte ciphertext equality and decryption in both directions. Runtime verification on PHP 7.4.33 and an mcrypt-enabled host is pending.
+** Added static file viewer tests for extension classification, root-directory containment and literal text escaping.
+** Avoiding the user name "test" in automated tests. Using "test.auto" instead.
+** Added automated Wiki element coverage for syntax highlighting, literal Wiki markup and HTML escaping.
+** The test environment/errorlog now displays the complete error log.
+** The test sourcefiles/unintendedfiles now also captures conflicted files created by pCloud.
+* Refactoring
+** No changes
+* Documentation
+** No changes
+==Version 0.0.79==
+Baselined 2026-06-07
+* '''IMPORTANT'''
+** Semantic versioning is used from now on.
+** All external assets (JQuery, Bootstrap and Fontawesome) have been integrated into WDK to avoid loading them from external sources. This is to comply with a recent German court ruling which renders loading anything from external sources as illegal.
 ** CEntityManagerModule::CheckCondition() has been renamed to ::CheckEntityCondition() to avoid a conflict with the newly introduced CWebsiteSatellite::CheckCondition() function.
 ** CDislaimerModule has been renamed to CConsentModule, TIDs have been renamed accordingly.
 ** The w3c validation check had to be deactivated for the time being. The operators of the w3c website think that it's not ok to use the test in an unattended automated fashion and added captcha checks. That is disappointing and does not contribute to make the world a better place. It is what it is.
@@ -35,6 +84,7 @@ NOT YET Baselined
 ** Introduced the javascript class WDKReactComponent to establish a place for common behavior of react components.
 ** Added react components Button, ButtonSelection, InfoMessage and ErrorMessage
 ** Added javascript function ArrayKeyExists() to wdk.js.
+** Added javascript function ArrayValueExists() to wdk.js.
 ** Added javascript function GetArrayValue() to wdk.js.
 ** Added javascript function IsArray() to wdk.js.
 ** Added javascript function GetBoolValue() to wdk.js.
@@ -44,7 +94,13 @@ NOT YET Baselined
 ** Added javascript function GetType() to wdk.js.
 ** Added javascript function GetProperties() to wdk.js.
 ** Added javascript function GetFunctions() to wdk.js.
+** Added javascript function MakeTableOfContents() to wdk-maketableofcontents.js
 ** Added shell script filesys-cleanup.sh to free up disc space by deleting various log files and backups.
+** Added shell script traffic-by-ip.sh to list traffic over all sites by source IPs.
+** Added shell script traffic-by-domain.sh to list traffic over all sites by target domain.
+** Added shell script traffic-by-agent.sh to list traffic over all sites by source agent.
+** Added shell script traffic.sh to analyse traffic by ip, by domain, and by agent in one go.
+** Added CTableOfContentsElement and corresponding generic output item "TOC"
 ** Added CIconTeaserElement and corresponding generic output item.
 ** Added form element layout style "compact" for small compact inline forms.
 ** CIconElement has a new layout "spin" for spinning icons.
@@ -63,12 +119,14 @@ NOT YET Baselined
 ** Reduced the threshold for alerting on exiring SSL certificates in CMonitoringUnitTest::TestCase_MonitorURL() to 4 days.
 ** CServerWebService has been updated to reflect the disappearance of the "mail.warn" log file and instead considers the "maillog" file.
 ** CServerManagerModule now also shows the Plesk link if the Server is reported to be down.
+** Simplified the implementation of ReplaceString() to increase performance.
 * Discontinued
 ** Removed the GOOGLEMAPS generic output item from CWebsite. The underlying element has already been removed in an earlier release.
 ** Removed outdated shell script beanc.sh
 ** Removed shell script listcoredumps.sh
 * Quality
 ** Extended test for HtmlEncode() to check for double quote encoding.
+** The test sourcefiles/unintendedfolders no longer considers ".git" as an unintended folder.
 * Refactoring
 ** CIconElement now loads the fontawesome alias icon ids from a csv file (instead from a layout cfg file).
 ** IsValidTimezoneID() has been renamed to IsValidTimeZoneID().

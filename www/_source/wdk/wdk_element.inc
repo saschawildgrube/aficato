@@ -1,5 +1,7 @@
 <?php
 
+	require_once('wdk_cache.inc');
+
 	abstract class CElement extends CWebsiteSatellite
 	{
 		private $m_strElementID;
@@ -11,6 +13,8 @@
 		private $m_bLayoutCFG;
 		private $m_bLayoutHTML;
 		private $m_strLayoutHTML;
+
+		private static $m_cacheLayout = null;
 		
 		function __construct(
 			CWebSite &$website,
@@ -20,6 +24,11 @@
 			$bLayoutHTML)
 		{
 			parent::__construct($website,$strElementID);
+
+			if (self::$m_cacheLayout == null)
+			{
+				self::$m_cacheLayout = new CMemoryCache();
+			}
 			
 			// Init values
 			$this->m_bLayoutCFG = $bLayoutCFG;
@@ -62,48 +71,70 @@
 		{
 			if ($this->m_strStyleID != '')
 			{
+				$strLayoutCacheID = $this->GetWebsite()->GetLayout()."\t".$this->m_strElementID."\t".$this->m_strStyleID;
+				$nLayoutCacheTTL = 3600;
 				$bLayoutCFG = false;
 				$bLayoutHTML = false;
 				if ($this->m_bLayoutCFG == true)
 				{
-					$strFileCFG = $this->GetAssemblyLine()->GetElementLayoutCfgFilePath(
-						$this->GetWebsite()->GetLayout(),
-						$this->m_strElementID,
-						$this->m_strStyleID);
-					$this->Trace("CElement::LoadLayoutFile: CFG: \"$strFileCFG\"");		
-					if ($strFileCFG != false)
+					$arrayLayoutDef = self::$m_cacheLayout->GetCacheObject("CFG\t".$strLayoutCacheID);
+					if ($arrayLayoutDef !== false)
 					{
-						$this->m_arrayLayoutDef = LoadNamedArrayFromTextFileMultiLine($strFileCFG,'LAYOUT_');
+						$this->m_arrayLayoutDef = $arrayLayoutDef;
 						$bLayoutCFG = true;
 					}
 					else
 					{
-						$this->Error('No layout CFG file found for style "'.$this->m_strStyleID.'"');	
+						$strFileCFG = $this->GetAssemblyLine()->GetElementLayoutCfgFilePath(
+							$this->GetWebsite()->GetLayout(),
+							$this->m_strElementID,
+							$this->m_strStyleID);
+						$this->Trace("CElement::LoadLayoutFile: CFG: \"$strFileCFG\"");		
+						if ($strFileCFG != false)
+						{
+							$this->m_arrayLayoutDef = LoadNamedArrayFromTextFileMultiLine($strFileCFG,'LAYOUT_');
+							self::$m_cacheLayout->SetCacheObject(
+								"CFG\t".$strLayoutCacheID,
+								$this->m_arrayLayoutDef,
+								$nLayoutCacheTTL);
+							$bLayoutCFG = true;
+						}
+						else
+						{
+							$this->Error('No layout CFG file found for style "'.$this->m_strStyleID.'"');	
+						}
 					}					
 				}
 				if ($this->m_bLayoutHTML == true) 
 				{
-					$strFileHTML = $this->GetAssemblyLine()->GetElementLayoutHtmlFilePath(
-						$this->GetWebsite()->GetLayout(),
-						$this->m_strElementID,
-						$this->m_strStyleID);
-					$this->Trace("CElement::LoadLayoutFile: HTML: \"$strFileHTML\"");			
-					if ($strFileHTML != false)
+					$strLayoutHTML = self::$m_cacheLayout->GetCacheObject("HTML\t".$strLayoutCacheID);
+					if ($strLayoutHTML !== false)
 					{
-						$this->m_strLayoutHTML = FileRead($strFileHTML);
+						$this->m_strLayoutHTML = $strLayoutHTML;
 						$bLayoutHTML = true;
 					}
 					else
 					{
-						$this->Error('No layout HTML file found for style "'.$this->m_strStyleID.'"');	
+						$strFileHTML = $this->GetAssemblyLine()->GetElementLayoutHtmlFilePath(
+							$this->GetWebsite()->GetLayout(),
+							$this->m_strElementID,
+							$this->m_strStyleID);
+						$this->Trace("CElement::LoadLayoutFile: HTML: \"$strFileHTML\"");			
+						if ($strFileHTML != false)
+						{
+							$this->m_strLayoutHTML = FileRead($strFileHTML);
+							self::$m_cacheLayout->SetCacheObject(
+								"HTML\t".$strLayoutCacheID,
+								$this->m_strLayoutHTML,
+								$nLayoutCacheTTL);
+							$bLayoutHTML = true;
+						}
+						else
+						{
+							$this->Error('No layout HTML file found for style "'.$this->m_strStyleID.'"');	
+						}
 					}
 				} 
-
-				$strFile = $this->GetAssemblyLine()->GetElementLayoutHtmlFilePath(
-					$this->GetWebsite()->GetLayout(),
-					$this->m_strElementID,
-					$this->m_strStyleID);
-			
 			}
 		}
 		

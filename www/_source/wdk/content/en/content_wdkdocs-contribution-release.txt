@@ -1,29 +1,29 @@
-={WDK} release checklist=
-* Search for "TODO" in the source code
+={WDK} Release Checklist=
+* Search for "TODO" in the source code, fix all open issues
 * Execute all automated tests
 * Test release candidate with selected websites
 * Test website scaffolder: "Basic"
 * Test website scaffolder: "Dynamic"
-* Update version information in wdk.txt (remove "WORK IN PROGRESS")
+* Update version information in wdk.txt and remove "WORK IN PROGRESS"
 * Update copyright year in wdk.txt
-* Update version information in content_wdkdocs-releasenotes.txt (remove "WORK IN PROGRESS")
+* Update version information in content_wdkdocs-releasenotes.txt and remove "WORK IN PROGRESS"
 * Update the baseline date in content_wdkdocs-releasenotes.txt
-* Update version information in wdk.inc (add the baseline date)
+* Update version information in wdk.inc and add the baseline date
 * Update system requirements (versions) in wdk_website.inc (search for "WDK_SYSTEMREQUIREMENT_")
-* Test the updated version information in lab environment
+* Test the updated version information in your lab environment
 * Zip the wdk folder and archive the zip file in the baseline folder 
+* Commit and sync GitHub repository
+* Create a Tag named like the version
+* Create a Release named like the version
 * Publish {WDK} on websitedevkit.com
 * Publish {WDK} on steelphp.com
-* Update GitHub repository
-* Create version tag in GitHub repository
 * Post on [https://www.linkedin.com linkedin.com]
-* Post on [https://www.twitter.com twitter.com]
-* Post on [https://www.facebook.com facebook.com]
 * Update version in wdk.inc 
 * Remove the baseline date in wdk.inc
 * Update version in wdk.txt and add "WORK IN PROGRESS" after the version number
-* Add new version chapter in content_wdkdocs-releasenotes.txt:<pre>
-==Version 0.0.0.x WORK IN PROGRESS==
+* Add new version chapter in content_wdkdocs-releasenotes.txt:
+<pre>
+==Version 0.0.x WORK IN PROGRESS==
 NOT YET Baselined
 * '''IMPORTANT'''
 ** No issues

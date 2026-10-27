@@ -257,7 +257,7 @@
 		{
 			
 			/*
-				When executed as root, the test is successful. When executed as www-data the test fails.
+				When executed as root, the test is successful. When executed as www the test fails.
 			*/
 			return;
 			

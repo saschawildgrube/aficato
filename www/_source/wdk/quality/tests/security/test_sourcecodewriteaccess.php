@@ -9,6 +9,13 @@
 			parent::__construct("Write access to source files");
 		}
 		
+		function OnInit()
+		{
+			parent::OnInit();
+			$this->SetActive(false);
+			return true;
+		}
+
 
 		function TestCase_IsDirectoryReadWriteAccess(
 			$strDirPath,

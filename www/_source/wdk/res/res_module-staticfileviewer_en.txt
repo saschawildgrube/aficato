@@ -1,0 +1,4 @@
+TID_STATICFILEVIEWER_TITLE
+File Viewer
+TID_STATICFILEVIEWER_ERROR_FILE_INVALID
+The file cannot be read or is not a supported text file.

@@ -40,6 +40,16 @@
 				$bUnintendedFile = true;
 			}
 
+			// pCloud sometimes leaves copies of files after unsuccessful merging
+			else if (FindString($strFileName,"[conflicted") != -1)
+			{
+				$bUnintendedFile = true;
+			}			
+			else if (FindString($strFileName,"(conflicted") != -1)
+			{
+				$bUnintendedFile = true;
+			}				
+
 			
 			if ($bUnintendedFile == true)
 			{

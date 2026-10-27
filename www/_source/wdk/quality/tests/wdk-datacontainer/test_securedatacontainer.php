@@ -11,10 +11,6 @@
 		
 		function OnInit()
 		{
-			if (!IsMcryptSupported())
-			{
-				$this->SetActive(false);
-			}
 			return parent::OnInit();	
 		}
 

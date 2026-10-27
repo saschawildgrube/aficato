@@ -79,7 +79,7 @@
 		private $m_arrayLoadedStringResources;
 		private $m_arrayResText;
     
-    private $m_strFrameworkID;
+    	private $m_strFrameworkID;
     
 		private $m_arrayOutputItems;
 		private $m_arrayBodyItems;
@@ -129,6 +129,7 @@
 		private $m_elementSourceCode;
 		private $m_elementYouTube;
 		private $m_elementCountDown;
+		private $m_elementTableOfContents;
 		
 		private $m_arrayDynamicNavigationTree;
 		
@@ -227,6 +228,7 @@
 				'payload20','title20','text20','linktext20','linkurl20','imageurl20','external20',				
 				'style'));
 			$this->RegisterGenericOutputItem('COUNTDOWN',array('datetime','timezone'));
+			$this->RegisterGenericOutputItem('TOC');
 			
 
 			// Init Time Zone Default
@@ -322,7 +324,7 @@
 			$this->m_strDownloadDir = 		$strWWWDir . "download/";
 
 			// Manage Protocols
-    	$this->m_strProtocol = "http";
+    		$this->m_strProtocol = "http";
 			if (ArrayKeyExists($_SERVER,"HTTPS"))
 			{
 				if ($_SERVER["HTTPS"] == true)
@@ -393,6 +395,7 @@
 			$this->m_elementTel = null;
 			$this->m_elementSourceCode = null;
 			$this->m_elementYouTube = null;
+			$this->m_elementTableOfContents = null;
 
 
 
@@ -797,7 +800,7 @@
 			$this->SetOutputItem('WDK_COPYRIGHT_PERIOD',WDK_COPYRIGHT_SINCE.'-'.$strCurrentYear);
 			$this->SetOutputItem('WDK_DOCS_URL','http://www.websitedevkit.com/');
 			$this->SetOutputItem('WDK_SCAFFOLDER_URL','http://www.websitedevkit.com/scaffolder/');
-			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_PHP_VERSION','7.2.24');
+			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_PHP_VERSION','7.4.33');
 			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_UBUNTU_VERSION','18.04');
 			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_APACHE_VERSION','2.4.29');
 			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_MARIADB_VERSION','10.1.38');			
@@ -815,6 +818,7 @@
 			$this->IncludeElement(''.'form');
 			$this->IncludeElement(''.'toolbar');
 			$this->IncludeElement(''.'table');
+			$this->IncludeElement(''.'tableofcontents');
 			
 
 			// Progress Indicator
@@ -1002,7 +1006,7 @@
 				}
 				else
 				{
-					$strOutput .= $this->RenderTrace();
+					$strOutput .= $this->RenderTraceLog();
 				}
 			}
 			else
@@ -1780,7 +1784,7 @@
 			return MakeURL($this->m_strRootURL,$arrayParams,true);			
 		}
 
-/*
+		/*
 		final
 		function MakeJavaScriptURL($strScriptID)
 		{
@@ -2273,7 +2277,7 @@
 			}
 		}
 		
-		final		
+		final
 		function SetWarningMessageCode($strMessageCode,$strPrefix="")
 		{
 			if ($strMessageCode != "")
@@ -2286,7 +2290,7 @@
 			}
 		}
 		
-		final		
+		final
 		function SetInfoMessageCode($strMessageCode,$strPrefix="")
 		{
 			if ($strMessageCode != "")
@@ -2310,7 +2314,7 @@
 			}
 		}
 		
-		final		
+		final
 		function SetWarningMessageText($strMessageText)
 		{
 			$this->m_arrayMessages["warning"] = array();
@@ -2321,7 +2325,7 @@
 			}
 		}
 		
-		final		
+		final
 		function SetInfoMessageText($strMessageText)
 		{
 			$this->m_arrayMessages["info"] = array();
@@ -2482,6 +2486,13 @@
 		}
 
 		
+		function IsMobileClient()
+		{
+			$strUserAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+			return (isset($_SERVER['HTTP_SEC_CH_UA_MOBILE']) && $_SERVER['HTTP_SEC_CH_UA_MOBILE'] == '?1')
+				|| preg_match('/Mobile|Android|iPhone|iPad|iPod|IEMobile|Opera Mini|Opera Mobi|Silk|Kindle/i',$strUserAgent) === 1;
+		}
+
 		final
 		function EnforceHTTPS()
 		{
@@ -2930,18 +2941,18 @@
 		function RenderWDKHelp()
 		{
 			return 
-MakeDocType("html5")."\n".
-"<html>
-	<head>
-		<title>WDK HELP</title>
-	</head>
-	<body>
-		<h1>WDK HELP</h1>
-		<pre>".
-FileRead(GetWDKDir() . "wdk_help.txt").
-"		<pre/>		
-	</body>
-</html>";
+				MakeDocType("html5")."\n".
+				"<html>
+					<head>
+						<title>WDK HELP</title>
+					</head>
+					<body>
+						<h1>WDK HELP</h1>
+						<pre>".
+							FileRead(GetWDKDir() . "wdk_help.txt").
+				"		<pre/>		
+					</body>
+				</html>";
 			
 		}
 
@@ -3139,19 +3150,18 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strContentID,
 				$this->GetLanguage());
 			
-      if ($strContentFilePHP != "")
-      {
-      	$this->Trace("CMyContent");
-        require_once($strContentFilePHP);
-        $content = new CMyContent($this,$strContentID); 
-      }
-      else
-      {
-      	$this->Trace("CContent");
-      	$content = new CContent($this,$strContentID);	
-      }
-      
-    	$strContentHTML = $content->RenderContent();
+			if ($strContentFilePHP != "")
+			{
+				$this->Trace("CMyContent");
+				require_once($strContentFilePHP);
+				$content = new CMyContent($this,$strContentID); 
+			}
+			else
+			{
+				$this->Trace("CContent");
+				$content = new CContent($this,$strContentID);	
+			}
+        	$strContentHTML = $content->RenderContent();
 			return $strContentHTML;
 		}
 		
@@ -3193,13 +3203,13 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$this->SetOutputItem("CONTENT",$strSpecialContent);	
 				return;
 			}
-    	$strContentHTML = $this->LoadContent($strContentID);
-      if ($strContentHTML === false)
-    	{
-    		$strContentHTML = $this->OnRenderContentException();
-    	}
-    	if ($strContentHTML !== false)
-    	{
+			$strContentHTML = $this->LoadContent($strContentID);
+			if ($strContentHTML === false)
+			{
+				$strContentHTML = $this->OnRenderContentException();
+			}
+			if ($strContentHTML !== false)
+			{
 				$this->SetOutputItem("CONTENT",$strContentHTML);
 			}			
 		}
@@ -3349,13 +3359,15 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$strOutput = $this->ReplaceGenericOutputItems($strOutput);
 			return $strOutput;
 		}
+
 		
 		final
 		function ReplaceGenericOutputItems($strOutput)
 		{
+			// Placeholder delimiters are ASCII. Keep all search/slice offsets in bytes
+			// so large UTF-8 pages are not recounted for every registered item.
 			$nFirstTagStartPos = 0;
 
-			$nOutputLen = StringLength($strOutput);			
 			$arrayTags = array();
 			foreach ($this->m_arrayGenericOutputItems as $strItemID => $arrayAttributeList)
 			{
@@ -3368,40 +3380,52 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				{
 					$nNextTagStartPos++;
 
-					$nNextTagStartPos = FindString($strOutput,$strTagStart,false,$nNextTagStartPos);
+					$nNextTagStartPos = strpos($strOutput,$strTagStart,$nNextTagStartPos);
+					if ($nNextTagStartPos === false)
+					{
+						$nNextTagStartPos = -1;
+					}
 					if ($nNextTagStartPos != -1)
 					{
-						$strFound = "";
-						$nNextTagStartPos = FindStringMultiple(
-							$strOutput, 
-							array(
+						$nBoundaryPos = -1;
+						foreach (array(
 								$strTagStart.$strTagEnd,
 								$strTagStart." ",
 								$strTagStart."\t",
 								$strTagStart."\n",
 								$strTagStart."\r\n"
-								),
-							$strFound,
-							false,
-							$nNextTagStartPos);
-	
+								) as $strBoundary)
+						{
+							$nCandidatePos = strpos($strOutput,$strBoundary,$nNextTagStartPos);
+							if ($nCandidatePos !== false && ($nBoundaryPos == -1 || $nCandidatePos < $nBoundaryPos))
+							{
+								$nBoundaryPos = $nCandidatePos;
+							}
+							if ($nBoundaryPos == $nNextTagStartPos)
+							{
+								break;
+							}
+						}
+						$nNextTagStartPos = $nBoundaryPos;
+
 						if ($nNextTagStartPos != -1)
 						{
 							
-							$nNextTagEndPos = FindString($strOutput, $strTagEnd, false, $nNextTagStartPos);
-							if ($nNextTagEndPos == -1)
+							$nNextTagEndPos = strpos($strOutput,$strTagEnd,$nNextTagStartPos);
+							if ($nNextTagEndPos === false)
 							{
+								$nNextTagEndPos = -1;
 								$this->Error("Syntax Error after \"{".$strItemID."\": Missing end tag \"$strTagEnd\". nNextTagStartPos=$nNextTagStartPos. nNextTagEndPos=$nNextTagEndPos.");
 							}
 							if ($nNextTagEndPos < $nNextTagStartPos)
 							{
-								$this->Error("nNextTagEndPos($nNextTagEndPos) < nNextTagStartPos($nNextTagStartPos)");	
+								$this->Error("nNextTagEndPos($nNextTagEndPos) < nNextTagStartPos($nNextTagStartPos)");    
 							}
 							
-							$strItemTag = StringSection(
+							$strItemTag = substr(
 								$strOutput,
 								$nNextTagStartPos,
-								$nNextTagEndPos - $nNextTagStartPos + StringLength($strTagEnd)
+								$nNextTagEndPos - $nNextTagStartPos + strlen($strTagEnd)
 								);
 								
 							$arrayAttributes = array();
@@ -3424,7 +3448,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			}
 			return ReplaceTags($strOutput,$arrayTags,'',''); 
 		}
-
 
 		
 		final
@@ -3463,7 +3486,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				}
 				return $this->MakeURL($arrayParams);
 			
-			case "ICON":
+			case 'ICON':
 				if ($this->m_elementIcon == null)
 				{
 					$this->m_elementIcon = new CIconElement($this,'default');	
@@ -3709,7 +3732,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				}
 				return "";								
 
-			case "COUNTDOWN":
+			case 'COUNTDOWN':
 				if ($this->m_elementCountDown == null) 
 				{
 					$this->IncludeElement('countdown');
@@ -3719,6 +3742,13 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strTimeZone = ArrayGetValue($arrayAttributes,'timezone');
 				$time = GetTime($strDateTime,$strTimeZone);
 				return $this->m_elementCountDown->RenderCountDown($time);   
+
+			case 'TOC':
+				if ($this->m_elementTableOfContents == null)
+				{
+					$this->m_elementTableOfContents = new CTableOfContentsElement($this,'default');	
+				}
+				return $this->m_elementTableOfContents->RenderTableOfContents();
 						
 			default:
 				$this->Error('OnRenderGenericOutputItem: No function handles item id: '.$strItem);
@@ -3936,22 +3966,22 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			
 			// Prepare Layout
 			$strLayoutFilePHP = $this->GetAssemblyLine()->GetLayoutIncFilePath($this->GetLayout());
-      if ($strLayoutFilePHP != "")
-      {
-      	$this->Trace("CMyLayout");
-        require_once($strLayoutFilePHP);
-        $layout = new CMyLayout($this,$this->GetLayout()); 
-      }
-      else
-      {
-      	$this->Trace("CLayout");
-      	$layout = new CLayout($this,$this->GetLayout());	
-      }
-    	$bLayoutInit = $layout->Init();
-    	if ($bLayoutInit == false)
-    	{
-    		$this->Error("Layout init failed.");	
-    	}
+			if ($strLayoutFilePHP != "")
+			{
+				$this->Trace("CMyLayout");
+				require_once($strLayoutFilePHP);
+				$layout = new CMyLayout($this,$this->GetLayout()); 
+			}
+			else
+			{
+				$this->Trace("CLayout");
+				$layout = new CLayout($this,$this->GetLayout());	
+			}
+			$bLayoutInit = $layout->Init();
+			if ($bLayoutInit == false)
+			{
+				$this->Error("Layout init failed.");	
+			}
 
 			$this->Trace("Loading framework file START");
 			$strLayoutFrameworkFile = $this->GetFrameworkLayoutFile();
@@ -3976,7 +4006,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			$this->Trace("PrepareMessages END");
 			$this->ProfilingTrace();
 			
-			// Prepare OpenGrapg
+			// Prepare OpenGraph
 			$this->Trace("PrepareOpenGraph START");
 			$this->PrepareOpenGraph();
 			$this->Trace("PrepareOpenGraph END");
@@ -4042,11 +4072,11 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$nNewOutputStrLenInterim = StringLength($strOutput);
 				if ($nNewOutputStrLenInterim != $nOldOutputStrLen)
 				{
-				  $this->ProfilingTrace();
+					$this->ProfilingTrace();
 					$this->Trace("Rendering: ReplaceOutputItems() (2)");
 					$stopwatchReplaceOutputItems->Start();
-				  $strOutput = $this->ReplaceOutputItems($strOutput);
-				  $stopwatchReplaceOutputItems->Stop();
+					$strOutput = $this->ReplaceOutputItems($strOutput);
+					$stopwatchReplaceOutputItems->Stop();
 				}
 
 				// Replace all text resource identifiers
@@ -4068,27 +4098,30 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				$strOutput = $this->ReplaceGenericOutputItems($strOutput);
 				$stopwatchReplaceGenericOutputItems->Stop();
 				
-				$this->ProfilingTrace();
-				$this->Trace("Rendering: RenderJavaScripts()"); 
-				$strOutput = $this->RenderJavaScripts($strOutput);
-
+				if ($nIteration > 2)
+				{
+					$this->ProfilingTrace();
+					$this->Trace("Rendering: RenderJavaScripts()"); 
+					$strOutput = $this->RenderJavaScripts($strOutput);
+				}
 				
 				$nIteration--;
    	      
- 	      if ($nIteration > 0)
- 	      {
- 	      	$nNewOutputStrLen = StringLength($strOutput);
- 	      	$this->Trace("Rendering: Old length: $nOldOutputStrLen");
- 	      	$this->Trace("Rendering: New length: $nNewOutputStrLen");
- 	      	if ($nNewOutputStrLen == $nOldOutputStrLen)
- 	      	{
- 	      		$nIteration = 0;
- 	      	}
- 	      	else
- 	      	{
- 	      		$nOldOutputStrLen = $nNewOutputStrLen;
- 	      	}
- 	      }
+				if ($nIteration > 0)
+				{
+					$nNewOutputStrLen = StringLength($strOutput);
+					$this->Trace("Rendering: Old length: $nOldOutputStrLen");
+					$this->Trace("Rendering: New length: $nNewOutputStrLen");
+					if (	$nNewOutputStrLen == $nOldOutputStrLen
+						&&	ArrayCount($this->m_arrayJavaScripts) == 0)
+					{
+						$nIteration = 0;
+					}
+					else
+					{
+						$nOldOutputStrLen = $nNewOutputStrLen;
+					}
+				}
 			}
 			$stopwatchTagReplacement->Stop();
          
@@ -4144,7 +4177,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 					return false;
 				}
 			}
-
 			
 			return true;
 		}
@@ -4210,8 +4242,6 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				header('Content-type: image/png');
 				imagepng($image);
 			}
-		
-			imagedestroy($image);
 			exit;	
 		}
 
@@ -4315,7 +4345,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 
 			*/
 
-/*
+			/*
 			if (StringSection($strFilePath,-3) == "eot")
 			{
 				header('Content-type: application/vnd.ms-fontobject');
@@ -4438,6 +4468,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				print(FileReadBinary($strFilePath));
 				return true;
 			}
+			if (StringSection($strFilePath,-3) == "svg")
+			{
+				header('Content-type: image/svg+xml');
+				print(FileReadBinary($strFilePath));
+				return true;
+			}
 			if (StringSection($strFilePath,-4) == "webp")
 			{
 				header('Content-type: image/webp');
@@ -4506,13 +4542,14 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			
 			$this->SetContent('');
 			$arraySitemap = $this->OnMakeSitemap();
-			print('<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
-	>
-');
+			print(
+				'<?xml version="1.0" encoding="UTF-8"?>
+				<urlset
+					xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+					>
+				');
 			if (!is_array($arraySitemap))
 			{
 				print("<!-- Sitemap is empty -->");
@@ -4598,7 +4635,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			2. Check for static css dir then for assemblies
 			*/
 						
-			$strFilePath = $this->GetCssDir() . $this->MakeLayoutCssFileName($strLayout);
+			$strFilePath = $this->GetStyleSheetsDir() . $this->MakeLayoutCssFileName($strLayout);
 			$this->Trace($strFilePath);
 			if (IsFile($strFilePath))
 			{
@@ -4612,7 +4649,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				return $strFilePath;	 
 			}			
 
-			$strFilePath = $this->GetCssDir() . $this->MakeLayoutCssFileName("default");
+			$strFilePath = $this->GetStyleSheetsDir() . $this->MakeLayoutCssFileName("default");
 			$this->Trace($strFilePath);
 			if (IsFile($strFilePath))
 			{
@@ -5113,7 +5150,7 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 			return true;
 		}
 
-		function OnUserSignin($strUsername,$strPassword,$arrayParams=array(),&$strError='',&$arrayResults=array())
+		function OnUserSignin($strUserName,$strPassword,$arrayParams=array(),&$strError='',&$arrayResults=array())
 		{
 			$this->Error('OnUserSignin() is not implemented.');
 			return false;
@@ -5131,6 +5168,12 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 				}
 			}
 			return true;
+		}
+
+		function OnUserLoadSettings()
+		{
+			$this->Error('OnUserLoadSettings() is not implemented.');
+			return false;
 		}
 
 
@@ -5779,4 +5822,4 @@ FileRead(GetWDKDir() . "wdk_help.txt").
 		}
 
 	}
-	
+

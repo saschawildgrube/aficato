@@ -49,10 +49,6 @@
 		
 		function SerializeEncrypt($strPassword)
 		{
-			if (IsMcryptSupported() == false)
-			{
-				return false;
-			}			
 
 			if ($this->GetHashMethod() == "")
 			{
@@ -88,10 +84,6 @@
 		
 		function UnserializeDecrypt($strSerialized,$strPassword)
 		{
-			if (IsMcryptSupported() == false)
-			{
-				return false;
-			}
 						
 			if ($strSerialized == "")
 			{

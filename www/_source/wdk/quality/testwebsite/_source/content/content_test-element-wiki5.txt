@@ -1,0 +1,9 @@
+=Syntax highlighting=
+<syntaxhighlight lang="php">
+<?php
+if ($value < 2 && $other > 1) {
+	print("[[not-a-link]] ''not italic''");
+}
+?>
+</syntaxhighlight>
+<syntaxhighlighting lang=html><strong>not HTML</strong></syntaxhighlighting>

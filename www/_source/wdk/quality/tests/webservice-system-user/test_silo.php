@@ -57,8 +57,8 @@
 			
 			$consumer = new CWebServiceConsumerWebApplication($this);
 
-			$strUserName = "test";
-			$strUserName2 = "test-renamed";
+			$strUserName = "test.auto";
+			$strUserName2 = "test.auto.renamed";
 
 			$strDataName1 = "data1";
 			$strDataContent1 = "This is a test";

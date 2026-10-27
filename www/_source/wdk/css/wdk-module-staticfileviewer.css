@@ -1,0 +1,32 @@
+/* Keep sizing local to the viewer. The surrounding page and navigation retain
+   their normal document flow. Layouts can override the pane height if needed. */
+.wdk-staticfileviewer
+{
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	padding-bottom: 10px;
+}
+
+.wdk-staticfileviewer > h3
+{
+	overflow-wrap: anywhere;
+}
+
+.wdk-staticfileviewer > .wdk-staticfileviewer-text
+{
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	height: var(--wdk-staticfileviewer-height, 50vh);
+	height: var(--wdk-staticfileviewer-height, 50dvh);
+	min-height: 0;
+	margin-bottom: 0;
+	white-space: pre;
+	overflow-wrap: normal;
+	word-break: normal;
+	overflow: auto;
+	overscroll-behavior: contain;
+}

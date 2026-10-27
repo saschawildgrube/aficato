@@ -1,0 +1,2 @@
+TID_JSONEDITOR_INTRO
+Paste JSON on the left and edit its tree on the right. Changes stay in your browser. Hide either panel to give the other panel the full width.

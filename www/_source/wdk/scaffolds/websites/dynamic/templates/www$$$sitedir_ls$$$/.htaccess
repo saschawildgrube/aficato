@@ -17,3 +17,4 @@ Action forbidden-file-types $$$sitedir_ls$$$?error=HTTP404&query=
 <IfModule mod_headers.c>
    RequestHeader unset Proxy
 </IfModule>
+CGIPassAuth On

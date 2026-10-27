@@ -119,6 +119,11 @@
 		
 		function CommandStatus()
 		{
+			$arrayOperatingSystem = GetVersionInfoOS();
+			$this->SetResultValue(ArrayGetValue($arrayOperatingSystem,'NAME'),'OS_NAME');
+			$this->SetResultValue(ArrayGetValue($arrayOperatingSystem,'VERSION'),'OS_VERSION');
+			$arrayPHPVersion = GetVersionInfoPHP();
+			$this->SetResultValue(ArrayGetValue($arrayPHPVersion,'VERSION'),'PHP_VERSION');
 	
 			$this->Trace('');	
 			$this->Trace('Check Disk Space');
@@ -173,6 +178,7 @@
 				$bPleskActive = true;
 			}
 			$this->SetResultValue(RenderInteger($bPleskActive),'PLESK_ACTIVE');	
+			$this->SetResultValue(GetPleskVersion(),'PLESK_VERSION');
 			$this->SetResultValue(GetFileSize('/var/log/plesk/panel.log',true),'PLESK_PANELLOG_FILESIZE');
 			
 			$this->Trace('');				

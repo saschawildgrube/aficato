@@ -129,6 +129,10 @@
 		{
 			return '';	
 		}
+		if (value == null)
+		{
+			return '';
+		}
 		return String(value);	
 	}
 	
@@ -236,6 +240,22 @@
 			return false;
 		}
 		return true;
+	}
+	
+	function ArrayValueExists(aArray,vValue)
+	{
+		if (IsArray(aArray) == false)
+		{
+			return false;
+		}
+		for (var nIndex = 0; nIndex < aArray.length; nIndex++)
+		{
+			if (vValue == aArray[nIndex])
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 

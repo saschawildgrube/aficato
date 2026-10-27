@@ -15,12 +15,6 @@
 			$strFolderName = GetFolderNameFromPath($strFolderPath);
 			
 			
-			// Dropbox sometimes leaves copies of files after unsuccessful merging
-			if (FindString($strFolderName,".git") != -1)
-			{
-				$bUnintendedFolder = true;
-			}
-
 			// Google Drive sometimes creates folder copies by error
 			if (RegExpMatch($strFolderName,'/\([0-9]+\)/m') == true)
 			{

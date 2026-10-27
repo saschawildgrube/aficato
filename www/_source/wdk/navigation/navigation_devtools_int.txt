@@ -1,5 +1,6 @@
 LEVEL	;CONTEXT									;LABEL				 														;CONDITIONS
 0			;devtools									;?TID_NAVIGATION_DEVTOOLS?								;devtools
+1;devtools-jsoneditor;?TID_NAVIGATION_DEVTOOLS-JSONEDITOR?;
 1			;devtools-scaffolder			;?TID_NAVIGATION_DEVTOOLS-SCAFFOLDER?			;
 1			;devtools-elementgallery	;?TID_NAVIGATION_DEVTOOLS-ELEMENTGALLERY?	;
 1			;devtools-cookiemanager		;?TID_NAVIGATION_DEVTOOLS-COOKIEMANAGER?	;

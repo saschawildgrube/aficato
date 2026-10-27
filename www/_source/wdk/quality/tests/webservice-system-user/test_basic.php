@@ -41,7 +41,7 @@
 			$this->RequireWebservice("system/user");
 			
 			$this->m_strWebservice = "system/user";
-			$this->m_strUserName = "test";
+			$this->m_strUserName = "test.auto";
 					
 			$this->SetVerbose(true);
 			//$this->SetActive(false);
@@ -55,10 +55,9 @@
 			
 			$consumer = new CWebServiceConsumerWebApplication($this);
 
-		
 			$this->Trace("1A. DELETE USER:");
 			$arrayParams = array();
-			$arrayParams["user_name"] = "test";
+			$arrayParams["user_name"] = $this->m_strUserName;
 			$arrayParams["command"] = "delete";
 			$consumer->ConsumeWebService($this->m_strWebservice,$arrayParams);
 			$this->Trace("");
@@ -66,7 +65,7 @@
 		
 			$this->Trace("1B. ADD USER:");
 			$arrayParams = array();
-			$arrayParams["user_name"] = "test";
+			$arrayParams["user_name"] = $this->m_strUserName;
 			$arrayParams["password"] = "changeme";
 			$arrayParams["command"] = "add";
 			$consumer->ConsumeWebService($this->m_strWebservice,$arrayParams);

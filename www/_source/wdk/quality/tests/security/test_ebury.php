@@ -25,9 +25,10 @@
 			$this->Trace("For more information go to https://www.cert-bund.de/ebury-faq");
 			
 			$this->Trace("");
-			$this->Trace("This test requires that the www user (e.g. www-data) can execute the ipcs command with root privileges.");
+			$this->Trace("This test requires that the system user can execute the ipcs command with root privileges.");
 			$this->Trace("In order to do this, you'll need to create a file in /etc/sudoers.d/ with mode 0440 that contains the following line:");
-			$this->Trace("www-data ALL=(ALL) NOPASSWD: /usr/bin/ipcs");
+			$this->Trace("User_Alias WDK_USERS = <name of system user>");
+			$this->Trace("WDK_USERS ALL=(ALL) NOPASSWD: /usr/bin/ipcs");
 			$this->Trace("");
 			
 			$arrayResult = array();

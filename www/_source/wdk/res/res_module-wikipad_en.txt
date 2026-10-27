@@ -6,6 +6,8 @@ TID_WIKIPAD_BUTTON_SAVE
 Save
 TID_WIKIPAD_BUTTON_SAVE_AND_STAY
 Save and Stay
+TID_WIKIPAD_ERROR_SECTION
+This section is no longer current. Copy your edits, reopen the section from View, and retry.
 TID_ERROR_WIKIPAD_GET
 An error occured while loading the content.
 TID_ERROR_WIKIPAD_SET

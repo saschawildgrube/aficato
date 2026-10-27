@@ -2,6 +2,7 @@
 
 	require_once(GetWDKDir()."wdk_module.inc");
 	require_once(GetWDKDir()."wdk_ip.inc");
+	require_once(GetWDKDir()."wdk_version.inc");
 	
 	class CServerManagerModule extends CModule
 	{
@@ -126,18 +127,26 @@
 			
 			$arrayDashboard = array();			
 			$arrayDashboard[] = array(
-				"?TID_SERVERMANAGER_LABEL_NAME?",
-				"?TID_SERVERMANAGER_LABEL_STATUS?",
-				"?TID_SERVERMANAGER_LABEL_IP?",				
-				"?TID_SERVERMANAGER_LABEL_LOAD_AVERAGE_1MINUTE?",
-				"?TID_SERVERMANAGER_LABEL_LOAD_AVERAGE_5MINUTES?",
-				"?TID_SERVERMANAGER_LABEL_LOAD_AVERAGE_15MINUTES?",
-				"?TID_SERVERMANAGER_LABEL_DISK_USED_PERCENT?",
-				"?TID_SERVERMANAGER_LABEL_PLESK_STATUS?"); 
+				"NAME" => "?TID_SERVERMANAGER_LABEL_NAME?",
+				"STATUS" => "?TID_SERVERMANAGER_LABEL_STATUS?",
+				"IP" => "?TID_SERVERMANAGER_LABEL_IP?",
+				"LOAD_AVERAGE_1MINUTE" => "?TID_SERVERMANAGER_LABEL_LOAD_AVERAGE_1MINUTE?",
+				"LOAD_AVERAGE_5MINUTES" => "?TID_SERVERMANAGER_LABEL_LOAD_AVERAGE_5MINUTES?",
+				"LOAD_AVERAGE_15MINUTES" => "?TID_SERVERMANAGER_LABEL_LOAD_AVERAGE_15MINUTES?",
+				"DISK_USED_PERCENT" => "?TID_SERVERMANAGER_LABEL_DISK_USED_PERCENT?",
+				"PLESK_STATUS" => "?TID_SERVERMANAGER_LABEL_PLESK?",
+				"PLESK_VERSION" => "?TID_SERVERMANAGER_LABEL_PLESK_VERSION?",
+				"OS_NAME" => "?TID_SERVERMANAGER_LABEL_OS_NAME?",
+				"OS_VERSION" => "?TID_SERVERMANAGER_LABEL_OS_VERSION?",
+				"PHP_VERSION" => "?TID_SERVERMANAGER_LABEL_PHP_VERSION?");
 			
 			$this->IncludeElement("format");
 			$formatError = new CFormatElement($this->GetWebsite(),"testfailed");
 			$formatUp = new CFormatElement($this->GetWebsite(),"testpassed");
+			$arrayPleskVersions = array();
+			$strHighestPleskVersion = "";
+			$arrayPHPVersions = array();
+			$strHighestPHPVersion = "";
 			
 			foreach ($arrayServers as $arrayServer)
 			{
@@ -149,6 +158,10 @@
 				$strLoadAvg15 = "";
 				$strDiskUsedPct = "";
 				$strPleskStatus = "";
+				$strPleskVersion = "";
+				$strOSName = "";
+				$strOSVersion = "";
+				$strPHPVersion = "";
 				if ($strName != "")
 				{
 					$arrayWebservice = ArrayGetValue($arrayServer,"webservice");
@@ -160,8 +173,15 @@
 						if ($strHost != "")
 						{
 							$strIP = GetIPFromHostName($strHost);
+							$strServerURL = ArrayGetValue($arrayURL,"PROTOCOL")."://".$strHost;
+							$strPort = ArrayGetValue($arrayURL,"PORT");
+							if ($strPort != "")
+							{
+								$strServerURL .= ":".$strPort;
+							}
+							$link = new CLinkElement($this->GetWebsite(),"default");
+							$strName = $link->RenderLink($strServerURL."/",$strName,true);
 						}
-						$bPleskActive = false;
 
 						$consumer = new CWebServiceConsumerWebApplication($this->GetWebsite());	
 						$arrayParams = array();
@@ -208,27 +228,64 @@
 							{
 								$strDiskUsedPct = $formatError->RenderFormat($strDiskUsedPct);
 							}
-							$bPleskActive = $consumer->GetResultValue("PLESK_ACTIVE");
+							$strPleskVersion = $consumer->GetResultValue("PLESK_VERSION");
+							$strOSName = $consumer->GetResultValue("OS_NAME");
+							$strOSVersion = $consumer->GetResultValue("OS_VERSION");
+							$strPHPVersion = $consumer->GetResultValue("PHP_VERSION");
 						}
-						$strPleskLinkLabel = "?TID_ITEM_INACTIVE?";
-						if ($bPleskActive == true)
-						{
-							$strPleskLinkLabel = "?TID_ITEM_ACTIVE?";
-						}
+						$strPleskLinkLabel = "?TID_SERVERMANAGER_LINK_LOGIN?";
 						$strPleskURL = "https://".$strHost.":8443/login_up.php";
 						$link = new CLinkElement($this->GetWebsite(),"default");							
 						$strPleskStatus = $link->RenderLink($strPleskURL,$strPleskLinkLabel,true);						
 					} 
 				}
 				$arrayDashboard[] = array(
-					$strName,
-					$strStatus,
-					$strIP,
-					$strLoadAvg1,
-					$strLoadAvg5,
-					$strLoadAvg15,
-					$strDiskUsedPct,
-					$strPleskStatus);
+					"NAME" => $strName,
+					"STATUS" => $strStatus,
+					"IP" => $strIP,
+					"LOAD_AVERAGE_1MINUTE" => $strLoadAvg1,
+					"LOAD_AVERAGE_5MINUTES" => $strLoadAvg5,
+					"LOAD_AVERAGE_15MINUTES" => $strLoadAvg15,
+					"DISK_USED_PERCENT" => $strDiskUsedPct,
+					"PLESK_STATUS" => $strPleskStatus,
+					"PLESK_VERSION" => $strPleskVersion,
+					"OS_NAME" => $strOSName,
+					"OS_VERSION" => $strOSVersion,
+					"PHP_VERSION" => $strPHPVersion);
+				$arrayPleskVersions[] = $strPleskVersion;
+				if ($strPleskVersion != "" &&
+					($strHighestPleskVersion == "" || CompareVersion($strPleskVersion,$strHighestPleskVersion,4) > 0))
+				{
+					$strHighestPleskVersion = $strPleskVersion;
+				}
+				$arrayPHPVersions[] = $strPHPVersion;
+				if ($strPHPVersion != "" &&
+					($strHighestPHPVersion == "" || CompareVersion($strPHPVersion,$strHighestPHPVersion,3) > 0))
+				{
+					$strHighestPHPVersion = $strPHPVersion;
+				}
+			}
+
+			if ($strHighestPleskVersion != "")
+			{
+				foreach ($arrayPleskVersions as $nServerIndex => $strPleskVersion)
+				{
+					if ($strPleskVersion != "" && CompareVersion($strPleskVersion,$strHighestPleskVersion,4) < 0)
+					{
+						$arrayDashboard[$nServerIndex+1]["PLESK_VERSION"] = $formatError->RenderFormat($strPleskVersion);
+					}
+				}
+			}
+
+			if ($strHighestPHPVersion != "")
+			{
+				foreach ($arrayPHPVersions as $nServerIndex => $strPHPVersion)
+				{
+					if ($strPHPVersion != "" && CompareVersion($strPHPVersion,$strHighestPHPVersion,3) < 0)
+					{
+						$arrayDashboard[$nServerIndex+1]["PHP_VERSION"] = $formatError->RenderFormat($strPHPVersion);
+					}
+				}
 			}
 			
 			$table = new CTableElement($this->GetWebsite(),"default");

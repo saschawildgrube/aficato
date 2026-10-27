@@ -158,6 +158,7 @@
 	}
 */
 
+/*
 	function ReplaceString($strString,$strFrom,$strTo,$bIgnoreCase = false)
 	{
 		if ($bIgnoreCase == true)
@@ -185,7 +186,30 @@
 			return str_replace($strFrom,$strTo,$strString);	
 		}
 	}
-		
+*/
+
+	function ReplaceString($strString,$strFrom,$strTo,$bIgnoreCase = false)
+	{
+		if ($bIgnoreCase == true)
+		{
+			if (IsStringUTF8($strString) || IsStringUTF8($strFrom) || IsStringUTF8($strTo))
+			{
+				return preg_replace(
+					'/' . preg_quote($strFrom, '/') . '/ui',
+					$strTo,
+					$strString
+				);
+			}
+			else
+			{
+				return str_ireplace($strFrom,$strTo,$strString);
+			}
+		}
+		else
+		{
+			return str_replace($strFrom,$strTo,$strString);	
+		}
+	}
 
 
 	function ReplaceStringIgnoreCase($strString,$strFrom,$strTo)
@@ -402,9 +426,10 @@
 	
 	function ReplaceTags_TagLoop($strTemplate, $arrayTags, $strTagPrefix, $strTagPostfix)
 	{
+		// Only presence matters here; byte searches preserve UTF-8 text unchanged.
 		if ($strTagPrefix != '')
 		{
-			if (FindString($strTemplate,$strTagPrefix) == -1 )
+			if (strpos($strTemplate,$strTagPrefix) === false)
 			{
 				return $strTemplate;
 			}
@@ -423,7 +448,7 @@
 		  {
 		  	if ($strTagPrefix != '')
 		  	{
-					if (FindString($strResult,$strTagPrefix) == -1 )
+					if (strpos($strResult,$strTagPrefix) === false)
 					{
 						return $strResult;
 					}

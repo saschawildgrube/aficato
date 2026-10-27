@@ -36,10 +36,6 @@
 	
 		function OnInit()
 		{
-			if (IsMcryptSupported() == false)
-			{
-				$this->Error("mcrypt is not supported!");	
-			}
 			$this->LoadSecretPayload();
 			return parent::OnInit();
 		}

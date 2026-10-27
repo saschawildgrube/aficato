@@ -120,10 +120,10 @@
 	{
 		/*
 			This will work in some cases but not for all.
-			Find out the real location of the error_log
+			Find out the real location of the error.log
 			or return an empty string.
 		*/
-		return GetDocumentRootDir().'../../logs/error_log';	
+		return GetDocumentRootDir().'../../logs/error.log';	
 	}
 
 

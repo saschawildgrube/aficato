@@ -13,14 +13,6 @@
 		function OnInit()
 		{
 			$this->SetResult(true);
-			if (!IsMcryptSupported())
-			{
-				$this->Trace("To install mcrypt support:");
-				$this->Trace("sudo apt-get install php5-mcrypt");
-				$this->Trace("sudo /etc/init.d/apache2 restart");
-				$this->Trace("");
-				$this->SetActive(false);
-			}
 			return parent::OnInit();	
 		}
 		

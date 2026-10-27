@@ -266,6 +266,23 @@
 		{
 			return false;	
 		}
+
+		if ($bUseShell == false && PHP_INT_SIZE >= 8)
+		{
+			clearstatcache(true, $strFilePath);
+
+			$ea = new CErrorAmnesty();
+			$ea->Start();
+			$nSize = filesize($strFilePath);
+			$ea->End();
+
+			if ($nSize === false)
+			{
+				return false;
+			}
+			return floatval($nSize);
+		}
+
 		require_once("wdk_shell.inc");
 		$arrayResult = array();
 		ShellExecute(

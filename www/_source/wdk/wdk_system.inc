@@ -7,6 +7,75 @@
 		return php_uname("n");
 	}
 
+
+
+	function GetVersionInfoOS()
+	{
+		$arrayOperatingSystem = array(
+			"NAME" => php_uname("s"),
+			"VERSION" => php_uname("r"));
+
+		$arrayResult = array();
+		$bResult = ShellExecute(
+			"cat",
+			array("/etc/os-release"),
+			array(),
+			"",
+			$arrayResult);
+		if ($bResult == false || ArrayGetValue($arrayResult,"return") != 0)
+		{
+			return $arrayOperatingSystem;
+		}
+
+		$arrayValues = array();
+		$arrayLines = StringExplode(ArrayGetValue($arrayResult,"stdout"),"\n",true);
+		foreach ($arrayLines as $strLine)
+		{
+			if ($strLine == "" || FindString($strLine,"#") == 0)
+			{
+				continue;
+			}
+
+			$nSeparatorPos = FindString($strLine,"=");
+			if ($nSeparatorPos == -1)
+			{
+				continue;
+			}
+
+			$strKey = StringTrim(StringSection($strLine,0,$nSeparatorPos));
+			$strValue = StringTrim(StringSection($strLine,$nSeparatorPos+1));
+			$nValueLength = strlen($strValue);
+			if ($nValueLength >= 2)
+			{
+				$strFirstCharacter = substr($strValue,0,1);
+				$strLastCharacter = substr($strValue,-1);
+				if (($strFirstCharacter == '"' && $strLastCharacter == '"') ||
+					($strFirstCharacter == "'" && $strLastCharacter == "'"))
+				{
+					$strValue = substr($strValue,1,$nValueLength-2);
+				}
+			}
+			$arrayValues[$strKey] = $strValue;
+		}
+
+		$strName = ArrayGetValue($arrayValues,"NAME");
+		if ($strName != "")
+		{
+			$arrayOperatingSystem["NAME"] = $strName;
+		}
+		$strVersion = ArrayGetValue($arrayValues,"VERSION_ID");
+		if ($strVersion == "")
+		{
+			$strVersion = ArrayGetValue($arrayValues,"VERSION");
+		}
+		if ($strVersion != "")
+		{
+			$arrayOperatingSystem["VERSION"] = $strVersion;
+		}
+
+		return $arrayOperatingSystem;
+	}
+
 	function GetSystemAverageLoad(&$arrayAverageLoad)
 	{
 		$arrayAverageLoad = array();
@@ -56,6 +125,40 @@
 		}
 		$strName = chop($arrayResult["stdout"]);
 		return $strName;
+	}
+
+
+
+	function GetPleskVersion()
+	{
+		$arrayResult = array();
+		$bResult = ShellExecute(
+			"plesk",
+			array("version"),
+			array(),
+			"",
+			$arrayResult);
+		if ($bResult == false || ArrayGetValue($arrayResult,"return") != 0)
+		{
+			return "";
+		}
+
+		$strStdOut = ArrayGetValue($arrayResult,"stdout");
+		$arrayLines = StringExplode($strStdOut,"\n",true);
+		foreach ($arrayLines as $strLine)
+		{
+			if (FindString($strLine,"Product version:") == 0)
+			{
+				$strProductVersion = StringTrim(StringSection($strLine,16));
+				$arrayMatches = array();
+				if (preg_match('/[0-9]+(?:\.[0-9]+)+/', $strProductVersion, $arrayMatches) == 1)
+				{
+					return ArrayGetValue($arrayMatches,0);
+				}
+				return "";
+			}
+		}
+		return "";
 	}
 
 

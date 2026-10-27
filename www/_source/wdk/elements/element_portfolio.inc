@@ -63,7 +63,7 @@
 				}
 				$nCount++;
 				$strOutputPortfolio .= $strTeaserBegin;
-				$strPayload = ArrayGetValue($arrayTeaser,"PAYLOAD");
+				$strPayload = ArrayGetValue($arrayTeaser,"payload");
 				if ($strPayload != "")
 				{
 					$strOutputPortfolio .= $strPayload;
