@@ -5,6 +5,8 @@
 	class CAccountAnalysisModule extends CModule
 	{
 		
+		private $m_arrayErrors;
+		private $m_parallelsetsElement;	
 		private $m_arrayAccount;
 		private $m_arrayRiskCountries;
 		private $m_arrayTypologyIDs;
