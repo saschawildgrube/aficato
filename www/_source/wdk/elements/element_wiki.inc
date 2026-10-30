@@ -11,6 +11,8 @@
 		protected $m_list;
 		protected $m_numberedlist;
 		protected $m_sourcecode;
+		protected $m_definitionlist;
+		protected $m_table;
 		
 		private $m_arrayTOC;
 		private $m_arrayChapterIDs;

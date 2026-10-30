@@ -63,12 +63,12 @@
 
 
 /*			
-			$strPayload = utf8_encode($strPayloadRaw);
+			$strPayload = mb_convert_encoding($strPayloadRaw, 'UTF-8', 'ISO-8859-1');
 			
 			$this->Trace("IsStringUTF8(\"$strPayloadRaw\") returns ".RenderBool(IsStringUTF8($strPayloadRaw))."");
 			if ($strPayload == $strPayloadRaw)
 			{
-				$this->Trace("utf8_encode had no effect on payload.");
+				$this->Trace("mb_convert_encoding had no effect on payload.");
 			}
 	*/		
 			

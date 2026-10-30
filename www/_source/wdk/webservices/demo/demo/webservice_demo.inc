@@ -82,9 +82,9 @@
 			
 			$this->SetResultValue("Test","TEST1");
 			$this->SetResultValue("Text is encapsulated like this \"<![CDATA[This is a test]]>\".","TEST2");
-			$this->SetResultValue(utf8_encode("ÄÜÖäüö"),"TEST3");
+			$this->SetResultValue(StringEncodeUTF8("ÄÜÖäüö"),"TEST3");
 			$this->SetResultValue("<>/&\"\'","TEST4");
-			$this->SetResultValue(utf8_encode("ä"),"TEST5");
+			$this->SetResultValue(StringEncodeUTF8("ä"),"TEST5");
 			$this->SetResultValue("uppercase?","test6");
 
 			

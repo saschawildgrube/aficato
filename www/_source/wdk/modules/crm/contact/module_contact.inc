@@ -98,9 +98,9 @@
 			$strSalutation = $this->GetModuleVar("salutation");
 			$strName = $this->GetModuleVarInsecure("name");
 			$strEmail = $this->GetModuleVar("email");
-			$strText = utf8_decode($this->GetModuleVarInsecure("text"));
-			$strPhone = utf8_decode($this->GetModuleVarInsecure("phone"));
-			$strCompany = utf8_decode($this->GetModuleVarInsecure("company"));
+			$strText = StringDecodeUTF8($this->GetModuleVarInsecure("text"));
+			$strPhone = StringDecodeUTF8($this->GetModuleVarInsecure("phone"));
+			$strCompany = StringDecodeUTF8($this->GetModuleVarInsecure("company"));
 			
 			if ($this->GetModuleConfig("salutation_hide") == false)
 			{

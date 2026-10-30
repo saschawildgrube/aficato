@@ -1,4 +1,35 @@
 ={WDK} Release Notes= 
+==Version 0.0.81 WORK IN PROGRESS==
+NOT YET Baselined
+* '''IMPORTANT'''
+** No issues
+* Security
+** No changes
+* Defects
+** No changes
+* New features
+** Added shell script config-plesk-php-fpm.sh to configure webspaces that use PHP FPM with reasonable default settings.
+* Improvements
+** Updated version requirements in CMonitoringUnitTest::TestCase_Server().
+** check.sh now display OS Version.
+** check.sh now displays Apache version.
+** check.sh now displays MariaDB version.
+** Modified array functions for PHP 8.x compatibility.
+** Avoided creation of dynamic properties for 8.x compatibility. 
+** Modified StringCheckCharSet() for PHP 8.x compatibility.
+** Modified GetIntegerValue() for PHP 8.x compatibility.
+** Modified ParseHttpResponse() for PHP 8.x compatibility.
+** Modified CSV rendering in CWebservice for PHP 8.x compatibility.
+** Added exception handling around mysqli_connect() for PHP 8.x compatibility.
+* Discontinued
+** No changes
+* Quality
+** Detecting the use of utf8_encode() and utf8_decode() in test sourcefile/deprecated.
+* Refactoring
+** Avoid the use of utf8_encode() and utf8_decode() for 8.x compatibility.
+** Avoid the use of strptime() for 8.x compatibility.
+* Documentation
+** No changes
 ==Version 0.0.80==
 Baselined 2026-10-25
 * '''IMPORTANT'''

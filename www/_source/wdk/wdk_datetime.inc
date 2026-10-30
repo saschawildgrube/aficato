@@ -203,7 +203,6 @@
 			}
 		} 
 		return $time;		
-		//return strtotime(RenderDateTime($time)." $nYears year");
 	}
 
 	function GetTimeDayBegin($time, $strTimeZone = 'UTC')
@@ -465,10 +464,10 @@
 		{
 			return false;	
 		}
-		$arrayResult2 = strptime($strDateTime,'%'.'Y-%'.'m-%'.'d %'.'H:%'.'M:%'.'S');   
-		//$arrayResult2 = DateTime::createFromFormat(FORMAT_DATETIME, $strDateTime);
+		// Use UTC to preserve calendar fields independently of local DST transitions.
+		$datetime = DateTime::createFromFormat(FORMAT_DATETIME,$strDateTime,new DateTimeZone('UTC'));
 		
-		if (!is_array($arrayResult2))   
+		if ($datetime === false)
 		{
 			return false;	
 		}
@@ -480,9 +479,9 @@
 		$arrayResult['HOUR'] = $arrayResult1['hour'];
 		$arrayResult['MINUTE'] = $arrayResult1['minute'];
 		$arrayResult['SECOND'] = $arrayResult1['second'];
-		$arrayResult['WEEKDAY'] = ($arrayResult2['tm_wday'] > 0)?($arrayResult2['tm_wday']):(7);
+		$arrayResult['WEEKDAY'] = intval($datetime->format('N'));
 		//$arrayResult['DST'] = GetBoolvalue(ArrayGetValue($arrayResult1,'is_dst')); // does not work. php documentation is plain wrong about this
-		$arrayResult['DAYOFYEAR'] = $arrayResult2['tm_yday']+1;
+		$arrayResult['DAYOFYEAR'] = intval($datetime->format('z'))+1;
 		//$arrayResult['MINUTEOFDAY'] = ; // Calculation of minutes on DST border days?
 		return $arrayResult;
 	}

@@ -3,6 +3,8 @@
 
 	class CWikiPadModule extends CModule
 	{
+		private $m_formDef;
+
 		function __construct(
 			CWebSite $website,
 			$strWikiPageID = 'default',

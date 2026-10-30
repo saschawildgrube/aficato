@@ -96,7 +96,7 @@
 			
 			$strName = $this->GetModuleVar("name");
 			$strEmail = $this->GetModuleVar("email");
-			$strText = utf8_decode($this->GetModuleVarInsecure("text"));
+			$strText = StringDecodeUTF8($this->GetModuleVarInsecure("text"));
 			
 			if ($strName == "")
 			{

@@ -22,6 +22,7 @@
 	{
 		private $m_strWebservice;
 		private $m_strUserID;
+		private $m_strValidationToken;
 		
 		function __construct()
 		{

@@ -7,7 +7,6 @@
 			$strInstanceID = "",
 			$arrayConfig = array())
 		{
-			$this->m_arrayErrors = array();
 			parent::__construct(
 				$website,
 				"cms/blog",

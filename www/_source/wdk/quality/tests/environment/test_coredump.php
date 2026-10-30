@@ -22,7 +22,7 @@
 			{
 				$this->Trace("Core dump files could not be checked.");
 				$this->Trace("/etc/sudoers.d/wdk must contain the following line:");
-				$this->Trace("www ALL=(ALL) NOPASSWD: /bin/ls -1 /core.*");
+				$this->Trace("WDK_USERS ALL=(ALL) NOPASSWD: /bin/ls -1 /core.*");
 				$this->SetActive(false);
 				return;
 			}

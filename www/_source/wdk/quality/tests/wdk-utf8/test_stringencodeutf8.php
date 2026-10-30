@@ -41,14 +41,14 @@
 					
 			$this->SetResult(true);
 			
-			$this->TestCase_StringEncodeUTF8("Ä",utf8_encode("Ä"));
-			$this->TestCase_StringEncodeUTF8("ÄÖÜ",utf8_encode("ÄÖÜ"));
-			$this->TestCase_StringEncodeUTF8("ÄÖÜ".utf8_encode("ÄÖÜ"),utf8_encode("ÄÖÜÄÖÜ"));
-			$this->TestCase_StringEncodeUTF8(utf8_encode("ÄÖÜ"),utf8_encode("ÄÖÜ"));
+			$this->TestCase_StringEncodeUTF8("Ä",mb_convert_encoding("Ä", 'UTF-8', 'ISO-8859-1'));
+			$this->TestCase_StringEncodeUTF8("ÄÖÜ",mb_convert_encoding("ÄÖÜ", 'UTF-8', 'ISO-8859-1'));
+			$this->TestCase_StringEncodeUTF8("ÄÖÜ".mb_convert_encoding("ÄÖÜ", 'UTF-8', 'ISO-8859-1'),mb_convert_encoding("ÄÖÜÄÖÜ", 'UTF-8', 'ISO-8859-1'));
+			$this->TestCase_StringEncodeUTF8(mb_convert_encoding("ÄÖÜ", 'UTF-8', 'ISO-8859-1'),mb_convert_encoding("ÄÖÜ", 'UTF-8', 'ISO-8859-1'));
 			$this->TestCase_StringEncodeUTF8("ABC","ABC");
 			$this->TestCase_StringEncodeUTF8(
 				"A secret message.\nWith some more lines of text\nHurray\nUmlauts: ÄÖÜ",
-				utf8_encode("A secret message.\nWith some more lines of text\nHurray\nUmlauts: ÄÖÜ"));
+				mb_convert_encoding("A secret message.\nWith some more lines of text\nHurray\nUmlauts: ÄÖÜ", 'UTF-8', 'ISO-8859-1'));
 		}
 		
 		

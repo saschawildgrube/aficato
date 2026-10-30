@@ -983,11 +983,11 @@
 					{
 						$value = array(array());	
 					}
-					foreach ($value as &$item)
+					foreach ($value as $key => $item)
 					{
 						if (is_array($item))
 						{
-							unset($item);	
+							unset($value[$key]);	
 						}
 					}
 				}

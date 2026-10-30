@@ -8,58 +8,69 @@ echo "Server Check START"
 echo "####################################################################################"
 echo ""
 
-echo "uptime:"
+echo "### uptime:"
 uptime
 echo ""
 echo ""
 
-echo "vmstat:"
+echo "### vmstat:"
 vmstat 1 10
 echo ""
 echo ""
 
-echo "nproc:"
+echo "### nproc:"
 nproc
 echo ""
 echo ""
 
-echo "free:"
+echo "### free:"
 free -h
 echo ""
 echo ""
 
-echo "top:"
+echo "### top:"
 top -b -d 1 -n 5 -w 180 | head -n 160
 echo ""
 echo ""
 
-echo "ps:"
+echo "### ps:"
 ps -eo pid,ppid,user,stat,pcpu,pmem,etime,comm --sort=-pcpu | head -25
 echo ""
 echo ""
 
-echo "Plesk Version:"
+echo "### OS Version"
+cat /etc/os-release
+echo ""
+echo ""
+
+
+echo "### Plesk Version:"
 plesk version
 echo ""
 echo ""
 
+echo "### Apache  cat /etc/os-releaseersion:"
+apache2 -v
+echo ""
+echo ""
 
-echo "apache2 config test:"
+
+echo "### Apache Config Test:"
 apache2ctl configtest
 echo ""
 echo ""
 
-echo "apache2 run config:"
+echo "### Apache Run Config:"
 apache2ctl -t -D DUMP_RUN_CFG
 echo ""
 echo ""
 
-echo "apache2 loaded modules:"
+echo "### Apache Loaded Modules:"
 apachectl -M
 echo ""
 echo ""
 
-echo "apache2 processes:"
+echo "### Apache Processes:"
 pid=$(ps -eo pid,comm,stat | awk '$2=="apache2" && $3 ~ /^R/ {print $1; exit}')
 if [ -n "$pid" ]; then
   echo "Tracing Apache PID $pid"
@@ -70,30 +81,34 @@ fi
 echo ""
 echo ""
 
-echo "nginx:"
+echo "### nginx Config Test:"
 nginx -t
 echo ""
 echo ""
 
 
-echo "php-fpm processes:"
+echo "### php-fpm Processes:"
 ps -eo pid,ppid,etime,args | grep '[p]hp-fpm'
 echo ""
 echo ""
 
-echo "php-fpm services:"
+echo "### php-fpm Services:"
 systemctl list-units --type=service --all | grep -E 'php.*fpm'
 echo ""
 echo ""
 
+echo "### MariaDB Version:"
+mariadb --version
+echo ""
+echo ""
 
-echo "traffic:"
+echo "### Traffic:"
 ./traffic.sh
 echo ""
 echo ""
 
 
-echo "fpm slow log:"
+echo "### php-fpm Slow Log:"
 tail -n 100 /var/log/php-fpm-slow.log
 echo ""
 echo ""

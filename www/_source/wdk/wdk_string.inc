@@ -897,6 +897,11 @@
 
 	function StringCheckCharSet($strString,$strCharsetDef)
 	{
+		// Reject invalid UTF-8 before character extraction can substitute allowed characters.
+		if (mb_check_encoding($strString,"UTF-8") == false || mb_check_encoding($strCharsetDef,"UTF-8") == false)
+		{
+			return false;
+		}
 		$nLength = StringLength($strString);
 		for ($nIndex = 0; $nIndex < $nLength; $nIndex++)
 		{

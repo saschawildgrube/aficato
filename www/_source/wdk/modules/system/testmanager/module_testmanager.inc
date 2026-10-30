@@ -15,7 +15,8 @@
 		private $m_format_testundefined;
 		private $m_format_testunknown;
 		private $m_format_testintest;
-		
+	
+		private $m_strWebservice;
 		private $m_bDatabaseSupport;
 
 	

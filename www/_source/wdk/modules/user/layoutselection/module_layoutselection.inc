@@ -5,6 +5,7 @@
 	class CLayoutSelectionModule extends CModule
 	{
 		protected $m_strContent;
+		protected $m_arrayLayouts;
 	
 		function __construct(
 			CWebSite $website,

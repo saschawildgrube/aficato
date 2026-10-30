@@ -68,28 +68,38 @@
 			$strDBPort = ""
 			)
 		{
-			$nDBPort = intval($strDBPort);	
+			$nDBPort = intval($strDBPort);
 			if ($nDBPort == 0)
 			{
 				$nDBPort = intval(ini_get("mysqli.default_port"));
 			}
 			$ea = new CErrorAmnesty();
 			$ea->Start();
-			$nDBLink = mysqli_connect(
-				$strDBHost,
-				$strDBUser,
-				$strDBPassword,
-				$strDBName,
-				$nDBPort); 
-			$ea->End();
+			try
+			{
+				$nDBLink = mysqli_connect(
+					$strDBHost,
+					$strDBUser,
+					$strDBPassword,
+					$strDBName,
+					$nDBPort);
+			}
+			catch (\Throwable $exception)
+			{
+				$nDBLink = false;
+			}
+			finally
+			{
+				$ea->End();
+			}
 			if ($nDBLink == false)
 			{
-				return false;	
+				return false;
 			}
 			$this->m_nDBLink = $nDBLink;
 			$this->m_strTableNamePrefix = $strTableNamePrefix;
-			$this->Query("SET NAMES 'utf8'"); 
-			return true;		
+			$this->Query("SET NAMES 'utf8'");
+			return true;
 		}
 		
 		function IsConnected()
@@ -137,6 +147,19 @@
 		
 		
 		
+		// Preserve WDK's return-value error handling with MySQLi strict reporting.
+		private function ExecuteQuery($strSQL)
+		{
+			try
+			{
+				return mysqli_query($this->m_nDBLink,$strSQL);
+			}
+			catch (mysqli_sql_exception $exception)
+			{
+				return false;
+			}
+		}
+
 		function Query($strSQL)
 		{
 			$strSQL = MakeSQL_PrefixTables(
@@ -148,9 +171,9 @@
 				return false;	
 			}
 
-			$this->m_result = mysqli_query($this->m_nDBLink,$strSQL);
+			$this->m_result = $this->ExecuteQuery($strSQL);
 			
-			if ($this->GetErrorCode() != 0)
+			if (($this->m_result === false) || ($this->GetErrorCode() != 0))
 			{
 				return false;
 			}
@@ -170,7 +193,7 @@
 		
 		function QueryFoundRows()
 		{
-			$result = mysqli_query($this->m_nDBLink,"SELECT FOUND_ROWS()");
+			$result = $this->ExecuteQuery("SELECT FOUND_ROWS()");
 			if ($result == false)
 			{
 				return -1;
@@ -211,7 +234,7 @@
 	
   	function TransactionBegin()
   	{ 
-  		$result = mysqli_query($this->m_nDBLink,"BEGIN");
+			$result = $this->ExecuteQuery("BEGIN");
   		if ($result == false)
 			{
 				return false;
@@ -221,7 +244,7 @@
   	
   	function TransactionRollback()
   	{ 
-   		$result = mysqli_query($this->m_nDBLink,"ROLLBACK"); 
+			$result = $this->ExecuteQuery("ROLLBACK");
   		if ($result == false)
 			{
 				return false;
@@ -231,7 +254,7 @@
 
 		function TransactionCommit()
 		{ 
-  		$result = mysqli_query($this->m_nDBLink,"COMMIT"); 
+			$result = $this->ExecuteQuery("COMMIT");
   		if ($result == false)
 			{
 				return false;
@@ -247,7 +270,7 @@
 			$strSQL,
 			$this->GetTableNamePrefix());
 			
-			$result = mysqli_query($this->m_nDBLink,$strSQL); 
+			$result = $this->ExecuteQuery($strSQL);
   		if ($result == false)
 			{
 				return false;
@@ -257,7 +280,7 @@
 
 		function UnlockTables()
 		{
-			$result = mysqli_query($this->m_nDBLink,"UNLOCK TABLES;"); 
+			$result = $this->ExecuteQuery("UNLOCK TABLES;");
   		if ($result == false)
 			{
 				return false;

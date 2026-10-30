@@ -360,8 +360,8 @@
 						$this->Trace("Execute \"chmod a+x logs\" where 'logs' is the directory in which the log file is stored.");
 						$this->Trace('');
 						$this->Trace('If the file is written to a different place:');
-						$this->Trace('Execute "link /<actual_dir>/error_log /<accessible_dir>/error_log".');
-						$this->Trace('This may be "link /var/www/vhosts/system/<vhost>/logs/error_log /var/www/vhosts/<vhost>/logs/error_log".');
+						$this->Trace('Execute "link /<actual_dir>/error.log /<accessible_dir>/error.log".');
+						$this->Trace('This may be "link /var/www/vhosts/system/<vhost>/logs/error.log /var/www/vhosts/<vhost>/logs/error.log".');
 						$this->Trace('');
 						$this->Trace('TESTCASE FAILED');
 					}

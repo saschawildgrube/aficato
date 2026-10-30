@@ -13,6 +13,7 @@
 		private $m_linkicon;
 		private $m_linkiconButton;
 		private $m_link;
+		private $m_strExportDecimalDelimiter; 
 		
 		function __construct(
 			CWebSite $website, 

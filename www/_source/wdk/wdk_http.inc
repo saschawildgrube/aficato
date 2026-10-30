@@ -105,8 +105,9 @@
  	function ParseHttpResponse($strResponse)
  	{
  		$arrayResponse = array();
- 		$nPos = FindString($strResponse,"\r\n\r\n");
- 		if ($nPos  == -1)
+ 		// HTTP responses may contain binary bodies; use byte offsets throughout.
+ 		$nPos = strpos($strResponse,"\r\n\r\n");
+ 		if ($nPos === false)
  		{
  			$arrayResponse["headers"] = $strResponse;
  			$arrayResponse["content"] = "";
@@ -114,10 +115,10 @@
 		}
 		else
 		{
- 			$arrayResponse["headers"] = StringSection($strResponse,0,$nPos);
- 			$arrayResponse["content"] = StringSection($strResponse,$nPos+4);
- 			$nPosStatusCode = FindString($arrayResponse["headers"]," ");
- 			$strStatusCode = StringSection($arrayResponse["headers"],$nPosStatusCode+1,3);
+ 			$arrayResponse["headers"] = substr($strResponse,0,$nPos);
+ 			$arrayResponse["content"] = substr($strResponse,$nPos+4);
+ 			$nPosStatusCode = strpos($arrayResponse["headers"]," ");
+ 			$strStatusCode = substr($arrayResponse["headers"],($nPosStatusCode === false)?0:$nPosStatusCode+1,3);
  			$arrayResponse["statuscode"] = $strStatusCode;
 		}
  		return $arrayResponse;

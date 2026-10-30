@@ -91,6 +91,22 @@ Content-Type: text/html",
 			//$this->Trace("3:".RenderHex($arrayResponse["content"]));
 			$this->TestCase_ParseHttpResponse($strResponse,$arrayResponse);
 
+			// Preserve all byte values, including invalid UTF-8 and embedded separators.
+			$strBinary = "";
+			for ($nByte = 0; $nByte < 256; $nByte++)
+			{
+				$strBinary .= chr($nByte);
+			}
+			$strBinary .= "\r\n\r\n\x00";
+			$strHeaders = "HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nX-Test: \xC3\xA4";
+			$this->TestCase_ParseHttpResponse(
+				$strHeaders."\r\n\r\n".$strBinary,
+				array(
+					"headers" => $strHeaders,
+					"content" => $strBinary,
+					"statuscode" => "200"
+					));
+
 
 		}
 	}

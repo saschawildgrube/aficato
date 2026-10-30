@@ -16,27 +16,27 @@
 			$value = StringUpperCase($value);
 			if (StringSection($value,-2) == 'MB')
 			{
-				return round($value) * 1024 * 1024;
+				return round(floatval($value)) * 1024 * 1024;
 			}
 			if (StringSection($value,-2) == 'TB')
 			{
-				return round($value) * 1024 * 1024 * 1024;
+				return round(floatval($value)) * 1024 * 1024 * 1024;
 			}
 			if (StringSection($value,-2) == 'KB')
 			{
-				return round($value) * 1024;
+				return round(floatval($value)) * 1024;
 			}
 			if (StringSection($value,-2) == 'BN')
 			{
-				return round($value) * 1000000000;
+				return round(floatval($value)) * 1000000000;
 			}
 			if (StringSection($value,-1) == 'M')
 			{
-				return round($value) * 1000000;
+				return round(floatval($value)) * 1000000;
 			}
 			if (StringSection($value,-1) == 'T')
 			{
-				return round($value) * 1000;
+				return round(floatval($value)) * 1000;
 			}
 		}
 		return intval($value);

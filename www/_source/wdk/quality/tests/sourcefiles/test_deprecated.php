@@ -143,6 +143,7 @@
 						'/CDisclaimerModule/',
 						'/disclaimerconfirmed/',
 						'/strftime/',
+						'/strptime/',
 						'/\%Y/',
 						'/\%H/',
 						'/\%h/',						
@@ -154,7 +155,9 @@
 						'/\%P/',		
 						'/\%e/',
 						'/\%m/',
-						'/\%d/',										
+						'/\%d/',	
+						'/utf8_encode\(/',
+						'/utf8_decode\(/',									
 						
 					);
 					

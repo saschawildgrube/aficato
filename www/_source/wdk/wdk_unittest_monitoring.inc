@@ -429,12 +429,7 @@
 				$arrayPHPVersion = ParseVersion($strPHPVersion);
 				if ($arrayPHPVersion["MAJOR"] == 7)
 				{
-					if ($arrayPHPVersion["MINOR"] < 4)   
-					{
-						$this->Trace("FAILED: PHP minor version is below 4.");
-						$bResult = false;
-					}
-					else
+					if ($arrayPHPVersion["MINOR"] == 5)   
 					{
 						if ($arrayPHPVersion["PATCH"] < 33)
 						{
@@ -442,10 +437,53 @@
 							$bResult = false;
 						}
 					}
+					else if ($arrayPHPVersion["MINOR"] < 4)   
+					{
+						$this->Trace("FAILED: PHP minor version is below 4.");
+						$bResult = false;
+					}
+					else
+					{
+						$this->Trace("FAILED: PHP minor version is above 5?");
+						$bResult = false;
+
+					}
+				}
+				else if ($arrayPHPVersion["MAJOR"] == 8)
+				{
+					if ($arrayPHPVersion["MINOR"] == 5)   
+					{
+						if ($arrayPHPVersion["PATCH"] < 12)
+						{
+							$this->Trace("FAILED: PHPversion is below 8.5.12. Potential vulnerability to CVE-2026-109618 and CVE-2026-109619.");   
+							$bResult = false;
+						}
+					}
+					else if ($arrayPHPVersion["MINOR"] == 4)   
+					{
+						if ($arrayPHPVersion["PATCH"] < 27)
+						{
+							$this->Trace("FAILED: PHPversion is below 8.4.27. Potential vulnerability to CVE-2026-109618 and CVE-2026-109619.");   
+							$bResult = false;
+						}
+					}
+					else if ($arrayPHPVersion["MINOR"] == 3)   
+					{
+						if ($arrayPHPVersion["PATCH"] < 36)
+						{
+							$this->Trace("FAILED: PHPversion is below 8.3.36. Potential vulnerability to CVE-2026-109618 and CVE-2026-109619.");   
+							$bResult = false;
+						}
+					}
+					else if ($arrayPHPVersion["MINOR"] < 3)   
+					{
+						$this->Trace("FAILED: PHP minor version is below 3.");
+						$bResult = false;
+					}
 				}
 				else
 				{
-					$this->Trace("FAILED: PHP major version is not 7.");
+					$this->Trace("FAILED: PHP major version is neither 7 nor 8.");
 					$bResult = false;
 				}
 				

@@ -30,7 +30,6 @@
 		{
 			if (!is_array($arrayEntityDef))
 			{
-				$this->m_arrayData = array();
 				return false;	
 			}
 			$this->m_strEntity = $strEntity;

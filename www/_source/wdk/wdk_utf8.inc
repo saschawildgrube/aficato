@@ -110,7 +110,7 @@
     	}
  	 		$str = $strRest;
 		}
-  	return $strOut;
+  		return $strOut;
 	}
 	
 	function StringDecodeUTF8($str)
@@ -119,7 +119,6 @@
 		{
 			return '';	  
 		}
-		//return utf8_decode($str);	
 		return mb_convert_encoding($str, 'ISO-8859-1', 'UTF-8');
 	}
 	

@@ -47,6 +47,7 @@
 	{
 		return $vValue2;
 	}
+
 	function CallbackArrayMergeAdd($vValue1, $vValue2)
 	{
 		if (is_numeric($vValue1) && is_numeric($vValue2))
@@ -56,8 +57,7 @@
 		return $vValue2;
 	}
 
-
-	function ArrayMerge($array1, $array2, callable $CallbackArrayMerge = null)
+	function ArrayMerge($array1, $array2, ?callable $CallbackArrayMerge = null)
 	{
 		$arrayResult = array();
 		if (is_array($array1) == false)
@@ -108,7 +108,7 @@
 		return $arrayResult;
 	}
 
-	function ArrayMergeRecursive($array1, $array2, callable $CallbackArrayMerge = null)
+	function ArrayMergeRecursive($array1, $array2, ?callable $CallbackArrayMerge = null)
 	{
 		$arrayResult = array();
 		if (!is_array($array1) || !is_array($array2))
