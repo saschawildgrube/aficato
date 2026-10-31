@@ -26,8 +26,8 @@
 		{
 			$strPassword = MakeHash($strPassword,$initvector,$strHashMethod);
 		}
-		// Preserve the original StringSection call, including its UTF-8 semantics.
-		$key = StringSection(sha1($strPassword,TRUE), 0, 32);
+		// Keep the binary SHA-1 key unchanged by UTF-8 string processing.
+		$key = sha1($strPassword,TRUE);
 		$cipher = new \phpseclib\Crypt\Rijndael(\phpseclib\Crypt\Base::MODE_CBC);
 		$cipher->setPreferredEngine(\phpseclib\Crypt\Base::ENGINE_INTERNAL);
 		$cipher->setBlockLength($nBlockSize * 8);

@@ -1,17 +1,17 @@
 ={WDK} Release Notes= 
-==Version 0.0.81 WORK IN PROGRESS==
-NOT YET Baselined
+==Version 0.0.81==
+Baselined 2026-10-30
 * '''IMPORTANT'''
-** No issues
+** Now supporting PHP 7.4.33 and 8.3.36
 * Security
-** No changes
+** Updated Encrypt() and Decrypt() functions for 8.x compatibility while maintaining cryptographic backward compatibility.  
 * Defects
 ** No changes
 * New features
 ** Added shell script config-plesk-php-fpm.sh to configure webspaces that use PHP FPM with reasonable default settings.
 * Improvements
 ** Updated version requirements in CMonitoringUnitTest::TestCase_Server().
-** check.sh now display OS Version.
+** check.sh now displays OS Version.
 ** check.sh now displays Apache version.
 ** check.sh now displays MariaDB version.
 ** Modified array functions for PHP 8.x compatibility.

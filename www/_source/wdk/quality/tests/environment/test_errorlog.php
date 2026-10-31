@@ -41,7 +41,7 @@
 			if ($nPos != -1)
 			{
 				$this->Trace("Found at least one PHP notice, warning, or error:");
-				$this->Trace($strLog);
+				$this->Trace(StringSection($strLog,$nPos,10000));
 				$this->SetResult(false);	
 				return;
 			}
