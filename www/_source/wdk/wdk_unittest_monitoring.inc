@@ -427,7 +427,7 @@
 				$this->Trace("Checking PHP");
 				$strPHPVersion = $webservice->GetResultValue("PHP","VERSION");
 				$arrayPHPVersion = ParseVersion($strPHPVersion);
-				if ($arrayPHPVersion["MAJOR"] == 7)
+				/*if ($arrayPHPVersion["MAJOR"] == 7)
 				{
 					if ($arrayPHPVersion["MINOR"] == 5)   
 					{
@@ -449,7 +449,8 @@
 
 					}
 				}
-				else if ($arrayPHPVersion["MAJOR"] == 8)
+				else*/
+				if ($arrayPHPVersion["MAJOR"] == 8)
 				{
 					if ($arrayPHPVersion["MINOR"] == 5)   
 					{
@@ -483,7 +484,7 @@
 				}
 				else
 				{
-					$this->Trace("FAILED: PHP major version is neither 7 nor 8.");
+					$this->Trace("FAILED: PHP major version is not 8.");
 					$bResult = false;
 				}
 				

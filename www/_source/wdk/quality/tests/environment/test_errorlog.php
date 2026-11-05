@@ -33,15 +33,19 @@
 				return;
 			}	
 			
-			$this->Trace("Log file size: ".RenderValue(StringLength($strLog)));
-			$this->Trace("Searching log for \"PHP \" to check if there are any PHP notices, warnings, or errors.");
-			$this->Trace("");
- 			
-			$nPos = FindString($strLog,"PHP ");
-			if ($nPos != -1)
+			$nLogLength = StringLength($strLog);
+			$this->Trace("Log file size: ".RenderValue($nLogLength));
+			
+			if ($nLogLength > 2)
 			{
-				$this->Trace("Found at least one PHP notice, warning, or error:");
-				$this->Trace(StringSection($strLog,$nPos,10000));
+				$nSectionLength = 10000;
+				$this->Trace("Found at least one entry in the error log:");
+				$strLogSection = StringSection($strLog,0,$nSectionLength);
+				if (StringLength($strLogSection) > $nSectionLength)
+				{
+					$strLogSection .= "...";
+				}
+				$this->Trace($strLogSection);
 				$this->SetResult(false);	
 				return;
 			}

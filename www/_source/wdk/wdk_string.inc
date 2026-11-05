@@ -221,7 +221,7 @@
 	function ReplaceStringOnce($strString,$strFrom,$strTo,$bIgnoreCase = false)
 	{
 		$nStrFromLength = StringLength($strFrom);
-    	$strRemainingString = $strString;
+    	$strRemainingString = $strString.'';
     	$strString = "";
 		$nPos = FindString($strRemainingString, $strFrom, $bIgnoreCase);
 		if ($nPos != -1)
@@ -240,11 +240,11 @@
 	
 	function StringLowerCase($strString)
 	{
-		return mb_strtolower($strString,"UTF-8");	
+		return mb_strtolower($strString.'',"UTF-8");	
 	}
 	function StringUpperCase($strString)
 	{
-		return mb_strtoupper($strString,"UTF-8");	
+		return mb_strtoupper($strString.'',"UTF-8");	
 	}
 	
 	function StringRemoveControlChars($strString)

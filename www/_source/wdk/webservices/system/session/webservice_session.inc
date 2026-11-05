@@ -268,10 +268,11 @@
 				return;
 			}
 			
-			if ($this->m_database->GetAffectedRows() == 0)
+			// A successful UPDATE may match a session without changing its values.
+			if ($this->m_database->GetMatchedRows() == 0)
 			{
 				$this->SetError("SESSION_NOT_FOUND");
-				return;	
+				return;
 			}
 		
 			return;	

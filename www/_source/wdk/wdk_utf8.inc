@@ -96,21 +96,21 @@
 		$strRest = '';
 		while( (strlen($str)) > 0)
 		{
-  		if (1 == preg_match($g_strGoodChars_StringEncodeUTF8,$str,$arrayMatch))
-  		{
-    		$char = $arrayMatch[1];
-    		$strRest = $arrayMatch[2];
-    		$strOut .= $char;
-  		}
-  		else if (1 == preg_match('@^(.)(.*)$@s',$str,$arrayMatch))
-  		{
-	      $char = $arrayMatch[1];
-	      $strRest = $arrayMatch[2];
-	      $strOut .= $g_arrayByteMap_StringEncodeUTF8[$char];
-    	}
+			if (1 == preg_match($g_strGoodChars_StringEncodeUTF8,$str,$arrayMatch))
+			{
+				$char = $arrayMatch[1];
+				$strRest = $arrayMatch[2];
+				$strOut .= $char;
+			}
+			else if (1 == preg_match('@^(.)(.*)$@s',$str,$arrayMatch))
+			{
+				$char = $arrayMatch[1];
+				$strRest = $arrayMatch[2];
+				$strOut .= $g_arrayByteMap_StringEncodeUTF8[$char];
+			}
  	 		$str = $strRest;
 		}
-  		return $strOut;
+  		return $strOut . '';
 	}
 	
 	function StringDecodeUTF8($str)

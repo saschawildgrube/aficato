@@ -25,7 +25,7 @@
 				$arrayRegExp[] = '/error_log\(/';
 				$arrayRegExp[] = '/var_dump\(/';
 				$arrayRegExp[] = '/this\-\>Debug\(/';
-				$arrayRegExp[] = '/flush\(\)/';
+				//$arrayRegExp[] = '/flush\(\)/';
 
 				if ($strFileName != "wdk_arrayprint.inc") 
 				{

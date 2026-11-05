@@ -800,7 +800,7 @@
 			$this->SetOutputItem('WDK_COPYRIGHT_PERIOD',WDK_COPYRIGHT_SINCE.'-'.$strCurrentYear);
 			$this->SetOutputItem('WDK_DOCS_URL','http://www.websitedevkit.com/');
 			$this->SetOutputItem('WDK_SCAFFOLDER_URL','http://www.websitedevkit.com/scaffolder/');
-			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_PHP_VERSION','7.4.33');
+			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_PHP_VERSION','8.3.36');
 			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_UBUNTU_VERSION','18.04');
 			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_APACHE_VERSION','2.4.29');
 			$this->SetOutputItem('WDK_SYSTEMREQUIREMENT_MARIADB_VERSION','10.1.38');			

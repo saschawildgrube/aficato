@@ -8,7 +8,6 @@
 		
 		private $m_strWebservice;
 		private $m_consumer;
-		private $m_strItemID;
 		
 		function __construct()
 		{
@@ -22,16 +21,12 @@
 		{
 			$this->RequireWebservice($this->m_strWebservice);
 			$this->SetVerbose(true);
-			$this->m_consumer = new CWebServiceConsumerWebApplication($this);
 			return parent::OnInit();	
 		}	
 		
 		function OnTest()
 		{
 			parent::OnTest();
-			
-			$this->OnCleanup();
-			$arrayItemIDs = array();
 			
 		
 			/*
@@ -73,6 +68,9 @@
 			25. List and check 
 			
 			*/
+
+			$this->m_consumer = new CWebServiceConsumerWebApplication($this);
+			$arrayItemIDs = array();
 
 			
 			$this->Trace("1. Add without sort order (at end)");
@@ -442,6 +440,12 @@
 		function OnCleanup()
 		{
 			parent::OnCleanup();
+			// Inactive tests never enter OnTest(), but their destructor still runs cleanup.
+			if ($this->m_consumer === null)
+			{
+				$this->Trace("Cleanup skipped: webservice consumer was not initialized.");
+				return true;
+			}
 			
 			
 			

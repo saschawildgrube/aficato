@@ -1,5 +1,6 @@
 <?php
 
+	
 	require_once("wdk_json.inc");
 	require_once("wdk_xml.inc");
 	require_once("wdk_pathcontent.inc");
@@ -35,6 +36,7 @@
 		
 		private $m_bCalled;
 		private $m_strError;
+		private $m_strTransportError = "";
 		
 		private $m_arrayResultEnvelope;
 		private $m_strServiceOutput;
@@ -48,13 +50,18 @@
 		{
 			$this->m_bCalled = false;	
 			$this->m_strError = "";
+			$this->m_strTransportError = "";
 			$this->m_stopwatchRequest = new CStopWatch();
 			$this->m_stopwatchParsing = new CStopWatch();
 			$this->m_fSecondsScript = 0;
 			
 		}
 		
-		function ConsumeWebService($strWebServiceURL,$arrayParams,$nTimeOut=WEBSERVICE_CONSUMER_TIMEOUT_DEFAULT)
+		function ConsumeWebService(
+			$strWebServiceURL,
+			$arrayParams,
+			$nTimeOut=WEBSERVICE_CONSUMER_TIMEOUT_DEFAULT,
+			$strTransportMode='http')
 		{
 			$this->m_bCalled = true;
 			
@@ -65,6 +72,7 @@
 			$this->m_arrayResultEnvelope = array();
 			
 			$this->m_strError = "";
+			$this->m_strTransportError = "";
 			
 			$this->m_fSecondsScript = 0;
 			
@@ -89,7 +97,20 @@
 			}
 
 			$this->m_stopwatchRequest->Start();
-			$strServiceOutput = HttpRequest($strURL,$arrayParams,"post",$nTimeOut);
+			if ($strTransportMode == 'static')
+			{
+				$strServiceOutput = StaticWebserviceRequest($strURL,$arrayParams,$this->m_strTransportError);
+			}
+			else if ($strTransportMode == 'http')
+			{
+				$strServiceOutput = HttpRequest($strURL,$arrayParams,"post",$nTimeOut);
+			}
+			else
+			{
+				$this->m_stopwatchRequest->Stop();
+				$this->m_strError = "TRANSPORT_INVALID";
+				return false;
+			}
 			$this->m_stopwatchRequest->Stop();
 
 			if ($strServiceOutput == false)
@@ -242,6 +263,11 @@
 			return true;
 		}
 		
+		function GetTransportError()
+		{
+			return $this->m_strTransportError;
+		}
+
 		function GetError()
 		{
 			if ($this->m_bCalled == false)

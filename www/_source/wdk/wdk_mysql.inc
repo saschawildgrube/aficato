@@ -212,6 +212,19 @@
 			return mysqli_affected_rows($this->m_nDBLink);	
 		}
 		
+		// Matched rows from the last UPDATE response; no additional query.
+		// Returns -1 when the response does not contain an UPDATE row count.
+		function GetMatchedRows()
+		{
+			$strInfo = mysqli_info($this->m_nDBLink);
+			$arrayMatches = array();
+			if (preg_match('/Rows matched:\s*(\d+)/', (string)$strInfo, $arrayMatches) != 1)
+			{
+				return -1;
+			}
+			return intval($arrayMatches[1]);
+		}
+		
 		function GetLastInsertID()
 		{
 			return mysqli_insert_id($this->m_nDBLink);

@@ -62,6 +62,13 @@
 		return 'json';	
 	}
 
+	function GetWebservicesDefaultTransportMode()
+	{
+		/* Use "static" if all web services should be included rather than called via http */
+		return 'http';	
+	}
+
+
 	function GetAdminEmail()
 	{
 		return '$$$adminemail$$$';	

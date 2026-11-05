@@ -1,12 +1,14 @@
 <?php
 
+	require_once("wdk_webservicetransport_static.inc");	
+
 	error_reporting (E_ALL);
 	ini_set('display_errors', 1);
 	
 	ini_set('allow_url_fopen', 0);
 	ini_set('max_execution_time',120);
 	ini_set('expose_php',false);
-	header('X-Powered-By:'); 
+	WebServiceTransportHeader('X-Powered-By:');
 
 	require_once("wdk_env.inc");
 	require_once("wdk.inc");
@@ -138,7 +140,7 @@
 			// X-Frame-Options: DENY
 			if ($this->GetConfigBoolean('iframe_allow') != true)
 			{
-				header('X-Frame-Options: DENY');
+				WebServiceTransportHeader('X-Frame-Options: DENY');
 			}
 
 		}
@@ -486,8 +488,8 @@
 			{
 				$strText = $this->OnBasicAuthGetText();
 				
-  			header('WWW-Authenticate: Basic realm="'.$strText.'"');
-  			header('HTTP/1.0 401 Unauthorized');
+				WebServiceTransportHeader('WWW-Authenticate: Basic realm="'.$strText.'"');
+				WebServiceTransportHeader('HTTP/1.0 401 Unauthorized');
 				
 				$strOutput = $this->OnBasicAuthRenderFailed();
 			}

@@ -5,7 +5,7 @@
 # Creates no backups, temporary files, RAM files, or filesystem work files.
 # Non-interactive: creates a loopback-only API key as root and revokes it on exit.
 # Optional: PLESK_PANEL_PORT (default 8443). No URL or credentials required.
-# Restarts plesk-php74-fpm once after all target configurations are verified.
+# Restarts each configured Plesk PHP-FPM service once after all targets are verified.
 # Usage: config-plesk-php-fpm [--all | WEBSPACE [WEBSPACE ...]]
 # No arguments: preview all. --all or webspace names: apply immediately.
 set -Eeuo pipefail
@@ -55,9 +55,10 @@ config='error_log = {DOCROOT}/../../{LOGDIR}/error.log
 [php-fpm-pool-settings]
 pm = dynamic
 pm.max_children = 30
-pm.start_servers = 6
-pm.min_spare_servers = 4
-pm.max_spare_servers = 8
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+pm.max_requests = 500
 
 pm.status_path = /fpm-status
 
@@ -74,6 +75,8 @@ ORDER BY d.name
 ')
 
 declare -a targets=()
+declare -a services=()
+declare -A seen_services=()
 
 while [[ -n $inventory ]]; do
     row=${inventory%%$'\n'*}
@@ -107,6 +110,17 @@ while [[ -n $inventory ]]; do
     fi
 
     if [[ $php == true && $handler == *fpm* ]]; then
+        # Plesk-provided FPM handler IDs are also their service names.
+        if [[ ! $handler =~ ^plesk-php[0-9]+-fpm(-dedicated)?$ ]]; then
+            echo "Cannot resolve the FPM service for $domain (handler=$handler); aborting." >&2
+            exit 1
+        fi
+
+        if [[ ${seen_services[$handler]:-} != 1 ]]; then
+            services+=("$handler")
+            seen_services[$handler]=1
+        fi
+
         targets+=("$domain")
         printf 'TARGET %s (%s)\n' "$domain" "$handler"
     else
@@ -125,6 +139,10 @@ if [[ $scope == named ]]; then
 fi
 
 printf '\nTargets: %s\n' "${#targets[@]}"
+
+if (( ${#services[@]} > 0 )); then
+    printf 'FPM service: %s\n' "${services[@]}"
+fi
 
 if [[ $mode == preview ]]; then
     echo 'Preview only. No settings or services were changed.'
@@ -149,6 +167,16 @@ command -v python3 >/dev/null || {
     exit 1
 }
 
+# Validate every service before any API key or configuration write.
+for service in "${services[@]}"; do
+    load_state=$(systemctl show --property=LoadState --value "$service")
+
+    if [[ $load_state != loaded ]]; then
+        echo "FPM service is not loaded: $service (LoadState=$load_state); aborting." >&2
+        exit 1
+    fi
+done
+
 # Use the documented inline API property instead of the CLI file argument.
 exec python3 -B -c '
 import re
@@ -163,7 +191,9 @@ import urllib.request
 import xml.etree.ElementTree as ET
 
 config = sys.argv[1]
-domains = sys.argv[2:]
+service_count = int(sys.argv[2])
+services = sys.argv[3:3 + service_count]
+domains = sys.argv[3 + service_count:]
 updated = 0
 current = None
 write_attempted = False
@@ -460,19 +490,20 @@ finally:
 # Restart only after every target was verified and API-key cleanup succeeded.
 if exit_code == 0 and updated == len(domains) and updated > 0:
     try:
-        print("Restarting plesk-php74-fpm ...", flush=True)
+        print("Restarting {} ...".format(", ".join(services)), flush=True)
 
         subprocess.run(
-            ["systemctl", "restart", "plesk-php74-fpm"],
+            ["systemctl", "restart"] + services,
             stdin=subprocess.DEVNULL,
             check=True
         )
 
-        subprocess.run(
-            ["systemctl", "is-active", "--quiet", "plesk-php74-fpm"],
-            stdin=subprocess.DEVNULL,
-            check=True
-        )
+        for service in services:
+            subprocess.run(
+                ["systemctl", "is-active", "--quiet", service],
+                stdin=subprocess.DEVNULL,
+                check=True
+            )
 
     except (Exception, KeyboardInterrupt) as exc:
         print(
@@ -484,9 +515,9 @@ if exit_code == 0 and updated == len(domains) and updated > 0:
 
 if exit_code == 0:
     print(
-        "Done: {} sites updated and verified; plesk-php74-fpm restarted "
-        "and active; local API key revoked.".format(updated)
+        "Done: {} sites updated and verified; {} restarted "
+        "and active; local API key revoked.".format(updated, ", ".join(services))
     )
 
 sys.exit(exit_code)
-' "$config" "${targets[@]}"
+' "$config" "${#services[@]}" "${services[@]}" "${targets[@]}"

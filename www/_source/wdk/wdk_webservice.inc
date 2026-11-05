@@ -956,13 +956,13 @@
 			$xmlResultEnvelope->SetAttribute("VERSION",$this->GetMeta("version"));
 			$xmlResultEnvelope->SetRecursiveArray($this->m_arrayResultEnvelope);
 
-			header('Content-type: application/xml');
+			WebServiceTransportHeader('Content-type: application/xml');
 			return $xmlResultEnvelope->RenderDocument();
 		}
 
 		function RenderWebServiceCSV()
 		{
-			header('Content-type: text/plain');
+			WebServiceTransportHeader('Content-type: text/plain');
 			
 			$strError = $this->GetError();
 			if ($strError != "")
@@ -1028,14 +1028,14 @@
 
 		function RenderWebServiceCSVPATH()
 		{
-			header('Content-type: text/plain');
+			WebServiceTransportHeader('Content-type: text/plain');
 			return RenderPathContent($this->m_arrayResultEnvelope);
 		}
 
 
 		function RenderWebServicePRINTR()
 		{
-			header('Content-type: text/plain');
+			WebServiceTransportHeader('Content-type: text/plain');
 			ob_start();
 			ArrayPrint($this->m_arrayResultEnvelope);
 			$strOutput = ob_get_contents();
@@ -1046,7 +1046,7 @@
 
 		function RenderWebServiceJSON()
 		{
-			header('Content-type: application/json');
+			WebServiceTransportHeader('Content-type: application/json');
 			$strOutput = JsonEncode($this->m_arrayResultEnvelope);
 			if ($strOutput == false)
 			{

@@ -1,8 +1,33 @@
 ={WDK} Release Notes= 
+==Version 0.0.82 WORK IN PROGRESS==
+NOT YET Baselined
+* '''IMPORTANT'''
+** PHP 7 is no longer actively supported.
+** PHP 8.3.36 (and higher patch versions) is supported.
+* Security
+** No changes
+* Defects
+** Shell script config-plesk-php-fpm.sh did not consider the actual FPM engine version(s) when restarting. This has been fixed. 
+** Webservice system/session eventually returned SESSION_NOT_FOUND if a session is written without changes. This has been fixed. 
+* New features
+** Web Services can now either be consumed via http (like before) or by static calls - while maintaining the existing implementation pattern - to increase speed and consider web applications that do not need a distributed web services architecture.
+** Function GetWebservicesDefaultTransportMode() is introduced to env.inc: it should either return "http" or "static". 
+** Added function CDatabase::GetMatchedRows().
+* Improvements
+** Avoid to pass null to htmlentities() and several other functions for 8.x compatibility.
+** Test environment/errorlog is now more strict and fails on any entry in the error log.
+* Discontinued
+** No changes
+* Quality
+** No changes
+* Refactoring
+** No changes
+* Documentation
+** No changes
 ==Version 0.0.81==
 Baselined 2026-10-30
 * '''IMPORTANT'''
-** Now supporting PHP 7.4.33 and 8.3.36
+** Now supporting PHP 7.4.33 and 8.3.36 (and higher)
 * Security
 ** Updated Encrypt() and Decrypt() functions for 8.x compatibility while maintaining cryptographic backward compatibility.  
 * Defects

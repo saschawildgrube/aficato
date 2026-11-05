@@ -5,7 +5,7 @@
 	function HtmlEncode($str)
 	{
 		$str = StringEncodeUTF8($str);
-		$str = htmlentities($str,ENT_QUOTES,"UTF-8");
+		$str = htmlentities($str . '',ENT_QUOTES,"UTF-8");
 		return $str;
 	}
 	

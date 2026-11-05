@@ -62,6 +62,11 @@
 		return 'json';	
 	}
 
+	function GetWebservicesDefaultTransportMode()
+	{
+		return 'static';	
+	}
+
 	function GetAdminEmail()
 	{
 		return '$$$adminemail$$$';	

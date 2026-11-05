@@ -138,7 +138,6 @@
 						'/On_TestCase_CheckFolder\(/',
 						'/::Callback/',
 						'/m_bCallback/',
-						'/Timezone/',
 						'/GetIconIDByFileCategory/',
 						'/CDisclaimerModule/',
 						'/disclaimerconfirmed/',

@@ -147,6 +147,17 @@
 				}
 			}
 
+			if ($this->TestCase_CheckEnvFunction('GetWebservicesDefaultTransportMode') == true)
+			{
+				$strTransportMode = GetWebservicesDefaultTransportMode();
+				$arrayTransportModes = array('http','static');
+				if (ArrayValueExists($arrayTransportModes,$strTransportMode) != true)
+				{
+					$this->SetResult(false);
+					$this->Trace('GetWebservicesDefaultTransportMode() returned an invalid default transport mode: "'.GetWebservicesDefaultFormat().'"');
+					$this->Trace('TESTCASE FAILED');
+				}
+			}
 
 			if ($this->TestCase_CheckEnvFunction('GetAdminEmail') == true)
 			{

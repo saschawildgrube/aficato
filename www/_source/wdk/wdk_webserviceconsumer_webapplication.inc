@@ -17,7 +17,8 @@
 		function ConsumeWebService(
 			$strWebService,
 			$arrayParams,
-			$nTimeOut = WEBSERVICE_CONSUMER_TIMEOUT_DEFAULT)
+			$nTimeOut = WEBSERVICE_CONSUMER_TIMEOUT_DEFAULT,
+			$strTransportMode = null)
 		{
 			$this->ProfilingTrace();
 			$this->Trace("ConsumeWebService BEGIN");
@@ -40,6 +41,33 @@
 			}
 */
 			
+			$arrayWebServices = $this->m_webapp->GetConfig("webservices");
+			$strConfiguredService = $strWebService;
+			if (IsValidURL($strWebService))
+			{
+				$strConfiguredService = '';
+				if (is_array($arrayWebServices))
+				{
+					foreach ($arrayWebServices as $strName => $arrayService)
+					{
+						if (ArrayGetValue($arrayService,'url') == $strWebService)
+						{
+							$strConfiguredService = $strName;
+							break;
+						}
+					}
+				}
+			}
+			if ($strTransportMode === null)
+			{
+				$strTransportMode = ArrayGetValue($arrayWebServices,$strConfiguredService,'transport');
+				if ($strTransportMode == '')
+				{
+					$strTransportMode = $strConfiguredService != '' && function_exists('GetWebservicesDefaultTransportMode')
+						? GetWebservicesDefaultTransportMode() : 'http';
+				}
+			}
+
 			if (IsValidURL($strWebService))
 			{
 				$strWebServiceURL = $strWebService;	
@@ -92,14 +120,19 @@
 			}
 			
 			$this->Trace("Service URL: \"$strWebServiceURL\"");
+			$this->Trace("Transport: ".$strTransportMode);
 			$this->Trace("Parameter:");
 			$this->Trace($arrayParams);
 			
-			$bResult = parent::ConsumeWebService($strWebServiceURL,$arrayParams,$nTimeOut);
+			$bResult = parent::ConsumeWebService($strWebServiceURL,$arrayParams,$nTimeOut,$strTransportMode);
 
 			if ($bResult == false)
 			{
 				$this->Trace("ERROR: ".$this->GetError());
+				if ($this->GetTransportError() != "")
+				{
+					$this->Trace("Transport failure: ".$this->GetTransportError());
+				}
 			}
 
 			$this->Trace($this->GetServiceOutput());
